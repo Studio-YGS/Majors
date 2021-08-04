@@ -8,6 +8,8 @@ public class ObjectPlacement : MonoBehaviour
     Transform cam;
 
     public float placementRange = 3;
+    bool objectPlaced;
+    GameObject PlacedObject;
 
 
     void Start()
@@ -26,16 +28,36 @@ public class ObjectPlacement : MonoBehaviour
         {
             if (hit.collider == gameObject.GetComponent<Collider>() && hand.GetComponentInChildren<ObjectHolder>())
             {
-                if (Input.GetKeyDown(KeyCode.E))
+                if (Input.GetKeyDown(KeyCode.E) && !objectPlaced)
                 {
+                    
                     ObjectHolder heldObject = hand.GetComponentInChildren<ObjectHolder>();
+                    PlacedObject = heldObject.gameObject;
                     heldObject.transform.position = transform.position + heldObject.placementOffset;
                     heldObject.PutObjectDown();
-                    heldObject.GetComponent<Collider>().enabled = true;
+                    heldObject.isPlacedDown = true;
+                    heldObject.thisObjectHeld = false;
                     heldObject.transform.parent = null;
-                    
+                    PlacedObject.transform.rotation = heldObject.rotationalSet;
+                    objectPlaced = true;
+                    StartCoroutine(ColliderOn());
                 }
             }
         }
+
+        if(PlacedObject != null)
+        {
+            if(PlacedObject.GetComponent<ObjectHolder>().isPlacedDown == false)
+            {
+                objectPlaced = false;
+                PlacedObject = null;
+            }
+        }
+    }
+
+    IEnumerator ColliderOn()
+    {
+        yield return new WaitForSeconds(1);
+        PlacedObject.GetComponent<Collider>().enabled = true;
     }
 }

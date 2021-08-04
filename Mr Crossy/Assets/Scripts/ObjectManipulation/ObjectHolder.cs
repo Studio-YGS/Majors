@@ -8,10 +8,13 @@ public class ObjectHolder : MonoBehaviour
     Transform objectInspectPoint;
     Transform cam;
     static bool objectHeld = false;
+    [HideInInspector] public bool thisObjectHeld;
+    [HideInInspector] public bool isPlacedDown;
 
     public float scaleFactor;
     public float pickupRange = 3;
     public Vector3 placementOffset;
+    public Quaternion rotationalSet;
 
     void Start()
     {
@@ -33,10 +36,29 @@ public class ObjectHolder : MonoBehaviour
                     transform.parent = hand;
                     transform.position = hand.position;
                     gameObject.GetComponent<Collider>().enabled = false;
+                    gameObject.GetComponent<Rigidbody>().isKinematic = true;
+                    gameObject.GetComponent<Rigidbody>().useGravity = false;
                     objectHeld = true;
+                    isPlacedDown = false;
+                    thisObjectHeld = true;
                 }
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            if (thisObjectHeld)
+            {
+                transform.parent = null;
+                transform.position = cam.position + cam.forward;
+                gameObject.GetComponent<Collider>().enabled = true;
+                gameObject.GetComponent<Rigidbody>().isKinematic = false;
+                gameObject.GetComponent<Rigidbody>().useGravity = true;
+                objectHeld = false;
+                thisObjectHeld = false;
+            }
+        }
+
     }
 
     public void PutObjectDown()
