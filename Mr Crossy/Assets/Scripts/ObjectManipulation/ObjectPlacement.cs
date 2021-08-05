@@ -38,6 +38,7 @@ public class ObjectPlacement : MonoBehaviour
                     heldObject.isPlacedDown = true;
                     heldObject.thisObjectHeld = false;
                     heldObject.transform.parent = null;
+                    PlacedObject.layer = 0;
                     PlacedObject.transform.rotation = heldObject.rotationalSet;
                     objectPlaced = true;
                     StartCoroutine(ColliderOn());
