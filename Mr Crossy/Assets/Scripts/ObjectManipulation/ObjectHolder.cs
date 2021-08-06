@@ -56,13 +56,31 @@ public class ObjectHolder : MonoBehaviour
             if (thisObjectHeld)
             {
                 transform.parent = null;
-                transform.position = cam.position + cam.forward;
+                RaycastHit detectWall;
+                if (Physics.Raycast(cam.position, cam.forward, out detectWall, 0.5f))
+                {
+                    if (detectWall.collider == null)
+                    {
+                        transform.position = cam.position + cam.forward;
+                    }
+                    else
+                    {
+                        transform.position = cam.position - cam.forward;
+                    }
+                }
                 gameObject.GetComponent<Collider>().enabled = true;
                 gameObject.GetComponent<Rigidbody>().isKinematic = false;
                 gameObject.GetComponent<Rigidbody>().useGravity = true;
                 gameObject.layer = 0;
                 objectHeld = false;
                 thisObjectHeld = false;
+                if(controller.enabled == false)
+                {
+                    Cursor.visible = true;
+                    Cursor.lockState = CursorLockMode.None;
+                    controller.enabled = true;
+                }
+                
             }
         }
 
