@@ -17,6 +17,7 @@ public class ObjectHolder : MonoBehaviour
     public float pickupRange = 3;
     public Vector3 placementOffset;
     public Quaternion rotationalSet;
+    public float distanceFromFace = 1.2f;
 
     void Start()
     {
@@ -73,7 +74,7 @@ public class ObjectHolder : MonoBehaviour
             }
             if (Input.GetMouseButtonDown(1))
             {
-                transform.position = cam.position + cam.forward * 2;
+                transform.position = cam.position + cam.forward * distanceFromFace;
                 controller.enabled = false;
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
