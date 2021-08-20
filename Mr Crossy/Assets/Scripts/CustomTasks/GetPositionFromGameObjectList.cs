@@ -11,8 +11,10 @@ public class GetPositionFromGameObjectList : Action
 
     [BehaviorDesigner.Runtime.Tasks.Tooltip("The GameObjectList that the task operates on.")]
     public SharedGameObjectList targetGameObjectList;
-    [BehaviorDesigner.Runtime.Tasks.Tooltip("The GameObject that the task operates on. If null the task GameObject is used.")]
+    [BehaviorDesigner.Runtime.Tasks.Tooltip("Picks a random object from list to get position.")]
     public bool getRandomGameObject;
+    [BehaviorDesigner.Runtime.Tasks.Tooltip("Index to specify GameObject to use. Is ignored if getting random.")]
+    public int getGameObjectByIndex;
     [BehaviorDesigner.Runtime.Tasks.Tooltip("Can the target GameObject be empty?")]
     [RequiredField]
     public SharedVector3 storeValue;
@@ -22,11 +24,13 @@ public class GetPositionFromGameObjectList : Action
 
     public override void OnStart()
     {
+        int i;
         List<GameObject> list = targetGameObjectList.Value;
 
-        int i = Random.Range(0, list.Count);
+        if (getRandomGameObject) i = Random.Range(0, list.Count);
+        else i = getGameObjectByIndex;
 
-        var currentGameObject = GetDefaultGameObject(list[i]);
+        GameObject currentGameObject = GetDefaultGameObject(list[i]);
         if (currentGameObject != prevGameObject)
         {
             targetTransform = currentGameObject.GetComponent<Transform>();
