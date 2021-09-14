@@ -1,9 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEditor.UI;
+using UnityEngine.UI;
 
 public class ObjectHolder : MonoBehaviour
 {
+    public Sprite objectImage;
+    public string objectName;
+    [HideInInspector] public Image image;
+    [HideInInspector] public TMP_Text textName;
     Vector3 startPos;
     Quaternion startRot;
     Material mat;
@@ -33,6 +40,8 @@ public class ObjectHolder : MonoBehaviour
         objectInspectPoint = hand.GetComponentInChildren<Transform>();
         cam = FindObjectOfType<Camera>().transform;
         controller = FindObjectOfType<Player_Controller>();
+        image = GameObject.Find("Canvas").transform.Find("Object Image").GetComponent<Image>();
+        textName = GameObject.Find("Canvas").transform.Find("Object Name").GetComponent<TMP_Text>();
     }
 
     
@@ -58,6 +67,10 @@ public class ObjectHolder : MonoBehaviour
                     objectHeld = true;
                     isPlacedDown = false;
                     thisObjectHeld = true;
+                    image.gameObject.SetActive(true);
+                    textName.gameObject.SetActive(true);
+                    image.sprite = objectImage;
+                    textName.text = objectName;
                 }
             }
         }
@@ -86,7 +99,9 @@ public class ObjectHolder : MonoBehaviour
                 objectHeld = false;
                 thisObjectHeld = false;
                 StartCoroutine("Dissolve");
-                if(controller.enabled == false)
+                image.gameObject.SetActive(false);
+                textName.gameObject.SetActive(false);
+                if (controller.enabled == false)
                 {
                     Cursor.visible = true;
                     Cursor.lockState = CursorLockMode.None;
