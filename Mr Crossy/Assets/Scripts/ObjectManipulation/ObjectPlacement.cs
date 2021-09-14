@@ -41,6 +41,8 @@ public class ObjectPlacement : MonoBehaviour
                     PlacedObject.layer = 0;
                     PlacedObject.transform.rotation = heldObject.rotationalSet;
                     objectPlaced = true;
+                    DetermineLetter letter = GetComponentInParent<DetermineLetter>();
+                    letter.ObjectPlaced(PlacedObject); //sending to darcy's script
                     StartCoroutine(ColliderOn());
                 }
             }
@@ -50,6 +52,8 @@ public class ObjectPlacement : MonoBehaviour
         {
             if(PlacedObject.GetComponent<ObjectHolder>().isPlacedDown == false)
             {
+                DetermineLetter letter = GetComponentInParent<DetermineLetter>();
+                letter.ObjectPickedUp(); //sending to darcy's script
                 objectPlaced = false;
                 PlacedObject = null;
             }
