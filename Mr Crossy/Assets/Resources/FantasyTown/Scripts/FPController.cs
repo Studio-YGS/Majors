@@ -22,7 +22,8 @@ public class FPController : MonoBehaviour {
 	void Start () {
 		cam = GetComponentInChildren<Camera> ();
 		cc = GetComponent<CharacterController> ();
-		Cursor.visible = false;
+		LockCursor();
+		//Cursor.visible = false;
 	}
 	
 	// Update is called once per frame
@@ -55,6 +56,33 @@ public class FPController : MonoBehaviour {
 		cc.Move (speedCombined * Time.deltaTime);
 
 
+        if (Input.GetKeyDown(KeyCode.Tab)) //journal related stuff
+        {
+			JournalOnSwitch j = FindObjectOfType<JournalOnSwitch>();
+			bool open;
+			open = j.OpenOrClosed();
 
+			if(open)
+            {
+				speed = 0f;
+				mouseSensitivity = 0f;
+				UnlockCursor();
+            }
+            else
+            {
+				speed = 6f;
+				mouseSensitivity = 5f;
+				LockCursor();
+            }
+        }
+	}
+
+	public void LockCursor()
+    {
+		Cursor.lockState = CursorLockMode.Locked;
+    }
+	public void UnlockCursor()
+	{
+		Cursor.lockState = CursorLockMode.None;
 	}
 }
