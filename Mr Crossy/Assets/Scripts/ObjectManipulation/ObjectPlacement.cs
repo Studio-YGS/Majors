@@ -41,6 +41,8 @@ public class ObjectPlacement : MonoBehaviour
                     PlacedObject.layer = 0;
                     PlacedObject.transform.rotation = heldObject.rotationalSet;
                     objectPlaced = true;
+                    heldObject.image.gameObject.SetActive(false);
+                    heldObject.textName.gameObject.SetActive(false);
                     DetermineLetter letter = GetComponentInParent<DetermineLetter>();
                     letter.ObjectPlaced(PlacedObject); //sending to darcy's script
                     StartCoroutine(ColliderOn());
