@@ -1,3 +1,4 @@
+//Not Used
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,7 @@ public class OutlineSwitch : MonoBehaviour
 {
     Outline outline;
     Camera cam;
-    public float distanceAway;
+    public float distanceAway = 3;
     void Start()
     {
         outline = GetComponent<Outline>();
