@@ -22,21 +22,33 @@ public class PatrolWithinArea : NavMeshMovement
     [Phil.Tooltip("What parts of the NavMesh can be considered a valid patrol location")]
     public SharedInt navMask;
 
-    Vector3 destination;
+    Vector3 destination = Vector3.zero;
+
+    public override void OnStart()
+    {
+        base.OnStart();
+
+        if (ValidatePointToNavmesh(GetPointInCircle(patrolAreaRadius.Value, patrolAreaCentre.Value), navErrorDistance.Value, navMeshAgent.areaMask)) SetDestination(destination);
+    }
 
     public override Phil.TaskStatus OnUpdate()
     {
-        if (navMeshAgent.destination == null)
+        if (destination == Vector3.zero)
         {
-            if (ValidatePointToNavmesh(GetPointInCircle(patrolAreaRadius.Value, patrolAreaCentre.Value), out destination, navErrorDistance.Value, navMask.Value)) navMeshAgent.destination = destination;
-            else return Phil.TaskStatus.Failure;
+            if (ValidatePointToNavmesh(GetPointInCircle(patrolAreaRadius.Value, patrolAreaCentre.Value), navErrorDistance.Value, navMeshAgent.areaMask))
+            {
+                SetDestination(destination);
+            }
+
         }
         else if (HasArrived())
         {
-            if (ValidatePointToNavmesh(GetPointInCircle(patrolAreaRadius.Value, patrolAreaCentre.Value), out destination, navErrorDistance.Value, navMask.Value)) navMeshAgent.destination = destination;
-            else return Phil.TaskStatus.Failure;
+            Debug.Log("Boope");
+            if (ValidatePointToNavmesh(GetPointInCircle(patrolAreaRadius.Value, patrolAreaCentre.Value), navErrorDistance.Value, navMeshAgent.areaMask))
+            {
+                SetDestination(destination);
+            }
         }
-
         return Phil.TaskStatus.Running;
     }
 
@@ -45,20 +57,31 @@ public class PatrolWithinArea : NavMeshMovement
         Vector2 pointInCircle;
         pointInCircle = Random.insideUnitCircle * radius;
 
-        Vector3 areaWithCentreOffset = new Vector3(pointInCircle.x + centre.x, 0, pointInCircle.y + centre.z);
-
+        Vector3 areaWithCentreOffset = new Vector3(pointInCircle.x + centre.x, centre.y, pointInCircle.y + centre.z);
         return areaWithCentreOffset;
     }
 
-    bool ValidatePointToNavmesh(Vector3 samplePoint, out Vector3 resultingPoint, float pointError, int areaMask) //Takes given point and translates it to the nearest allowed navmesh location
+    bool ValidatePointToNavmesh(Vector3 samplePoint, float pointError, int areaMask) //Takes given point and translates it to the nearest allowed navmesh location, returns true if valid point found
     {
-        NavMeshHit hit;
-
-        if (NavMesh.SamplePosition(samplePoint, out hit, pointError, areaMask))
+        
+        for (int i = 0; i < 30; i++)
         {
-            resultingPoint = hit.position;
-            return true;
+            if (NavMesh.SamplePosition(samplePoint, out NavMeshHit hit, pointError, areaMask))
+            {
+                destination = hit.position;
+                return true;
+            }
         }
-        else { resultingPoint = Vector3.zero; return false; }
+
+        destination = Vector3.zero; 
+        return false;
+    }
+
+    public override void OnDrawGizmos()
+    {
+        Color colour = Color.green;
+        colour.a = 0.01f;
+        UnityEditor.Handles.color = colour;
+        UnityEditor.Handles.DrawSolidDisc(patrolAreaCentre.Value, Vector3.up, patrolAreaRadius.Value);
     }
 }

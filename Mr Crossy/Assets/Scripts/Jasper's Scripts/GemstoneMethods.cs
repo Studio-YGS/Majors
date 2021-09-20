@@ -21,5 +21,14 @@ namespace Gemstone
 
             return areaWithCentreOffset;
         }
+
+        public static float ToRadians(this float angleInDeg)
+        {
+            float radians = angleInDeg * Mathf.Deg2Rad;
+
+            return radians;
+        }
+
+        
     }
 }
