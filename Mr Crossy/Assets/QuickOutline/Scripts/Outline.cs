@@ -17,8 +17,8 @@ public class Outline : MonoBehaviour {
   private static HashSet<Mesh> registeredMeshes = new HashSet<Mesh>();
 
   public enum Mode {
-    OutlineAll,
     OutlineVisible,
+    OutlineAll,
     OutlineHidden,
     OutlineAndSilhouette,
     SilhouetteOnly
@@ -62,6 +62,10 @@ public class Outline : MonoBehaviour {
   [SerializeField, Range(0f, 10f)]
   private float outlineWidth = 2f;
 
+    Camera cam;
+    public float distanceAway = 3;
+    bool outlineEnabled;
+
   [Header("Optional")]
 
   [SerializeField, Tooltip("Precompute enabled: Per-vertex calculations are performed in the editor and serialized with the object. "
@@ -97,9 +101,35 @@ public class Outline : MonoBehaviour {
 
     // Apply material properties immediately
     needsUpdate = true;
-  }
 
-  void OnEnable() {
+        //Added code so that the ouline script works with multiple submeshes
+        foreach (var skinnedMeshRenderer in GetComponentsInChildren<SkinnedMeshRenderer>())
+        {
+            if (skinnedMeshRenderer.sharedMesh.subMeshCount > 1)
+            {
+                skinnedMeshRenderer.sharedMesh.subMeshCount = skinnedMeshRenderer.sharedMesh.subMeshCount + 1;
+                skinnedMeshRenderer.sharedMesh.SetTriangles(skinnedMeshRenderer.sharedMesh.triangles, skinnedMeshRenderer.sharedMesh.subMeshCount - 1);
+            }
+
+        }
+
+        foreach (var meshFilter in GetComponentsInChildren<MeshFilter>())
+        {
+            if (meshFilter.sharedMesh.subMeshCount > 1)
+            {
+                meshFilter.mesh.subMeshCount = meshFilter.mesh.subMeshCount + 1;
+                meshFilter.mesh.SetTriangles(meshFilter.mesh.triangles, meshFilter.mesh.subMeshCount - 1);
+            }
+        }
+    }
+
+    void Start()
+    {
+        cam = FindObjectOfType<Camera>();
+    }
+
+    void OnEnable() {
+        outlineEnabled = true;
     foreach (var renderer in renderers) {
 
       // Append outline shaders
@@ -135,9 +165,50 @@ public class Outline : MonoBehaviour {
 
       UpdateMaterialProperties();
     }
-  }
+
+        //Added code to toggle the outline dpeneding on distance
+        Vector3 distance = cam.transform.position - transform.position;
+        if (distance.magnitude > distanceAway)
+        {
+            if (outlineEnabled == true)
+            {
+                outlineEnabled = false;
+                foreach (var renderer in renderers)
+                {
+
+                    // Remove outline shaders
+                    var materials = renderer.sharedMaterials.ToList();
+
+                    materials.Remove(outlineMaskMaterial);
+                    materials.Remove(outlineFillMaterial);
+
+                    renderer.materials = materials.ToArray();
+                }
+            }
+        }
+        else
+        {
+            if (outlineEnabled == false)
+            {
+                outlineEnabled = true;
+                foreach (var renderer in renderers)
+                {
+
+                    // Append outline shaders
+                    var materials = renderer.sharedMaterials.ToList();
+
+                    materials.Add(outlineMaskMaterial);
+                    materials.Add(outlineFillMaterial);
+
+                    renderer.materials = materials.ToArray();
+                }
+            }
+        }
+
+    }
 
   void OnDisable() {
+        outlineEnabled = false;
     foreach (var renderer in renderers) {
 
       // Remove outline shaders
@@ -151,7 +222,7 @@ public class Outline : MonoBehaviour {
   }
 
   void OnDestroy() {
-
+        outlineEnabled = false;
     // Destroy material instances
     Destroy(outlineMaskMaterial);
     Destroy(outlineFillMaterial);
