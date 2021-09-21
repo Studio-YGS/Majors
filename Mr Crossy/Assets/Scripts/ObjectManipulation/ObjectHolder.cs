@@ -35,7 +35,7 @@ public class ObjectHolder : MonoBehaviour
     [Header("In Hand")]
     public Vector3 handOffset;
     public Quaternion handRotation;
-    public Vector3 scaleFactor;
+    public Vector3 scaleFactor = new Vector3 (1,1,1);
     [Header("On Pedestal")]
     public Vector3 placementOffset;
     public Quaternion rotationalSet;
@@ -159,12 +159,12 @@ public class ObjectHolder : MonoBehaviour
             
             if(handOffset != newHandPosition)
             {
-                transform.position = hand.position + handOffset;
+                transform.position = hand.TransformPoint(handOffset);
                 newHandPosition = handOffset;
             }
             if(handRotation != newHandRotation)
             {
-                transform.rotation = handRotation;
+                transform.localRotation = handRotation;
                 newHandRotation = handRotation;
             }
             
@@ -198,7 +198,7 @@ public class ObjectHolder : MonoBehaviour
         itemObjectHolder.StartCoroutine("Dissolve");
         image.gameObject.SetActive(false);
         textName.gameObject.SetActive(false);
-        transform.localScale = ogScaleFactor;
+        heldObject.transform.localScale = ogScaleFactor;
         if (controller.enabled == false)
         {
             Cursor.visible = true;
@@ -215,12 +215,14 @@ public class ObjectHolder : MonoBehaviour
         itemObjectHolder.dissolving = false;
         itemObjectHolder.dissolveValue = 0;
         itemObjectHolder.mat.SetFloat("Vector1_1bfaaeffe0534a91a219fc6f2e1eae9e", dissolveValue);
+        transform.localScale = scaleFactor;
+        //itemObjectHolder.transform.position = hand.position + handOffset;
+        itemObjectHolder.transform.position = hand.TransformPoint(handOffset);
         itemObjectHolder.transform.parent = hand;
-        itemObjectHolder.transform.position = hand.position + handOffset;
         itemObjectHolder.gameObject.GetComponent<Collider>().enabled = false;
         itemObjectHolder.gameObject.GetComponent<Rigidbody>().isKinematic = true;
         itemObjectHolder.gameObject.GetComponent<Rigidbody>().useGravity = false;
-        itemObjectHolder.transform.rotation = handRotation;
+        itemObjectHolder.transform.localRotation = handRotation;
         itemObjectHolder.gameObject.layer = 6;
         objectHeld = true;
         itemObjectHolder.isPlacedDown = false;
@@ -229,7 +231,6 @@ public class ObjectHolder : MonoBehaviour
         textName.gameObject.SetActive(true);
         itemObjectHolder.image.sprite = objectImage;
         textName.text = itemObjectHolder.objectName;
-        transform.localScale = scaleFactor;
     }
 
     public void PutObjectDown()
