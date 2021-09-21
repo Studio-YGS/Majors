@@ -5,6 +5,8 @@ using TMPro;
 using UnityEditor.UI;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Outline))]
 public class ObjectHolder : MonoBehaviour
 {
     public Sprite objectImage;
@@ -28,11 +30,20 @@ public class ObjectHolder : MonoBehaviour
     Vector3 posLastFrame;
     Player_Controller controller;
 
-    public float scaleFactor;
+    //public float scaleFactor;
     public float pickupRange = 5;
+    [Header("In Hand")]
+    public Vector3 handOffset;
+    public Quaternion handRotation;
+    [Header("On Pedestal")]
     public Vector3 placementOffset;
     public Quaternion rotationalSet;
+    [Header("When Inspecting")]
     public float distanceFromFace = 1.2f;
+    [Header("Testing Pos In Hand")]
+    public bool updatePos;
+    Vector3 newHandPosition = Vector3.zero;
+    Quaternion newHandRotation = new Quaternion(0, 0, 0, 0);
 
     void Start()
     {
@@ -138,6 +149,23 @@ public class ObjectHolder : MonoBehaviour
                 mat.SetFloat("Vector1_1bfaaeffe0534a91a219fc6f2e1eae9e", dissolveValue);
             }
         }
+        
+        if(updatePos && thisObjectHeld)
+        {
+            
+            if(handOffset != newHandPosition)
+            {
+                transform.position = hand.position + handOffset;
+                newHandPosition = handOffset;
+            }
+            if(handRotation != newHandRotation)
+            {
+                transform.rotation = handRotation;
+                newHandRotation = handRotation;
+            }
+            
+            
+        }
 
     }
 
@@ -183,11 +211,11 @@ public class ObjectHolder : MonoBehaviour
         itemObjectHolder.dissolveValue = 0;
         itemObjectHolder.mat.SetFloat("Vector1_1bfaaeffe0534a91a219fc6f2e1eae9e", dissolveValue);
         itemObjectHolder.transform.parent = hand;
-        itemObjectHolder.transform.position = hand.position;
+        itemObjectHolder.transform.position = hand.position + handOffset;
         itemObjectHolder.gameObject.GetComponent<Collider>().enabled = false;
         itemObjectHolder.gameObject.GetComponent<Rigidbody>().isKinematic = true;
         itemObjectHolder.gameObject.GetComponent<Rigidbody>().useGravity = false;
-        itemObjectHolder.transform.rotation = new Quaternion(0, 0, 0, 0);
+        itemObjectHolder.transform.rotation = handRotation;
         itemObjectHolder.gameObject.layer = 6;
         objectHeld = true;
         itemObjectHolder.isPlacedDown = false;
