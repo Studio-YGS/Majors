@@ -30,11 +30,12 @@ public class ObjectHolder : MonoBehaviour
     Vector3 posLastFrame;
     Player_Controller controller;
 
-    //public float scaleFactor;
+    Vector3 ogScaleFactor;
     public float pickupRange = 5;
     [Header("In Hand")]
     public Vector3 handOffset;
     public Quaternion handRotation;
+    public Vector3 scaleFactor;
     [Header("On Pedestal")]
     public Vector3 placementOffset;
     public Quaternion rotationalSet;
@@ -57,6 +58,9 @@ public class ObjectHolder : MonoBehaviour
         image = GameObject.Find("Canvas").transform.Find("Object Image").GetComponent<Image>();
         textName = GameObject.Find("Canvas").transform.Find("Object Name").GetComponent<TMP_Text>();
         hoverText = GameObject.Find("Canvas").transform.Find("Hover Name").GetComponent<TMP_Text>();
+        newHandPosition = handOffset;
+        newHandRotation = handRotation;
+        ogScaleFactor = transform.localScale;
     }
 
     
@@ -194,6 +198,7 @@ public class ObjectHolder : MonoBehaviour
         itemObjectHolder.StartCoroutine("Dissolve");
         image.gameObject.SetActive(false);
         textName.gameObject.SetActive(false);
+        transform.localScale = ogScaleFactor;
         if (controller.enabled == false)
         {
             Cursor.visible = true;
@@ -224,6 +229,7 @@ public class ObjectHolder : MonoBehaviour
         textName.gameObject.SetActive(true);
         itemObjectHolder.image.sprite = objectImage;
         textName.text = itemObjectHolder.objectName;
+        transform.localScale = scaleFactor;
     }
 
     public void PutObjectDown()

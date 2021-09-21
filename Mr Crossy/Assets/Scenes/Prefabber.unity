@@ -194,6 +194,7 @@ GameObject:
   - component: {fileID: 184174544}
   - component: {fileID: 184174543}
   - component: {fileID: 184174548}
+  - component: {fileID: 184174549}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -219,11 +220,14 @@ MonoBehaviour:
   textName: {fileID: 0}
   thisObjectHeld: 0
   isPlacedDown: 0
-  scaleFactor: 0
   pickupRange: 5.07
+  handOffset: {x: 0, y: 0, z: 0}
+  handRotation: {x: 0, y: 0, z: 0, w: 0}
+  scaleFactor: {x: 0, y: 0, z: 0}
   placementOffset: {x: 0, y: 0.5, z: 0}
   rotationalSet: {x: 0, y: 0, z: 0, w: 0}
   distanceFromFace: 0
+  updatePos: 0
 --- !u!135 &184174544
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -316,6 +320,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &184174549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 184174542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  distanceAway: 5
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1001 &308858353
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -444,6 +467,62 @@ PrefabInstance:
     - target: {fileID: 2601460497090204088, guid: 8feedd1fdda0b1a4b8a406356e3eda02, type: 3}
       propertyPath: m_Name
       value: '[B]ird Skull'
+      objectReference: {fileID: 0}
+    - target: {fileID: 3223085717234663486, guid: 8feedd1fdda0b1a4b8a406356e3eda02, type: 3}
+      propertyPath: image
+      value: 
+      objectReference: {fileID: 1711820981}
+    - target: {fileID: 3223085717234663486, guid: 8feedd1fdda0b1a4b8a406356e3eda02, type: 3}
+      propertyPath: textName
+      value: 
+      objectReference: {fileID: 1727028701}
+    - target: {fileID: 3223085717234663486, guid: 8feedd1fdda0b1a4b8a406356e3eda02, type: 3}
+      propertyPath: updatePos
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3223085717234663486, guid: 8feedd1fdda0b1a4b8a406356e3eda02, type: 3}
+      propertyPath: handOffset.x
+      value: -0.115
+      objectReference: {fileID: 0}
+    - target: {fileID: 3223085717234663486, guid: 8feedd1fdda0b1a4b8a406356e3eda02, type: 3}
+      propertyPath: handOffset.y
+      value: 0.447
+      objectReference: {fileID: 0}
+    - target: {fileID: 3223085717234663486, guid: 8feedd1fdda0b1a4b8a406356e3eda02, type: 3}
+      propertyPath: handOffset.z
+      value: -0.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 3223085717234663486, guid: 8feedd1fdda0b1a4b8a406356e3eda02, type: 3}
+      propertyPath: scaleFactor.x
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3223085717234663486, guid: 8feedd1fdda0b1a4b8a406356e3eda02, type: 3}
+      propertyPath: scaleFactor.y
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3223085717234663486, guid: 8feedd1fdda0b1a4b8a406356e3eda02, type: 3}
+      propertyPath: scaleFactor.z
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3223085717234663486, guid: 8feedd1fdda0b1a4b8a406356e3eda02, type: 3}
+      propertyPath: handRotation.w
+      value: 0.96089685
+      objectReference: {fileID: 0}
+    - target: {fileID: 3223085717234663486, guid: 8feedd1fdda0b1a4b8a406356e3eda02, type: 3}
+      propertyPath: handRotation.x
+      value: 0.027945597
+      objectReference: {fileID: 0}
+    - target: {fileID: 3223085717234663486, guid: 8feedd1fdda0b1a4b8a406356e3eda02, type: 3}
+      propertyPath: handRotation.y
+      value: -0.26690742
+      objectReference: {fileID: 0}
+    - target: {fileID: 3223085717234663486, guid: 8feedd1fdda0b1a4b8a406356e3eda02, type: 3}
+      propertyPath: handRotation.z
+      value: -0.06824015
+      objectReference: {fileID: 0}
+    - target: {fileID: 3223085717234663486, guid: 8feedd1fdda0b1a4b8a406356e3eda02, type: 3}
+      propertyPath: thisObjectHeld
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3496283212423211714, guid: 8feedd1fdda0b1a4b8a406356e3eda02, type: 3}
       propertyPath: m_RootOrder
@@ -1056,6 +1135,7 @@ GameObject:
   - component: {fileID: 1093698712}
   - component: {fileID: 1093698711}
   - component: {fileID: 1093698710}
+  - component: {fileID: 1093698716}
   m_Layer: 0
   m_Name: Sphere (1)
   m_TagString: Untagged
@@ -1097,11 +1177,14 @@ MonoBehaviour:
   textName: {fileID: 0}
   thisObjectHeld: 0
   isPlacedDown: 0
-  scaleFactor: 0
   pickupRange: 5.07
+  handOffset: {x: 0, y: 0, z: 0}
+  handRotation: {x: 0, y: 0, z: 0, w: 0}
+  scaleFactor: {x: 0, y: 0, z: 0}
   placementOffset: {x: 0, y: 0.5, z: 0}
   rotationalSet: {x: 0, y: 0, z: 0, w: 0}
   distanceFromFace: 0
+  updatePos: 0
 --- !u!135 &1093698712
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1178,6 +1261,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1093698716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1093698709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  distanceAway: 5
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1001 &1160681601
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1526,6 +1628,7 @@ GameObject:
   - component: {fileID: 1427324416}
   - component: {fileID: 1427324415}
   - component: {fileID: 1427324414}
+  - component: {fileID: 1427324420}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -1551,11 +1654,14 @@ MonoBehaviour:
   textName: {fileID: 0}
   thisObjectHeld: 0
   isPlacedDown: 0
-  scaleFactor: 0
   pickupRange: 4.23
+  handOffset: {x: 0, y: 0, z: 0}
+  handRotation: {x: 0, y: 0, z: 0, w: 0}
+  scaleFactor: {x: 0, y: 0, z: 0}
   placementOffset: {x: 0, y: 0.5, z: 0}
   rotationalSet: {x: 0, y: 0, z: 0, w: 0}
   distanceFromFace: 0
+  updatePos: 0
 --- !u!54 &1427324415
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1649,6 +1755,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1427324420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1427324413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  distanceAway: 5
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &1435148663
 GameObject:
   m_ObjectHideFlags: 0
@@ -2845,6 +2970,7 @@ GameObject:
   - component: {fileID: 2093697150}
   - component: {fileID: 2093697149}
   - component: {fileID: 2093697148}
+  - component: {fileID: 2093697154}
   m_Layer: 0
   m_Name: Cube (4)
   m_TagString: Untagged
@@ -2886,11 +3012,14 @@ MonoBehaviour:
   textName: {fileID: 0}
   thisObjectHeld: 0
   isPlacedDown: 0
-  scaleFactor: 0
   pickupRange: 4.23
+  handOffset: {x: 0, y: 0, z: 0}
+  handRotation: {x: 0, y: 0, z: 0, w: 0}
+  scaleFactor: {x: 0, y: 0, z: 0}
   placementOffset: {x: 0, y: 0.5, z: 0}
   rotationalSet: {x: 0, y: 0, z: 0, w: 0}
   distanceFromFace: 1.2
+  updatePos: 0
 --- !u!65 &2093697150
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2967,6 +3096,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2093697154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2093697147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  distanceAway: 5
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1001 &4625939428001540527
 PrefabInstance:
   m_ObjectHideFlags: 0
