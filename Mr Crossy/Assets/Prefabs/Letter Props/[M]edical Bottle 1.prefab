@@ -11,8 +11,12 @@ GameObject:
   - component: {fileID: 3544646804937786535}
   - component: {fileID: 477037311767694082}
   - component: {fileID: 2412295120965976008}
+  - component: {fileID: -1868215803328205717}
+  - component: {fileID: 5820645591548424510}
+  - component: {fileID: -322989650728767281}
+  - component: {fileID: -7738674986627155564}
   m_Layer: 0
-  m_Name: '[M]edical Bottle  '
+  m_Name: '[M]edical Bottle 1'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81,3 +85,77 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &-1868215803328205717
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4213906701108780573}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4064401460107052069, guid: bfc78cad87fbaf94c999854499dc78f8, type: 3}
+--- !u!54 &5820645591548424510
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4213906701108780573}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &-322989650728767281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4213906701108780573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  distanceAway: 5
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
+--- !u!114 &-7738674986627155564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4213906701108780573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c771dc25b37682447906be6093940da8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectImage: {fileID: -1491001289897183491, guid: 55697872fa590ed4783621502adaad17, type: 3}
+  objectName: '[M]edical Bottle'
+  image: {fileID: 0}
+  textName: {fileID: 0}
+  thisObjectHeld: 0
+  isPlacedDown: 0
+  pickupRange: 5
+  handOffset: {x: 0, y: 0, z: 0}
+  handRotation: {x: 0, y: 0, z: 0, w: 0}
+  placementOffset: {x: 0, y: 0, z: 0}
+  rotationalSet: {x: 0, y: 0, z: 0, w: 0}
+  distanceFromFace: 1.2
+  updatePos: 0

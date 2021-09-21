@@ -11,6 +11,9 @@ GameObject:
   - component: {fileID: 2816505614825947812}
   - component: {fileID: 1205248888107633921}
   - component: {fileID: 3989362658490448331}
+  - component: {fileID: 7298531468047306456}
+  - component: {fileID: 4648930142349423423}
+  - component: {fileID: 8145326764561276414}
   m_Layer: 0
   m_Name: '[M]edical Bottle   '
   m_TagString: Untagged
@@ -81,3 +84,63 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!54 &7298531468047306456
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3196971086183421982}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &4648930142349423423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3196971086183421982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  distanceAway: 5
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
+--- !u!114 &8145326764561276414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3196971086183421982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c771dc25b37682447906be6093940da8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectImage: {fileID: -646973176054653376, guid: 55697872fa590ed4783621502adaad17, type: 3}
+  objectName: '[M]edical Bottle'
+  image: {fileID: 0}
+  textName: {fileID: 0}
+  thisObjectHeld: 0
+  isPlacedDown: 0
+  pickupRange: 5
+  handOffset: {x: 0, y: 0, z: 0}
+  handRotation: {x: 0, y: 0, z: 0, w: 0}
+  placementOffset: {x: 0, y: 0, z: 0}
+  rotationalSet: {x: 0, y: 0, z: 0, w: 0}
+  distanceFromFace: 1.2
+  updatePos: 0

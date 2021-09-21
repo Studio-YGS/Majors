@@ -11,6 +11,10 @@ GameObject:
   - component: {fileID: 7176882529098118639}
   - component: {fileID: 316589341344831577}
   - component: {fileID: 7611589632506640047}
+  - component: {fileID: 6707713257393286845}
+  - component: {fileID: 222760895726521190}
+  - component: {fileID: 5941068643195459969}
+  - component: {fileID: 1689133603657961507}
   m_Layer: 0
   m_Name: '[M]ask  '
   m_TagString: Untagged
@@ -81,3 +85,77 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!54 &6707713257393286845
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9113946167517520270}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &222760895726521190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9113946167517520270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  distanceAway: 5
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
+--- !u!114 &5941068643195459969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9113946167517520270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c771dc25b37682447906be6093940da8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectImage: {fileID: -5440323788065144066, guid: 55697872fa590ed4783621502adaad17, type: 3}
+  objectName: '[M]ask'
+  image: {fileID: 0}
+  textName: {fileID: 0}
+  thisObjectHeld: 0
+  isPlacedDown: 0
+  pickupRange: 5
+  handOffset: {x: 0, y: 0, z: 0}
+  handRotation: {x: 0, y: 0, z: 0, w: 0}
+  placementOffset: {x: 0, y: 0, z: 0}
+  rotationalSet: {x: 0, y: 0, z: 0, w: 0}
+  distanceFromFace: 1.2
+  updatePos: 0
+--- !u!64 &1689133603657961507
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9113946167517520270}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8395040042216875932, guid: ae7ef7475c66f4f44b42239d2987eaba, type: 3}
