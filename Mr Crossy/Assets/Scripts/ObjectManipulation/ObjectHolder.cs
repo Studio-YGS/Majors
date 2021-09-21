@@ -29,7 +29,7 @@ public class ObjectHolder : MonoBehaviour
     Player_Controller controller;
 
     public float scaleFactor;
-    public float pickupRange = 3;
+    public float pickupRange = 5;
     public Vector3 placementOffset;
     public Quaternion rotationalSet;
     public float distanceFromFace = 1.2f;
