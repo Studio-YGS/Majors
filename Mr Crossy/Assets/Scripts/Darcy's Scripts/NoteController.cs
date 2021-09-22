@@ -10,6 +10,18 @@ public class NoteController : MonoBehaviour
     [SerializeField]
     Transform player;
 
+    JournalController journalController;
+
+    JournalOnSwitch journalOnSwitch;
+
+    int currentNote = 0;
+
+    void Awake()
+    {
+        journalOnSwitch = FindObjectOfType<JournalOnSwitch>();
+        journalController = FindObjectOfType<JournalController>();
+    }
+
     void Update()
     {
         RaycastHit hit;
@@ -39,6 +51,9 @@ public class NoteController : MonoBehaviour
 
     void PickUpNote()
     {
-        
+        journalController.whichNotesPage = currentNote;
+        journalController.OpenNotes();
+        journalOnSwitch.OpenOrClosed();
+        currentNote++;
     }
 }

@@ -64,15 +64,11 @@ public class FPController : MonoBehaviour {
 
 			if(open)
             {
-				speed = 0f;
-				mouseSensitivity = 0f;
-				UnlockCursor();
+				DisableController();
             }
             else
             {
-				speed = 6f;
-				mouseSensitivity = 5f;
-				LockCursor();
+				EnableController();
             }
         }
 	}
@@ -84,5 +80,21 @@ public class FPController : MonoBehaviour {
 	public void UnlockCursor()
 	{
 		Cursor.lockState = CursorLockMode.None;
+	}
+
+	public void EnableController()
+    {
+		speed = 6f;
+		mouseSensitivity = 5f;
+		jumpSpeed = 10f;
+		LockCursor();
+	}
+
+	public void DisableController()
+    {
+		speed = 0f;
+		mouseSensitivity = 0f;
+		jumpSpeed = 0f;
+		UnlockCursor();
 	}
 }
