@@ -204,7 +204,7 @@ public class ObjectHolder : MonoBehaviour
         itemObjectHolder.StartCoroutine("Dissolve");
         image.gameObject.SetActive(false);
         textName.gameObject.SetActive(false);
-        heldObject.transform.localScale = ogScaleFactor;
+        heldObject.transform.localScale = itemObjectHolder.ogScaleFactor;
         if (controller.enabled == false)
         {
             Cursor.visible = true;
