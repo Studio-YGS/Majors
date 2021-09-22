@@ -45,6 +45,7 @@ public class ObjectHolder : MonoBehaviour
     public bool updatePos;
     Vector3 newHandPosition = Vector3.zero;
     Quaternion newHandRotation = new Quaternion(0, 0, 0, 0);
+    Vector3 newScaleFactor;
 
     void Start()
     {
@@ -60,6 +61,7 @@ public class ObjectHolder : MonoBehaviour
         hoverText = GameObject.Find("Canvas").transform.Find("Hover Name").GetComponent<TMP_Text>();
         newHandPosition = handOffset;
         newHandRotation = handRotation;
+        newScaleFactor = scaleFactor;
         ogScaleFactor = transform.localScale;
     }
 
@@ -167,7 +169,11 @@ public class ObjectHolder : MonoBehaviour
                 transform.localRotation = handRotation;
                 newHandRotation = handRotation;
             }
-            
+            if(scaleFactor != newScaleFactor)
+            {
+                transform.localScale = scaleFactor;
+                newScaleFactor = scaleFactor;
+            }
             
         }
 
@@ -215,7 +221,7 @@ public class ObjectHolder : MonoBehaviour
         itemObjectHolder.dissolving = false;
         itemObjectHolder.dissolveValue = 0;
         itemObjectHolder.mat.SetFloat("Vector1_1bfaaeffe0534a91a219fc6f2e1eae9e", dissolveValue);
-        transform.localScale = scaleFactor;
+        itemObjectHolder.transform.localScale = scaleFactor;
         //itemObjectHolder.transform.position = hand.position + handOffset;
         itemObjectHolder.transform.position = hand.TransformPoint(handOffset);
         itemObjectHolder.transform.parent = hand;
