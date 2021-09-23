@@ -7,11 +7,14 @@ public class JournalController : MonoBehaviour
     [SerializeField]
     GameObject[] notePages, logPages;
 
+    //[HideInInspector]
+    public List<int> noteList = new List<int>(0); 
+
     [SerializeField]
     GameObject log, map, notes, rightArrow, leftArrow;
 
     int whichTab = 1, whichLogPage = 0;
-    [HideInInspector]
+    //[HideInInspector]
     public int whichNotesPage = 0; 
 
     void Update()
@@ -31,6 +34,10 @@ public class JournalController : MonoBehaviour
         log.SetActive(true);
         map.SetActive(false);
         notes.SetActive(false);
+
+        leftArrow.SetActive(false);
+        rightArrow.SetActive(false);
+
         whichTab = 1;
 
         for (int i = 0; i < logPages.Length; i++)
@@ -69,32 +76,42 @@ public class JournalController : MonoBehaviour
 
     public void OpenNotes()
     {
-        log.SetActive(false);
-        map.SetActive(false);
-        notes.SetActive(true);
-        whichTab = 3;
-
-        for (int i = 0; i < notePages.Length; i++)
+        if(noteList.Count >= 1)
         {
-            notePages[i].SetActive(false);
-        }
+            log.SetActive(false);
+            map.SetActive(false);
+            notes.SetActive(true);
 
-        notePages[whichNotesPage].SetActive(true);
-
-        if (whichNotesPage == 0)
-        {
             leftArrow.SetActive(false);
-            rightArrow.SetActive(true);
-        }
-        else if (whichNotesPage == notePages.Length - 1)
-        {
-            leftArrow.SetActive(true);
             rightArrow.SetActive(false);
-        }
-        else
-        {
-            leftArrow.SetActive(true);
-            rightArrow.SetActive(true);
+
+            whichTab = 3;
+
+            for (int i = 0; i < notePages.Length; i++)
+            {
+                notePages[i].SetActive(false);
+            }
+
+            notePages[whichNotesPage].SetActive(true);
+
+            if (whichNotesPage == 0 && noteList.Count > 1)
+            {
+                leftArrow.SetActive(false);
+                rightArrow.SetActive(true);
+            }
+            else if (whichNotesPage == noteList.Count)
+            {
+                leftArrow.SetActive(true);
+                rightArrow.SetActive(false);
+            }
+            else if(whichNotesPage > 0)
+            {
+                if(whichNotesPage < noteList.Count)
+                {
+                    leftArrow.SetActive(true);
+                    rightArrow.SetActive(true);
+                }
+            }
         }
     }
 

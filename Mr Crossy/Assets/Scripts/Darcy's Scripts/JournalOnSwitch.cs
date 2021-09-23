@@ -9,8 +9,12 @@ public class JournalOnSwitch : MonoBehaviour
     [SerializeField]
     GameObject journalOpen, journalClosed;
 
-    [SerializeField]
     FPController fpc;
+
+    void Awake()
+    {
+        fpc = FindObjectOfType<FPController>();
+    }
 
     public bool OpenOrClosed()
     {
@@ -29,6 +33,7 @@ public class JournalOnSwitch : MonoBehaviour
     void OpenJournal()
     {
         fpc.DisableController();
+
         open = true;
         journalClosed.SetActive(false);
         journalOpen.SetActive(true);
@@ -37,6 +42,7 @@ public class JournalOnSwitch : MonoBehaviour
     void CloseJournal()
     {
         fpc.EnableController();
+
         open = false;
         journalClosed.SetActive(true);
         journalOpen.SetActive(false);

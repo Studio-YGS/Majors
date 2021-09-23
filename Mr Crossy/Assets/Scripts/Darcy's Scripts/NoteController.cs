@@ -52,8 +52,11 @@ public class NoteController : MonoBehaviour
     void PickUpNote()
     {
         journalController.whichNotesPage = currentNote;
+        journalController.noteList.Add(currentNote);
         journalController.OpenNotes();
+
         journalOnSwitch.OpenOrClosed();
+
         currentNote++;
     }
 }
