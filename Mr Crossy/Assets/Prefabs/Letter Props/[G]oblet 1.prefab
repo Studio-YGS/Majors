@@ -117,11 +117,14 @@ MonoBehaviour:
   textName: {fileID: 0}
   thisObjectHeld: 0
   isPlacedDown: 0
-  scaleFactor: 0
   pickupRange: 5
+  handOffset: {x: 0, y: 0, z: 0}
+  handRotation: {x: 0, y: 0, z: 0, w: 0}
+  scaleFactor: {x: 0, y: 0, z: 0}
   placementOffset: {x: 0, y: 0, z: 0}
   rotationalSet: {x: 0, y: 0, z: 0, w: 0}
   distanceFromFace: 1.2
+  updatePos: 0
 --- !u!54 &4497607518392031109
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -137,7 +140,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &1866499961104363697
 MonoBehaviour:
   m_ObjectHideFlags: 0

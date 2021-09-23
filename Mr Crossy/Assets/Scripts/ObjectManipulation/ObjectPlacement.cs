@@ -41,6 +41,7 @@ public class ObjectPlacement : MonoBehaviour
                     PlacedObject.layer = 0;
                     PlacedObject.transform.rotation = heldObject.rotationalSet;
                     objectPlaced = true;
+                    heldObject.transform.localScale = heldObject.ogScaleFactor;
                     heldObject.image.gameObject.SetActive(false);
                     heldObject.textName.gameObject.SetActive(false);
                     DetermineLetter letter = GetComponentInParent<DetermineLetter>();

@@ -30,7 +30,7 @@ public class ObjectHolder : MonoBehaviour
     Vector3 posLastFrame;
     Player_Controller controller;
 
-    Vector3 ogScaleFactor;
+    [HideInInspector] public Vector3 ogScaleFactor;
     public float pickupRange = 5;
     [Header("In Hand")]
     public Vector3 handOffset;
@@ -49,6 +49,7 @@ public class ObjectHolder : MonoBehaviour
 
     void Start()
     {
+        thisObjectHeld = false;
         mat = gameObject.GetComponent<MeshRenderer>().material;
         startPos = transform.position;
         startRot = transform.rotation;
@@ -128,8 +129,8 @@ public class ObjectHolder : MonoBehaviour
                 controller.enabled = true;
                 Cursor.visible = false;
                 Cursor.lockState = CursorLockMode.Locked;
-                transform.position = hand.position;
-                transform.rotation = new Quaternion(0, 0, 0, 0);
+                transform.position = hand.TransformPoint(handOffset);
+                transform.localRotation = handRotation;
             }
             if (Input.GetMouseButton(0) && Input.GetMouseButton(1))
             {
