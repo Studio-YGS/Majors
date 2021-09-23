@@ -131,7 +131,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!64 &2697067333332619210
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -143,7 +143,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -9044987488356545354, guid: 9c0100456b3073b4287c6bd606dd5694, type: 3}
 --- !u!114 &2172495809146409682
@@ -177,14 +177,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c771dc25b37682447906be6093940da8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectImage: {fileID: -2804498633085967154, guid: c9eea934591e8f4428c79ce2fbb600ac, type: 3}
+  objectImage: {fileID: 5339320356558433737, guid: c9eea934591e8f4428c79ce2fbb600ac, type: 3}
   objectName: '[C]orn'
   image: {fileID: 0}
   textName: {fileID: 0}
   thisObjectHeld: 0
-  isPlacedDown: 0
-  scaleFactor: 0
+  isPlacedDown: 1
+  ogScaleFactor: {x: 1, y: 1, z: 1}
   pickupRange: 5
-  placementOffset: {x: 0, y: 0, z: 0}
-  rotationalSet: {x: 0, y: 0, z: 0, w: 0}
-  distanceFromFace: 1.2
+  handOffset: {x: 0.14, y: 0.1, z: 0}
+  handRotation: {x: 0.15246938, y: 0.48015743, z: 0.09191936, w: 0.8589254}
+  scaleFactor: {x: 1, y: 1, z: 1}
+  placementOffset: {x: -0.1, y: 0.04, z: -0.1}
+  rotationalSet: {x: 0.6531687, y: 0.27064478, z: -0.27055135, w: 0.6533942}
+  distanceFromFace: 0.7
+  updatePos: 0
