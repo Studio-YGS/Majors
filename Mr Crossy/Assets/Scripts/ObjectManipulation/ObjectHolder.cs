@@ -5,6 +5,8 @@ using TMPro;
 using UnityEditor.UI;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Outline))]
 public class ObjectHolder : MonoBehaviour
 {
     public Sprite objectImage;
@@ -28,11 +30,22 @@ public class ObjectHolder : MonoBehaviour
     Vector3 posLastFrame;
     Player_Controller controller;
 
-    public float scaleFactor;
-    public float pickupRange = 3;
+    Vector3 ogScaleFactor;
+    public float pickupRange = 5;
+    [Header("In Hand")]
+    public Vector3 handOffset;
+    public Quaternion handRotation;
+    public Vector3 scaleFactor = new Vector3 (1,1,1);
+    [Header("On Pedestal")]
     public Vector3 placementOffset;
     public Quaternion rotationalSet;
+    [Header("When Inspecting")]
     public float distanceFromFace = 1.2f;
+    [Header("Testing Pos In Hand")]
+    public bool updatePos;
+    Vector3 newHandPosition = Vector3.zero;
+    Quaternion newHandRotation = new Quaternion(0, 0, 0, 0);
+    Vector3 newScaleFactor;
 
     void Start()
     {
@@ -46,6 +59,10 @@ public class ObjectHolder : MonoBehaviour
         image = GameObject.Find("Canvas").transform.Find("Object Image").GetComponent<Image>();
         textName = GameObject.Find("Canvas").transform.Find("Object Name").GetComponent<TMP_Text>();
         hoverText = GameObject.Find("Canvas").transform.Find("Hover Name").GetComponent<TMP_Text>();
+        newHandPosition = handOffset;
+        newHandRotation = handRotation;
+        newScaleFactor = scaleFactor;
+        ogScaleFactor = transform.localScale;
     }
 
     
@@ -138,6 +155,27 @@ public class ObjectHolder : MonoBehaviour
                 mat.SetFloat("Vector1_1bfaaeffe0534a91a219fc6f2e1eae9e", dissolveValue);
             }
         }
+        
+        if(updatePos && thisObjectHeld)
+        {
+            
+            if(handOffset != newHandPosition)
+            {
+                transform.position = hand.TransformPoint(handOffset);
+                newHandPosition = handOffset;
+            }
+            if(handRotation != newHandRotation)
+            {
+                transform.localRotation = handRotation;
+                newHandRotation = handRotation;
+            }
+            if(scaleFactor != newScaleFactor)
+            {
+                transform.localScale = scaleFactor;
+                newScaleFactor = scaleFactor;
+            }
+            
+        }
 
     }
 
@@ -166,6 +204,7 @@ public class ObjectHolder : MonoBehaviour
         itemObjectHolder.StartCoroutine("Dissolve");
         image.gameObject.SetActive(false);
         textName.gameObject.SetActive(false);
+        heldObject.transform.localScale = ogScaleFactor;
         if (controller.enabled == false)
         {
             Cursor.visible = true;
@@ -182,12 +221,14 @@ public class ObjectHolder : MonoBehaviour
         itemObjectHolder.dissolving = false;
         itemObjectHolder.dissolveValue = 0;
         itemObjectHolder.mat.SetFloat("Vector1_1bfaaeffe0534a91a219fc6f2e1eae9e", dissolveValue);
+        itemObjectHolder.transform.localScale = scaleFactor;
+        //itemObjectHolder.transform.position = hand.position + handOffset;
+        itemObjectHolder.transform.position = hand.TransformPoint(handOffset);
         itemObjectHolder.transform.parent = hand;
-        itemObjectHolder.transform.position = hand.position;
         itemObjectHolder.gameObject.GetComponent<Collider>().enabled = false;
         itemObjectHolder.gameObject.GetComponent<Rigidbody>().isKinematic = true;
         itemObjectHolder.gameObject.GetComponent<Rigidbody>().useGravity = false;
-        itemObjectHolder.transform.rotation = new Quaternion(0, 0, 0, 0);
+        itemObjectHolder.transform.localRotation = handRotation;
         itemObjectHolder.gameObject.layer = 6;
         objectHeld = true;
         itemObjectHolder.isPlacedDown = false;

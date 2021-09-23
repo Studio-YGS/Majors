@@ -63,7 +63,7 @@ public class Outline : MonoBehaviour {
   private float outlineWidth = 2f;
 
     Camera cam;
-    public float distanceAway = 3;
+    public float distanceAway = 5;
     bool outlineEnabled;
 
   [Header("Optional")]
