@@ -5,12 +5,16 @@ using TMPro;
 using UnityEditor.UI;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Outline))]
 public class ObjectHolder : MonoBehaviour
 {
     public Sprite objectImage;
     public string objectName;
     [HideInInspector] public Image image;
     [HideInInspector] public TMP_Text textName;
+    TMP_Text hoverText;
+    bool turnOffHoverText;
     Vector3 startPos;
     Quaternion startRot;
     Material mat;
@@ -19,17 +23,29 @@ public class ObjectHolder : MonoBehaviour
     Transform objectInspectPoint;
     Transform cam;
     static bool objectHeld = false;
+    static GameObject heldObject;
     bool dissolving;
     [HideInInspector] public bool thisObjectHeld;
     [HideInInspector] public bool isPlacedDown;
     Vector3 posLastFrame;
     Player_Controller controller;
 
-    public float scaleFactor;
-    public float pickupRange = 3;
+    Vector3 ogScaleFactor;
+    public float pickupRange = 5;
+    [Header("In Hand")]
+    public Vector3 handOffset;
+    public Quaternion handRotation;
+    public Vector3 scaleFactor = new Vector3 (1,1,1);
+    [Header("On Pedestal")]
     public Vector3 placementOffset;
     public Quaternion rotationalSet;
+    [Header("When Inspecting")]
     public float distanceFromFace = 1.2f;
+    [Header("Testing Pos In Hand")]
+    public bool updatePos;
+    Vector3 newHandPosition = Vector3.zero;
+    Quaternion newHandRotation = new Quaternion(0, 0, 0, 0);
+    Vector3 newScaleFactor;
 
     void Start()
     {
@@ -42,6 +58,11 @@ public class ObjectHolder : MonoBehaviour
         controller = FindObjectOfType<Player_Controller>();
         image = GameObject.Find("Canvas").transform.Find("Object Image").GetComponent<Image>();
         textName = GameObject.Find("Canvas").transform.Find("Object Name").GetComponent<TMP_Text>();
+        hoverText = GameObject.Find("Canvas").transform.Find("Hover Name").GetComponent<TMP_Text>();
+        newHandPosition = handOffset;
+        newHandRotation = handRotation;
+        newScaleFactor = scaleFactor;
+        ogScaleFactor = transform.localScale;
     }
 
     
@@ -52,61 +73,39 @@ public class ObjectHolder : MonoBehaviour
         {
             if(hit.collider == gameObject.GetComponent<Collider>())
             {
-                if (Input.GetKeyDown(KeyCode.E) && !objectHeld)
+                hoverText.text = "Pick Up " + objectName;
+                hoverText.gameObject.SetActive(true);
+                turnOffHoverText = true;
+                GameObject intereactedObject = hit.collider.gameObject;
+                if (Input.GetKeyDown(KeyCode.E) && objectHeld)
                 {
-                    StopCoroutine("Dissolve");
-                    dissolveValue = 0;
-                    mat.SetFloat("Vector1_1bfaaeffe0534a91a219fc6f2e1eae9e", dissolveValue);
-                    transform.parent = hand;
-                    transform.position = hand.position;
-                    gameObject.GetComponent<Collider>().enabled = false;
-                    gameObject.GetComponent<Rigidbody>().isKinematic = true;
-                    gameObject.GetComponent<Rigidbody>().useGravity = false;
-                    transform.rotation = new Quaternion (0,0,0,0);
-                    gameObject.layer = 6;
+                    DropCurrentObject(heldObject);
+                    PickUpObject(intereactedObject);
                     objectHeld = true;
-                    isPlacedDown = false;
-                    thisObjectHeld = true;
-                    image.gameObject.SetActive(true);
-                    textName.gameObject.SetActive(true);
-                    image.sprite = objectImage;
-                    textName.text = objectName;
+                }
+                else if (Input.GetKeyDown(KeyCode.E) && !objectHeld)
+                {
+                    
+                    PickUpObject(intereactedObject);
                 }
             }
+            else if (hit.collider != gameObject.GetComponent<Collider>() && turnOffHoverText)
+            {
+                turnOffHoverText = false;
+                hoverText.gameObject.SetActive(false);
+            }
+        }
+        else if (turnOffHoverText)
+        {
+            turnOffHoverText = false;
+            hoverText.gameObject.SetActive(false);
         }
 
         if (Input.GetKeyDown(KeyCode.X))
         {
             if (thisObjectHeld)
             {
-                transform.parent = null;
-                RaycastHit detectWall;
-                if (Physics.Raycast(cam.position, cam.forward, out detectWall, 0.5f))
-                {
-                    if (detectWall.collider == null)
-                    {
-                        transform.position = cam.position + cam.forward;
-                    }
-                    else
-                    {
-                        transform.position = cam.position - cam.forward;
-                    }
-                }
-                gameObject.GetComponent<Collider>().enabled = true;
-                gameObject.GetComponent<Rigidbody>().isKinematic = false;
-                gameObject.GetComponent<Rigidbody>().useGravity = true;
-                gameObject.layer = 0;
-                objectHeld = false;
-                thisObjectHeld = false;
-                StartCoroutine("Dissolve");
-                image.gameObject.SetActive(false);
-                textName.gameObject.SetActive(false);
-                if (controller.enabled == false)
-                {
-                    Cursor.visible = true;
-                    Cursor.lockState = CursorLockMode.None;
-                    controller.enabled = true;
-                }
+                DropCurrentObject(heldObject);
                 
             }
         }
@@ -156,7 +155,88 @@ public class ObjectHolder : MonoBehaviour
                 mat.SetFloat("Vector1_1bfaaeffe0534a91a219fc6f2e1eae9e", dissolveValue);
             }
         }
+        
+        if(updatePos && thisObjectHeld)
+        {
+            
+            if(handOffset != newHandPosition)
+            {
+                transform.position = hand.TransformPoint(handOffset);
+                newHandPosition = handOffset;
+            }
+            if(handRotation != newHandRotation)
+            {
+                transform.localRotation = handRotation;
+                newHandRotation = handRotation;
+            }
+            if(scaleFactor != newScaleFactor)
+            {
+                transform.localScale = scaleFactor;
+                newScaleFactor = scaleFactor;
+            }
+            
+        }
 
+    }
+
+    void DropCurrentObject(GameObject item)
+    {
+        ObjectHolder itemObjectHolder = item.GetComponent<ObjectHolder>();
+        heldObject.transform.parent = null;
+        RaycastHit detectWall;
+        if (Physics.Raycast(cam.position, cam.forward, out detectWall, 0.5f))
+        {
+            if (detectWall.collider == null)
+            {
+                heldObject.transform.position = cam.position + cam.forward;
+            }
+            else
+            {
+                heldObject.transform.position = cam.position - cam.forward;
+            }
+        }
+        heldObject.gameObject.GetComponent<Collider>().enabled = true;
+        heldObject.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+        heldObject.gameObject.GetComponent<Rigidbody>().useGravity = true;
+        heldObject.gameObject.layer = 0;
+        objectHeld = false;
+        itemObjectHolder.thisObjectHeld = false;
+        itemObjectHolder.StartCoroutine("Dissolve");
+        image.gameObject.SetActive(false);
+        textName.gameObject.SetActive(false);
+        heldObject.transform.localScale = ogScaleFactor;
+        if (controller.enabled == false)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            controller.enabled = true;
+        }
+    }
+
+    void PickUpObject(GameObject item)
+    {
+        heldObject = item;
+        ObjectHolder itemObjectHolder = item.GetComponent<ObjectHolder>();
+        itemObjectHolder.StopCoroutine("Dissolve");
+        itemObjectHolder.dissolving = false;
+        itemObjectHolder.dissolveValue = 0;
+        itemObjectHolder.mat.SetFloat("Vector1_1bfaaeffe0534a91a219fc6f2e1eae9e", dissolveValue);
+        itemObjectHolder.transform.localScale = scaleFactor;
+        //itemObjectHolder.transform.position = hand.position + handOffset;
+        itemObjectHolder.transform.position = hand.TransformPoint(handOffset);
+        itemObjectHolder.transform.parent = hand;
+        itemObjectHolder.gameObject.GetComponent<Collider>().enabled = false;
+        itemObjectHolder.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+        itemObjectHolder.gameObject.GetComponent<Rigidbody>().useGravity = false;
+        itemObjectHolder.transform.localRotation = handRotation;
+        itemObjectHolder.gameObject.layer = 6;
+        objectHeld = true;
+        itemObjectHolder.isPlacedDown = false;
+        itemObjectHolder.thisObjectHeld = true;
+        image.gameObject.SetActive(true);
+        textName.gameObject.SetActive(true);
+        itemObjectHolder.image.sprite = objectImage;
+        textName.text = itemObjectHolder.objectName;
     }
 
     public void PutObjectDown()
@@ -174,6 +254,8 @@ public class ObjectHolder : MonoBehaviour
         }
         transform.position = startPos;
         transform.rotation = startRot;
+        gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        gameObject.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
         dissolving = false;
         while (mat.GetFloat("Vector1_1bfaaeffe0534a91a219fc6f2e1eae9e") > 0)
         {
