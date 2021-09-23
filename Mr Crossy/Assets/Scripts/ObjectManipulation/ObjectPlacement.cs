@@ -34,7 +34,6 @@ public class ObjectPlacement : MonoBehaviour
                     ObjectHolder heldObject = hand.GetComponentInChildren<ObjectHolder>();
                     PlacedObject = heldObject.gameObject;
                     heldObject.transform.position = transform.position + heldObject.placementOffset;
-                    heldObject.PutObjectDown();
                     heldObject.isPlacedDown = true;
                     heldObject.thisObjectHeld = false;
                     heldObject.transform.parent = null;
