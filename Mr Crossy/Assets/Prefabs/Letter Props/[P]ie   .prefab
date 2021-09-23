@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3452539477035770055}
-  - component: {fileID: 2853730524167468547}
   m_Layer: 0
   m_Name: '[P]ie   '
   m_TagString: Untagged
@@ -32,38 +31,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!205 &2853730524167468547
-LODGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1851748573522957012}
-  serializedVersion: 2
-  m_LocalReferencePoint: {x: 0.0010550544, y: 0.042943213, z: 0.00017094985}
-  m_Size: 0.1558634
-  m_FadeMode: 0
-  m_AnimateCrossFading: 0
-  m_LastLODIsBillboard: 0
-  m_LODs:
-  - screenRelativeHeight: 0.25
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 8177390061191350166}
-    - renderer: {fileID: 5406069287039226101, guid: 2fdc33c782ecfc245af7a97ef0fef1a5, type: 3}
-  - screenRelativeHeight: 0.125
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 0}
-  - screenRelativeHeight: 0.0625
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 0}
-  - screenRelativeHeight: 0.01
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 0}
-  m_Enabled: 1
 --- !u!1 &2802875727968441173
 GameObject:
   m_ObjectHideFlags: 0
@@ -201,14 +168,15 @@ MonoBehaviour:
   image: {fileID: 0}
   textName: {fileID: 0}
   thisObjectHeld: 0
-  isPlacedDown: 0
+  isPlacedDown: 1
+  ogScaleFactor: {x: 1, y: 1, z: 1}
   pickupRange: 5
-  handOffset: {x: 0, y: 0, z: 0}
-  handRotation: {x: 0, y: 0, z: 0, w: 0}
-  scaleFactor: {x: 1, y: 1, z: 1}
+  handOffset: {x: 0.03, y: 0.3, z: 0}
+  handRotation: {x: -0.2636366, y: -0.34393787, z: 0.34565985, w: 0.83229905}
+  scaleFactor: {x: 2, y: 2, z: 2}
   placementOffset: {x: 0, y: 0, z: 0}
   rotationalSet: {x: 0, y: 0, z: 0, w: 0}
-  distanceFromFace: 1.2
+  distanceFromFace: 0.6
   updatePos: 0
 --- !u!64 &8578400616960682135
 MeshCollider:
