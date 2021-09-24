@@ -60,10 +60,12 @@ public class ObjectHolder : MonoBehaviour
         objectInspectPoint = hand.GetComponentInChildren<Transform>();
         cam = FindObjectOfType<Camera>().transform;
         controller = FindObjectOfType<Player_Controller>();
-        image = GameObject.Find("Canvas").transform.Find("Object Image").GetComponent<Image>();
+        image = GameObject.Find("Canvas").transform.Find("Item Square 1").transform.Find("Object Image").GetComponent<Image>();
         textName = GameObject.Find("Canvas").transform.Find("Object Name").GetComponent<TMP_Text>();
-        imageTwo = GameObject.Find("Canvas").transform.Find("Object Image 2").GetComponent<Image>();
+        
+        imageTwo = GameObject.Find("Canvas").transform.Find("Item Square 2").transform.Find("Object Image").GetComponent<Image>();
         textNameTwo = GameObject.Find("Canvas").transform.Find("Object Name 2").GetComponent<TMP_Text>();
+
         hoverText = GameObject.Find("Canvas").transform.Find("Hover Name").GetComponent<TMP_Text>();
         newHandPosition = handOffset;
         newHandRotation = handRotation;
@@ -135,16 +137,16 @@ public class ObjectHolder : MonoBehaviour
                     objectsInHands[0].SetActive(false);
                     objectsInHands[1].SetActive(true);
                     heldObject = objectsInHands[1];
-                    image.transform.localScale = new Vector3(1f, 1f, 1f);
-                    imageTwo.transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
+                    image.GetComponentInParent<Transform>().localScale = new Vector3(1f, 1f, 1f);
+                    imageTwo.GetComponentInParent<Transform>().localScale = new Vector3(1.3f, 1.3f, 1.3f);
                 }
                 else if (objectsInHands[1].activeSelf == true)
                 {
                     objectsInHands[1].SetActive(false);
                     objectsInHands[0].SetActive(true);
                     heldObject = objectsInHands[0];
-                    imageTwo.transform.localScale = new Vector3(1f, 1f, 1f);
-                    image.transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
+                    imageTwo.GetComponentInParent<Transform>().localScale = new Vector3(1f, 1f, 1f);
+                    image.GetComponentInParent<Transform>().localScale = new Vector3(1.3f, 1.3f, 1.3f);
                 }
             }
             if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -152,16 +154,16 @@ public class ObjectHolder : MonoBehaviour
                 objectsInHands[1].SetActive(false);
                 objectsInHands[0].SetActive(true);
                 heldObject = objectsInHands[0];
-                imageTwo.transform.localScale = new Vector3(1f, 1f, 1f);
-                image.transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
+                imageTwo.GetComponentInParent<Transform>().localScale = new Vector3(1f, 1f, 1f);
+                image.GetComponentInParent<Transform>().localScale = new Vector3(1.3f, 1.3f, 1.3f);
             }
             else if (Input.GetKeyDown(KeyCode.Alpha2))
             {
                 objectsInHands[0].SetActive(false);
                 objectsInHands[1].SetActive(true);
                 heldObject = objectsInHands[1];
-                image.transform.localScale = new Vector3(1f, 1f, 1f);
-                imageTwo.transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
+                image.GetComponentInParent<Transform>().localScale = new Vector3(1f, 1f, 1f);
+                imageTwo.GetComponentInParent<Transform>().localScale = new Vector3(1.3f, 1.3f, 1.3f);
             }
         }
 
@@ -305,7 +307,7 @@ public class ObjectHolder : MonoBehaviour
             textName.gameObject.SetActive(true);
             itemObjectHolder.image.sprite = objectImage;
             textName.text = itemObjectHolder.objectName;
-            image.transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
+            image.GetComponentInParent<Transform>().localScale = new Vector3(1.3f, 1.3f, 1.3f);
         }
         else if (objectsInHands.Count == 1)
         {
@@ -316,8 +318,8 @@ public class ObjectHolder : MonoBehaviour
             textNameTwo.gameObject.SetActive(true);
             itemObjectHolder.imageTwo.sprite = objectImage;
             textNameTwo.text = itemObjectHolder.objectName;
-            image.transform.localScale = new Vector3(1f, 1f, 1f);
-            imageTwo.transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
+            image.GetComponentInParent<Transform>().localScale = new Vector3(1f, 1f, 1f);
+            imageTwo.GetComponentInParent<Transform>().localScale = new Vector3(1.3f, 1.3f, 1.3f);
         }
         
         
@@ -339,6 +341,41 @@ public class ObjectHolder : MonoBehaviour
         
         
 
+    }
+
+    public void PlacedOnPedestal(GameObject item)
+    {
+        ObjectHolder itemObjectHolder = item.GetComponent<ObjectHolder>();
+        if (item == objectsInHands[0])
+        {
+            if (objectsInHands.Count == 2)
+            {
+                image.sprite = objectsInHands[1].GetComponent<ObjectHolder>().objectImage;
+                textName.text = objectsInHands[1].GetComponent<ObjectHolder>().objectName;
+                imageTwo.gameObject.SetActive(false);
+                textNameTwo.gameObject.SetActive(false);
+            }
+            else
+            {
+                image.gameObject.SetActive(false);
+                textName.gameObject.SetActive(false);
+            }
+            objectsInHands.Remove(objectsInHands[0]);
+
+        }
+        else if (item == objectsInHands[1])
+        {
+            objectsInHands.Remove(objectsInHands[1]);
+            imageTwo.gameObject.SetActive(false);
+            textNameTwo.gameObject.SetActive(false);
+
+        }
+        if (objectsInHands.Count == 1)
+        {
+            objectsInHands[0].SetActive(true);
+            heldObject = objectsInHands[0];
+        }
+        image.transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
     }
 
     IEnumerator Dissolve()
