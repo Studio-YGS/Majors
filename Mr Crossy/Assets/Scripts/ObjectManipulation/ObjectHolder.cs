@@ -266,6 +266,7 @@ public class ObjectHolder : MonoBehaviour
         image.transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
 
         heldObject.transform.parent = null;
+        heldObject.GetComponent<Outline>().enabled = true;
         RaycastHit detectWall;
         if (Physics.Raycast(cam.position, cam.forward, out detectWall, 0.5f))
         {
@@ -282,7 +283,10 @@ public class ObjectHolder : MonoBehaviour
         heldObject.gameObject.GetComponent<Rigidbody>().isKinematic = false;
         heldObject.gameObject.GetComponent<Rigidbody>().useGravity = true;
         heldObject.gameObject.layer = 0;
-        
+        foreach (Transform HO in heldObject.transform)
+        {
+            HO.gameObject.layer = 0;
+        }
         itemObjectHolder.thisObjectHeld = false;
         itemObjectHolder.StartCoroutine("Dissolve");
         
@@ -321,8 +325,8 @@ public class ObjectHolder : MonoBehaviour
             image.GetComponentInParent<Transform>().localScale = new Vector3(1f, 1f, 1f);
             imageTwo.GetComponentInParent<Transform>().localScale = new Vector3(1.3f, 1.3f, 1.3f);
         }
-        
-        
+
+        itemObjectHolder.GetComponent<Outline>().enabled = false;
         itemObjectHolder.StopCoroutine("Dissolve");
         itemObjectHolder.dissolving = false;
         itemObjectHolder.dissolveValue = 0;
@@ -336,6 +340,10 @@ public class ObjectHolder : MonoBehaviour
         itemObjectHolder.gameObject.GetComponent<Rigidbody>().useGravity = false;
         itemObjectHolder.transform.localRotation = handRotation;
         itemObjectHolder.gameObject.layer = 6;
+        foreach(Transform HO in itemObjectHolder.transform)
+        {
+            HO.gameObject.layer = 6;
+        }
         itemObjectHolder.isPlacedDown = false;
         itemObjectHolder.thisObjectHeld = true;
         

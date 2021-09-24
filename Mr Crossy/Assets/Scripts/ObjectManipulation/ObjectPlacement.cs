@@ -43,6 +43,10 @@ public class ObjectPlacement : MonoBehaviour
                     heldObject.isPlacedDown = true;
                     heldObject.thisObjectHeld = false;
                     heldObject.transform.parent = null;
+                    foreach(Transform PO in PlacedObject.transform)
+                    {
+                        PO.gameObject.layer = 0;
+                    }
                     PlacedObject.layer = 0;
                     PlacedObject.transform.rotation = heldObject.rotationalSet;
                     objectPlaced = true;
