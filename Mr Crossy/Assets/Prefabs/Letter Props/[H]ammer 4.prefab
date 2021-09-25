@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7581480885425592782}
   - component: {fileID: 6001950216466976941}
   - component: {fileID: 5429940205465391061}
+  - component: {fileID: 7280827638281651794}
   m_Layer: 0
   m_Name: hammer02_LOD0
   m_TagString: Untagged
@@ -137,14 +138,29 @@ MonoBehaviour:
   textName: {fileID: 0}
   thisObjectHeld: 0
   isPlacedDown: 0
+  ogScaleFactor: {x: 0, y: 0, z: 0}
   pickupRange: 5
-  handOffset: {x: 0, y: 0, z: 0}
+  handOffset: {x: 0, y: 0.1, z: 0}
   handRotation: {x: 0, y: 0, z: 0, w: 0}
-  scaleFactor: {x: 1, y: 1, z: 1}
-  placementOffset: {x: 0, y: 0, z: 0}
-  rotationalSet: {x: 0, y: 0, z: 0, w: 0}
+  scaleFactor: {x: 0.5, y: 0.5, z: 0.5}
+  placementOffset: {x: 0.3, y: 0.04, z: 0.02}
+  rotationalSet: {x: 0, y: 0, z: 0.70710677, w: 0.70710677}
   distanceFromFace: 1.2
   updatePos: 0
+--- !u!64 &7280827638281651794
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1239895325261898}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 1adf0c3e29ee7994698571c3da594137, type: 3}
 --- !u!1 &1594024420467354
 GameObject:
   m_ObjectHideFlags: 0

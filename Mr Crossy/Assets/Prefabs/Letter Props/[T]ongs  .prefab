@@ -9,8 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 435220}
-  - component: {fileID: 20570142}
-  - component: {fileID: 64881692460005296}
   m_Layer: 0
   m_Name: '[T]ongs  '
   m_TagString: Untagged
@@ -33,47 +31,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!205 &20570142
-LODGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 141630}
-  serializedVersion: 2
-  m_LocalReferencePoint: {x: 0.00000020116568, y: 0, z: 0}
-  m_Size: 0.7756038
-  m_FadeMode: 0
-  m_AnimateCrossFading: 0
-  m_LastLODIsBillboard: 0
-  m_LODs:
-  - screenRelativeHeight: 0.25
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 23415594001561942}
-  - screenRelativeHeight: 0.125
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 0}
-  - screenRelativeHeight: 0.01
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 0}
-  m_Enabled: 1
---- !u!64 &64881692460005296
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 141630}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300006, guid: e07ae525794001245a4f675e13655b8a, type: 3}
 --- !u!1 &1818915429735698
 GameObject:
   m_ObjectHideFlags: 0
@@ -211,13 +168,14 @@ MonoBehaviour:
   image: {fileID: 0}
   textName: {fileID: 0}
   thisObjectHeld: 0
-  isPlacedDown: 0
+  isPlacedDown: 1
+  ogScaleFactor: {x: 1, y: 1, z: 1}
   pickupRange: 5
-  handOffset: {x: 0, y: 0, z: 0}
-  handRotation: {x: 0, y: 0, z: 0, w: 0}
+  handOffset: {x: 0.21, y: 0.11, z: 0}
+  handRotation: {x: 0.0864056, y: -0.4180363, z: 0.027234051, w: 0.9039016}
   scaleFactor: {x: 1, y: 1, z: 1}
-  placementOffset: {x: 0, y: 0, z: 0}
-  rotationalSet: {x: 0, y: 0, z: 0, w: 0}
+  placementOffset: {x: 0, y: 0.02, z: 0}
+  rotationalSet: {x: 0, y: 0, z: 0.70710677, w: -0.70710677}
   distanceFromFace: 1.2
   updatePos: 0
 --- !u!64 &4130515723350604448

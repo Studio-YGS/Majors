@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7298531468047306456}
   - component: {fileID: 4648930142349423423}
   - component: {fileID: 8145326764561276414}
+  - component: {fileID: 1294466283430575422}
   m_Layer: 0
   m_Name: '[M]edical Bottle   '
   m_TagString: Untagged
@@ -28,7 +29,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3196971086183421982}
-  m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -136,12 +137,27 @@ MonoBehaviour:
   image: {fileID: 0}
   textName: {fileID: 0}
   thisObjectHeld: 0
-  isPlacedDown: 0
+  isPlacedDown: 1
+  ogScaleFactor: {x: 1, y: 1, z: 1}
   pickupRange: 5
-  handOffset: {x: 0, y: 0, z: 0}
-  handRotation: {x: 0, y: 0, z: 0, w: 0}
-  scaleFactor: {x: 1, y: 1, z: 1}
+  handOffset: {x: 0.14, y: 0.2, z: 0}
+  handRotation: {x: 0.10286465, y: 0.49317017, z: 0.0041213185, w: 0.86382}
+  scaleFactor: {x: 2, y: 2, z: 2}
   placementOffset: {x: 0, y: 0, z: 0}
   rotationalSet: {x: 0, y: 0, z: 0, w: 0}
-  distanceFromFace: 1.2
+  distanceFromFace: 0.5
   updatePos: 0
+--- !u!64 &1294466283430575422
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3196971086183421982}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 111144564646179630, guid: b860df6b0b8ef8c4d949a5345bf7fc54, type: 3}
