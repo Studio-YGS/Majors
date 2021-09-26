@@ -2,13 +2,12 @@
 [LOG] Manager::init                            : maxchannels = 256 studioflags = 00000006 flags 00000000 extradriverdata 0000000000000000.
 [LOG] SystemI::init                            : Initialize version=20109 (115889), maxchannels=256, flags=0x00020000
 [LOG] SystemI::setOutputInternal               : Setting output to 'FMOD WASAPI Output'
-[LOG] OutputWASAPI::init                       : Mix Format (WAVEFORMATEX): wFormatTag=0xFFFE, nChannels=2, nSamplesPerSec=44100, nAvgBytesPerSec=352800, nBlockAlign=8, wBitsPerSample=32, cbSize=22.
+[LOG] OutputWASAPI::init                       : Mix Format (WAVEFORMATEX): wFormatTag=0xFFFE, nChannels=2, nSamplesPerSec=48000, nAvgBytesPerSec=384000, nBlockAlign=8, wBitsPerSample=32, cbSize=22.
 [LOG] OutputWASAPI::init                       : Mix Format (WAVEFORMATEXTENSIBLE): wValidBitsPerSample=32, dwChannelMask=0x00000003, SubFormat=00000003-0000-0010-8000-00AA00389B71.
-[LOG] OutputWASAPI::init                       : Output buffer size: 3760 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
-[LOG] SystemI::init                            : Output requires a sample rate of 44100Hz, resampling will occur.
+[LOG] OutputWASAPI::init                       : Output buffer size: 4096 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
 [LOG] Thread::initThread                       : Init FMOD stream thread. Affinity: 0x8000000000000003, Priority: 0xFFFF7FFB, Stack Size: 98304, Semaphore: No, Sleep Time: 10, Looping: Yes.
 [LOG] Thread::initThread                       : Init FMOD mixer thread. Affinity: 0x8000000000000001, Priority: 0xFFFF7FFA, Stack Size: 81920, Semaphore: No, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncManager::init                       : manager 0000015CCA344248 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : manager 000001E1B4BECDE8 isAsync 0 updatePeriod 0.02
 [LOG] AsyncManager::init                       : done
 [LOG] PlaybackSystem::init                     : 
 [LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Affinity: 0x8000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
@@ -19,13 +18,79 @@
 [LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
 [LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
 [LOG] Manager::readBank                        : fileversion = 135, compatVersion = 132 (oldest = 44, newest = 135)
-[LOG] SoundI::release                          : scott_lawlor_horror_drone_atmosphere_processed_windchimes (0000015CED127CF8)
-[LOG] SoundI::release                          :     scott_lawlor_horror_drone_atmosphere_processed_windchimes (0000015BAEBD62D8)
-[LOG] SoundI::release                          :     scott_lawlor_horror_drone_atmosphere_processed_windchimes (0000015CED128C28)
-[LOG] SoundI::release                          :  (0000015BAA1BE4E8)
-[LOG] SoundI::release                          :     Jimmy Laugh (0000015BAEBD6AF8)
-[LOG] SoundI::release                          :  (0000015BAA1BE208)
-[LOG] SoundI::release                          :     ES_Bird Crow Caw Multiple 1 - SFX Producer (0000015BAEBD7CD8)
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001E19A15FA68
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001E19A15FA68
+[LOG] SystemI::createSound                     : filename = Assets/Audio/MrCrossy_Fmod/Build\Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 000001E1713C1D78 : node = 000001E12E406410
+[LOG] SystemI::createSound                     : add node to async list : head = 000001E12D11B368.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001E1713C1D78
+[LOG] SystemI::createSoundInternal             :     Create name='Assets/Audio/MrCrossy_Fmod/Build\Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 13454272
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 33824
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001E12E406520
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='zapsplat_foley_flag_flap_medium_strong_wind_25288', format=5, channels=2, frequency=48000, lengthbytes=349088, lengthpcm=1259136, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.710144.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001E1713C1D78
+[LOG] SoundI::release                          : zapsplat_foley_flag_flap_medium_strong_wind_25288 (000001E15C41B308)
+[LOG] SoundI::release                          :     zapsplat_foley_flag_flap_medium_strong_wind_25288 (000001DF620C5778)
+[LOG] SoundI::release                          :     zapsplat_foley_flag_flap_medium_strong_wind_25288 (000001E19A15FA68)
+[LOG] SystemI::createSound                     : filename = Assets/Audio/MrCrossy_Fmod/Build\Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 000001E15C41B308 : node = 000001E12EB29E30
+[LOG] SystemI::createSound                     : add node to async list : head = 000001E12D11B368.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001E15C41B308
+[LOG] SystemI::createSoundInternal             :     Create name='Assets/Audio/MrCrossy_Fmod/Build\Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 13454272
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 33824
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001E12EB29F40
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='zapsplat_foley_flag_flap_medium_strong_wind_25288', format=5, channels=2, frequency=48000, lengthbytes=349088, lengthpcm=1259136, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.710144.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001E15C41B308
+[LOG] SoundI::release                          : zapsplat_foley_flag_flap_medium_strong_wind_25288 (000001E1713C1D78)
+[LOG] SoundI::release                          :     zapsplat_foley_flag_flap_medium_strong_wind_25288 (000001DF620C2ED8)
+[LOG] SoundI::release                          :     zapsplat_foley_flag_flap_medium_strong_wind_25288 (000001E19A15FC18)
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001E1713C1868
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001E1713C1868
+[LOG] SystemI::createSound                     : filename = Assets/Audio/MrCrossy_Fmod/Build\Desktop/Master.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 000001E1713C56D8 : node = 000001E12E406B90
+[LOG] SystemI::createSound                     : add node to async list : head = 000001E12D11B368.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001E1713C56D8
+[LOG] SystemI::createSoundInternal             :     Create name='Assets/Audio/MrCrossy_Fmod/Build\Desktop/Master.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 13454272
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 33824
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001E12E406CA0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Blastwave_FX_NightCornField_S011AM.8', format=5, channels=2, frequency=48000, lengthbytes=776288, lengthpcm=2900736, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.033752.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001E1713C56D8
+[LOG] SoundI::release                          : Blastwave_FX_NightCornField_S011AM.8 (000001E15C418DE8)
+[LOG] SoundI::release                          :     Blastwave_FX_NightCornField_S011AM.8 (000001DF620C5C58)
+[LOG] SoundI::release                          :     Blastwave_FX_NightCornField_S011AM.8 (000001E19A1602D8)
+[LOG] SoundI::release                          : west_wolf_Nature_Ambience_With_Crickets (000001E15C4199B8)
+[LOG] SoundI::release                          :     west_wolf_Nature_Ambience_With_Crickets (000001DF620C5DF8)
+[LOG] SoundI::release                          :     west_wolf_Nature_Ambience_With_Crickets (000001E19A15F8B8)
+[LOG] SoundI::release                          : Blastwave_FX_NightCornField_S011AM.8 (000001E1713C56D8)
+[LOG] SoundI::release                          :     Blastwave_FX_NightCornField_S011AM.8 (000001DF620C62D8)
+[LOG] SoundI::release                          :     Blastwave_FX_NightCornField_S011AM.8 (000001E10867DF78)
+[LOG] SoundI::release                          : 27 - Crows Caw in Field (000001E15C41BB78)
+[LOG] SoundI::release                          :     27 - Crows Caw in Field (000001DF620C4C18)
+[LOG] SoundI::release                          :     27 - Crows Caw in Field (000001E19A160488)
+[LOG] SoundI::release                          : zapsplat_foley_flag_flap_medium_strong_wind_25288 (000001E15C41B308)
+[LOG] SoundI::release                          :     zapsplat_foley_flag_flap_medium_strong_wind_25288 (000001DF620C5438)
+[LOG] SoundI::release                          :     zapsplat_foley_flag_flap_medium_strong_wind_25288 (000001E1713C1868)
 [LOG] Thread::callback                         : FMOD Studio update thread finished.
 [LOG] Thread::callback                         : FMOD Studio bank load thread finished.
 [LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
