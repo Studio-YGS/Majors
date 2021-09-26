@@ -14,21 +14,19 @@ public class CrossyController : MonoBehaviour
     public Transform vision;
 
     [Space(10)]
+    [Header("Movement Variables")]
     [SerializeField] private float m_WalkSpeed;
     [SerializeField] private float m_RunSpeed;
-    [Space(10)]
-    private float accelAmt;
-    private float deccelAmt;
-
     private float m_MoveSpeed;
-    [Space(10)]
     private float m_Acceleration;
-    
     [SerializeField] private float m_AngularSpeed;
     [SerializeField] private float m_StoppingDistance;
-    [SerializeField] private float slowRange;
+    [SerializeField] private float m_SlowRange;
 
-    private int m_Mask; 
+    private int m_Mask;
+    [Space(10)]
+    [Header("Detection Variables")]
+    [SerializeField] private float m_DetectionTime;
 
     public float WalkSpeed { get { return m_WalkSpeed; } set { m_WalkSpeed = value; } }
     public float RunSpeed { get { return m_RunSpeed; } set { m_RunSpeed = value; } }
@@ -42,15 +40,18 @@ public class CrossyController : MonoBehaviour
 
     public int NavMeshMask { get { return m_Mask; } }
 
+    public float BaseDetectTime { get { return m_DetectionTime; } }
+    public float CloseDetectTime { get { return m_DetectionTime*3; } }
+
 
     [Space(10)]
-    [SerializeField] float veloMag;
+    float veloMag;
 
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-        m_Mask = NavMesh.GetAreaFromName("CrossyAble");
+        m_Mask = agent.areaMask;
     }
 
     private void Update()

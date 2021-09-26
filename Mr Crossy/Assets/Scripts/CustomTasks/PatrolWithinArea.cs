@@ -24,12 +24,15 @@ public class PatrolWithinArea : NavMeshMovement
 
     Vector3 destination = Vector3.zero;
 
-    public override void OnStart()
+    /*public override void OnStart()
     {
         base.OnStart();
 
-        if (ValidatePointToNavmesh(GetPointInCircle(patrolAreaRadius.Value, patrolAreaCentre.Value), navErrorDistance.Value, navMeshAgent.areaMask)) SetDestination(destination);
-    }
+        if (ValidatePointToNavmesh(GetPointInCircle(patrolAreaRadius.Value, patrolAreaCentre.Value), navErrorDistance.Value, navMeshAgent.areaMask))
+        {
+            SetDestination(destination);
+        }
+    }*/
 
     public override Phil.TaskStatus OnUpdate()
     {
@@ -68,8 +71,15 @@ public class PatrolWithinArea : NavMeshMovement
         {
             if (NavMesh.SamplePosition(samplePoint, out NavMeshHit hit, pointError, areaMask))
             {
-                destination = hit.position;
-                return true;
+                NavMeshPath pathTest = new NavMeshPath();
+
+                navMeshAgent.CalculatePath(hit.position, pathTest);
+
+                if(pathTest.status == NavMeshPathStatus.PathComplete)
+                {
+                    destination = hit.position;
+                    return true;
+                }
             }
         }
 
