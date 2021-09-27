@@ -56,21 +56,21 @@ public class FPController : MonoBehaviour {
 		cc.Move (speedCombined * Time.deltaTime);
 
 
-        if (Input.GetKeyDown(KeyCode.Tab)) //journal related stuff
-        {
-			JournalOnSwitch j = FindObjectOfType<JournalOnSwitch>();
-			bool open;
-			open = j.OpenOrClosed();
+   //     if (Input.GetKeyDown(KeyCode.Tab)) //journal related stuff
+   //     {
+			//JournalOnSwitch j = FindObjectOfType<JournalOnSwitch>();
+			//bool open;
+			//open = j.OpenOrClose();
 
-			if(open)
-            {
-				DisableController();
-            }
-            else
-            {
-				EnableController();
-            }
-        }
+			//if(open)
+   //         {
+			//	DisableController();
+   //         }
+   //         else
+   //         {
+			//	EnableController();
+   //         }
+   //     }
 	}
 
 	public void LockCursor()

@@ -9,14 +9,14 @@ public class JournalOnSwitch : MonoBehaviour
     [SerializeField]
     GameObject journalOpen, journalClosed;
 
-    FPController fpc;
+    Player_Controller fpc;
 
     void Awake()
     {
-        fpc = FindObjectOfType<FPController>();
+        fpc = FindObjectOfType<Player_Controller>();
     }
 
-    public bool OpenOrClosed()
+    public bool OpenOrClose()
     {
         if (open)
         {

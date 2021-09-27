@@ -26,7 +26,7 @@ public class NoteController : MonoBehaviour
     {
         RaycastHit hit;
 
-        if(Physics.Raycast(player.position, player.TransformDirection(Vector3.forward), out hit, 2f))
+        if(Physics.Raycast(player.position, player.TransformDirection(Vector3.forward), out hit, 5f))
         {
             if(hit.transform.gameObject.CompareTag("Note"))
             {
@@ -43,7 +43,7 @@ public class NoteController : MonoBehaviour
                 prompt.SetActive(false);
             }
         }
-        else if (!Physics.Raycast(player.position, player.TransformDirection(Vector3.forward), 2f))
+        else if (!Physics.Raycast(player.position, player.TransformDirection(Vector3.forward), 5f))
         {
             prompt.SetActive(false);
         }
@@ -55,7 +55,7 @@ public class NoteController : MonoBehaviour
         journalController.noteList.Add(currentNote);
         journalController.OpenNotes();
 
-        journalOnSwitch.OpenOrClosed();
+        journalOnSwitch.OpenOrClose();
 
         currentNote++;
     }

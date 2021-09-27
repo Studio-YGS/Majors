@@ -1,14 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 //Written by Darcy Glover
 
 public class DetermineLetter : MonoBehaviour
 {
     [Tooltip("The UI letter that this altar corresponds to")]
-    public Text assignedLetter;
+    public TextMeshProUGUI assignedLetter;
 
     [SerializeField, Tooltip("The 'Puzzle Controller' object")]
     GameObject puzzleControl;
@@ -24,12 +24,12 @@ public class DetermineLetter : MonoBehaviour
 
     public void ObjectPickedUp()
     {
-        firstLetter = "_"; //setting it back to 'empty'
+        firstLetter = ""; //setting it back to empty
         SendLetterAndName(firstLetter);
     }
 
     void SendLetterAndName(string letter) //sending the letter to the controller, as well as the name of the object it came from
     {
-        puzzleControl.GetComponent<WordControl>().ReceiveLetterAndName(letter, gameObject.name);
+        puzzleControl.GetComponent<PuzzleController>().ReceiveLetterAndName(letter, gameObject.name);
     }
 }
