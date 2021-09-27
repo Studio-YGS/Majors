@@ -100,7 +100,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!64 &7273537992598314715
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -131,14 +131,16 @@ MonoBehaviour:
   objectName: '[P]ears'
   image: {fileID: 0}
   textName: {fileID: 0}
-  thisObjectHeld: 0
+  thisObjectHeld: 1
   isPlacedDown: 0
+  ogScaleFactor: {x: 1, y: 1, z: 1}
   pickupRange: 5
-  handOffset: {x: 0, y: 0, z: 0}
-  handRotation: {x: 0, y: 0, z: 0, w: 0}
+  handOffset: {x: 0.08, y: 0.18, z: 0}
+  handRotation: {x: 0.087480046, y: -0.0042841025, z: 0.14648913, w: 0.98532724}
+  scaleFactor: {x: 1, y: 1, z: 1}
   placementOffset: {x: 0, y: 0, z: 0}
   rotationalSet: {x: 0, y: 0, z: 0, w: 0}
-  distanceFromFace: 1.2
+  distanceFromFace: 0.8
   updatePos: 0
 --- !u!114 &6937016334180771535
 MonoBehaviour:

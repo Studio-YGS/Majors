@@ -133,7 +133,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &4331913495415665813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,12 +151,16 @@ MonoBehaviour:
   image: {fileID: 0}
   textName: {fileID: 0}
   thisObjectHeld: 0
-  isPlacedDown: 0
-  scaleFactor: 0
+  isPlacedDown: 1
+  ogScaleFactor: {x: 1, y: 1, z: 1}
   pickupRange: 5
-  placementOffset: {x: 0, y: 0, z: 0}
-  rotationalSet: {x: 0, y: 0, z: 0, w: 0}
+  handOffset: {x: -0.31, y: 0.29, z: -0.34}
+  handRotation: {x: 0.022708321, y: -0.7606335, z: 0.019360507, w: -0.64849526}
+  scaleFactor: {x: 0.2, y: 0.2, z: 0.2}
+  placementOffset: {x: 1.2, y: 0.02, z: 0.02}
+  rotationalSet: {x: 0, y: 0, z: 0.70710677, w: 0.70710677}
   distanceFromFace: 1.2
+  updatePos: 0
 --- !u!1 &1971897880613298
 GameObject:
   m_ObjectHideFlags: 0

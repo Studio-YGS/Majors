@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7024547333870245673}
   - component: {fileID: 3447827791833842878}
   - component: {fileID: 3042455871677631312}
+  - component: {fileID: 4673603238797969325}
   m_Layer: 0
   m_Name: '[C]ream'
   m_TagString: Untagged
@@ -95,7 +96,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: ddb836adb67fd12488ee5c8800b0aa34, type: 3}
 --- !u!114 &3447827791833842878
@@ -115,12 +116,16 @@ MonoBehaviour:
   image: {fileID: 0}
   textName: {fileID: 0}
   thisObjectHeld: 0
-  isPlacedDown: 0
-  scaleFactor: 0
+  isPlacedDown: 1
+  ogScaleFactor: {x: 1, y: 1, z: 1}
   pickupRange: 5
+  handOffset: {x: 0.1, y: 0.25, z: 0}
+  handRotation: {x: 0.15173179, y: 0.48031256, z: 0.09235887, w: 0.85892206}
+  scaleFactor: {x: 2, y: 2, z: 2}
   placementOffset: {x: 0, y: 0, z: 0}
   rotationalSet: {x: 0, y: 0, z: 0, w: 0}
-  distanceFromFace: 1.2
+  distanceFromFace: 0.5
+  updatePos: 0
 --- !u!114 &3042455871677631312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -140,3 +145,19 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!54 &4673603238797969325
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7024547333868157321}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

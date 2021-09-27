@@ -10,7 +10,7 @@ public class ObjectPlacement : MonoBehaviour
     public float placementRange = 3;
     bool objectPlaced;
     GameObject PlacedObject;
-
+    ObjectHolder heldObject;
 
     void Start()
     {
@@ -30,21 +30,34 @@ public class ObjectPlacement : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.E) && !objectPlaced)
                 {
-                    
-                    ObjectHolder heldObject = hand.GetComponentInChildren<ObjectHolder>();
+                    foreach(Transform child in hand)
+                    {
+                        if (child.gameObject.activeSelf)
+                        {
+                            heldObject = child.GetComponentInChildren<ObjectHolder>();
+                            break;
+                        }
+                    }
                     PlacedObject = heldObject.gameObject;
                     heldObject.transform.position = transform.position + heldObject.placementOffset;
-                    heldObject.PutObjectDown();
                     heldObject.isPlacedDown = true;
                     heldObject.thisObjectHeld = false;
                     heldObject.transform.parent = null;
+                    foreach(Transform PO in PlacedObject.transform)
+                    {
+                        PO.gameObject.layer = 0;
+                    }
                     PlacedObject.layer = 0;
                     PlacedObject.transform.rotation = heldObject.rotationalSet;
                     objectPlaced = true;
-                    heldObject.image.gameObject.SetActive(false);
-                    heldObject.textName.gameObject.SetActive(false);
-                    DetermineLetter letter = GetComponentInParent<DetermineLetter>();
-                    letter.ObjectPlaced(PlacedObject); //sending to darcy's script
+                    heldObject.transform.localScale = heldObject.ogScaleFactor;
+                    heldObject.PlacedOnPedestal(PlacedObject);
+                    if (GetComponentInParent<DetermineLetter>())
+                    {
+                        DetermineLetter letter = GetComponentInParent<DetermineLetter>();
+                        letter.ObjectPlaced(PlacedObject); //sending to darcy's script
+                    }
+                    
                     StartCoroutine(ColliderOn());
                 }
             }
@@ -54,8 +67,12 @@ public class ObjectPlacement : MonoBehaviour
         {
             if(PlacedObject.GetComponent<ObjectHolder>().isPlacedDown == false)
             {
-                DetermineLetter letter = GetComponentInParent<DetermineLetter>();
-                letter.ObjectPickedUp(); //sending to darcy's script
+                if (GetComponentInParent<DetermineLetter>())
+                {
+                    DetermineLetter letter = GetComponentInParent<DetermineLetter>();
+                    letter.ObjectPickedUp(); //sending to darcy's script
+                }
+                    
                 objectPlaced = false;
                 PlacedObject = null;
             }
