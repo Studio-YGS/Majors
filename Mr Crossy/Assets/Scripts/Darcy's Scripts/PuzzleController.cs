@@ -50,13 +50,20 @@ public class PuzzleController : MonoBehaviour
 
     void DisplayLetter() 
     {
-        GameObject.Find(altarName).GetComponent<DetermineLetter>().assignedLetter.GetComponent<TextMeshProUGUI>().text = letter; //changing the letter on the canvas to what the current letter is
+        if (GameObject.Find(altarName).GetComponent<DetermineLetter>()) //changing the letter on the canvas to what the current letter is
+        {
+            GameObject.Find(altarName).GetComponent<DetermineLetter>().assignedLetter.text = letter;
+        }
+        else
+        {
+            GameObject.Find(altarName).GetComponent<OverlappedAltar>().assignedLetter.text = letter;
+        }
     }
 
     void PlayerWordControl() //this method forms the players word as they place objects, and also controls the win condition
     {
         playersWord = "";
-        int playersWordLength = 0;
+        int playersWordLength;
 
         for(int i = 0; i < wordLength; i++) //the player's word becomes equal to all the texts within the canvas letters combined
         {

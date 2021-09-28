@@ -7,14 +7,14 @@ public class JournalController : MonoBehaviour
     [SerializeField]
     GameObject[] notePages, logPages;
 
-    //[HideInInspector]
+    [HideInInspector]
     public List<int> noteList = new List<int>(0); 
 
     [SerializeField]
     GameObject log, map, notes, rightArrow, leftArrow;
 
     int whichTab = 1, whichLogPage = 0;
-    //[HideInInspector]
+    [HideInInspector]
     public int whichNotesPage = 0; 
 
     void Update()
