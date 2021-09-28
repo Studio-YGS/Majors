@@ -99,18 +99,15 @@ public class JournalController : MonoBehaviour
                 leftArrow.SetActive(false);
                 rightArrow.SetActive(true);
             }
-            else if (whichNotesPage == noteList.Count)
+            else if (whichNotesPage == noteList.Count && noteList.Count > 1 || whichNotesPage == noteList.Count - 1 && noteList.Count > 1)
             {
                 leftArrow.SetActive(true);
                 rightArrow.SetActive(false);
             }
             else if(whichNotesPage > 0)
             {
-                if(whichNotesPage < noteList.Count)
-                {
-                    leftArrow.SetActive(true);
-                    rightArrow.SetActive(true);
-                }
+                leftArrow.SetActive(true);
+                rightArrow.SetActive(true);
             }
         }
     }
