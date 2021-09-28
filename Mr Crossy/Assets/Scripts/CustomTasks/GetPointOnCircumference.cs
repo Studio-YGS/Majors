@@ -80,6 +80,7 @@ public class GetPointOnCircumference : Phil.Action
 
     public override void OnDrawGizmos()
     {
+#if UNITY_EDITOR
         Color colourOne = Color.red;
         Color colourTwo = Color.cyan;
 
@@ -93,5 +94,6 @@ public class GetPointOnCircumference : Phil.Action
         colour.a = 0.01f;
         UnityEditor.Handles.color = colour;
         UnityEditor.Handles.DrawSolidDisc(circleCentre.Value, Vector3.up, circleRadius.Value);
+#endif
     }
 }

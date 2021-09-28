@@ -89,9 +89,11 @@ public class PatrolWithinArea : NavMeshMovement
 
     public override void OnDrawGizmos()
     {
+#if UNITY_EDITOR
         Color colour = Color.green;
         colour.a = 0.01f;
         UnityEditor.Handles.color = colour;
         UnityEditor.Handles.DrawSolidDisc(patrolAreaCentre.Value, Vector3.up, patrolAreaRadius.Value);
+#endif
     }
 }
