@@ -94,7 +94,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: f32ed1278454d354c85b467d90b34872, type: 3}
 --- !u!114 &-7940262494176962676
@@ -109,14 +109,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c771dc25b37682447906be6093940da8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectImage: {fileID: -8339536415507534925, guid: 55697872fa590ed4783621502adaad17, type: 3}
-  objectName: '[G]oblet  CHANGE ICON'
+  objectImage: {fileID: 8246610395571625104, guid: c9eea934591e8f4428c79ce2fbb600ac, type: 3}
+  objectName: '[G]oblet NEEDS IMAGE'
   image: {fileID: 0}
   textName: {fileID: 0}
   thisObjectHeld: 0
-  isPlacedDown: 0
-  scaleFactor: 0
+  isPlacedDown: 1
+  ogScaleFactor: {x: 1, y: 1, z: 1}
   pickupRange: 5
+  handOffset: {x: 0.21, y: 0.14, z: 0}
+  handRotation: {x: 0.15173173, y: 0.48031256, z: 0.0923589, w: 0.85892206}
+  scaleFactor: {x: 1.5, y: 1.5, z: 1.5}
   placementOffset: {x: 0, y: 0, z: 0}
   rotationalSet: {x: 0, y: 0, z: 0, w: 0}
-  distanceFromFace: 1.2
+  distanceFromFace: 0.7
+  updatePos: 0

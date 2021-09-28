@@ -96,7 +96,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 6d549d7b75eea0743b690aebc3714598, type: 3}
 --- !u!54 &2540899930019929573
@@ -114,7 +114,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &78225649958093944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,12 +151,16 @@ MonoBehaviour:
   image: {fileID: 0}
   textName: {fileID: 0}
   thisObjectHeld: 0
-  isPlacedDown: 0
-  scaleFactor: 0
+  isPlacedDown: 1
+  ogScaleFactor: {x: 1, y: 1, z: 1}
   pickupRange: 5
-  placementOffset: {x: 0, y: 0, z: 0}
+  handOffset: {x: 0.21, y: 0.12, z: 0}
+  handRotation: {x: 0.68113077, y: 0.18650246, z: -0.18594989, w: 0.6831547}
+  scaleFactor: {x: 2, y: 2, z: 2}
+  placementOffset: {x: 0, y: 0.01, z: 0.02}
   rotationalSet: {x: 0, y: 0, z: 0, w: 0}
-  distanceFromFace: 1.2
+  distanceFromFace: 0.4
+  updatePos: 0
 --- !u!1 &6998599305419363523
 GameObject:
   m_ObjectHideFlags: 0

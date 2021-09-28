@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 9175606380573245784}
   - component: {fileID: 9175606380569227576}
   - component: {fileID: 4545433389659611963}
-  - component: {fileID: 1858035247047676065}
   - component: {fileID: -5344028431384579827}
+  - component: {fileID: 2717212352555689234}
   m_Layer: 0
   m_Name: '[A]larm'
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 9175606380571320216}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.15, y: 1.15, z: 1.15}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -96,7 +96,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 986404243f259f246a9f0aff49f0c6bf, type: 3}
 --- !u!54 &4545433389659611963
@@ -114,30 +114,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!114 &1858035247047676065
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9175606380571320216}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c771dc25b37682447906be6093940da8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectImage: {fileID: 9100312028382064674, guid: c9eea934591e8f4428c79ce2fbb600ac, type: 3}
-  objectName: '[A]larm'
-  image: {fileID: 0}
-  textName: {fileID: 0}
-  thisObjectHeld: 0
-  isPlacedDown: 0
-  scaleFactor: 0
-  pickupRange: 5.07
-  placementOffset: {x: 0, y: 0.5, z: 0}
-  rotationalSet: {x: 0, y: 0, z: 0, w: 0}
-  distanceFromFace: 0
+  m_CollisionDetection: 1
 --- !u!114 &-5344028431384579827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,3 +134,29 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &2717212352555689234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9175606380571320216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c771dc25b37682447906be6093940da8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectImage: {fileID: 9100312028382064674, guid: c9eea934591e8f4428c79ce2fbb600ac, type: 3}
+  objectName: '[A]larm'
+  image: {fileID: 0}
+  textName: {fileID: 0}
+  thisObjectHeld: 1
+  isPlacedDown: 0
+  pickupRange: 5.07
+  handOffset: {x: -0.01, y: 0.31, z: -0.13}
+  handRotation: {x: -0.013247581, y: -0.97383285, z: -0.05887987, w: 0.21910559}
+  scaleFactor: {x: 2, y: 2, z: 2}
+  placementOffset: {x: 0, y: 0, z: 0}
+  rotationalSet: {x: 0.004363309, y: 0.99999046, z: -1.907263e-10, w: -0.000000043710973}
+  distanceFromFace: 0.5
+  updatePos: 0

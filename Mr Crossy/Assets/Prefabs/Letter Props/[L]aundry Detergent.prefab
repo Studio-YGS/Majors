@@ -96,7 +96,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 91ad7fd4d93eafb48949a28dd55b1b5d, type: 3}
 --- !u!114 &7800072791388432685
@@ -116,12 +116,16 @@ MonoBehaviour:
   image: {fileID: 0}
   textName: {fileID: 0}
   thisObjectHeld: 0
-  isPlacedDown: 0
-  scaleFactor: 0
+  isPlacedDown: 1
+  ogScaleFactor: {x: 1, y: 1, z: 1}
   pickupRange: 5
+  handOffset: {x: 0.22, y: 0.14, z: 0}
+  handRotation: {x: 0, y: 0.39281866, z: 0, w: 0.919616}
+  scaleFactor: {x: 2, y: 2, z: 2}
   placementOffset: {x: 0, y: 0, z: 0}
   rotationalSet: {x: 0, y: 0, z: 0, w: 0}
-  distanceFromFace: 1.2
+  distanceFromFace: 0.9
+  updatePos: 0
 --- !u!114 &8789670113478635829
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,4 +160,4 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1

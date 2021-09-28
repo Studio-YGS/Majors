@@ -100,7 +100,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &7326726829791167686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,18 +132,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c771dc25b37682447906be6093940da8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectImage: {fileID: 2445313105393285136, guid: 55697872fa590ed4783621502adaad17, type: 3}
+  objectImage: {fileID: -3606775505359042030, guid: 55697872fa590ed4783621502adaad17, type: 3}
   objectName: '[S]croll'
   image: {fileID: 0}
   textName: {fileID: 0}
   thisObjectHeld: 0
-  isPlacedDown: 0
+  isPlacedDown: 1
+  ogScaleFactor: {x: 1, y: 1, z: 1}
   pickupRange: 5
-  handOffset: {x: 0, y: 0, z: 0}
-  handRotation: {x: 0, y: 0, z: 0, w: 0}
+  handOffset: {x: 0.15, y: 0.25, z: 0}
+  handRotation: {x: 0.69516027, y: 0, z: 0, w: -0.7188548}
+  scaleFactor: {x: 1, y: 1, z: 1}
   placementOffset: {x: 0, y: 0, z: 0}
   rotationalSet: {x: 0, y: 0, z: 0, w: 0}
-  distanceFromFace: 1.2
+  distanceFromFace: 0.8
   updatePos: 0
 --- !u!64 &8607395275551260643
 MeshCollider:
