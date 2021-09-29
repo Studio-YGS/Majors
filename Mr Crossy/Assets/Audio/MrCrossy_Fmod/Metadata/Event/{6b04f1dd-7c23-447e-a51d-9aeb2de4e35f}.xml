@@ -62,7 +62,17 @@
 			<destination>{522e00b0-f47a-4b27-be75-96f6112d4cd2}</destination>
 		</relationship>
 	</object>
-	<object class="EventAutomatableProperties" id="{30ec1233-41de-42d0-8362-e7a91cada31d}" />
+	<object class="EventAutomatableProperties" id="{30ec1233-41de-42d0-8362-e7a91cada31d}">
+		<property name="isPersistent">
+			<value>true</value>
+		</property>
+		<property name="dopplerScale">
+			<value>0</value>
+		</property>
+		<property name="triggerCooldown">
+			<value>7000</value>
+		</property>
+	</object>
 	<object class="MarkerTrack" id="{759265d6-9fe9-4dec-8fa1-91a4dfe538b1}" />
 	<object class="GroupTrack" id="{e9822b33-58c5-4693-bcb3-3174e1da3c95}">
 		<relationship name="modules">
@@ -77,7 +87,7 @@
 			<destination>{d3a91e94-88df-46ad-83e2-a9e385bbefb2}</destination>
 		</relationship>
 		<relationship name="markers">
-			<destination>{a2a0555e-371e-4d0b-b2d0-3ead36cc62f8}</destination>
+			<destination>{edfdc4f7-66bc-4412-9dd1-ad32e047c498}</destination>
 		</relationship>
 	</object>
 	<object class="ActionSheet" id="{cd73f515-4ac5-4db7-bb40-b976aeb6cb7c}">
@@ -86,9 +96,6 @@
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{eda28793-9b48-4f0f-9ae8-990d450e31bd}">
-		<property name="volume">
-			<value>-24</value>
-		</property>
 		<relationship name="effectChain">
 			<destination>{46e8b47d-99a6-405d-bd7b-3824cc3563ab}</destination>
 		</relationship>
@@ -115,6 +122,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{b5aa7e5f-ad02-44d0-9985-bf8a28803080}">
+		<property name="volume">
+			<value>-27.5</value>
+		</property>
 		<property name="name">
 			<value>Audio 1</value>
 		</property>
@@ -128,7 +138,7 @@
 			<destination>{eda28793-9b48-4f0f-9ae8-990d450e31bd}</destination>
 		</relationship>
 	</object>
-	<object class="LoopRegion" id="{a2a0555e-371e-4d0b-b2d0-3ead36cc62f8}">
+	<object class="LoopRegion" id="{edfdc4f7-66bc-4412-9dd1-ad32e047c498}">
 		<property name="position">
 			<value>0</value>
 		</property>
@@ -162,7 +172,7 @@
 			<value>0</value>
 		</property>
 		<property name="maximumDistance">
-			<value>8.55000019</value>
+			<value>10</value>
 		</property>
 	</object>
 	<object class="MixerBusFader" id="{9c4ae9ab-c221-4c38-97dd-c11bc51051d4}" />
