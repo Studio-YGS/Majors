@@ -15,6 +15,10 @@ public class Player_Controller : MonoBehaviour
     float z;
     float x;
 
+    //journal variables
+    [SerializeField]
+    GameObject cursorImage;
+    bool inJournal = false; 
 
     public Transform groundCheck;
     private Vector3 groundCheckSpot;
@@ -42,75 +46,124 @@ public class Player_Controller : MonoBehaviour
         camStart = cam.localPosition;
 
         //locking cursor and making it invisible
-        Cursor.visible = false;
+        //Cursor.visible = false; //cursor cant be invisible for journal to work :(
         Cursor.lockState = CursorLockMode.Locked;
     }
 
 
     void Update()
     {
-        
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance);
 
-        rotation.y += Input.GetAxis("Mouse X");
-        rotation.x += -Input.GetAxis("Mouse Y");
-
-        rotation.x = Mathf.Clamp(rotation.x, -30f, 30f);
-        playerBody.transform.eulerAngles = new Vector2(0, rotation.y * mouseSensitivity);
-        cam.transform.localRotation = Quaternion.Euler(rotation.x * mouseSensitivity, 0, 0);
-
-        x = Input.GetAxis("Horizontal");
-        z = Input.GetAxis("Vertical");
-        
-        
-            
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (!inJournal)
         {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
 
+            isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance);
+
+            rotation.y += Input.GetAxis("Mouse X");
+            rotation.x += -Input.GetAxis("Mouse Y");
+
+            rotation.x = Mathf.Clamp(rotation.x, -30f, 30f);
+            playerBody.transform.eulerAngles = new Vector2(0, rotation.y * mouseSensitivity);
+            cam.transform.localRotation = Quaternion.Euler(rotation.x * mouseSensitivity, 0, 0);
+
+            x = Input.GetAxis("Horizontal");
+            z = Input.GetAxis("Vertical");
+
+
+
+            if (Input.GetButtonDown("Jump") && isGrounded)
+            {
+                velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+
+            }
+
+            velocity.y += gravity * Time.deltaTime;
+            move = transform.right * x + transform.forward * z;
+            controller.Move(velocity * Time.deltaTime);
+
+
+            if (Input.GetKeyDown(KeyCode.C) && isGrounded)
+            {
+                //makes smol
+                controller.height = reducedHeight;
+                speed = crouchSpeed;
+                groundCheck.localPosition += new Vector3(0, (originalHeight - reducedHeight) / 2, 0);
+                cam.localPosition -= new Vector3(0, (originalHeight - reducedHeight) / 2, 0);
+            }
+            else if (Input.GetKeyUp(KeyCode.C))
+            {
+                controller.height = originalHeight;
+                groundCheck.localPosition = groundCheckSpot;
+                cam.localPosition = camStart;
+                speed = baseSpeed;
+            }
+
+
+            if (Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.C))
+            {
+                speed = sprintSpeed;
+            }
+            else if (Input.GetKeyUp(KeyCode.LeftShift) && !Input.GetKey(KeyCode.C))
+            {
+                speed = baseSpeed;
+            }
+
+            move.Normalize();
+
+            controller.Move(move * speed * Time.deltaTime);
+
+            if (isGrounded && velocity.y < 0)
+            {
+
+                velocity.y = -2f;
+            }
         }
 
-        velocity.y += gravity * Time.deltaTime;
-        move = transform.right * x + transform.forward * z;
-        controller.Move(velocity * Time.deltaTime);
-
-
-        if (Input.GetKeyDown(KeyCode.C) && isGrounded)
+        //journal related stuff
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
-            //makes smol
-            controller.height = reducedHeight;
-            speed = crouchSpeed;
-            groundCheck.localPosition += new Vector3(0, (originalHeight-reducedHeight)/2, 0);
-            cam.localPosition -= new Vector3(0, (originalHeight - reducedHeight) / 2, 0);
+            JournalOnSwitch journal = FindObjectOfType<JournalOnSwitch>();
+            bool open = journal.OpenOrClose();
+
+            if (open)
+            {
+                DisableController();
+            }
+            else
+            {
+                EnableController();
+            }
         }
-        else if (Input.GetKeyUp(KeyCode.C))
+        if (Input.GetKeyDown(KeyCode.Escape) && inJournal)
         {
-            controller.height = originalHeight;
-            groundCheck.localPosition = groundCheckSpot;
-            cam.localPosition = camStart;
-            speed = baseSpeed;
+            JournalOnSwitch journal = FindObjectOfType<JournalOnSwitch>();
+
+            journal.OpenOrClose();
+            EnableController();
         }
-            
-
-        if (Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.C))
-        {
-            speed = sprintSpeed;
-        }
-        else if (Input.GetKeyUp(KeyCode.LeftShift) && !Input.GetKey(KeyCode.C))
-        {
-            speed = baseSpeed;
-        }
-
-        move.Normalize();
-
-        controller.Move(move * speed * Time.deltaTime);
-
-        if (isGrounded && velocity.y < 0)
-        {
-            
-            velocity.y = -2f;
-        }
-
+    }
+    
+    //methods for journal
+    public void LockCursor()
+    {
+        cursorImage.SetActive(true);
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+    public void UnlockCursor()
+    {
+        cursorImage.SetActive(false);
+        Cursor.lockState = CursorLockMode.None;
     }
 
+    public void EnableController()
+    {
+        inJournal = false;
+        LockCursor();
+    }
+
+    public void DisableController()
+    {
+        inJournal = true;
+        UnlockCursor();
+    }
 }
