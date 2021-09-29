@@ -4,73 +4,158 @@ using UnityEngine;
 
 public class DoorInteraction : MonoBehaviour
 {
-    public bool moveable;
+    bool moveable = false;
+    bool greaterThan;
+    bool lessThan;
+    bool equalTo = true;
     Transform cam;
     public float rotationVal;
-    Vector3 posLastFrame;
-    public Quaternion hitRotation;
+    Transform player;
+    float angleRelativeToPlayer;
+    public float openSpeed = 10;
     void Start()
     {
         cam = FindObjectOfType<Camera>().transform;
         rotationVal = 0;
-        hitRotation = transform.localRotation;
+        player = GameObject.Find("Fps Character").transform;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        //Debug.Log(transform.localRotation.y);
         RaycastHit hit;
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit))
         {
             if(hit.collider == gameObject.GetComponent<Collider>())
             {
-                moveable = true;
                 
-            }
-            else
-            {
-                moveable = false;
-                //rotationVal = 0;
-                hitRotation = transform.rotation;
+                if (Input.GetMouseButtonDown(0))
+                {
+                    moveable = true;
+                    Vector3 direction = transform.parent.position - player.position;
+                    angleRelativeToPlayer = Vector3.Angle(direction, transform.parent.forward);
+                }
             }
         }
-        else
+        if (Input.GetMouseButtonUp(0) && moveable)
         {
+            if (transform.localRotation.y > 0.04)
+            {
+                greaterThan = true;
+                lessThan = false;
+                equalTo = false;
+            }
+            else if (transform.localRotation.y < -0.04)
+            {
+                greaterThan = false;
+                lessThan = true;
+                equalTo = false;
+            }
+            else if (transform.localRotation.y == 0)
+            {
+                greaterThan = false;
+                lessThan = false;
+                equalTo = true;
+            }
+            
             moveable = false;
-            //rotationVal = 0;
-            hitRotation = transform.rotation;
         }
+        
 
         if (moveable)
         {
-            //if (Input.GetMouseButtonDown(0))
-            //{
-            //    hitRotation = transform.localRotation;
-            //}
-            if (Input.GetMouseButton(0))
+            rotationVal = Mathf.Clamp(rotationVal, -90f, 90f);
+            if (angleRelativeToPlayer > 180 * 0.5f)
             {
-                //rotationVal += Input.GetAxis("Mouse X");
-                //rotationVal = Mathf.Clamp(rotationVal, -30f, 30f);
-                if(Input.GetAxis("Mouse X") > 0)
+                //BEHIND
+                if (greaterThan)
                 {
-                    rotationVal += 1;
-                    //rotationVal += Input.GetAxis("Mouse X");
+                    if (Input.GetAxis("Mouse X") > 0)
+                    {
+                        rotationVal += Input.GetAxis("Mouse X") * openSpeed;
 
+                    }
+                    else if (Input.GetAxis("Mouse X") < 0)
+                    {
+                        rotationVal -= -Input.GetAxis("Mouse X") * openSpeed;
+                    }
                 }
-                else if(Input.GetAxis("Mouse X") < 0)
+                else if (lessThan)
                 {
-                    rotationVal -= 1;
-                    //rotationVal -= Input.GetAxis("Mouse X");
+                    if (Input.GetAxis("Mouse X") < 0)
+                    {
+                        rotationVal += -Input.GetAxis("Mouse X") * openSpeed;
+
+                    }
+                    else if (Input.GetAxis("Mouse X") > 0)
+                    {
+                        rotationVal -= Input.GetAxis("Mouse X") * openSpeed;
+                    }
                 }
-                //transform.rotation = Quaternion.Lerp(hitRotation, Quaternion.Euler(0, hitRotation.y + rotationVal * 2, 0) , Time.deltaTime);
-                transform.localRotation = Quaternion.Euler(0, hitRotation.y + rotationVal, 0);
+                else if (equalTo)
+                {
+                    if (Input.GetAxis("Mouse X") < 0)
+                    {
+                        rotationVal += -Input.GetAxis("Mouse X") * openSpeed;
+
+                    }
+                    else if (Input.GetAxis("Mouse X") > 0)
+                    {
+                        rotationVal -= Input.GetAxis("Mouse X") * openSpeed;
+                    }
+                }
             }
-            if (Input.GetMouseButtonUp(0))
+            else if (angleRelativeToPlayer < 180 * 0.5f)
             {
-                hitRotation = transform.rotation;
+                //INFRONT
+                if (greaterThan)
+                {
+                    if (Input.GetAxis("Mouse X") < 0)
+                    {
+                        rotationVal += -Input.GetAxis("Mouse X") * openSpeed;
+
+                    }
+                    else if (Input.GetAxis("Mouse X") > 0)
+                    {
+                        rotationVal -= Input.GetAxis("Mouse X") * openSpeed;
+                    }
+                }
+                else if (lessThan)
+                {
+                    if (Input.GetAxis("Mouse X") > 0)
+                    {
+                        rotationVal += Input.GetAxis("Mouse X") * openSpeed;
+
+                    }
+                    else if (Input.GetAxis("Mouse X") < 0)
+                    {
+                        rotationVal -= -Input.GetAxis("Mouse X") * openSpeed;
+                    }
+                }
+                else if (equalTo)
+                {
+                    if (Input.GetAxis("Mouse X") > 0)
+                    {
+                        rotationVal += Input.GetAxis("Mouse X") * openSpeed;
+
+                    }
+                    else if (Input.GetAxis("Mouse X") < 0)
+                    {
+                        rotationVal -= -Input.GetAxis("Mouse X") * openSpeed;
+                    }
+                }
             }
-            
+            if (Input.GetAxis("Mouse X") > 0)
+            {
+                
+
+            }
+            else if (Input.GetAxis("Mouse X") < 0)
+            {
+                
+            }
+            transform.localRotation = Quaternion.Euler(0,  rotationVal , 0);
+
 
         }
     }
