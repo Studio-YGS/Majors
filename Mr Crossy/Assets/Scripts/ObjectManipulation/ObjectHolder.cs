@@ -29,7 +29,7 @@ public class ObjectHolder : MonoBehaviour
     bool dissolving;
     [HideInInspector] public bool thisObjectHeld;
     [HideInInspector] public bool isPlacedDown;
-    Vector3 posLastFrame;
+    //Vector3 posLastFrame;
     Player_Controller controller;
 
     [HideInInspector] public Vector3 ogScaleFactor;
@@ -168,13 +168,14 @@ public class ObjectHolder : MonoBehaviour
 
         if (thisObjectHeld)
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                posLastFrame = Input.mousePosition;
-            }
+            //if (Input.GetMouseButtonDown(0))
+            //{
+            //    posLastFrame = Input.mousePosition;
+            //}
             if (Input.GetMouseButtonDown(1))
             {
-                transform.position = cam.position + cam.forward * distanceFromFace;
+                Vector3 posOffset = transform.position - transform.GetComponent<Renderer>().bounds.center;
+                transform.position = cam.position + cam.forward * distanceFromFace + posOffset;
                 controller.enabled = false;
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
@@ -189,11 +190,15 @@ public class ObjectHolder : MonoBehaviour
             }
             if (Input.GetMouseButton(0) && Input.GetMouseButton(1))
             {
-                var delta = Input.mousePosition - posLastFrame;
-                posLastFrame = Input.mousePosition;
+                //var delta = Input.mousePosition - posLastFrame;
+                //posLastFrame = Input.mousePosition;
 
-                var axis = Quaternion.AngleAxis(-90f, Vector3.forward) * delta;
-                transform.rotation = Quaternion.AngleAxis(delta.magnitude * 0.3f, axis) * transform.rotation;
+                //var axis = Quaternion.AngleAxis(-90f, Vector3.forward ) * delta;
+                //transform.rotation = Quaternion.AngleAxis(delta.magnitude * 0.3f, axis) * transform.rotation;
+                float rotX = Input.GetAxis("Mouse X") * 200 * Mathf.Deg2Rad;
+                float rotY = Input.GetAxis("Mouse Y") * 200 * Mathf.Deg2Rad;
+                transform.RotateAround(transform.GetComponent<Renderer>().bounds.center, Vector3.up, -rotX);
+                transform.RotateAround(transform.GetComponent<Renderer>().bounds.center, Vector3.right, rotY);
             }
 
         }

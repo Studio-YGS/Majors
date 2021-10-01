@@ -50,6 +50,7 @@ public class ObjectPlacement : MonoBehaviour
                     PlacedObject.layer = 0;
                     PlacedObject.transform.rotation = heldObject.rotationalSet;
                     objectPlaced = true;
+                    gameObject.layer = 2;
                     heldObject.transform.localScale = heldObject.ogScaleFactor;
                     heldObject.PlacedOnPedestal(PlacedObject);
                     if (GetComponentInParent<DetermineLetter>())
@@ -74,6 +75,7 @@ public class ObjectPlacement : MonoBehaviour
                 }
                     
                 objectPlaced = false;
+                gameObject.layer = 0;
                 PlacedObject = null;
             }
         }
