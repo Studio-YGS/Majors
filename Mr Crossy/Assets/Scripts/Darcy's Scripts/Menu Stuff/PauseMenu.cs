@@ -9,7 +9,7 @@ public class PauseMenu : MonoBehaviour
     JournalOnSwitch journalOnSwitch;
 
     [SerializeField]
-    GameObject pauseMenuObject;
+    GameObject pauseMenuObject, settingsMenuObject;
 
     void Start()
     {
@@ -48,8 +48,47 @@ public class PauseMenu : MonoBehaviour
         journalOnSwitch.ShowTab();
     }
 
+    public void OpenSettingsMenu()
+    {
+        settingsMenuObject.SetActive(true);
+        pauseMenuObject.SetActive(false);
+    }
+
+    public void CloseSettingsMenu()
+    {
+        settingsMenuObject.SetActive(false);
+        pauseMenuObject.SetActive(true);
+    }
+
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void ResolutionChange(int val)
+    {
+        switch (val)
+        {
+            case 0:
+                {
+                    Debug.Log("Fullscreen");
+                    Screen.SetResolution(Screen.currentResolution.width, Screen.currentResolution.height, true);
+                    Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
+                    break;
+                }
+            case 1:
+                {
+                    Debug.Log("Windowed F");
+                    Screen.SetResolution(Screen.currentResolution.width, Screen.currentResolution.height, true);
+                    Screen.fullScreenMode = FullScreenMode.Windowed;
+                    break;
+                }
+            case 2:
+                {
+                    Debug.Log("Windowed");
+                    Screen.SetResolution(Screen.currentResolution.width, Screen.currentResolution.height, false);
+                    break;
+                }
+        }
     }
 }
