@@ -1,34 +1,86 @@
 fileFormatVersion: 2
 guid: 397f079d227443a4b900a34db7371677
 ModelImporter:
-  serializedVersion: 23
-  fileIDToRecycleName:
-    100000: //RootNode
-    100002: WoodenTools_Spatel
-    100004: WoodenTools_Spoon
-    100006: WoodenTools_Spork
-    400000: //RootNode
-    400002: WoodenTools_Spatel
-    400004: WoodenTools_Spoon
-    400006: WoodenTools_Spork
-    2100000: KitchenWare_Mat
-    2100002: Wood_Material_1
-    2300000: //RootNode
-    2300002: WoodenTools_Spatel
-    2300004: WoodenTools_Spoon
-    2300006: WoodenTools_Spork
-    3300000: //RootNode
-    3300002: WoodenTools_Spatel
-    3300004: WoodenTools_Spoon
-    3300006: WoodenTools_Spork
-    4300000: WoodenTools
-    4300002: WoodenTools_Spoon
-    4300004: WoodenTools_Spork
-    4300006: WoodenTools_Spatel
-    6400000: //RootNode
-    6400002: WoodenTools_Spatel
-    6400004: WoodenTools_Spoon
-    6400006: WoodenTools_Spork
+  serializedVersion: 20200
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: //RootNode
+  - first:
+      1: 100002
+    second: WoodenTools_Spatel
+  - first:
+      1: 100004
+    second: WoodenTools_Spoon
+  - first:
+      1: 100006
+    second: WoodenTools_Spork
+  - first:
+      4: 400000
+    second: //RootNode
+  - first:
+      4: 400002
+    second: WoodenTools_Spatel
+  - first:
+      4: 400004
+    second: WoodenTools_Spoon
+  - first:
+      4: 400006
+    second: WoodenTools_Spork
+  - first:
+      21: 2100000
+    second: KitchenWare_Mat
+  - first:
+      21: 2100002
+    second: Wood_Material_1
+  - first:
+      23: 2300000
+    second: //RootNode
+  - first:
+      23: 2300002
+    second: WoodenTools_Spatel
+  - first:
+      23: 2300004
+    second: WoodenTools_Spoon
+  - first:
+      23: 2300006
+    second: WoodenTools_Spork
+  - first:
+      33: 3300000
+    second: //RootNode
+  - first:
+      33: 3300002
+    second: WoodenTools_Spatel
+  - first:
+      33: 3300004
+    second: WoodenTools_Spoon
+  - first:
+      33: 3300006
+    second: WoodenTools_Spork
+  - first:
+      43: 4300000
+    second: WoodenTools
+  - first:
+      43: 4300002
+    second: WoodenTools_Spoon
+  - first:
+      43: 4300004
+    second: WoodenTools_Spork
+  - first:
+      43: 4300006
+    second: WoodenTools_Spatel
+  - first:
+      64: 6400000
+    second: //RootNode
+  - first:
+      64: 6400002
+    second: WoodenTools_Spatel
+  - first:
+      64: 6400004
+    second: WoodenTools_Spoon
+  - first:
+      64: 6400006
+    second: WoodenTools_Spork
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -41,7 +93,7 @@ ModelImporter:
       name: Wood_Material_1
     second: {fileID: 2100000, guid: 3d55e1ecfb20a614fbf92423a7b92953, type: 2}
   materials:
-    importMaterials: 1
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -74,25 +126,32 @@ ModelImporter:
     meshCompression: 0
     addColliders: 1
     useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 1
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    bakeAxisConversion: 0
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 0
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -101,10 +160,10 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -114,13 +173,17 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 0
   humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
   additionalBone: 0
   userData: 
   assetBundleName: 

@@ -1,41 +1,107 @@
 fileFormatVersion: 2
 guid: 9062d567216514e4a91db1c92a489a4e
 ModelImporter:
-  serializedVersion: 23
-  fileIDToRecycleName:
-    100000: //RootNode
-    100002: TVTableShelf.001
-    100004: TVTableShelf.002
-    100006: TVTableShelf.003
-    100008: TVTableShelf.004
-    400000: //RootNode
-    400002: TVTableShelf.001
-    400004: TVTableShelf.002
-    400006: TVTableShelf.003
-    400008: TVTableShelf.004
-    2100000: GuestRoom_Mat
-    2100002: Wood_Material_1
-    2100004: Wood_Material_2
-    2300000: //RootNode
-    2300002: TVTableShelf.001
-    2300004: TVTableShelf.002
-    2300006: TVTableShelf.003
-    2300008: TVTableShelf.004
-    3300000: //RootNode
-    3300002: TVTableShelf.001
-    3300004: TVTableShelf.002
-    3300006: TVTableShelf.003
-    3300008: TVTableShelf.004
-    4300000: TV-Table
-    4300002: TVTableShelf.003
-    4300004: TVTableShelf.002
-    4300006: TVTableShelf.001
-    4300008: TVTableShelf.004
-    6400000: //RootNode
-    6400002: TVTableShelf.001
-    6400004: TVTableShelf.002
-    6400006: TVTableShelf.003
-    6400008: TVTableShelf.004
+  serializedVersion: 20200
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: //RootNode
+  - first:
+      1: 100002
+    second: TVTableShelf.001
+  - first:
+      1: 100004
+    second: TVTableShelf.002
+  - first:
+      1: 100006
+    second: TVTableShelf.003
+  - first:
+      1: 100008
+    second: TVTableShelf.004
+  - first:
+      4: 400000
+    second: //RootNode
+  - first:
+      4: 400002
+    second: TVTableShelf.001
+  - first:
+      4: 400004
+    second: TVTableShelf.002
+  - first:
+      4: 400006
+    second: TVTableShelf.003
+  - first:
+      4: 400008
+    second: TVTableShelf.004
+  - first:
+      21: 2100000
+    second: GuestRoom_Mat
+  - first:
+      21: 2100002
+    second: Wood_Material_1
+  - first:
+      21: 2100004
+    second: Wood_Material_2
+  - first:
+      23: 2300000
+    second: //RootNode
+  - first:
+      23: 2300002
+    second: TVTableShelf.001
+  - first:
+      23: 2300004
+    second: TVTableShelf.002
+  - first:
+      23: 2300006
+    second: TVTableShelf.003
+  - first:
+      23: 2300008
+    second: TVTableShelf.004
+  - first:
+      33: 3300000
+    second: //RootNode
+  - first:
+      33: 3300002
+    second: TVTableShelf.001
+  - first:
+      33: 3300004
+    second: TVTableShelf.002
+  - first:
+      33: 3300006
+    second: TVTableShelf.003
+  - first:
+      33: 3300008
+    second: TVTableShelf.004
+  - first:
+      43: 4300000
+    second: TV-Table
+  - first:
+      43: 4300002
+    second: TVTableShelf.003
+  - first:
+      43: 4300004
+    second: TVTableShelf.002
+  - first:
+      43: 4300006
+    second: TVTableShelf.001
+  - first:
+      43: 4300008
+    second: TVTableShelf.004
+  - first:
+      64: 6400000
+    second: //RootNode
+  - first:
+      64: 6400002
+    second: TVTableShelf.001
+  - first:
+      64: 6400004
+    second: TVTableShelf.002
+  - first:
+      64: 6400006
+    second: TVTableShelf.003
+  - first:
+      64: 6400008
+    second: TVTableShelf.004
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -53,7 +119,7 @@ ModelImporter:
       name: Wood_Material_2
     second: {fileID: 2100000, guid: ee72ec26279a291489368caac1fafdb9, type: 2}
   materials:
-    importMaterials: 1
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -86,25 +152,32 @@ ModelImporter:
     meshCompression: 0
     addColliders: 1
     useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 1
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    bakeAxisConversion: 0
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 0
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -113,10 +186,10 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -126,13 +199,17 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 0
   humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
   additionalBone: 0
   userData: 
   assetBundleName: 
