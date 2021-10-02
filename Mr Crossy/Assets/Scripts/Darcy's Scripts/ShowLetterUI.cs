@@ -22,24 +22,20 @@ public class ShowLetterUI : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(cam.position, cam.forward, out hit, pickupRange))
         {
-            if (hit.collider == gameObject.GetComponent<Collider>())
+            if (hit.transform.gameObject.CompareTag("Holdable"))
             {
-                uiLetter.text = hit.transform.gameObject.name;
-                uiLetter.transform.gameObject.SetActive(true);
+                uiLetter.text = "Press E to pick up: " + hit.transform.gameObject.name;
+                uiLetter.gameObject.SetActive(true);
             }
-        }
-
-        if (Physics.Raycast(cam.position, cam.forward, out hit, pickupRange))
-        {
-            if (!hit.collider == gameObject.GetComponent<Collider>())
+            else if(!hit.transform.gameObject.CompareTag("Holdable"))
             {
-                uiLetter.transform.gameObject.SetActive(false);
+                uiLetter.gameObject.SetActive(false);
             }
         }
 
         if (!Physics.Raycast(cam.position, cam.forward, pickupRange))
         {
-            uiLetter.transform.gameObject.SetActive(false);
+            uiLetter.gameObject.SetActive(false);
         }
     }
 }
