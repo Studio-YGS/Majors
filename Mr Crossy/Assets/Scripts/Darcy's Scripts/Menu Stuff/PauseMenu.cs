@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using FMODUnity;
+using TMPro;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -11,10 +12,15 @@ public class PauseMenu : MonoBehaviour
 
     StudioEventEmitter[] studioEventEmitters;
 
+    GameObject[] volumeObjects;
+
     [SerializeField]
     GameObject pauseMenuObject, settingsMenuObject;
 
-    float defTimeScale;
+    [SerializeField]
+    TextMeshProUGUI musicText, sfxText, voiceText;
+
+    float defTimeScale, musicVolume = 0.5f, sfxVolume = 0.5f, voiceVolume = 0.5f;
 
     void Start()
     {
@@ -27,11 +33,16 @@ public class PauseMenu : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            if (!playerController.inJournal && !pauseMenuObject.activeInHierarchy)
+            if (!playerController.inJournal && !pauseMenuObject.activeInHierarchy && !settingsMenuObject.activeInHierarchy)
             {
                 OpenPauseMenu();
             }
-            else if(!playerController.inJournal && pauseMenuObject.activeInHierarchy)
+            else if (!playerController.inJournal && !pauseMenuObject.activeInHierarchy && settingsMenuObject.activeInHierarchy)
+            {
+                CloseSettingsMenu();
+                ClosePauseMenu();
+            }
+            else if (!playerController.inJournal && pauseMenuObject.activeInHierarchy)
             {
                 ClosePauseMenu();
             }
@@ -91,6 +102,105 @@ public class PauseMenu : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void IncreaseVolume(string volType)
+    {
+        switch (volType)
+        {
+            case "Music":
+                {
+                    volumeObjects = GameObject.FindGameObjectsWithTag("Music");
+
+                    for(int i = 0; i < volumeObjects.Length; i++)
+                    {
+                        if (volumeObjects[i].GetComponent<StudioEventEmitter>() && musicVolume < 0.99)
+                        {
+                            volumeObjects[i].GetComponent<StudioEventEmitter>().EventInstance.setVolume(musicVolume += 0.01f);
+                            musicText.text = (Mathf.Round(musicVolume * 100)).ToString();
+                        }
+                    }
+
+                    break;
+                }
+            case "SFX":
+                {
+                    volumeObjects = GameObject.FindGameObjectsWithTag("SFX");
+
+                    for (int i = 0; i < volumeObjects.Length; i++)
+                    {
+                        if (volumeObjects[i].GetComponent<StudioEventEmitter>() && sfxVolume < 0.99)
+                        {
+                            volumeObjects[i].GetComponent<StudioEventEmitter>().EventInstance.setVolume(sfxVolume += 0.01f);
+                            sfxText.text = (Mathf.Round(sfxVolume * 100)).ToString();
+                        }
+                    }
+                    break;
+                }
+            case "Voice":
+                {
+                    volumeObjects = GameObject.FindGameObjectsWithTag("Voice");
+
+                    for (int i = 0; i < volumeObjects.Length; i++)
+                    {
+                        if (volumeObjects[i].GetComponent<StudioEventEmitter>() && voiceVolume < 0.99)
+                        {
+                            volumeObjects[i].GetComponent<StudioEventEmitter>().EventInstance.setVolume(voiceVolume += 0.01f);
+                            voiceText.text = (Mathf.Round(voiceVolume * 100)).ToString();
+                        }
+                    }
+                    break;
+                } 
+        }
+    }
+    public void DecreaseVolume(string volType)
+    {
+        switch (volType)
+        {
+            case "Music":
+                {
+                    volumeObjects = GameObject.FindGameObjectsWithTag("Music");
+
+                    for (int i = 0; i < volumeObjects.Length; i++)
+                    {
+                        if (volumeObjects[i].GetComponent<StudioEventEmitter>() && musicVolume > 0.01)
+                        {
+                            volumeObjects[i].GetComponent<StudioEventEmitter>().EventInstance.setVolume(musicVolume -= 0.01f);
+                            musicText.text = (Mathf.Round(musicVolume * 100)).ToString();
+                        }
+                    }
+
+                    break;
+                }
+            case "SFX":
+                {
+                    volumeObjects = GameObject.FindGameObjectsWithTag("SFX");
+
+                    for (int i = 0; i < volumeObjects.Length; i++)
+                    {
+                        if (volumeObjects[i].GetComponent<StudioEventEmitter>() && sfxVolume > 0.01)
+                        {
+                            volumeObjects[i].GetComponent<StudioEventEmitter>().EventInstance.setVolume(sfxVolume -= 0.01f);
+                            sfxText.text = (Mathf.Round(sfxVolume * 100)).ToString();
+                        }
+                    }
+                    break;
+                }
+            case "Voice":
+                {
+                    volumeObjects = GameObject.FindGameObjectsWithTag("Voice");
+
+                    for (int i = 0; i < volumeObjects.Length; i++)
+                    {
+                        if (volumeObjects[i].GetComponent<StudioEventEmitter>() && voiceVolume > 0.01)
+                        {
+                            volumeObjects[i].GetComponent<StudioEventEmitter>().EventInstance.setVolume(voiceVolume -= 0.01f);
+                            voiceText.text = (Mathf.Round(voiceVolume * 100)).ToString();
+                        }
+                    }
+                    break;
+                }
+        }
     }
 
     public void ResolutionChange(int val)
