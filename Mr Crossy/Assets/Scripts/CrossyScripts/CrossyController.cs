@@ -8,22 +8,26 @@ public class CrossyController : MonoBehaviour
     Animator animator;
     NavMeshAgent agent;
 
-    public bool shouldRun = false;
-
     public Transform headBone;
     public Transform vision;
 
     [Space(10)]
     [Header("Movement Variables")]
+    [Tooltip("Mr. Crossy's walking speed.")]
     [SerializeField] private float m_WalkSpeed;
+    [Tooltip("Mr. Crossy's running speed.")]
     [SerializeField] private float m_RunSpeed;
     private float m_MoveSpeed;
-    private float m_Acceleration;
+    [Tooltip("Mr. Crossy's acceleration rate.")]
+    /*[SerializeField]*/ private float m_Acceleration;
+    [Tooltip("Mr. Crossy's turning speed.")]
     [SerializeField] private float m_AngularSpeed;
+    [Tooltip("Distance from destination that Mr. Crossy can stop at.")]
     [SerializeField] private float m_StoppingDistance;
-    [SerializeField] private float m_SlowRange;
+    //[SerializeField] private float m_SlowRange;
 
     private int m_Mask;
+    private bool m_ShouldRun = false;
     [Space(10)]
     [Header("Detection Variables")]
     [SerializeField] private float m_DetectionTime;
@@ -39,6 +43,7 @@ public class CrossyController : MonoBehaviour
     public Vector3 VisionPosition { get { return vision.localPosition; }}
 
     public int NavMeshMask { get { return m_Mask; } }
+    public bool ShouldRun { get { return m_ShouldRun; } set { m_ShouldRun = value; } }
 
     public float BaseDetectTime { get { return m_DetectionTime; } }
     public float CloseDetectTime { get { return m_DetectionTime*3; } }
@@ -58,7 +63,7 @@ public class CrossyController : MonoBehaviour
     {
         vision.position = headBone.position;
         vision.rotation = headBone.rotation;
-        MoveSpeed = (shouldRun) ? RunSpeed : WalkSpeed;
+        MoveSpeed = (m_ShouldRun) ? RunSpeed : WalkSpeed;
 
         veloMag = agent.velocity.magnitude;
         animator.SetBool("Moving", veloMag >= 0.05);
