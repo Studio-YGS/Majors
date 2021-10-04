@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -8,13 +9,18 @@ public class PauseMenu : MonoBehaviour
 
     JournalOnSwitch journalOnSwitch;
 
+    StudioEventEmitter[] studioEventEmitters;
+
     [SerializeField]
     GameObject pauseMenuObject, settingsMenuObject;
+
+    float defTimeScale;
 
     void Start()
     {
         playerController = FindObjectOfType<Player_Controller>();
         journalOnSwitch = FindObjectOfType<JournalOnSwitch>();
+        defTimeScale = Time.timeScale;
     }
 
     void Update()
@@ -35,17 +41,39 @@ public class PauseMenu : MonoBehaviour
     public void OpenPauseMenu()
     {
         pauseMenuObject.SetActive(true);
+
         playerController.DisableController();
         playerController.inJournal = false;
+
         journalOnSwitch.HideTab();
+
+        Time.timeScale = 0f;
+
+        studioEventEmitters = FindObjectsOfType<StudioEventEmitter>();
+
+        for(int i = 0; i < studioEventEmitters.Length; i++)
+        {
+            studioEventEmitters[i].EventInstance.setPaused(true);
+        }
     }
 
     public void ClosePauseMenu()
     {
         pauseMenuObject.SetActive(false);
+
         playerController.EnableController();
         playerController.inJournal = false;
+
         journalOnSwitch.ShowTab();
+
+        Time.timeScale = defTimeScale;
+
+        studioEventEmitters = FindObjectsOfType<StudioEventEmitter>();
+
+        for (int i = 0; i < studioEventEmitters.Length; i++)
+        {
+            studioEventEmitters[i].EventInstance.setPaused(false);
+        }
     }
 
     public void OpenSettingsMenu()
@@ -80,7 +108,7 @@ public class PauseMenu : MonoBehaviour
                 {
                     Debug.Log("Windowed F");
                     Screen.SetResolution(Screen.currentResolution.width, Screen.currentResolution.height, true);
-                    Screen.fullScreenMode = FullScreenMode.Windowed;
+                    Screen.fullScreenMode = FullScreenMode.MaximizedWindow;
                     break;
                 }
             case 2:
