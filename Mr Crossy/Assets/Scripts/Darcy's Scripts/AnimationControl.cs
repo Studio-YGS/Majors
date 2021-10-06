@@ -11,25 +11,11 @@ public class AnimationControl : MonoBehaviour
         GetComponent<Animator>().SetBool("OpenGate", true);
     }
 
-    //public void PausingControl(bool pause)
-    //{
-    //    if (pause)
-    //    {
-    //        animations = FindObjectsOfType<Animator>();
-
-    //        foreach (Animator ani in animations)
-    //        {
-    //            ani.StopPlayback();
-    //        }
-    //    }
-    //    else
-    //    {
-    //        animations = FindObjectsOfType<Animator>();
-
-    //        foreach (Animator ani in animations)
-    //        {
-    //            ani.StartPlayback();
-    //        }
-    //    }
-    //}
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.H)) //dev tool
+        {
+            GetComponent<Animator>().SetBool("OpenGate", true);
+        }
+    }
 }
