@@ -20,7 +20,7 @@ public class ObjectHolder : MonoBehaviour
     Quaternion startRot;
     Material mat;
     float dissolveValue;
-    Transform hand;
+    [HideInInspector] public Transform hand;
     Transform objectInspectPoint;
     Transform cam;
     static GameObject heldObject;
@@ -191,8 +191,8 @@ public class ObjectHolder : MonoBehaviour
             {
                 float rotX = Input.GetAxis("Mouse X") * 200 * Mathf.Deg2Rad;
                 float rotY = Input.GetAxis("Mouse Y") * 200 * Mathf.Deg2Rad;
-                transform.RotateAround(transform.GetComponent<Renderer>().bounds.center, Vector3.up, -rotX);
-                transform.RotateAround(transform.GetComponent<Renderer>().bounds.center, Vector3.right, rotY);
+                transform.RotateAround(transform.GetComponent<Renderer>().bounds.center, cam.up, -rotX);
+                transform.RotateAround(transform.GetComponent<Renderer>().bounds.center, cam.right, rotY);
             }
 
         }
