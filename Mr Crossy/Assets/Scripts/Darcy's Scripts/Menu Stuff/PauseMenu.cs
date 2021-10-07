@@ -10,6 +10,8 @@ public class PauseMenu : MonoBehaviour
 
     JournalOnSwitch journalOnSwitch;
 
+    JournalController journalController;
+
     StudioEventEmitter[] studioEventEmitters;
 
     GameObject[] volumeObjects;
@@ -26,25 +28,29 @@ public class PauseMenu : MonoBehaviour
     {
         playerController = FindObjectOfType<Player_Controller>();
         journalOnSwitch = FindObjectOfType<JournalOnSwitch>();
+        journalController = FindObjectOfType<JournalController>();
         defTimeScale = Time.timeScale;
     }
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (!journalController.disabled)
         {
-            if (!playerController.inJournal && !pauseMenuObject.activeInHierarchy && !settingsMenuObject.activeInHierarchy)
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                OpenPauseMenu();
-            }
-            else if (!playerController.inJournal && !pauseMenuObject.activeInHierarchy && settingsMenuObject.activeInHierarchy)
-            {
-                CloseSettingsMenu();
-                ClosePauseMenu();
-            }
-            else if (!playerController.inJournal && pauseMenuObject.activeInHierarchy)
-            {
-                ClosePauseMenu();
+                if (!playerController.inJournal && !pauseMenuObject.activeInHierarchy && !settingsMenuObject.activeInHierarchy)
+                {
+                    OpenPauseMenu();
+                }
+                else if (!playerController.inJournal && !pauseMenuObject.activeInHierarchy && settingsMenuObject.activeInHierarchy)
+                {
+                    CloseSettingsMenu();
+                    ClosePauseMenu();
+                }
+                else if (!playerController.inJournal && pauseMenuObject.activeInHierarchy)
+                {
+                    ClosePauseMenu();
+                }
             }
         }
     }
@@ -55,6 +61,8 @@ public class PauseMenu : MonoBehaviour
 
         playerController.DisableController();
         playerController.inJournal = false;
+
+        journalController.DisableJournal();
 
         journalOnSwitch.HideTab();
 
@@ -74,6 +82,8 @@ public class PauseMenu : MonoBehaviour
 
         playerController.EnableController();
         playerController.inJournal = false;
+
+        journalController.EnableJournal();
 
         journalOnSwitch.ShowTab();
 
