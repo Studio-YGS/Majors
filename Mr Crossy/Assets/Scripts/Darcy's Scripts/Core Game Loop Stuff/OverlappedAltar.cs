@@ -14,7 +14,7 @@ public class OverlappedAltar : MonoBehaviour
     public void ReceiveLetter(string firstLetter)
     {
         letter = firstLetter;
-        SendLetterAndName();
+        //SendLetterAndName();
     }
 
     void SendLetterAndName()

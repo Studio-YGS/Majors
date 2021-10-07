@@ -18,7 +18,9 @@ public class Player_Controller : MonoBehaviour
     //journal variables
     [SerializeField]
     GameObject cursorImage;
-    bool inJournal = false; 
+    [HideInInspector]
+    public bool inJournal = false;
+    bool canMove = true;
 
     public Transform groundCheck;
     private Vector3 groundCheckSpot;
@@ -54,7 +56,7 @@ public class Player_Controller : MonoBehaviour
     void Update()
     {
 
-        if (!inJournal)
+        if (canMove)
         {
 
             isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance);
@@ -158,12 +160,14 @@ public class Player_Controller : MonoBehaviour
     public void EnableController()
     {
         inJournal = false;
+        canMove = true;
         LockCursor();
     }
 
     public void DisableController()
     {
         inJournal = true;
+        canMove = false;
         UnlockCursor();
     }
 }

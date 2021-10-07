@@ -10,8 +10,8 @@ public class DetermineLetter : MonoBehaviour
     [Tooltip("The UI letter that this altar corresponds to")]
     public TextMeshProUGUI assignedLetter;
 
-    [SerializeField, Tooltip("Any altars that this letter overlaps")]
-    GameObject[] overlappedAltars;
+    [Tooltip("Any altars that this letter overlaps")]
+    public GameObject[] overlappedAltars;
 
     PuzzleController puzzleController;
 

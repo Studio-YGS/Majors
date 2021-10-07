@@ -47,4 +47,14 @@ public class JournalOnSwitch : MonoBehaviour
         journalClosed.SetActive(true);
         journalOpen.SetActive(false);
     }
+
+    public void HideTab()
+    {
+        journalClosed.SetActive(false);
+    }
+
+    public void ShowTab()
+    {
+        journalClosed.SetActive(true);
+    }
 }

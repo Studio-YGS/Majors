@@ -50,13 +50,16 @@ public class PuzzleController : MonoBehaviour
 
     void DisplayLetter() 
     {
-        if (GameObject.Find(altarName).GetComponent<DetermineLetter>()) //changing the letter on the canvas to what the current letter is
+        DetermineLetter letterSend = GameObject.Find(altarName).GetComponent<DetermineLetter>();
+
+        letterSend.assignedLetter.text = letter;
+
+        if(letterSend.overlappedAltars.Length > 0)
         {
-            GameObject.Find(altarName).GetComponent<DetermineLetter>().assignedLetter.text = letter;
-        }
-        else
-        {
-            GameObject.Find(altarName).GetComponent<OverlappedAltar>().assignedLetter.text = letter;
+            for(int i = 0; i < letterSend.overlappedAltars.Length; i++)
+            {
+                letterSend.overlappedAltars[i].GetComponent<OverlappedAltar>().assignedLetter.text = letter;
+            }
         }
     }
 
