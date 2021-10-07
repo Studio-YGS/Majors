@@ -18,7 +18,7 @@ public class GetPointOnCircumference : Phil.Action
     [Phil.Tooltip("Centre of area to be patrolled")]
     public SharedVector3 circleCentre;
     [Phil.Tooltip("Radius of patrol area")]
-    public SharedFloat circleRadius;
+    public SharedFloat circleAreaRadius;
     [Phil.Tooltip("Margin of error to find NavMesh point")]
     public SharedFloat navErrorDistance;
     [Phil.Tooltip("What parts of the NavMesh can be considered a valid patrol location")]
@@ -30,7 +30,7 @@ public class GetPointOnCircumference : Phil.Action
 
     public override Phil.TaskStatus OnUpdate()
     {
-        if (ValidatePointToNavmesh(circleCentre.Value, circleRadius.Value, navErrorDistance.Value, navMask.Value)) 
+        if (ValidatePointToNavmesh(circleCentre.Value, circleAreaRadius.Value, navErrorDistance.Value, navMask.Value)) 
         {
             returnedPoint.Value = returnedPos;
             return Phil.TaskStatus.Success; //Returns success when a valid point found
@@ -45,7 +45,7 @@ public class GetPointOnCircumference : Phil.Action
         float x = (Mathf.Cos(radians) * circleRadius) + circleCentre.x;
         float y = (Mathf.Sin(radians) * circleRadius) + circleCentre.z;
 
-        Vector3 resultPoint = new Vector3(x,circleCentre.y,y);
+        Vector3 resultPoint = new Vector3(x, circleCentre.y, y);
         Debug.Log("GETCIRCUMPOINT: " + "Sampled Point: " + resultPoint);
         return resultPoint;
     }
@@ -66,9 +66,12 @@ public class GetPointOnCircumference : Phil.Action
                 samplePosition = hit.position;
                 if (pathTest.status == NavMeshPathStatus.PathComplete)
                 {
-                    Debug.Log("GETCIRCUMPOINT: " + "SUCCESS");
-                    returnedPos = hit.position;
-                    return true;
+                    if (Emerald.GetPathLength(pathTest) <= circleAreaRadius.Value)
+                    {
+                        Debug.Log("GETCIRCUMPOINT: " + "SUCCESS");
+                        returnedPos = hit.position;
+                        return true;
+                    }
                 }
                 else samplePoint = PointOnCircumference(circleCentre, circleRadius, Random.Range(0f, 360f).ToRadians());
             }
@@ -93,7 +96,7 @@ public class GetPointOnCircumference : Phil.Action
         Color colour = Color.gray;
         colour.a = 0.01f;
         UnityEditor.Handles.color = colour;
-        UnityEditor.Handles.DrawSolidDisc(circleCentre.Value, Vector3.up, circleRadius.Value);
+        UnityEditor.Handles.DrawSolidDisc(circleCentre.Value, Vector3.up, circleAreaRadius.Value);
 #endif
     }
 }

@@ -1,6 +1,7 @@
 
 using UnityEngine;
 using UnityEngine.AI;
+using Gemstone;
 using BehaviorDesigner.Runtime;
 using Phil = BehaviorDesigner.Runtime.Tasks;
 using BehaviorDesigner.Runtime.Tasks.Movement;
@@ -75,7 +76,7 @@ public class PatrolWithinArea : NavMeshMovement
 
                 navMeshAgent.CalculatePath(hit.position, pathTest);
 
-                if(pathTest.status == NavMeshPathStatus.PathComplete)
+                if (pathTest.status == NavMeshPathStatus.PathComplete)
                 {
                     destination = hit.position;
                     return true;
