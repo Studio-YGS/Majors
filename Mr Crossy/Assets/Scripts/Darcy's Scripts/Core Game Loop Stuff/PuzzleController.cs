@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using TMPro;
 
 //Written by Darcy Glover
@@ -21,12 +22,12 @@ public class PuzzleController : MonoBehaviour
     [Tooltip("Write in how many words the puzzle has")]
     public int wordsInPuzzle;
 
-    public GameObject gate;
-
     //[HideInInspector]
     public List<TextMeshProUGUI> canvasLetters = new List<TextMeshProUGUI>();
 
     string playersWord, letter, altarName;
+
+    public UnityEvent winEvent, loseEvent;
 
     public void SetUpLetters()
     {
@@ -99,14 +100,12 @@ public class PuzzleController : MonoBehaviour
 
         if(completedWords == wordsInPuzzle)
         {
-            gate.GetComponent<AnimationControl>().OpenGate();
-            //put all win condittion stuff in here, sounds, images, etc
+            winEvent.Invoke();
         }
     }
 
     void GameOver()
     {
-        Debug.Log("Player has lost the game");
-        //lose condition stuff here, sounds, images, etc
+        loseEvent.Invoke();
     }
 }
