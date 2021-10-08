@@ -10,6 +10,8 @@ public class TutorialController : MonoBehaviour
 
     GameObject controlsUI;
 
+    bool reading = true;
+
     void Start()
     {
         journalController = FindObjectOfType<JournalController>();
@@ -18,6 +20,16 @@ public class TutorialController : MonoBehaviour
 
     void ShowControls()
     {
-        //StartCoroutine(Loading());
+        StartCoroutine(ShowingUI());
+    }
+
+    IEnumerator ShowingUI()
+    {
+        if (!reading)
+        {
+
+        }
+
+        yield return null;
     }
 }

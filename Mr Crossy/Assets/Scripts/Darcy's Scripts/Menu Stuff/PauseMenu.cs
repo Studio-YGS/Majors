@@ -122,26 +122,29 @@ public class PauseMenu : MonoBehaviour
                 {
                     volumeObjects = GameObject.FindGameObjectsWithTag("Music");
 
-                    for(int i = 0; i < volumeObjects.Length; i++)
+                    if (musicVolume < 0.99)
                     {
-                        if (volumeObjects[i].GetComponent<StudioEventEmitter>() && musicVolume < 0.99)
+                        musicVolume += 0.01f;
+
+                        for (int i = 0; i < volumeObjects.Length; i++)
                         {
-                            volumeObjects[i].GetComponent<StudioEventEmitter>().EventInstance.setVolume(musicVolume += 0.01f);
+                            volumeObjects[i].GetComponent<StudioEventEmitter>().EventInstance.setVolume(musicVolume);
                             musicText.text = (Mathf.Round(musicVolume * 100)).ToString();
                         }
                     }
-
                     break;
                 }
             case "SFX":
                 {
                     volumeObjects = GameObject.FindGameObjectsWithTag("SFX");
 
-                    for (int i = 0; i < volumeObjects.Length; i++)
+                    if (sfxVolume < 0.99)
                     {
-                        if (volumeObjects[i].GetComponent<StudioEventEmitter>() && sfxVolume < 0.99)
+                        sfxVolume += 0.01f;
+
+                        for (int i = 0; i < volumeObjects.Length; i++)
                         {
-                            volumeObjects[i].GetComponent<StudioEventEmitter>().EventInstance.setVolume(sfxVolume += 0.01f);
+                            volumeObjects[i].GetComponent<StudioEventEmitter>().EventInstance.setVolume(sfxVolume);
                             sfxText.text = (Mathf.Round(sfxVolume * 100)).ToString();
                         }
                     }
@@ -151,16 +154,18 @@ public class PauseMenu : MonoBehaviour
                 {
                     volumeObjects = GameObject.FindGameObjectsWithTag("Voice");
 
-                    for (int i = 0; i < volumeObjects.Length; i++)
+                    if (voiceVolume < 0.99)
                     {
-                        if (volumeObjects[i].GetComponent<StudioEventEmitter>() && voiceVolume < 0.99)
+                        voiceVolume += 0.01f;
+
+                        for (int i = 0; i < volumeObjects.Length; i++)
                         {
-                            volumeObjects[i].GetComponent<StudioEventEmitter>().EventInstance.setVolume(voiceVolume += 0.01f);
+                            volumeObjects[i].GetComponent<StudioEventEmitter>().EventInstance.setVolume(voiceVolume);
                             voiceText.text = (Mathf.Round(voiceVolume * 100)).ToString();
                         }
                     }
                     break;
-                } 
+                }
         }
     }
     public void DecreaseVolume(string volType)
@@ -171,26 +176,29 @@ public class PauseMenu : MonoBehaviour
                 {
                     volumeObjects = GameObject.FindGameObjectsWithTag("Music");
 
-                    for (int i = 0; i < volumeObjects.Length; i++)
+                    if (musicVolume > 0.01)
                     {
-                        if (volumeObjects[i].GetComponent<StudioEventEmitter>() && musicVolume > 0.01)
+                        musicVolume -= 0.01f;
+
+                        for (int i = 0; i < volumeObjects.Length; i++)
                         {
-                            volumeObjects[i].GetComponent<StudioEventEmitter>().EventInstance.setVolume(musicVolume -= 0.01f);
+                            volumeObjects[i].GetComponent<StudioEventEmitter>().EventInstance.setVolume(musicVolume);
                             musicText.text = (Mathf.Round(musicVolume * 100)).ToString();
                         }
                     }
-
                     break;
                 }
             case "SFX":
                 {
                     volumeObjects = GameObject.FindGameObjectsWithTag("SFX");
 
-                    for (int i = 0; i < volumeObjects.Length; i++)
+                    if (sfxVolume > 0.01)
                     {
-                        if (volumeObjects[i].GetComponent<StudioEventEmitter>() && sfxVolume > 0.01)
+                        sfxVolume -= 0.01f;
+
+                        for (int i = 0; i < volumeObjects.Length; i++)
                         {
-                            volumeObjects[i].GetComponent<StudioEventEmitter>().EventInstance.setVolume(sfxVolume -= 0.01f);
+                            volumeObjects[i].GetComponent<StudioEventEmitter>().EventInstance.setVolume(sfxVolume);
                             sfxText.text = (Mathf.Round(sfxVolume * 100)).ToString();
                         }
                     }
@@ -200,11 +208,13 @@ public class PauseMenu : MonoBehaviour
                 {
                     volumeObjects = GameObject.FindGameObjectsWithTag("Voice");
 
-                    for (int i = 0; i < volumeObjects.Length; i++)
+                    if (voiceVolume > 0.01)
                     {
-                        if (volumeObjects[i].GetComponent<StudioEventEmitter>() && voiceVolume > 0.01)
+                        voiceVolume -= 0.01f;
+
+                        for (int i = 0; i < volumeObjects.Length; i++)
                         {
-                            volumeObjects[i].GetComponent<StudioEventEmitter>().EventInstance.setVolume(voiceVolume -= 0.01f);
+                            volumeObjects[i].GetComponent<StudioEventEmitter>().EventInstance.setVolume(voiceVolume);
                             voiceText.text = (Mathf.Round(voiceVolume * 100)).ToString();
                         }
                     }
