@@ -12323,7 +12323,7 @@ LODGroup:
   m_AnimateCrossFading: 0
   m_LastLODIsBillboard: 0
   m_LODs:
-  - screenRelativeHeight: 0.34444273
+  - screenRelativeHeight: 0.5544762
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 23869321907882186}
@@ -12677,7 +12677,7 @@ LODGroup:
     - renderer: {fileID: 23382647710538042}
     - renderer: {fileID: 23376803891481894}
     - renderer: {fileID: 23180656666663298}
-  - screenRelativeHeight: 0.29707345
+  - screenRelativeHeight: 0.39650527
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 8980076745282062648}
@@ -15226,6 +15226,8 @@ GameObject:
   - component: {fileID: 33330933051648994}
   - component: {fileID: 23275495828782252}
   - component: {fileID: 65262028949317858}
+  - component: {fileID: 868883316}
+  - component: {fileID: 868883315}
   m_Layer: 0
   m_Name: door_wing_c
   m_TagString: Untagged
@@ -15307,8 +15309,40 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.2227612, y: 2.2, z: 0.18485078}
-  m_Center: {x: 0.5885221, y: 1.1, z: -0.026580796}
+  m_Size: {x: 0.92603695, y: 1.8964314, z: 0.18485078}
+  m_Center: {x: 0.59279495, y: 1.1796896, z: -0.026580796}
+--- !u!54 &868883316
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1935141538925360}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
+--- !u!114 &868883315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1935141538925360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecdd776d9bfeeac4a9fd6c9f3fb05282, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xForward: 0
+  zForward: 1
+  rotationVal: 0
+  openSpeed: 10
 --- !u!1 &1938374864217458
 GameObject:
   m_ObjectHideFlags: 0
@@ -49436,6 +49470,7 @@ GameObject:
   - component: {fileID: 8980076744796410574}
   - component: {fileID: 8980076744796410572}
   - component: {fileID: 8980076744796410575}
+  - component: {fileID: 2020014400}
   m_Layer: 0
   m_Name: 340_static_door_wing_c
   m_TagString: Untagged
@@ -49506,6 +49541,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2020014400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8980076744796410577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8980076744800186864
 GameObject:
   m_ObjectHideFlags: 0
