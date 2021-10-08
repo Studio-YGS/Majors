@@ -31,7 +31,7 @@ public class ObjectHolder : MonoBehaviour
     [HideInInspector] public bool isPlacedDown;
     [HideInInspector] public bool beingInspected;
     //Vector3 posLastFrame;
-    Player_Controller controller;
+    [HideInInspector] public Player_Controller controller;
 
     [HideInInspector] public Vector3 ogScaleFactor;
     public float pickupRange = 5;
@@ -117,15 +117,7 @@ public class ObjectHolder : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.X))
         {
-            if (thisObjectHeld)
-            {
-                DropCurrentObject(heldObject);
-                if(objectsInHands.Count == 1)
-                {
-                    objectsInHands[0].SetActive(true);
-                    heldObject = objectsInHands[0];
-                }
-            }
+            Drop();
         }
 
         if(objectsInHands.Count == 2 && thisObjectHeld)
@@ -234,6 +226,19 @@ public class ObjectHolder : MonoBehaviour
 
     }
 
+
+    public void Drop()
+    {
+        if (thisObjectHeld)
+        {
+            DropCurrentObject(heldObject);
+            if (objectsInHands.Count == 1)
+            {
+                objectsInHands[0].SetActive(true);
+                heldObject = objectsInHands[0];
+            }
+        }
+    }
     void DropCurrentObject(GameObject item)
     {
         ObjectHolder itemObjectHolder = item.GetComponent<ObjectHolder>();
