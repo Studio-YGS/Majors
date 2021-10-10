@@ -11,6 +11,10 @@ public class CrossyController : MonoBehaviour
     public Transform headBone;
     public Transform vision;
 
+    [SerializeField] private float m_PatrolRunDistance;
+    [SerializeField] private float m_AlertRunDistance;
+    private float m_RunDistance;
+
     [Space(10)]
     [Header("Movement Variables")]
     [Tooltip("Mr. Crossy's walking speed.")]
@@ -19,7 +23,7 @@ public class CrossyController : MonoBehaviour
     [SerializeField] private float m_RunSpeed;
     private float m_MoveSpeed;
     [Tooltip("Mr. Crossy's acceleration rate.")]
-    /*[SerializeField]*/ private float m_Acceleration;
+    [SerializeField] private float m_Acceleration;
     [Tooltip("Mr. Crossy's turning speed.")]
     [SerializeField] private float m_AngularSpeed;
     [Tooltip("Distance from destination that Mr. Crossy can stop at.")]
@@ -28,6 +32,7 @@ public class CrossyController : MonoBehaviour
 
     private int m_Mask;
     private bool m_ShouldRun = false;
+    private int m_State = -1;
     [Space(10)]
     [Header("Detection Variables")]
     [SerializeField] private float m_DetectionTime;
@@ -44,6 +49,7 @@ public class CrossyController : MonoBehaviour
 
     public int NavMeshMask { get { return m_Mask; } }
     public bool ShouldRun { get { return m_ShouldRun; } set { m_ShouldRun = value; } }
+    public int State { get { return m_State; } set { m_State = value; } }
 
     public float BaseDetectTime { get { return m_DetectionTime; } }
     public float CloseDetectTime { get { return m_DetectionTime*3; } }
@@ -52,6 +58,7 @@ public class CrossyController : MonoBehaviour
     [Space(10)]
     float veloMag;
 
+    Quaternion visual;
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -62,7 +69,21 @@ public class CrossyController : MonoBehaviour
     private void Update()
     {
         vision.position = headBone.position;
-        vision.rotation = headBone.rotation;
+        vision.rotation.SetLookRotation(headBone.up, -headBone.right);
+
+
+        agent.acceleration = Acceleration;
+
+        if (m_State < 1) { m_ShouldRun = false; }
+        else if (m_State == 1 || m_State == 2)
+        {
+            m_RunDistance = (m_State == 1) ? m_AlertRunDistance : m_PatrolRunDistance;
+
+            if (agent.remainingDistance > m_RunDistance) m_ShouldRun = true;
+            else m_ShouldRun = false;
+        }
+        else if (m_State > 2) { m_ShouldRun = true; }
+
         MoveSpeed = (m_ShouldRun) ? RunSpeed : WalkSpeed;
 
         veloMag = agent.velocity.magnitude;

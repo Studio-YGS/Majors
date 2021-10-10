@@ -4,7 +4,7 @@ using BehaviorDesigner.Runtime;
 
 public class OverseerController : MonoBehaviour
 {
-    static BehaviorTree Observer;
+    static BehaviorTree ObserverTree;
 
     [SerializeField] private bool startOnAwake;
     [SerializeField] private bool usePositioner;
@@ -12,7 +12,9 @@ public class OverseerController : MonoBehaviour
     [Header("GameObjects")]
     public GameObject validationPositioner;
 
+    private GameObject m_Observer;
     [SerializeField] private GameObject m_Crossy;
+    [SerializeField] private GameObject m_Player;
     //[Space(10)]
     [Header("Behaviour Timers")]
     [SerializeField] private float m_TimeSpawn;
@@ -30,7 +32,9 @@ public class OverseerController : MonoBehaviour
     [SerializeField] private float m_SearchRadiusAggro;
     [SerializeField] private Vector3 m_ValidationPosition;
 
+    public GameObject Observer { get { return m_Observer; } }
     public GameObject MrCrossy { get { return m_Crossy; } }
+    public GameObject Player { get { return m_Player; } }
 
     public float TimeTilSpawn { get { return m_TimeSpawn; } set { m_TimeSpawn = value; } }
     public float TimeTilTighten { get { return m_TimeTight; } }
@@ -49,11 +53,12 @@ public class OverseerController : MonoBehaviour
 
     private void Awake()
     {
-        Observer = gameObject.GetComponent<BehaviorTree>();
+        m_Observer = gameObject;
+        ObserverTree = gameObject.GetComponent<BehaviorTree>();
         if (startOnAwake)
         {
             AwakenObserver();
-        } else Observer.enabled = false;
+        } else ObserverTree.enabled = false;
     }
 
     private void Update()
@@ -66,6 +71,6 @@ public class OverseerController : MonoBehaviour
 
     public static void AwakenObserver()
     {
-        Observer.enabled = true;
+        ObserverTree.enabled = true;
     }
 }

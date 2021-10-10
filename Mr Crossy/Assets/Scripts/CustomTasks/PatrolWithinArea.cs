@@ -14,6 +14,10 @@ using BehaviorDesigner.Runtime.Tasks.Movement;
 
 public class PatrolWithinArea : NavMeshMovement
 {
+    public bool limitPathLength;
+
+    public SharedFloat validPathLimit;
+
     [Phil.Tooltip("Centre of area to be patrolled")]
     public SharedVector3 patrolAreaCentre;
     [Phil.Tooltip("Radius of patrol area")]
@@ -67,19 +71,31 @@ public class PatrolWithinArea : NavMeshMovement
 
     bool ValidatePointToNavmesh(Vector3 samplePoint, float pointError, int areaMask) //Takes given point and translates it to the nearest allowed navmesh location, returns true if valid point found
     {
-        
         for (int i = 0; i < 30; i++)
         {
             if (NavMesh.SamplePosition(samplePoint, out NavMeshHit hit, pointError, areaMask))
             {
-                NavMeshPath pathTest = new NavMeshPath();
+                NavMeshPath foundPathTest = new NavMeshPath();
+                navMeshAgent.CalculatePath(hit.position, foundPathTest);
 
-                navMeshAgent.CalculatePath(hit.position, pathTest);
-
-                if (pathTest.status == NavMeshPathStatus.PathComplete)
+                if (foundPathTest.status == NavMeshPathStatus.PathComplete)
                 {
-                    destination = hit.position;
-                    return true;
+                    if (limitPathLength)
+                    {
+                        NavMeshPath validPathTest = new NavMeshPath();
+                        NavMesh.CalculatePath(hit.position, patrolAreaCentre.Value, areaMask, validPathTest);
+
+                        if (validPathTest.status == NavMeshPathStatus.PathComplete && Emerald.GetPathLength(validPathTest) <= validPathLimit.Value)
+                        {
+                            destination = hit.position;
+                            return true;
+                        }
+                    }
+                    else
+                    {
+                        destination = hit.position;
+                        return true;
+                    }
                 }
             }
         }

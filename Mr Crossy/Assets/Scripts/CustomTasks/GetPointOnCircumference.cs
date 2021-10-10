@@ -13,7 +13,10 @@ using Phil = BehaviorDesigner.Runtime.Tasks;
 
 public class GetPointOnCircumference : Phil.Action
 {
+    public bool useValidationDistance;
+
     public SharedVector3 validationVector;
+    public SharedFloat validationDistance;
 
     [Phil.Tooltip("Centre of area to be patrolled")]
     public SharedVector3 circleCentre;
@@ -66,12 +69,22 @@ public class GetPointOnCircumference : Phil.Action
                 samplePosition = hit.position;
                 if (pathTest.status == NavMeshPathStatus.PathComplete)
                 {
-                    if (Emerald.GetPathLength(pathTest) <= circleAreaRadius.Value)
+                    if(useValidationDistance)
+                    {
+                        if (Emerald.GetPathLength(pathTest) <= validationDistance.Value)
+                        {
+                            Debug.Log("GETCIRCUMPOINT: " + "SUCCESS");
+                            returnedPos = hit.position;
+                            return true;
+                        }
+                    }
+                    else
                     {
                         Debug.Log("GETCIRCUMPOINT: " + "SUCCESS");
                         returnedPos = hit.position;
                         return true;
                     }
+                    
                 }
                 else samplePoint = PointOnCircumference(circleCentre, circleRadius, Random.Range(0f, 360f).ToRadians());
             }
