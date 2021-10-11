@@ -5,7 +5,7 @@ using TMPro;
 
 public class CrossKey : MonoBehaviour
 {
-    public TMP_InputField[] wordOne;
+    public TMP_InputField wordOne;
     public TMP_Text[] toothOneFront;
     public TMP_Text[] toothTwoFront;
     public TMP_Text[] toothOneBack;
@@ -30,9 +30,9 @@ public class CrossKey : MonoBehaviour
             transform.RotateAround(transform.GetComponent<Renderer>().bounds.center, cam.right, rotY);
         }
 
-        if(numOfLetters == 6)
-        {
-            if(wordOne[0].text + wordOne[1].text + wordOne[2].text + wordOne[3].text == answer)
+        //if(numOfLetters == 6)
+        //{
+            if(wordOne.text == answer)
             {
                 Debug.Log("unlock");
                 FindObjectOfType<CrossKeyManager>().controller.enabled = true;
@@ -41,7 +41,7 @@ public class CrossKey : MonoBehaviour
                 door.locked = false;
                 Destroy(gameObject);
             }
-        }
+        //}
 
     }
 }

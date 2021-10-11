@@ -46,7 +46,7 @@ public class CrossKeyManager : MonoBehaviour
         
         if(numOfKeys > 0)
         {
-            Debug.Log("oof");
+            numOfKeys -= 1;
             controller.enabled = false;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
@@ -71,59 +71,216 @@ public class CrossKeyManager : MonoBehaviour
                     }
                 }
             }
-            if(keyPuzzles[randomKey].numOfLetters == 6)
+            if (keyPuzzles[randomKey].numOfLetters == 4)
             {
-                int randomPuzzle = Random.Range(0, key.puzzleOptions.Length);
-                
-                PuzzleOptions puzzle = key.puzzleOptions[randomPuzzle];
-                if (puzzle.wordOneSetBack)
-                {
-                    string[] characters = new string[puzzle.keyToothWordOne.Length];
-                    for (int i = 0; i < 4; i++)
-                    {
-                        characters[i] = System.Convert.ToString(puzzle.keyToothWordOne[i]);
-                        newCrossKey.GetComponent<CrossKey>().toothOneBack[i].text = characters[i];
-                    }
-                }
-                else if (puzzle.wordOneSetBack == false)
-                {
-                    string[] characters = new string[puzzle.keyToothWordOne.Length];
-                    for (int i = 0; i < 4; i++)
-                    {
-                        characters[i] = System.Convert.ToString(puzzle.keyToothWordOne[i]);
-                        newCrossKey.GetComponent<CrossKey>().toothOneFront[i].text = characters[i];
-                    }
-                }
-
-                if (puzzle.wordTwoSetBack)
-                {
-                    string[] characters = new string[puzzle.keyToothWordTwo.Length];
-                    for (int i = 0; i < 3; i++)
-                    {
-                        characters[i] = System.Convert.ToString(puzzle.keyToothWordTwo[i]);
-                        newCrossKey.GetComponent<CrossKey>().toothTwoBack[i].text = characters[i];
-                    }
-                }
-                else if (puzzle.wordTwoSetBack == false)
-                {
-                    string[] characters = new string[puzzle.keyToothWordTwo.Length];
-                    for (int i = 0; i < 3; i++)
-                    {
-                        characters[i] = System.Convert.ToString(puzzle.keyToothWordTwo[i]);
-                        newCrossKey.GetComponent<CrossKey>().toothTwoFront[i].text = characters[i];
-                    }
-                }
-
-                string[] answerChar = new string[puzzle.wordToSolve.Length];
-                for (int i = 0; i < 6; i++)
-                {
-                    answerChar[i] = System.Convert.ToString(puzzle.wordToSolve[i]);
-                    
-                }
-                newCrossKey.GetComponent<CrossKey>().door = door;
-                newCrossKey.GetComponent<CrossKey>().answer = answerChar[0] + answerChar[1] + answerChar[2] + answerChar[4];
+                FourLetterKey(key, newCrossKey, door);
+            }
+            if (keyPuzzles[randomKey].numOfLetters == 5)
+            {
+                FiveLetterKey(key, newCrossKey, door);
+            }
+            if (keyPuzzles[randomKey].numOfLetters == 6)
+            {
+                SixLetterKey(key, newCrossKey, door);
+            }
+            if(keyPuzzles[randomKey].numOfLetters == 7)
+            {
+                SevenLetterKey(key, newCrossKey, door);
             }
             
         }
+    }
+
+    void FourLetterKey(KeyPuzzles key, GameObject newCrossKey, DoorInteraction door)
+    {
+        int randomPuzzle = Random.Range(0, key.puzzleOptions.Length);
+
+        PuzzleOptions puzzle = key.puzzleOptions[randomPuzzle];
+        if (puzzle.wordTwoSetBack)
+        {
+            string[] characters = new string[puzzle.keyToothWordTwo.Length];
+            for (int i = 0; i < 3; i++)
+            {
+                characters[i] = System.Convert.ToString(puzzle.keyToothWordTwo[i]);
+                newCrossKey.GetComponent<CrossKey>().toothTwoBack[i].text = characters[i];
+            }
+        }
+        else if (puzzle.wordTwoSetBack == false)
+        {
+            string[] characters = new string[puzzle.keyToothWordTwo.Length];
+            for (int i = 0; i < 3; i++)
+            {
+                characters[i] = System.Convert.ToString(puzzle.keyToothWordTwo[i]);
+                newCrossKey.GetComponent<CrossKey>().toothTwoFront[i].text = characters[i];
+            }
+        }
+
+        string[] answerChar = new string[puzzle.wordToSolve.Length];
+        for (int i = 0; i < 4; i++)
+        {
+            answerChar[i] = System.Convert.ToString(puzzle.wordToSolve[i]);
+
+        }
+        newCrossKey.GetComponent<CrossKey>().door = door;
+        newCrossKey.GetComponent<CrossKey>().answer = puzzle.wordToSolve;
+    }
+
+    void FiveLetterKey(KeyPuzzles key, GameObject newCrossKey, DoorInteraction door)
+    {
+        int randomPuzzle = Random.Range(0, key.puzzleOptions.Length);
+
+        PuzzleOptions puzzle = key.puzzleOptions[randomPuzzle];
+        if (puzzle.wordOneSetBack)
+        {
+            string[] characters = new string[puzzle.keyToothWordOne.Length];
+            for (int i = 0; i < 4; i++)
+            {
+                characters[i] = System.Convert.ToString(puzzle.keyToothWordOne[i]);
+                newCrossKey.GetComponent<CrossKey>().toothOneBack[i].text = characters[i];
+            }
+        }
+        else if (puzzle.wordOneSetBack == false)
+        {
+            string[] characters = new string[puzzle.keyToothWordOne.Length];
+            for (int i = 0; i < 4; i++)
+            {
+                characters[i] = System.Convert.ToString(puzzle.keyToothWordOne[i]);
+                newCrossKey.GetComponent<CrossKey>().toothOneFront[i].text = characters[i];
+            }
+        }
+
+        if (puzzle.wordTwoSetBack)
+        {
+            string[] characters = new string[puzzle.keyToothWordTwo.Length];
+            for (int i = 0; i < 3; i++)
+            {
+                characters[i] = System.Convert.ToString(puzzle.keyToothWordTwo[i]);
+                newCrossKey.GetComponent<CrossKey>().toothTwoBack[i].text = characters[i];
+            }
+        }
+        else if (puzzle.wordTwoSetBack == false)
+        {
+            string[] characters = new string[puzzle.keyToothWordTwo.Length];
+            for (int i = 0; i < 3; i++)
+            {
+                characters[i] = System.Convert.ToString(puzzle.keyToothWordTwo[i]);
+                newCrossKey.GetComponent<CrossKey>().toothTwoFront[i].text = characters[i];
+            }
+        }
+
+        string[] answerChar = new string[puzzle.wordToSolve.Length];
+        for (int i = 0; i < 5; i++)
+        {
+            answerChar[i] = System.Convert.ToString(puzzle.wordToSolve[i]);
+
+        }
+        newCrossKey.GetComponent<CrossKey>().door = door;
+        newCrossKey.GetComponent<CrossKey>().answer = puzzle.wordToSolve;
+    }
+
+    void SixLetterKey(KeyPuzzles key, GameObject newCrossKey, DoorInteraction door)
+    {
+        int randomPuzzle = Random.Range(0, key.puzzleOptions.Length);
+
+        PuzzleOptions puzzle = key.puzzleOptions[randomPuzzle];
+        if (puzzle.wordOneSetBack)
+        {
+            string[] characters = new string[puzzle.keyToothWordOne.Length];
+            for (int i = 0; i < 4; i++)
+            {
+                characters[i] = System.Convert.ToString(puzzle.keyToothWordOne[i]);
+                newCrossKey.GetComponent<CrossKey>().toothOneBack[i].text = characters[i];
+            }
+        }
+        else if (puzzle.wordOneSetBack == false)
+        {
+            string[] characters = new string[puzzle.keyToothWordOne.Length];
+            for (int i = 0; i < 4; i++)
+            {
+                characters[i] = System.Convert.ToString(puzzle.keyToothWordOne[i]);
+                newCrossKey.GetComponent<CrossKey>().toothOneFront[i].text = characters[i];
+            }
+        }
+
+        if (puzzle.wordTwoSetBack)
+        {
+            string[] characters = new string[puzzle.keyToothWordTwo.Length];
+            for (int i = 0; i < 3; i++)
+            {
+                characters[i] = System.Convert.ToString(puzzle.keyToothWordTwo[i]);
+                newCrossKey.GetComponent<CrossKey>().toothTwoBack[i].text = characters[i];
+            }
+        }
+        else if (puzzle.wordTwoSetBack == false)
+        {
+            string[] characters = new string[puzzle.keyToothWordTwo.Length];
+            for (int i = 0; i < 3; i++)
+            {
+                characters[i] = System.Convert.ToString(puzzle.keyToothWordTwo[i]);
+                newCrossKey.GetComponent<CrossKey>().toothTwoFront[i].text = characters[i];
+            }
+        }
+
+        //string[] answerChar = new string[puzzle.wordToSolve.Length];
+        //for (int i = 0; i < 6; i++)
+        //{
+        //    answerChar[i] = System.Convert.ToString(puzzle.wordToSolve[i]);
+
+        //}
+        newCrossKey.GetComponent<CrossKey>().door = door;
+        newCrossKey.GetComponent<CrossKey>().answer = puzzle.wordToSolve;
+    }
+
+    void SevenLetterKey(KeyPuzzles key, GameObject newCrossKey, DoorInteraction door)
+    {
+        int randomPuzzle = Random.Range(0, key.puzzleOptions.Length);
+
+        PuzzleOptions puzzle = key.puzzleOptions[randomPuzzle];
+        if (puzzle.wordOneSetBack)
+        {
+            string[] characters = new string[puzzle.keyToothWordOne.Length];
+            for (int i = 0; i < 4; i++)
+            {
+                characters[i] = System.Convert.ToString(puzzle.keyToothWordOne[i]);
+                newCrossKey.GetComponent<CrossKey>().toothOneBack[i].text = characters[i];
+            }
+        }
+        else if (puzzle.wordOneSetBack == false)
+        {
+            string[] characters = new string[puzzle.keyToothWordOne.Length];
+            for (int i = 0; i < 4; i++)
+            {
+                characters[i] = System.Convert.ToString(puzzle.keyToothWordOne[i]);
+                newCrossKey.GetComponent<CrossKey>().toothOneFront[i].text = characters[i];
+            }
+        }
+
+        if (puzzle.wordTwoSetBack)
+        {
+            string[] characters = new string[puzzle.keyToothWordTwo.Length];
+            for (int i = 0; i < 3; i++)
+            {
+                characters[i] = System.Convert.ToString(puzzle.keyToothWordTwo[i]);
+                newCrossKey.GetComponent<CrossKey>().toothTwoBack[i].text = characters[i];
+            }
+        }
+        else if (puzzle.wordTwoSetBack == false)
+        {
+            string[] characters = new string[puzzle.keyToothWordTwo.Length];
+            for (int i = 0; i < 3; i++)
+            {
+                characters[i] = System.Convert.ToString(puzzle.keyToothWordTwo[i]);
+                newCrossKey.GetComponent<CrossKey>().toothTwoFront[i].text = characters[i];
+            }
+        }
+
+        string[] answerChar = new string[puzzle.wordToSolve.Length];
+        for (int i = 0; i < 7; i++)
+        {
+            answerChar[i] = System.Convert.ToString(puzzle.wordToSolve[i]);
+
+        }
+        newCrossKey.GetComponent<CrossKey>().door = door;
+        newCrossKey.GetComponent<CrossKey>().answer = puzzle.wordToSolve;
     }
 }
