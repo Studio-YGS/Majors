@@ -20,7 +20,7 @@ public class ObjectHolder : MonoBehaviour
     Quaternion startRot;
     Material mat;
     float dissolveValue;
-    Transform hand;
+    [HideInInspector] public Transform hand;
     Transform objectInspectPoint;
     Transform cam;
     static GameObject heldObject;
@@ -29,8 +29,9 @@ public class ObjectHolder : MonoBehaviour
     bool dissolving;
     [HideInInspector] public bool thisObjectHeld;
     [HideInInspector] public bool isPlacedDown;
+    [HideInInspector] public bool beingInspected;
     //Vector3 posLastFrame;
-    Player_Controller controller;
+    [HideInInspector] public Player_Controller controller;
 
     [HideInInspector] public Vector3 ogScaleFactor;
     public float pickupRange = 5;
@@ -116,15 +117,7 @@ public class ObjectHolder : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.X))
         {
-            if (thisObjectHeld)
-            {
-                DropCurrentObject(heldObject);
-                if(objectsInHands.Count == 1)
-                {
-                    objectsInHands[0].SetActive(true);
-                    heldObject = objectsInHands[0];
-                }
-            }
+            Drop();
         }
 
         if(objectsInHands.Count == 2 && thisObjectHeld)
@@ -168,21 +161,19 @@ public class ObjectHolder : MonoBehaviour
 
         if (thisObjectHeld)
         {
-            //if (Input.GetMouseButtonDown(0))
-            //{
-            //    posLastFrame = Input.mousePosition;
-            //}
             if (Input.GetMouseButtonDown(1))
             {
                 Vector3 posOffset = transform.position - transform.GetComponent<Renderer>().bounds.center;
                 transform.position = cam.position + cam.forward * distanceFromFace + posOffset;
                 controller.enabled = false;
+                beingInspected = true;
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
             }
             else if (Input.GetMouseButtonUp(1))
             {
                 controller.enabled = true;
+                beingInspected = false;
                 Cursor.visible = false;
                 Cursor.lockState = CursorLockMode.Locked;
                 transform.position = hand.TransformPoint(handOffset);
@@ -190,15 +181,10 @@ public class ObjectHolder : MonoBehaviour
             }
             if (Input.GetMouseButton(0) && Input.GetMouseButton(1))
             {
-                //var delta = Input.mousePosition - posLastFrame;
-                //posLastFrame = Input.mousePosition;
-
-                //var axis = Quaternion.AngleAxis(-90f, Vector3.forward ) * delta;
-                //transform.rotation = Quaternion.AngleAxis(delta.magnitude * 0.3f, axis) * transform.rotation;
                 float rotX = Input.GetAxis("Mouse X") * 200 * Mathf.Deg2Rad;
                 float rotY = Input.GetAxis("Mouse Y") * 200 * Mathf.Deg2Rad;
-                transform.RotateAround(transform.GetComponent<Renderer>().bounds.center, Vector3.up, -rotX);
-                transform.RotateAround(transform.GetComponent<Renderer>().bounds.center, Vector3.right, rotY);
+                transform.RotateAround(transform.GetComponent<Renderer>().bounds.center, cam.up, -rotX);
+                transform.RotateAround(transform.GetComponent<Renderer>().bounds.center, cam.right, rotY);
             }
 
         }
@@ -240,6 +226,19 @@ public class ObjectHolder : MonoBehaviour
 
     }
 
+
+    public void Drop()
+    {
+        if (thisObjectHeld)
+        {
+            DropCurrentObject(heldObject);
+            if (objectsInHands.Count == 1)
+            {
+                objectsInHands[0].SetActive(true);
+                heldObject = objectsInHands[0];
+            }
+        }
+    }
     void DropCurrentObject(GameObject item)
     {
         ObjectHolder itemObjectHolder = item.GetComponent<ObjectHolder>();
@@ -294,6 +293,18 @@ public class ObjectHolder : MonoBehaviour
             if (HO.GetComponent<Outline>())
             {
                 HO.GetComponent<Outline>().enabled = true;
+            }
+            foreach (Transform t in HO.transform)
+            {
+                t.gameObject.layer = 0;
+                foreach (Transform T in t.transform)
+                {
+                    T.gameObject.layer = 0;
+                }
+                if (t.GetComponent<Outline>())
+                {
+                    t.GetComponent<Outline>().enabled = true;
+                }
             }
         }
         itemObjectHolder.thisObjectHeld = false;
@@ -356,6 +367,18 @@ public class ObjectHolder : MonoBehaviour
             if (HO.GetComponent<Outline>())
             {
                 HO.GetComponent<Outline>().enabled = false;
+            }
+            foreach(Transform t in HO.transform)
+            {
+                t.gameObject.layer = 6;
+                foreach(Transform T in t.transform)
+                {
+                    T.gameObject.layer = 6;
+                }
+                if (t.GetComponent<Outline>())
+                {
+                    t.GetComponent<Outline>().enabled = false;
+                }
             }
         }
         itemObjectHolder.isPlacedDown = false;
