@@ -8,28 +8,55 @@ public class TutorialController : MonoBehaviour
 
     Player_Controller playerController;
 
-    GameObject controlsUI;
+    [SerializeField]
+    GameObject controlsUI, spaceToContinue;
 
-    bool reading = true;
+    bool canContinue = false;
 
     void Start()
     {
         journalController = FindObjectOfType<JournalController>();
         playerController = FindObjectOfType<Player_Controller>();
+
+        ShowControls();
+    }
+
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space) && canContinue)
+        {
+            canContinue = false;
+            spaceToContinue.SetActive(false);
+
+            StartTutorial();
+        }
     }
 
     void ShowControls()
     {
-        StartCoroutine(ShowingUI());
+        controlsUI.SetActive(true);
+
+        playerController.DisableController();
+        playerController.inJournal = false;
+
+        journalController.DisableJournal();
+
+        StartCoroutine(ReadingControls());
     }
 
-    IEnumerator ShowingUI()
+    void StartTutorial()
     {
-        if (!reading)
-        {
+        controlsUI.SetActive(false);
 
-        }
+        playerController.EnableController();
+    }
 
-        yield return null;
+    IEnumerator ReadingControls()
+    {
+        yield return new WaitForSeconds(5f);
+
+        canContinue = true;
+        spaceToContinue.SetActive(true);
+        StopCoroutine(ReadingControls());
     }
 }
