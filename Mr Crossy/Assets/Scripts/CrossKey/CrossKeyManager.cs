@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 [System.Serializable]
 public class PuzzleOptions
@@ -26,6 +27,7 @@ public class KeyPuzzles
 public class CrossKeyManager : MonoBehaviour
 {
     public int numOfKeys = 1;
+    public TMP_Text hintArea;
     public KeyPuzzles[] keyPuzzles;
     Transform cam;
     [HideInInspector] public Player_Controller controller;
@@ -115,14 +117,15 @@ public class CrossKeyManager : MonoBehaviour
             }
         }
 
-        string[] answerChar = new string[puzzle.wordToSolve.Length];
-        for (int i = 0; i < 4; i++)
-        {
-            answerChar[i] = System.Convert.ToString(puzzle.wordToSolve[i]);
+        //string[] answerChar = new string[puzzle.wordToSolve.Length];
+        //for (int i = 0; i < 4; i++)
+        //{
+        //    answerChar[i] = System.Convert.ToString(puzzle.wordToSolve[i]);
 
-        }
+        //}
         newCrossKey.GetComponent<CrossKey>().door = door;
         newCrossKey.GetComponent<CrossKey>().answer = puzzle.wordToSolve;
+        hintArea.text = "[C]LUE: " + puzzle.hint;
     }
 
     void FiveLetterKey(KeyPuzzles key, GameObject newCrossKey, DoorInteraction door)
@@ -168,14 +171,15 @@ public class CrossKeyManager : MonoBehaviour
             }
         }
 
-        string[] answerChar = new string[puzzle.wordToSolve.Length];
-        for (int i = 0; i < 5; i++)
-        {
-            answerChar[i] = System.Convert.ToString(puzzle.wordToSolve[i]);
+        //string[] answerChar = new string[puzzle.wordToSolve.Length];
+        //for (int i = 0; i < 5; i++)
+        //{
+        //    answerChar[i] = System.Convert.ToString(puzzle.wordToSolve[i]);
 
-        }
+        //}
         newCrossKey.GetComponent<CrossKey>().door = door;
         newCrossKey.GetComponent<CrossKey>().answer = puzzle.wordToSolve;
+        hintArea.text = "[C]LUE: " + puzzle.hint;
     }
 
     void SixLetterKey(KeyPuzzles key, GameObject newCrossKey, DoorInteraction door)
@@ -229,6 +233,7 @@ public class CrossKeyManager : MonoBehaviour
         //}
         newCrossKey.GetComponent<CrossKey>().door = door;
         newCrossKey.GetComponent<CrossKey>().answer = puzzle.wordToSolve;
+        hintArea.text = "[C]LUE: " + puzzle.hint;
     }
 
     void SevenLetterKey(KeyPuzzles key, GameObject newCrossKey, DoorInteraction door)
@@ -274,13 +279,14 @@ public class CrossKeyManager : MonoBehaviour
             }
         }
 
-        string[] answerChar = new string[puzzle.wordToSolve.Length];
-        for (int i = 0; i < 7; i++)
-        {
-            answerChar[i] = System.Convert.ToString(puzzle.wordToSolve[i]);
+        //string[] answerChar = new string[puzzle.wordToSolve.Length];
+        //for (int i = 0; i < 7; i++)
+        //{
+        //    answerChar[i] = System.Convert.ToString(puzzle.wordToSolve[i]);
 
-        }
+        //}
         newCrossKey.GetComponent<CrossKey>().door = door;
         newCrossKey.GetComponent<CrossKey>().answer = puzzle.wordToSolve;
+        hintArea.text = "[C]LUE: " + puzzle.hint;
     }
 }

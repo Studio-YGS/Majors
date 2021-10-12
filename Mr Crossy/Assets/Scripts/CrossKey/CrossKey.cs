@@ -32,15 +32,16 @@ public class CrossKey : MonoBehaviour
 
         //if(numOfLetters == 6)
         //{
-            if(wordOne.text == answer)
-            {
-                Debug.Log("unlock");
-                FindObjectOfType<CrossKeyManager>().controller.enabled = true;
-                Cursor.visible = false;
-                Cursor.lockState = CursorLockMode.Locked;
-                door.locked = false;
-                Destroy(gameObject);
-            }
+        if (wordOne.text == answer)
+        {
+            Debug.Log("unlock");
+            FindObjectOfType<CrossKeyManager>().controller.enabled = true;
+            FindObjectOfType<CrossKeyManager>().hintArea.text = "";
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            door.locked = false;
+            Destroy(gameObject);
+        }
         //}
 
     }
