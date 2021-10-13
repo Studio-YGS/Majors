@@ -8,6 +8,7 @@ public class DoorInteraction : MonoBehaviour
     public bool xForward;
     public bool zForward;
     bool moveable = false;
+    bool moved;
     bool greaterThan;
     bool lessThan;
     bool equalTo = true;
@@ -19,6 +20,7 @@ public class DoorInteraction : MonoBehaviour
     float angleRelativeToPlayer;
     float relativeAngle;
     public float openSpeed = 10;
+    public float closeDistance = 45;
     public bool locked;
     void Start()
     {
@@ -56,6 +58,11 @@ public class DoorInteraction : MonoBehaviour
                     if (Input.GetMouseButtonDown(0))
                     {
                         moveable = true;
+                        if (!moved)
+                        {
+                            StartCoroutine(WaitToClose());
+                            moved = true;
+                        }
                         Vector3 direction = transform.parent.position - player.position;
                         if (xForward)
                         {
@@ -251,5 +258,28 @@ public class DoorInteraction : MonoBehaviour
             touchingPlayerRight = false;
             touchingPlayerLeft = false;
         }
+    }
+
+    IEnumerator WaitToClose()
+    {
+        while(Vector3.Distance(transform.position, player.position) < closeDistance )
+        {
+            yield return null;
+        }
+        while (transform.localRotation != Quaternion.identity)
+        {
+
+            transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.identity, Time.deltaTime * 2f);
+            //Vector3 posOffset = transform.position - transform.GetComponent<Renderer>().bounds.center;
+            //transform.position = player.position + player.forward * holder.distanceFromFace + posOffset;
+            //transform.position = Vector3.Lerp(transform.position, player.position + player.forward * holder.distanceFromFace + posOffset, 0.01f);
+
+            yield return null;
+        }
+        rotationVal = 0;
+        greaterThan = false;
+        lessThan = false;
+        equalTo = true;
+        moved = false;
     }
 }
