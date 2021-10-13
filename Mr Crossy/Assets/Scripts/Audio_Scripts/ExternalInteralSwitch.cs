@@ -27,7 +27,7 @@ public class ExternalInteralSwitch : MonoBehaviour
     {
         if (other.gameObject.CompareTag("GameController"))
         {
-            if (floors >= 1)
+            if (floors >= 2)
             {
                 WalkOut();
             }
@@ -41,11 +41,11 @@ public class ExternalInteralSwitch : MonoBehaviour
         }
         foreach (GameObject twoDSound in outdoorTwoDSounds)
         {
-            twoDSound.GetComponent<StudioEventEmitter>().Stop();
+            twoDSound.SetActive(false);
         }
         foreach (GameObject indoorTwoD in indoorTwoDSounds)
         {
-            indoorTwoD.GetComponent<StudioEventEmitter>().Play();
+            indoorTwoD.SetActive(true);
         }
         foreach (GameObject indoorThreeD in indoorThreeDSounds)
         {
@@ -60,11 +60,11 @@ public class ExternalInteralSwitch : MonoBehaviour
         }
         foreach (GameObject twoDSound in outdoorTwoDSounds)
         {
-            twoDSound.GetComponent<StudioEventEmitter>().Play();
+            twoDSound.SetActive(true);
         }
         foreach (GameObject indoorTwoD in indoorTwoDSounds)
         {
-            indoorTwoD.GetComponent<StudioEventEmitter>().Stop();
+            indoorTwoD.SetActive(false);
         }
         foreach (GameObject indoorThreeD in indoorThreeDSounds)
         {
