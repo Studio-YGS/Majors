@@ -1,6 +1,7 @@
 
 using UnityEngine;
 using UnityEngine.AI;
+using Gemstone;
 using BehaviorDesigner.Runtime;
 using Phil = BehaviorDesigner.Runtime.Tasks;
 using BehaviorDesigner.Runtime.Tasks.Movement;
@@ -13,6 +14,10 @@ using BehaviorDesigner.Runtime.Tasks.Movement;
 
 public class PatrolWithinArea : NavMeshMovement
 {
+    public bool limitPathLength;
+
+    public SharedFloat validPathLimit;
+
     [Phil.Tooltip("Centre of area to be patrolled")]
     public SharedVector3 patrolAreaCentre;
     [Phil.Tooltip("Radius of patrol area")]
@@ -24,12 +29,15 @@ public class PatrolWithinArea : NavMeshMovement
 
     Vector3 destination = Vector3.zero;
 
-    public override void OnStart()
+    /*public override void OnStart()
     {
         base.OnStart();
 
-        if (ValidatePointToNavmesh(GetPointInCircle(patrolAreaRadius.Value, patrolAreaCentre.Value), navErrorDistance.Value, navMeshAgent.areaMask)) SetDestination(destination);
-    }
+        if (ValidatePointToNavmesh(GetPointInCircle(patrolAreaRadius.Value, patrolAreaCentre.Value), navErrorDistance.Value, navMeshAgent.areaMask))
+        {
+            SetDestination(destination);
+        }
+    }*/
 
     public override Phil.TaskStatus OnUpdate()
     {
@@ -63,13 +71,32 @@ public class PatrolWithinArea : NavMeshMovement
 
     bool ValidatePointToNavmesh(Vector3 samplePoint, float pointError, int areaMask) //Takes given point and translates it to the nearest allowed navmesh location, returns true if valid point found
     {
-        
         for (int i = 0; i < 30; i++)
         {
             if (NavMesh.SamplePosition(samplePoint, out NavMeshHit hit, pointError, areaMask))
             {
-                destination = hit.position;
-                return true;
+                NavMeshPath foundPathTest = new NavMeshPath();
+                navMeshAgent.CalculatePath(hit.position, foundPathTest);
+
+                if (foundPathTest.status == NavMeshPathStatus.PathComplete)
+                {
+                    if (limitPathLength)
+                    {
+                        NavMeshPath validPathTest = new NavMeshPath();
+                        NavMesh.CalculatePath(hit.position, patrolAreaCentre.Value, areaMask, validPathTest);
+
+                        if (validPathTest.status == NavMeshPathStatus.PathComplete && Emerald.GetPathLength(validPathTest) <= validPathLimit.Value)
+                        {
+                            destination = hit.position;
+                            return true;
+                        }
+                    }
+                    else
+                    {
+                        destination = hit.position;
+                        return true;
+                    }
+                }
             }
         }
 
@@ -79,9 +106,11 @@ public class PatrolWithinArea : NavMeshMovement
 
     public override void OnDrawGizmos()
     {
+#if UNITY_EDITOR
         Color colour = Color.green;
         colour.a = 0.01f;
         UnityEditor.Handles.color = colour;
         UnityEditor.Handles.DrawSolidDisc(patrolAreaCentre.Value, Vector3.up, patrolAreaRadius.Value);
+#endif
     }
 }
