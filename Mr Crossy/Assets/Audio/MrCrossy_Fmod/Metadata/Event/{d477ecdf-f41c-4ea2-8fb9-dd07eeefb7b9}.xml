@@ -2,13 +2,13 @@
 <objects serializationModel="Studio.02.01.00">
 	<object class="Event" id="{d477ecdf-f41c-4ea2-8fb9-dd07eeefb7b9}">
 		<property name="name">
-			<value>Wind 2</value>
+			<value>Wind (Exterior)</value>
 		</property>
 		<property name="outputFormat">
 			<value>1</value>
 		</property>
 		<relationship name="folder">
-			<destination>{1e87b6d8-46f6-4eda-af55-05d6b69ea24f}</destination>
+			<destination>{c55e8e83-ec7e-462e-a7cc-3f4d3fa31011}</destination>
 		</relationship>
 		<relationship name="mixer">
 			<destination>{fd29348d-ae7f-4a86-bc1b-ca44ce1bcdbc}</destination>
@@ -104,11 +104,14 @@
 	</object>
 	<object class="EventMixerGroup" id="{c4f2e892-375c-4b07-a247-a18de1b2cc68}">
 		<property name="volume">
-			<value>-2</value>
+			<value>-19.5</value>
 		</property>
 		<property name="name">
 			<value>Audio 1</value>
 		</property>
+		<relationship name="modulators">
+			<destination>{cd2351c5-845a-4d03-a034-7f0568659dfb}</destination>
+		</relationship>
 		<relationship name="effectChain">
 			<destination>{457e8326-0264-4241-85bd-065d9bb0deb8}</destination>
 		</relationship>
@@ -144,6 +147,26 @@
 		</property>
 	</object>
 	<object class="MixerBusFader" id="{855b0bb9-bebf-4c92-9013-f05be97140df}" />
+	<object class="ADSRModulator" id="{cd2351c5-845a-4d03-a034-7f0568659dfb}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>volume</value>
+		</property>
+		<property name="initialValue">
+			<value>-80</value>
+		</property>
+		<property name="attackTime">
+			<value>0</value>
+		</property>
+		<property name="attackShape">
+			<value>-1.00000048</value>
+		</property>
+		<property name="releaseTime">
+			<value>10000</value>
+		</property>
+		<property name="finalValue">
+			<value>-80</value>
+		</property>
+	</object>
 	<object class="MixerBusEffectChain" id="{457e8326-0264-4241-85bd-065d9bb0deb8}">
 		<relationship name="effects">
 			<destination>{76b6df0e-0d61-409d-b03c-08999297bcb7}</destination>
