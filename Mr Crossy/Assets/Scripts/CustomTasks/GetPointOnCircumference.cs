@@ -13,56 +13,103 @@ using Phil = BehaviorDesigner.Runtime.Tasks;
 
 public class GetPointOnCircumference : Phil.Action
 {
-    public SharedBool isSpawned;
+    public bool useValidationDistance;
+
+    public SharedVector3 validationVector;
+    public SharedFloat validationDistance;
 
     [Phil.Tooltip("Centre of area to be patrolled")]
     public SharedVector3 circleCentre;
     [Phil.Tooltip("Radius of patrol area")]
-    public SharedFloat circleRadius;
+    public SharedFloat circleAreaRadius;
     [Phil.Tooltip("Margin of error to find NavMesh point")]
     public SharedFloat navErrorDistance;
     [Phil.Tooltip("What parts of the NavMesh can be considered a valid patrol location")]
     public SharedInt navMask;
 
     public SharedVector3 returnedPoint;
+    private Vector3 returnedPos;
+    private Vector3 samplePosition;
 
     public override Phil.TaskStatus OnUpdate()
     {
-        Vector3 spawnPoint;
-
-        if (!isSpawned.Value)
+        if (ValidatePointToNavmesh(circleCentre.Value, circleAreaRadius.Value, navErrorDistance.Value, navMask.Value)) 
         {
-            if (ValidatePointToNavmesh(PointOnCircumference(circleCentre.Value, circleRadius.Value, Random.Range(0f, 360f)), out spawnPoint, navErrorDistance.Value, navMask.Value)) 
-            {
-                returnedPoint.Value = spawnPoint;
-                return Phil.TaskStatus.Success; //Returns success when a valid point found
-            }
-            else return Phil.TaskStatus.Running; //Returns running when a valid point not found
+            returnedPoint.Value = returnedPos;
+            return Phil.TaskStatus.Success; //Returns success when a valid point found
         }
-        else return Phil.TaskStatus.Failure; //Returns failure if run when Mr Crossy is on the field
+        else return Phil.TaskStatus.Running; //Returns running when a valid point not found
+        
+        
     }
 
-    public Vector3 PointOnCircumference(Vector3 circleCentre, float circleRadius, float angle)
+    public Vector3 PointOnCircumference(Vector3 circleCentre, float circleRadius, float radians)
     {
-        float radians = angle.ToRadians();
-
         float x = (Mathf.Cos(radians) * circleRadius) + circleCentre.x;
-        float y = (Mathf.Cos(radians) * circleRadius) + circleCentre.z;
+        float y = (Mathf.Sin(radians) * circleRadius) + circleCentre.z;
 
-        Vector3 resultPoint = new Vector3(x,0,y);
-
+        Vector3 resultPoint = new Vector3(x, circleCentre.y, y);
+        Debug.Log("GETCIRCUMPOINT: " + "Sampled Point: " + resultPoint);
         return resultPoint;
     }
 
-    bool ValidatePointToNavmesh(Vector3 samplePoint, out Vector3 resultingPoint, float pointError, int areaMask) //Takes given point and translates it to the nearest allowed navmesh location
+    bool ValidatePointToNavmesh(Vector3 circleCentre, float circleRadius, float pointError, int areaMask) //Takes given point and translates it to the nearest allowed navmesh location, returns true if valid point found
     {
-        NavMeshHit hit;
+        Debug.Log("GETCIRCUMPOINT: " + "validate attempt");
+        Vector3 samplePoint = PointOnCircumference(circleCentre, circleRadius, Random.Range(0f, 360f).ToRadians());
 
-        if (NavMesh.SamplePosition(samplePoint, out hit, pointError, areaMask))
+
+        for (int i = 0; i < 30; i++)
         {
-            resultingPoint = hit.position;
-            return true;
+            if (NavMesh.SamplePosition(samplePoint, out NavMeshHit hit, pointError, areaMask))
+            {
+                NavMeshPath pathTest = new NavMeshPath();
+                Debug.Log("GETCIRCUMPOINT: " + "begin testingPath");
+                NavMesh.CalculatePath(hit.position, validationVector.Value, areaMask, pathTest);
+                samplePosition = hit.position;
+                if (pathTest.status == NavMeshPathStatus.PathComplete)
+                {
+                    if(useValidationDistance)
+                    {
+                        if (Emerald.GetPathLength(pathTest) <= validationDistance.Value)
+                        {
+                            Debug.Log("GETCIRCUMPOINT: " + "SUCCESS");
+                            returnedPos = hit.position;
+                            return true;
+                        }
+                    }
+                    else
+                    {
+                        Debug.Log("GETCIRCUMPOINT: " + "SUCCESS");
+                        returnedPos = hit.position;
+                        return true;
+                    }
+                    
+                }
+                else samplePoint = PointOnCircumference(circleCentre, circleRadius, Random.Range(0f, 360f).ToRadians());
+            }
         }
-        else { resultingPoint = Vector3.zero; return false; }
+        Debug.Log("GETCIRCUMPOINT: " + "FAILURE");
+        returnedPos = Vector3.zero;
+        return false;
+    }
+
+    public override void OnDrawGizmos()
+    {
+#if UNITY_EDITOR
+        Color colourOne = Color.red;
+        Color colourTwo = Color.cyan;
+
+        Gizmos.color = colourOne;
+        Gizmos.DrawSphere(samplePosition, .1f);
+
+        Gizmos.color = colourTwo;
+        Gizmos.DrawSphere(validationVector.Value, .1f);
+
+        Color colour = Color.gray;
+        colour.a = 0.01f;
+        UnityEditor.Handles.color = colour;
+        UnityEditor.Handles.DrawSolidDisc(circleCentre.Value, Vector3.up, circleAreaRadius.Value);
+#endif
     }
 }

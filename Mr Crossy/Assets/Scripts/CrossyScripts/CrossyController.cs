@@ -8,27 +8,42 @@ public class CrossyController : MonoBehaviour
     Animator animator;
     NavMeshAgent agent;
 
-    public bool shouldRun = false;
+    public bool overrideShouldRun;
+    public bool run;
 
     public Transform headBone;
     public Transform vision;
+    [SerializeField] private Transform m_CrossyDespawn;
+
+    [SerializeField] private float m_PatrolRunDistance;
+    [SerializeField] private float m_AlertRunDistance;
+    private float m_RunDistance;
 
     [Space(10)]
+    [Header("Movement Variables")]
+    [Tooltip("Mr. Crossy's walking speed.")]
     [SerializeField] private float m_WalkSpeed;
+    [Tooltip("Mr. Crossy's running speed.")]
     [SerializeField] private float m_RunSpeed;
-    [Space(10)]
-    private float accelAmt;
-    private float deccelAmt;
-
     private float m_MoveSpeed;
-    [Space(10)]
-    private float m_Acceleration;
-    
+    [Tooltip("Mr. Crossy's acceleration rate.")]
+    [SerializeField] private float m_WalkAcceleration;
+    [SerializeField] private float m_RunAcceleration;
+    [SerializeField] private float m_Acceleration;
+    [Tooltip("Mr. Crossy's turning speed.")]
+    [SerializeField] private float m_WalkAngularSpeed;
+    [SerializeField] private float m_RunAngularSpeed;
     [SerializeField] private float m_AngularSpeed;
+    [Tooltip("Distance from destination that Mr. Crossy can stop at.")]
     [SerializeField] private float m_StoppingDistance;
-    [SerializeField] private float slowRange;
+    //[SerializeField] private float m_SlowRange;
 
-    private int m_Mask; 
+    private int m_Mask;
+    private bool m_ShouldRun = false;
+    private int m_State = -1;
+    [Space(10)]
+    [Header("Detection Variables")]
+    [SerializeField] private float m_DetectionTime;
 
     public float WalkSpeed { get { return m_WalkSpeed; } set { m_WalkSpeed = value; } }
     public float RunSpeed { get { return m_RunSpeed; } set { m_RunSpeed = value; } }
@@ -41,25 +56,61 @@ public class CrossyController : MonoBehaviour
     public Vector3 VisionPosition { get { return vision.localPosition; }}
 
     public int NavMeshMask { get { return m_Mask; } }
+    public bool ShouldRun { get { return m_ShouldRun; } set { m_ShouldRun = value; } }
+    public int State { get { return m_State; } set { m_State = value; } }
+    public Vector3 CrossyDespawn { get { return m_CrossyDespawn.position; } set { m_CrossyDespawn.position = value; } }
+
+    public float BaseDetectTime { get { return m_DetectionTime; } }
+    public float CloseDetectTime { get { return m_DetectionTime*3; } }
 
 
     [Space(10)]
     [SerializeField] float veloMag;
+    [SerializeField] float veloDesire;
+    [SerializeField] float interpolator;
 
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-        m_Mask = NavMesh.GetAreaFromName("CrossyAble");
+        m_Mask = agent.areaMask;
     }
 
     private void Update()
     {
         vision.position = headBone.position;
-        vision.rotation = headBone.rotation;
-        MoveSpeed = (shouldRun) ? RunSpeed : WalkSpeed;
-
+        vision.rotation.SetLookRotation(headBone.up, -headBone.right);
         veloMag = agent.velocity.magnitude;
+        veloDesire = agent.desiredVelocity.magnitude;
+
+        if (overrideShouldRun == false)
+        {
+            if (m_State < 1) { m_ShouldRun = false; }
+            else if (m_State == 1 || m_State == 2)
+            {
+                m_RunDistance = (m_State == 1) ? m_AlertRunDistance : m_PatrolRunDistance;
+
+                if (agent.remainingDistance > m_RunDistance) m_ShouldRun = true;
+                else m_ShouldRun = false;
+            }
+            else if (m_State > 2) { m_ShouldRun = true; }
+
+        }
+        else { m_ShouldRun = run; }
+
+
+        //NavAgent fiddling
+        MoveSpeed = (m_ShouldRun) ? RunSpeed : WalkSpeed;
+        /*
+        interpolator = Mathf.InverseLerp(0, RunSpeed, veloDesire);
+
+        m_AngularSpeed = Mathf.Lerp(m_WalkAngularSpeed, m_RunAngularSpeed, interpolator);
+        m_Acceleration = Mathf.Lerp(m_WalkAcceleration, m_RunAcceleration, interpolator);
+        */
+        agent.acceleration = Acceleration;
+
+        //Animator Actions
+        
         animator.SetBool("Moving", veloMag >= 0.05);
         animator.SetFloat("VelocityMag",veloMag);
     }

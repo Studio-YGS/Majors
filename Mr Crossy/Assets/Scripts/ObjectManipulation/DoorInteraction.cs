@@ -8,6 +8,7 @@ public class DoorInteraction : MonoBehaviour
     public bool xForward;
     public bool zForward;
     bool moveable = false;
+    bool moved;
     bool greaterThan;
     bool lessThan;
     bool equalTo = true;
@@ -19,6 +20,8 @@ public class DoorInteraction : MonoBehaviour
     float angleRelativeToPlayer;
     float relativeAngle;
     public float openSpeed = 10;
+    public float closeDistance = 45;
+    public bool locked;
     void Start()
     {
         cam = FindObjectOfType<Camera>().transform;
@@ -28,155 +31,83 @@ public class DoorInteraction : MonoBehaviour
 
     void Update()
     {
-        //Debug.Log(transform.localRotation.y);
-        //if (Input.GetKeyDown(KeyCode.H))
-        //{
-        //    if (angleRelativeToPlayer > 180 * 0.5f)
-        //    {
-        //        //BEHIND
-        //        Debug.Log("behind");
-        //    }
-        //    else if (angleRelativeToPlayer < 180 * 0.5f)
-        //    {
-        //        //INFRONT
-        //        Debug.Log("infront");
-        //    }
-        //}
-        RaycastHit hit;
-        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit))
+        if (locked)
         {
-            if(hit.collider == gameObject.GetComponent<Collider>())
+            RaycastHit hit;
+            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit))
             {
-                
-                if (Input.GetMouseButtonDown(0))
+                if (hit.collider == gameObject.GetComponent<Collider>())
                 {
-                    moveable = true;
-                    Vector3 direction = transform.parent.position - player.position;
-                    if (xForward)
+
+                    if (Input.GetMouseButtonDown(0))
                     {
-                        angleRelativeToPlayer = Vector3.Angle(direction, transform.parent.right);
+                        FindObjectOfType<CrossKeyManager>().StartCrossKeyPuzzle(gameObject.GetComponent<DoorInteraction>());
+
                     }
-                    else if (zForward)
-                    {
-                        angleRelativeToPlayer = Vector3.Angle(direction, transform.parent.forward);
-                    }
-                    
                 }
             }
         }
-        if (Input.GetMouseButtonUp(0) && moveable)
+        if (!locked)
         {
-            if (transform.localRotation.y > 0.02)
+            RaycastHit hit;
+            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit))
             {
-                greaterThan = true;
-                lessThan = false;
-                equalTo = false;
-            }
-            else if (transform.localRotation.y < -0.02)
-            {
-                greaterThan = false;
-                lessThan = true;
-                equalTo = false;
-            }
-            else if (transform.localRotation.y == 0)
-            {
-                greaterThan = false;
-                lessThan = false;
-                equalTo = true;
-            }
-            
-            moveable = false;
-        }
-        
-
-        if (moveable)
-        {
-            rotationVal = Mathf.Clamp(rotationVal, -90f, 90f);
-            if (angleRelativeToPlayer > 180 * 0.5f)
-            {
-                //BEHIND
-                if (greaterThan)
+                if (hit.collider == gameObject.GetComponent<Collider>())
                 {
-                    if (Input.GetAxis("Mouse X") > 0 && !touchingPlayerLeft)
+
+                    if (Input.GetMouseButtonDown(0))
                     {
-                        rotationVal += Input.GetAxis("Mouse X") * openSpeed;
+                        moveable = true;
+                        if (!moved)
+                        {
+                            StartCoroutine(WaitToClose());
+                            moved = true;
+                        }
+                        Vector3 direction = transform.parent.position - player.position;
+                        if (xForward)
+                        {
+                            angleRelativeToPlayer = Vector3.Angle(direction, transform.parent.right);
+                        }
+                        else if (zForward)
+                        {
+                            angleRelativeToPlayer = Vector3.Angle(direction, transform.parent.forward);
+                        }
 
                     }
-                    else if (Input.GetAxis("Mouse X") < 0 && !touchingPlayerRight)
-                    {
-                        rotationVal -= -Input.GetAxis("Mouse X") * openSpeed;
-                    }
-                }
-                else if (lessThan)
-                {
-                    if (Input.GetAxis("Mouse X") < 0 && !touchingPlayerLeft)
-                    {
-                        rotationVal += -Input.GetAxis("Mouse X") * openSpeed;
-
-                    }
-                    else if (Input.GetAxis("Mouse X") > 0   && !touchingPlayerRight)
-                    {
-                        rotationVal -= Input.GetAxis("Mouse X") * openSpeed;
-                    }
-                }
-                else if (equalTo)
-                {
-                    if (zForward)
-                    {
-                        if (Input.GetAxis("Mouse X") < 0 && !touchingPlayerRight)
-                        {
-                            rotationVal += -Input.GetAxis("Mouse X") * openSpeed;
-
-                        }
-                        else if (Input.GetAxis("Mouse X") > 0 && !touchingPlayerLeft)
-                        {
-                            rotationVal -= Input.GetAxis("Mouse X") * openSpeed;
-                        }
-                    }
-                    else if (xForward)
-                    {
-                        if (Input.GetAxis("Mouse X") < 0 && !touchingPlayerLeft)
-                        {
-                            rotationVal += -Input.GetAxis("Mouse X") * openSpeed;
-
-                        }
-                        else if (Input.GetAxis("Mouse X") > 0  && !touchingPlayerRight)
-                        {
-                            rotationVal -= Input.GetAxis("Mouse X") * openSpeed;
-                        }
-                    } 
                 }
             }
-            else if (angleRelativeToPlayer < 180 * 0.5f)
+            if (Input.GetMouseButtonUp(0) && moveable)
             {
-                //INFRONT
-                if (greaterThan)
+                if (transform.localRotation.y > 0.02)
                 {
-                    if (Input.GetAxis("Mouse X") < 0 && !touchingPlayerLeft)
-                    {
-                        rotationVal += -Input.GetAxis("Mouse X") * openSpeed;
-
-                    }
-                    else if (Input.GetAxis("Mouse X") > 0  && !touchingPlayerRight)
-                    {
-                        rotationVal -= Input.GetAxis("Mouse X") * openSpeed;
-                    }
+                    greaterThan = true;
+                    lessThan = false;
+                    equalTo = false;
                 }
-                else if (lessThan)
+                else if (transform.localRotation.y < -0.02)
                 {
-                    if (Input.GetAxis("Mouse X") > 0 && !touchingPlayerLeft)
-                    {
-                        rotationVal += Input.GetAxis("Mouse X") * openSpeed;
-
-                    }
-                    else if (Input.GetAxis("Mouse X") < 0  && !touchingPlayerRight)
-                    {
-                        rotationVal -= -Input.GetAxis("Mouse X") * openSpeed;
-                    }
+                    greaterThan = false;
+                    lessThan = true;
+                    equalTo = false;
                 }
-                else if (equalTo)
+                else if (transform.localRotation.y == 0)
                 {
-                    if (zForward)
+                    greaterThan = false;
+                    lessThan = false;
+                    equalTo = true;
+                }
+
+                moveable = false;
+            }
+
+
+            if (moveable)
+            {
+                rotationVal = Mathf.Clamp(rotationVal, -90f, 90f);
+                if (angleRelativeToPlayer > 180 * 0.5f)
+                {
+                    //BEHIND
+                    if (greaterThan)
                     {
                         if (Input.GetAxis("Mouse X") > 0 && !touchingPlayerLeft)
                         {
@@ -188,25 +119,108 @@ public class DoorInteraction : MonoBehaviour
                             rotationVal -= -Input.GetAxis("Mouse X") * openSpeed;
                         }
                     }
-                    else if (xForward)
+                    else if (lessThan)
                     {
-                        if (Input.GetAxis("Mouse X") > 0 && !touchingPlayerRight)
+                        if (Input.GetAxis("Mouse X") < 0 && !touchingPlayerLeft)
+                        {
+                            rotationVal += -Input.GetAxis("Mouse X") * openSpeed;
+
+                        }
+                        else if (Input.GetAxis("Mouse X") > 0 && !touchingPlayerRight)
+                        {
+                            rotationVal -= Input.GetAxis("Mouse X") * openSpeed;
+                        }
+                    }
+                    else if (equalTo)
+                    {
+                        if (zForward)
+                        {
+                            if (Input.GetAxis("Mouse X") < 0 && !touchingPlayerRight)
+                            {
+                                rotationVal += -Input.GetAxis("Mouse X") * openSpeed;
+
+                            }
+                            else if (Input.GetAxis("Mouse X") > 0 && !touchingPlayerLeft)
+                            {
+                                rotationVal -= Input.GetAxis("Mouse X") * openSpeed;
+                            }
+                        }
+                        else if (xForward)
+                        {
+                            if (Input.GetAxis("Mouse X") < 0 && !touchingPlayerLeft)
+                            {
+                                rotationVal += -Input.GetAxis("Mouse X") * openSpeed;
+
+                            }
+                            else if (Input.GetAxis("Mouse X") > 0 && !touchingPlayerRight)
+                            {
+                                rotationVal -= Input.GetAxis("Mouse X") * openSpeed;
+                            }
+                        }
+                    }
+                }
+                else if (angleRelativeToPlayer < 180 * 0.5f)
+                {
+                    //INFRONT
+                    if (greaterThan)
+                    {
+                        if (Input.GetAxis("Mouse X") < 0 && !touchingPlayerLeft)
+                        {
+                            rotationVal += -Input.GetAxis("Mouse X") * openSpeed;
+
+                        }
+                        else if (Input.GetAxis("Mouse X") > 0 && !touchingPlayerRight)
+                        {
+                            rotationVal -= Input.GetAxis("Mouse X") * openSpeed;
+                        }
+                    }
+                    else if (lessThan)
+                    {
+                        if (Input.GetAxis("Mouse X") > 0 && !touchingPlayerLeft)
                         {
                             rotationVal += Input.GetAxis("Mouse X") * openSpeed;
 
                         }
-                        else if (Input.GetAxis("Mouse X") < 0  && !touchingPlayerLeft)
+                        else if (Input.GetAxis("Mouse X") < 0 && !touchingPlayerRight)
                         {
                             rotationVal -= -Input.GetAxis("Mouse X") * openSpeed;
                         }
                     }
-                    
+                    else if (equalTo)
+                    {
+                        if (zForward)
+                        {
+                            if (Input.GetAxis("Mouse X") > 0 && !touchingPlayerLeft)
+                            {
+                                rotationVal += Input.GetAxis("Mouse X") * openSpeed;
+
+                            }
+                            else if (Input.GetAxis("Mouse X") < 0 && !touchingPlayerRight)
+                            {
+                                rotationVal -= -Input.GetAxis("Mouse X") * openSpeed;
+                            }
+                        }
+                        else if (xForward)
+                        {
+                            if (Input.GetAxis("Mouse X") > 0 && !touchingPlayerRight)
+                            {
+                                rotationVal += Input.GetAxis("Mouse X") * openSpeed;
+
+                            }
+                            else if (Input.GetAxis("Mouse X") < 0 && !touchingPlayerLeft)
+                            {
+                                rotationVal -= -Input.GetAxis("Mouse X") * openSpeed;
+                            }
+                        }
+
+                    }
                 }
+                transform.localRotation = Quaternion.Euler(0, rotationVal, 0);
+
+
             }
-            transform.localRotation = Quaternion.Euler(0,  rotationVal , 0);
-
-
         }
+        
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -244,5 +258,28 @@ public class DoorInteraction : MonoBehaviour
             touchingPlayerRight = false;
             touchingPlayerLeft = false;
         }
+    }
+
+    IEnumerator WaitToClose()
+    {
+        while(Vector3.Distance(transform.position, player.position) < closeDistance )
+        {
+            yield return null;
+        }
+        while (transform.localRotation != Quaternion.identity)
+        {
+
+            transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.identity, Time.deltaTime * 2f);
+            //Vector3 posOffset = transform.position - transform.GetComponent<Renderer>().bounds.center;
+            //transform.position = player.position + player.forward * holder.distanceFromFace + posOffset;
+            //transform.position = Vector3.Lerp(transform.position, player.position + player.forward * holder.distanceFromFace + posOffset, 0.01f);
+
+            yield return null;
+        }
+        rotationVal = 0;
+        greaterThan = false;
+        lessThan = false;
+        equalTo = true;
+        moved = false;
     }
 }
