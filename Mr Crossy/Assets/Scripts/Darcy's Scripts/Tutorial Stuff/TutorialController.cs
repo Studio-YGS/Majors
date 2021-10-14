@@ -6,6 +6,8 @@ public class TutorialController : MonoBehaviour
 {
     JournalController journalController;
 
+    JournalOnSwitch journalOnSwitch;
+
     Player_Controller playerController;
 
     [SerializeField]
@@ -17,6 +19,7 @@ public class TutorialController : MonoBehaviour
     {
         journalController = FindObjectOfType<JournalController>();
         playerController = FindObjectOfType<Player_Controller>();
+        journalOnSwitch = FindObjectOfType<JournalOnSwitch>();
 
         ShowControls();
     }
@@ -49,6 +52,10 @@ public class TutorialController : MonoBehaviour
         controlsUI.SetActive(false);
 
         playerController.EnableController();
+
+        journalController.EnableJournal();
+
+        journalOnSwitch.journalClosed.SetActive(true);
     }
 
     IEnumerator ReadingControls()

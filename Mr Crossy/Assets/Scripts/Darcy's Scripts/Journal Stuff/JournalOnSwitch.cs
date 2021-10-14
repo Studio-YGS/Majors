@@ -6,8 +6,7 @@ public class JournalOnSwitch : MonoBehaviour
 {
     bool open = false;
 
-    [SerializeField]
-    GameObject journalOpen, journalClosed;
+    public GameObject journalOpen, journalClosed;
 
     Player_Controller fpc;
 
