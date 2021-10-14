@@ -19,7 +19,7 @@ public class ObjectHolder : MonoBehaviour
     Vector3 startPos;
     Quaternion startRot;
     Material mat;
-    float dissolveValue;
+    //float dissolveValue;
     [HideInInspector] public Transform hand;
     Transform objectInspectPoint;
     Transform cam;
@@ -189,19 +189,19 @@ public class ObjectHolder : MonoBehaviour
 
         }
 
-        if(dissolving == true)
-        {
-            dissolveValue += Time.deltaTime;
-            mat.SetFloat("Vector1_1bfaaeffe0534a91a219fc6f2e1eae9e", dissolveValue);
-        }
-        else if(dissolving == false)
-        {
-            if (mat.GetFloat("Vector1_1bfaaeffe0534a91a219fc6f2e1eae9e") != 0)
-            {
-                dissolveValue -= Time.deltaTime;
-                mat.SetFloat("Vector1_1bfaaeffe0534a91a219fc6f2e1eae9e", dissolveValue);
-            }
-        }
+        //if(dissolving == true)
+        //{
+        //    dissolveValue += Time.deltaTime;
+        //    mat.SetFloat("Vector1_1bfaaeffe0534a91a219fc6f2e1eae9e", dissolveValue);
+        //}
+        //else if(dissolving == false)
+        //{
+        //    if (mat.GetFloat("Vector1_1bfaaeffe0534a91a219fc6f2e1eae9e") != 0)
+        //    {
+        //        dissolveValue -= Time.deltaTime;
+        //        mat.SetFloat("Vector1_1bfaaeffe0534a91a219fc6f2e1eae9e", dissolveValue);
+        //    }
+        //}
         
         if(updatePos && thisObjectHeld)
         {
@@ -349,8 +349,8 @@ public class ObjectHolder : MonoBehaviour
         
         itemObjectHolder.StopCoroutine("Dissolve");
         itemObjectHolder.dissolving = false;
-        itemObjectHolder.dissolveValue = 0;
-        itemObjectHolder.mat.SetFloat("Vector1_1bfaaeffe0534a91a219fc6f2e1eae9e", dissolveValue);
+        //itemObjectHolder.dissolveValue = 0;
+        //itemObjectHolder.mat.SetFloat("Vector1_1bfaaeffe0534a91a219fc6f2e1eae9e", dissolveValue);
         itemObjectHolder.transform.localScale = scaleFactor;
         //itemObjectHolder.transform.position = hand.position + handOffset;
         itemObjectHolder.transform.position = hand.TransformPoint(handOffset);
@@ -427,20 +427,20 @@ public class ObjectHolder : MonoBehaviour
     {
         yield return new WaitForSeconds(5);
         dissolving = true;
-        while(mat.GetFloat("Vector1_1bfaaeffe0534a91a219fc6f2e1eae9e") < 1)
-        {
-            yield return null;
-        }
+        //while(mat.GetFloat("Vector1_1bfaaeffe0534a91a219fc6f2e1eae9e") < 1)
+        //{
+        //    yield return null;
+        //}
         transform.position = startPos;
         transform.rotation = startRot;
         gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
         gameObject.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
         dissolving = false;
-        while (mat.GetFloat("Vector1_1bfaaeffe0534a91a219fc6f2e1eae9e") > 0)
-        {
-            yield return null;
-        }
-        dissolveValue = 0;
-        mat.SetFloat("Vector1_1bfaaeffe0534a91a219fc6f2e1eae9e", dissolveValue);
+        //while (mat.GetFloat("Vector1_1bfaaeffe0534a91a219fc6f2e1eae9e") > 0)
+        //{
+        //    yield return null;
+        //}
+        //dissolveValue = 0;
+        //mat.SetFloat("Vector1_1bfaaeffe0534a91a219fc6f2e1eae9e", dissolveValue);
     }
 }
