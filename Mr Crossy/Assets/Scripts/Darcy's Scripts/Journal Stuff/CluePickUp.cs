@@ -1,18 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CluePickUp : MonoBehaviour
 {
-    // Start is called before the first frame update
+    Player_Controller playerController;
+
+    public UnityEvent pickUp;
+
     void Start()
     {
-        
+        playerController = FindObjectOfType<Player_Controller>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        RaycastHit hit;
+
+        if(Input.GetKeyDown(KeyCode.E) && Physics.Raycast(playerController.cam.position, playerController.transform.TransformDirection(Vector3.forward), out hit, 2f))
+        {
+            if (hit.transform.gameObject.CompareTag("Clue"))
+            {
+                pickUp.Invoke();
+            }
+        }
     }
 }

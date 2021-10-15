@@ -55,11 +55,11 @@ public class Player_Controller : MonoBehaviour
 
     void Update()
     {
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance);
 
-        if (canMove)
+        if (canMove || !isGrounded)
         {
 
-            isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance);
 
             rotation.y += Input.GetAxis("Mouse X");
             rotation.x += -Input.GetAxis("Mouse Y");

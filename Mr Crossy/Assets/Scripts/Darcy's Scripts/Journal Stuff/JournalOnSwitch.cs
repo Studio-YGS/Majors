@@ -32,6 +32,11 @@ public class JournalOnSwitch : MonoBehaviour
         }
     }
 
+    public void ForceOpenOrClose()
+    {
+        OpenOrClose();
+    }
+
     void OpenJournal()
     {
         if (!journalController.disabled)
