@@ -31,11 +31,13 @@ public class CrossKeyManager : MonoBehaviour
     public KeyPuzzles[] keyPuzzles;
     Transform cam;
     [HideInInspector] public Player_Controller controller;
+    [HideInInspector] public HeadBob headBob;
 
     void Start()
     {
         cam = FindObjectOfType<Camera>().transform;
         controller = FindObjectOfType<Player_Controller>();
+        headBob = FindObjectOfType<HeadBob>();
     }
 
     
@@ -50,6 +52,7 @@ public class CrossKeyManager : MonoBehaviour
         {
             numOfKeys -= 1;
             controller.enabled = false;
+            headBob.enabled = false;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             int randomKey = Random.Range(0, keyPuzzles.Length);
