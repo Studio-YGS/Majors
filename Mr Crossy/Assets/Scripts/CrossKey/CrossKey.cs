@@ -67,13 +67,17 @@ public class CrossKey : MonoBehaviour
 
     void CompletePuzzle()
     {
-        FindObjectOfType<CrossKeyManager>().controller.enabled = true;
+        //FindObjectOfType<CrossKeyManager>().controller.enabled = true;
         FindObjectOfType<CrossKeyManager>().hintArea.text = "";
-        FindObjectOfType<CrossKeyManager>().headBob.enabled = true;
+        //FindObjectOfType<CrossKeyManager>().headBob.enabled = true;
+        //Time.timeScale = 1;
+        //Time.fixedDeltaTime = 0.02f;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         door.locked = false;
+        door.StartCoroutine("RotateCamToOldPosition");
         Destroy(gameObject);
+        
     }
 
     public void valueChanged(TMP_InputField field)
