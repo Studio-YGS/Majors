@@ -35,6 +35,8 @@ public class CrossyTheWatcher : MonoBehaviour
     [Range(0, 1)] public float rightGoal;
 
 
+    [HideInInspector] public int m_state;
+
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -126,5 +128,10 @@ public class CrossyTheWatcher : MonoBehaviour
         lightHouseBase = lighthouse.selfTransform;
 
         hiddenPosition = new Vector3(lightHouseBase.position.x, lightHouseBase.position.y + hiddenYOffset, lightHouseBase.position.z);
+    }
+
+    public void TitanCrossyHouse(Lighthouse newLighthouse)
+    {
+        
     }
 }
