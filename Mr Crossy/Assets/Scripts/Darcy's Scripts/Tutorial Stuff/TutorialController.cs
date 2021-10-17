@@ -30,6 +30,8 @@ public class TutorialController : MonoBehaviour
         ShowControls();
 
         journalTimer.canCount = false;
+
+        showPrompt.canShow = false;
     }
 
     void Update()
@@ -82,6 +84,17 @@ public class TutorialController : MonoBehaviour
         showPrompt.canShow = false;
     }
 
+    public void TeachHowToOpenDoor()
+    {
+        showPrompt.generalPrompt.text = "Teaching players how to open door";
+        showPrompt.generalPrompt.gameObject.SetActive(true);
+        showPrompt.canShow = false;
+
+
+
+        StartCoroutine(DoorOpenTeach());
+    }
+
     IEnumerator ReadingControls()
     {
         yield return new WaitForSeconds(5f);
@@ -108,5 +121,12 @@ public class TutorialController : MonoBehaviour
         showPrompt.canShow = true;
 
         StopCoroutine(PlayerNeedsToWait());
+    }
+
+    IEnumerator DoorOpenTeach()
+    {
+        yield return new WaitForSeconds(10f);
+
+
     }
 }
