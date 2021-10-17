@@ -54,7 +54,14 @@ public class CrossyCrossKeyVariant : MonoBehaviour
         animator.SetBool("Moving", veloMag >= 0.05);
         animator.SetFloat("VelocityMag", veloMag);
 
-        if (agent.remainingDistance <= distanceToAtk) { animator.SetTrigger("DoSwing"); animator.SetBool("CanSwing", false); }
+        if (agent.remainingDistance <= distanceToAtk) 
+        { 
+            if(!animator.IsInTransition(0))
+            {
+                animator.SetTrigger("DoSwing");
+                animator.SetBool("CanSwing", false);
+            }
+        }
         else animator.SetBool("CanSwing", true);
     }
 
