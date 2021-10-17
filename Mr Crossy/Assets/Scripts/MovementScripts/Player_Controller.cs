@@ -18,7 +18,9 @@ public class Player_Controller : MonoBehaviour
     //journal variables
     [SerializeField]
     GameObject cursorImage;
-    bool inJournal = false; 
+    [HideInInspector]
+    public bool inJournal = false;
+    bool canMove = true;
 
     public Transform groundCheck;
     private Vector3 groundCheckSpot;
@@ -53,11 +55,11 @@ public class Player_Controller : MonoBehaviour
 
     void Update()
     {
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance);
 
-        if (!inJournal)
+        if (canMove || !isGrounded)
         {
 
-            isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance);
 
             rotation.y += Input.GetAxis("Mouse X");
             rotation.x += -Input.GetAxis("Mouse Y");
@@ -122,24 +124,34 @@ public class Player_Controller : MonoBehaviour
         //journal related stuff
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            JournalOnSwitch journal = FindObjectOfType<JournalOnSwitch>();
-            bool open = journal.OpenOrClose();
+            JournalController journalController = FindObjectOfType<JournalController>();
 
-            if (open)
+            if (!journalController.disabled)
             {
-                DisableController();
-            }
-            else
-            {
-                EnableController();
+                JournalOnSwitch journal = FindObjectOfType<JournalOnSwitch>();
+                bool open = journal.OpenOrClose();
+
+                if (open)
+                {
+                    DisableController();
+                }
+                else
+                {
+                    EnableController();
+                }
             }
         }
         if (Input.GetKeyDown(KeyCode.Escape) && inJournal)
         {
-            JournalOnSwitch journal = FindObjectOfType<JournalOnSwitch>();
+            JournalController journalController = FindObjectOfType<JournalController>();
 
-            journal.OpenOrClose();
-            EnableController();
+            if (!journalController.disabled)
+            {
+                JournalOnSwitch journal = FindObjectOfType<JournalOnSwitch>();
+
+                journal.OpenOrClose();
+                EnableController();
+            }
         }
     }
     
@@ -158,12 +170,14 @@ public class Player_Controller : MonoBehaviour
     public void EnableController()
     {
         inJournal = false;
+        canMove = true;
         LockCursor();
     }
 
     public void DisableController()
     {
         inJournal = true;
+        canMove = false;
         UnlockCursor();
     }
 }
