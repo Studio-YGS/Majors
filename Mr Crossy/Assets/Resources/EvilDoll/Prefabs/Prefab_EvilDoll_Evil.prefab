@@ -2861,7 +2861,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4029557201914332
 Transform:
   m_ObjectHideFlags: 0
@@ -2946,16 +2946,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b91b128b986e39949b56b19671e90292, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  overrideShouldRun: 0
+  run: 0
+  conditionIsTrue: 0
   headBone: {fileID: 4661417999854800}
   vision: {fileID: 8395744739945143461}
+  m_CrossyDespawn: {fileID: 0}
   m_PatrolRunDistance: 84
   m_AlertRunDistance: 20
   m_WalkSpeed: 1.7
   m_RunSpeed: 6
+  m_WalkAcceleration: 0
+  m_RunAcceleration: 0
   m_Acceleration: 2
+  m_WalkAngularSpeed: 0
+  m_RunAngularSpeed: 0
   m_AngularSpeed: 120
   m_StoppingDistance: 3
   m_DetectionTime: 10
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  walkableTag: 
+  lookAtWeight: 0
+  lookAtTransform: {fileID: 0}
+  lookAtOffset: {x: 0, y: 0, z: 0}
+  IKLeftFootDistance: 0
+  IKRightFootDistance: 0
+  veloMag: 0
+  veloDesire: 0
+  interpolator: 0
+  showNorma: {x: 0, y: 0, z: 0}
+  showLeftRotation: {x: 0, y: 0, z: 0, w: 0}
+  showRightRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &8435205118161319010
 MonoBehaviour:
   m_ObjectHideFlags: 0
