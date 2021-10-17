@@ -1,39 +1,101 @@
 fileFormatVersion: 2
 guid: 58434543d8c03d74f86091abbd8615ec
 ModelImporter:
-  serializedVersion: 23
-  fileIDToRecycleName:
-    100000: sm_box_1
-    100002: sm_box_2
-    100004: //RootNode
-    100006: sm_door_1
-    100008: sm_door_2
-    400000: sm_box_1
-    400002: sm_box_2
-    400004: //RootNode
-    400006: sm_door_1
-    400008: sm_door_2
-    2100000: M_commode
-    2300000: sm_box_1
-    2300002: sm_box_2
-    2300004: //RootNode
-    2300006: sm_door_1
-    2300008: sm_door_2
-    3300000: sm_box_1
-    3300002: sm_box_2
-    3300004: //RootNode
-    3300006: sm_door_1
-    3300008: sm_door_2
-    4300000: sm__commode
-    4300002: sm_box_1
-    4300004: sm_box_2
-    4300006: sm_door_1
-    4300008: sm_door_2
-    6400000: sm_box_1
-    6400002: sm_box_2
-    6400004: //RootNode
-    6400006: sm_door_1
-    6400008: sm_door_2
+  serializedVersion: 20200
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: sm_box_1
+  - first:
+      1: 100002
+    second: sm_box_2
+  - first:
+      1: 100004
+    second: //RootNode
+  - first:
+      1: 100006
+    second: sm_door_1
+  - first:
+      1: 100008
+    second: sm_door_2
+  - first:
+      4: 400000
+    second: sm_box_1
+  - first:
+      4: 400002
+    second: sm_box_2
+  - first:
+      4: 400004
+    second: //RootNode
+  - first:
+      4: 400006
+    second: sm_door_1
+  - first:
+      4: 400008
+    second: sm_door_2
+  - first:
+      21: 2100000
+    second: M_commode
+  - first:
+      23: 2300000
+    second: sm_box_1
+  - first:
+      23: 2300002
+    second: sm_box_2
+  - first:
+      23: 2300004
+    second: //RootNode
+  - first:
+      23: 2300006
+    second: sm_door_1
+  - first:
+      23: 2300008
+    second: sm_door_2
+  - first:
+      33: 3300000
+    second: sm_box_1
+  - first:
+      33: 3300002
+    second: sm_box_2
+  - first:
+      33: 3300004
+    second: //RootNode
+  - first:
+      33: 3300006
+    second: sm_door_1
+  - first:
+      33: 3300008
+    second: sm_door_2
+  - first:
+      43: 4300000
+    second: sm__commode
+  - first:
+      43: 4300002
+    second: sm_box_1
+  - first:
+      43: 4300004
+    second: sm_box_2
+  - first:
+      43: 4300006
+    second: sm_door_1
+  - first:
+      43: 4300008
+    second: sm_door_2
+  - first:
+      64: 6400000
+    second: sm_box_1
+  - first:
+      64: 6400002
+    second: sm_box_2
+  - first:
+      64: 6400004
+    second: //RootNode
+  - first:
+      64: 6400006
+    second: sm_door_1
+  - first:
+      64: 6400008
+    second: sm_door_2
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -41,7 +103,7 @@ ModelImporter:
       name: M_commode
     second: {fileID: 2100000, guid: 5d7ae6516d1aaf540aa6b3b269e8307a, type: 2}
   materials:
-    importMaterials: 0
+    materialImportMode: 0
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -74,25 +136,32 @@ ModelImporter:
     meshCompression: 0
     addColliders: 1
     useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 1
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    bakeAxisConversion: 0
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 0
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -101,10 +170,10 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -114,13 +183,17 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 0
   humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
   additionalBone: 0
   userData: 
   assetBundleName: 
