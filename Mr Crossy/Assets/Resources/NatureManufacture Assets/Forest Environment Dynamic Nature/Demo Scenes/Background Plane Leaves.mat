@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Background Plane Leaves
-  m_Shader: {fileID: 4800000, guid: 4799b78ba0452488c954504d8c6a267a, type: 3}
+  m_Shader: {fileID: 4800000, guid: 0c3250378db487848854884ac1f2ec9b, type: 3}
   m_ShaderKeywords: _NORMALMAP_TANGENT_SPACE _USEDYNAMICSNOWTSTATICMASKF_ON _USESNOW_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -32,6 +32,14 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _BaseMaskMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BaseNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BentNormalMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -46,6 +54,22 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _CoatMaskMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CoverBaseColorMap:
+        m_Texture: {fileID: 2800000, guid: 5af05d805d74c974286984104e05ccd9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CoverMaskA:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CoverMaskMap:
+        m_Texture: {fileID: 2800000, guid: 09741e4705fa89b4e92c8135aea63d5e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CoverNormalMap:
+        m_Texture: {fileID: 2800000, guid: 3905e92499e0b194587776e8f6cd4c75, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -80,10 +104,6 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _GlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _HeightMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -97,7 +117,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 004345496046a194cb357e8cbc1530de, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskMap:
@@ -168,10 +188,6 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _TranslucencyMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _TransmittanceColorMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -191,9 +207,34 @@ Material:
     - _AlphaCutoffPrepass: 0.5
     - _AmbientOcclusionPower: 1
     - _Anisotropy: 0
+    - _BaseAORemapMax: 1
+    - _BaseAORemapMin: 0
+    - _BaseMetallic: 1
+    - _BaseNormalScale: 1
+    - _BaseSmoothnessRemapMax: 1
+    - _BaseSmoothnessRemapMin: 0
+    - _BaseUsePlanarUV: 0
     - _BlendMode: 0
     - _BumpScale: 1
     - _CoatMask: 0
+    - _CoverAORemapMax: 1
+    - _CoverAORemapMin: 0
+    - _CoverHardness: 5
+    - _CoverHeightMapMax: 1
+    - _CoverHeightMapMin: 0
+    - _CoverHeightMapOffset: 0
+    - _CoverMaskPower: 1
+    - _CoverMetallic: 1
+    - _CoverNormalBlendHardness: 1
+    - _CoverNormalScale: 1
+    - _CoverSmoothnessRemapMax: 1
+    - _CoverSmoothnessRemapMin: 0
+    - _CoverUsePlanarUV: 1
+    - _Cover_Amount: 2
+    - _Cover_Amount_Grow_Speed: 3
+    - _Cover_Max_Angle: 90
+    - _Cover_Min_Height: -10000
+    - _Cover_Min_Height_Blending: 1
     - _CullMode: 2
     - _CullModeForward: 2
     - _Cutoff: 0.5
@@ -268,7 +309,6 @@ Material:
     - _PreRefractionPass: 0
     - _RefractionModel: 0
     - _SSRefractionProjectionModel: 0
-    - _Shininess: 0.078125
     - _ShiverDirectionality: 0.5
     - _ShiverDrag: 0.2
     - _Smoothness: 0.5
@@ -293,7 +333,6 @@ Material:
     - _SpecularAAScreenSpaceVariance: 0.1
     - _SpecularAAThreshold: 0.2
     - _SpecularHighlights: 1
-    - _SquashAmount: 1
     - _SrcBlend: 1
     - _StencilRef: 2
     - _StencilRefMV: 128
@@ -317,8 +356,10 @@ Material:
     - _UVDetail: 0
     - _UVEmissive: 0
     - _UVSec: 0
+    - _UseDynamicCoverTStaticMaskF: 0
     - _UseDynamicSnowTStaticMaskF: 1
     - _UseSnow: 1
+    - _WetSmoothness: 1
     - _ZTestDepthEqualForOpaque: 3
     - _ZTestGBuffer: 4
     - _ZTestModeDistortion: 4
@@ -326,7 +367,11 @@ Material:
     - __dirty: 1
     m_Colors:
     - _BaseColor: {r: 0.74264705, g: 0.74264705, b: 0.74264705, a: 1}
+    - _BaseTilingOffset: {r: 1, g: 1, b: 0, a: 0}
     - _Color: {r: 0.74264705, g: 0.74264705, b: 0.74264705, a: 1}
+    - _CoverBaseColor: {r: 1, g: 1, b: 1, a: 0}
+    - _CoverTilingOffset: {r: 2, g: 2, b: 0, a: 0}
+    - _DetailTilingOffset: {r: 1, g: 1, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissiveColor: {r: 0, g: 0, b: 0, a: 1}
@@ -336,9 +381,7 @@ Material:
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _ThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
     - _TransmittanceColor: {r: 1, g: 1, b: 1, a: 1}
-    - _TreeInstanceColor: {r: 1, g: 1, b: 1, a: 1}
-    - _TreeInstanceScale: {r: 1, g: 1, b: 1, a: 1}
     - _UVDetailsMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMaskEmissive: {r: 1, g: 0, b: 0, a: 0}
-  m_BuildTextureStacks: []
+    - _WetColor: {r: 0.7735849, g: 0.7735849, b: 0.7735849, a: 0}
