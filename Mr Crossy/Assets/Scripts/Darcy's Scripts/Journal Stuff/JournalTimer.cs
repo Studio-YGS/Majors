@@ -13,6 +13,7 @@ public class JournalTimer : MonoBehaviour
 
     TimeSpan timePlaying;
     bool timerGoing = false;
+    public bool canCount = true;
 
     float elapsedTime;
 
@@ -46,7 +47,7 @@ public class JournalTimer : MonoBehaviour
 
     IEnumerator UpdateTimer()
     {
-        while (timerGoing)
+        while (timerGoing && canCount)
         {
             elapsedTime += Time.deltaTime;
             timePlaying = TimeSpan.FromSeconds(elapsedTime);

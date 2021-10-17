@@ -5,9 +5,6 @@ using UnityEngine;
 public class NoteController : MonoBehaviour
 {
     [SerializeField]
-    GameObject prompt;
-
-    [SerializeField]
     Transform player;
 
     JournalController journalController;
@@ -30,22 +27,12 @@ public class NoteController : MonoBehaviour
         {
             if(hit.transform.gameObject.CompareTag("Note"))
             {
-                prompt.SetActive(true);
-
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     hit.transform.gameObject.SetActive(false);
                     PickUpNote();
                 }
             }
-            else if (!hit.transform.gameObject.CompareTag("Note"))
-            {
-                prompt.SetActive(false);
-            }
-        }
-        else if (!Physics.Raycast(player.position, player.TransformDirection(Vector3.forward), 5f))
-        {
-            prompt.SetActive(false);
         }
     }
 

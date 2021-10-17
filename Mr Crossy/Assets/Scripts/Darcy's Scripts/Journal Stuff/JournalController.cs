@@ -15,7 +15,9 @@ public class JournalController : MonoBehaviour
 
     int whichTab = 1, whichLogPage = 0;
     [HideInInspector]
-    public int whichNotesPage = 0; 
+    public int whichNotesPage = 0;
+
+    public bool disabled = false;
 
     void Update()
     {
@@ -31,83 +33,92 @@ public class JournalController : MonoBehaviour
 
     public void OpenLog()
     {
-        log.SetActive(true);
-        map.SetActive(false);
-        notes.SetActive(false);
-
-        leftArrow.SetActive(false);
-        rightArrow.SetActive(false);
-
-        whichTab = 1;
-
-        for (int i = 0; i < logPages.Length; i++)
+        if (!disabled)
         {
-            logPages[i].SetActive(false);
-        }
+            log.SetActive(true);
+            map.SetActive(false);
+            notes.SetActive(false);
 
-        logPages[whichLogPage].SetActive(true);
-
-        if (whichLogPage == 0)
-        {
             leftArrow.SetActive(false);
-            rightArrow.SetActive(true);
-        }
-        else if (whichLogPage == logPages.Length - 1)
-        {
-            leftArrow.SetActive(true);
             rightArrow.SetActive(false);
-        }
-        else
-        {
-            leftArrow.SetActive(true);
-            rightArrow.SetActive(true);
+
+            whichTab = 1;
+
+            for (int i = 0; i < logPages.Length; i++)
+            {
+                logPages[i].SetActive(false);
+            }
+
+            logPages[whichLogPage].SetActive(true);
+
+            if (whichLogPage == 0)
+            {
+                leftArrow.SetActive(false);
+                rightArrow.SetActive(true);
+            }
+            else if (whichLogPage == logPages.Length - 1)
+            {
+                leftArrow.SetActive(true);
+                rightArrow.SetActive(false);
+            }
+            else
+            {
+                leftArrow.SetActive(true);
+                rightArrow.SetActive(true);
+            }
         }
     }
 
     public void OpenMap()
     {
-        log.SetActive(false);
-        map.SetActive(true);
-        notes.SetActive(false);
-        rightArrow.SetActive(false);
-        leftArrow.SetActive(false);
-        whichTab = 2;
+        if (!disabled)
+        {
+            log.SetActive(false);
+            map.SetActive(true);
+            notes.SetActive(false);
+            rightArrow.SetActive(false);
+            leftArrow.SetActive(false);
+            whichTab = 2;
+        }
     }
 
     public void OpenNotes()
     {
-        if(noteList.Count >= 1)
+        if (!disabled)
         {
-            log.SetActive(false);
-            map.SetActive(false);
-            notes.SetActive(true);
-
-            leftArrow.SetActive(false);
-            rightArrow.SetActive(false);
-
-            whichTab = 3;
-
-            for (int i = 0; i < notePages.Length; i++)
+            if (noteList.Count >= 1)
             {
-                notePages[i].SetActive(false);
-            }
+                log.SetActive(false);
+                map.SetActive(false);
+                notes.SetActive(true);
 
-            notePages[whichNotesPage].SetActive(true);
-
-            if (whichNotesPage == 0 && noteList.Count > 1)
-            {
                 leftArrow.SetActive(false);
-                rightArrow.SetActive(true);
-            }
-            else if (whichNotesPage == noteList.Count && noteList.Count > 1 || whichNotesPage == noteList.Count - 1 && noteList.Count > 1)
-            {
-                leftArrow.SetActive(true);
                 rightArrow.SetActive(false);
-            }
-            else if(whichNotesPage > 0)
-            {
-                leftArrow.SetActive(true);
-                rightArrow.SetActive(true);
+
+                whichTab = 3;
+
+                for (int i = 0; i < notePages.Length; i++)
+                {
+                    notePages[i].SetActive(false);
+                }
+
+                notePages[whichNotesPage].SetActive(true);
+
+                if (whichNotesPage == 0 && noteList.Count > 1)
+                {
+                    leftArrow.SetActive(false);
+                    rightArrow.SetActive(true);
+                }
+                else if (whichNotesPage == noteList.Count && noteList.Count > 1 || whichNotesPage == noteList.Count - 1 && noteList.Count > 1)
+                {
+                    leftArrow.SetActive(true);
+                    rightArrow.SetActive(false);
+                }
+                else if (whichNotesPage > 0)
+                {
+                    leftArrow.SetActive(true);
+                    rightArrow.SetActive(true);
+                }
             }
         }
     }
@@ -160,5 +171,15 @@ public class JournalController : MonoBehaviour
                     }
             }
         }
+    }
+
+    public void DisableJournal()
+    {
+        disabled = true;
+    }
+
+    public void EnableJournal()
+    {
+        disabled = false;
     }
 }
