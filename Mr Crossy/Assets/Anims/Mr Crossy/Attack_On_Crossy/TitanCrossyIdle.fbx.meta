@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2171307e5cbc7dc40a1733fc496ec5b1
+guid: 6dc229d08e19f8a48913443dcc7bbc2a
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
@@ -629,7 +629,7 @@ ModelImporter:
     second: EvilDoll:L_Sleeve
   - first:
       74: 7400000
-    second: Walk_Scary
+    second: Idle
   - first:
       95: 9500000
     second: //RootNode
@@ -680,14 +680,14 @@ ModelImporter:
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
-    motionNodeName: 
+    motionNodeName: <Root Transform>
     rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
-    animationImportWarnings: "\nClip 'Walk_Scary' has import animation warnings that
-      might lower retargeting quality:\nNote: Activate translation DOF on avatar
-      to improve retargeting quality.\n\t'EvilDoll:Spine1_M' is inbetween humanoid
-      transforms and has rotation animation that will be discarded.\n\t'EvilDoll:Spine1Part1_M'
+    animationImportWarnings: "\nClip 'Idle' has import animation warnings that might
+      lower retargeting quality:\nNote: Activate translation DOF on avatar to improve
+      retargeting quality.\n\t'EvilDoll:Spine1_M' is inbetween humanoid transforms
+      and has rotation animation that will be discarded.\n\t'EvilDoll:Spine1Part1_M'
       is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'EvilDoll:Chest_M'
       is inbetween humanoid transforms and has rotation animation that will be discarded.\n\t'EvilDoll:NeckPart1_M'
       is inbetween humanoid transforms and has rotation animation that will be discarded.\n"
@@ -704,11 +704,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Walk_Scary
-      takeName: Walk_Scary
+      name: Idle
+      takeName: Idle
       internalID: 0
       firstFrame: 0
-      lastFrame: 35
+      lastFrame: 120
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -726,204 +726,160 @@ ModelImporter:
       heightFromFeet: 0
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
+      curves:
+      - name: HeightWeight
+        curve:
+          serializedVersion: 2
+          curve:
+          - serializedVersion: 3
+            time: 0
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          preInfinity: 3
+          postInfinity: 3
+          rotationOrder: 4
+      - name: IKLookWeight
+        curve:
+          serializedVersion: 2
+          curve:
+          - serializedVersion: 3
+            time: 0
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          preInfinity: 3
+          postInfinity: 3
+          rotationOrder: 4
+      - name: IKLeftHandWeight
+        curve:
+          serializedVersion: 2
+          curve:
+          - serializedVersion: 3
+            time: 0
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          preInfinity: 3
+          postInfinity: 3
+          rotationOrder: 4
+      - name: IKRightHandWeight
+        curve:
+          serializedVersion: 2
+          curve:
+          - serializedVersion: 3
+            time: 0
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          preInfinity: 3
+          postInfinity: 3
+          rotationOrder: 4
+      - name: IKLeftGoal
+        curve:
+          serializedVersion: 2
+          curve:
+          - serializedVersion: 3
+            time: 0
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          preInfinity: 3
+          postInfinity: 3
+          rotationOrder: 4
+      - name: IKRightGoal
+        curve:
+          serializedVersion: 2
+          curve:
+          - serializedVersion: 3
+            time: 0
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          preInfinity: 3
+          postInfinity: 3
+          rotationOrder: 4
       events: []
-      transformMask:
-      - path: 
-        weight: 1
-      - path: EvilDoll:Geometry
-        weight: 0
-      - path: EvilDoll:Geometry/EvilDoll:geo
-        weight: 0
-      - path: EvilDoll:Geometry/EvilDoll:geo/EvilDoll:Body_GRP
-        weight: 0
-      - path: EvilDoll:Geometry/EvilDoll:geo/EvilDoll:Body_GRP/EvilDoll:Body
-        weight: 0
-      - path: EvilDoll:Geometry/EvilDoll:geo/EvilDoll:Dress_GRP
-        weight: 0
-      - path: EvilDoll:Geometry/EvilDoll:geo/EvilDoll:Dress_GRP/EvilDoll:Jacket
-        weight: 0
-      - path: EvilDoll:Geometry/EvilDoll:geo/EvilDoll:Dress_GRP/EvilDoll:L_Shoe
-        weight: 0
-      - path: EvilDoll:Geometry/EvilDoll:geo/EvilDoll:Dress_GRP/EvilDoll:L_Sleeve
-        weight: 0
-      - path: EvilDoll:Geometry/EvilDoll:geo/EvilDoll:Dress_GRP/EvilDoll:Necktie
-        weight: 0
-      - path: EvilDoll:Geometry/EvilDoll:geo/EvilDoll:Dress_GRP/EvilDoll:Pants
-        weight: 0
-      - path: EvilDoll:Geometry/EvilDoll:geo/EvilDoll:Dress_GRP/EvilDoll:R_Shoe
-        weight: 0
-      - path: EvilDoll:Geometry/EvilDoll:geo/EvilDoll:Dress_GRP/EvilDoll:R_Sleeve
-        weight: 0
-      - path: EvilDoll:Geometry/EvilDoll:geo/EvilDoll:Dress_GRP/EvilDoll:Shirt
-        weight: 0
-      - path: EvilDoll:Geometry/EvilDoll:geo/EvilDoll:Face_Grp
-        weight: 0
-      - path: EvilDoll:Geometry/EvilDoll:geo/EvilDoll:Face_Grp/EvilDoll:Hair
-        weight: 0
-      - path: EvilDoll:Geometry/EvilDoll:geo/EvilDoll:Face_Grp/EvilDoll:L_Eye
-        weight: 0
-      - path: EvilDoll:Geometry/EvilDoll:geo/EvilDoll:Face_Grp/EvilDoll:R_Eye
-        weight: 0
-      - path: EvilDoll:Main
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:Hip_L
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:Hip_L/EvilDoll:Knee_L
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:Hip_L/EvilDoll:Knee_L/EvilDoll:Ankle_L
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:Hip_L/EvilDoll:Knee_L/EvilDoll:Ankle_L/EvilDoll:Toes_L
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:Hip_L/EvilDoll:Knee_L/EvilDoll:Ankle_L/EvilDoll:Toes_L/EvilDoll:ToesEnd_L
-        weight: 0
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:Hip_R
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:Hip_R/EvilDoll:Knee_R
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:Hip_R/EvilDoll:Knee_R/EvilDoll:Ankle_R
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:Hip_R/EvilDoll:Knee_R/EvilDoll:Ankle_R/EvilDoll:Toes_R
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:Hip_R/EvilDoll:Knee_R/EvilDoll:Ankle_R/EvilDoll:Toes_R/EvilDoll:ToesEnd_R
-        weight: 0
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Neck_M
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Neck_M/EvilDoll:NeckPart1_M
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Neck_M/EvilDoll:NeckPart1_M/EvilDoll:Head_M
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Neck_M/EvilDoll:NeckPart1_M/EvilDoll:Head_M/EvilDoll:Eye_L
-        weight: 0
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Neck_M/EvilDoll:NeckPart1_M/EvilDoll:Head_M/EvilDoll:Eye_L/EvilDoll:EyeEnd_L
-        weight: 0
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Neck_M/EvilDoll:NeckPart1_M/EvilDoll:Head_M/EvilDoll:Eye_R
-        weight: 0
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Neck_M/EvilDoll:NeckPart1_M/EvilDoll:Head_M/EvilDoll:Eye_R/EvilDoll:EyeEnd_R
-        weight: 0
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Neck_M/EvilDoll:NeckPart1_M/EvilDoll:Head_M/EvilDoll:HeadEnd_M
-        weight: 0
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Scapula_L
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Scapula_L/EvilDoll:Shoulder_L
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Scapula_L/EvilDoll:Shoulder_L/EvilDoll:Elbow_L
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Scapula_L/EvilDoll:Shoulder_L/EvilDoll:Elbow_L/EvilDoll:ElbowPart1_L
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Scapula_L/EvilDoll:Shoulder_L/EvilDoll:Elbow_L/EvilDoll:ElbowPart1_L/EvilDoll:Wrist_L
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Scapula_L/EvilDoll:Shoulder_L/EvilDoll:Elbow_L/EvilDoll:ElbowPart1_L/EvilDoll:Wrist_L/EvilDoll:Cup_L
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Scapula_L/EvilDoll:Shoulder_L/EvilDoll:Elbow_L/EvilDoll:ElbowPart1_L/EvilDoll:Wrist_L/EvilDoll:Cup_L/EvilDoll:PinkyFinger1_L
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Scapula_L/EvilDoll:Shoulder_L/EvilDoll:Elbow_L/EvilDoll:ElbowPart1_L/EvilDoll:Wrist_L/EvilDoll:Cup_L/EvilDoll:PinkyFinger1_L/EvilDoll:PinkyFinger2_L
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Scapula_L/EvilDoll:Shoulder_L/EvilDoll:Elbow_L/EvilDoll:ElbowPart1_L/EvilDoll:Wrist_L/EvilDoll:Cup_L/EvilDoll:PinkyFinger1_L/EvilDoll:PinkyFinger2_L/EvilDoll:PinkyFinger3_L
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Scapula_L/EvilDoll:Shoulder_L/EvilDoll:Elbow_L/EvilDoll:ElbowPart1_L/EvilDoll:Wrist_L/EvilDoll:Cup_L/EvilDoll:PinkyFinger1_L/EvilDoll:PinkyFinger2_L/EvilDoll:PinkyFinger3_L/EvilDoll:PinkyFinger4_L
-        weight: 0
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Scapula_L/EvilDoll:Shoulder_L/EvilDoll:Elbow_L/EvilDoll:ElbowPart1_L/EvilDoll:Wrist_L/EvilDoll:Cup_L/EvilDoll:RingFinger1_L
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Scapula_L/EvilDoll:Shoulder_L/EvilDoll:Elbow_L/EvilDoll:ElbowPart1_L/EvilDoll:Wrist_L/EvilDoll:Cup_L/EvilDoll:RingFinger1_L/EvilDoll:RingFinger2_L
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Scapula_L/EvilDoll:Shoulder_L/EvilDoll:Elbow_L/EvilDoll:ElbowPart1_L/EvilDoll:Wrist_L/EvilDoll:Cup_L/EvilDoll:RingFinger1_L/EvilDoll:RingFinger2_L/EvilDoll:RingFinger3_L
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Scapula_L/EvilDoll:Shoulder_L/EvilDoll:Elbow_L/EvilDoll:ElbowPart1_L/EvilDoll:Wrist_L/EvilDoll:Cup_L/EvilDoll:RingFinger1_L/EvilDoll:RingFinger2_L/EvilDoll:RingFinger3_L/EvilDoll:RingFinger4_L
-        weight: 0
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Scapula_L/EvilDoll:Shoulder_L/EvilDoll:Elbow_L/EvilDoll:ElbowPart1_L/EvilDoll:Wrist_L/EvilDoll:IndexFinger1_L
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Scapula_L/EvilDoll:Shoulder_L/EvilDoll:Elbow_L/EvilDoll:ElbowPart1_L/EvilDoll:Wrist_L/EvilDoll:IndexFinger1_L/EvilDoll:IndexFinger2_L
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Scapula_L/EvilDoll:Shoulder_L/EvilDoll:Elbow_L/EvilDoll:ElbowPart1_L/EvilDoll:Wrist_L/EvilDoll:IndexFinger1_L/EvilDoll:IndexFinger2_L/EvilDoll:IndexFinger3_L
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Scapula_L/EvilDoll:Shoulder_L/EvilDoll:Elbow_L/EvilDoll:ElbowPart1_L/EvilDoll:Wrist_L/EvilDoll:IndexFinger1_L/EvilDoll:IndexFinger2_L/EvilDoll:IndexFinger3_L/EvilDoll:IndexFinger4_L
-        weight: 0
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Scapula_L/EvilDoll:Shoulder_L/EvilDoll:Elbow_L/EvilDoll:ElbowPart1_L/EvilDoll:Wrist_L/EvilDoll:MiddleFinger1_L
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Scapula_L/EvilDoll:Shoulder_L/EvilDoll:Elbow_L/EvilDoll:ElbowPart1_L/EvilDoll:Wrist_L/EvilDoll:MiddleFinger1_L/EvilDoll:MiddleFinger2_L
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Scapula_L/EvilDoll:Shoulder_L/EvilDoll:Elbow_L/EvilDoll:ElbowPart1_L/EvilDoll:Wrist_L/EvilDoll:MiddleFinger1_L/EvilDoll:MiddleFinger2_L/EvilDoll:MiddleFinger3_L
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Scapula_L/EvilDoll:Shoulder_L/EvilDoll:Elbow_L/EvilDoll:ElbowPart1_L/EvilDoll:Wrist_L/EvilDoll:MiddleFinger1_L/EvilDoll:MiddleFinger2_L/EvilDoll:MiddleFinger3_L/EvilDoll:MiddleFinger4_L
-        weight: 0
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Scapula_L/EvilDoll:Shoulder_L/EvilDoll:Elbow_L/EvilDoll:ElbowPart1_L/EvilDoll:Wrist_L/EvilDoll:ThumbFinger1_L
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Scapula_L/EvilDoll:Shoulder_L/EvilDoll:Elbow_L/EvilDoll:ElbowPart1_L/EvilDoll:Wrist_L/EvilDoll:ThumbFinger1_L/EvilDoll:ThumbFinger2_L
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Scapula_L/EvilDoll:Shoulder_L/EvilDoll:Elbow_L/EvilDoll:ElbowPart1_L/EvilDoll:Wrist_L/EvilDoll:ThumbFinger1_L/EvilDoll:ThumbFinger2_L/EvilDoll:ThumbFinger3_L
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Scapula_L/EvilDoll:Shoulder_L/EvilDoll:Elbow_L/EvilDoll:ElbowPart1_L/EvilDoll:Wrist_L/EvilDoll:ThumbFinger1_L/EvilDoll:ThumbFinger2_L/EvilDoll:ThumbFinger3_L/EvilDoll:ThumbFinger4_L
-        weight: 0
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Scapula_R
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Scapula_R/EvilDoll:Shoulder_R
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Scapula_R/EvilDoll:Shoulder_R/EvilDoll:Elbow_R
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Scapula_R/EvilDoll:Shoulder_R/EvilDoll:Elbow_R/EvilDoll:ElbowPart1_R
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Scapula_R/EvilDoll:Shoulder_R/EvilDoll:Elbow_R/EvilDoll:ElbowPart1_R/EvilDoll:Wrist_R
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Scapula_R/EvilDoll:Shoulder_R/EvilDoll:Elbow_R/EvilDoll:ElbowPart1_R/EvilDoll:Wrist_R/EvilDoll:Cup_R
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Scapula_R/EvilDoll:Shoulder_R/EvilDoll:Elbow_R/EvilDoll:ElbowPart1_R/EvilDoll:Wrist_R/EvilDoll:Cup_R/EvilDoll:PinkyFinger1_R
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Scapula_R/EvilDoll:Shoulder_R/EvilDoll:Elbow_R/EvilDoll:ElbowPart1_R/EvilDoll:Wrist_R/EvilDoll:Cup_R/EvilDoll:PinkyFinger1_R/EvilDoll:PinkyFinger2_R
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Scapula_R/EvilDoll:Shoulder_R/EvilDoll:Elbow_R/EvilDoll:ElbowPart1_R/EvilDoll:Wrist_R/EvilDoll:Cup_R/EvilDoll:PinkyFinger1_R/EvilDoll:PinkyFinger2_R/EvilDoll:PinkyFinger3_R
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Scapula_R/EvilDoll:Shoulder_R/EvilDoll:Elbow_R/EvilDoll:ElbowPart1_R/EvilDoll:Wrist_R/EvilDoll:Cup_R/EvilDoll:PinkyFinger1_R/EvilDoll:PinkyFinger2_R/EvilDoll:PinkyFinger3_R/EvilDoll:PinkyFinger4_R
-        weight: 0
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Scapula_R/EvilDoll:Shoulder_R/EvilDoll:Elbow_R/EvilDoll:ElbowPart1_R/EvilDoll:Wrist_R/EvilDoll:Cup_R/EvilDoll:RingFinger1_R
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Scapula_R/EvilDoll:Shoulder_R/EvilDoll:Elbow_R/EvilDoll:ElbowPart1_R/EvilDoll:Wrist_R/EvilDoll:Cup_R/EvilDoll:RingFinger1_R/EvilDoll:RingFinger2_R
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Scapula_R/EvilDoll:Shoulder_R/EvilDoll:Elbow_R/EvilDoll:ElbowPart1_R/EvilDoll:Wrist_R/EvilDoll:Cup_R/EvilDoll:RingFinger1_R/EvilDoll:RingFinger2_R/EvilDoll:RingFinger3_R
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Scapula_R/EvilDoll:Shoulder_R/EvilDoll:Elbow_R/EvilDoll:ElbowPart1_R/EvilDoll:Wrist_R/EvilDoll:Cup_R/EvilDoll:RingFinger1_R/EvilDoll:RingFinger2_R/EvilDoll:RingFinger3_R/EvilDoll:RingFinger4_R
-        weight: 0
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Scapula_R/EvilDoll:Shoulder_R/EvilDoll:Elbow_R/EvilDoll:ElbowPart1_R/EvilDoll:Wrist_R/EvilDoll:IndexFinger1_R
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Scapula_R/EvilDoll:Shoulder_R/EvilDoll:Elbow_R/EvilDoll:ElbowPart1_R/EvilDoll:Wrist_R/EvilDoll:IndexFinger1_R/EvilDoll:IndexFinger2_R
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Scapula_R/EvilDoll:Shoulder_R/EvilDoll:Elbow_R/EvilDoll:ElbowPart1_R/EvilDoll:Wrist_R/EvilDoll:IndexFinger1_R/EvilDoll:IndexFinger2_R/EvilDoll:IndexFinger3_R
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Scapula_R/EvilDoll:Shoulder_R/EvilDoll:Elbow_R/EvilDoll:ElbowPart1_R/EvilDoll:Wrist_R/EvilDoll:IndexFinger1_R/EvilDoll:IndexFinger2_R/EvilDoll:IndexFinger3_R/EvilDoll:IndexFinger4_R
-        weight: 0
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Scapula_R/EvilDoll:Shoulder_R/EvilDoll:Elbow_R/EvilDoll:ElbowPart1_R/EvilDoll:Wrist_R/EvilDoll:MiddleFinger1_R
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Scapula_R/EvilDoll:Shoulder_R/EvilDoll:Elbow_R/EvilDoll:ElbowPart1_R/EvilDoll:Wrist_R/EvilDoll:MiddleFinger1_R/EvilDoll:MiddleFinger2_R
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Scapula_R/EvilDoll:Shoulder_R/EvilDoll:Elbow_R/EvilDoll:ElbowPart1_R/EvilDoll:Wrist_R/EvilDoll:MiddleFinger1_R/EvilDoll:MiddleFinger2_R/EvilDoll:MiddleFinger3_R
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Scapula_R/EvilDoll:Shoulder_R/EvilDoll:Elbow_R/EvilDoll:ElbowPart1_R/EvilDoll:Wrist_R/EvilDoll:MiddleFinger1_R/EvilDoll:MiddleFinger2_R/EvilDoll:MiddleFinger3_R/EvilDoll:MiddleFinger4_R
-        weight: 0
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Scapula_R/EvilDoll:Shoulder_R/EvilDoll:Elbow_R/EvilDoll:ElbowPart1_R/EvilDoll:Wrist_R/EvilDoll:ThumbFinger1_R
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Scapula_R/EvilDoll:Shoulder_R/EvilDoll:Elbow_R/EvilDoll:ElbowPart1_R/EvilDoll:Wrist_R/EvilDoll:ThumbFinger1_R/EvilDoll:ThumbFinger2_R
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Scapula_R/EvilDoll:Shoulder_R/EvilDoll:Elbow_R/EvilDoll:ElbowPart1_R/EvilDoll:Wrist_R/EvilDoll:ThumbFinger1_R/EvilDoll:ThumbFinger2_R/EvilDoll:ThumbFinger3_R
-        weight: 1
-      - path: EvilDoll:Main/EvilDoll:DeformationSystem/EvilDoll:Root_M/EvilDoll:RootPart1_M/EvilDoll:RootPart2_M/EvilDoll:Spine1_M/EvilDoll:Spine1Part1_M/EvilDoll:Spine1Part2_M/EvilDoll:Chest_M/EvilDoll:Scapula_R/EvilDoll:Shoulder_R/EvilDoll:Elbow_R/EvilDoll:ElbowPart1_R/EvilDoll:Wrist_R/EvilDoll:ThumbFinger1_R/EvilDoll:ThumbFinger2_R/EvilDoll:ThumbFinger3_R/EvilDoll:ThumbFinger4_R
-        weight: 0
-      maskType: 0
+      transformMask: []
+      maskType: 3
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     isReadable: 1

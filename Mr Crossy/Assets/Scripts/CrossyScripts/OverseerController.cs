@@ -1,4 +1,5 @@
-
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using BehaviorDesigner.Runtime;
 
@@ -6,6 +7,7 @@ public class OverseerController : MonoBehaviour
 {
     static BehaviorTree ObserverTree;
 
+    #region Fields
     [SerializeField] private bool startOnAwake;
     [SerializeField] private bool usePositioner;
 
@@ -32,6 +34,9 @@ public class OverseerController : MonoBehaviour
     [SerializeField] private float m_SearchRadiusAggro;
     [SerializeField] private Vector3 m_ValidationPosition;
 
+    #endregion
+
+    #region Properties
     public GameObject Observer { get { return m_Observer; } }
     public GameObject MrCrossy { get { return m_Crossy; } }
     public GameObject Player { get { return m_Player; } }
@@ -51,6 +56,11 @@ public class OverseerController : MonoBehaviour
 
     public Vector3 ValidationPosition { get { return m_ValidationPosition; } }
 
+    #endregion
+
+    [Space(10)]
+    public List<Lighthouse> lighthouses = new List<Lighthouse>();
+
     private void Awake()
     {
         m_Observer = gameObject;
@@ -65,6 +75,8 @@ public class OverseerController : MonoBehaviour
     {
         if (usePositioner) m_ValidationPosition = validationPositioner.transform.position;
 
+
+        
 
     }
 
