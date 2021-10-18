@@ -292,4 +292,9 @@ public class CrossKeyManager : MonoBehaviour
         newCrossKey.GetComponent<CrossKey>().answer = puzzle.wordToSolve;
         hintArea.text = "[C]LUE: " + puzzle.hint;
     }
+
+    public void PuzzleDeath()
+    {
+        Debug.Log("Dead");
+    }
 }

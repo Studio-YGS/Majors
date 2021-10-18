@@ -36,6 +36,8 @@ public class CrossyCrossKeyVariant : MonoBehaviour
 
     [SerializeField] private float distanceToAtk;
 
+    [HideInInspector] public DoorInteraction door;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -54,8 +56,8 @@ public class CrossyCrossKeyVariant : MonoBehaviour
         animator.SetBool("Moving", veloMag >= 0.05);
         animator.SetFloat("VelocityMag", veloMag);
 
-        if (agent.remainingDistance <= distanceToAtk) { animator.SetTrigger("DoSwing"); animator.SetBool("CanSwing", false); }
-        else animator.SetBool("CanSwing", true);
+        if (agent.remainingDistance <= distanceToAtk && door.puzzleOn == true) { animator.SetTrigger("DoSwing"); animator.SetBool("CanSwing", true); FindObjectOfType<CrossKeyManager>().PuzzleDeath(); }
+        else animator.SetBool("CanSwing", false);
     }
 
     private void OnAnimatorIK(int layerIndex)

@@ -30,10 +30,13 @@ public class DoorInteraction : MonoBehaviour
     public bool spawnRight;
     public bool spawnBehind;
     public GameObject mrCrossy;
+    public GameObject mask;
     GameObject createdMrCrossy;
     Vector3 randomPos;
     Quaternion savedCamRot;
-    bool puzzleOn;
+    [HideInInspector] public bool puzzleOn;
+    bool puzzleTimer;
+    float countdownTimer;
     
     
     void Start()
@@ -47,128 +50,185 @@ public class DoorInteraction : MonoBehaviour
     {
         if (locked)
         {
-            RaycastHit hit;
-            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit))
+            if (FindObjectOfType<CrossKeyManager>().numOfKeys > 0)
             {
-                if (hit.collider == gameObject.GetComponent<Collider>())
+                RaycastHit hit;
+                if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit))
                 {
+                    if (hit.collider == gameObject.GetComponent<Collider>())
+                    {
+                        if (Input.GetMouseButtonDown(0))
+                        {
+                            FindObjectOfType<Player_Controller>().enabled = false;
+                            FindObjectOfType<HeadBob>().enabled = false;
+                            puzzleOn = true;
+                            Time.timeScale = 0.1f;
+                            Time.fixedDeltaTime = Time.timeScale * 0.02f;
+                            if (zForward)
+                            {
+                                if (spawnBehind)
+                                {
+                                    randomPos = new Vector3(15, 0, Random.Range(-5, 5));
+                                    createdMrCrossy = Instantiate(mrCrossy, transform.position - transform.forward * randomPos.x + transform.right * randomPos.z, Quaternion.LookRotation(player.position - (transform.position - transform.forward * randomPos.x + transform.right * randomPos.z)));
 
-                    if (Input.GetMouseButtonDown(0))
-                    {
-                        FindObjectOfType<Player_Controller>().enabled = false;
-                        FindObjectOfType<HeadBob>().enabled = false;
-                        puzzleOn = true;
-                        Time.timeScale = 0.1f;
-                        Time.fixedDeltaTime = Time.timeScale * 0.02f;
-                        if (zForward)
-                        {
-                            if (spawnBehind)
+                                }
+                                else if (spawnLeft)
+                                {
+                                    randomPos = new Vector3(Random.Range(0, 5), 0, -15);
+                                    createdMrCrossy = Instantiate(mrCrossy, transform.position - transform.forward * randomPos.x + transform.right * randomPos.z, Quaternion.LookRotation(player.position - (transform.position - transform.forward * randomPos.x + transform.right * randomPos.z)));
+                                }
+                                else if (spawnRight)
+                                {
+                                    randomPos = new Vector3(Random.Range(0, 5), 0, 15);
+                                    createdMrCrossy = Instantiate(mrCrossy, transform.position - transform.forward * randomPos.x + transform.right * randomPos.z, Quaternion.LookRotation(player.position - (transform.position - transform.forward * randomPos.x + transform.right * randomPos.z)));
+                                }
+                            }
+                            else if (xForward)
                             {
-                                randomPos = new Vector3(15, 0, Random.Range(-5, 5));
-                                createdMrCrossy = Instantiate(mrCrossy, transform.position - transform.forward * randomPos.x +transform.right * randomPos.z , Quaternion.LookRotation(player.position - (transform.position - transform.forward * randomPos.x + transform.right * randomPos.z)));
+                                if (spawnBehind)
+                                {
+                                    randomPos = new Vector3(Random.Range(-5, 5), 0, 15);
+                                    createdMrCrossy = Instantiate(mrCrossy, transform.position + transform.forward * randomPos.x + transform.right * randomPos.z, Quaternion.LookRotation(player.position - (transform.position + transform.forward * randomPos.x + transform.right * randomPos.z)));
 
+                                }
+                                else if (spawnLeft)
+                                {
+                                    randomPos = new Vector3(-15, 0, Random.Range(0, 5));
+                                    createdMrCrossy = Instantiate(mrCrossy, transform.position + transform.forward * randomPos.x + transform.right * randomPos.z, Quaternion.LookRotation(player.position - (transform.position + transform.forward * randomPos.x + transform.right * randomPos.z)));
+                                }
+                                else if (spawnRight)
+                                {
+                                    randomPos = new Vector3(15, 0, Random.Range(0, 5));
+                                    createdMrCrossy = Instantiate(mrCrossy, transform.position + transform.forward * randomPos.x + transform.right * randomPos.z, Quaternion.LookRotation(player.position - (transform.position + transform.forward * randomPos.x + transform.right * randomPos.z)));
+                                }
                             }
-                            else if (spawnLeft)
-                            {
-                                randomPos = new Vector3(Random.Range(0, 5), 0, -15);
-                                createdMrCrossy = Instantiate(mrCrossy, transform.position - transform.forward * randomPos.x + transform.right * randomPos.z, Quaternion.LookRotation(player.position - (transform.position - transform.forward * randomPos.x + transform.right * randomPos.z)));
-                            }
-                            else if (spawnRight)
-                            {
-                                randomPos = new Vector3(Random.Range(0, 5), 0, 15);
-                                createdMrCrossy = Instantiate(mrCrossy, transform.position - transform.forward * randomPos.x + transform.right * randomPos.z, Quaternion.LookRotation(player.position - (transform.position - transform.forward * randomPos.x + transform.right * randomPos.z)));
-                            }
-                        }
-                        else if (xForward)
-                        {
-                            if (spawnBehind)
-                            {
-                                randomPos = new Vector3(Random.Range(-5, 5), 0, 15);
-                                createdMrCrossy = Instantiate(mrCrossy, transform.position + transform.forward * randomPos.x + transform.right * randomPos.z, Quaternion.LookRotation(player.position - (transform.position + transform.forward * randomPos.x + transform.right * randomPos.z)));
-
-                            }
-                            else if (spawnLeft)
-                            {
-                                randomPos = new Vector3(-15, 0, Random.Range(0, 5));
-                                createdMrCrossy = Instantiate(mrCrossy, transform.position + transform.forward * randomPos.x + transform.right * randomPos.z, Quaternion.LookRotation(player.position - (transform.position + transform.forward * randomPos.x + transform.right * randomPos.z)));
-                            }
-                            else if (spawnRight)
-                            {
-                                randomPos = new Vector3(15, 0, Random.Range(0, 5));
-                                createdMrCrossy = Instantiate(mrCrossy, transform.position + transform.forward * randomPos.x + transform.right * randomPos.z, Quaternion.LookRotation(player.position - (transform.position + transform.forward * randomPos.x + transform.right * randomPos.z)));
-                            }
-                        }
-                        savedCamRot = cam.rotation;
-                        StartCoroutine(RotateCamToNewPosition());
-                        createdMrCrossy.GetComponent<NavMeshAgent>().SetDestination(player.position);
-                    }
-                }
-            }
-        }
-
-        if (puzzleOn && moved)
-        {
-            if (zForward)
-            {
-                if (angleRelativeToPlayer > 180 * 0.5f)
-                {
-                    if (greaterThan)
-                    {
-                        if (rotationVal <= 0)
-                        {
-                            moveable = false;
-                            Destroy(createdMrCrossy);
-                            rotationVal = 0;
-                            transform.localRotation = Quaternion.Euler(0, rotationVal, 0);
-                            puzzleOn = false;
-                            moved = false;
-                        }
-                    }
-                    else if (lessThan)
-                    {
-                        if (rotationVal >= 0)
-                        {
-                            moveable = false;
-                            Destroy(createdMrCrossy);
-                            rotationVal = 0;
-                            transform.localRotation = Quaternion.Euler(0, rotationVal, 0);
-                            puzzleOn = false;
-                            moved = false;
-                        }
-                    }
-                }
-            }
-            else if (xForward)
-            {
-                if (angleRelativeToPlayer < 180 * 0.5f)
-                {
-                    if (greaterThan)
-                    {
-                        if (rotationVal <= 0)
-                        {
-                            moveable = false;
-                            Destroy(createdMrCrossy);
-                            rotationVal = 0;
-                            transform.localRotation = Quaternion.Euler(0, rotationVal, 0);
-                            puzzleOn = false;
-                            moved = false;
-                        }
-                    }
-                    else if (lessThan)
-                    {
-                        if (rotationVal >= 0)
-                        {
-                            moveable = false;
-                            Destroy(createdMrCrossy);
-                            rotationVal = 0;
-                            transform.localRotation = Quaternion.Euler(0, rotationVal, 0);
-                            puzzleOn = false;
-                            moved = false;
+                            savedCamRot = cam.rotation;
+                            StartCoroutine(RotateCamToNewPosition());
+                            createdMrCrossy.GetComponent<NavMeshAgent>().SetDestination(player.position);
+                            createdMrCrossy.GetComponent<CrossyCrossKeyVariant>().door = gameObject.GetComponent<DoorInteraction>();
                         }
                     }
                 }
             }
             
+        }
+
+        
+
+        if (puzzleOn)
+        {
+            createdMrCrossy.GetComponent<NavMeshAgent>().SetDestination(player.position);
+            if (moved)
+            {
+                if (zForward)
+                {
+                    if (angleRelativeToPlayer > 180 * 0.5f)
+                    {
+                        if (greaterThan)
+                        {
+                            if (rotationVal <= 0)
+                            {
+                                moveable = false;
+                                //Destroy(createdMrCrossy);
+                                rotationVal = 0;
+                                transform.localRotation = Quaternion.Euler(0, rotationVal, 0);
+                                puzzleOn = false;
+                                StartCoroutine("WaitForPuzzleEnd");
+                                moved = false;
+                            }
+                        }
+                        else if (lessThan)
+                        {
+                            if (rotationVal >= 0)
+                            {
+                                moveable = false;
+                                //Destroy(createdMrCrossy);
+                                rotationVal = 0;
+                                transform.localRotation = Quaternion.Euler(0, rotationVal, 0);
+                                puzzleOn = false;
+                                StartCoroutine("WaitForPuzzleEnd");
+                                moved = false;
+                            }
+                        }
+                    }
+                    
+                }
+                else if (xForward)
+                {
+                    if (angleRelativeToPlayer < 180 * 0.5f)
+                    {
+                        if (greaterThan)
+                        {
+                            if (rotationVal <= 0)
+                            {
+                                moveable = false;
+                                //Destroy(createdMrCrossy);
+                                rotationVal = 0;
+                                transform.localRotation = Quaternion.Euler(0, rotationVal, 0);
+                                puzzleOn = false;
+                                StartCoroutine("WaitForPuzzleEnd");
+                                moved = false;
+                            }
+                        }
+                        else if (lessThan)
+                        {
+                            if (rotationVal >= 0)
+                            {
+                                moveable = false;
+                                //Destroy(createdMrCrossy);
+                                rotationVal = 0;
+                                transform.localRotation = Quaternion.Euler(0, rotationVal, 0);
+                                puzzleOn = false;
+                                StartCoroutine("WaitForPuzzleEnd");
+                                moved = false;
+                            }
+                        }
+                    }
+                    
+                }
+            }
+            
+            if(Vector3.Distance(transform.position, player.position) > 5)
+            {
+                FindObjectOfType<CrossKeyManager>().PuzzleDeath();
+            }
+            
+        }
+        if (puzzleTimer)
+        {
+            if (zForward)
+            {
+                createdMrCrossy.GetComponent<NavMeshAgent>().SetDestination(transform.position - transform.forward + transform.right *0.5f);
+            }
+            else if (xForward)
+            {
+                createdMrCrossy.GetComponent<NavMeshAgent>().SetDestination(transform.position + transform.right);
+            }
+            FindObjectOfType<CrossyCrossKeyVariant>().lookAtTransform = transform;
+            
+            if (moved)
+            {
+                if (rotationVal > 5 && rotationVal < 20 || rotationVal > -20 && rotationVal < -5)
+                {
+                    
+                    countdownTimer += Time.deltaTime;
+                    if(countdownTimer >= 2.7f)
+                    {
+                        FindObjectOfType<CrossKeyManager>().PuzzleDeath();
+                        StopCoroutine("WaitForPuzzleEnd");
+                    }
+                }
+                else
+                {
+                    countdownTimer = 0;
+                }
+                
+                if(rotationVal > 20 || rotationVal < -20)
+                {
+                    FindObjectOfType<CrossKeyManager>().PuzzleDeath();
+                    StopCoroutine("WaitForPuzzleEnd");
+                }
+            }
         }
 
         if (!locked)
@@ -440,5 +500,33 @@ public class DoorInteraction : MonoBehaviour
         }
         Time.timeScale = 1;
         Time.fixedDeltaTime = 0.02f;
+    }
+
+    IEnumerator WaitForPuzzleEnd()
+    {
+        puzzleTimer = true;
+        float timer = 0;
+        while (timer <= Random.Range(10, 20))
+        {
+            
+            if (rotationVal < 5 && rotationVal > -5)
+            {
+                timer += Time.deltaTime;
+                mask.SetActive(false);
+            }
+            else
+            {
+                timer = 0;
+                mask.SetActive(true);
+            }
+            yield return null;
+        }
+        
+        
+        
+        puzzleTimer = false;
+        puzzleOn = false;
+        Destroy(createdMrCrossy);
+        Debug.Log("safe");
     }
 }
