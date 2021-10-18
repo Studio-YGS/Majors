@@ -74,7 +74,7 @@ public class TutorialController : MonoBehaviour
         showPrompt.generalPrompt.gameObject.SetActive(true);
         showPrompt.canShow = false;
 
-        StartCoroutine(PlayerNeedsToWait());
+        StartCoroutine(PlayerNeedsToWait(4f));
     }
 
     public void CantOpenDoorYet()
@@ -90,9 +90,7 @@ public class TutorialController : MonoBehaviour
         showPrompt.generalPrompt.gameObject.SetActive(true);
         showPrompt.canShow = false;
 
-
-
-        StartCoroutine(DoorOpenTeach());
+        StartCoroutine(PlayerNeedsToWait(10f));
     }
 
     IEnumerator ReadingControls()
@@ -104,14 +102,14 @@ public class TutorialController : MonoBehaviour
         StopCoroutine(ReadingControls());
     }
 
-    IEnumerator PlayerNeedsToWait()
+    IEnumerator PlayerNeedsToWait(float waitTime)
     {
         playerController.DisableController();
         playerController.inJournal = false;
 
         journalController.DisableJournal();
 
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(waitTime);
 
         playerController.EnableController();
 
@@ -120,13 +118,8 @@ public class TutorialController : MonoBehaviour
         showPrompt.generalPrompt.gameObject.SetActive(false);
         showPrompt.canShow = true;
 
-        StopCoroutine(PlayerNeedsToWait());
-    }
+        Debug.Log("stopped");
 
-    IEnumerator DoorOpenTeach()
-    {
-        yield return new WaitForSeconds(10f);
-
-
+        StopCoroutine(PlayerNeedsToWait(5f));
     }
 }
