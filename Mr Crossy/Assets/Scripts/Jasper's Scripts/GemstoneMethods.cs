@@ -1,5 +1,6 @@
 
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Gemstone
 {
@@ -29,6 +30,18 @@ namespace Gemstone
             return radians;
         }
 
-        
+        public static float GetPathLength(NavMeshPath path)
+        {
+            float pathLength = 0.0f;
+            if (path.corners.Length > 1)
+            {
+                for (int i = 1; i < path.corners.Length; ++i)
+                {
+                    pathLength += Vector3.Distance(path.corners[i - 1], path.corners[i]);
+                }
+            }
+
+            return pathLength;
+        }
     }
 }
