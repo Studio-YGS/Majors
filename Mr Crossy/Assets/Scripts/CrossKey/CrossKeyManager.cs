@@ -30,6 +30,7 @@ public class CrossKeyManager : MonoBehaviour
     public TMP_Text hintArea;
     public KeyPuzzles[] keyPuzzles;
     Transform cam;
+    [HideInInspector] public bool puzzleOn;
     [HideInInspector] public Player_Controller controller;
     [HideInInspector] public HeadBob headBob;
 
@@ -48,9 +49,10 @@ public class CrossKeyManager : MonoBehaviour
     public void StartCrossKeyPuzzle(DoorInteraction door)
     {
         
-        if(numOfKeys > 0)
+        if(numOfKeys > 0 && !puzzleOn)
         {
             numOfKeys -= 1;
+            puzzleOn = true;
             controller.enabled = false;
             headBob.enabled = false;
             Cursor.visible = true;

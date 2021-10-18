@@ -6,6 +6,10 @@ using UnityEngine.AI;
 [RequireComponent(typeof(Rigidbody))]
 public class DoorInteraction : MonoBehaviour
 {
+    [Header("Canvas")]
+    public GameObject reticle;
+    public GameObject hand;
+    
     [Header("Door Controls")]
     public bool xForward;
     public bool zForward;
@@ -24,6 +28,7 @@ public class DoorInteraction : MonoBehaviour
     public float openSpeed = 10;
     public float closeDistance = 45;
     public bool locked;
+    bool handon;
 
     [Header("Cross-Key Settings")]
     public bool spawnLeft;
@@ -53,14 +58,23 @@ public class DoorInteraction : MonoBehaviour
             if (FindObjectOfType<CrossKeyManager>().numOfKeys > 0)
             {
                 RaycastHit hit;
-                if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit))
+                if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 2))
                 {
                     if (hit.collider == gameObject.GetComponent<Collider>())
                     {
-                        if (Input.GetMouseButtonDown(0))
+                        if (!handon)
+                        {
+                            handon = true;
+                            reticle.SetActive(false);
+                            hand.SetActive(true);
+                        }
+                        
+                        if (Input.GetMouseButtonDown(0) && !puzzleOn)
                         {
                             FindObjectOfType<Player_Controller>().enabled = false;
                             FindObjectOfType<HeadBob>().enabled = false;
+                            reticle.SetActive(false);
+                            hand.SetActive(false);
                             puzzleOn = true;
                             Time.timeScale = 0.1f;
                             Time.fixedDeltaTime = Time.timeScale * 0.02f;
@@ -108,6 +122,18 @@ public class DoorInteraction : MonoBehaviour
                             createdMrCrossy.GetComponent<CrossyCrossKeyVariant>().door = gameObject.GetComponent<DoorInteraction>();
                         }
                     }
+                    else if (handon)
+                    {
+                        reticle.SetActive(true);
+                        hand.SetActive(false);
+                        handon = false;
+                    }
+                }
+                else if (handon)
+                {
+                    reticle.SetActive(true);
+                    hand.SetActive(false);
+                    handon = false;
                 }
             }
             
@@ -234,11 +260,13 @@ public class DoorInteraction : MonoBehaviour
         if (!locked)
         {
             RaycastHit hit;
-            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit))
+            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 2))
             {
                 if (hit.collider == gameObject.GetComponent<Collider>())
                 {
-
+                    handon = true;
+                    reticle.SetActive(false);
+                    hand.SetActive(true);
                     if (Input.GetMouseButtonDown(0))
                     {
                         moveable = true;
@@ -259,6 +287,18 @@ public class DoorInteraction : MonoBehaviour
 
                     }
                 }
+                else if (handon)
+                {
+                    reticle.SetActive(true);
+                    hand.SetActive(false);
+                    handon = false;
+                }
+            }
+            else if (handon)
+            {
+                reticle.SetActive(true);
+                hand.SetActive(false);
+                handon = false;
             }
             if (Input.GetMouseButtonUp(0) && moveable)
             {
@@ -525,7 +565,7 @@ public class DoorInteraction : MonoBehaviour
         
         
         puzzleTimer = false;
-        puzzleOn = false;
+        FindObjectOfType<CrossKeyManager>().puzzleOn = false;
         Destroy(createdMrCrossy);
         Debug.Log("safe");
     }
