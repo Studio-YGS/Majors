@@ -93,6 +93,15 @@ public class TutorialController : MonoBehaviour
         StartCoroutine(PlayerNeedsToWait(10f));
     }
 
+    public void HowToSpellWord()
+    {
+        showPrompt.generalPrompt.text = "How to spell word";
+        showPrompt.generalPrompt.gameObject.SetActive(true);
+        showPrompt.canShow = false;
+
+        StartCoroutine(PlayerNeedsToWait(4f));
+    }
+
     IEnumerator ReadingControls()
     {
         yield return new WaitForSeconds(5f);

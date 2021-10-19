@@ -51,6 +51,17 @@ public class TutorialSectionStart : MonoBehaviour
                 needsRaycast = false;
                 raycastEvent.Invoke();
             }
+
+            if (hit.transform.gameObject.CompareTag("Note") && Input.GetKeyDown(KeyCode.E))
+            {
+                needsRaycast = false;
+                raycastEvent.Invoke();
+            }
         }
+    }
+
+    public void NeedsRaycast(bool need)
+    {
+        needsRaycast = need;
     }
 }
