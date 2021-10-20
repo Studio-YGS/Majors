@@ -30,12 +30,15 @@ public class CrossKeyManager : MonoBehaviour
     public TMP_Text hintArea;
     public KeyPuzzles[] keyPuzzles;
     Transform cam;
+    [HideInInspector] public bool puzzleOn;
     [HideInInspector] public Player_Controller controller;
+    [HideInInspector] public HeadBob headBob;
 
     void Start()
     {
         cam = FindObjectOfType<Camera>().transform;
         controller = FindObjectOfType<Player_Controller>();
+        headBob = FindObjectOfType<HeadBob>();
     }
 
     
@@ -46,10 +49,12 @@ public class CrossKeyManager : MonoBehaviour
     public void StartCrossKeyPuzzle(DoorInteraction door)
     {
         
-        if(numOfKeys > 0)
+        if(numOfKeys > 0 && !puzzleOn)
         {
             numOfKeys -= 1;
+            puzzleOn = true;
             controller.enabled = false;
+            headBob.enabled = false;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             int randomKey = Random.Range(0, keyPuzzles.Length);
@@ -288,5 +293,10 @@ public class CrossKeyManager : MonoBehaviour
         newCrossKey.GetComponent<CrossKey>().door = door;
         newCrossKey.GetComponent<CrossKey>().answer = puzzle.wordToSolve;
         hintArea.text = "[C]LUE: " + puzzle.hint;
+    }
+
+    public void PuzzleDeath()
+    {
+        Debug.Log("Dead");
     }
 }
