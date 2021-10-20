@@ -10,6 +10,8 @@ public class PauseMenu : MonoBehaviour
 
     JournalOnSwitch journalOnSwitch;
 
+    JournalController journalController;
+
     StudioEventEmitter[] studioEventEmitters;
 
     GameObject[] volumeObjects;
@@ -26,25 +28,29 @@ public class PauseMenu : MonoBehaviour
     {
         playerController = FindObjectOfType<Player_Controller>();
         journalOnSwitch = FindObjectOfType<JournalOnSwitch>();
+        journalController = FindObjectOfType<JournalController>();
         defTimeScale = Time.timeScale;
     }
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (!journalController.disabled)
         {
-            if (!playerController.inJournal && !pauseMenuObject.activeInHierarchy && !settingsMenuObject.activeInHierarchy)
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                OpenPauseMenu();
-            }
-            else if (!playerController.inJournal && !pauseMenuObject.activeInHierarchy && settingsMenuObject.activeInHierarchy)
-            {
-                CloseSettingsMenu();
-                ClosePauseMenu();
-            }
-            else if (!playerController.inJournal && pauseMenuObject.activeInHierarchy)
-            {
-                ClosePauseMenu();
+                if (!playerController.inJournal && !pauseMenuObject.activeInHierarchy && !settingsMenuObject.activeInHierarchy)
+                {
+                    OpenPauseMenu();
+                }
+                else if (!playerController.inJournal && !pauseMenuObject.activeInHierarchy && settingsMenuObject.activeInHierarchy)
+                {
+                    CloseSettingsMenu();
+                    ClosePauseMenu();
+                }
+                else if (!playerController.inJournal && pauseMenuObject.activeInHierarchy)
+                {
+                    ClosePauseMenu();
+                }
             }
         }
     }
@@ -55,6 +61,8 @@ public class PauseMenu : MonoBehaviour
 
         playerController.DisableController();
         playerController.inJournal = false;
+
+        journalController.DisableJournal();
 
         journalOnSwitch.HideTab();
 
@@ -74,6 +82,8 @@ public class PauseMenu : MonoBehaviour
 
         playerController.EnableController();
         playerController.inJournal = false;
+
+        journalController.EnableJournal();
 
         journalOnSwitch.ShowTab();
 
@@ -112,26 +122,29 @@ public class PauseMenu : MonoBehaviour
                 {
                     volumeObjects = GameObject.FindGameObjectsWithTag("Music");
 
-                    for(int i = 0; i < volumeObjects.Length; i++)
+                    if (musicVolume < 0.99)
                     {
-                        if (volumeObjects[i].GetComponent<StudioEventEmitter>() && musicVolume < 0.99)
+                        musicVolume += 0.01f;
+
+                        for (int i = 0; i < volumeObjects.Length; i++)
                         {
-                            volumeObjects[i].GetComponent<StudioEventEmitter>().EventInstance.setVolume(musicVolume += 0.01f);
+                            volumeObjects[i].GetComponent<StudioEventEmitter>().EventInstance.setVolume(musicVolume);
                             musicText.text = (Mathf.Round(musicVolume * 100)).ToString();
                         }
                     }
-
                     break;
                 }
             case "SFX":
                 {
                     volumeObjects = GameObject.FindGameObjectsWithTag("SFX");
 
-                    for (int i = 0; i < volumeObjects.Length; i++)
+                    if (sfxVolume < 0.99)
                     {
-                        if (volumeObjects[i].GetComponent<StudioEventEmitter>() && sfxVolume < 0.99)
+                        sfxVolume += 0.01f;
+
+                        for (int i = 0; i < volumeObjects.Length; i++)
                         {
-                            volumeObjects[i].GetComponent<StudioEventEmitter>().EventInstance.setVolume(sfxVolume += 0.01f);
+                            volumeObjects[i].GetComponent<StudioEventEmitter>().EventInstance.setVolume(sfxVolume);
                             sfxText.text = (Mathf.Round(sfxVolume * 100)).ToString();
                         }
                     }
@@ -141,16 +154,18 @@ public class PauseMenu : MonoBehaviour
                 {
                     volumeObjects = GameObject.FindGameObjectsWithTag("Voice");
 
-                    for (int i = 0; i < volumeObjects.Length; i++)
+                    if (voiceVolume < 0.99)
                     {
-                        if (volumeObjects[i].GetComponent<StudioEventEmitter>() && voiceVolume < 0.99)
+                        voiceVolume += 0.01f;
+
+                        for (int i = 0; i < volumeObjects.Length; i++)
                         {
-                            volumeObjects[i].GetComponent<StudioEventEmitter>().EventInstance.setVolume(voiceVolume += 0.01f);
+                            volumeObjects[i].GetComponent<StudioEventEmitter>().EventInstance.setVolume(voiceVolume);
                             voiceText.text = (Mathf.Round(voiceVolume * 100)).ToString();
                         }
                     }
                     break;
-                } 
+                }
         }
     }
     public void DecreaseVolume(string volType)
@@ -161,26 +176,29 @@ public class PauseMenu : MonoBehaviour
                 {
                     volumeObjects = GameObject.FindGameObjectsWithTag("Music");
 
-                    for (int i = 0; i < volumeObjects.Length; i++)
+                    if (musicVolume > 0.01)
                     {
-                        if (volumeObjects[i].GetComponent<StudioEventEmitter>() && musicVolume > 0.01)
+                        musicVolume -= 0.01f;
+
+                        for (int i = 0; i < volumeObjects.Length; i++)
                         {
-                            volumeObjects[i].GetComponent<StudioEventEmitter>().EventInstance.setVolume(musicVolume -= 0.01f);
+                            volumeObjects[i].GetComponent<StudioEventEmitter>().EventInstance.setVolume(musicVolume);
                             musicText.text = (Mathf.Round(musicVolume * 100)).ToString();
                         }
                     }
-
                     break;
                 }
             case "SFX":
                 {
                     volumeObjects = GameObject.FindGameObjectsWithTag("SFX");
 
-                    for (int i = 0; i < volumeObjects.Length; i++)
+                    if (sfxVolume > 0.01)
                     {
-                        if (volumeObjects[i].GetComponent<StudioEventEmitter>() && sfxVolume > 0.01)
+                        sfxVolume -= 0.01f;
+
+                        for (int i = 0; i < volumeObjects.Length; i++)
                         {
-                            volumeObjects[i].GetComponent<StudioEventEmitter>().EventInstance.setVolume(sfxVolume -= 0.01f);
+                            volumeObjects[i].GetComponent<StudioEventEmitter>().EventInstance.setVolume(sfxVolume);
                             sfxText.text = (Mathf.Round(sfxVolume * 100)).ToString();
                         }
                     }
@@ -190,11 +208,13 @@ public class PauseMenu : MonoBehaviour
                 {
                     volumeObjects = GameObject.FindGameObjectsWithTag("Voice");
 
-                    for (int i = 0; i < volumeObjects.Length; i++)
+                    if (voiceVolume > 0.01)
                     {
-                        if (volumeObjects[i].GetComponent<StudioEventEmitter>() && voiceVolume > 0.01)
+                        voiceVolume -= 0.01f;
+
+                        for (int i = 0; i < volumeObjects.Length; i++)
                         {
-                            volumeObjects[i].GetComponent<StudioEventEmitter>().EventInstance.setVolume(voiceVolume -= 0.01f);
+                            volumeObjects[i].GetComponent<StudioEventEmitter>().EventInstance.setVolume(voiceVolume);
                             voiceText.text = (Mathf.Round(voiceVolume * 100)).ToString();
                         }
                     }

@@ -6,14 +6,16 @@ public class JournalOnSwitch : MonoBehaviour
 {
     bool open = false;
 
-    [SerializeField]
-    GameObject journalOpen, journalClosed;
+    public GameObject journalOpen, journalClosed;
 
     Player_Controller fpc;
 
-    void Awake()
+    JournalController journalController;
+
+    void Start()
     {
         fpc = FindObjectOfType<Player_Controller>();
+        journalController = FindObjectOfType<JournalController>();
     }
 
     public bool OpenOrClose()
@@ -30,22 +32,33 @@ public class JournalOnSwitch : MonoBehaviour
         }
     }
 
+    public void ForceOpenOrClose()
+    {
+        OpenOrClose();
+    }
+
     void OpenJournal()
     {
-        fpc.DisableController();
+        if (!journalController.disabled)
+        {
+            fpc.DisableController();
 
-        open = true;
-        journalClosed.SetActive(false);
-        journalOpen.SetActive(true);
+            open = true;
+            journalClosed.SetActive(false);
+            journalOpen.SetActive(true);
+        }
     }
 
     void CloseJournal()
     {
-        fpc.EnableController();
+        if (!journalController.disabled)
+        {
+            fpc.EnableController();
 
-        open = false;
-        journalClosed.SetActive(true);
-        journalOpen.SetActive(false);
+            open = false;
+            journalClosed.SetActive(true);
+            journalOpen.SetActive(false);
+        }
     }
 
     public void HideTab()
