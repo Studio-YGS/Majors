@@ -11,9 +11,9 @@ public class FootstepDetector : MonoBehaviour
     int posX;
     int posZ;
     public float[] textureValues;
-    public bool isGrounded;
-    public bool isOnTerrain;
-    public bool walking;
+    bool isGrounded;
+    bool isOnTerrain;
+    bool walking;
     float currentSpeed;
     float distanceCoverd;
     RaycastHit hit;
