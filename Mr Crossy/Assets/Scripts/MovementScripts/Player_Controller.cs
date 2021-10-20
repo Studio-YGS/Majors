@@ -79,9 +79,9 @@ public class Player_Controller : MonoBehaviour
 
             }
 
-            velocity.y += gravity * Time.deltaTime;
+            velocity.y += gravity * Time.unscaledDeltaTime;
             move = transform.right * x + transform.forward * z;
-            controller.Move(velocity * Time.deltaTime);
+            controller.Move(velocity * Time.unscaledDeltaTime);
 
 
             if (Input.GetKeyDown(KeyCode.C) && isGrounded)
@@ -112,7 +112,7 @@ public class Player_Controller : MonoBehaviour
 
             move.Normalize();
 
-            controller.Move(move * speed * Time.deltaTime);
+            controller.Move(move * speed * Time.unscaledDeltaTime);
 
             if (isGrounded && velocity.y < 0)
             {
