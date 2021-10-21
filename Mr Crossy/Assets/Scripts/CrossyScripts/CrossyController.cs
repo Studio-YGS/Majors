@@ -11,11 +11,11 @@ public class CrossyController : MonoBehaviour
     Animator animator;
     NavMeshAgent agent;
 
-    public bool overrideShouldRun;
-    public bool run;
-    public bool conditionIsTrue;
+    [HideInInspector] public bool overrideShouldRun;
+    [HideInInspector] public bool run;
+    public bool lookCondition;
 
-    public Transform headBone;
+    private Transform headBone;
     public Transform vision;
     [SerializeField] private Transform m_CrossyDespawn;
 
@@ -31,12 +31,12 @@ public class CrossyController : MonoBehaviour
     [SerializeField] private float m_RunSpeed;
     private float m_MoveSpeed;
     [Tooltip("Mr. Crossy's acceleration rate.")]
-    [SerializeField] private float m_WalkAcceleration;
-    [SerializeField] private float m_RunAcceleration;
+    /*[SerializeField]*/ private float m_WalkAcceleration;
+    /*[SerializeField]*/ private float m_RunAcceleration;
     [SerializeField] private float m_Acceleration;
     [Tooltip("Mr. Crossy's turning speed.")]
-    [SerializeField] private float m_WalkAngularSpeed;
-    [SerializeField] private float m_RunAngularSpeed;
+    /*[SerializeField]*/ private float m_WalkAngularSpeed;
+    /*[SerializeField]*/ private float m_RunAngularSpeed;
     [SerializeField] private float m_AngularSpeed;
     [Tooltip("Distance from destination that Mr. Crossy can stop at.")]
     [SerializeField] private float m_StoppingDistance;
@@ -56,8 +56,9 @@ public class CrossyController : MonoBehaviour
     [Range(0,1)]public float lookAtWeight;
     public Transform lookAtTransform;
     public Vector3 lookAtOffset;
-    public float IKLeftFootDistance;
-    public float IKRightFootDistance;
+
+    [Range(0,2)] public float IKLeftFootDistance;
+    [Range(0,2)] public float IKRightFootDistance;
 
     #region Properties
     public float WalkSpeed { get { return m_WalkSpeed; } set { m_WalkSpeed = value; } }
@@ -81,31 +82,30 @@ public class CrossyController : MonoBehaviour
 
     [Space(10)]
     [SerializeField] float veloMag;
-    [SerializeField] float veloDesire;
-    [SerializeField] float interpolator;
+    //[SerializeField] float veloDesire;
+    //[SerializeField] float interpolator;
 
-    [Space(10)]
+    /*[Space(10)]
     [Header("Debuggles")]
     [SerializeField] private Vector3 showNorma;
     [SerializeField] private Quaternion showLeftRotation;
     [SerializeField] private Quaternion showRightRotation;
-
+    */
 
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         m_Mask = agent.areaMask;
+        headBone = animator.GetBoneTransform(HumanBodyBones.Head);
     }
 
     private void Update()
     {
-        vision.position = headBone.position;
-        vision.rotation.SetLookRotation(headBone.up, -headBone.right);
         veloMag = agent.velocity.magnitude;
-        veloDesire = agent.desiredVelocity.magnitude;
+        //veloDesire = agent.desiredVelocity.magnitude;
 
-        if (overrideShouldRun == false)
+        if (overrideShouldRun == false) // Sets 'm_ShouldRun' based on state and distance from target.
         {
             if (m_State < 1) { m_ShouldRun = false; }
             else if (m_State == 1 || m_State == 2)
@@ -116,31 +116,19 @@ public class CrossyController : MonoBehaviour
                 else m_ShouldRun = false;
             }
             else if (m_State > 2) { m_ShouldRun = true; }
-
         }
         else { m_ShouldRun = run; }
 
-
-        //NavAgent fiddling
+        //NavAgent Fiddling
         MoveSpeed = (m_ShouldRun) ? RunSpeed : WalkSpeed;
-        /*
-        interpolator = Mathf.InverseLerp(0, RunSpeed, veloDesire);
-
-        m_AngularSpeed = Mathf.Lerp(m_WalkAngularSpeed, m_RunAngularSpeed, interpolator);
-        m_Acceleration = Mathf.Lerp(m_WalkAcceleration, m_RunAcceleration, interpolator);
-        */
+        
         agent.acceleration = Acceleration;
 
         //Animator Actions
-        
         animator.SetBool("Moving", veloMag >= 0.05);
         animator.SetFloat("VelocityMag",veloMag);
     }
 
-    private void LateUpdate()
-    {
-        
-    }
 
     private void OnAnimatorIK(int layerIndex)
     {
@@ -149,22 +137,19 @@ public class CrossyController : MonoBehaviour
             //Noggin Malarkey
             if (lookAtTransform)
             {
-                if (conditionIsTrue)
+                if (lookCondition)
                 {
                     animator.SetLookAtPosition(lookAtTransform.position + lookAtOffset);
                     animator.SetLookAtWeight(lookAtWeight);
                 }
                 else animator.SetLookAtWeight(0f);
             }
-
+            
             //Foot Stuff
-            animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, 1f);
-            animator.SetIKRotationWeight(AvatarIKGoal.LeftFoot, 1f);
-            animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, 1f);
-            animator.SetIKRotationWeight(AvatarIKGoal.RightFoot, 1f);
-
-            showLeftRotation = animator.GetIKRotation(AvatarIKGoal.LeftFoot);
-            showRightRotation = animator.GetIKRotation(AvatarIKGoal.RightFoot);
+            animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, animator.GetFloat("IKLeftFootWeight"));
+            animator.SetIKRotationWeight(AvatarIKGoal.LeftFoot, animator.GetFloat("IKLeftFootWeight"));
+            animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, animator.GetFloat("IKRightFootWeight"));
+            animator.SetIKRotationWeight(AvatarIKGoal.RightFoot, animator.GetFloat("IKRightFootWeight"));
 
             RaycastHit hit;
             Ray ray;
@@ -178,9 +163,8 @@ public class CrossyController : MonoBehaviour
 
                     footPos.y += IKLeftFootDistance;
                     animator.SetIKPosition(AvatarIKGoal.LeftFoot, footPos);
-
-                    animator.SetIKRotation(AvatarIKGoal.LeftFoot, Quaternion.LookRotation(transform.forward, hit.normal));
-                    showNorma = hit.normal;
+                    animator.SetIKRotation(AvatarIKGoal.LeftFoot, Quaternion.LookRotation(-animator.GetBoneTransform(HumanBodyBones.LeftFoot).up, hit.normal));
+                    //showNorma = hit.normal;
                 }
             }
 
@@ -194,7 +178,7 @@ public class CrossyController : MonoBehaviour
 
                     footPos.y += IKRightFootDistance;
                     animator.SetIKPosition(AvatarIKGoal.RightFoot, footPos);
-                    animator.SetIKRotation(AvatarIKGoal.RightFoot, Quaternion.LookRotation(transform.forward, hit.normal));
+                    animator.SetIKRotation(AvatarIKGoal.RightFoot, Quaternion.LookRotation(animator.GetBoneTransform(HumanBodyBones.RightFoot).up, hit.normal));
                 }
             }
         }
