@@ -9,6 +9,7 @@ public class Player_Controller : MonoBehaviour
     public float baseSpeed;
     public float speed;
     public float sprintSpeed;
+    public float stamina = 8;
     public float crouchSpeed;
     public float gravity;
     public float jumpHeight = 3f;
@@ -101,12 +102,23 @@ public class Player_Controller : MonoBehaviour
             }
 
 
-            if (Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.C))
+            if (Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.C) && stamina > 0)
             {
                 speed = sprintSpeed;
+                stamina -= Time.unscaledDeltaTime * 2;
             }
             else if (Input.GetKeyUp(KeyCode.LeftShift) && !Input.GetKey(KeyCode.C))
             {
+                speed = baseSpeed;
+            }
+
+            if(stamina < 8 && !Input.GetKey(KeyCode.LeftShift))
+            {
+                stamina += Time.unscaledDeltaTime;
+            }
+            if (stamina <= 0)
+            {
+                //when the player runs out of stamina
                 speed = baseSpeed;
             }
 
