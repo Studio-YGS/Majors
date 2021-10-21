@@ -35,9 +35,17 @@ public class FootstepDetector : MonoBehaviour
         if (walking)
         {
             distanceCoverd += (currentSpeed * Time.unscaledDeltaTime) * 0.5f;
-            if (distanceCoverd > 1 && isGrounded && isOnTerrain)
+            if (distanceCoverd > 1 && isGrounded)
             {
-                PlayFootStep();
+                if (isOnTerrain)
+                {
+                    PlayFootStepTerrain();
+                }
+                else
+                {
+                    PlayFootStepTag();
+                }
+                
                 distanceCoverd = 0;
             }
         }
@@ -74,7 +82,23 @@ public class FootstepDetector : MonoBehaviour
         }
     }
 
-    public void PlayFootStep()
+    public void PlayFootStepTag()
+    {
+        if(hit.collider.tag == "New Wood")
+        {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Footstep/Home Wood");
+        }
+        else if (hit.collider.tag == "Old Wood")
+        {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Footstep/Wood_1");
+        }
+        else if (hit.collider.tag == "Carpet")
+        {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Footstep/Carpet");
+        }
+    }
+
+    public void PlayFootStepTerrain()
     {
         
         GetTerrainTexture();
