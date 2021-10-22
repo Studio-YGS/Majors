@@ -36,15 +36,32 @@ public class TutorialSectionStart : MonoBehaviour
     {
         RaycastHit hit;
 
-        if(Physics.Raycast(playerController.cam.transform.position, playerController.transform.TransformDirection(Vector3.forward), out hit, 5f) && needsRaycast)
+        if(Physics.Raycast(playerController.cam.position, playerController.cam.TransformDirection(Vector3.forward), out hit, 2f) && needsRaycast)
         {
-            Debug.Log("bonk");
+            Debug.Log("bonk " + hit.transform.gameObject.name);
             if(hit.transform.gameObject.CompareTag("Front Door")) //for the front door part of the tutorial
             {
                 Debug.Log("hit front door");
                 needsRaycast = false;
                 raycastEvent.Invoke();
             }
+
+            if(hit.transform.gameObject.CompareTag("Holdable") && Input.GetKeyDown(KeyCode.E))
+            {
+                needsRaycast = false;
+                raycastEvent.Invoke();
+            }
+
+            if (hit.transform.gameObject.CompareTag("Note") && Input.GetKeyDown(KeyCode.E))
+            {
+                needsRaycast = false;
+                raycastEvent.Invoke();
+            }
         }
+    }
+
+    public void NeedsRaycast(bool need)
+    {
+        needsRaycast = need;
     }
 }
