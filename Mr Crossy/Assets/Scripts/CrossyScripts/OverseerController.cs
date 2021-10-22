@@ -63,10 +63,14 @@ public class OverseerController : MonoBehaviour
     public Vector3 ValidationPosition { get { return m_ValidationPosition; } }
     public int State { get { return m_State; } set { m_State = value; } }
 
+    public List<GameObject> SpawnLightHouses { get { return m_SpawnLighthouses; } }
+
     #endregion
 
     [Space(10)]
-    public List<Lighthouse> lighthouses = new List<Lighthouse>();
+    public List<Lighthouse> titanLighthouses = new List<Lighthouse>();
+
+    [SerializeField] private List<GameObject> m_SpawnLighthouses = new List<GameObject>();
 
     public Lighthouse storedHouse;
     public float currDist;
@@ -132,7 +136,7 @@ public class OverseerController : MonoBehaviour
 
         storedHouse = titan.lighthouse;
 
-        foreach(Lighthouse lighthouse in lighthouses)
+        foreach(Lighthouse lighthouse in titanLighthouses)
         {
             Vector3 check = new Vector3(lighthouse.selfTransform.position.x, 0f, lighthouse.selfTransform.position.z);
 

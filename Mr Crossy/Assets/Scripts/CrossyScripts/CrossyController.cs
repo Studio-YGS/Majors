@@ -11,8 +11,10 @@ public class CrossyController : MonoBehaviour
     Animator animator;
     NavMeshAgent agent;
 
-    [HideInInspector] public bool overrideShouldRun;
-    [HideInInspector] public bool run;
+    [Header("Debug Booleans")]
+    public bool overrideShouldRun;
+    public bool run;
+    public bool accelManipulation;
     public bool lookCondition;
 
     private Transform headBone;
@@ -31,8 +33,8 @@ public class CrossyController : MonoBehaviour
     [SerializeField] private float m_RunSpeed;
     private float m_MoveSpeed;
     [Tooltip("Mr. Crossy's acceleration rate.")]
-    /*[SerializeField]*/ private float m_WalkAcceleration;
-    /*[SerializeField]*/ private float m_RunAcceleration;
+    [SerializeField] private float m_BaseAcceleration;
+    [SerializeField] private float m_CornerAcceleration;
     [SerializeField] private float m_Acceleration;
     [Tooltip("Mr. Crossy's turning speed.")]
     /*[SerializeField]*/ private float m_WalkAngularSpeed;
@@ -40,6 +42,9 @@ public class CrossyController : MonoBehaviour
     [SerializeField] private float m_AngularSpeed;
     [Tooltip("Distance from destination that Mr. Crossy can stop at.")]
     [SerializeField] private float m_StoppingDistance;
+    [SerializeField] private float m_CornerThreshold;
+
+    private float m_DistanceToCorner;
 
     private int m_Mask;
     private bool m_ShouldRun = false;
@@ -83,7 +88,7 @@ public class CrossyController : MonoBehaviour
     [Space(10)]
     [SerializeField] float veloMag;
     //[SerializeField] float veloDesire;
-    //[SerializeField] float interpolator;
+    [SerializeField] float interpolator;
 
     /*[Space(10)]
     [Header("Debuggles")]
@@ -103,7 +108,7 @@ public class CrossyController : MonoBehaviour
     private void Update()
     {
         veloMag = agent.velocity.magnitude;
-        //veloDesire = agent.desiredVelocity.magnitude;
+        m_DistanceToCorner = Vector3.Distance(transform.position, agent.steeringTarget);
 
         if (overrideShouldRun == false) // Sets 'm_ShouldRun' based on state and distance from target.
         {
@@ -122,12 +127,31 @@ public class CrossyController : MonoBehaviour
         //NavAgent Fiddling
         MoveSpeed = (m_ShouldRun) ? RunSpeed : WalkSpeed;
         
+        if(accelManipulation)
+        {
+            if (m_DistanceToCorner <= m_CornerThreshold)
+            {
+                interpolator = Mathf.InverseLerp(m_CornerThreshold, 0f, m_DistanceToCorner);
+
+            }
+            else if (interpolator < 1f)
+            {
+                interpolator = 1f;
+            }
+        }
+
+        Acceleration = (accelManipulation) ? Mathf.Lerp(m_BaseAcceleration, m_CornerAcceleration, interpolator) : m_BaseAcceleration;
+
         agent.acceleration = Acceleration;
+
+
 
         //Animator Actions
         animator.SetBool("Moving", veloMag >= 0.05);
         animator.SetFloat("VelocityMag",veloMag);
     }
+
+
 
 
     private void OnAnimatorIK(int layerIndex)
