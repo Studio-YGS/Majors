@@ -11,7 +11,7 @@ public class JournalController : MonoBehaviour
     public List<int> noteList = new List<int>(0); 
 
     [SerializeField]
-    GameObject log, map, notes, rightArrow, leftArrow;
+    GameObject log, map, notes, howTo, rightArrow, leftArrow;
 
     int whichTab = 1, whichLogPage = 0;
     [HideInInspector]
@@ -38,6 +38,7 @@ public class JournalController : MonoBehaviour
             log.SetActive(true);
             map.SetActive(false);
             notes.SetActive(false);
+            howTo.SetActive(false);
 
             leftArrow.SetActive(false);
             rightArrow.SetActive(false);
@@ -76,8 +77,11 @@ public class JournalController : MonoBehaviour
             log.SetActive(false);
             map.SetActive(true);
             notes.SetActive(false);
+            howTo.SetActive(false);
+
             rightArrow.SetActive(false);
             leftArrow.SetActive(false);
+
             whichTab = 2;
         }
     }
@@ -91,6 +95,7 @@ public class JournalController : MonoBehaviour
                 log.SetActive(false);
                 map.SetActive(false);
                 notes.SetActive(true);
+                howTo.SetActive(false);
 
                 leftArrow.SetActive(false);
                 rightArrow.SetActive(false);
@@ -123,6 +128,22 @@ public class JournalController : MonoBehaviour
         }
     }
 
+    public void OpenHowTo()
+    {
+        if (!disabled)
+        {
+            log.SetActive(false);
+            map.SetActive(false);
+            notes.SetActive(false);
+            howTo.SetActive(true);
+
+            leftArrow.SetActive(false);
+            rightArrow.SetActive(false);
+
+            whichTab = 4;
+        }
+    }
+
     public void Arrows(bool right)
     {
         if (right)
@@ -133,11 +154,6 @@ public class JournalController : MonoBehaviour
                     {
                         whichLogPage++;
                         OpenLog();
-                        break;
-                    }
-                case 2:
-                    {
-                        OpenMap();
                         break;
                     }
                 case 3:
@@ -156,11 +172,6 @@ public class JournalController : MonoBehaviour
                     {
                         whichLogPage--;
                         OpenLog();
-                        break;
-                    }
-                case 2:
-                    {
-                        OpenMap();
                         break;
                     }
                 case 3:
