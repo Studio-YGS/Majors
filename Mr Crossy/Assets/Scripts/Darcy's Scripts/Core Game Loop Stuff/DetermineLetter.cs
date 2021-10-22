@@ -20,7 +20,7 @@ public class DetermineLetter : MonoBehaviour
     public void ObjectPlaced(GameObject placedObject)
     {
         wholeName = placedObject.name;
-        firstLetter = wholeName.Substring(0, 1);
+        firstLetter = wholeName.Substring(1, 1);
         SendLetterAndName(firstLetter);
 
         if(overlappedAltars.Length > 0)

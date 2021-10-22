@@ -27,7 +27,9 @@ public class PuzzleController : MonoBehaviour
 
     string playersWord, letter, altarName;
 
-    public UnityEvent winEvent, loseEvent;
+    public UnityEvent winEvent, loseEvent, tutorialEvent;
+
+    public bool tutorial;
 
     public void SetUpLetters()
     {
@@ -76,6 +78,12 @@ public class PuzzleController : MonoBehaviour
 
         playersWordLength = playersWord.ToIntArray().Length;
         Debug.Log(playersWordLength);
+
+        if (tutorial)
+        {
+            tutorialEvent.Invoke();
+            tutorial = false;
+        }
 
         if(playersWord == word) //the script then checks to see if the players formed word is the same as the puzzle's answer
         {
