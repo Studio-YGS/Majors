@@ -86,7 +86,8 @@ public class CrossyController : MonoBehaviour
     #endregion
 
     [Space(10)]
-    [SerializeField] float veloMag;
+    [SerializeField] float mSpeed;
+    [SerializeField] float tSpeed;
     //[SerializeField] float veloDesire;
     [SerializeField] float interpolator;
 
@@ -107,7 +108,7 @@ public class CrossyController : MonoBehaviour
 
     private void Update()
     {
-        veloMag = agent.velocity.magnitude;
+        //veloMag = agent.velocity.magnitude;
         m_DistanceToCorner = Vector3.Distance(transform.position, agent.steeringTarget);
 
         if (overrideShouldRun == false) // Sets 'm_ShouldRun' based on state and distance from target.
@@ -144,14 +145,21 @@ public class CrossyController : MonoBehaviour
 
         agent.acceleration = Acceleration;
 
-
+        GetMotionHashValues();
 
         //Animator Actions
-        animator.SetBool("Moving", veloMag >= 0.05);
-        animator.SetFloat("VelocityMag",veloMag);
+        animator.SetBool("Moving", mSpeed >= 0.05);
+        animator.SetFloat("Speed", mSpeed);
+        animator.SetFloat("Turn", tSpeed);
     }
 
+    public void GetMotionHashValues()
+    {
+        Vector3 velocity = agent.transform.InverseTransformDirection(agent.velocity);
 
+        mSpeed = velocity.z;
+        tSpeed = velocity.x;
+    }
 
 
     private void OnAnimatorIK(int layerIndex)
