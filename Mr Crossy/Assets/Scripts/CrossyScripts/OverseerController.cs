@@ -63,10 +63,20 @@ public class OverseerController : MonoBehaviour
     public Vector3 ValidationPosition { get { return m_ValidationPosition; } }
     public int State { get { return m_State; } set { m_State = value; } }
 
+    public List<GameObject> SpawnLightHouses { get { return m_SpawnLighthouses; } }
+
     #endregion
 
     [Space(10)]
-    public List<Lighthouse> lighthouses = new List<Lighthouse>();
+    public List<Lighthouse> titanLighthouses = new List<Lighthouse>();
+
+    [SerializeField] private List<GameObject> m_SpawnLighthouses = new List<GameObject>();
+
+    public Lighthouse storedHouse;
+    public float currDist;
+    private float storedDist = 0;
+
+    [SerializeField] private bool doing;
 
     private void Awake()
     {
@@ -84,10 +94,15 @@ public class OverseerController : MonoBehaviour
         if (usePositioner) m_ValidationPosition = validationPositioner.transform.position;
 
         titan.m_state = m_State;
-        
-        if(LeftRadius())
+
+        if(m_State == -1)
         {
-            CheckClosestLighthouse();
+            bool left = LeftRadius();
+
+            if (left)
+            {
+                CheckClosestLighthouse();
+            }
         }
     }
 
@@ -103,34 +118,51 @@ public class OverseerController : MonoBehaviour
         Vector3 check = new Vector3(titan.lighthouse.selfTransform.position.x, 0f, titan.lighthouse.selfTransform.position.z);
         float dist = Vector3.Distance(playerPosition, check);
 
-        if (dist > m_CheckRadius) return true;
-        else return false;
+        if (dist > m_CheckRadius)
+        {
+            Debug.Log("Checkky");
+            return true;
+        }
+        else 
+        { 
+            return false; 
+        }
     }
 
     public void CheckClosestLighthouse()
     {
+        Debug.Log("StartLight");
         Vector3 playerPosition = new Vector3(m_Player.transform.position.x, 0f, m_Player.transform.position.z);
 
-        Lighthouse storedHouse = titan.lighthouse;
-        float storedDist = 0;
-        float currDist;
+        storedHouse = titan.lighthouse;
 
-        foreach(Lighthouse lighthouse in lighthouses)
+        foreach(Lighthouse lighthouse in titanLighthouses)
         {
             Vector3 check = new Vector3(lighthouse.selfTransform.position.x, 0f, lighthouse.selfTransform.position.z);
+
             currDist = Vector3.Distance(playerPosition, check);
-            if (storedDist == 0) storedDist = currDist;
-            if(currDist < storedDist)
+
+
+            if (storedDist == 0) 
+            { 
+                storedDist = currDist;
+                Debug.Log("setdist");
+            }
+
+            if(currDist <= storedDist)
             {
+                Debug.Log("SetHouse");
                 storedDist = currDist;
                 storedHouse = lighthouse;
             }
 
         }
-        if(storedHouse != titan.lighthouse)
+        if(storedHouse != titan.lighthouse && !titan.lighthousing)
         {
+            Debug.Log("DiffLight");
             titan.TitanCrossyHouse(storedHouse);
         }
-
+        storedDist = 0;
+        Debug.Log("EndLight");
     }
 }

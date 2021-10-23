@@ -82,10 +82,12 @@ public class PatrolWithinArea : NavMeshMovement
                 {
                     if (limitPathLength)
                     {
-                        NavMeshPath validPathTest = new NavMeshPath();
-                        NavMesh.CalculatePath(hit.position, patrolAreaCentre.Value, areaMask, validPathTest);
+                        //NavMeshPath validPathTest = new NavMeshPath();
+                        //NavMesh.CalculatePath(hit.position, patrolAreaCentre.Value, areaMask, validPathTest);
 
-                        if (validPathTest.status == NavMeshPathStatus.PathComplete && Emerald.GetPathLength(validPathTest) <= validPathLimit.Value)
+                        Debug.Log("Path Length: " + Emerald.GetPathLength(foundPathTest));
+
+                        if (Emerald.GetPathLength(foundPathTest) <= validPathLimit.Value)
                         {
                             destination = hit.position;
                             return true;
