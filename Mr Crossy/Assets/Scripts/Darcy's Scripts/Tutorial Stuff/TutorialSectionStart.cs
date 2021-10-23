@@ -9,7 +9,7 @@ public class TutorialSectionStart : MonoBehaviour
 
     public UnityEvent sectionStart, steppingAway, raycastEvent;
 
-    public bool needsRaycast = false;
+    public bool needsRaycast = false, needsSecondRaycast = false;
 
     void Start()
     {
@@ -36,25 +36,36 @@ public class TutorialSectionStart : MonoBehaviour
     {
         RaycastHit hit;
 
-        if(Physics.Raycast(playerController.cam.position, playerController.cam.TransformDirection(Vector3.forward), out hit, 2f) && needsRaycast)
+        if(Physics.Raycast(playerController.cam.position, playerController.cam.TransformDirection(Vector3.forward), out hit, 2f))
         {
-            Debug.Log("bonk " + hit.transform.gameObject.name);
-            if(hit.transform.gameObject.CompareTag("Front Door")) //for the front door part of the tutorial
+            if(hit.transform.gameObject.CompareTag("Front Door") && needsRaycast) //for the front door part of the tutorial
             {
                 Debug.Log("hit front door");
                 needsRaycast = false;
                 raycastEvent.Invoke();
             }
 
-            if(hit.transform.gameObject.CompareTag("Holdable") && Input.GetKeyDown(KeyCode.E))
+            if(hit.transform.gameObject.CompareTag("Holdable") && needsRaycast)
+            {
+                Debug.Log("Hit tag: " + hit.transform.gameObject.tag);
+                needsRaycast = false;
+                raycastEvent.Invoke();
+            }
+
+            if (hit.transform.gameObject.CompareTag("Holdable") && Input.GetKeyDown(KeyCode.E) && needsSecondRaycast)
+            {
+                needsSecondRaycast = false;
+                sectionStart.Invoke();
+            }
+
+            if (hit.transform.gameObject.CompareTag("Note") && Input.GetKeyDown(KeyCode.E) && needsRaycast)
             {
                 needsRaycast = false;
                 raycastEvent.Invoke();
             }
 
-            if (hit.transform.gameObject.CompareTag("Note") && Input.GetKeyDown(KeyCode.E))
-            {
-                needsRaycast = false;
+            if (hit.transform.gameObject.CompareTag("Clue") && needsRaycast)
+            { 
                 raycastEvent.Invoke();
             }
         }
@@ -63,5 +74,10 @@ public class TutorialSectionStart : MonoBehaviour
     public void NeedsRaycast(bool need)
     {
         needsRaycast = need;
+    }
+
+    public void NeedsSecondRaycast(bool need)
+    {
+        needsSecondRaycast = need;
     }
 }

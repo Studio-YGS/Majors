@@ -4,18 +4,16 @@ using UnityEngine;
 
 public class AnimationControl : MonoBehaviour
 {
-    Animator[] animations;
+    TutorialController tutorialController;
 
     public void OpenGate()
     {
         GetComponent<Animator>().SetBool("OpenGate", true);
     }
 
-    void Update()
+    public void TutorialAnimations(string triggerName)
     {
-        if (Input.GetKeyDown(KeyCode.H)) //dev tool
-        {
-            GetComponent<Animator>().SetBool("OpenGate", true);
-        }
+        Debug.Log("Trying to trigger: " + triggerName + " from: " + gameObject.name);
+        GetComponent<Animator>().SetTrigger(triggerName);
     }
 }
