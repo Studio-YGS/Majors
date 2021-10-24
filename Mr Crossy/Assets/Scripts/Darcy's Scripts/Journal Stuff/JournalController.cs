@@ -20,7 +20,7 @@ public class JournalController : MonoBehaviour
     [HideInInspector]
     public int whichNotesPage = 0;
 
-    public bool disabled = false;
+    public bool disabled = false, tutorial = true, readingHowTo = false;
 
     void Start()
     {
@@ -36,6 +36,15 @@ public class JournalController : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.A) && leftArrow.activeInHierarchy)
         {
             Arrows(false);
+        }
+
+        if(Input.GetKeyDown(KeyCode.Tab) && readingHowTo)
+        {
+            readingHowTo = false;
+
+            GetComponent<TutorialSectionStart>().ReadHowTo();
+
+            GetComponent<JournalTimer>().canCount = true;
         }
     }
 
@@ -143,7 +152,7 @@ public class JournalController : MonoBehaviour
 
     public void OpenHowTo()
     {
-        if (!disabled)
+        if (!disabled && !tutorial)
         {
             log.SetActive(false);
             mapPage.SetActive(false);
@@ -205,5 +214,10 @@ public class JournalController : MonoBehaviour
     public void EnableJournal()
     {
         disabled = false;
+    }
+
+    public void SetTutorialBool(bool set)
+    {
+        tutorial = set;
     }
 }

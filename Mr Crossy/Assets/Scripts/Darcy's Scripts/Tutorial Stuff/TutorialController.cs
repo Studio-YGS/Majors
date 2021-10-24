@@ -22,8 +22,6 @@ public class TutorialController : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI conLetter;
 
-    ShowPromptUI showPrompt;
-
     bool canContinue = false;
 
     void Start()
@@ -31,14 +29,11 @@ public class TutorialController : MonoBehaviour
         journalController = FindObjectOfType<JournalController>();
         playerController = FindObjectOfType<Player_Controller>();
         journalOnSwitch = FindObjectOfType<JournalOnSwitch>();
-        showPrompt = FindObjectOfType<ShowPromptUI>();
         journalTimer = FindObjectOfType<JournalTimer>();
 
         ShowControls();
 
         journalTimer.canCount = false;
-
-        showPrompt.canShow = false;
     }
 
     void Update()
@@ -85,6 +80,11 @@ public class TutorialController : MonoBehaviour
         conLetter.text = "[" + letter + "]";
     }
 
+    public void CrossyWait(float waitTime)
+    {
+        StartCoroutine(WaitForCrossy(waitTime));
+    }
+
     IEnumerator ReadingControls()
     {
         yield return new WaitForSeconds(5f);
@@ -107,11 +107,16 @@ public class TutorialController : MonoBehaviour
 
         journalController.EnableJournal();
 
-        showPrompt.generalPrompt.gameObject.SetActive(false);
-        showPrompt.canShow = true;
-
-        Debug.Log("stopped");
-
         StopCoroutine(PlayerNeedsToWait(5f));
+    }
+
+    IEnumerator WaitForCrossy(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+
+        journalController.OpenHowTo();
+        journalController.readingHowTo = true;
+
+        journalOnSwitch.OpenOrClose();
     }
 }

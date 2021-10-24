@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class AnimationControl : MonoBehaviour
 {
-    TutorialController tutorialController;
-
     public void OpenGate()
     {
         GetComponent<Animator>().SetBool("OpenGate", true);
@@ -15,5 +13,11 @@ public class AnimationControl : MonoBehaviour
     {
         Debug.Log("Trying to trigger: " + triggerName + " from: " + gameObject.name);
         GetComponent<Animator>().SetTrigger(triggerName);
+    }
+
+    public void LowerWalls()
+    {
+        Debug.Log("Lowering Walls");
+        GetComponent<Animator>().SetBool("WallDown", true);
     }
 }

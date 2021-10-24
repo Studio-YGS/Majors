@@ -133,6 +133,13 @@ public class PuzzleController : MonoBehaviour
     {
         completedWords++;
 
+        if(completedWords == 3)
+        {
+            TutorialSectionStart tutorialSectionStart = GetComponent<TutorialSectionStart>();
+
+            tutorialSectionStart.TutorialComplete();
+        }
+
         if(completedWords == wordsInPuzzle)
         {
             winEvent.Invoke();

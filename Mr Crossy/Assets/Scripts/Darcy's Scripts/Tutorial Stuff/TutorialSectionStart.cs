@@ -9,7 +9,10 @@ public class TutorialSectionStart : MonoBehaviour
 
     public UnityEvent sectionStart, steppingAway, raycastEvent;
 
-    public bool needsRaycast = false, needsSecondRaycast = false;
+    public bool needsRaycast = false, needsSecondRaycast = false, needsCheck = false;
+
+    [SerializeField]
+    GameObject[] tutorialClues;
 
     void Start()
     {
@@ -40,14 +43,12 @@ public class TutorialSectionStart : MonoBehaviour
         {
             if(hit.transform.gameObject.CompareTag("Front Door") && needsRaycast) //for the front door part of the tutorial
             {
-                Debug.Log("hit front door");
                 needsRaycast = false;
                 raycastEvent.Invoke();
             }
 
             if(hit.transform.gameObject.CompareTag("Holdable") && needsRaycast)
             {
-                Debug.Log("Hit tag: " + hit.transform.gameObject.tag);
                 needsRaycast = false;
                 raycastEvent.Invoke();
             }
@@ -68,6 +69,11 @@ public class TutorialSectionStart : MonoBehaviour
             { 
                 raycastEvent.Invoke();
             }
+
+            if(hit.transform.gameObject.CompareTag("Crosskey") && needsRaycast && Input.GetKeyDown(KeyCode.E))
+            {
+                raycastEvent.Invoke();
+            }
         }
     }
 
@@ -79,5 +85,40 @@ public class TutorialSectionStart : MonoBehaviour
     public void NeedsSecondRaycast(bool need)
     {
         needsSecondRaycast = need;
+    }
+
+    public void CheckClues()
+    {
+        int count = 0;
+
+        if (needsCheck)
+        {
+            for (int i = 0; i < tutorialClues.Length; i++)
+            {
+                if (!tutorialClues[i].activeInHierarchy)
+                {
+                    count++;
+                }
+
+                if (count == 4)
+                {
+                    sectionStart.Invoke();
+                }
+            }
+        }
+    }
+
+    public void ReadHowTo()
+    {
+        sectionStart.Invoke();
+    }
+
+    public void TutorialComplete()
+    {
+        if (needsCheck)
+        {
+            needsCheck = false;
+            sectionStart.Invoke();
+        }
     }
 }
