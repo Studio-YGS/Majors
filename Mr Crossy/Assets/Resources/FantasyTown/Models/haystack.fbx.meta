@@ -1,34 +1,74 @@
 fileFormatVersion: 2
 guid: f7edcea4c518bfd42860a265bb5b57d8
-timeCreated: 1535877013
-licenseType: Store
 ModelImporter:
-  serializedVersion: 22
-  fileIDToRecycleName:
-    100000: //RootNode
-    100002: haystack
-    100004: haystack_collider
-    100006: haystack_lod
-    400000: //RootNode
-    400002: haystack
-    400004: haystack_collider
-    400006: haystack_lod
-    2100000: No Name
-    2300000: //RootNode
-    2300002: haystack
-    2300004: haystack_collider
-    2300006: haystack_lod
-    3300000: //RootNode
-    3300002: haystack
-    3300004: haystack_collider
-    3300006: haystack_lod
-    4300000: Plane
-    4300002: haystack
-    4300004: haystack_lod
-    4300006: haystack_collider
+  serializedVersion: 20200
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: //RootNode
+  - first:
+      1: 100002
+    second: haystack
+  - first:
+      1: 100004
+    second: haystack_collider
+  - first:
+      1: 100006
+    second: haystack_lod
+  - first:
+      4: 400000
+    second: //RootNode
+  - first:
+      4: 400002
+    second: haystack
+  - first:
+      4: 400004
+    second: haystack_collider
+  - first:
+      4: 400006
+    second: haystack_lod
+  - first:
+      21: 2100000
+    second: No Name
+  - first:
+      23: 2300000
+    second: //RootNode
+  - first:
+      23: 2300002
+    second: haystack
+  - first:
+      23: 2300004
+    second: haystack_collider
+  - first:
+      23: 2300006
+    second: haystack_lod
+  - first:
+      33: 3300000
+    second: //RootNode
+  - first:
+      33: 3300002
+    second: haystack
+  - first:
+      33: 3300004
+    second: haystack_collider
+  - first:
+      33: 3300006
+    second: haystack_lod
+  - first:
+      43: 4300000
+    second: Plane
+  - first:
+      43: 4300002
+    second: haystack
+  - first:
+      43: 4300004
+    second: haystack_lod
+  - first:
+      43: 4300006
+    second: haystack_collider
   externalObjects: {}
   materials:
-    importMaterials: 1
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -45,6 +85,7 @@ ModelImporter:
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
+    importConstraints: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
@@ -53,27 +94,37 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 1
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
     globalScale: 1
-    meshCompression: 0
+    meshCompression: 1
     addColliders: 0
-    importVisibility: 1
-    importBlendShapes: 1
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 0
+    importBlendShapes: 0
     importCameras: 1
     importLights: 1
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    bakeAxisConversion: 0
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 0
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
   tangentSpace:
@@ -81,10 +132,13 @@ ModelImporter:
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
-  importAnimation: 1
-  copyAvatar: 0
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -94,14 +148,17 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
-    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 0
   humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
   additionalBone: 0
   userData: 
   assetBundleName: 
