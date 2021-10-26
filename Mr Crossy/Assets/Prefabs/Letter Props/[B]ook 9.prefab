@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 2370776062221846070}
   - component: {fileID: 2370776062218978838}
   - component: {fileID: 2370776062219945174}
-  - component: {fileID: 2370776062223987894}
   - component: {fileID: -6385215712317637293}
   - component: {fileID: 5910765452603233233}
   - component: {fileID: 8982158879884296081}
+  - component: {fileID: 5093986275875431910}
   m_Layer: 0
   m_Name: '[B]ook 9'
   m_TagString: Untagged
@@ -85,20 +85,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &2370776062223987894
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2370776062221883926}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: fb15d29fe500abf48a90b434d7f38add, type: 3}
 --- !u!114 &-6385215712317637293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,8 +101,13 @@ MonoBehaviour:
   objectName: '[B]ook'
   image: {fileID: 0}
   textName: {fileID: 0}
+  imageTwo: {fileID: 0}
+  textNameTwo: {fileID: 0}
+  hand: {fileID: 0}
   thisObjectHeld: 0
   isPlacedDown: 1
+  beingInspected: 0
+  controller: {fileID: 0}
   ogScaleFactor: {x: 1, y: 1, z: 1}
   pickupRange: 5
   handOffset: {x: 0, y: 0.2, z: 0}
@@ -161,3 +152,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!65 &5093986275875431910
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2370776062221883926}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1910052, y: 0.03610446, z: 0.2631542}
+  m_Center: {x: -0.006710302, y: 0.0180522, z: -0.042798735}

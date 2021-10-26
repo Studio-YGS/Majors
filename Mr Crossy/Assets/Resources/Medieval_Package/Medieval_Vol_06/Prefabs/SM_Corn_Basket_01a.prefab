@@ -34,59 +34,6 @@ Transform:
   m_Father: {fileID: 8672580503057190972}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2384885507273467623
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5759824035885198267}
-  - component: {fileID: 3162569377094090964}
-  - component: {fileID: 8924014084334741882}
-  m_Layer: 0
-  m_Name: UCX_SM_Corn_Basket_01a_LOD0
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
---- !u!4 &5759824035885198267
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2384885507273467623}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 8672580503057190972}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &3162569377094090964
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2384885507273467623}
-  m_Mesh: {fileID: -4281707516838394749, guid: 91cae57abdcbe544db55a6e9584f886d, type: 3}
---- !u!65 &8924014084334741882
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2384885507273467623}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.34110832, y: 0.40607387, z: 0.6845522}
-  m_Center: {x: 0.19851398, y: 0.20620528, z: 0.348989}
 --- !u!1 &3206669834837338182
 GameObject:
   m_ObjectHideFlags: 0
@@ -285,6 +232,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8672580503057190972}
   - component: {fileID: 8081899277715621624}
+  - component: {fileID: 1360173767945584095}
   m_Layer: 0
   m_Name: SM_Corn_Basket_01a
   m_TagString: Untagged
@@ -304,7 +252,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7680331990707263394}
-  - {fileID: 5759824035885198267}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -316,8 +263,8 @@ LODGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5620610928755417647}
   serializedVersion: 2
-  m_LocalReferencePoint: {x: 0.19225882, y: 0.23042013, z: 0.34040698}
-  m_Size: 0.7220836
+  m_LocalReferencePoint: {x: 0.19296542, y: 0.23042013, z: 0.3403783}
+  m_Size: 0.7220263
   m_FadeMode: 0
   m_AnimateCrossFading: 0
   m_LastLODIsBillboard: 0
@@ -326,7 +273,6 @@ LODGroup:
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 5035263615387566171}
-    - renderer: {fileID: -4702706810989526544, guid: 91cae57abdcbe544db55a6e9584f886d, type: 3}
   - screenRelativeHeight: 0.125
     fadeTransitionWidth: 0
     renderers:
@@ -340,6 +286,19 @@ LODGroup:
     renderers:
     - renderer: {fileID: 6680070702894791617}
   m_Enabled: 1
+--- !u!65 &1360173767945584095
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5620610928755417647}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.2785348, y: 0.4093814, z: 0.663349}
+  m_Center: {x: 0.18336846, y: 0.20407718, z: 0.35716555}
 --- !u!1 &7560832501068328712
 GameObject:
   m_ObjectHideFlags: 0

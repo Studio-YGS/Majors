@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4446125353156597154}
   - component: {fileID: 3873185727047779174}
+  - component: {fileID: 6137941399323867273}
   m_Layer: 0
   m_Name: SM_Cooking_Station_01a
   m_TagString: Untagged
@@ -29,7 +30,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2198739735076850923}
-  - {fileID: 1508450191981400754}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -41,8 +41,8 @@ LODGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 858101391579097009}
   serializedVersion: 2
-  m_LocalReferencePoint: {x: -0.22740242, y: 0.75039726, z: 1.2904798}
-  m_Size: 2.5910447
+  m_LocalReferencePoint: {x: -0.22817367, y: 0.7515815, z: 1.2901295}
+  m_Size: 2.5870078
   m_FadeMode: 0
   m_AnimateCrossFading: 0
   m_LastLODIsBillboard: 0
@@ -51,7 +51,6 @@ LODGroup:
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 4861663615103194020}
-    - renderer: {fileID: -4875863516695032194, guid: 84d5e22968f2a824f91eb6f692774533, type: 3}
   - screenRelativeHeight: 0.125
     fadeTransitionWidth: 0
     renderers:
@@ -65,6 +64,19 @@ LODGroup:
     renderers:
     - renderer: {fileID: 2888029302996431039}
   m_Enabled: 1
+--- !u!65 &6137941399323867273
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 858101391579097009}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.32070118, y: 1.4273788, z: 2.1721554}
+  m_Center: {x: -0.19410652, y: 0.75694567, z: 1.309895}
 --- !u!1 &2401078644695761924
 GameObject:
   m_ObjectHideFlags: 0
@@ -99,59 +111,6 @@ Transform:
   m_Father: {fileID: 4446125353156597154}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2606735700915266296
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1508450191981400754}
-  - component: {fileID: 4150335610572540886}
-  - component: {fileID: 1491590218}
-  m_Layer: 0
-  m_Name: UCX_SM_Cooking_Station_01a_LOD0
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
---- !u!4 &1508450191981400754
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2606735700915266296}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4446125353156597154}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &4150335610572540886
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2606735700915266296}
-  m_Mesh: {fileID: -9185979857461673520, guid: 84d5e22968f2a824f91eb6f692774533, type: 3}
---- !u!65 &1491590218
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2606735700915266296}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.50673103, y: 1.5480397, z: 2.3115587}
-  m_Center: {x: -0.1757822, y: 0.75422776, z: 1.2646809}
 --- !u!1 &3394816503592135546
 GameObject:
   m_ObjectHideFlags: 0
