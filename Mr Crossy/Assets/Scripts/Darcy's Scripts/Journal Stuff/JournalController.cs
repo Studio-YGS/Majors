@@ -45,6 +45,9 @@ public class JournalController : MonoBehaviour
             GetComponent<TutorialSectionStart>().ReadHowTo();
 
             GetComponent<JournalTimer>().canCount = true;
+            GetComponent<JournalTimer>().StartTimer();
+
+            OpenMap();
         }
     }
 
