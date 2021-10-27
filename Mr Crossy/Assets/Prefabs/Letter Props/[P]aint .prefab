@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1813135493616765814}
   - component: {fileID: 3819257923254388374}
   - component: {fileID: 6357211986526080852}
+  - component: {fileID: 1093762942428223844}
   m_Layer: 0
   m_Name: '[P]aint '
   m_TagString: Untagged
@@ -150,8 +151,13 @@ MonoBehaviour:
   objectName: '[P]aint'
   image: {fileID: 0}
   textName: {fileID: 0}
+  imageTwo: {fileID: 0}
+  textNameTwo: {fileID: 0}
+  hand: {fileID: 0}
   thisObjectHeld: 0
   isPlacedDown: 1
+  beingInspected: 0
+  controller: {fileID: 0}
   ogScaleFactor: {x: 1, y: 1, z: 1}
   pickupRange: 5
   handOffset: {x: 0, y: 0.37, z: 0}
@@ -161,3 +167,15 @@ MonoBehaviour:
   rotationalSet: {x: 0, y: 0, z: 0, w: 0}
   distanceFromFace: 0.8
   updatePos: 0
+--- !u!114 &1093762942428223844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5404522233638024445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

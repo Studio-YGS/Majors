@@ -105,7 +105,6 @@ GameObject:
   - component: {fileID: 7375674034284249447}
   - component: {fileID: 8890925887567131906}
   - component: {fileID: 2362110365952307760}
-  - component: {fileID: 8409732534065950554}
   m_Layer: 0
   m_Name: SM_Double_Barrel_Stand_01a_LOD0
   m_TagString: Untagged
@@ -176,18 +175,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &8409732534065950554
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4556726431014601519}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5145759386438999118
 GameObject:
   m_ObjectHideFlags: 0
@@ -232,6 +219,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8836495792326307775}
   - component: {fileID: 8273698059458574715}
+  - component: {fileID: 6691466270229161993}
   m_Layer: 0
   m_Name: SM_Double_Barrel_Stand_01a
   m_TagString: Untagged
@@ -251,7 +239,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 9186551501608033451}
-  - {fileID: 4724371817366447468}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -263,9 +250,9 @@ LODGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5546978721627446700}
   serializedVersion: 2
-  m_LocalReferencePoint: {x: 0.0016360879, y: 0.89836794, z: -0.0024451017}
-  m_Size: 1.8238972
-  m_FadeMode: 0
+  m_LocalReferencePoint: {x: 0.0011849403, y: 0.8967639, z: -0.003513813}
+  m_Size: 1.8206892
+  m_FadeMode: 1
   m_AnimateCrossFading: 0
   m_LastLODIsBillboard: 0
   m_LODs:
@@ -273,7 +260,6 @@ LODGroup:
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 2362110365952307760}
-    - renderer: {fileID: 7283119677575878433, guid: fbed93cb6dcb1e244840f11efd19cc41, type: 3}
   - screenRelativeHeight: 0.125
     fadeTransitionWidth: 0
     renderers:
@@ -287,6 +273,19 @@ LODGroup:
     renderers:
     - renderer: {fileID: 2680398276468187155}
   m_Enabled: 1
+--- !u!65 &6691466270229161993
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5546978721627446700}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5890074, y: 1.7915238, z: 1.4200116}
+  m_Center: {x: -0.009815335, y: 0.8647619, z: 0.0058109164}
 --- !u!1 &6548635965228017914
 GameObject:
   m_ObjectHideFlags: 0
@@ -475,56 +474,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &8653236175387758195
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4724371817366447468}
-  - component: {fileID: 3327613447799635491}
-  - component: {fileID: 1482156309}
-  m_Layer: 0
-  m_Name: UCX_SM_Double_Barrel_Stand_01a_LOD0
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
---- !u!4 &4724371817366447468
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8653236175387758195}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 8836495792326307775}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &3327613447799635491
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8653236175387758195}
-  m_Mesh: {fileID: 2523736652823088278, guid: fbed93cb6dcb1e244840f11efd19cc41, type: 3}
---- !u!65 &1482156309
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8653236175387758195}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.7071953, y: 1.768898, z: 1.4164648}
-  m_Center: {x: -0.022777557, y: 0.88863945, z: 0.010539532}

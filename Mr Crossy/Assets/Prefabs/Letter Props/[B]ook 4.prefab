@@ -11,10 +11,11 @@ GameObject:
   - component: {fileID: 689199809050561644}
   - component: {fileID: 689199809047661644}
   - component: {fileID: 689199809048661644}
-  - component: {fileID: 689199809052966636}
   - component: {fileID: 7321634726099067156}
   - component: {fileID: 555291452407464417}
   - component: {fileID: 6491894902331599093}
+  - component: {fileID: 8967897494863210278}
+  - component: {fileID: -1481736707406492073}
   m_Layer: 0
   m_Name: '[B]ook 4'
   m_TagString: Untagged
@@ -85,20 +86,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &689199809052966636
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 689199809050857548}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 42664d695f255514caba5d401bdd43a4, type: 3}
 --- !u!54 &7321634726099067156
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -131,8 +118,13 @@ MonoBehaviour:
   objectName: '[B]ook'
   image: {fileID: 0}
   textName: {fileID: 0}
+  imageTwo: {fileID: 0}
+  textNameTwo: {fileID: 0}
+  hand: {fileID: 0}
   thisObjectHeld: 0
   isPlacedDown: 1
+  beingInspected: 0
+  controller: {fileID: 0}
   ogScaleFactor: {x: 1, y: 1, z: 1}
   pickupRange: 5
   handOffset: {x: 0, y: 0.2, z: 0}
@@ -161,3 +153,28 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!65 &8967897494863210278
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 689199809050857548}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.15000008, y: 0.020000031, z: 0.20000002}
+  m_Center: {x: 0.000000037252903, y: 0.009999984, z: -0.09999998}
+--- !u!114 &-1481736707406492073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 689199809050857548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

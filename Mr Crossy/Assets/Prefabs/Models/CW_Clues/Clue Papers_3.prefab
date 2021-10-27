@@ -11,9 +11,11 @@ GameObject:
   - component: {fileID: 4243912585761779188}
   - component: {fileID: 5714348152770818817}
   - component: {fileID: 2538133991295200750}
+  - component: {fileID: 51697580}
+  - component: {fileID: 3373365152992124099}
   m_Layer: 0
   m_Name: Clue Papers_3
-  m_TagString: Untagged
+  m_TagString: Clue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4978336345299039569}
-  m_LocalRotation: {x: -0.00000000943234, y: 0.00000032807225, z: 0.16734125, w: 0.98589903}
+  m_LocalRotation: {x: 0, y: 0, z: 0.16734517, w: 0.9858984}
   m_LocalPosition: {x: 0.42931092, y: -0.122932136, z: -0.036904097}
   m_LocalScale: {x: 0.038221687, y: 0.038221687, z: 0.038221687}
   m_Children: []
@@ -96,3 +98,76 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 9.433838, y: 4.9003673, z: 0.832135}
   m_Center: {x: 0.36401772, y: 0.21044916, z: -0.31606758}
+--- !u!114 &51697580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4978336345299039569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09463e7ee10f0b34789d13e83f628649, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickUp:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4978336345299039569}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3373365152992124099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4978336345299039569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 929ec0948db3c3b40b45ee8e9d981a2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sectionStart:
+    m_PersistentCalls:
+      m_Calls: []
+  steppingAway:
+    m_PersistentCalls:
+      m_Calls: []
+  raycastEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: AnimationControl, Assembly-CSharp
+        m_MethodName: TutorialAnimations
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: tutorial_0.2
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3373365152992124099}
+        m_TargetAssemblyTypeName: TutorialSectionStart, Assembly-CSharp
+        m_MethodName: NeedsRaycast
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  needsRaycast: 1

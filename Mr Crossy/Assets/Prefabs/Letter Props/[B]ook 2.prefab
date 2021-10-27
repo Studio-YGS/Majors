@@ -11,10 +11,11 @@ GameObject:
   - component: {fileID: 5341828002195998788}
   - component: {fileID: 5341828002195228772}
   - component: {fileID: 5341828002194229924}
-  - component: {fileID: 5341828002198534852}
   - component: {fileID: 8294143820839484756}
   - component: {fileID: 6133205245246883114}
   - component: {fileID: 5729189577890805480}
+  - component: {fileID: 1042164027554761586}
+  - component: {fileID: -606278342590500347}
   m_Layer: 0
   m_Name: '[B]ook 2'
   m_TagString: Untagged
@@ -85,20 +86,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &5341828002198534852
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5341828002196427876}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: b0fc362502d52434387b27402b210185, type: 3}
 --- !u!114 &8294143820839484756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,8 +102,13 @@ MonoBehaviour:
   objectName: '[B]ook'
   image: {fileID: 0}
   textName: {fileID: 0}
+  imageTwo: {fileID: 0}
+  textNameTwo: {fileID: 0}
+  hand: {fileID: 0}
   thisObjectHeld: 0
   isPlacedDown: 1
+  beingInspected: 0
+  controller: {fileID: 0}
   ogScaleFactor: {x: 1, y: 1, z: 1}
   pickupRange: 5
   handOffset: {x: 0, y: 0, z: 0}
@@ -161,3 +153,28 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!65 &1042164027554761586
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5341828002196427876}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1910052, y: 0.03610446, z: 0.2631542}
+  m_Center: {x: -0.006710302, y: 0.0180522, z: -0.042798735}
+--- !u!114 &-606278342590500347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5341828002196427876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
