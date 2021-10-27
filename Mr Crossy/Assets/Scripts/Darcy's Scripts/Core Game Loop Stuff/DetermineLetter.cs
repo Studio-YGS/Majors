@@ -13,6 +13,7 @@ public class DetermineLetter : MonoBehaviour
     [Tooltip("Any altars that this letter overlaps")]
     public GameObject[] overlappedAltars;
 
+    [SerializeField]
     PuzzleController puzzleController;
 
     string firstLetter, wholeName; //the first letter of the the name of the object placed on the altar, and the entire name
@@ -48,8 +49,6 @@ public class DetermineLetter : MonoBehaviour
 
     void SendLetterAndName(string letter) //sending the letter to the controller, as well as the name of the object it came from
     {
-        puzzleController = FindObjectOfType<PuzzleController>();
-
         puzzleController.ReceiveLetterAndName(letter, gameObject.name);
     }
 }

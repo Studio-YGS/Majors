@@ -8,10 +8,11 @@ using TMPro;
 
 public class PuzzleController : MonoBehaviour
 {
-    //[HideInInspector]
     public GameObject wordObject;
 
-    //[HideInInspector]
+    [SerializeField]
+    GameObject[] assignedAltars;
+
     public string word;
 
     [SerializeField]
@@ -27,9 +28,17 @@ public class PuzzleController : MonoBehaviour
 
     string playersWord, letter, altarName;
 
-    public UnityEvent winEvent, loseEvent, tutorialEvent;
+    public UnityEvent winEvent, loseEvent, tutorialEvent, tutorialMistakeEvent;
 
     public bool tutorial;
+
+    void Start()
+    {
+        if (tutorial)
+        {
+            SetUpLetters();
+        }
+    }
 
     public void SetUpLetters()
     {
@@ -77,10 +86,14 @@ public class PuzzleController : MonoBehaviour
         }
 
         playersWordLength = playersWord.ToIntArray().Length;
-        Debug.Log(playersWordLength);
+        Debug.Log("Players word: " + playersWord + " is " + playersWordLength + " long.");
 
         if (tutorial)
         {
+            TutorialController tutorialController = FindObjectOfType<TutorialController>();
+
+            tutorialController.ChangeConLetter(letter);
+
             tutorialEvent.Invoke();
             tutorial = false;
         }
@@ -95,6 +108,12 @@ public class PuzzleController : MonoBehaviour
             mistakeCount--;
             mistakeText.text = "Mistakes remaining: " + mistakeCount;
 
+            if (gameObject.name.Contains("Tutorial"))
+            {
+                Debug.Log("TUTORIAL MISTAKE");
+                tutorialMistakeEvent.Invoke();
+            }
+
             if(mistakeCount == 0)
             {
                 GameOver();
@@ -102,9 +121,24 @@ public class PuzzleController : MonoBehaviour
         }
     }
 
+    public void DisableAltars()
+    {
+        for(int i = 0; i < assignedAltars.Length; i++)
+        {
+            assignedAltars[i].GetComponentInChildren<ObjectPlacement>().enabled = false;
+        }
+    }
+
     void CompletionCheck()
     {
         completedWords++;
+
+        if(completedWords == 3)
+        {
+            TutorialSectionStart tutorialSectionStart = GetComponent<TutorialSectionStart>();
+
+            tutorialSectionStart.TutorialComplete();
+        }
 
         if(completedWords == wordsInPuzzle)
         {

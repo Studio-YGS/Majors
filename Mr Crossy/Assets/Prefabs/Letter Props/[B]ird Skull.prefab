@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 8917147078859691699}
   - component: {fileID: 7924055685931026255}
   - component: {fileID: 4112084018408115230}
-  - component: {fileID: 2507103315148724299}
   - component: {fileID: 2590027944237870829}
   - component: {fileID: 3223085717234663486}
+  - component: {fileID: 2116060081661269397}
+  - component: {fileID: -865405080608735443}
   m_Layer: 0
   m_Name: '[B]ird Skull'
   m_TagString: Untagged
@@ -101,20 +102,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!64 &2507103315148724299
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2601460497090204088}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 2783131832183395012, guid: ae7ef7475c66f4f44b42239d2987eaba, type: 3}
 --- !u!114 &2590027944237870829
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,8 +137,13 @@ MonoBehaviour:
   objectName: '[B]ird Skull'
   image: {fileID: 0}
   textName: {fileID: 0}
+  imageTwo: {fileID: 0}
+  textNameTwo: {fileID: 0}
+  hand: {fileID: 0}
   thisObjectHeld: 0
   isPlacedDown: 1
+  beingInspected: 0
+  controller: {fileID: 0}
   ogScaleFactor: {x: 0.25, y: 0.25, z: 0.25}
   pickupRange: 5
   handOffset: {x: 0.14, y: 0.31, z: -0.05}
@@ -161,3 +153,28 @@ MonoBehaviour:
   rotationalSet: {x: 0, y: 1, z: 0, w: -0.00000004371139}
   distanceFromFace: 0.4
   updatePos: 0
+--- !u!135 &2116060081661269397
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2601460497090204088}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.105227195
+  m_Center: {x: 0.016724408, y: 0.020540189, z: 0.0034099296}
+--- !u!114 &-865405080608735443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2601460497090204088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
