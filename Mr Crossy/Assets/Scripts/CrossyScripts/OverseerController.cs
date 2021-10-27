@@ -5,7 +5,7 @@ using BehaviorDesigner.Runtime;
 
 public class OverseerController : MonoBehaviour
 {
-    static BehaviorTree ObserverTree;
+    BehaviorTree ObserverTree;
     CrossyTheWatcher titan;
 
     #region Fields
@@ -107,7 +107,7 @@ public class OverseerController : MonoBehaviour
     }
 
 
-    public static void AwakenObserver()
+    public void AwakenObserver()
     {
         ObserverTree.enabled = true;
     }
@@ -164,5 +164,7 @@ public class OverseerController : MonoBehaviour
         }
         storedDist = 0;
         Debug.Log("EndLight");
+
+        
     }
 }

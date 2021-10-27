@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using BehaviorDesigner.Runtime;
 
+
+//If you want stuff to happen when mr crossy attacks you, stuff it in the "Dead" method way down yonder
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(NavMeshAgent))]
 public class CrossyController : MonoBehaviour
 {
+    BehaviorTree crossyTree;
     Animator animator;
     NavMeshAgent agent;
 
@@ -115,6 +119,7 @@ public class CrossyController : MonoBehaviour
 
     private void Start()
     {
+        
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         m_Mask = agent.areaMask;
@@ -179,6 +184,10 @@ public class CrossyController : MonoBehaviour
         tSpeed = velocity.x;
     }
 
+    public void ForceDespawn()
+    {
+        crossyTree.SendEvent("Despawn");
+    }
 
     private void OnAnimatorIK(int layerIndex)
     {
@@ -232,5 +241,21 @@ public class CrossyController : MonoBehaviour
                 }
             }
         }
+
+    }
+
+    public void OnEnable()
+    {
+        crossyTree = GetComponent<BehaviorTree>();
+        crossyTree.RegisterEvent("DeadNoises", Dead);
+    }
+
+    public void Dead()
+    {
+        Debug.Log("PotatoSammichs");
+    }
+    public void OnDisable()
+    {
+        crossyTree.UnregisterEvent("DeadNoises", Dead);
     }
 }
