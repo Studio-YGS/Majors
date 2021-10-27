@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8787881843905929567}
   - component: {fileID: 5570404399036143572}
   - component: {fileID: 9000139664762419533}
+  - component: {fileID: -938806518128190957}
   m_Layer: 0
   m_Name: '[F]ire Fork'
   m_TagString: Untagged
@@ -115,8 +116,13 @@ MonoBehaviour:
   objectName: '[F]ire Fork'
   image: {fileID: 0}
   textName: {fileID: 0}
+  imageTwo: {fileID: 0}
+  textNameTwo: {fileID: 0}
+  hand: {fileID: 0}
   thisObjectHeld: 0
   isPlacedDown: 1
+  beingInspected: 0
+  controller: {fileID: 0}
   ogScaleFactor: {x: 0.5, y: 0.5, z: 0.5}
   pickupRange: 5
   handOffset: {x: 0.5, y: -0.54, z: 0.08}
@@ -161,3 +167,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!114 &-938806518128190957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1914142335412857743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
