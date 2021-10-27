@@ -47,11 +47,19 @@ public class CrossyController : MonoBehaviour
     private float m_DistanceToCorner;
 
     private int m_Mask;
+    private bool m_InSight = false;
+    private bool m_InPeripheral = false;
     private bool m_ShouldRun = false;
     private int m_State = -1;
     [Space(10)]
     [Header("Detection Variables")]
     [SerializeField] private float m_DetectionTime;
+    [Space(10)]
+    [SerializeField] private float m_FocalViewCone;
+    [SerializeField] private float m_PeripheralViewCone;
+    [Space(10)]
+    [SerializeField] private float m_FocalViewDist;
+    [SerializeField] private float m_PeripheralViewDist;
 
     [Space(10)]
     [Header("IK Variables")]
@@ -78,18 +86,25 @@ public class CrossyController : MonoBehaviour
 
     public int NavMeshMask { get { return m_Mask; } }
     public bool ShouldRun { get { return m_ShouldRun; } set { m_ShouldRun = value; } }
+    public bool InSight { get { return m_InSight; } set { m_InSight = value; } }
+    public bool InPeripheral { get { return m_InPeripheral; } set { m_InPeripheral = value; } }
     public int State { get { return m_State; } set { m_State = value; } }
     public Vector3 CrossyDespawn { get { return m_CrossyDespawn.position; } set { m_CrossyDespawn.position = value; } }
 
     public float BaseDetectTime { get { return m_DetectionTime; } }
     public float CloseDetectTime { get { return m_DetectionTime*3; } }
+
+    public float FocalViewCone { get { return m_FocalViewCone; } set { m_FocalViewCone = value; } }
+    public float PeripheralViewCone { get { return m_PeripheralViewCone; } set { m_PeripheralViewCone = value; } }
+    public float FocalViewDist { get { return m_FocalViewDist; } set { m_FocalViewDist = value; } }
+    public float PeripheralViewDist { get { return m_PeripheralViewDist; } set { m_PeripheralViewDist = value; } }
     #endregion
 
     [Space(10)]
     [SerializeField] float mSpeed;
     [SerializeField] float tSpeed;
     //[SerializeField] float veloDesire;
-    [SerializeField] float interpolator;
+    float interpolator;
 
     /*[Space(10)]
     [Header("Debuggles")]
@@ -144,6 +159,9 @@ public class CrossyController : MonoBehaviour
         Acceleration = (accelManipulation) ? Mathf.Lerp(m_BaseAcceleration, m_CornerAcceleration, interpolator) : m_BaseAcceleration;
 
         agent.acceleration = Acceleration;
+
+        if (m_InSight || m_InPeripheral) lookCondition = true;
+        else lookCondition = false;
 
         GetMotionHashValues();
 
