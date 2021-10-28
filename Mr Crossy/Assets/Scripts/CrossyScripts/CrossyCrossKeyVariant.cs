@@ -56,7 +56,12 @@ public class CrossyCrossKeyVariant : MonoBehaviour
         animator.SetBool("Moving", veloMag >= 0.05);
         animator.SetFloat("VelocityMag", veloMag);
 
-        if (agent.remainingDistance <= distanceToAtk && door.puzzleOn == true) { animator.SetTrigger("DoSwing"); animator.SetBool("CanSwing", true); FindObjectOfType<CrossKeyManager>().PuzzleDeath(); }
+        if (agent.remainingDistance <= distanceToAtk && door.puzzleOn == true) 
+        { 
+            animator.SetTrigger("DoSwing"); 
+            animator.SetBool("CanSwing", true); 
+            FindObjectOfType<CrossKeyManager>().PuzzleDeath(); 
+        }
         else animator.SetBool("CanSwing", false);
     }
 
