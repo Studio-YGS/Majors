@@ -5,7 +5,7 @@ using BehaviorDesigner.Runtime;
 
 public class OverseerController : MonoBehaviour
 {
-    BehaviorTree ObserverTree;
+    public static BehaviorTree ObserverTree;
     CrossyTheWatcher titan;
 
     #region Fields
@@ -85,9 +85,10 @@ public class OverseerController : MonoBehaviour
         ObserverTree = gameObject.GetComponent<BehaviorTree>();
         if (startOnAwake)
         {
-            AwakenObserver();
+            TreeMalarkey.EnableTree(ObserverTree);
+            //AwakenObserver();
         }
-        else ObserverTree.DisableBehavior();
+        else TreeMalarkey.DisableTree(ObserverTree);
         titan = m_TitanCrossy.GetComponent<CrossyTheWatcher>();
     }
 

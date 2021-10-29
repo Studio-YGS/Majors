@@ -11,7 +11,7 @@ using BehaviorDesigner.Runtime;
 [RequireComponent(typeof(NavMeshAgent))]
 public class CrossyController : MonoBehaviour
 {
-    BehaviorTree crossyTree;
+    public static BehaviorTree crossyTree;
     Animator animator;
     NavMeshAgent agent;
 
@@ -117,9 +117,9 @@ public class CrossyController : MonoBehaviour
     [SerializeField] private Quaternion showRightRotation;
     */
 
-    private void Start()
+    private void Awake()
     {
-        
+        crossyTree = GetComponent<BehaviorTree>();
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         m_Mask = agent.areaMask;
@@ -247,10 +247,13 @@ public class CrossyController : MonoBehaviour
     // Behaviour Tree Events
     public void OnEnable()
     {
-        crossyTree = GetComponent<BehaviorTree>();
-        crossyTree.RegisterEvent("DeadNoises", CrossyAttack);
+        
     }
 
+    public void CrossyBoBossy()
+    {
+        Debug.Log("PotatoSammichsTWOOOS");
+    }
     public void CrossyAttack()
     {
         Debug.Log("PotatoSammichs");
@@ -258,5 +261,6 @@ public class CrossyController : MonoBehaviour
     public void OnDisable()
     {
         crossyTree.UnregisterEvent("DeadNoises", CrossyAttack);
+        crossyTree.UnregisterEvent("DeadNoises", CrossyBoBossy);
     }
 }
