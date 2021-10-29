@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using BehaviorDesigner.Runtime;
 
+
+//If you want stuff to happen when mr crossy attacks you, stuff it in the "CrossyAttack" method way down yonder
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(NavMeshAgent))]
 public class CrossyController : MonoBehaviour
 {
+    public static BehaviorTree crossyTree;
     Animator animator;
     NavMeshAgent agent;
 
@@ -47,11 +51,19 @@ public class CrossyController : MonoBehaviour
     private float m_DistanceToCorner;
 
     private int m_Mask;
+    private bool m_InSight = false;
+    private bool m_InPeripheral = false;
     private bool m_ShouldRun = false;
     private int m_State = -1;
     [Space(10)]
     [Header("Detection Variables")]
     [SerializeField] private float m_DetectionTime;
+    [Space(10)]
+    [SerializeField] private float m_FocalViewCone;
+    [SerializeField] private float m_PeripheralViewCone;
+    [Space(10)]
+    [SerializeField] private float m_FocalViewDist;
+    [SerializeField] private float m_PeripheralViewDist;
 
     [Space(10)]
     [Header("IK Variables")]
@@ -78,18 +90,25 @@ public class CrossyController : MonoBehaviour
 
     public int NavMeshMask { get { return m_Mask; } }
     public bool ShouldRun { get { return m_ShouldRun; } set { m_ShouldRun = value; } }
+    public bool InSight { get { return m_InSight; } set { m_InSight = value; } }
+    public bool InPeripheral { get { return m_InPeripheral; } set { m_InPeripheral = value; } }
     public int State { get { return m_State; } set { m_State = value; } }
     public Vector3 CrossyDespawn { get { return m_CrossyDespawn.position; } set { m_CrossyDespawn.position = value; } }
 
     public float BaseDetectTime { get { return m_DetectionTime; } }
     public float CloseDetectTime { get { return m_DetectionTime*3; } }
+
+    public float FocalViewCone { get { return m_FocalViewCone; } set { m_FocalViewCone = value; } }
+    public float PeripheralViewCone { get { return m_PeripheralViewCone; } set { m_PeripheralViewCone = value; } }
+    public float FocalViewDist { get { return m_FocalViewDist; } set { m_FocalViewDist = value; } }
+    public float PeripheralViewDist { get { return m_PeripheralViewDist; } set { m_PeripheralViewDist = value; } }
     #endregion
 
     [Space(10)]
     [SerializeField] float mSpeed;
     [SerializeField] float tSpeed;
     //[SerializeField] float veloDesire;
-    [SerializeField] float interpolator;
+    float interpolator;
 
     /*[Space(10)]
     [Header("Debuggles")]
@@ -98,8 +117,9 @@ public class CrossyController : MonoBehaviour
     [SerializeField] private Quaternion showRightRotation;
     */
 
-    private void Start()
+    private void Awake()
     {
+        crossyTree = GetComponent<BehaviorTree>();
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         m_Mask = agent.areaMask;
@@ -145,6 +165,9 @@ public class CrossyController : MonoBehaviour
 
         agent.acceleration = Acceleration;
 
+        if (m_InSight || m_InPeripheral) lookCondition = true;
+        else lookCondition = false;
+
         GetMotionHashValues();
 
         //Animator Actions
@@ -161,6 +184,10 @@ public class CrossyController : MonoBehaviour
         tSpeed = velocity.x;
     }
 
+    public void ForceDespawn()
+    {
+        crossyTree.SendEvent("Despawn");
+    }
 
     private void OnAnimatorIK(int layerIndex)
     {
@@ -214,5 +241,26 @@ public class CrossyController : MonoBehaviour
                 }
             }
         }
+
+    }
+
+    // Behaviour Tree Events
+    public void OnEnable()
+    {
+        
+    }
+
+    public void CrossyBoBossy()
+    {
+        Debug.Log("PotatoSammichsTWOOOS");
+    }
+    public void CrossyAttack()
+    {
+        Debug.Log("PotatoSammichs");
+    }
+    public void OnDisable()
+    {
+        crossyTree.UnregisterEvent("DeadNoises", CrossyAttack);
+        crossyTree.UnregisterEvent("DeadNoises", CrossyBoBossy);
     }
 }

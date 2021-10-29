@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5856776860116481495}
   - component: {fileID: 2684718696610196225}
   - component: {fileID: 3867676897424019865}
+  - component: {fileID: -3670049866294976496}
   m_Layer: 0
   m_Name: '[L]adle 1'
   m_TagString: Untagged
@@ -115,8 +116,13 @@ MonoBehaviour:
   objectName: '[L]adle'
   image: {fileID: 0}
   textName: {fileID: 0}
+  imageTwo: {fileID: 0}
+  textNameTwo: {fileID: 0}
+  hand: {fileID: 0}
   thisObjectHeld: 0
   isPlacedDown: 1
+  beingInspected: 0
+  controller: {fileID: 0}
   ogScaleFactor: {x: 0.75, y: 0.75, z: 0.75}
   pickupRange: 5
   handOffset: {x: 0.21, y: -0.07, z: 0}
@@ -161,3 +167,15 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &-3670049866294976496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8183735972765084029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

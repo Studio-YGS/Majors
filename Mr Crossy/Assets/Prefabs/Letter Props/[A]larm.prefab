@@ -11,10 +11,11 @@ GameObject:
   - component: {fileID: 9175606380571476920}
   - component: {fileID: 9175606380574344088}
   - component: {fileID: 9175606380573245784}
-  - component: {fileID: 9175606380569227576}
   - component: {fileID: 4545433389659611963}
   - component: {fileID: -5344028431384579827}
   - component: {fileID: 2717212352555689234}
+  - component: {fileID: 480496035530620301}
+  - component: {fileID: 5426420240911530345}
   m_Layer: 0
   m_Name: '[A]larm'
   m_TagString: Untagged
@@ -85,20 +86,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &9175606380569227576
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9175606380571320216}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 986404243f259f246a9f0aff49f0c6bf, type: 3}
 --- !u!54 &4545433389659611963
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -150,8 +137,14 @@ MonoBehaviour:
   objectName: '[A]larm'
   image: {fileID: 0}
   textName: {fileID: 0}
+  imageTwo: {fileID: 0}
+  textNameTwo: {fileID: 0}
+  hand: {fileID: 0}
   thisObjectHeld: 1
   isPlacedDown: 0
+  beingInspected: 0
+  controller: {fileID: 0}
+  ogScaleFactor: {x: 0, y: 0, z: 0}
   pickupRange: 5.07
   handOffset: {x: -0.01, y: 0.31, z: -0.13}
   handRotation: {x: -0.013247581, y: -0.97383285, z: -0.05887987, w: 0.21910559}
@@ -160,3 +153,28 @@ MonoBehaviour:
   rotationalSet: {x: 0.004363309, y: 0.99999046, z: -1.907263e-10, w: -0.000000043710973}
   distanceFromFace: 0.5
   updatePos: 0
+--- !u!65 &480496035530620301
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9175606380571320216}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.114400014, y: 0.059796154, z: 0.057200015}
+  m_Center: {x: 0, y: 0.029898077, z: -0.028159998}
+--- !u!114 &5426420240911530345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9175606380571320216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

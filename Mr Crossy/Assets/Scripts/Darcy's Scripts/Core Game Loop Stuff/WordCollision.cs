@@ -4,20 +4,19 @@ using UnityEngine;
 
 public class WordCollision : MonoBehaviour
 {
-    string word;
+    public string word;
 
     [SerializeField, Tooltip("The object on the canvas with the TMP components as its children")]
     GameObject wordObject;
 
+    [SerializeField]
     PuzzleController wordControl;
 
     RespawnWordColliders respawn;
 
     void Start()
     {
-        word = gameObject.name;
         respawn = FindObjectOfType<RespawnWordColliders>();
-        wordControl = FindObjectOfType<PuzzleController>();
     }
 
     void OnTriggerEnter(Collider other)
