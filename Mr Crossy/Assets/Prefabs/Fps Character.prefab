@@ -274,6 +274,7 @@ GameObject:
   - component: {fileID: 3960544938577410215}
   - component: {fileID: 323171010441254327}
   - component: {fileID: 464876266}
+  - component: {fileID: 4501606300730059303}
   m_Layer: 2
   m_Name: Fps Character
   m_TagString: GameController
@@ -367,6 +368,60 @@ MonoBehaviour:
   - 0
   - 0
   - 0
+--- !u!114 &4501606300730059303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8487632906480231147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f117d867511de444489363cc988124d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numOfKeys: 1
+  hintArea: {fileID: 0}
+  keyPuzzles:
+  - numOfLetters: 6
+    crossKey: {fileID: 6358591642356368007, guid: 25a51d19823ec924ab10e8a95f42a9b9, type: 3}
+    puzzleOptions:
+    - hint: you are currently being ...
+      wordToSolve: chased
+      keyToothWordOne: STAY
+      wordOneSetBack: 1
+      keyToothWordTwo: DIE
+      wordTwoSetBack: 0
+  - numOfLetters: 4
+    crossKey: {fileID: 3176498184418548290, guid: 4b6eddc0002b4304bb218894d0a5afeb, type: 3}
+    puzzleOptions:
+    - hint: A destructive emotion
+      wordToSolve: hate
+      keyToothWordOne: 
+      wordOneSetBack: 0
+      keyToothWordTwo: eye
+      wordTwoSetBack: 0
+  - numOfLetters: 5
+    crossKey: {fileID: 6614734635026173717, guid: fe4f96a5424b21c45aefc1310409f7dc, type: 3}
+    puzzleOptions:
+    - hint: Blood flows through them
+      wordToSolve: veins
+      keyToothWordOne: iced
+      wordOneSetBack: 0
+      keyToothWordTwo: son
+      wordTwoSetBack: 0
+  - numOfLetters: 7
+    crossKey: {fileID: 7740336926440309796, guid: ea721730d4f932a4db99de5336d7cf95, type: 3}
+    puzzleOptions:
+    - hint: relief and happiness
+      wordToSolve: comfort
+      keyToothWordOne: find
+      wordOneSetBack: 0
+      keyToothWordTwo: ten
+      wordTwoSetBack: 1
+  puzzleOn: 0
+  controller: {fileID: 0}
+  headBob: {fileID: 0}
 --- !u!1 &8487632906824986559
 GameObject:
   m_ObjectHideFlags: 0
