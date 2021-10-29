@@ -26,6 +26,7 @@ public class WordCollision : MonoBehaviour
             wordControl.wordObject = wordObject;
             wordControl.word = word;
             wordControl.SetUpLetters();
+            wordControl.storedObjects.Clear();
 
             respawn.RespawnColliders();
 
