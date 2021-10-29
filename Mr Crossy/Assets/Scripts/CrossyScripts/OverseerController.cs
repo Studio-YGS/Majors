@@ -39,6 +39,7 @@ public class OverseerController : MonoBehaviour
     [Header("Titan Crossy Placement")]
     [SerializeField] private float m_CheckRadius;
     private int m_State;
+    private bool m_HideTitan;
     #endregion
 
     #region Properties
@@ -62,6 +63,7 @@ public class OverseerController : MonoBehaviour
 
     public Vector3 ValidationPosition { get { return m_ValidationPosition; } }
     public int State { get { return m_State; } set { m_State = value; } }
+    public bool HideTitan { get { return m_HideTitan; } set { m_HideTitan = value; } }
 
     public List<GameObject> SpawnLightHouses { get { return m_SpawnLighthouses; } }
 
@@ -76,7 +78,6 @@ public class OverseerController : MonoBehaviour
     public float currDist;
     private float storedDist = 0;
 
-    [SerializeField] private bool doing;
 
     private void Awake()
     {
@@ -85,7 +86,8 @@ public class OverseerController : MonoBehaviour
         if (startOnAwake)
         {
             AwakenObserver();
-        } else ObserverTree.enabled = false;
+        }
+        else ObserverTree.DisableBehavior();
         titan = m_TitanCrossy.GetComponent<CrossyTheWatcher>();
     }
 
@@ -94,6 +96,7 @@ public class OverseerController : MonoBehaviour
         if (usePositioner) m_ValidationPosition = validationPositioner.transform.position;
 
         titan.m_state = m_State;
+        titan.hidingTitan = m_HideTitan;
 
         if(m_State == -1)
         {
@@ -109,7 +112,7 @@ public class OverseerController : MonoBehaviour
 
     public void AwakenObserver()
     {
-        ObserverTree.enabled = true;
+        ObserverTree.EnableBehavior();
     }
 
     public bool LeftRadius()
