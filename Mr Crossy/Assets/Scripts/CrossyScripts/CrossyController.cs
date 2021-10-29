@@ -5,7 +5,7 @@ using UnityEngine.AI;
 using BehaviorDesigner.Runtime;
 
 
-//If you want stuff to happen when mr crossy attacks you, stuff it in the "Dead" method way down yonder
+//If you want stuff to happen when mr crossy attacks you, stuff it in the "CrossyAttack" method way down yonder
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(NavMeshAgent))]
@@ -244,18 +244,19 @@ public class CrossyController : MonoBehaviour
 
     }
 
+    // Behaviour Tree Events
     public void OnEnable()
     {
         crossyTree = GetComponent<BehaviorTree>();
-        crossyTree.RegisterEvent("DeadNoises", Dead);
+        crossyTree.RegisterEvent("DeadNoises", CrossyAttack);
     }
 
-    public void Dead()
+    public void CrossyAttack()
     {
         Debug.Log("PotatoSammichs");
     }
     public void OnDisable()
     {
-        crossyTree.UnregisterEvent("DeadNoises", Dead);
+        crossyTree.UnregisterEvent("DeadNoises", CrossyAttack);
     }
 }
