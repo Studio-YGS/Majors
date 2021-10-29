@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1229897634108148663}
   - component: {fileID: 4211372462416081441}
   - component: {fileID: 3868461427464644816}
+  - component: {fileID: 8165443386400831080}
   m_Layer: 0
   m_Name: '[C]utting Board 1'
   m_TagString: Untagged
@@ -115,8 +116,13 @@ MonoBehaviour:
   objectName: '[C]utting Board'
   image: {fileID: 0}
   textName: {fileID: 0}
+  imageTwo: {fileID: 0}
+  textNameTwo: {fileID: 0}
+  hand: {fileID: 0}
   thisObjectHeld: 0
   isPlacedDown: 1
+  beingInspected: 0
+  controller: {fileID: 0}
   ogScaleFactor: {x: 0.5, y: 0.5, z: 0.5}
   pickupRange: 5
   handOffset: {x: 0, y: 0.18, z: 0}
@@ -161,3 +167,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8165443386400831080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2946072328860419617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

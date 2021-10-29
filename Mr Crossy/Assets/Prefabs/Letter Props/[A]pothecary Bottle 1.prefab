@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 5724049869838498153}
   - component: {fileID: 7533148123846725027}
   - component: {fileID: 1284009116626644594}
-  - component: {fileID: 7386001089106992293}
   - component: {fileID: 443880386994115349}
   - component: {fileID: -2964094346164277147}
+  - component: {fileID: 4693701347625553398}
+  - component: {fileID: -8270225350432394378}
   m_Layer: 0
   m_Name: '[A]pothecary Bottle 1'
   m_TagString: Untagged
@@ -101,20 +102,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!64 &7386001089106992293
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8325997093599014006}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 458287299431775306, guid: 9765cdacadb0b6d46a1a09113626abed, type: 3}
 --- !u!114 &443880386994115349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,8 +118,13 @@ MonoBehaviour:
   objectName: '[A]pothecary Bottle'
   image: {fileID: 0}
   textName: {fileID: 0}
+  imageTwo: {fileID: 0}
+  textNameTwo: {fileID: 0}
+  hand: {fileID: 0}
   thisObjectHeld: 1
   isPlacedDown: 0
+  beingInspected: 0
+  controller: {fileID: 0}
   ogScaleFactor: {x: 0, y: 0, z: 0}
   pickupRange: 5.07
   handOffset: {x: 0, y: 0.27, z: -0.15}
@@ -161,3 +153,29 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!136 &4693701347625553398
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8325997093599014006}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.03442417
+  m_Height: 0.15740745
+  m_Direction: 1
+  m_Center: {x: 0.000000018626451, y: 0.07869928, z: 0}
+--- !u!114 &-8270225350432394378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8325997093599014006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

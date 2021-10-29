@@ -11,13 +11,21 @@ public class JournalController : MonoBehaviour
     public List<int> noteList = new List<int>(0); 
 
     [SerializeField]
-    GameObject log, map, notes, howTo, rightArrow, leftArrow;
+    GameObject log, tutMap, gameMap, notes, howTo, rightArrow, leftArrow;
+
+    GameObject mapPage;
 
     int whichTab = 1, whichLogPage = 0;
+
     [HideInInspector]
     public int whichNotesPage = 0;
 
-    public bool disabled = false;
+    public bool disabled = false, tutorial = true, readingHowTo = false;
+
+    void Start()
+    {
+        mapPage = tutMap;
+    }
 
     void Update()
     {
@@ -29,6 +37,23 @@ public class JournalController : MonoBehaviour
         {
             Arrows(false);
         }
+
+        if(Input.GetKeyDown(KeyCode.Tab) && readingHowTo)
+        {
+            readingHowTo = false;
+
+            GetComponent<TutorialSectionStart>().ReadHowTo();
+
+            GetComponent<JournalTimer>().canCount = true;
+            GetComponent<JournalTimer>().StartTimer();
+
+            OpenMap();
+        }
+    }
+
+    public void SetToGameMap()
+    {
+        mapPage = gameMap;
     }
 
     public void OpenLog()
@@ -36,7 +61,7 @@ public class JournalController : MonoBehaviour
         if (!disabled)
         {
             log.SetActive(true);
-            map.SetActive(false);
+            mapPage.SetActive(false);
             notes.SetActive(false);
             howTo.SetActive(false);
 
@@ -75,7 +100,7 @@ public class JournalController : MonoBehaviour
         if (!disabled)
         {
             log.SetActive(false);
-            map.SetActive(true);
+            mapPage.SetActive(true);
             notes.SetActive(false);
             howTo.SetActive(false);
 
@@ -93,7 +118,7 @@ public class JournalController : MonoBehaviour
             if (noteList.Count >= 1)
             {
                 log.SetActive(false);
-                map.SetActive(false);
+                mapPage.SetActive(false);
                 notes.SetActive(true);
                 howTo.SetActive(false);
 
@@ -130,10 +155,10 @@ public class JournalController : MonoBehaviour
 
     public void OpenHowTo()
     {
-        if (!disabled)
+        if (!disabled && !tutorial)
         {
             log.SetActive(false);
-            map.SetActive(false);
+            mapPage.SetActive(false);
             notes.SetActive(false);
             howTo.SetActive(true);
 
@@ -192,5 +217,10 @@ public class JournalController : MonoBehaviour
     public void EnableJournal()
     {
         disabled = false;
+    }
+
+    public void SetTutorialBool(bool set)
+    {
+        tutorial = set;
     }
 }

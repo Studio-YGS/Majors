@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class TutorialController : MonoBehaviour
 {
@@ -15,7 +16,11 @@ public class TutorialController : MonoBehaviour
     [SerializeField]
     GameObject controlsUI, spaceToContinue;
 
-    ShowPromptUI showPrompt;
+    [SerializeField]
+    GameObject[] objectsToSwitchOn;
+
+    [SerializeField]
+    TextMeshProUGUI conLetter;
 
     bool canContinue = false;
 
@@ -24,14 +29,11 @@ public class TutorialController : MonoBehaviour
         journalController = FindObjectOfType<JournalController>();
         playerController = FindObjectOfType<Player_Controller>();
         journalOnSwitch = FindObjectOfType<JournalOnSwitch>();
-        showPrompt = FindObjectOfType<ShowPromptUI>();
         journalTimer = FindObjectOfType<JournalTimer>();
 
         ShowControls();
 
         journalTimer.canCount = false;
-
-        showPrompt.canShow = false;
     }
 
     void Update()
@@ -66,40 +68,21 @@ public class TutorialController : MonoBehaviour
         journalController.EnableJournal();
 
         journalOnSwitch.journalClosed.SetActive(true);
+
+        for(int i = 0; i < objectsToSwitchOn.Length; i++)
+        {
+            objectsToSwitchOn[i].SetActive(true);
+        }
     }
 
-    public void LockedGate()
+    public void ChangeConLetter(string letter)
     {
-        showPrompt.generalPrompt.text = "The gate appears to be locked. What's that piece of paper though?";
-        showPrompt.generalPrompt.gameObject.SetActive(true);
-        showPrompt.canShow = false;
-
-        StartCoroutine(PlayerNeedsToWait(4f));
+        conLetter.text = "[" + letter + "]";
     }
 
-    public void CantOpenDoorYet()
+    public void CrossyWait(float waitTime)
     {
-        showPrompt.generalPrompt.text = "There's something alluring about that gate.";
-        showPrompt.generalPrompt.gameObject.SetActive(true);
-        showPrompt.canShow = false;
-    }
-
-    public void TeachHowToOpenDoor()
-    {
-        showPrompt.generalPrompt.text = "Teaching players how to open door";
-        showPrompt.generalPrompt.gameObject.SetActive(true);
-        showPrompt.canShow = false;
-
-        StartCoroutine(PlayerNeedsToWait(10f));
-    }
-
-    public void HowToSpellWord()
-    {
-        showPrompt.generalPrompt.text = "How to spell word";
-        showPrompt.generalPrompt.gameObject.SetActive(true);
-        showPrompt.canShow = false;
-
-        StartCoroutine(PlayerNeedsToWait(4f));
+        StartCoroutine(WaitForCrossy(waitTime));
     }
 
     IEnumerator ReadingControls()
@@ -124,11 +107,16 @@ public class TutorialController : MonoBehaviour
 
         journalController.EnableJournal();
 
-        showPrompt.generalPrompt.gameObject.SetActive(false);
-        showPrompt.canShow = true;
-
-        Debug.Log("stopped");
-
         StopCoroutine(PlayerNeedsToWait(5f));
+    }
+
+    IEnumerator WaitForCrossy(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+
+        journalController.OpenHowTo();
+        journalController.readingHowTo = true;
+
+        journalOnSwitch.OpenOrClose();
     }
 }
