@@ -37,12 +37,14 @@ public class CrossyCrossKeyVariant : MonoBehaviour
     [SerializeField] private float distanceToAtk;
 
     [HideInInspector] public DoorInteraction door;
+    GameObject player;
 
     // Start is called before the first frame update
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        player = FindObjectOfType<Camera>().gameObject;
     }
 
     // Update is called once per frame
@@ -55,6 +57,18 @@ public class CrossyCrossKeyVariant : MonoBehaviour
 
         animator.SetBool("Moving", veloMag >= 0.05);
         animator.SetFloat("VelocityMag", veloMag);
+        RaycastHit hit;
+        Debug.DrawRay(player.transform.position, (transform.position + transform.up) - player.transform.position, Color.green);
+        if(Physics.Raycast(player.transform.position, (transform.position + transform.up) - player.transform.position, out hit))
+        {
+            if(hit.collider == gameObject.GetComponent<Collider>())
+            {
+                Debug.Log("hit");
+                FindObjectOfType<MrCrossyDistortion>().DistanceVignette(gameObject);
+            }
+            
+        }
+
 
         if (agent.remainingDistance <= distanceToAtk && door.puzzleOn == true) 
         { 

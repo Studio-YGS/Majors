@@ -33,26 +33,6 @@ public class MrCrossyDistortion : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.P))
-        //{
-        //    motionBlur.SetFloat("_BlurMagnitude", 0.01f);
-        //    motionBlur.SetFloat("_ScreenXMagnitude", 0.02f);
-        //    motionBlur.SetFloat("_ScreenYMagnitude", 0.02f);
-        //    screenBlur.SetFloat("_Magnitude", 0.02f);
-
-        //    Vignette vignette;
-        //    if (volume.profile.TryGet<Vignette>(out vignette))
-        //    {
-        //        vignette.intensity.value = 0.7f;
-        //    }
-
-        //    ChromaticAberration aberration;
-        //    if(volume.profile.TryGet<ChromaticAberration>(out aberration))
-        //    {
-        //        aberration.active = true;
-        //    }
-
-        //}
         if(mrCrossy != null)
         {
             float distance = Vector3.Distance(player.position, mrCrossy.transform.position);
@@ -203,6 +183,16 @@ public class MrCrossyDistortion : MonoBehaviour
         
     }
 
+    public void DistanceVignette(GameObject crossy)
+    {
+        float distance = Vector3.Distance(player.position, crossy.transform.position);
+        colorAdjustments.active = true;
+        colorAdjustments.colorFilter.value = new Color(colorAdjustments.colorFilter.value.r - (Time.unscaledDeltaTime * vignetteIncreaseRate / (distance)),
+                colorAdjustments.colorFilter.value.b - (Time.unscaledDeltaTime * vignetteIncreaseRate / (distance )), colorAdjustments.colorFilter.value.g - (Time.unscaledDeltaTime * vignetteIncreaseRate / (distance )));
+        vignette.intensity.value += Time.deltaTime * vignetteIncreaseRate / (distance / 4);
+    }
+
+
     public void DecreaseVignette()
     {
         if (!vignetteReducing)
@@ -234,13 +224,16 @@ public class MrCrossyDistortion : MonoBehaviour
 
     IEnumerator BlackenScreen(float speed)
     {
+        
         StopCoroutine("ReduceVignette");
-        while (vignette.intensity.value < 1 && colorAdjustments.colorFilter.value != Color.black)
+        colorAdjustments.active = true;
+        while (colorAdjustments.colorFilter.value != new Color(0, 0, 0))
         {
             vignette.intensity.value += Time.deltaTime * vignetteIncreaseRate * speed;
             colorAdjustments.colorFilter.value = new Color(colorAdjustments.colorFilter.value.r - Time.deltaTime * vignetteIncreaseRate * speed,
                 colorAdjustments.colorFilter.value.b - Time.deltaTime * vignetteIncreaseRate * speed, colorAdjustments.colorFilter.value.g - Time.deltaTime * vignetteIncreaseRate * speed);
             yield return null;
         }
+        colorAdjustments.active = false;
     }
 }
