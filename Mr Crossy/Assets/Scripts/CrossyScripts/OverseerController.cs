@@ -113,7 +113,7 @@ public class OverseerController : MonoBehaviour
 
     public void AwakenObserver()
     {
-        ObserverTree.EnableBehavior();
+        TreeMalarkey.EnableTree(ObserverTree);
     }
 
     public bool LeftRadius()
