@@ -244,23 +244,4 @@ public class CrossyController : MonoBehaviour
 
     }
 
-    // Behaviour Tree Events
-    public void OnEnable()
-    {
-        
-    }
-
-    public void CrossyBoBossy()
-    {
-        Debug.Log("PotatoSammichsTWOOOS");
-    }
-    public void CrossyAttack()
-    {
-        Debug.Log("PotatoSammichs");
-    }
-    public void OnDisable()
-    {
-        crossyTree.UnregisterEvent("DeadNoises", CrossyAttack);
-        crossyTree.UnregisterEvent("DeadNoises", CrossyBoBossy);
-    }
 }

@@ -8,11 +8,13 @@ public static class TreeMalarkey
     public static void EnableTree(BehaviorTree tree)
     {
         tree.EnableBehavior();
+        Debug.Log("Enabled tree: " + tree);
     }
 
     public static void DisableTree(BehaviorTree tree)
     {
         tree.DisableBehavior();
+        Debug.Log("Disabled tree: " + tree);
     }
 
     public static void DisableTree(BehaviorTree tree, bool pauseTree)
