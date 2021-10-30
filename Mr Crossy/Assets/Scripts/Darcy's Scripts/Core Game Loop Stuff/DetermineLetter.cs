@@ -13,6 +13,9 @@ public class DetermineLetter : MonoBehaviour
     [Tooltip("Any altars that this letter overlaps")]
     public GameObject[] overlappedAltars;
 
+    [HideInInspector]
+    public GameObject storedObject;
+
     [SerializeField]
     PuzzleController puzzleController;
 
@@ -20,6 +23,7 @@ public class DetermineLetter : MonoBehaviour
 
     public void ObjectPlaced(GameObject placedObject)
     {
+        storedObject = placedObject;
         wholeName = placedObject.name;
         firstLetter = wholeName.Substring(1, 1);
         SendLetterAndName(firstLetter);
@@ -42,7 +46,7 @@ public class DetermineLetter : MonoBehaviour
         {
             for (int i = 0; i < overlappedAltars.Length; i++)
             {
-
+                overlappedAltars[i].GetComponent<OverlappedAltar>().ReceiveLetter(firstLetter);
             }
         }
     }

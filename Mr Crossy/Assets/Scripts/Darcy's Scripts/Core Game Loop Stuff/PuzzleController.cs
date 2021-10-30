@@ -20,11 +20,12 @@ public class PuzzleController : MonoBehaviour
 
     int wordLength, mistakeCount = 3, completedWords = 0;
 
-    [Tooltip("Write in how many words the puzzle has")]
     public int wordsInPuzzle;
 
     //[HideInInspector]
     public List<TextMeshProUGUI> canvasLetters = new List<TextMeshProUGUI>();
+
+    public List<GameObject> storedObjects = new List<GameObject>();
 
     string playersWord, letter, altarName;
 
@@ -88,6 +89,8 @@ public class PuzzleController : MonoBehaviour
         playersWordLength = playersWord.ToIntArray().Length;
         Debug.Log("Players word: " + playersWord + " is " + playersWordLength + " long.");
 
+        storedObjects.Add(GameObject.Find(altarName));
+
         if (tutorial)
         {
             TutorialController tutorialController = FindObjectOfType<TutorialController>();
@@ -107,6 +110,8 @@ public class PuzzleController : MonoBehaviour
         {
             mistakeCount--;
             mistakeText.text = "Mistakes remaining: " + mistakeCount;
+
+            storedObjects.Clear();
 
             if (gameObject.name.Contains("Tutorial"))
             {
@@ -133,7 +138,17 @@ public class PuzzleController : MonoBehaviour
     {
         completedWords++;
 
-        if(completedWords == 3)
+        for(int i = 0; i < storedObjects.Count; i++)
+        {
+            storedObjects[i].GetComponent<Outline>().enabled = false;
+            storedObjects[i].GetComponentInChildren<ObjectPlacement>().enabled = false;
+            storedObjects[i].GetComponent<DetermineLetter>().storedObject.GetComponent<ObjectHolder>().enabled = false;
+            storedObjects[i].GetComponent<DetermineLetter>().storedObject.GetComponent<Outline>().enabled = false;
+        }
+
+        storedObjects.Clear();
+
+        if (completedWords == 3)
         {
             TutorialSectionStart tutorialSectionStart = GetComponent<TutorialSectionStart>();
 
