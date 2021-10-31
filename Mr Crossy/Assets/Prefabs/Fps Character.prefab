@@ -435,6 +435,7 @@ GameObject:
   - component: {fileID: 8487632906824986558}
   - component: {fileID: 779037828685407173}
   - component: {fileID: 8033547339244094327}
+  - component: {fileID: 5438225332145525025}
   m_Layer: 2
   m_Name: FirstPersonCharacter
   m_TagString: MainCamera
@@ -559,3 +560,19 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_MaxRayIntersections: 0
+--- !u!114 &5438225332145525025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8487632906824986559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d393cfeab2a59044b8943f505276f696, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bobSpeed: 0.07
+  bobDistance: 0.07
+  cam: {fileID: 8487632906824986544}
+  canBob: 1

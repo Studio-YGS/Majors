@@ -299,5 +299,6 @@ public class CrossKeyManager : MonoBehaviour
     {
         Debug.Log("Dead");
         FindObjectOfType<MrCrossyDistortion>().DarkenScreen(1.5f);
+        FindObjectOfType<PlayerRespawn>().PlayerDie();
     }
 }
