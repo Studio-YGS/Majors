@@ -79,6 +79,9 @@ public class DoorInteraction : MonoBehaviour
                             puzzleOn = true;
                             Time.timeScale = 0.1f;
                             Time.fixedDeltaTime = Time.timeScale * 0.02f;
+
+                            TreeMalarkey.SendEventToTree(CrossyController.crossyTree, "SuperDespawn");
+
                             if (zForward)
                             {
                                 if (spawnBehind)
