@@ -38,6 +38,8 @@ public class CrossyTheWatcher : MonoBehaviour
 
 
     [HideInInspector] public bool lighthousing;
+    [HideInInspector] public bool hidingTitan;
+    [HideInInspector] public bool isTutorial = true;
 
     private void Start()
     {
@@ -62,11 +64,14 @@ public class CrossyTheWatcher : MonoBehaviour
             
         }
 
-        if(!lighthousing)
+        if(!isTutorial)
         {
-            if(m_state == -1 && animator.GetCurrentAnimatorStateInfo(0).IsName("TitanCrossyIdleHidden"))
+            if (!lighthousing && !hidingTitan)
             {
-                AwakenTitan();
+                if (m_state == -1 && animator.GetCurrentAnimatorStateInfo(0).IsName("TitanCrossyIdleHidden"))
+                {
+                    AwakenTitan();
+                }
             }
         }
 
