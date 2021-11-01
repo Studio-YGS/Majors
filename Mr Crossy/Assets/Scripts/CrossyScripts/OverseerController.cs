@@ -7,6 +7,7 @@ public class OverseerController : MonoBehaviour
 {
     public static BehaviorTree ObserverTree;
     CrossyTheWatcher titan;
+    MrCrossyDistortion distootle;
 
     #region Fields
     [SerializeField] private bool startOnAwake;
@@ -81,12 +82,13 @@ public class OverseerController : MonoBehaviour
     public Lighthouse storedHouse;
     public float currDist;
     private float storedDist = 0;
-
+    bool vignetteActivated = false;
 
     private void Awake()
     {
         m_Observer = gameObject;
         ObserverTree = gameObject.GetComponent<BehaviorTree>();
+        distootle = FindObjectOfType<MrCrossyDistortion>();
         if (startOnAwake)
         {
             TreeMalarkey.EnableTree(ObserverTree);
@@ -110,6 +112,17 @@ public class OverseerController : MonoBehaviour
             {
                 CheckClosestLighthouse();
             }
+        }
+
+        if(m_State == 2)
+        {
+            vignetteActivated = true;
+            distootle.DistanceVignette(m_Crossy);
+        }
+        else if (m_State != 2 && vignetteActivated)
+        {
+            vignetteActivated = false;
+            distootle.DecreaseVignette();
         }
     }
 
