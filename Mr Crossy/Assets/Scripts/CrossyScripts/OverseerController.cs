@@ -117,11 +117,13 @@ public class OverseerController : MonoBehaviour
         if(m_State == 2)
         {
             vignetteActivated = true;
+            Debug.Log("potoatosondwich");
             distootle.DistanceVignette(m_Crossy);
         }
         else if (m_State != 2 && vignetteActivated)
         {
             vignetteActivated = false;
+            Debug.Log("VignetteNooooooo");
             distootle.DecreaseVignette();
         }
     }
