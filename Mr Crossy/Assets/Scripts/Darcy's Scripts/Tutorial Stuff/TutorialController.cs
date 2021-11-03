@@ -114,6 +114,7 @@ public class TutorialController : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTime);
 
+        journalController.EnableJournal();
         journalController.OpenHowTo();
         journalController.readingHowTo = true;
 

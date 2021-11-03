@@ -19,6 +19,8 @@ public class PauseMenu : MonoBehaviour
     [SerializeField]
     GameObject pauseMenuObject, settingsMenuObject;
 
+    public GameObject streetName;
+
     [SerializeField]
     TextMeshProUGUI musicText, sfxText, voiceText;
 
@@ -63,6 +65,8 @@ public class PauseMenu : MonoBehaviour
 
         journalOnSwitch.HideTab();
 
+        streetName.SetActive(false);
+
         Time.timeScale = 0f;
 
         studioEventEmitters = FindObjectsOfType<StudioEventEmitter>();
@@ -83,6 +87,8 @@ public class PauseMenu : MonoBehaviour
         journalController.EnableJournal();
 
         journalOnSwitch.ShowTab();
+
+        streetName.SetActive(true);
 
         Time.timeScale = defTimeScale;
 
