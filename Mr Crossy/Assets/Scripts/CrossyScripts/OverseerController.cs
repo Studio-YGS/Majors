@@ -6,6 +6,8 @@ using BehaviorDesigner.Runtime;
 public class OverseerController : MonoBehaviour
 {
     public static BehaviorTree ObserverTree;
+    [HideInInspector] public static bool m_PlayerInHouse;
+
     CrossyTheWatcher titan;
     MrCrossyDistortion distootle;
 
@@ -72,6 +74,8 @@ public class OverseerController : MonoBehaviour
     public List<GameObject> SpawnLightHouses { get { return m_SpawnLighthouses; } }
 
     public bool IsTutorial { get { return m_IsTutorial; } set { m_IsTutorial = value; } }
+
+    public bool IsInHouse { get { return m_PlayerInHouse; } }
 
     #endregion
 
