@@ -13,10 +13,10 @@ public class PuzzleController : MonoBehaviour
     [SerializeField]
     GameObject[] assignedAltars;
 
-    public string word;
+    public string word, currentStreet;
 
     [SerializeField]
-    TextMeshProUGUI mistakeText;
+    TextMeshProUGUI mistakeText, streetText;
 
     int wordLength, mistakeCount = 3, completedWords = 0;
 
@@ -27,7 +27,7 @@ public class PuzzleController : MonoBehaviour
 
     public List<GameObject> storedObjects = new List<GameObject>();
 
-    string playersWord, letter, altarName;
+    string playersWord, letter, altarName, uiWord;
 
     public UnityEvent winEvent, loseEvent, tutorialEvent, tutorialMistakeEvent;
 
@@ -35,6 +35,8 @@ public class PuzzleController : MonoBehaviour
 
     void Start()
     {
+        uiWord = " _ _ _ _";
+
         if (tutorial)
         {
             SetUpLetters();
@@ -51,6 +53,8 @@ public class PuzzleController : MonoBehaviour
         }
 
         wordLength = canvasLetters.Count;
+
+        WriteToUI();
     }
 
     public void ReceiveLetterAndName(string firstLetter, string altarOrigName) //receiving the letter of the object, and the name of the altar it came from
@@ -87,9 +91,11 @@ public class PuzzleController : MonoBehaviour
         }
 
         playersWordLength = playersWord.ToIntArray().Length;
-        Debug.Log("Players word: " + playersWord + " is " + playersWordLength + " long.");
+        Debug.Log("Players word: " + playersWord + " is " + playersWordLength + " letters long.");
 
         storedObjects.Add(GameObject.Find(altarName));
+
+        WriteToUI();
 
         if (tutorial)
         {
@@ -132,6 +138,27 @@ public class PuzzleController : MonoBehaviour
         {
             assignedAltars[i].GetComponentInChildren<ObjectPlacement>().enabled = false;
         }
+    }
+
+    void WriteToUI()
+    {
+        string currentAltarWord = "";
+
+        for(int i = 0; i < canvasLetters.Count; i++)
+        {
+            if(canvasLetters[i].text.ToIntArray().Length < 1)
+            {
+                currentAltarWord += " _ ";
+            }
+            else
+            {
+                currentAltarWord += canvasLetters[i].text;
+            }
+        }
+
+        uiWord = currentStreet + ": " + currentAltarWord;
+
+        streetText.text = uiWord;
     }
 
     void CompletionCheck()
