@@ -19,6 +19,8 @@ public class PauseMenu : MonoBehaviour
     [SerializeField]
     GameObject pauseMenuObject, settingsMenuObject;
 
+    public GameObject streetName;
+
     [SerializeField]
     TextMeshProUGUI musicText, sfxText, voiceText;
 
@@ -34,23 +36,20 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
-        if (!journalController.disabled)
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (!playerController.inJournal && !pauseMenuObject.activeInHierarchy && !settingsMenuObject.activeInHierarchy)
             {
-                if (!playerController.inJournal && !pauseMenuObject.activeInHierarchy && !settingsMenuObject.activeInHierarchy)
-                {
-                    OpenPauseMenu();
-                }
-                else if (!playerController.inJournal && !pauseMenuObject.activeInHierarchy && settingsMenuObject.activeInHierarchy)
-                {
-                    CloseSettingsMenu();
-                    ClosePauseMenu();
-                }
-                else if (!playerController.inJournal && pauseMenuObject.activeInHierarchy)
-                {
-                    ClosePauseMenu();
-                }
+                OpenPauseMenu();
+            }
+            else if (!playerController.inJournal && !pauseMenuObject.activeInHierarchy && settingsMenuObject.activeInHierarchy)
+            {
+                CloseSettingsMenu();
+                ClosePauseMenu();
+            }
+            else if (!playerController.inJournal && pauseMenuObject.activeInHierarchy)
+            {
+                ClosePauseMenu();
             }
         }
     }
@@ -65,6 +64,8 @@ public class PauseMenu : MonoBehaviour
         journalController.DisableJournal();
 
         journalOnSwitch.HideTab();
+
+        streetName.SetActive(false);
 
         Time.timeScale = 0f;
 
@@ -86,6 +87,8 @@ public class PauseMenu : MonoBehaviour
         journalController.EnableJournal();
 
         journalOnSwitch.ShowTab();
+
+        streetName.SetActive(true);
 
         Time.timeScale = defTimeScale;
 

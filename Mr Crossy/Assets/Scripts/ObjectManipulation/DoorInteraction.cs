@@ -35,13 +35,13 @@ public class DoorInteraction : MonoBehaviour
     public bool spawnRight;
     public bool spawnBehind;
     public GameObject mrCrossy;
-    public GameObject mask;
     GameObject createdMrCrossy;
     Vector3 randomPos;
     Quaternion savedCamRot;
     [HideInInspector] public bool puzzleOn;
     bool puzzleTimer;
     float countdownTimer;
+    MrCrossyDistortion distortion;
     
     
     void Start()
@@ -49,6 +49,7 @@ public class DoorInteraction : MonoBehaviour
         cam = GameObject.Find("FirstPersonCharacter").transform;
         rotationVal = 0;
         player = GameObject.Find("Fps Character").transform;
+        distortion = FindObjectOfType<MrCrossyDistortion>();
     }
 
     void Update()
@@ -78,6 +79,9 @@ public class DoorInteraction : MonoBehaviour
                             puzzleOn = true;
                             Time.timeScale = 0.1f;
                             Time.fixedDeltaTime = Time.timeScale * 0.02f;
+
+                            TreeMalarkey.SendEventToTree(CrossyController.crossyTree, "SuperDespawn");
+
                             if (zForward)
                             {
                                 if (spawnBehind)
@@ -120,6 +124,7 @@ public class DoorInteraction : MonoBehaviour
                             StartCoroutine(RotateCamToNewPosition());
                             createdMrCrossy.GetComponent<NavMeshAgent>().SetDestination(player.position);
                             createdMrCrossy.GetComponent<CrossyCrossKeyVariant>().door = gameObject.GetComponent<DoorInteraction>();
+                            distortion.IncreaseInsanity(createdMrCrossy);
                         }
                     }
                     else if (handon)
@@ -237,17 +242,17 @@ public class DoorInteraction : MonoBehaviour
                 if (rotationVal > 5 && rotationVal < 20 || rotationVal > -20 && rotationVal < -5)
                 {
                     
-                    countdownTimer += Time.deltaTime;
-                    if(countdownTimer >= 2.7f)
+                    //countdownTimer += Time.deltaTime;
+                    if(distortion.vignette.intensity.value >= 1)
                     {
                         FindObjectOfType<CrossKeyManager>().PuzzleDeath();
                         StopCoroutine("WaitForPuzzleEnd");
                     }
                 }
-                else
-                {
-                    countdownTimer = 0;
-                }
+                //else
+                //{
+                //    countdownTimer = 0;
+                //}
                 
                 if(rotationVal > 20 || rotationVal < -20)
                 {
@@ -552,12 +557,14 @@ public class DoorInteraction : MonoBehaviour
             if (rotationVal < 5 && rotationVal > -5)
             {
                 timer += Time.deltaTime;
-                mask.SetActive(false);
+                
+                distortion.DecreaseVignette();
             }
             else
             {
                 timer = 0;
-                mask.SetActive(true);
+                
+                distortion.IncreaseVignette();
             }
             yield return null;
         }
@@ -566,6 +573,7 @@ public class DoorInteraction : MonoBehaviour
         
         puzzleTimer = false;
         FindObjectOfType<CrossKeyManager>().puzzleOn = false;
+        distortion.ReduceInsanity();
         Destroy(createdMrCrossy);
         Debug.Log("safe");
     }

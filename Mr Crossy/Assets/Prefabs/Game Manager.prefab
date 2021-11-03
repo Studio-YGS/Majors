@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2629922956381282753}
   - component: {fileID: 2629922956381282754}
   - component: {fileID: 2629922956381282758}
-  - component: {fileID: 2629922956381282757}
+  - component: {fileID: 6209574557737880101}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -64,7 +64,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controlsUI: {fileID: 0}
   spaceToContinue: {fileID: 0}
---- !u!114 &2629922956381282757
+  objectsToSwitchOn:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  conLetter: {fileID: 0}
+--- !u!114 &6209574557737880101
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -73,9 +81,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 2629922956381282759}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e1b9164fe2a53e488b75def8a57795b, type: 3}
+  m_Script: {fileID: 11500000, guid: ed2e9075584b6434c8fc37b5e27b0c90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickupPrompt: {fileID: 0}
-  generalPrompt: {fileID: 0}
-  canShow: 1
+  respawnPosition: {fileID: 0}
+  respawningText: {fileID: 0}
