@@ -48,6 +48,8 @@ public class JournalOnSwitch : MonoBehaviour
 
             pauseMenu.streetName.SetActive(false);
 
+            //paper sound
+
             open = true;
             journalClosed.SetActive(false);
             journalOpen.SetActive(true);
@@ -61,6 +63,8 @@ public class JournalOnSwitch : MonoBehaviour
             fpc.EnableController();
 
             pauseMenu.streetName.SetActive(true);
+
+            //paper sound
 
             open = false;
             journalClosed.SetActive(true);
