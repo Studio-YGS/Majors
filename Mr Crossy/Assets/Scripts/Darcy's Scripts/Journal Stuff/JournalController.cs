@@ -188,6 +188,7 @@ public class JournalController : MonoBehaviour
                         break;
                     }
             }
+            //paper sound
         }
         else
         {
@@ -206,6 +207,7 @@ public class JournalController : MonoBehaviour
                         break;
                     }
             }
+            //paper sound
         }
     }
 
