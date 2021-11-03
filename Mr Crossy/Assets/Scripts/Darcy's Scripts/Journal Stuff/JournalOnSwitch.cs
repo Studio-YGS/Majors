@@ -12,8 +12,11 @@ public class JournalOnSwitch : MonoBehaviour
 
     JournalController journalController;
 
+    PauseMenu pauseMenu;
+
     void Start()
     {
+        pauseMenu = FindObjectOfType<PauseMenu>();
         fpc = FindObjectOfType<Player_Controller>();
         journalController = FindObjectOfType<JournalController>();
     }
@@ -43,6 +46,8 @@ public class JournalOnSwitch : MonoBehaviour
         {
             fpc.DisableController();
 
+            pauseMenu.streetName.SetActive(false);
+
             open = true;
             journalClosed.SetActive(false);
             journalOpen.SetActive(true);
@@ -54,6 +59,8 @@ public class JournalOnSwitch : MonoBehaviour
         if (!journalController.disabled)
         {
             fpc.EnableController();
+
+            pauseMenu.streetName.SetActive(true);
 
             open = false;
             journalClosed.SetActive(true);

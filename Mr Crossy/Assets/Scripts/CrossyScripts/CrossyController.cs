@@ -244,4 +244,18 @@ public class CrossyController : MonoBehaviour
 
     }
 
+    public void OnEnable()
+    {
+        TreeMalarkey.RegisterEventOnTree(crossyTree, "Schlepp", Flibbity);
+    }
+
+    public void Flibbity()
+    {
+        FindObjectOfType<MrCrossyDistortion>().DarkenScreen(1.5f);
+    }
+
+    public void OnDisable()
+    {
+        TreeMalarkey.UnregisterEventOnTree(crossyTree, "Schlepp", Flibbity);
+    }
 }

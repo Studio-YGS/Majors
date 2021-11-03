@@ -6,7 +6,10 @@ using BehaviorDesigner.Runtime;
 public class OverseerController : MonoBehaviour
 {
     public static BehaviorTree ObserverTree;
+    [HideInInspector] public static bool m_PlayerInHouse;
+
     CrossyTheWatcher titan;
+    MrCrossyDistortion distootle;
 
     #region Fields
     [SerializeField] private bool startOnAwake;
@@ -72,6 +75,8 @@ public class OverseerController : MonoBehaviour
 
     public bool IsTutorial { get { return m_IsTutorial; } set { m_IsTutorial = value; } }
 
+    public bool IsInHouse { get { return m_PlayerInHouse; } }
+
     #endregion
 
     [Space(10)]
@@ -81,12 +86,13 @@ public class OverseerController : MonoBehaviour
     public Lighthouse storedHouse;
     public float currDist;
     private float storedDist = 0;
-
+    bool vignetteActivated = false;
 
     private void Awake()
     {
         m_Observer = gameObject;
         ObserverTree = gameObject.GetComponent<BehaviorTree>();
+        distootle = FindObjectOfType<MrCrossyDistortion>();
         if (startOnAwake)
         {
             TreeMalarkey.EnableTree(ObserverTree);
@@ -110,6 +116,19 @@ public class OverseerController : MonoBehaviour
             {
                 CheckClosestLighthouse();
             }
+        }
+
+        if(m_State == 2)
+        {
+            vignetteActivated = true;
+            Debug.Log("potoatosondwich");
+            distootle.DistanceVignette(m_Crossy);
+        }
+        else if (m_State != 2 && vignetteActivated)
+        {
+            vignetteActivated = false;
+            Debug.Log("VignetteNooooooo");
+            distootle.DecreaseVignette();
         }
     }
 
