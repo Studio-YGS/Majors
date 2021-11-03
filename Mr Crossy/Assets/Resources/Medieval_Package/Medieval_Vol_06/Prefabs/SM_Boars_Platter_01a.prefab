@@ -89,6 +89,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -113,6 +114,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &3298139168703339957
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,6 +170,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -192,6 +195,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &3824927876938218305
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,6 +206,7 @@ GameObject:
   m_Component:
   - component: {fileID: 238557169924098386}
   - component: {fileID: 809549439339913110}
+  - component: {fileID: 6958227796527665952}
   m_Layer: 0
   m_Name: SM_Boars_Platter_01a
   m_TagString: Untagged
@@ -221,7 +226,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 81506356381529745}
-  - {fileID: 4960047827764537960}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -233,23 +237,21 @@ LODGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3824927876938218305}
   serializedVersion: 2
-  m_LocalReferencePoint: {x: -0.008374631, y: 0.21407315, z: 0.000595361}
-  m_Size: 1.2328175
-  m_FadeMode: 0
+  m_LocalReferencePoint: {x: -0.009594619, y: 0.21526317, z: -0.000000007450581}
+  m_Size: 1.2303776
+  m_FadeMode: 1
   m_AnimateCrossFading: 0
   m_LastLODIsBillboard: 0
   m_LODs:
-  - screenRelativeHeight: 0.25
+  - screenRelativeHeight: 0.6859167
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 8033053913921010953}
-    - renderer: {fileID: -8279289773458982818, guid: 42c0a466f2a6d7243b1947fae510fcc4,
-        type: 3}
-  - screenRelativeHeight: 0.125
+  - screenRelativeHeight: 0.33087617
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 8432233731546018154}
-  - screenRelativeHeight: 0.0625
+  - screenRelativeHeight: 0.09328905
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 4905378157465007086}
@@ -258,6 +260,19 @@ LODGroup:
     renderers:
     - renderer: {fileID: 9083278930077400474}
   m_Enabled: 1
+--- !u!65 &6958227796527665952
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3824927876938218305}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.108882, y: 0.338927, z: 0.38333526}
+  m_Center: {x: -0.05444166, y: 0.24593796, z: 0.014914051}
 --- !u!1 &7086644031530440201
 GameObject:
   m_ObjectHideFlags: 0
@@ -313,6 +328,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -337,60 +353,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!1 &7969407181523396966
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4960047827764537960}
-  - component: {fileID: 6424164347030733603}
-  - component: {fileID: 5059005513323995722}
-  m_Layer: 0
-  m_Name: UCX_SM_Boars_Platter_01a_LOD0
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
---- !u!4 &4960047827764537960
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7969407181523396966}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 238557169924098386}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &6424164347030733603
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7969407181523396966}
-  m_Mesh: {fileID: 3476896600306990505, guid: 42c0a466f2a6d7243b1947fae510fcc4, type: 3}
---- !u!64 &5059005513323995722
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7969407181523396966}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 3476896600306990505, guid: 42c0a466f2a6d7243b1947fae510fcc4, type: 3}
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &9148647996719873275
 GameObject:
   m_ObjectHideFlags: 0
@@ -446,6 +409,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -470,3 +434,4 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}

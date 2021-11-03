@@ -9,6 +9,7 @@ public class Player_Controller : MonoBehaviour
     public float baseSpeed;
     public float speed;
     public float sprintSpeed;
+    public float stamina = 8;
     public float crouchSpeed;
     public float gravity;
     public float jumpHeight = 3f;
@@ -18,7 +19,9 @@ public class Player_Controller : MonoBehaviour
     //journal variables
     [SerializeField]
     GameObject cursorImage;
-    bool inJournal = false; 
+    [HideInInspector]
+    public bool inJournal = false;
+    bool canMove = true;
 
     public Transform groundCheck;
     private Vector3 groundCheckSpot;
@@ -53,11 +56,11 @@ public class Player_Controller : MonoBehaviour
 
     void Update()
     {
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance);
 
-        if (!inJournal)
+        if (canMove || !isGrounded)
         {
 
-            isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance);
 
             rotation.y += Input.GetAxis("Mouse X");
             rotation.x += -Input.GetAxis("Mouse Y");
@@ -71,15 +74,15 @@ public class Player_Controller : MonoBehaviour
 
 
 
-            if (Input.GetButtonDown("Jump") && isGrounded)
+            if (Input.GetButtonDown("Jump") && isGrounded && canMove)
             {
                 velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
 
             }
 
-            velocity.y += gravity * Time.deltaTime;
+            velocity.y += gravity * Time.unscaledDeltaTime;
             move = transform.right * x + transform.forward * z;
-            controller.Move(velocity * Time.deltaTime);
+            controller.Move(velocity * Time.unscaledDeltaTime);
 
 
             if (Input.GetKeyDown(KeyCode.C) && isGrounded)
@@ -99,18 +102,29 @@ public class Player_Controller : MonoBehaviour
             }
 
 
-            if (Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.C))
+            if (Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.C) && stamina > 0)
             {
                 speed = sprintSpeed;
+                stamina -= Time.unscaledDeltaTime * 2;
             }
             else if (Input.GetKeyUp(KeyCode.LeftShift) && !Input.GetKey(KeyCode.C))
             {
                 speed = baseSpeed;
             }
 
+            if(stamina < 8 && !Input.GetKey(KeyCode.LeftShift))
+            {
+                stamina += Time.unscaledDeltaTime;
+            }
+            if (stamina <= 0)
+            {
+                //when the player runs out of stamina
+                speed = baseSpeed;
+            }
+
             move.Normalize();
 
-            controller.Move(move * speed * Time.deltaTime);
+            controller.Move(move * speed * Time.unscaledDeltaTime);
 
             if (isGrounded && velocity.y < 0)
             {
@@ -122,24 +136,34 @@ public class Player_Controller : MonoBehaviour
         //journal related stuff
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            JournalOnSwitch journal = FindObjectOfType<JournalOnSwitch>();
-            bool open = journal.OpenOrClose();
+            JournalController journalController = FindObjectOfType<JournalController>();
 
-            if (open)
+            if (!journalController.disabled)
             {
-                DisableController();
-            }
-            else
-            {
-                EnableController();
+                JournalOnSwitch journal = FindObjectOfType<JournalOnSwitch>();
+                bool open = journal.OpenOrClose();
+
+                if (open)
+                {
+                    DisableController();
+                }
+                else
+                {
+                    EnableController();
+                }
             }
         }
         if (Input.GetKeyDown(KeyCode.Escape) && inJournal)
         {
-            JournalOnSwitch journal = FindObjectOfType<JournalOnSwitch>();
+            JournalController journalController = FindObjectOfType<JournalController>();
 
-            journal.OpenOrClose();
-            EnableController();
+            if (!journalController.disabled)
+            {
+                JournalOnSwitch journal = FindObjectOfType<JournalOnSwitch>();
+
+                journal.OpenOrClose();
+                EnableController();
+            }
         }
     }
     
@@ -158,12 +182,14 @@ public class Player_Controller : MonoBehaviour
     public void EnableController()
     {
         inJournal = false;
+        canMove = true;
         LockCursor();
     }
 
     public void DisableController()
     {
         inJournal = true;
+        canMove = false;
         UnlockCursor();
     }
 }

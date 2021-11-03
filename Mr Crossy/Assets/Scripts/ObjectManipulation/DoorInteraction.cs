@@ -1,13 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 [RequireComponent(typeof(Rigidbody))]
 public class DoorInteraction : MonoBehaviour
 {
+    [Header("Canvas")]
+    public GameObject reticle;
+    public GameObject hand;
+    
+    [Header("Door Controls")]
     public bool xForward;
     public bool zForward;
     bool moveable = false;
+    bool moved;
     bool greaterThan;
     bool lessThan;
     bool equalTo = true;
@@ -19,164 +26,317 @@ public class DoorInteraction : MonoBehaviour
     float angleRelativeToPlayer;
     float relativeAngle;
     public float openSpeed = 10;
+    public float closeDistance = 45;
+    public bool locked;
+    bool handon;
+
+    [Header("Cross-Key Settings")]
+    public bool spawnLeft;
+    public bool spawnRight;
+    public bool spawnBehind;
+    public GameObject mrCrossy;
+    GameObject createdMrCrossy;
+    Vector3 randomPos;
+    Quaternion savedCamRot;
+    [HideInInspector] public bool puzzleOn;
+    bool puzzleTimer;
+    float countdownTimer;
+    MrCrossyDistortion distortion;
+    
+    
     void Start()
     {
-        cam = FindObjectOfType<Camera>().transform;
+        cam = GameObject.Find("FirstPersonCharacter").transform;
         rotationVal = 0;
         player = GameObject.Find("Fps Character").transform;
+        distortion = FindObjectOfType<MrCrossyDistortion>();
     }
 
     void Update()
     {
-        //Debug.Log(transform.localRotation.y);
-        //if (Input.GetKeyDown(KeyCode.H))
-        //{
-        //    if (angleRelativeToPlayer > 180 * 0.5f)
-        //    {
-        //        //BEHIND
-        //        Debug.Log("behind");
-        //    }
-        //    else if (angleRelativeToPlayer < 180 * 0.5f)
-        //    {
-        //        //INFRONT
-        //        Debug.Log("infront");
-        //    }
-        //}
-        RaycastHit hit;
-        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit))
+        if (locked)
         {
-            if(hit.collider == gameObject.GetComponent<Collider>())
+            if (FindObjectOfType<CrossKeyManager>().numOfKeys > 0)
             {
-                
-                if (Input.GetMouseButtonDown(0))
+                RaycastHit hit;
+                if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 2))
                 {
-                    moveable = true;
-                    Vector3 direction = transform.parent.position - player.position;
-                    if (xForward)
+                    if (hit.collider == gameObject.GetComponent<Collider>())
                     {
-                        angleRelativeToPlayer = Vector3.Angle(direction, transform.parent.right);
+                        if (!handon)
+                        {
+                            handon = true;
+                            reticle.SetActive(false);
+                            hand.SetActive(true);
+                        }
+                        
+                        if (Input.GetMouseButtonDown(0) && !puzzleOn)
+                        {
+                            FindObjectOfType<Player_Controller>().enabled = false;
+                            FindObjectOfType<HeadBob>().enabled = false;
+                            reticle.SetActive(false);
+                            hand.SetActive(false);
+                            puzzleOn = true;
+                            Time.timeScale = 0.1f;
+                            Time.fixedDeltaTime = Time.timeScale * 0.02f;
+
+                            TreeMalarkey.SendEventToTree(CrossyController.crossyTree, "SuperDespawn");
+
+                            if (zForward)
+                            {
+                                if (spawnBehind)
+                                {
+                                    randomPos = new Vector3(15, 0, Random.Range(-5, 5));
+                                    createdMrCrossy = Instantiate(mrCrossy, transform.position - transform.forward * randomPos.x + transform.right * randomPos.z, Quaternion.LookRotation(player.position - (transform.position - transform.forward * randomPos.x + transform.right * randomPos.z)));
+
+                                }
+                                else if (spawnLeft)
+                                {
+                                    randomPos = new Vector3(Random.Range(0, 5), 0, -15);
+                                    createdMrCrossy = Instantiate(mrCrossy, transform.position - transform.forward * randomPos.x + transform.right * randomPos.z, Quaternion.LookRotation(player.position - (transform.position - transform.forward * randomPos.x + transform.right * randomPos.z)));
+                                }
+                                else if (spawnRight)
+                                {
+                                    randomPos = new Vector3(Random.Range(0, 5), 0, 15);
+                                    createdMrCrossy = Instantiate(mrCrossy, transform.position - transform.forward * randomPos.x + transform.right * randomPos.z, Quaternion.LookRotation(player.position - (transform.position - transform.forward * randomPos.x + transform.right * randomPos.z)));
+                                }
+                            }
+                            else if (xForward)
+                            {
+                                if (spawnBehind)
+                                {
+                                    randomPos = new Vector3(Random.Range(-5, 5), 0, 15);
+                                    createdMrCrossy = Instantiate(mrCrossy, transform.position + transform.forward * randomPos.x + transform.right * randomPos.z, Quaternion.LookRotation(player.position - (transform.position + transform.forward * randomPos.x + transform.right * randomPos.z)));
+
+                                }
+                                else if (spawnLeft)
+                                {
+                                    randomPos = new Vector3(-15, 0, Random.Range(0, 5));
+                                    createdMrCrossy = Instantiate(mrCrossy, transform.position + transform.forward * randomPos.x + transform.right * randomPos.z, Quaternion.LookRotation(player.position - (transform.position + transform.forward * randomPos.x + transform.right * randomPos.z)));
+                                }
+                                else if (spawnRight)
+                                {
+                                    randomPos = new Vector3(15, 0, Random.Range(0, 5));
+                                    createdMrCrossy = Instantiate(mrCrossy, transform.position + transform.forward * randomPos.x + transform.right * randomPos.z, Quaternion.LookRotation(player.position - (transform.position + transform.forward * randomPos.x + transform.right * randomPos.z)));
+                                }
+                            }
+                            savedCamRot = cam.rotation;
+                            StartCoroutine(RotateCamToNewPosition());
+                            createdMrCrossy.GetComponent<NavMeshAgent>().SetDestination(player.position);
+                            createdMrCrossy.GetComponent<CrossyCrossKeyVariant>().door = gameObject.GetComponent<DoorInteraction>();
+                            distortion.IncreaseInsanity(createdMrCrossy);
+                        }
                     }
-                    else if (zForward)
+                    else if (handon)
                     {
-                        angleRelativeToPlayer = Vector3.Angle(direction, transform.parent.forward);
+                        reticle.SetActive(true);
+                        hand.SetActive(false);
+                        handon = false;
+                    }
+                }
+                else if (handon)
+                {
+                    reticle.SetActive(true);
+                    hand.SetActive(false);
+                    handon = false;
+                }
+            }
+            
+        }
+
+        
+
+        if (puzzleOn)
+        {
+            createdMrCrossy.GetComponent<NavMeshAgent>().SetDestination(player.position);
+            if (moved)
+            {
+                if (zForward)
+                {
+                    if (angleRelativeToPlayer > 180 * 0.5f)
+                    {
+                        if (greaterThan)
+                        {
+                            if (rotationVal <= 0)
+                            {
+                                moveable = false;
+                                //Destroy(createdMrCrossy);
+                                rotationVal = 0;
+                                transform.localRotation = Quaternion.Euler(0, rotationVal, 0);
+                                puzzleOn = false;
+                                StartCoroutine("WaitForPuzzleEnd");
+                                moved = false;
+                            }
+                        }
+                        else if (lessThan)
+                        {
+                            if (rotationVal >= 0)
+                            {
+                                moveable = false;
+                                //Destroy(createdMrCrossy);
+                                rotationVal = 0;
+                                transform.localRotation = Quaternion.Euler(0, rotationVal, 0);
+                                puzzleOn = false;
+                                StartCoroutine("WaitForPuzzleEnd");
+                                moved = false;
+                            }
+                        }
+                    }
+                    
+                }
+                else if (xForward)
+                {
+                    if (angleRelativeToPlayer < 180 * 0.5f)
+                    {
+                        if (greaterThan)
+                        {
+                            if (rotationVal <= 0)
+                            {
+                                moveable = false;
+                                //Destroy(createdMrCrossy);
+                                rotationVal = 0;
+                                transform.localRotation = Quaternion.Euler(0, rotationVal, 0);
+                                puzzleOn = false;
+                                StartCoroutine("WaitForPuzzleEnd");
+                                moved = false;
+                            }
+                        }
+                        else if (lessThan)
+                        {
+                            if (rotationVal >= 0)
+                            {
+                                moveable = false;
+                                //Destroy(createdMrCrossy);
+                                rotationVal = 0;
+                                transform.localRotation = Quaternion.Euler(0, rotationVal, 0);
+                                puzzleOn = false;
+                                StartCoroutine("WaitForPuzzleEnd");
+                                moved = false;
+                            }
+                        }
                     }
                     
                 }
             }
-        }
-        if (Input.GetMouseButtonUp(0) && moveable)
-        {
-            if (transform.localRotation.y > 0.02)
+            
+            if(Vector3.Distance(transform.position, player.position) > 5)
             {
-                greaterThan = true;
-                lessThan = false;
-                equalTo = false;
-            }
-            else if (transform.localRotation.y < -0.02)
-            {
-                greaterThan = false;
-                lessThan = true;
-                equalTo = false;
-            }
-            else if (transform.localRotation.y == 0)
-            {
-                greaterThan = false;
-                lessThan = false;
-                equalTo = true;
+                FindObjectOfType<CrossKeyManager>().PuzzleDeath();
             }
             
-            moveable = false;
         }
-        
-
-        if (moveable)
+        if (puzzleTimer)
         {
-            rotationVal = Mathf.Clamp(rotationVal, -90f, 90f);
-            if (angleRelativeToPlayer > 180 * 0.5f)
+            if (zForward)
             {
-                //BEHIND
-                if (greaterThan)
+                createdMrCrossy.GetComponent<NavMeshAgent>().SetDestination(transform.position - transform.forward + transform.right *0.5f);
+            }
+            else if (xForward)
+            {
+                createdMrCrossy.GetComponent<NavMeshAgent>().SetDestination(transform.position + transform.right);
+            }
+            FindObjectOfType<CrossyCrossKeyVariant>().lookAtTransform = transform;
+            
+            if (moved)
+            {
+                if (rotationVal > 5 && rotationVal < 20 || rotationVal > -20 && rotationVal < -5)
                 {
-                    if (Input.GetAxis("Mouse X") > 0 && !touchingPlayerLeft)
+                    
+                    //countdownTimer += Time.deltaTime;
+                    if(distortion.vignette.intensity.value >= 1)
                     {
-                        rotationVal += Input.GetAxis("Mouse X") * openSpeed;
-
-                    }
-                    else if (Input.GetAxis("Mouse X") < 0 && !touchingPlayerRight)
-                    {
-                        rotationVal -= -Input.GetAxis("Mouse X") * openSpeed;
+                        FindObjectOfType<CrossKeyManager>().PuzzleDeath();
+                        StopCoroutine("WaitForPuzzleEnd");
                     }
                 }
-                else if (lessThan)
+                //else
+                //{
+                //    countdownTimer = 0;
+                //}
+                
+                if(rotationVal > 20 || rotationVal < -20)
                 {
-                    if (Input.GetAxis("Mouse X") < 0 && !touchingPlayerLeft)
-                    {
-                        rotationVal += -Input.GetAxis("Mouse X") * openSpeed;
-
-                    }
-                    else if (Input.GetAxis("Mouse X") > 0   && !touchingPlayerRight)
-                    {
-                        rotationVal -= Input.GetAxis("Mouse X") * openSpeed;
-                    }
-                }
-                else if (equalTo)
-                {
-                    if (zForward)
-                    {
-                        if (Input.GetAxis("Mouse X") < 0 && !touchingPlayerRight)
-                        {
-                            rotationVal += -Input.GetAxis("Mouse X") * openSpeed;
-
-                        }
-                        else if (Input.GetAxis("Mouse X") > 0 && !touchingPlayerLeft)
-                        {
-                            rotationVal -= Input.GetAxis("Mouse X") * openSpeed;
-                        }
-                    }
-                    else if (xForward)
-                    {
-                        if (Input.GetAxis("Mouse X") < 0 && !touchingPlayerLeft)
-                        {
-                            rotationVal += -Input.GetAxis("Mouse X") * openSpeed;
-
-                        }
-                        else if (Input.GetAxis("Mouse X") > 0  && !touchingPlayerRight)
-                        {
-                            rotationVal -= Input.GetAxis("Mouse X") * openSpeed;
-                        }
-                    } 
+                    FindObjectOfType<CrossKeyManager>().PuzzleDeath();
+                    StopCoroutine("WaitForPuzzleEnd");
                 }
             }
-            else if (angleRelativeToPlayer < 180 * 0.5f)
+        }
+
+        if (!locked)
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 2))
             {
-                //INFRONT
-                if (greaterThan)
+                if (hit.collider == gameObject.GetComponent<Collider>())
                 {
-                    if (Input.GetAxis("Mouse X") < 0 && !touchingPlayerLeft)
+                    handon = true;
+                    reticle.SetActive(false);
+                    hand.SetActive(true);
+                    if (Input.GetMouseButtonDown(0))
                     {
-                        rotationVal += -Input.GetAxis("Mouse X") * openSpeed;
+                        moveable = true;
+                        if (!moved)
+                        {
+                            StartCoroutine(WaitToClose());
+                            moved = true;
+                        }
+                        Vector3 direction = transform.parent.position - player.position;
+                        if (xForward)
+                        {
+                            angleRelativeToPlayer = Vector3.Angle(direction, transform.parent.right);
+                        }
+                        else if (zForward)
+                        {
+                            angleRelativeToPlayer = Vector3.Angle(direction, transform.parent.forward);
+                        }
 
                     }
-                    else if (Input.GetAxis("Mouse X") > 0  && !touchingPlayerRight)
-                    {
-                        rotationVal -= Input.GetAxis("Mouse X") * openSpeed;
-                    }
                 }
-                else if (lessThan)
+                else if (handon)
                 {
-                    if (Input.GetAxis("Mouse X") > 0 && !touchingPlayerLeft)
-                    {
-                        rotationVal += Input.GetAxis("Mouse X") * openSpeed;
+                    reticle.SetActive(true);
+                    hand.SetActive(false);
+                    handon = false;
+                }
+            }
+            else if (handon)
+            {
+                reticle.SetActive(true);
+                hand.SetActive(false);
+                handon = false;
+            }
+            if (Input.GetMouseButtonUp(0) && moveable)
+            {
+                if (transform.localRotation.y > 0.02)
+                {
+                    greaterThan = true;
+                    lessThan = false;
+                    equalTo = false;
+                }
+                else if (transform.localRotation.y < -0.02)
+                {
+                    greaterThan = false;
+                    lessThan = true;
+                    equalTo = false;
+                }
+                else if (transform.localRotation.y == 0)
+                {
+                    greaterThan = false;
+                    lessThan = false;
+                    equalTo = true;
+                }
 
-                    }
-                    else if (Input.GetAxis("Mouse X") < 0  && !touchingPlayerRight)
-                    {
-                        rotationVal -= -Input.GetAxis("Mouse X") * openSpeed;
-                    }
-                }
-                else if (equalTo)
+                moveable = false;
+            }
+
+
+            if (moveable)
+            {
+                rotationVal = Mathf.Clamp(rotationVal, -90f, 90f);
+                if (angleRelativeToPlayer > 180 * 0.5f)
                 {
-                    if (zForward)
+                    //BEHIND
+                    if (greaterThan)
                     {
                         if (Input.GetAxis("Mouse X") > 0 && !touchingPlayerLeft)
                         {
@@ -188,25 +348,108 @@ public class DoorInteraction : MonoBehaviour
                             rotationVal -= -Input.GetAxis("Mouse X") * openSpeed;
                         }
                     }
-                    else if (xForward)
+                    else if (lessThan)
                     {
-                        if (Input.GetAxis("Mouse X") > 0 && !touchingPlayerRight)
+                        if (Input.GetAxis("Mouse X") < 0 && !touchingPlayerLeft)
+                        {
+                            rotationVal += -Input.GetAxis("Mouse X") * openSpeed;
+
+                        }
+                        else if (Input.GetAxis("Mouse X") > 0 && !touchingPlayerRight)
+                        {
+                            rotationVal -= Input.GetAxis("Mouse X") * openSpeed;
+                        }
+                    }
+                    else if (equalTo)
+                    {
+                        if (zForward)
+                        {
+                            if (Input.GetAxis("Mouse X") < 0 && !touchingPlayerRight)
+                            {
+                                rotationVal += -Input.GetAxis("Mouse X") * openSpeed;
+
+                            }
+                            else if (Input.GetAxis("Mouse X") > 0 && !touchingPlayerLeft)
+                            {
+                                rotationVal -= Input.GetAxis("Mouse X") * openSpeed;
+                            }
+                        }
+                        else if (xForward)
+                        {
+                            if (Input.GetAxis("Mouse X") < 0 && !touchingPlayerLeft)
+                            {
+                                rotationVal += -Input.GetAxis("Mouse X") * openSpeed;
+
+                            }
+                            else if (Input.GetAxis("Mouse X") > 0 && !touchingPlayerRight)
+                            {
+                                rotationVal -= Input.GetAxis("Mouse X") * openSpeed;
+                            }
+                        }
+                    }
+                }
+                else if (angleRelativeToPlayer < 180 * 0.5f)
+                {
+                    //INFRONT
+                    if (greaterThan)
+                    {
+                        if (Input.GetAxis("Mouse X") < 0 && !touchingPlayerLeft)
+                        {
+                            rotationVal += -Input.GetAxis("Mouse X") * openSpeed;
+
+                        }
+                        else if (Input.GetAxis("Mouse X") > 0 && !touchingPlayerRight)
+                        {
+                            rotationVal -= Input.GetAxis("Mouse X") * openSpeed;
+                        }
+                    }
+                    else if (lessThan)
+                    {
+                        if (Input.GetAxis("Mouse X") > 0 && !touchingPlayerLeft)
                         {
                             rotationVal += Input.GetAxis("Mouse X") * openSpeed;
 
                         }
-                        else if (Input.GetAxis("Mouse X") < 0  && !touchingPlayerLeft)
+                        else if (Input.GetAxis("Mouse X") < 0 && !touchingPlayerRight)
                         {
                             rotationVal -= -Input.GetAxis("Mouse X") * openSpeed;
                         }
                     }
-                    
+                    else if (equalTo)
+                    {
+                        if (zForward)
+                        {
+                            if (Input.GetAxis("Mouse X") > 0 && !touchingPlayerLeft)
+                            {
+                                rotationVal += Input.GetAxis("Mouse X") * openSpeed;
+
+                            }
+                            else if (Input.GetAxis("Mouse X") < 0 && !touchingPlayerRight)
+                            {
+                                rotationVal -= -Input.GetAxis("Mouse X") * openSpeed;
+                            }
+                        }
+                        else if (xForward)
+                        {
+                            if (Input.GetAxis("Mouse X") > 0 && !touchingPlayerRight)
+                            {
+                                rotationVal += Input.GetAxis("Mouse X") * openSpeed;
+
+                            }
+                            else if (Input.GetAxis("Mouse X") < 0 && !touchingPlayerLeft)
+                            {
+                                rotationVal -= -Input.GetAxis("Mouse X") * openSpeed;
+                            }
+                        }
+
+                    }
                 }
+                transform.localRotation = Quaternion.Euler(0, rotationVal, 0);
+
+
             }
-            transform.localRotation = Quaternion.Euler(0,  rotationVal , 0);
-
-
         }
+        
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -244,5 +487,94 @@ public class DoorInteraction : MonoBehaviour
             touchingPlayerRight = false;
             touchingPlayerLeft = false;
         }
+    }
+
+    IEnumerator WaitToClose()
+    {
+        while(Vector3.Distance(transform.position, player.position) < closeDistance )
+        {
+            yield return null;
+        }
+        while (transform.localRotation != Quaternion.identity)
+        {
+
+            transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.identity, Time.deltaTime * 2f);
+
+            yield return null;
+        }
+        rotationVal = 0;
+        greaterThan = false;
+        lessThan = false;
+        equalTo = true;
+        moved = false;
+    }
+
+    IEnumerator RotateCamToNewPosition()
+    {
+        
+        while (cam.rotation != Quaternion.Slerp(cam.rotation, Quaternion.LookRotation(createdMrCrossy.transform.position - cam.position), 0.005f))
+        {
+            cam.rotation = Quaternion.Slerp(cam.rotation, Quaternion.LookRotation(createdMrCrossy.transform.position - cam.position), 0.005f);
+
+            yield return null;
+        }
+        FindObjectOfType<CrossKeyManager>().StartCrossKeyPuzzle(gameObject.GetComponent<DoorInteraction>());
+    }
+
+    public IEnumerator RotateCamToOldPosition()
+    {
+        while (cam.rotation != savedCamRot)
+        {
+            cam.rotation = Quaternion.Slerp(cam.rotation, savedCamRot, 0.025f);
+
+            yield return null;
+        }
+        FindObjectOfType<CrossKeyManager>().headBob.enabled = true;
+        FindObjectOfType<CrossKeyManager>().controller.enabled = true;
+        StartCoroutine("ReturnTimeScale");
+    }
+
+    public IEnumerator ReturnTimeScale()
+    {
+        while (Time.timeScale <= 0.9f)
+        {
+            Time.timeScale = Mathf.Lerp(Time.timeScale, 1, 0.005f);
+            Time.fixedDeltaTime = Time.timeScale * 0.02f;
+
+            yield return null;
+        }
+        Time.timeScale = 1;
+        Time.fixedDeltaTime = 0.02f;
+    }
+
+    IEnumerator WaitForPuzzleEnd()
+    {
+        puzzleTimer = true;
+        float timer = 0;
+        while (timer <= Random.Range(10, 20))
+        {
+            
+            if (rotationVal < 5 && rotationVal > -5)
+            {
+                timer += Time.deltaTime;
+                
+                distortion.DecreaseVignette();
+            }
+            else
+            {
+                timer = 0;
+                
+                distortion.IncreaseVignette();
+            }
+            yield return null;
+        }
+        
+        
+        
+        puzzleTimer = false;
+        FindObjectOfType<CrossKeyManager>().puzzleOn = false;
+        distortion.ReduceInsanity();
+        Destroy(createdMrCrossy);
+        Debug.Log("safe");
     }
 }
