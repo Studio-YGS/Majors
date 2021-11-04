@@ -31,6 +31,7 @@ public class DoorInteraction : MonoBehaviour
     bool handon;
 
     [Header("Cross-Key Settings")]
+    public bool isSafeHouse;
     public bool spawnLeft;
     public bool spawnRight;
     public bool spawnBehind;
@@ -575,6 +576,7 @@ public class DoorInteraction : MonoBehaviour
         FindObjectOfType<CrossKeyManager>().puzzleOn = false;
         distortion.ReduceInsanity();
         Destroy(createdMrCrossy);
+        FindObjectOfType<DoorLock>().UnLockDoors();
         Debug.Log("safe");
     }
 }

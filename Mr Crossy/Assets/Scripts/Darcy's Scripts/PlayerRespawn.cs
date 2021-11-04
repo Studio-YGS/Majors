@@ -48,6 +48,7 @@ public class PlayerRespawn : MonoBehaviour
 
     public void PlayerDie()
     {
+        FindObjectOfType<DoorLock>().UnLockDoors();
         player = FindObjectOfType<Player_Controller>();
         journal = FindObjectOfType<JournalController>();
 
