@@ -9,10 +9,17 @@ public class AnimationControl : MonoBehaviour
         GetComponent<Animator>().SetBool("OpenGate", true);
     }
 
-    public void TutorialAnimations(string triggerName)
+    public void TutorialAnimationsTrue(string conName)
     {
-        Debug.Log("Trying to trigger: " + triggerName + " from: " + gameObject.name);
-        GetComponent<Animator>().SetTrigger(triggerName);
+        Debug.Log("Trying to activate: " + conName);
+        GetComponent<Animator>().SetBool(conName, true);
+        //play sound here
+    }
+
+    public void TutorialAnimationsFalse(string conName)
+    {
+        Debug.Log("Turning off: " + conName);
+        GetComponent<Animator>().SetBool(conName, false);
     }
 
     public void LowerWalls()
