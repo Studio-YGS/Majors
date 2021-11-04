@@ -74,7 +74,7 @@ public class CrossyCrossKeyVariant : MonoBehaviour
         { 
             animator.SetTrigger("DoSwing"); 
             animator.SetBool("CanSwing", true); 
-            FindObjectOfType<CrossKeyManager>().PuzzleDeath(); 
+            FindObjectOfType<CrossKeyManager>().PuzzleDeath(gameObject); 
         }
         else animator.SetBool("CanSwing", false);
     }

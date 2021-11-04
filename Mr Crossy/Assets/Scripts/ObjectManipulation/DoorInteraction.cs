@@ -36,7 +36,7 @@ public class DoorInteraction : MonoBehaviour
     public bool spawnRight;
     public bool spawnBehind;
     public GameObject mrCrossy;
-    GameObject createdMrCrossy;
+    [HideInInspector] public GameObject createdMrCrossy;
     Vector3 randomPos;
     Quaternion savedCamRot;
     [HideInInspector] public bool puzzleOn;
@@ -226,7 +226,7 @@ public class DoorInteraction : MonoBehaviour
             
             if(Vector3.Distance(transform.position, player.position) > 5)
             {
-                FindObjectOfType<CrossKeyManager>().PuzzleDeath();
+                FindObjectOfType<CrossKeyManager>().PuzzleDeath(createdMrCrossy);
             }
             
         }
@@ -250,7 +250,7 @@ public class DoorInteraction : MonoBehaviour
                     //countdownTimer += Time.deltaTime;
                     if(distortion.vignette.intensity.value >= 1)
                     {
-                        FindObjectOfType<CrossKeyManager>().PuzzleDeath();
+                        FindObjectOfType<CrossKeyManager>().PuzzleDeath(createdMrCrossy);
                         StopCoroutine("WaitForPuzzleEnd");
                     }
                 }
@@ -261,7 +261,7 @@ public class DoorInteraction : MonoBehaviour
                 
                 if(rotationVal > 20 || rotationVal < -20)
                 {
-                    FindObjectOfType<CrossKeyManager>().PuzzleDeath();
+                    FindObjectOfType<CrossKeyManager>().PuzzleDeath(createdMrCrossy);
                     StopCoroutine("WaitForPuzzleEnd");
                 }
             }
