@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class WordCollision : MonoBehaviour
 {
-    public string word;
+    public string word, street;
 
     [SerializeField, Tooltip("The object on the canvas with the TMP components as its children")]
     GameObject wordObject;
 
     [SerializeField]
-    PuzzleController wordControl;
+    PuzzleController puzzleController;
 
     RespawnWordColliders respawn;
 
@@ -23,9 +23,11 @@ public class WordCollision : MonoBehaviour
     {
         if (other.CompareTag("GameController"))
         {
-            wordControl.wordObject = wordObject;
-            wordControl.word = word;
-            wordControl.SetUpLetters();
+            puzzleController.wordObject = wordObject;
+            puzzleController.word = word;
+            puzzleController.currentStreet = street;
+            puzzleController.SetUpLetters();
+            puzzleController.storedObjects.Clear();
 
             respawn.RespawnColliders();
 

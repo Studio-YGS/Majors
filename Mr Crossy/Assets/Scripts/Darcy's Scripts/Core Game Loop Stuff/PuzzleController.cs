@@ -13,20 +13,21 @@ public class PuzzleController : MonoBehaviour
     [SerializeField]
     GameObject[] assignedAltars;
 
-    public string word;
+    public string word, currentStreet;
 
     [SerializeField]
-    TextMeshProUGUI mistakeText;
+    TextMeshProUGUI mistakeText, streetText;
 
     int wordLength, mistakeCount = 3, completedWords = 0;
 
-    [Tooltip("Write in how many words the puzzle has")]
     public int wordsInPuzzle;
 
     //[HideInInspector]
     public List<TextMeshProUGUI> canvasLetters = new List<TextMeshProUGUI>();
 
-    string playersWord, letter, altarName;
+    public List<GameObject> storedObjects = new List<GameObject>();
+
+    string playersWord, letter, altarName, uiWord;
 
     public UnityEvent winEvent, loseEvent, tutorialEvent, tutorialMistakeEvent;
 
@@ -34,6 +35,8 @@ public class PuzzleController : MonoBehaviour
 
     void Start()
     {
+        uiWord = " _ _ _ _";
+
         if (tutorial)
         {
             SetUpLetters();
@@ -50,6 +53,8 @@ public class PuzzleController : MonoBehaviour
         }
 
         wordLength = canvasLetters.Count;
+
+        WriteToUI();
     }
 
     public void ReceiveLetterAndName(string firstLetter, string altarOrigName) //receiving the letter of the object, and the name of the altar it came from
@@ -86,7 +91,11 @@ public class PuzzleController : MonoBehaviour
         }
 
         playersWordLength = playersWord.ToIntArray().Length;
-        Debug.Log("Players word: " + playersWord + " is " + playersWordLength + " long.");
+        Debug.Log("Players word: " + playersWord + " is " + playersWordLength + " letters long.");
+
+        storedObjects.Add(GameObject.Find(altarName));
+
+        WriteToUI();
 
         if (tutorial)
         {
@@ -108,9 +117,12 @@ public class PuzzleController : MonoBehaviour
             mistakeCount--;
             mistakeText.text = "Mistakes remaining: " + mistakeCount;
 
+            //play mistake sound here
+
+            storedObjects.Clear();
+
             if (gameObject.name.Contains("Tutorial"))
-            {
-                Debug.Log("TUTORIAL MISTAKE");
+            {      
                 tutorialMistakeEvent.Invoke();
             }
 
@@ -129,11 +141,44 @@ public class PuzzleController : MonoBehaviour
         }
     }
 
+    void WriteToUI()
+    {
+        string currentAltarWord = "";
+
+        for(int i = 0; i < canvasLetters.Count; i++)
+        {
+            if(canvasLetters[i].text.ToIntArray().Length < 1)
+            {
+                currentAltarWord += " _ ";
+            }
+            else
+            {
+                currentAltarWord += canvasLetters[i].text;
+            }
+        }
+
+        uiWord = currentStreet + ": " + currentAltarWord;
+
+        streetText.text = uiWord;
+    }
+
     void CompletionCheck()
     {
         completedWords++;
 
-        if(completedWords == 3)
+        //play correct sound here
+
+        for(int i = 0; i < storedObjects.Count; i++)
+        {
+            storedObjects[i].GetComponent<Outline>().enabled = false;
+            storedObjects[i].GetComponentInChildren<ObjectPlacement>().enabled = false;
+            storedObjects[i].GetComponent<DetermineLetter>().storedObject.GetComponent<ObjectHolder>().enabled = false;
+            storedObjects[i].GetComponent<DetermineLetter>().storedObject.GetComponent<Outline>().enabled = false;
+        }
+
+        storedObjects.Clear();
+
+        if (completedWords == 3)
         {
             TutorialSectionStart tutorialSectionStart = GetComponent<TutorialSectionStart>();
 

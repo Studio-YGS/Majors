@@ -5,13 +5,13 @@ using UnityEngine.AI;
 using BehaviorDesigner.Runtime;
 
 
-//If you want stuff to happen when mr crossy attacks you, stuff it in the "Dead" method way down yonder
+//If you want stuff to happen when mr crossy attacks you, stuff it in the "CrossyAttack" method way down yonder
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(NavMeshAgent))]
 public class CrossyController : MonoBehaviour
 {
-    BehaviorTree crossyTree;
+    public static BehaviorTree crossyTree;
     Animator animator;
     NavMeshAgent agent;
 
@@ -117,9 +117,9 @@ public class CrossyController : MonoBehaviour
     [SerializeField] private Quaternion showRightRotation;
     */
 
-    private void Start()
+    private void Awake()
     {
-        
+        crossyTree = GetComponent<BehaviorTree>();
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         m_Mask = agent.areaMask;
@@ -246,16 +246,16 @@ public class CrossyController : MonoBehaviour
 
     public void OnEnable()
     {
-        crossyTree = GetComponent<BehaviorTree>();
-        crossyTree.RegisterEvent("DeadNoises", Dead);
+        TreeMalarkey.RegisterEventOnTree(crossyTree, "Schlepp", Flibbity);
     }
 
-    public void Dead()
+    public void Flibbity()
     {
-        Debug.Log("PotatoSammichs");
+        FindObjectOfType<MrCrossyDistortion>().DarkenScreen(1.5f);
     }
+
     public void OnDisable()
     {
-        crossyTree.UnregisterEvent("DeadNoises", Dead);
+        TreeMalarkey.UnregisterEventOnTree(crossyTree, "Schlepp", Flibbity);
     }
 }

@@ -27,6 +27,7 @@ public class KeyPuzzles
 public class CrossKeyManager : MonoBehaviour
 {
     public int numOfKeys = 1;
+    public bool doorsLocked;
     public TMP_Text hintArea;
     public KeyPuzzles[] keyPuzzles;
     Transform cam;
@@ -298,5 +299,9 @@ public class CrossKeyManager : MonoBehaviour
     public void PuzzleDeath()
     {
         Debug.Log("Dead");
+        FindObjectOfType<MrCrossyDistortion>().DarkenScreen(1.5f);
+        Time.timeScale = 1;
+        Time.fixedDeltaTime = 0.02f;
+        FindObjectOfType<PlayerRespawn>().PlayerDie();
     }
 }

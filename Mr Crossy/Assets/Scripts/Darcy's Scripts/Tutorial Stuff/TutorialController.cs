@@ -65,6 +65,7 @@ public class TutorialController : MonoBehaviour
 
         playerController.EnableController();
 
+        journalController.OpenMap();
         journalController.EnableJournal();
 
         journalOnSwitch.journalClosed.SetActive(true);
@@ -94,26 +95,27 @@ public class TutorialController : MonoBehaviour
         StopCoroutine(ReadingControls());
     }
 
-    IEnumerator PlayerNeedsToWait(float waitTime)
-    {
-        playerController.DisableController();
-        playerController.inJournal = false;
+    //IEnumerator PlayerNeedsToWait(float waitTime)
+    //{
+    //    playerController.DisableController();
+    //    playerController.inJournal = false;
 
-        journalController.DisableJournal();
+    //    journalController.DisableJournal();
 
-        yield return new WaitForSeconds(waitTime);
+    //    yield return new WaitForSeconds(waitTime);
 
-        playerController.EnableController();
+    //    playerController.EnableController();
 
-        journalController.EnableJournal();
+    //    journalController.EnableJournal();
 
-        StopCoroutine(PlayerNeedsToWait(5f));
-    }
+    //    StopCoroutine(PlayerNeedsToWait(5f));
+    //}
 
     IEnumerator WaitForCrossy(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
 
+        journalController.EnableJournal();
         journalController.OpenHowTo();
         journalController.readingHowTo = true;
 
