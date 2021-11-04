@@ -27,7 +27,7 @@ public class DoorInteraction : MonoBehaviour
     float relativeAngle;
     public float openSpeed = 10;
     public float closeDistance = 45;
-    public bool locked;
+    //public bool locked;
     bool handon;
 
     [Header("Cross-Key Settings")]
@@ -43,10 +43,12 @@ public class DoorInteraction : MonoBehaviour
     bool puzzleTimer;
     float countdownTimer;
     MrCrossyDistortion distortion;
+    CrossKeyManager keyMan;
     
     
     void Start()
     {
+        keyMan = FindObjectOfType<CrossKeyManager>();
         cam = GameObject.Find("FirstPersonCharacter").transform;
         rotationVal = 0;
         player = GameObject.Find("Fps Character").transform;
@@ -55,14 +57,14 @@ public class DoorInteraction : MonoBehaviour
 
     void Update()
     {
-        if (locked)
+        if (keyMan.doorsLocked && !isSafeHouse)
         {
-            if (FindObjectOfType<CrossKeyManager>().numOfKeys > 0)
+            RaycastHit hit;
+            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 2))
             {
-                RaycastHit hit;
-                if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 2))
+                if (hit.collider == gameObject.GetComponent<Collider>())
                 {
-                    if (hit.collider == gameObject.GetComponent<Collider>())
+                    if (FindObjectOfType<CrossKeyManager>().numOfKeys > 0)
                     {
                         if (!handon)
                         {
@@ -70,7 +72,7 @@ public class DoorInteraction : MonoBehaviour
                             reticle.SetActive(false);
                             hand.SetActive(true);
                         }
-                        
+
                         if (Input.GetMouseButtonDown(0) && !puzzleOn)
                         {
                             FindObjectOfType<Player_Controller>().enabled = false;
@@ -128,12 +130,8 @@ public class DoorInteraction : MonoBehaviour
                             distortion.IncreaseInsanity(createdMrCrossy);
                         }
                     }
-                    else if (handon)
-                    {
-                        reticle.SetActive(true);
-                        hand.SetActive(false);
-                        handon = false;
-                    }
+
+
                 }
                 else if (handon)
                 {
@@ -142,7 +140,13 @@ public class DoorInteraction : MonoBehaviour
                     handon = false;
                 }
             }
-            
+            else if (handon)
+            {
+                reticle.SetActive(true);
+                hand.SetActive(false);
+                handon = false;
+            }
+
         }
 
         
@@ -263,7 +267,7 @@ public class DoorInteraction : MonoBehaviour
             }
         }
 
-        if (!locked)
+        if (!keyMan.doorsLocked || isSafeHouse)
         {
             RaycastHit hit;
             if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 2))
@@ -576,7 +580,7 @@ public class DoorInteraction : MonoBehaviour
         FindObjectOfType<CrossKeyManager>().puzzleOn = false;
         distortion.ReduceInsanity();
         Destroy(createdMrCrossy);
-        FindObjectOfType<DoorLock>().UnLockDoors();
+        keyMan.doorsLocked = false;
         Debug.Log("safe");
     }
 }
