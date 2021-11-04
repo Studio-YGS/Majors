@@ -117,11 +117,12 @@ public class PuzzleController : MonoBehaviour
             mistakeCount--;
             mistakeText.text = "Mistakes remaining: " + mistakeCount;
 
+            //play mistake sound here
+
             storedObjects.Clear();
 
             if (gameObject.name.Contains("Tutorial"))
-            {
-                Debug.Log("TUTORIAL MISTAKE");
+            {      
                 tutorialMistakeEvent.Invoke();
             }
 
@@ -164,6 +165,8 @@ public class PuzzleController : MonoBehaviour
     void CompletionCheck()
     {
         completedWords++;
+
+        //play correct sound here
 
         for(int i = 0; i < storedObjects.Count; i++)
         {
