@@ -27,6 +27,7 @@ public class KeyPuzzles
 public class CrossKeyManager : MonoBehaviour
 {
     public int numOfKeys = 1;
+    public bool doorsLocked;
     public TMP_Text hintArea;
     public KeyPuzzles[] keyPuzzles;
     Transform cam;
