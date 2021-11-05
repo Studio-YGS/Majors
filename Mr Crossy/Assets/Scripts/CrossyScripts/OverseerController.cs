@@ -123,6 +123,10 @@ public class OverseerController : MonoBehaviour
             vignetteActivated = true;
             Debug.Log("potoatosondwich");
             distootle.DistanceVignette(m_Crossy);
+            if(!FindObjectOfType<CrossKeyManager>().doorsLocked)
+            {
+                FindObjectOfType<CrossKeyManager>().doorsLocked = true;
+            }
         }
         else if (m_State != 2 && vignetteActivated)
         {
