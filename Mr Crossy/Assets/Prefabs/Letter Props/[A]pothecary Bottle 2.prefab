@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 7196936037031865017}
   - component: {fileID: 4901130771826024051}
   - component: {fileID: 7003631976663591933}
+  - component: {fileID: 2329714403997333177}
   - component: {fileID: 6391099151604523129}
   - component: {fileID: 4103584774056668745}
-  - component: {fileID: -8342721909873059205}
   m_Layer: 0
   m_Name: '[A]pothecary Bottle 2'
   m_TagString: Untagged
@@ -29,7 +29,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6846786484050247590}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -52,7 +52,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6846786484050247590}
   m_Enabled: 1
-  m_CastShadows: 0
+  m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1
@@ -101,13 +101,8 @@ MonoBehaviour:
   objectName: '[A]pothecary Bottle'
   image: {fileID: 0}
   textName: {fileID: 0}
-  imageTwo: {fileID: 0}
-  textNameTwo: {fileID: 0}
-  hand: {fileID: 0}
   thisObjectHeld: 0
   isPlacedDown: 1
-  beingInspected: 0
-  controller: {fileID: 0}
   ogScaleFactor: {x: 1, y: 1, z: 1}
   pickupRange: 5.07
   handOffset: {x: 0, y: 0.27, z: -0.08}
@@ -117,6 +112,20 @@ MonoBehaviour:
   rotationalSet: {x: 0, y: 0, z: 0, w: 0}
   distanceFromFace: 0.6
   updatePos: 0
+--- !u!64 &2329714403997333177
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6846786484050247590}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1654208355914529337, guid: 274ab4eefa404b144b58b6ada0999984, type: 3}
 --- !u!54 &6391099151604523129
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -152,17 +161,3 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
---- !u!136 &-8342721909873059205
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6846786484050247590}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.028296001
-  m_Height: 0.15685156
-  m_Direction: 1
-  m_Center: {x: -0.000000019557774, y: 0.0784297, z: 0.000028555281}

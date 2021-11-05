@@ -9,7 +9,6 @@ public class Player_Controller : MonoBehaviour
     public float baseSpeed;
     public float speed;
     public float sprintSpeed;
-    public float stamina = 8;
     public float crouchSpeed;
     public float gravity;
     public float jumpHeight = 3f;
@@ -74,15 +73,15 @@ public class Player_Controller : MonoBehaviour
 
 
 
-            if (Input.GetButtonDown("Jump") && isGrounded && canMove)
+            if (Input.GetButtonDown("Jump") && isGrounded)
             {
                 velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
 
             }
 
-            velocity.y += gravity * Time.unscaledDeltaTime;
+            velocity.y += gravity * Time.deltaTime;
             move = transform.right * x + transform.forward * z;
-            controller.Move(velocity * Time.unscaledDeltaTime);
+            controller.Move(velocity * Time.deltaTime);
 
 
             if (Input.GetKeyDown(KeyCode.C) && isGrounded)
@@ -102,29 +101,18 @@ public class Player_Controller : MonoBehaviour
             }
 
 
-            if (Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.C) && stamina > 0)
+            if (Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.C))
             {
                 speed = sprintSpeed;
-                stamina -= Time.unscaledDeltaTime * 2;
             }
             else if (Input.GetKeyUp(KeyCode.LeftShift) && !Input.GetKey(KeyCode.C))
             {
                 speed = baseSpeed;
             }
 
-            if(stamina < 8 && !Input.GetKey(KeyCode.LeftShift))
-            {
-                stamina += Time.unscaledDeltaTime;
-            }
-            if (stamina <= 0)
-            {
-                //when the player runs out of stamina
-                speed = baseSpeed;
-            }
-
             move.Normalize();
 
-            controller.Move(move * speed * Time.unscaledDeltaTime);
+            controller.Move(move * speed * Time.deltaTime);
 
             if (isGrounded && velocity.y < 0)
             {

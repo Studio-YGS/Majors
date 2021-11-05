@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class NoteController : MonoBehaviour
 {
-    Player_Controller player;
+    [SerializeField]
+    Transform player;
 
     JournalController journalController;
 
@@ -16,14 +17,13 @@ public class NoteController : MonoBehaviour
     {
         journalOnSwitch = FindObjectOfType<JournalOnSwitch>();
         journalController = FindObjectOfType<JournalController>();
-        player = FindObjectOfType<Player_Controller>();
     }
 
     void Update()
     {
         RaycastHit hit;
 
-        if(Physics.Raycast(player.cam.position, player.cam.TransformDirection(Vector3.forward), out hit, 2f))
+        if(Physics.Raycast(player.position, player.TransformDirection(Vector3.forward), out hit, 5f))
         {
             if(hit.transform.gameObject.CompareTag("Note"))
             {

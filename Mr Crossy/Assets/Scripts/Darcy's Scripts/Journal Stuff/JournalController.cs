@@ -11,21 +11,13 @@ public class JournalController : MonoBehaviour
     public List<int> noteList = new List<int>(0); 
 
     [SerializeField]
-    GameObject log, tutMap, gameMap, notes, howTo, rightArrow, leftArrow;
-
-    GameObject mapPage;
+    GameObject log, map, notes, rightArrow, leftArrow;
 
     int whichTab = 1, whichLogPage = 0;
-
     [HideInInspector]
     public int whichNotesPage = 0;
 
-    public bool disabled = false, tutorial = true, readingHowTo = false;
-
-    void Start()
-    {
-        mapPage = tutMap;
-    }
+    public bool disabled = false;
 
     void Update()
     {
@@ -37,23 +29,6 @@ public class JournalController : MonoBehaviour
         {
             Arrows(false);
         }
-
-        if(Input.GetKeyDown(KeyCode.Tab) && readingHowTo)
-        {
-            readingHowTo = false;
-
-            GetComponent<TutorialSectionStart>().ReadHowTo();
-
-            GetComponent<JournalTimer>().canCount = true;
-            GetComponent<JournalTimer>().StartTimer();
-
-            OpenMap();
-        }
-    }
-
-    public void SetToGameMap()
-    {
-        mapPage = gameMap;
     }
 
     public void OpenLog()
@@ -61,9 +36,8 @@ public class JournalController : MonoBehaviour
         if (!disabled)
         {
             log.SetActive(true);
-            mapPage.SetActive(false);
+            map.SetActive(false);
             notes.SetActive(false);
-            howTo.SetActive(false);
 
             leftArrow.SetActive(false);
             rightArrow.SetActive(false);
@@ -100,13 +74,10 @@ public class JournalController : MonoBehaviour
         if (!disabled)
         {
             log.SetActive(false);
-            mapPage.SetActive(true);
+            map.SetActive(true);
             notes.SetActive(false);
-            howTo.SetActive(false);
-
             rightArrow.SetActive(false);
             leftArrow.SetActive(false);
-
             whichTab = 2;
         }
     }
@@ -118,9 +89,8 @@ public class JournalController : MonoBehaviour
             if (noteList.Count >= 1)
             {
                 log.SetActive(false);
-                mapPage.SetActive(false);
+                map.SetActive(false);
                 notes.SetActive(true);
-                howTo.SetActive(false);
 
                 leftArrow.SetActive(false);
                 rightArrow.SetActive(false);
@@ -153,22 +123,6 @@ public class JournalController : MonoBehaviour
         }
     }
 
-    public void OpenHowTo()
-    {
-        if (!disabled && !tutorial)
-        {
-            log.SetActive(false);
-            mapPage.SetActive(false);
-            notes.SetActive(false);
-            howTo.SetActive(true);
-
-            leftArrow.SetActive(false);
-            rightArrow.SetActive(false);
-
-            whichTab = 4;
-        }
-    }
-
     public void Arrows(bool right)
     {
         if (right)
@@ -181,6 +135,11 @@ public class JournalController : MonoBehaviour
                         OpenLog();
                         break;
                     }
+                case 2:
+                    {
+                        OpenMap();
+                        break;
+                    }
                 case 3:
                     {
                         whichNotesPage++;
@@ -188,7 +147,6 @@ public class JournalController : MonoBehaviour
                         break;
                     }
             }
-            //paper sound
         }
         else
         {
@@ -200,6 +158,11 @@ public class JournalController : MonoBehaviour
                         OpenLog();
                         break;
                     }
+                case 2:
+                    {
+                        OpenMap();
+                        break;
+                    }
                 case 3:
                     {
                         whichNotesPage--;
@@ -207,7 +170,6 @@ public class JournalController : MonoBehaviour
                         break;
                     }
             }
-            //paper sound
         }
     }
 
@@ -219,10 +181,5 @@ public class JournalController : MonoBehaviour
     public void EnableJournal()
     {
         disabled = false;
-    }
-
-    public void SetTutorialBool(bool set)
-    {
-        tutorial = set;
     }
 }

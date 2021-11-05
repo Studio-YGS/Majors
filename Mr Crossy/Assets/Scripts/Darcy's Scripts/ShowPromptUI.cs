@@ -20,7 +20,7 @@ public class ShowPromptUI : MonoBehaviour
     {
         RaycastHit hit;
 
-        if (Physics.Raycast(playerController.cam.position, playerController.cam.forward, out hit, 2f) && canShow)
+        if (Physics.Raycast(playerController.cam.position, playerController.transform.TransformDirection(Vector3.forward), out hit, 2f) && canShow)
         {
             string tag = hit.transform.gameObject.tag;
 

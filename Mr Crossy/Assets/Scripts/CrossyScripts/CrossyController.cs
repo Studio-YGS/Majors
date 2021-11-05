@@ -2,26 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using BehaviorDesigner.Runtime;
 
-
-//If you want stuff to happen when mr crossy attacks you, stuff it in the "CrossyAttack" method way down yonder
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(NavMeshAgent))]
 public class CrossyController : MonoBehaviour
 {
-    public static BehaviorTree crossyTree;
     Animator animator;
     NavMeshAgent agent;
 
-    [Header("Debug Booleans")]
     public bool overrideShouldRun;
     public bool run;
-    public bool accelManipulation;
-    public bool lookCondition;
+    public bool conditionIsTrue;
 
-    private Transform headBone;
+    public Transform headBone;
     public Transform vision;
     [SerializeField] private Transform m_CrossyDespawn;
 
@@ -37,33 +31,22 @@ public class CrossyController : MonoBehaviour
     [SerializeField] private float m_RunSpeed;
     private float m_MoveSpeed;
     [Tooltip("Mr. Crossy's acceleration rate.")]
-    [SerializeField] private float m_BaseAcceleration;
-    [SerializeField] private float m_CornerAcceleration;
+    [SerializeField] private float m_WalkAcceleration;
+    [SerializeField] private float m_RunAcceleration;
     [SerializeField] private float m_Acceleration;
     [Tooltip("Mr. Crossy's turning speed.")]
-    /*[SerializeField]*/ private float m_WalkAngularSpeed;
-    /*[SerializeField]*/ private float m_RunAngularSpeed;
+    [SerializeField] private float m_WalkAngularSpeed;
+    [SerializeField] private float m_RunAngularSpeed;
     [SerializeField] private float m_AngularSpeed;
     [Tooltip("Distance from destination that Mr. Crossy can stop at.")]
     [SerializeField] private float m_StoppingDistance;
-    [SerializeField] private float m_CornerThreshold;
-
-    private float m_DistanceToCorner;
 
     private int m_Mask;
-    private bool m_InSight = false;
-    private bool m_InPeripheral = false;
     private bool m_ShouldRun = false;
     private int m_State = -1;
     [Space(10)]
     [Header("Detection Variables")]
     [SerializeField] private float m_DetectionTime;
-    [Space(10)]
-    [SerializeField] private float m_FocalViewCone;
-    [SerializeField] private float m_PeripheralViewCone;
-    [Space(10)]
-    [SerializeField] private float m_FocalViewDist;
-    [SerializeField] private float m_PeripheralViewDist;
 
     [Space(10)]
     [Header("IK Variables")]
@@ -73,9 +56,8 @@ public class CrossyController : MonoBehaviour
     [Range(0,1)]public float lookAtWeight;
     public Transform lookAtTransform;
     public Vector3 lookAtOffset;
-
-    [Range(0,2)] public float IKLeftFootDistance;
-    [Range(0,2)] public float IKRightFootDistance;
+    public float IKLeftFootDistance;
+    public float IKRightFootDistance;
 
     #region Properties
     public float WalkSpeed { get { return m_WalkSpeed; } set { m_WalkSpeed = value; } }
@@ -90,48 +72,40 @@ public class CrossyController : MonoBehaviour
 
     public int NavMeshMask { get { return m_Mask; } }
     public bool ShouldRun { get { return m_ShouldRun; } set { m_ShouldRun = value; } }
-    public bool InSight { get { return m_InSight; } set { m_InSight = value; } }
-    public bool InPeripheral { get { return m_InPeripheral; } set { m_InPeripheral = value; } }
     public int State { get { return m_State; } set { m_State = value; } }
     public Vector3 CrossyDespawn { get { return m_CrossyDespawn.position; } set { m_CrossyDespawn.position = value; } }
 
     public float BaseDetectTime { get { return m_DetectionTime; } }
     public float CloseDetectTime { get { return m_DetectionTime*3; } }
-
-    public float FocalViewCone { get { return m_FocalViewCone; } set { m_FocalViewCone = value; } }
-    public float PeripheralViewCone { get { return m_PeripheralViewCone; } set { m_PeripheralViewCone = value; } }
-    public float FocalViewDist { get { return m_FocalViewDist; } set { m_FocalViewDist = value; } }
-    public float PeripheralViewDist { get { return m_PeripheralViewDist; } set { m_PeripheralViewDist = value; } }
     #endregion
 
     [Space(10)]
-    [SerializeField] float mSpeed;
-    [SerializeField] float tSpeed;
-    //[SerializeField] float veloDesire;
-    float interpolator;
+    [SerializeField] float veloMag;
+    [SerializeField] float veloDesire;
+    [SerializeField] float interpolator;
 
-    /*[Space(10)]
+    [Space(10)]
     [Header("Debuggles")]
     [SerializeField] private Vector3 showNorma;
     [SerializeField] private Quaternion showLeftRotation;
     [SerializeField] private Quaternion showRightRotation;
-    */
 
-    private void Awake()
+
+    private void Start()
     {
-        crossyTree = GetComponent<BehaviorTree>();
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         m_Mask = agent.areaMask;
-        headBone = animator.GetBoneTransform(HumanBodyBones.Head);
     }
 
     private void Update()
     {
-        //veloMag = agent.velocity.magnitude;
-        m_DistanceToCorner = Vector3.Distance(transform.position, agent.steeringTarget);
+        vision.position = headBone.position;
+        vision.rotation.SetLookRotation(headBone.up, -headBone.right);
+        veloMag = agent.velocity.magnitude;
+        veloDesire = agent.desiredVelocity.magnitude;
 
-        if (overrideShouldRun == false) // Sets 'm_ShouldRun' based on state and distance from target.
+        if (overrideShouldRun == false)
         {
             if (m_State < 1) { m_ShouldRun = false; }
             else if (m_State == 1 || m_State == 2)
@@ -142,51 +116,30 @@ public class CrossyController : MonoBehaviour
                 else m_ShouldRun = false;
             }
             else if (m_State > 2) { m_ShouldRun = true; }
+
         }
         else { m_ShouldRun = run; }
 
-        //NavAgent Fiddling
+
+        //NavAgent fiddling
         MoveSpeed = (m_ShouldRun) ? RunSpeed : WalkSpeed;
-        
-        if(accelManipulation)
-        {
-            if (m_DistanceToCorner <= m_CornerThreshold)
-            {
-                interpolator = Mathf.InverseLerp(m_CornerThreshold, 0f, m_DistanceToCorner);
+        /*
+        interpolator = Mathf.InverseLerp(0, RunSpeed, veloDesire);
 
-            }
-            else if (interpolator < 1f)
-            {
-                interpolator = 1f;
-            }
-        }
-
-        Acceleration = (accelManipulation) ? Mathf.Lerp(m_BaseAcceleration, m_CornerAcceleration, interpolator) : m_BaseAcceleration;
-
+        m_AngularSpeed = Mathf.Lerp(m_WalkAngularSpeed, m_RunAngularSpeed, interpolator);
+        m_Acceleration = Mathf.Lerp(m_WalkAcceleration, m_RunAcceleration, interpolator);
+        */
         agent.acceleration = Acceleration;
 
-        if (m_InSight || m_InPeripheral) lookCondition = true;
-        else lookCondition = false;
-
-        GetMotionHashValues();
-
         //Animator Actions
-        animator.SetBool("Moving", mSpeed >= 0.05);
-        animator.SetFloat("Speed", mSpeed);
-        animator.SetFloat("Turn", tSpeed);
+        
+        animator.SetBool("Moving", veloMag >= 0.05);
+        animator.SetFloat("VelocityMag",veloMag);
     }
 
-    public void GetMotionHashValues()
+    private void LateUpdate()
     {
-        Vector3 velocity = agent.transform.InverseTransformDirection(agent.velocity);
-
-        mSpeed = velocity.z;
-        tSpeed = velocity.x;
-    }
-
-    public void ForceDespawn()
-    {
-        crossyTree.SendEvent("Despawn");
+        
     }
 
     private void OnAnimatorIK(int layerIndex)
@@ -196,19 +149,22 @@ public class CrossyController : MonoBehaviour
             //Noggin Malarkey
             if (lookAtTransform)
             {
-                if (lookCondition)
+                if (conditionIsTrue)
                 {
                     animator.SetLookAtPosition(lookAtTransform.position + lookAtOffset);
                     animator.SetLookAtWeight(lookAtWeight);
                 }
                 else animator.SetLookAtWeight(0f);
             }
-            
+
             //Foot Stuff
-            animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, animator.GetFloat("IKLeftFootWeight"));
-            animator.SetIKRotationWeight(AvatarIKGoal.LeftFoot, animator.GetFloat("IKLeftFootWeight"));
-            animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, animator.GetFloat("IKRightFootWeight"));
-            animator.SetIKRotationWeight(AvatarIKGoal.RightFoot, animator.GetFloat("IKRightFootWeight"));
+            animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, 1f);
+            animator.SetIKRotationWeight(AvatarIKGoal.LeftFoot, 1f);
+            animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, 1f);
+            animator.SetIKRotationWeight(AvatarIKGoal.RightFoot, 1f);
+
+            showLeftRotation = animator.GetIKRotation(AvatarIKGoal.LeftFoot);
+            showRightRotation = animator.GetIKRotation(AvatarIKGoal.RightFoot);
 
             RaycastHit hit;
             Ray ray;
@@ -222,8 +178,9 @@ public class CrossyController : MonoBehaviour
 
                     footPos.y += IKLeftFootDistance;
                     animator.SetIKPosition(AvatarIKGoal.LeftFoot, footPos);
-                    animator.SetIKRotation(AvatarIKGoal.LeftFoot, Quaternion.LookRotation(-animator.GetBoneTransform(HumanBodyBones.LeftFoot).up, hit.normal));
-                    //showNorma = hit.normal;
+
+                    animator.SetIKRotation(AvatarIKGoal.LeftFoot, Quaternion.LookRotation(transform.forward, hit.normal));
+                    showNorma = hit.normal;
                 }
             }
 
@@ -237,25 +194,9 @@ public class CrossyController : MonoBehaviour
 
                     footPos.y += IKRightFootDistance;
                     animator.SetIKPosition(AvatarIKGoal.RightFoot, footPos);
-                    animator.SetIKRotation(AvatarIKGoal.RightFoot, Quaternion.LookRotation(animator.GetBoneTransform(HumanBodyBones.RightFoot).up, hit.normal));
+                    animator.SetIKRotation(AvatarIKGoal.RightFoot, Quaternion.LookRotation(transform.forward, hit.normal));
                 }
             }
         }
-
-    }
-
-    public void OnEnable()
-    {
-        TreeMalarkey.RegisterEventOnTree(crossyTree, "Schlepp", Flibbity);
-    }
-
-    public void Flibbity()
-    {
-        FindObjectOfType<MrCrossyDistortion>().DarkenScreen(1.5f);
-    }
-
-    public void OnDisable()
-    {
-        TreeMalarkey.UnregisterEventOnTree(crossyTree, "Schlepp", Flibbity);
     }
 }

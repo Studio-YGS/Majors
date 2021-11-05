@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 6423261985855608827}
   - component: {fileID: 1598861991977700455}
   - component: {fileID: 470320899979031716}
+  - component: {fileID: 6073474928297970951}
   - component: {fileID: 280638190742791676}
   - component: {fileID: 863641632906962992}
   - component: {fileID: 7877117363865625298}
-  - component: {fileID: 5776381264602284839}
   m_Layer: 0
-  m_Name: '[P]ie 3'
+  m_Name: SM_Biscuit_01d_LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -85,6 +85,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &6073474928297970951
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 196035842102462348}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 1669852498838806076, guid: 1501d0554bfd162439c276ea0903d732, type: 3}
 --- !u!54 &280638190742791676
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -136,13 +150,8 @@ MonoBehaviour:
   objectName: '[P]ie'
   image: {fileID: 0}
   textName: {fileID: 0}
-  imageTwo: {fileID: 0}
-  textNameTwo: {fileID: 0}
-  hand: {fileID: 0}
   thisObjectHeld: 0
   isPlacedDown: 1
-  beingInspected: 0
-  controller: {fileID: 0}
   ogScaleFactor: {x: 1, y: 1, z: 1}
   pickupRange: 5
   handOffset: {x: 0.03, y: 0.3, z: 0}
@@ -152,19 +161,6 @@ MonoBehaviour:
   rotationalSet: {x: 0, y: 0, z: 0, w: 0}
   distanceFromFace: 0.6
   updatePos: 0
---- !u!65 &5776381264602284839
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 196035842102462348}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.08046738, y: 0.048774865, z: 0.08033569}
-  m_Center: {x: -0.003813833, y: 0.024386263, z: 0.0005740747}
 --- !u!1 &1896241623907222361
 GameObject:
   m_ObjectHideFlags: 0
@@ -174,7 +170,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3173793559339479370}
-  - component: {fileID: 8884062633483268827}
   m_Layer: 0
   m_Name: '[P]ie 3'
   m_TagString: Untagged
@@ -197,15 +192,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8884062633483268827
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1896241623907222361}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

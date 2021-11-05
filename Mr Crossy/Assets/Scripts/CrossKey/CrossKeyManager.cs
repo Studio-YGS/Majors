@@ -27,20 +27,15 @@ public class KeyPuzzles
 public class CrossKeyManager : MonoBehaviour
 {
     public int numOfKeys = 1;
-    public bool doorsLocked;
     public TMP_Text hintArea;
     public KeyPuzzles[] keyPuzzles;
     Transform cam;
-    [HideInInspector] public bool puzzleOn;
     [HideInInspector] public Player_Controller controller;
-    [HideInInspector] public HeadBob headBob;
-    GameObject newCrossKey;
 
     void Start()
     {
         cam = FindObjectOfType<Camera>().transform;
         controller = FindObjectOfType<Player_Controller>();
-        headBob = FindObjectOfType<HeadBob>();
     }
 
     
@@ -51,18 +46,16 @@ public class CrossKeyManager : MonoBehaviour
     public void StartCrossKeyPuzzle(DoorInteraction door)
     {
         
-        if(numOfKeys > 0 && !puzzleOn)
+        if(numOfKeys > 0)
         {
             numOfKeys -= 1;
-            puzzleOn = true;
             controller.enabled = false;
-            headBob.enabled = false;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             int randomKey = Random.Range(0, keyPuzzles.Length);
             KeyPuzzles key = keyPuzzles[randomKey];
             Vector3 posOffset = key.crossKey.transform.position - key.crossKey.transform.GetComponent<Renderer>().bounds.center;
-            newCrossKey = Instantiate(key.crossKey, cam.position + cam.forward * 0.4f + posOffset, key.crossKey.transform.rotation);
+            GameObject newCrossKey = Instantiate(key.crossKey, cam.position + cam.forward * 0.4f + posOffset, key.crossKey.transform.rotation);
             newCrossKey.layer = 6;
             foreach(Transform t in newCrossKey.transform)
             {
@@ -295,20 +288,5 @@ public class CrossKeyManager : MonoBehaviour
         newCrossKey.GetComponent<CrossKey>().door = door;
         newCrossKey.GetComponent<CrossKey>().answer = puzzle.wordToSolve;
         hintArea.text = "[C]LUE: " + puzzle.hint;
-    }
-
-    public void PuzzleDeath(GameObject mrCrossy)
-    {
-        Debug.Log("Dead");
-        if (newCrossKey)
-        {
-            Destroy(newCrossKey);
-        }
-        Destroy(mrCrossy);
-        FindObjectOfType<MrCrossyDistortion>().DarkenScreen(1.5f);
-        hintArea.text = "";
-        Time.timeScale = 1;
-        Time.fixedDeltaTime = 0.02f;
-        FindObjectOfType<PlayerRespawn>().PlayerDie();
     }
 }

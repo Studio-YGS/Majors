@@ -22,6 +22,7 @@ public class CrossyTheWatcher : MonoBehaviour
     
 
     public Lighthouse lighthouse;
+    public float hiddenYOffset;
 
     private Transform lightHouseBase;
     private Vector3 hiddenPosition;
@@ -36,45 +37,29 @@ public class CrossyTheWatcher : MonoBehaviour
 
     [HideInInspector] public int m_state;
 
-
-    [HideInInspector] public bool lighthousing;
-    [HideInInspector] public bool hidingTitan;
-    [HideInInspector] public bool isTutorial = true;
-
     private void Start()
     {
         animator = GetComponent<Animator>();
-        transform.rotation = lighthouse.selfTransform.rotation;
-        //SetPosToLighthouse();
+        InitFromLighthouse();
     }
 
     // Update is called once per frame
     void Update()
     {
+        animator.SetLayerWeight(1, animator.GetFloat("LayerWeight"));
+
         if(lerpPosition)
         {
             if(weights)
             {
-                transform.position = Vector3.Lerp(lighthouse.hiddenPosition, lighthouse.selfTransform.position, heightWeight);
+                transform.position = Vector3.Lerp(hiddenPosition, lightHouseBase.position, heightWeight);
             }
             else
             {
-                transform.position = Vector3.Lerp(lighthouse.hiddenPosition, lighthouse.selfTransform.position, animator.GetFloat("HeightWeight"));
+                transform.position = Vector3.Lerp(hiddenPosition, lightHouseBase.position, animator.GetFloat("HeightWeight"));
             }
             
         }
-
-        if(!isTutorial)
-        {
-            if (!lighthousing && !hidingTitan)
-            {
-                if (m_state == -1 && animator.GetCurrentAnimatorStateInfo(0).IsName("TitanCrossyIdleHidden"))
-                {
-                    AwakenTitan();
-                }
-            }
-        }
-
     }
 
     private void OnAnimatorIK(int layerIndex)
@@ -107,7 +92,13 @@ public class CrossyTheWatcher : MonoBehaviour
                 }
                 else animator.SetLookAtWeight(0f);
 
-                Rotahtee();
+                Quaternion stepRotation = Quaternion.identity;
+                Quaternion rotation = Quaternion.LookRotation(faceToTransform.position - transform.position);
+
+                rotation.eulerAngles = new Vector3(0, rotation.eulerAngles.y, 0);
+                stepRotation = Quaternion.RotateTowards(transform.rotation, rotation, turnRate * Time.deltaTime);
+
+                transform.rotation = stepRotation;
             }
 
             if(hands)
@@ -132,65 +123,15 @@ public class CrossyTheWatcher : MonoBehaviour
     }
 
 
-    /*public void SetPosToLighthouse()
+    public void InitFromLighthouse()
     {
-        transform.position = lighthouse.selfTransform.position;
-        transform.rotation = lighthouse.selfTransform.rotation;
+        lightHouseBase = lighthouse.selfTransform;
 
-        //lightHouseBase = lighthouse.selfTransform;
+        hiddenPosition = new Vector3(lightHouseBase.position.x, lightHouseBase.position.y + hiddenYOffset, lightHouseBase.position.z);
+    }
 
-        //hiddenPosition = new Vector3(lightHouseBase.position.x, lightHouseBase.position.y + lighthouse.hiddenYOffset, lightHouseBase.position.z);
-    }*/
-
-    //Called When lighthouse Switched
     public void TitanCrossyHouse(Lighthouse newLighthouse)
     {
-        lighthousing = true;
-        StartCoroutine(SwitchLighthouse(newLighthouse));
-    }
-
-    public void Rotahtee()
-    {
-        Quaternion stepRotation;
-        Quaternion rotation = Quaternion.LookRotation(faceToTransform.position - transform.position);
-
-        rotation.eulerAngles = new Vector3(0, rotation.eulerAngles.y, 0);
-        stepRotation = Quaternion.RotateTowards(transform.rotation, rotation, turnRate * Time.deltaTime);
-
-        transform.rotation = stepRotation;
-    }
-
-    //Awakens Titan Crossy
-    public void AwakenTitan()
-    {
-        animator.SetTrigger("TitanAwaken");
-    }
-
-    //Hides Titan Crossy
-    public void HideTitan()
-    {
-        animator.SetTrigger("TitanSeal");
-    }
-
-    public IEnumerator SwitchLighthouse(Lighthouse lighthouseNew)
-    {
-        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("TitanCrossyIdleHidden"))
-        {
-            Debug.Log("Ough Moy Gawsh");
-            HideTitan();
-        }
-
-        while (!animator.GetCurrentAnimatorStateInfo(0).IsName("TitanCrossyIdleHidden"))
-        {
-            yield return null;
-        }
-
-        lighthouse = lighthouseNew;
-        transform.rotation = lighthouse.selfTransform.rotation;
-        //SetPosToLighthouse();
-
-        if (m_state == -1) AwakenTitan();
-
-        lighthousing = false;
+        
     }
 }

@@ -18,16 +18,11 @@ public class CluePickUp : MonoBehaviour
     {
         RaycastHit hit;
 
-        if(Input.GetKeyDown(KeyCode.E) && Physics.Raycast(playerController.cam.position, playerController.cam.TransformDirection(Vector3.forward), out hit, 2f))
+        if(Input.GetKeyDown(KeyCode.E) && Physics.Raycast(playerController.cam.position, playerController.transform.TransformDirection(Vector3.forward), out hit, 2f))
         {
-            if (hit.transform.gameObject.CompareTag("Clue") && hit.transform.gameObject.name == gameObject.name)
+            if (hit.transform.gameObject.CompareTag("Clue"))
             {
                 pickUp.Invoke();
-
-                if (GetComponentInParent<TutorialSectionStart>())
-                {
-                    GetComponentInParent<TutorialSectionStart>().CheckClues();
-                }
             }
         }
     }

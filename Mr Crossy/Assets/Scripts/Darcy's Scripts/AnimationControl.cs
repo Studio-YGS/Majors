@@ -4,27 +4,18 @@ using UnityEngine;
 
 public class AnimationControl : MonoBehaviour
 {
+    Animator[] animations;
+
     public void OpenGate()
     {
         GetComponent<Animator>().SetBool("OpenGate", true);
     }
 
-    public void TutorialAnimationsTrue(string conName)
+    void Update()
     {
-        Debug.Log("Trying to activate: " + conName);
-        GetComponent<Animator>().SetBool(conName, true);
-        //play sound here
-    }
-
-    public void TutorialAnimationsFalse(string conName)
-    {
-        Debug.Log("Turning off: " + conName);
-        GetComponent<Animator>().SetBool(conName, false);
-    }
-
-    public void LowerWalls()
-    {
-        Debug.Log("Lowering Walls");
-        GetComponent<Animator>().SetBool("WallDown", true);
+        if (Input.GetKeyDown(KeyCode.H)) //dev tool
+        {
+            GetComponent<Animator>().SetBool("OpenGate", true);
+        }
     }
 }

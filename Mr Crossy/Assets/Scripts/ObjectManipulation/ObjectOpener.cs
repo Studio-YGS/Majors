@@ -32,7 +32,7 @@ public class ObjectOpener : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.DrawRay(player.position, key.transform.position - player.position, Color.green);
+        Debug.DrawRay(player.position, key.transform.position - player.position, Color.green);
         //Debug.DrawRay(transform.position, player.position - transform.position, Color.red);
         //(player.position) - (transform.position + transform.up * rotationOffset.y + transform.right * rotationOffset.x + transform.forward * rotationOffset.z), Color.red);
         //Debug.Log(angleXRelativeToPlayer);
