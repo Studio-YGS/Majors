@@ -227,10 +227,11 @@ public class DoorInteraction : MonoBehaviour
             if(Vector3.Distance(transform.position, player.position) > 5)
             {
                 FindObjectOfType<CrossKeyManager>().PuzzleDeath(createdMrCrossy);
+                puzzleTimer = false;
             }
             
         }
-        if (puzzleTimer)
+        if (puzzleTimer /*&& createdMrCrossy*/)
         {
             if (zForward)
             {
@@ -248,10 +249,12 @@ public class DoorInteraction : MonoBehaviour
                 {
                     
                     //countdownTimer += Time.deltaTime;
-                    if(distortion.vignette.intensity.value >= 1)
+                    if(distortion.vignette[0].intensity.value >= 1)
                     {
                         FindObjectOfType<CrossKeyManager>().PuzzleDeath(createdMrCrossy);
+                        
                         StopCoroutine("WaitForPuzzleEnd");
+                        puzzleTimer = false;
                     }
                 }
                 //else
@@ -262,7 +265,9 @@ public class DoorInteraction : MonoBehaviour
                 if(rotationVal > 20 || rotationVal < -20)
                 {
                     FindObjectOfType<CrossKeyManager>().PuzzleDeath(createdMrCrossy);
+                    
                     StopCoroutine("WaitForPuzzleEnd");
+                    puzzleTimer = false;
                 }
             }
         }
@@ -579,7 +584,11 @@ public class DoorInteraction : MonoBehaviour
         puzzleTimer = false;
         FindObjectOfType<CrossKeyManager>().puzzleOn = false;
         distortion.ReduceInsanity();
-        Destroy(createdMrCrossy);
+        if (createdMrCrossy)
+        {
+            Destroy(createdMrCrossy);
+        }
+        
         keyMan.doorsLocked = false;
         Debug.Log("safe");
     }
