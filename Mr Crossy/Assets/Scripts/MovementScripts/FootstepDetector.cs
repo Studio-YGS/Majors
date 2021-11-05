@@ -84,17 +84,25 @@ public class FootstepDetector : MonoBehaviour
 
     public void PlayFootStepTag()
     {
-        if(hit.collider.tag == "New Wood")
+        if(hit.collider.tag == "Home_Wood")
         {
             FMODUnity.RuntimeManager.PlayOneShot("event:/Footstep/Home Wood");
         }
-        else if (hit.collider.tag == "Old Wood")
+        else if (hit.collider.tag == "Cael_Floor")
         {
             FMODUnity.RuntimeManager.PlayOneShot("event:/Footstep/Wood_1");
         }
-        else if (hit.collider.tag == "Carpet")
+        else if (hit.collider.tag == "Cael_Stair")
+        {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Footstep/Cobblestone");
+        }
+        else if (hit.collider.tag == "Home_Carpet")
         {
             FMODUnity.RuntimeManager.PlayOneShot("event:/Footstep/Carpet");
+        }
+        else if (hit.collider.tag == "Stone")
+        {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Footstep/Cobblestone");
         }
     }
 
@@ -102,40 +110,27 @@ public class FootstepDetector : MonoBehaviour
     {
         
         GetTerrainTexture();
-        if(textureValues[0] > 0)
+        if (textureValues[0] > 0)
         {
-            //Debug.Log("rock - volume:" + textureValues[0]);
+            //Debug.Log("Desert Grass - volume:" + textureValues[1]);
             FMODUnity.RuntimeManager.PlayOneShot("event:/Footstep/Cobblestone");
         }
         else if (textureValues[1] > 0)
         {
-            //Debug.Log("grass - volume:" + textureValues[1]);
-        }
-        else if (textureValues[2] > 0)
-        {
-            //Debug.Log("mud - volume:" + textureValues[2]);
-            FMODUnity.RuntimeManager.PlayOneShot("event:/Footstep/Mud");
-        }
-        else if (textureValues[3] > 0)
-        {
             //Debug.Log("mud@ - volume:" + textureValues[3]);
             FMODUnity.RuntimeManager.PlayOneShot("event:/Footstep/Mud");
         }
-        else if (textureValues[4] > 0)
+        else if (textureValues[2] > 0)
         {
-            //Debug.Log("gravel - volume:" + textureValues[4]);
-            FMODUnity.RuntimeManager.PlayOneShot("event:/Footstep/Gravel");
-        }
-        else if (textureValues[5] > 0)
-        {
-            //Debug.Log("road - volume:" + textureValues[5]);
+            //Debug.Log("road_Path- volume:" + textureValues[5]);
             FMODUnity.RuntimeManager.PlayOneShot("event:/Footstep/Cobblestone");
         }
-        else if (textureValues[6] > 0)
+        else if (textureValues[3] > 0)
         {
-            //Debug.Log("leaf Floor - volume:" + textureValues[6]);
+            //Debug.Log("leaf_Forest - volume:" + textureValues[6]);
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Footstep/Cobblestone");
         }
-        else if (textureValues[7] > 0)
+        else if (textureValues[4] > 0)
         {
             //Debug.Log("newlayer - volume:" + textureValues[7]);
             FMODUnity.RuntimeManager.PlayOneShot("event:/Footstep/Cobblestone");
@@ -169,8 +164,5 @@ public class FootstepDetector : MonoBehaviour
         textureValues[2] = aMap[0, 0, 2];
         textureValues[3] = aMap[0, 0, 3];
         textureValues[4] = aMap[0, 0, 4];
-        textureValues[5] = aMap[0, 0, 5];
-        textureValues[6] = aMap[0, 0, 6];
-        textureValues[7] = aMap[0, 0, 7];
     }
 }

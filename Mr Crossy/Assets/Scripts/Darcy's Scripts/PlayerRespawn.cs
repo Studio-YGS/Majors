@@ -51,7 +51,7 @@ public class PlayerRespawn : MonoBehaviour
         FindObjectOfType<CrossKeyManager>().doorsLocked = false;
         player = FindObjectOfType<Player_Controller>();
         journal = FindObjectOfType<JournalController>();
-
+        
         player.gameObject.SetActive(false);
         player.DisableController();
         player.transform.position = respawnPosition.position;
@@ -67,7 +67,7 @@ public class PlayerRespawn : MonoBehaviour
     IEnumerator WaitForRespawn(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
-
+        FindObjectOfType<MrCrossyDistortion>().mask.SetActive(false);
         respawningText.SetActive(false);
 
         player.gameObject.SetActive(true);

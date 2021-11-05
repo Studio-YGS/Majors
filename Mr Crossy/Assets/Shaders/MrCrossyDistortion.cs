@@ -138,8 +138,11 @@ public class MrCrossyDistortion : MonoBehaviour
                 reducingInsanity = false;
             }
         }
-        
-        
+        if (Input.GetKey(KeyCode.L))
+        {
+            StartCoroutine(BlackenScreen(1.5f));
+        }
+
     }
 
     private void OnApplicationQuit()
@@ -174,7 +177,7 @@ public class MrCrossyDistortion : MonoBehaviour
             //mask.SetActive(true);
             vignette.intensity.value += Time.deltaTime * vignetteIncreaseRate;
         }
-        colorAdjustments.active = true;
+        //colorAdjustments.active = true;
         if(colorAdjustments.colorFilter.value != Color.black)
         {
             colorAdjustments.colorFilter.value = new Color (colorAdjustments.colorFilter.value.r - Time.deltaTime * vignetteIncreaseRate, 
@@ -186,7 +189,7 @@ public class MrCrossyDistortion : MonoBehaviour
     public void DistanceVignette(GameObject crossy)
     {
         float distance = Vector3.Distance(player.position, crossy.transform.position);
-        colorAdjustments.active = true;
+        //colorAdjustments.active = true;
         colorAdjustments.colorFilter.value = new Color(colorAdjustments.colorFilter.value.r - (Time.unscaledDeltaTime * vignetteIncreaseRate / (distance)),
                 colorAdjustments.colorFilter.value.b - (Time.unscaledDeltaTime * vignetteIncreaseRate / (distance )), colorAdjustments.colorFilter.value.g - (Time.unscaledDeltaTime * vignetteIncreaseRate / (distance )));
         vignette.intensity.value += Time.deltaTime * vignetteIncreaseRate / (distance / 4);
@@ -213,27 +216,34 @@ public class MrCrossyDistortion : MonoBehaviour
             yield return null;
         }
         vignette.intensity.value = baseVignette;
-        colorAdjustments.active = false;
+        colorAdjustments.colorFilter.value = Color.white;
+        //colorAdjustments.active = false;
         vignetteReducing = false;
     }
 
     public void DarkenScreen(float speed)
     {
-        StartCoroutine(BlackenScreen(speed));
+        
+        
     }
 
     IEnumerator BlackenScreen(float speed)
     {
         
         StopCoroutine("ReduceVignette");
-        colorAdjustments.active = true;
-        while (colorAdjustments.colorFilter.value != new Color(0, 0, 0))
+        //colorAdjustments.active = true;
+        float time = 0;
+        while (time < 3)
         {
+            time += Time.unscaledDeltaTime;
             vignette.intensity.value += Time.deltaTime * vignetteIncreaseRate * speed;
             colorAdjustments.colorFilter.value = new Color(colorAdjustments.colorFilter.value.r - Time.deltaTime * vignetteIncreaseRate * speed,
                 colorAdjustments.colorFilter.value.b - Time.deltaTime * vignetteIncreaseRate * speed, colorAdjustments.colorFilter.value.g - Time.deltaTime * vignetteIncreaseRate * speed);
             yield return null;
         }
-        colorAdjustments.active = false;
+        mask.SetActive(true);
+        colorAdjustments.colorFilter.value = Color.white;
+        vignette.intensity.value = baseVignette;
+        //colorAdjustments.active = false;
     }
 }
