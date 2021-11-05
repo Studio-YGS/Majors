@@ -14,9 +14,9 @@ public class AudioSettings : MonoBehaviour
 
     void Awake()
     {
-        music = RuntimeManager.GetBus("bus:/Music");
-        sfx = RuntimeManager.GetBus("bus:/SFX");
-        voice = RuntimeManager.GetBus("bus:/Voice");
+        sfx = RuntimeManager.GetBus("bus:/Master/SFX");
+        music = RuntimeManager.GetBus("bus:/Master/Music");
+        voice = RuntimeManager.GetBus("bus:/Master/Voice");
         sfxVolumePreview = RuntimeManager.CreateInstance("event:/UI_Multimedia/Tutorial_Info");
     }
 
@@ -34,12 +34,7 @@ public class AudioSettings : MonoBehaviour
 
     public void SFXVolumeLevel(float newSFXVolume)
     {
-        Debug.Log("Trying to change SFX Volume from: " + sfxVolume);
         sfxVolume = newSFXVolume;
-        Debug.Log("Have changed the previous value to: " + newSFXVolume + ", confirming: " + sfxVolume);
-
-        music.getVolume(out float vol);
-        Debug.Log("The actual SFX volume is now: " + vol);
 
         PLAYBACK_STATE pbState;
         sfxVolumePreview.getPlaybackState(out pbState);
