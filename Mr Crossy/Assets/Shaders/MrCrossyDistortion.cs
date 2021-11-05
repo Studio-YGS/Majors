@@ -227,13 +227,17 @@ public class MrCrossyDistortion : MonoBehaviour
         
         StopCoroutine("ReduceVignette");
         colorAdjustments.active = true;
-        while (colorAdjustments.colorFilter.value != new Color(0, 0, 0))
+        float time = 0;
+        while (time < 3)
         {
+            time += Time.unscaledDeltaTime;
             vignette.intensity.value += Time.deltaTime * vignetteIncreaseRate * speed;
             colorAdjustments.colorFilter.value = new Color(colorAdjustments.colorFilter.value.r - Time.deltaTime * vignetteIncreaseRate * speed,
                 colorAdjustments.colorFilter.value.b - Time.deltaTime * vignetteIncreaseRate * speed, colorAdjustments.colorFilter.value.g - Time.deltaTime * vignetteIncreaseRate * speed);
             yield return null;
         }
+        mask.SetActive(true);
+        colorAdjustments.colorFilter.value = new Color(255, 255, 255);
         colorAdjustments.active = false;
     }
 }
