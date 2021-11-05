@@ -12,11 +12,11 @@ public class JournalOnSwitch : MonoBehaviour
 
     JournalController journalController;
 
-    PauseMenu pauseMenu;
+    MenuManager pauseMenu;
 
     void Start()
     {
-        pauseMenu = FindObjectOfType<PauseMenu>();
+        pauseMenu = FindObjectOfType<MenuManager>();
         fpc = FindObjectOfType<Player_Controller>();
         journalController = FindObjectOfType<JournalController>();
     }
