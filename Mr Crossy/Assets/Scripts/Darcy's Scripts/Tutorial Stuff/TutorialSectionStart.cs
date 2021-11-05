@@ -9,7 +9,10 @@ public class TutorialSectionStart : MonoBehaviour
 
     public UnityEvent sectionStart, steppingAway, raycastEvent;
 
-    public bool needsRaycast = false;
+    public bool needsRaycast = false, needsSecondRaycast = false, needsCheck = false;
+
+    [SerializeField]
+    GameObject[] tutorialClues;
 
     void Start()
     {
@@ -36,15 +39,86 @@ public class TutorialSectionStart : MonoBehaviour
     {
         RaycastHit hit;
 
-        if(Physics.Raycast(playerController.cam.transform.position, playerController.transform.TransformDirection(Vector3.forward), out hit, 5f) && needsRaycast)
+        if(Physics.Raycast(playerController.cam.position, playerController.cam.TransformDirection(Vector3.forward), out hit, 2f))
         {
-            Debug.Log("bonk");
-            if(hit.transform.gameObject.CompareTag("Front Door")) //for the front door part of the tutorial
+            if(hit.transform.gameObject.CompareTag("Front Door") && needsRaycast) //for the front door part of the tutorial
             {
-                Debug.Log("hit front door");
                 needsRaycast = false;
                 raycastEvent.Invoke();
             }
+
+            if(hit.transform.gameObject.CompareTag("Holdable") && needsRaycast)
+            {
+                needsRaycast = false;
+                raycastEvent.Invoke();
+            }
+
+            if (hit.transform.gameObject.CompareTag("Holdable") && Input.GetKeyDown(KeyCode.E) && needsSecondRaycast)
+            {
+                needsSecondRaycast = false;
+                sectionStart.Invoke();
+            }
+
+            if (hit.transform.gameObject.CompareTag("Note") && Input.GetKeyDown(KeyCode.E) && needsRaycast)
+            {
+                needsRaycast = false;
+                raycastEvent.Invoke();
+            }
+
+            if (hit.transform.gameObject.CompareTag("Clue") && needsRaycast)
+            { 
+                raycastEvent.Invoke();
+            }
+
+            if(hit.transform.gameObject.CompareTag("Crosskey") && needsRaycast && Input.GetKeyDown(KeyCode.E))
+            {
+                raycastEvent.Invoke();
+            }
+        }
+    }
+
+    public void NeedsRaycast(bool need)
+    {
+        needsRaycast = need;
+    }
+
+    public void NeedsSecondRaycast(bool need)
+    {
+        needsSecondRaycast = need;
+    }
+
+    public void CheckClues()
+    {
+        int count = 0;
+
+        if (needsCheck)
+        {
+            for (int i = 0; i < tutorialClues.Length; i++)
+            {
+                if (!tutorialClues[i].activeInHierarchy)
+                {
+                    count++;
+                }
+
+                if (count == 4)
+                {
+                    sectionStart.Invoke();
+                }
+            }
+        }
+    }
+
+    public void ReadHowTo()
+    {
+        sectionStart.Invoke();
+    }
+
+    public void TutorialComplete()
+    {
+        if (needsCheck)
+        {
+            needsCheck = false;
+            sectionStart.Invoke();
         }
     }
 }

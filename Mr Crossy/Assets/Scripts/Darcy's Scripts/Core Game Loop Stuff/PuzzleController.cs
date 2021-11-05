@@ -8,26 +8,40 @@ using TMPro;
 
 public class PuzzleController : MonoBehaviour
 {
-    //[HideInInspector]
     public GameObject wordObject;
 
-    //[HideInInspector]
-    public string word;
+    [SerializeField]
+    GameObject[] assignedAltars;
+
+    public string word, currentStreet;
 
     [SerializeField]
-    TextMeshProUGUI mistakeText;
+    TextMeshProUGUI mistakeText, streetText;
 
     int wordLength, mistakeCount = 3, completedWords = 0;
 
-    [Tooltip("Write in how many words the puzzle has")]
     public int wordsInPuzzle;
 
     //[HideInInspector]
     public List<TextMeshProUGUI> canvasLetters = new List<TextMeshProUGUI>();
 
-    string playersWord, letter, altarName;
+    public List<GameObject> storedObjects = new List<GameObject>();
 
-    public UnityEvent winEvent, loseEvent;
+    string playersWord, letter, altarName, uiWord;
+
+    public UnityEvent winEvent, loseEvent, tutorialEvent, tutorialMistakeEvent;
+
+    public bool tutorial;
+
+    void Start()
+    {
+        uiWord = " _ _ _ _";
+
+        if (tutorial)
+        {
+            SetUpLetters();
+        }
+    }
 
     public void SetUpLetters()
     {
@@ -39,6 +53,8 @@ public class PuzzleController : MonoBehaviour
         }
 
         wordLength = canvasLetters.Count;
+
+        WriteToUI();
     }
 
     public void ReceiveLetterAndName(string firstLetter, string altarOrigName) //receiving the letter of the object, and the name of the altar it came from
@@ -75,7 +91,21 @@ public class PuzzleController : MonoBehaviour
         }
 
         playersWordLength = playersWord.ToIntArray().Length;
-        Debug.Log(playersWordLength);
+        Debug.Log("Players word: " + playersWord + " is " + playersWordLength + " letters long.");
+
+        storedObjects.Add(GameObject.Find(altarName));
+
+        WriteToUI();
+
+        if (tutorial)
+        {
+            TutorialController tutorialController = FindObjectOfType<TutorialController>();
+
+            tutorialController.ChangeConLetter(letter);
+
+            tutorialEvent.Invoke();
+            tutorial = false;
+        }
 
         if(playersWord == word) //the script then checks to see if the players formed word is the same as the puzzle's answer
         {
@@ -87,6 +117,15 @@ public class PuzzleController : MonoBehaviour
             mistakeCount--;
             mistakeText.text = "Mistakes remaining: " + mistakeCount;
 
+            //play mistake sound here
+
+            storedObjects.Clear();
+
+            if (gameObject.name.Contains("Tutorial"))
+            {      
+                tutorialMistakeEvent.Invoke();
+            }
+
             if(mistakeCount == 0)
             {
                 GameOver();
@@ -94,9 +133,57 @@ public class PuzzleController : MonoBehaviour
         }
     }
 
+    public void DisableAltars()
+    {
+        for(int i = 0; i < assignedAltars.Length; i++)
+        {
+            assignedAltars[i].GetComponentInChildren<ObjectPlacement>().enabled = false;
+        }
+    }
+
+    void WriteToUI()
+    {
+        string currentAltarWord = "";
+
+        for(int i = 0; i < canvasLetters.Count; i++)
+        {
+            if(canvasLetters[i].text.ToIntArray().Length < 1)
+            {
+                currentAltarWord += " _ ";
+            }
+            else
+            {
+                currentAltarWord += canvasLetters[i].text;
+            }
+        }
+
+        uiWord = currentStreet + ": " + currentAltarWord;
+
+        streetText.text = uiWord;
+    }
+
     void CompletionCheck()
     {
         completedWords++;
+
+        //play correct sound here
+
+        for(int i = 0; i < storedObjects.Count; i++)
+        {
+            storedObjects[i].GetComponent<Outline>().enabled = false;
+            storedObjects[i].GetComponentInChildren<ObjectPlacement>().enabled = false;
+            storedObjects[i].GetComponent<DetermineLetter>().storedObject.GetComponent<ObjectHolder>().enabled = false;
+            storedObjects[i].GetComponent<DetermineLetter>().storedObject.GetComponent<Outline>().enabled = false;
+        }
+
+        storedObjects.Clear();
+
+        if (completedWords == 3)
+        {
+            TutorialSectionStart tutorialSectionStart = GetComponent<TutorialSectionStart>();
+
+            tutorialSectionStart.TutorialComplete();
+        }
 
         if(completedWords == wordsInPuzzle)
         {

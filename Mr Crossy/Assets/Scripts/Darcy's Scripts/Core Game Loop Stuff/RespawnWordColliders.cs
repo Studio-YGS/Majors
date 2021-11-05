@@ -4,15 +4,8 @@ using UnityEngine;
 
 public class RespawnWordColliders : MonoBehaviour
 {
+    [SerializeField]
     List<BoxCollider> colliders = new List<BoxCollider>();
-
-    void Start()
-    {
-        foreach(BoxCollider collider in gameObject.GetComponentsInChildren<BoxCollider>())
-        {
-            colliders.Add(collider);
-        }
-    }
 
     public void RespawnColliders()
     {

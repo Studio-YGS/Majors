@@ -4,29 +4,30 @@ using UnityEngine;
 
 public class WordCollision : MonoBehaviour
 {
-    string word;
+    public string word, street;
 
     [SerializeField, Tooltip("The object on the canvas with the TMP components as its children")]
     GameObject wordObject;
 
-    PuzzleController wordControl;
+    [SerializeField]
+    PuzzleController puzzleController;
 
     RespawnWordColliders respawn;
 
     void Start()
     {
-        word = gameObject.name;
         respawn = FindObjectOfType<RespawnWordColliders>();
-        wordControl = FindObjectOfType<PuzzleController>();
     }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("GameController"))
         {
-            wordControl.wordObject = wordObject;
-            wordControl.word = word;
-            wordControl.SetUpLetters();
+            puzzleController.wordObject = wordObject;
+            puzzleController.word = word;
+            puzzleController.currentStreet = street;
+            puzzleController.SetUpLetters();
+            puzzleController.storedObjects.Clear();
 
             respawn.RespawnColliders();
 

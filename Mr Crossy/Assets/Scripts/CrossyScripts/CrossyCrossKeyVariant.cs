@@ -36,11 +36,15 @@ public class CrossyCrossKeyVariant : MonoBehaviour
 
     [SerializeField] private float distanceToAtk;
 
+    [HideInInspector] public DoorInteraction door;
+    GameObject player;
+
     // Start is called before the first frame update
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        player = FindObjectOfType<Camera>().gameObject;
     }
 
     // Update is called once per frame
@@ -53,16 +57,26 @@ public class CrossyCrossKeyVariant : MonoBehaviour
 
         animator.SetBool("Moving", veloMag >= 0.05);
         animator.SetFloat("VelocityMag", veloMag);
-
-        if (agent.remainingDistance <= distanceToAtk) 
-        { 
-            if(!animator.IsInTransition(0))
+        RaycastHit hit;
+        Debug.DrawRay(player.transform.position, (transform.position + transform.up) - player.transform.position, Color.green);
+        if(Physics.Raycast(player.transform.position, (transform.position + transform.up) - player.transform.position, out hit))
+        {
+            if(hit.collider == gameObject.GetComponent<Collider>())
             {
-                animator.SetTrigger("DoSwing");
-                animator.SetBool("CanSwing", false);
+                Debug.Log("hit");
+                FindObjectOfType<MrCrossyDistortion>().DistanceVignette(gameObject);
             }
+            
         }
-        else animator.SetBool("CanSwing", true);
+
+
+        if (agent.remainingDistance <= distanceToAtk && door.puzzleOn == true) 
+        { 
+            animator.SetTrigger("DoSwing"); 
+            animator.SetBool("CanSwing", true); 
+            FindObjectOfType<CrossKeyManager>().PuzzleDeath(gameObject); 
+        }
+        else animator.SetBool("CanSwing", false);
     }
 
     private void OnAnimatorIK(int layerIndex)
