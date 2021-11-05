@@ -1,5 +1,59 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &112660419
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 112660420}
+  - component: {fileID: 112660421}
+  m_Layer: 0
+  m_Name: Wind Internal
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &112660420
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 112660419}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1158351801}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &112660421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 112660419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/2D/Wind/Wind (Interior)
+  PlayEvent: 11
+  StopEvent: 12
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 0
 --- !u!1 &145596006
 GameObject:
   m_ObjectHideFlags: 0
@@ -13,7 +67,6 @@ GameObject:
   - component: {fileID: 145596010}
   - component: {fileID: 145596009}
   - component: {fileID: 145596008}
-  - component: {fileID: 7402897212283829844}
   m_Layer: 0
   m_Name: Audio_Int_Ext_Switcher
   m_TagString: Untagged
@@ -111,21 +164,80 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outdoorThreeDSounds: []
   outdoorTwoDSounds: []
-  indoorThreeDSounds: []
-  indoorTwoDSounds: []
+  indoorThreeDSounds:
+  - {fileID: 628156778}
+  indoorTwoDSounds:
+  - {fileID: 1158351800}
   floors: 0
---- !u!114 &7402897212283829844
+--- !u!1 &286560282
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 286560283}
+  - component: {fileID: 286560285}
+  - component: {fileID: 286560284}
+  m_Layer: 0
+  m_Name: External_Sound_2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &286560283
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 286560282}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -12.52, y: 6.6800003, z: 9.85}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 628156779}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &286560285
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 145596006}
+  m_GameObject: {fileID: 286560282}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/3D/Metal/Metal_Squeak_LRV
+  PlayEvent: 0
+  StopEvent: 12
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 1
+  OverrideMinDistance: 3
+  OverrideMaxDistance: 10
+--- !u!114 &286560284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 286560282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e0ffcd3955c50844bee57823c2ca0c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minWait: 4
+  maxWait: 20
 --- !u!1 &406086563
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,6 +280,439 @@ OcclusionArea:
   m_Size: {x: 5.372112, y: 3.3820527, z: 11.244595}
   m_Center: {x: 1.7042968, y: 1.2410485, z: -0.9543476}
   m_IsViewVolume: 1
+--- !u!1 &416808832
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 416808833}
+  - component: {fileID: 416808835}
+  - component: {fileID: 416808834}
+  m_Layer: 0
+  m_Name: Wood Creak_3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &416808833
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 416808832}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -4.0650024, y: 11.3, z: 1.43}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 628156779}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &416808835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 416808832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/3D/Wood_Creaks/Wood_Interior_Creaks
+  PlayEvent: 0
+  StopEvent: 12
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 1
+  OverrideMinDistance: 3
+  OverrideMaxDistance: 10
+--- !u!114 &416808834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 416808832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e0ffcd3955c50844bee57823c2ca0c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minWait: 4
+  maxWait: 20
+--- !u!1 &452741567
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 452741568}
+  m_Layer: 0
+  m_Name: Internal_Audio_Daddy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &452741568
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 452741567}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1158351801}
+  - {fileID: 628156779}
+  m_Father: {fileID: 4423055632707114}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &465701771
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 465701772}
+  - component: {fileID: 465701774}
+  - component: {fileID: 465701773}
+  m_Layer: 0
+  m_Name: Box_2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &465701772
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 465701771}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.6248755, y: 6.4743176, z: 6.3314}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 990318437}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &465701774
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 465701771}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.6995773, y: 6.402542, z: 12.411381}
+  m_Center: {x: -0.42167282, y: -0.15752602, z: 0.38206553}
+--- !u!114 &465701773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 465701771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGlobal: 0
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: b56d638e14ab78e4d8d668aa6dcd2e31, type: 2}
+--- !u!1 &494995801
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 494995802}
+  - component: {fileID: 494995804}
+  - component: {fileID: 494995803}
+  m_Layer: 0
+  m_Name: External_Sound_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &494995802
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 494995801}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 4.4300003, y: 5.279999, z: 6.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 628156779}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &494995804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 494995801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/3D/Bricks/Brick_Impact_LVR
+  PlayEvent: 0
+  StopEvent: 12
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 1
+  OverrideMinDistance: 3
+  OverrideMaxDistance: 10
+--- !u!114 &494995803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 494995801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e0ffcd3955c50844bee57823c2ca0c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minWait: 4
+  maxWait: 20
+--- !u!1 &510135317
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 510135318}
+  - component: {fileID: 510135320}
+  - component: {fileID: 510135319}
+  m_Layer: 0
+  m_Name: Modulated Wind
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &510135318
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 510135317}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1158351801}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &510135320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 510135317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/2D/Wind/Modulated_Wind (Interior)
+  PlayEvent: 11
+  StopEvent: 12
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 0
+--- !u!114 &510135319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 510135317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &516487036
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 516487037}
+  - component: {fileID: 516487039}
+  - component: {fileID: 516487038}
+  m_Layer: 0
+  m_Name: Crickets
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &516487037
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 516487036}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1158351801}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &516487039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 516487036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/2D/Crickets/Crickets Int
+  PlayEvent: 11
+  StopEvent: 12
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 0
+--- !u!114 &516487038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 516487036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &525483223
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 525483224}
+  - component: {fileID: 525483226}
+  - component: {fileID: 525483225}
+  m_Layer: 0
+  m_Name: Internal Wood
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &525483224
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 525483223}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1158351801}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &525483226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 525483223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/2D/Wood_Internal/Internal Wood
+  PlayEvent: 11
+  StopEvent: 12
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 0
+--- !u!114 &525483225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 525483223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &528631235
 GameObject:
   m_ObjectHideFlags: 0
@@ -368,6 +913,206 @@ LightProbeGroup:
   - {x: -1.4275639, y: -1, z: 8.25}
   - {x: -1.4275639, y: 0.493793, z: 8.25}
   m_Dering: 1
+--- !u!1 &628156778
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 628156779}
+  m_Layer: 0
+  m_Name: 3D Ambiance
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &628156779
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 628156778}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1081206069}
+  - {fileID: 2078550323}
+  - {fileID: 416808833}
+  - {fileID: 494995802}
+  - {fileID: 286560283}
+  - {fileID: 1369825565}
+  m_Father: {fileID: 452741568}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &990318436
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 990318437}
+  m_Layer: 0
+  m_Name: PostProcessing Daddy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &990318437
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 990318436}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1045284455}
+  - {fileID: 465701772}
+  - {fileID: 1602624511}
+  m_Father: {fileID: 4423055632707114}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1045284454
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1045284455}
+  - component: {fileID: 1045284457}
+  - component: {fileID: 1045284456}
+  m_Layer: 0
+  m_Name: Box_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1045284455
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1045284454}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.6248755, y: 2.9743176, z: 6.3314}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 990318437}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1045284457
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1045284454}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.8820267, y: 3.5923138, z: 11.368084}
+  m_Center: {x: -0.3686409, y: -1.5626402, z: 1.7347453}
+--- !u!114 &1045284456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1045284454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGlobal: 0
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: b56d638e14ab78e4d8d668aa6dcd2e31, type: 2}
+--- !u!1 &1081206068
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1081206069}
+  - component: {fileID: 1081206071}
+  - component: {fileID: 1081206070}
+  m_Layer: 0
+  m_Name: Wood Creak_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1081206069
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1081206068}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.66, y: 2.973999, z: 3.6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 628156779}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1081206071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1081206068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/3D/Wood_Creaks/Wood_Interior_Creaks
+  PlayEvent: 0
+  StopEvent: 12
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 1
+  OverrideMinDistance: 3
+  OverrideMaxDistance: 10
+--- !u!114 &1081206070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1081206068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e0ffcd3955c50844bee57823c2ca0c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minWait: 4
+  maxWait: 20
 --- !u!1 &1131550676
 GameObject:
   m_ObjectHideFlags: 0
@@ -410,6 +1155,42 @@ OcclusionArea:
   m_Size: {x: 5.287823, y: 2.8438005, z: 11.244595}
   m_Center: {x: 1.7464414, y: 0.9719221, z: -0.9543476}
   m_IsViewVolume: 1
+--- !u!1 &1158351800
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1158351801}
+  m_Layer: 0
+  m_Name: Environmental
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1158351801
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1158351800}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 510135318}
+  - {fileID: 516487037}
+  - {fileID: 525483224}
+  - {fileID: 1905765170}
+  - {fileID: 112660420}
+  - {fileID: 1694066786}
+  m_Father: {fileID: 452741568}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1173217372
 GameObject:
   m_ObjectHideFlags: 0
@@ -483,6 +1264,204 @@ OcclusionArea:
   m_Size: {x: 5.527251, y: 2.8438005, z: 11.547383}
   m_Center: {x: 1.7135925, y: 0.9719221, z: -1.1057417}
   m_IsViewVolume: 1
+--- !u!1 &1369825564
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1369825565}
+  - component: {fileID: 1369825567}
+  - component: {fileID: 1369825566}
+  m_Layer: 0
+  m_Name: External_Sound_3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1369825565
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1369825564}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -8.1, y: 4.42, z: -5.79}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 628156779}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1369825567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1369825564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/3D/Metal/Metal_Squeak_LRV
+  PlayEvent: 0
+  StopEvent: 12
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 1
+  OverrideMinDistance: 3
+  OverrideMaxDistance: 10
+--- !u!114 &1369825566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1369825564}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e0ffcd3955c50844bee57823c2ca0c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minWait: 4
+  maxWait: 20
+--- !u!1 &1602624510
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1602624511}
+  - component: {fileID: 1602624513}
+  - component: {fileID: 1602624512}
+  m_Layer: 0
+  m_Name: Box_3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1602624511
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1602624510}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.6248755, y: 6.4743176, z: 6.3314}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 990318437}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1602624513
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1602624510}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.6995773, y: 3.2065287, z: 3.953206}
+  m_Center: {x: -0.42167282, y: 1.4404807, z: 8.175932}
+--- !u!114 &1602624512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1602624510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGlobal: 0
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: 48ab4486beb174a4584699a670bb5964, type: 2}
+--- !u!1 &1694066785
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1694066786}
+  - component: {fileID: 1694066788}
+  - component: {fileID: 1694066787}
+  m_Layer: 0
+  m_Name: Unpleasantries_(Only if needed)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1694066786
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1694066785}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1158351801}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1694066788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1694066785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: GameController
+  Event: event:/2D/Interior_Unpleasantries/Spider_Sensation
+  PlayEvent: 11
+  StopEvent: 12
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 0
+--- !u!114 &1694066787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1694066785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1696027330
 GameObject:
   m_ObjectHideFlags: 0
@@ -548,6 +1527,73 @@ Transform:
   m_Father: {fileID: 1696027331}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1905765169
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1905765170}
+  - component: {fileID: 1905765172}
+  - component: {fileID: 1905765171}
+  m_Layer: 0
+  m_Name: Internal Crows
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1905765170
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1905765169}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1158351801}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1905765172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1905765169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/2D/Crows/Crows Caw in Field Inside
+  PlayEvent: 11
+  StopEvent: 12
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 0
+  OverrideMaxDistance: 0
+--- !u!114 &1905765171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1905765169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1972421361
 GameObject:
   m_ObjectHideFlags: 0
@@ -703,6 +1749,75 @@ Transform:
   m_Father: {fileID: 1696027331}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2078550322
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2078550323}
+  - component: {fileID: 2078550325}
+  - component: {fileID: 2078550324}
+  m_Layer: 0
+  m_Name: Wood Creak_2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2078550323
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2078550322}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.841, y: 5.939, z: 13.279}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 628156779}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2078550325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2078550322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  Event: event:/3D/Wood_Creaks/Wood_Interior_Creaks
+  PlayEvent: 0
+  StopEvent: 12
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 1
+  OverrideMinDistance: 3
+  OverrideMaxDistance: 10
+--- !u!114 &2078550324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2078550322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e0ffcd3955c50844bee57823c2ca0c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minWait: 4
+  maxWait: 20
 --- !u!1 &1002518986463318
 GameObject:
   m_ObjectHideFlags: 0
@@ -901,7 +2016,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4600763755906446}
   - component: {fileID: 7403912369794081571}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_71_3x3m_b_assembly_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -948,7 +2063,7 @@ GameObject:
   - component: {fileID: 23239349368041102}
   - component: {fileID: 3538956967899410742}
   - component: {fileID: 7403901589354497461}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_70_3x3m_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1149,7 +2264,7 @@ GameObject:
   - component: {fileID: 33601705610723568}
   - component: {fileID: 23980692904436822}
   - component: {fileID: 4278460608175625151}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_50_3x3m (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1241,7 +2356,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4408116757448030}
   - component: {fileID: 7403889422316658403}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_70_3x3m_a_assembly_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1286,9 +2401,10 @@ GameObject:
   - component: {fileID: 4743881250289114}
   - component: {fileID: 33169755815853168}
   - component: {fileID: 23691666454422082}
-  m_Layer: 6
+  - component: {fileID: 9141175093107176162}
+  m_Layer: 15
   m_Name: floor_02_3x3m (10)
-  m_TagString: Untagged
+  m_TagString: Cael_Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 107
@@ -1356,6 +2472,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &9141175093107176162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1050667904361974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1052018439870450
 GameObject:
   m_ObjectHideFlags: 0
@@ -1554,7 +2682,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4349259430670252}
   - component: {fileID: 7403781166350814455}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_53_3x1.5m_a_assembly_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1598,7 +2726,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4677721919324164}
   - component: {fileID: 7403833812885382327}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_side
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1929,7 +3057,7 @@ GameObject:
   - component: {fileID: 33074696367708458}
   - component: {fileID: 23155839686235650}
   - component: {fileID: 2781753657008129421}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_50_3x3m (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2117,7 +3245,7 @@ GameObject:
   - component: {fileID: 33957517492316414}
   - component: {fileID: 23766021716255644}
   - component: {fileID: 5185812637475564189}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: stone_13_trim_2m (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2305,9 +3433,9 @@ GameObject:
   - component: {fileID: 33522463379913768}
   - component: {fileID: 23334125814274024}
   - component: {fileID: 6602934680575186341}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: floor_02_3x3m (4)
-  m_TagString: Untagged
+  m_TagString: Cael_Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 107
@@ -2491,7 +3619,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4215555103316180}
   - component: {fileID: 7401744727823154369}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_71_3x3m_b_assembly_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2537,7 +3665,7 @@ GameObject:
   - component: {fileID: 33336859680851258}
   - component: {fileID: 23063831474925128}
   - component: {fileID: 7401742079855427769}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: roof_01 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2631,7 +3759,7 @@ GameObject:
   - component: {fileID: 33640994111115324}
   - component: {fileID: 23917571265035598}
   - component: {fileID: 1490022221894528847}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: floor_02_3x2m (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2725,7 +3853,7 @@ GameObject:
   - component: {fileID: 33739020872957780}
   - component: {fileID: 23847727805630464}
   - component: {fileID: 7401784661853930105}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_56_3x3m_door_wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3099,7 +4227,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4912422323008528}
   - component: {fileID: 7401692542708890121}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_71_3x3m_b_assembly_a (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3145,7 +4273,7 @@ GameObject:
   - component: {fileID: 33262389798509904}
   - component: {fileID: 23025660204205454}
   - component: {fileID: 3817944448187358392}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: floor_02_3x1m (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3333,7 +4461,7 @@ GameObject:
   - component: {fileID: 33604954809610464}
   - component: {fileID: 23366559782764182}
   - component: {fileID: 4945369857880733764}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_50_3x3m (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3427,9 +4555,9 @@ GameObject:
   - component: {fileID: 33654781634775588}
   - component: {fileID: 23760262427448856}
   - component: {fileID: 55951443953846742}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: floor_02_3x3m (3)
-  m_TagString: Untagged
+  m_TagString: Cael_Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 107
@@ -3612,8 +4740,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4080808095670474}
-  - component: {fileID: 270097017997009374}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3644,18 +4771,6 @@ Transform:
   m_Father: {fileID: 4423055632707114}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &270097017997009374
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1241591551108508}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1259608809258366
 GameObject:
   m_ObjectHideFlags: 0
@@ -3665,8 +4780,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4890097251597782}
-  - component: {fileID: 3579704169577931007}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: Interior
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3696,18 +4810,6 @@ Transform:
   m_Father: {fileID: 4423055632707114}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3579704169577931007
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1259608809258366}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1261988809798762
 GameObject:
   m_ObjectHideFlags: 0
@@ -3720,7 +4822,7 @@ GameObject:
   - component: {fileID: 33667803447165490}
   - component: {fileID: 23214355841970960}
   - component: {fileID: 9016558593650627328}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_50_3x3m (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3812,7 +4914,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4690319358048114}
   - component: {fileID: 7401702843818969335}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: stone_14_stairs_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4048,7 +5150,7 @@ GameObject:
   - component: {fileID: 23485235783865470}
   - component: {fileID: 5730563774058853864}
   - component: {fileID: 7401901181516271321}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_52_3x3m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4155,7 +5257,7 @@ GameObject:
   - component: {fileID: 33694876874680064}
   - component: {fileID: 23680847227653050}
   - component: {fileID: 7895508616020994557}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_90_basement_6m (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4249,7 +5351,7 @@ GameObject:
   - component: {fileID: 33254559826256922}
   - component: {fileID: 23901260408319110}
   - component: {fileID: 8427375052146641615}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: floor_02_3x1m (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4438,7 +5540,7 @@ GameObject:
   - component: {fileID: 23805438195968390}
   - component: {fileID: 65116471287100042}
   - component: {fileID: 7401883246444495423}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: rail_2m (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4543,7 +5645,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4828753173928170}
   - component: {fileID: 7401945809564334777}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: roof
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4595,7 +5697,7 @@ GameObject:
   - component: {fileID: 33367842170623582}
   - component: {fileID: 23835715917866636}
   - component: {fileID: 8288054781895652934}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_90_basement_6m (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4783,7 +5885,7 @@ GameObject:
   - component: {fileID: 33381615251112002}
   - component: {fileID: 23254351119216698}
   - component: {fileID: 7401938124127252237}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: floor_02_3x2m (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4875,7 +5977,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4017893242908332}
   - component: {fileID: 7401938356594314421}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: Front_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4925,7 +6027,7 @@ GameObject:
   - component: {fileID: 23793607664186902}
   - component: {fileID: 6881755939993592310}
   - component: {fileID: 7401918693658039737}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_71_3x3m_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5033,7 +6135,7 @@ GameObject:
   - component: {fileID: 23103115701179170}
   - component: {fileID: 65450120707946056}
   - component: {fileID: 7401838158261594035}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_50_3x3m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5140,9 +6242,9 @@ GameObject:
   - component: {fileID: 33410148715710676}
   - component: {fileID: 23225860812038178}
   - component: {fileID: 1267333806358016075}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: floor_02_3x3m (16)
-  m_TagString: Untagged
+  m_TagString: Cael_Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 107
@@ -5234,7 +6336,7 @@ GameObject:
   - component: {fileID: 33770638308763642}
   - component: {fileID: 23003756252715946}
   - component: {fileID: 6069074039365989628}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_50_3x3m (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5327,7 +6429,7 @@ GameObject:
   - component: {fileID: 4706354550629090}
   - component: {fileID: 33764634620025770}
   - component: {fileID: 23823535825119404}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_90_basement_6m (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5597,9 +6699,9 @@ GameObject:
   - component: {fileID: 33510320844267506}
   - component: {fileID: 23562625103067146}
   - component: {fileID: 70652493884993395}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: floor_02_3x3m (1)
-  m_TagString: Untagged
+  m_TagString: Cael_Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 107
@@ -5692,7 +6794,7 @@ GameObject:
   - component: {fileID: 23215668603388056}
   - component: {fileID: 65149661422924866}
   - component: {fileID: 7401874838314577033}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: floor_02_3x1m (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5799,7 +6901,7 @@ GameObject:
   - component: {fileID: 33660763948093534}
   - component: {fileID: 23121490913718346}
   - component: {fileID: 7401873445557700499}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_50_3x3m_extension
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5891,7 +6993,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4871465406663186}
   - component: {fileID: 7401847981004347627}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_71_3x3m_b_assembly_b (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6217,7 +7319,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4355301096137020}
   - component: {fileID: 7402029135274788905}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_56_3x3m_door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6356,7 +7458,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4181135145015324}
   - component: {fileID: 7402081669687268693}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_52_3x3m_assembly_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6402,7 +7504,7 @@ GameObject:
   - component: {fileID: 33159300438941876}
   - component: {fileID: 23305341237771800}
   - component: {fileID: 7402078601272296441}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_73_3x3_door_stone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6496,7 +7598,7 @@ GameObject:
   - component: {fileID: 33718339848847772}
   - component: {fileID: 23446280115530782}
   - component: {fileID: 4988553597154597799}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_72_3x3m_b (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6588,7 +7690,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4143145908394836}
   - component: {fileID: 7402066317598982191}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_70_3x3m_a_assembly_a (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6725,7 +7827,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4122534949882540}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: floor_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6772,9 +7874,9 @@ GameObject:
   - component: {fileID: 33943881322748450}
   - component: {fileID: 23094252977900094}
   - component: {fileID: 215494881000668431}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: floor_02_3x3m (2)
-  m_TagString: Untagged
+  m_TagString: Cael_Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 107
@@ -6867,7 +7969,7 @@ GameObject:
   - component: {fileID: 23930084659573094}
   - component: {fileID: 65481212909528234}
   - component: {fileID: 7402010217829879909}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: rail_2m (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7068,9 +8170,9 @@ GameObject:
   - component: {fileID: 33189173725728724}
   - component: {fileID: 23467037622494256}
   - component: {fileID: 4665931555559587525}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: floor_02_3x3m (18)
-  m_TagString: Untagged
+  m_TagString: Cael_Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 107
@@ -7163,7 +8265,7 @@ GameObject:
   - component: {fileID: 23470826695046800}
   - component: {fileID: 65764174693443168}
   - component: {fileID: 7401994859368634209}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_50_3x3m (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7270,9 +8372,9 @@ GameObject:
   - component: {fileID: 33537615708940080}
   - component: {fileID: 23250352955043360}
   - component: {fileID: 1769367002652419225}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: floor_02_3x3m (19)
-  m_TagString: Untagged
+  m_TagString: Cael_Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 107
@@ -7362,7 +8464,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4831987374166204}
   - component: {fileID: 7401985920245397511}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_53_3x1.5m_a_assembly_a (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7408,7 +8510,7 @@ GameObject:
   - component: {fileID: 33627882741041624}
   - component: {fileID: 23540749752503492}
   - component: {fileID: 7401984688587801919}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: stairs_a_3m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7597,7 +8699,7 @@ GameObject:
   - component: {fileID: 33769552690889754}
   - component: {fileID: 23406256156677428}
   - component: {fileID: 7402178403230128163}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: floor_02_3x1m (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7783,7 +8885,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4632880135693096}
   - component: {fileID: 7402160172033113195}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_side (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7924,7 +9026,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4791483113331060}
   - component: {fileID: 7402220047007834525}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: roof_01_wall_b (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7972,7 +9074,7 @@ GameObject:
   - component: {fileID: 23414316864281126}
   - component: {fileID: 65848604887546702}
   - component: {fileID: 7402216623712109343}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: rail_4m (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8079,10 +9181,9 @@ GameObject:
   - component: {fileID: 33114768003317326}
   - component: {fileID: 23640995733483882}
   - component: {fileID: 65935446156393120}
-  - component: {fileID: 7402210284539987475}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: floor_02_3x3m
-  m_TagString: Untagged
+  m_TagString: Cael_Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 107
@@ -8163,18 +9264,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 5.8669043, y: 0.25000632, z: 6.0935454}
   m_Center: {x: -2.9334493, y: 0.12499994, z: 0.046781063}
---- !u!114 &7402210284539987475
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1601730156062242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1613658391493470
 GameObject:
   m_ObjectHideFlags: 0
@@ -8185,7 +9274,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4098070553241580}
   - component: {fileID: 7402198528118954863}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_side (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8234,7 +9323,7 @@ GameObject:
   - component: {fileID: 33898247038411326}
   - component: {fileID: 23642902034347092}
   - component: {fileID: 5185812637475564324}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: roof_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8420,7 +9509,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4134479008312428}
   - component: {fileID: 7402115793891708993}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_53_3x1.5m_a_assembly_a (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8560,7 +9649,7 @@ GameObject:
   - component: {fileID: 33883593597676468}
   - component: {fileID: 23499919551769390}
   - component: {fileID: 7402107305004868159}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_71_3x3m_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8655,7 +9744,7 @@ GameObject:
   - component: {fileID: 23489390163757886}
   - component: {fileID: 65315599653490586}
   - component: {fileID: 7402101394077464301}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: rail_2m (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8762,7 +9851,7 @@ GameObject:
   - component: {fileID: 33121781689443600}
   - component: {fileID: 23522283077108942}
   - component: {fileID: 7402088334663093825}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: stone_14_stairs_01_sides
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8856,7 +9945,7 @@ GameObject:
   - component: {fileID: 33145432387518248}
   - component: {fileID: 23224898578495186}
   - component: {fileID: 5218947057325870251}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_50_3x3m (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8950,7 +10039,7 @@ GameObject:
   - component: {fileID: 33452412139735422}
   - component: {fileID: 23077346825428486}
   - component: {fileID: 5185812637475564187}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: stone_13_trim_2m (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9044,7 +10133,7 @@ GameObject:
   - component: {fileID: 33740757216052128}
   - component: {fileID: 23362198441112520}
   - component: {fileID: 7402148655631434715}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_53_3x1.5m_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9219,10 +10308,10 @@ GameObject:
   - component: {fileID: 33028136987249090}
   - component: {fileID: 23793827309298886}
   - component: {fileID: 65354662451950056}
-  - component: {fileID: 7402141126035553905}
-  m_Layer: 6
+  - component: {fileID: 2056391747152946057}
+  m_Layer: 15
   m_Name: floor_02_3x2m (2)
-  m_TagString: Untagged
+  m_TagString: Cael_Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 107
@@ -9303,7 +10392,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 6.3378553, y: 0.25000632, z: 3.0000062}
   m_Center: {x: 1.1689248, y: 0.12499994, z: -1.5}
---- !u!114 &7402141126035553905
+--- !u!114 &2056391747152946057
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9325,7 +10414,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4333794700892864}
   - component: {fileID: 7402138694083359533}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_70_3x3m_a_assembly_a (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9370,7 +10459,7 @@ GameObject:
   - component: {fileID: 4536273588439382}
   - component: {fileID: 33050209229496998}
   - component: {fileID: 5185812637475564325}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: roof_01_extension_a_collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9544,7 +10633,7 @@ MonoBehaviour:
   rotationVal: 0
   openSpeed: 10
   closeDistance: 15
-  locked: 0
+  isSafeHouse: 0
   spawnLeft: 0
   spawnRight: 0
   spawnBehind: 0
@@ -9563,7 +10652,7 @@ GameObject:
   - component: {fileID: 23982761270604230}
   - component: {fileID: 65449337613186622}
   - component: {fileID: 7402131520156024889}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_72_3x3m_a (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9951,7 +11040,6 @@ GameObject:
   - component: {fileID: 4237487121318010}
   - component: {fileID: 33625547985419196}
   - component: {fileID: 23167911957921196}
-  - component: {fileID: 5185812637475564204}
   m_Layer: 0
   m_Name: stone_12_trim_6m
   m_TagString: Untagged
@@ -10022,18 +11110,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &5185812637475564204
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1703518773871070}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1711492661133554
 GameObject:
   m_ObjectHideFlags: 0
@@ -10046,7 +11122,7 @@ GameObject:
   - component: {fileID: 33626789746462754}
   - component: {fileID: 23290133264357968}
   - component: {fileID: 8686357074075432360}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_72_3x3m_a (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10140,7 +11216,7 @@ GameObject:
   - component: {fileID: 33490433450907618}
   - component: {fileID: 23977457774777234}
   - component: {fileID: 5185812637475564317}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: roof_01_scaffold_01 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10597,7 +11673,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4049799451116088}
   - component: {fileID: 7402361970468615101}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_53_3x1.5m_b_assembly_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10829,7 +11905,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4443661794901896}
   - component: {fileID: 7402344629650265973}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: Front_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10972,7 +12048,7 @@ GameObject:
   - component: {fileID: 33020077845848968}
   - component: {fileID: 23387758760893166}
   - component: {fileID: 2897971178763711119}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_72_3x3m_b (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11158,7 +12234,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4444070261990496}
   - component: {fileID: 7402250427921250411}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: props
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11210,9 +12286,9 @@ GameObject:
   - component: {fileID: 23794425844652688}
   - component: {fileID: 65527244632117088}
   - component: {fileID: 7402250445578446321}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: floor_02_3x3m (15)
-  m_TagString: Untagged
+  m_TagString: Cael_Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 107
@@ -11408,7 +12484,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4694670858248186}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: floor_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11454,7 +12530,7 @@ GameObject:
   - component: {fileID: 33549375345563942}
   - component: {fileID: 23100881309078264}
   - component: {fileID: 5185812637475564188}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: stone_13_trim_2m (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11549,7 +12625,7 @@ GameObject:
   - component: {fileID: 23031852112750860}
   - component: {fileID: 65875861289142592}
   - component: {fileID: 7402231859212840585}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: rail_2m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11656,7 +12732,7 @@ GameObject:
   - component: {fileID: 33666875460792156}
   - component: {fileID: 23160979696971222}
   - component: {fileID: 9216648863776504590}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_90_basement_6m (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11841,8 +12917,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4264452597530306}
-  - component: {fileID: 6917527309108972454}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: Exterior
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11871,18 +12946,6 @@ Transform:
   m_Father: {fileID: 4423055632707114}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6917527309108972454
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1817086324536092}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1817366750392946
 GameObject:
   m_ObjectHideFlags: 0
@@ -11895,7 +12958,7 @@ GameObject:
   - component: {fileID: 33822863853472576}
   - component: {fileID: 23970909195181926}
   - component: {fileID: 7402276390312137283}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: rail_2m (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11989,7 +13052,7 @@ GameObject:
   - component: {fileID: 33066540663845310}
   - component: {fileID: 23548732740259494}
   - component: {fileID: 5185812637475564319}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: roof_01_scaffold_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12207,7 +13270,7 @@ GameObject:
   - component: {fileID: 33743094734328354}
   - component: {fileID: 23723693192190840}
   - component: {fileID: 1731332109737886478}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: floor_02_3x1m (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12301,9 +13364,9 @@ GameObject:
   - component: {fileID: 33172392741629302}
   - component: {fileID: 23684107872255746}
   - component: {fileID: 2557782876279618569}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: floor_02_3x3m (13)
-  m_TagString: Untagged
+  m_TagString: Cael_Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 107
@@ -12394,7 +13457,7 @@ GameObject:
   - component: {fileID: 4671796193185314}
   - component: {fileID: 33470847073712310}
   - component: {fileID: 23068148070677914}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: floor_02_3x1m (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12476,7 +13539,7 @@ GameObject:
   - component: {fileID: 33825969007469336}
   - component: {fileID: 23354350418399820}
   - component: {fileID: 7402456128736524235}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_90_basement_6m (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12664,7 +13727,7 @@ GameObject:
   - component: {fileID: 33595702399025136}
   - component: {fileID: 23975121161937386}
   - component: {fileID: 5185812637475564316}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: roof_01_scaffold_01 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12849,7 +13912,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4080735146434374}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: floor_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13032,9 +14095,9 @@ GameObject:
   - component: {fileID: 23319267756892650}
   - component: {fileID: 65534392611845058}
   - component: {fileID: 7402489102960985923}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: floor_02_3x3m (17)
-  m_TagString: Untagged
+  m_TagString: Cael_Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 107
@@ -13421,7 +14484,7 @@ GameObject:
   - component: {fileID: 33802097678951194}
   - component: {fileID: 23802615516013794}
   - component: {fileID: 7402399675860307313}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: stairs_a_3m (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13610,10 +14673,9 @@ GameObject:
   - component: {fileID: 33498733060157808}
   - component: {fileID: 23763484282478092}
   - component: {fileID: 65199508734301842}
-  - component: {fileID: 7402389943634132617}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: floor_02_3x3m (6)
-  m_TagString: Untagged
+  m_TagString: Cael_Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 107
@@ -13694,18 +14756,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.9450502, y: 0.25000632, z: 3.0000057}
   m_Center: {x: -1.027478, y: 0.12499994, z: -1.500001}
---- !u!114 &7402389943634132617
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1914962599075512}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1924139946158284
 GameObject:
   m_ObjectHideFlags: 0
@@ -13812,7 +14862,7 @@ GameObject:
   - component: {fileID: 33556870188029268}
   - component: {fileID: 23000418715484696}
   - component: {fileID: 7402376887152053923}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_53_3x1.5m_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13907,9 +14957,9 @@ GameObject:
   - component: {fileID: 23898657972298964}
   - component: {fileID: 65660566627336508}
   - component: {fileID: 7402435808831542095}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: floor_02_3x3m (14)
-  m_TagString: Untagged
+  m_TagString: Cael_Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 107
@@ -14012,7 +15062,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4063778032027372}
   - component: {fileID: 7402434353128521127}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_side (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14059,7 +15109,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4894597194216428}
   - component: {fileID: 7402430738178435213}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: walls_wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14116,7 +15166,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4423055632707114}
-  - component: {fileID: 1132263806550646950}
   m_Layer: 0
   m_Name: Building_06
   m_TagString: Untagged
@@ -14143,21 +15192,11 @@ Transform:
   - {fileID: 1972421366}
   - {fileID: 1696027331}
   - {fileID: 528631236}
+  - {fileID: 990318437}
+  - {fileID: 452741568}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1132263806550646950
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1952017966062582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1954710455307432
 GameObject:
   m_ObjectHideFlags: 0
@@ -14170,7 +15209,7 @@ GameObject:
   - component: {fileID: 33616622503734326}
   - component: {fileID: 23032586031733758}
   - component: {fileID: 5185812637475564320}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: roof_01_scaffold_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14262,7 +15301,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4221208878139584}
   - component: {fileID: 7402419262009951255}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: roof_01_extension_a (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14403,7 +15442,7 @@ GameObject:
   - component: {fileID: 33443510172153984}
   - component: {fileID: 23662522619420744}
   - component: {fileID: 5185812637475564318}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: roof_01_scaffold_02 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14997,7 +16036,7 @@ GameObject:
   - component: {fileID: 1328248692663095793}
   - component: {fileID: 1319145927132691387}
   - component: {fileID: 7231546366464063929}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_72_3x3m_b (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15091,7 +16130,7 @@ GameObject:
   - component: {fileID: 1324974563501777751}
   - component: {fileID: 1319464265412900429}
   - component: {fileID: 1303835649117795042}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_71_3x3m_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15268,7 +16307,7 @@ GameObject:
   - component: {fileID: 8559599487937173195}
   - component: {fileID: 2007031065062419176}
   - component: {fileID: 1303860546078669162}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_56_3x3m_door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15576,7 +16615,7 @@ GameObject:
   - component: {fileID: 1327890405850142967}
   - component: {fileID: 1319443827539221987}
   - component: {fileID: 8206960555541978891}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: roof_01_extension_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15764,7 +16803,7 @@ GameObject:
   - component: {fileID: 1327989351790862091}
   - component: {fileID: 1319198936735346629}
   - component: {fileID: 3481838375958934109}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_72_3x3m_b (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15951,7 +16990,7 @@ GameObject:
   - component: {fileID: 1300158354436207627}
   - component: {fileID: 1327456533800083341}
   - component: {fileID: 1319347378824876157}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: wood_01_trim_8m_a (13)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16032,7 +17071,7 @@ GameObject:
   - component: {fileID: 1300085000152911975}
   - component: {fileID: 1327967480529561939}
   - component: {fileID: 8206960555541978890}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: roof_01_extension_a_collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16085,7 +17124,7 @@ GameObject:
   - component: {fileID: 1327866549917462247}
   - component: {fileID: 1317850155594227259}
   - component: {fileID: 1305074390049354050}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_71_3x3m_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16355,7 +17394,7 @@ GameObject:
   - component: {fileID: 1327566220763806685}
   - component: {fileID: 1317592889885381747}
   - component: {fileID: 1305200942107464998}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_53_3x1.5m_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16449,9 +17488,9 @@ GameObject:
   - component: {fileID: 1328097715255066599}
   - component: {fileID: 1319457222877769107}
   - component: {fileID: 2708945231291474670}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: floor_02_3x3m (13)
-  m_TagString: Untagged
+  m_TagString: Cael_Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 107
@@ -16637,7 +17676,7 @@ GameObject:
   - component: {fileID: 1327992903790214715}
   - component: {fileID: 1317446061571412845}
   - component: {fileID: 1305211081930887906}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_72_3x3m_a (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16731,7 +17770,7 @@ GameObject:
   - component: {fileID: 1327834317033253415}
   - component: {fileID: 1317997317124468491}
   - component: {fileID: 869096966168466473}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: floor_02_3x1m (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16919,9 +17958,9 @@ GameObject:
   - component: {fileID: 1328280353389613387}
   - component: {fileID: 1317848061766474259}
   - component: {fileID: 573400272165744445}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: floor_02_3x3m (16)
-  m_TagString: Untagged
+  m_TagString: Cael_Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 107
@@ -17013,7 +18052,7 @@ GameObject:
   - component: {fileID: 1328119509526896305}
   - component: {fileID: 1317595652607751539}
   - component: {fileID: 1305273383289096458}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: stone_14_stairs_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17201,10 +18240,9 @@ GameObject:
   - component: {fileID: 1300390262562267041}
   - component: {fileID: 1328042029058158987}
   - component: {fileID: 1319383697542346309}
-  - component: {fileID: 8168282400559555422}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: floor_02_3x3m (14)
-  m_TagString: Untagged
+  m_TagString: Cael_Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 107
@@ -17272,18 +18310,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &8168282400559555422
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1305305188855407087}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1305306936345468459
 GameObject:
   m_ObjectHideFlags: 0
@@ -17298,7 +18324,7 @@ GameObject:
   - component: {fileID: 1024476342010846993}
   - component: {fileID: 8097144966093580899}
   - component: {fileID: 1305306936345468456}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_73_3x3m_door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17418,7 +18444,7 @@ GameObject:
   - component: {fileID: 1327849246208275849}
   - component: {fileID: 1319322076776233293}
   - component: {fileID: 8206960555541978205}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: wood_01_trim_8m_a (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17513,7 +18539,7 @@ GameObject:
   - component: {fileID: 1317378086472161113}
   - component: {fileID: 2184535562842454947}
   - component: {fileID: 1305323435067855768}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_70_3x3m_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17619,7 +18645,7 @@ GameObject:
   - component: {fileID: 1302753700461931249}
   - component: {fileID: 1325112133982568603}
   - component: {fileID: 1319350576864295331}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: wood_01_trim_8m_a (13)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17893,7 +18919,7 @@ GameObject:
   - component: {fileID: 1327705007402353331}
   - component: {fileID: 1317652023973349569}
   - component: {fileID: 3283226619695495344}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_72_3x3m_a (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17987,7 +19013,7 @@ GameObject:
   - component: {fileID: 1325122804049319265}
   - component: {fileID: 1319295167387057037}
   - component: {fileID: 8206960555541978182}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: wood_01_trim_8m_a (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18081,7 +19107,7 @@ GameObject:
   - component: {fileID: 1324912777309713759}
   - component: {fileID: 1317506640396194177}
   - component: {fileID: 8206960555541978178}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: wood_07_trim_5m (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18175,7 +19201,7 @@ GameObject:
   - component: {fileID: 1327843763270926917}
   - component: {fileID: 1319310671140120595}
   - component: {fileID: 8206960555541978177}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: wood_01_trim_8m_a (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18350,7 +19376,7 @@ GameObject:
   - component: {fileID: 1328223642458976537}
   - component: {fileID: 1317466454105704575}
   - component: {fileID: 8508330753280306879}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_72_3x3m_b (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18444,9 +19470,9 @@ GameObject:
   - component: {fileID: 1324986076877770371}
   - component: {fileID: 1317501121730874987}
   - component: {fileID: 4621231560519653133}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: floor_02_3x3m (17)
-  m_TagString: Untagged
+  m_TagString: Cael_Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 107
@@ -18538,7 +19564,7 @@ GameObject:
   - component: {fileID: 1327555256528166593}
   - component: {fileID: 1317714569240906423}
   - component: {fileID: 1305419339518280684}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: wood_01_trim_8m_a (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18632,7 +19658,7 @@ GameObject:
   - component: {fileID: 1327601858164056659}
   - component: {fileID: 1317752202705033073}
   - component: {fileID: 8206960555541978187}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: wood_01_trim_8m_a (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18726,7 +19752,7 @@ GameObject:
   - component: {fileID: 1328084100244339261}
   - component: {fileID: 1319543507736442701}
   - component: {fileID: 8035468512706168662}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_72_3x3m_a (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18850,7 +19876,7 @@ GameObject:
   - component: {fileID: 1328125997261670879}
   - component: {fileID: 1319144052360048707}
   - component: {fileID: 1305487841941458884}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: wood_01_trim_8m_a (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18944,7 +19970,7 @@ GameObject:
   - component: {fileID: 1325183278223683157}
   - component: {fileID: 1319287671736150211}
   - component: {fileID: 8206960555541978186}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: wood_01_trim_8m_a (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19038,7 +20064,7 @@ GameObject:
   - component: {fileID: 1324918942848855283}
   - component: {fileID: 1317310698915900027}
   - component: {fileID: 8206960555541978932}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: roof_01_extension_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19133,7 +20159,7 @@ GameObject:
   - component: {fileID: 1317735378062685081}
   - component: {fileID: 2856633479640284546}
   - component: {fileID: 1305506507622597548}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_72_3x3m_a (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19333,7 +20359,6 @@ GameObject:
   - component: {fileID: 1302846399935729207}
   - component: {fileID: 1325170647363982999}
   - component: {fileID: 1317591737362311639}
-  - component: {fileID: 8206960555541978259}
   m_Layer: 0
   m_Name: wood_01_trim_8m_a (1)
   m_TagString: Untagged
@@ -19404,18 +20429,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &8206960555541978259
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1305544545307742821}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1305554237926479809
 GameObject:
   m_ObjectHideFlags: 0
@@ -19522,7 +20535,7 @@ GameObject:
   - component: {fileID: 1324915617389235615}
   - component: {fileID: 1319288748205693511}
   - component: {fileID: 8206960555541978888}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: roof_01_wall_b_wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19616,7 +20629,7 @@ GameObject:
   - component: {fileID: 1327776853173445499}
   - component: {fileID: 1319371155177279589}
   - component: {fileID: 4371531028689586090}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_72_3x3m_b (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19899,7 +20912,7 @@ GameObject:
   - component: {fileID: 1325137318948529145}
   - component: {fileID: 1317478833286565883}
   - component: {fileID: 8206960555541978198}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: wood_01_trim_8m_a (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19994,7 +21007,7 @@ GameObject:
   - component: {fileID: 1319361687975290409}
   - component: {fileID: 3532120754465012780}
   - component: {fileID: 1305637050841659756}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_53_3x1.5m_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20101,7 +21114,7 @@ GameObject:
   - component: {fileID: 1327546384945744125}
   - component: {fileID: 1319194655901044081}
   - component: {fileID: 6642142392228052911}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_72_3x3m_b (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20277,7 +21290,7 @@ GameObject:
   - component: {fileID: 1328272167822018659}
   - component: {fileID: 1319310105693898031}
   - component: {fileID: 8206960555541978193}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: wood_01_trim_8m_a (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20371,7 +21384,7 @@ GameObject:
   - component: {fileID: 1327898820492644633}
   - component: {fileID: 1317976034034434535}
   - component: {fileID: 2512700916558550700}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_72_3x3m_a (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20545,8 +21558,7 @@ GameObject:
   - component: {fileID: 1300010908521546769}
   - component: {fileID: 1327509858241113057}
   - component: {fileID: 1318006188124984613}
-  - component: {fileID: 1305672922806826024}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: roof_01_wall_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20616,18 +21628,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &1305672922806826024
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1305672922806826027}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1305674102451447295
 GameObject:
   m_ObjectHideFlags: 0
@@ -20640,7 +21640,7 @@ GameObject:
   - component: {fileID: 1327516729787847437}
   - component: {fileID: 1317531091491946127}
   - component: {fileID: 7528009114108426492}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_72_3x3m_b (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20923,7 +21923,7 @@ GameObject:
   - component: {fileID: 1327536377459380105}
   - component: {fileID: 1317462676568910529}
   - component: {fileID: 8206960555541978889}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: roof_01_wall_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21299,7 +22299,7 @@ GameObject:
   - component: {fileID: 1327933417722895413}
   - component: {fileID: 1319501874572449057}
   - component: {fileID: 8206960555541978181}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: wood_01_trim_8m_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21393,7 +22393,7 @@ GameObject:
   - component: {fileID: 1327848513523912571}
   - component: {fileID: 1319301646852422117}
   - component: {fileID: 4983030504184560545}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_72_3x3m_a (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21530,7 +22530,7 @@ GameObject:
   - component: {fileID: 1327838970422016401}
   - component: {fileID: 1317470908978901907}
   - component: {fileID: 8206960555541978207}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: wood_01_trim_8m_a (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21624,7 +22624,7 @@ GameObject:
   - component: {fileID: 1328239635614273167}
   - component: {fileID: 1317934524531742559}
   - component: {fileID: 1305774379792664974}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_70_3x3m_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21717,7 +22717,7 @@ GameObject:
   - component: {fileID: 1300215397178701781}
   - component: {fileID: 1327673714482894111}
   - component: {fileID: 1317923454527261215}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: floor_02_3x1m (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21799,7 +22799,7 @@ GameObject:
   - component: {fileID: 1328242208488319013}
   - component: {fileID: 1317743518015429197}
   - component: {fileID: 8206960555541978176}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: wood_01_trim_8m_a (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21893,7 +22893,7 @@ GameObject:
   - component: {fileID: 1327747901873296083}
   - component: {fileID: 1317617892036879019}
   - component: {fileID: 982992250416394061}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: floor_02_3x2m (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22080,7 +23080,7 @@ GameObject:
   - component: {fileID: 1303171156858591605}
   - component: {fileID: 1327822597349647675}
   - component: {fileID: 1319420691512064151}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: wood_01_trim_8m_a (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22162,7 +23162,7 @@ GameObject:
   - component: {fileID: 1327542295852959133}
   - component: {fileID: 1317691953510621793}
   - component: {fileID: 8206960555541978179}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: wood_07_trim_5m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22350,7 +23350,7 @@ GameObject:
   - component: {fileID: 1327851182389636491}
   - component: {fileID: 1317378978731667107}
   - component: {fileID: 8206960555541978199}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: wood_01_trim_8m_a (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22444,7 +23444,7 @@ GameObject:
   - component: {fileID: 1327934204349996871}
   - component: {fileID: 1319434756146351367}
   - component: {fileID: 8206960555541978183}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: wood_01_trim_8m_a (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22538,7 +23538,7 @@ GameObject:
   - component: {fileID: 1327444262855213741}
   - component: {fileID: 1319408661635510239}
   - component: {fileID: 8078841237951586239}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: floor_02_3x2m (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22632,7 +23632,7 @@ GameObject:
   - component: {fileID: 1324924055436005655}
   - component: {fileID: 1317727235228247387}
   - component: {fileID: 8206960555541978204}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: wood_01_trim_8m_a (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22995,8 +23995,7 @@ GameObject:
   - component: {fileID: 696438423389673885}
   - component: {fileID: 6498941646371962509}
   - component: {fileID: 5725255124449826481}
-  - component: {fileID: 8928289202902785520}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23079,18 +24078,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8928289202902785520
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2115557622932078019}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2208825271147198104
 GameObject:
   m_ObjectHideFlags: 0
@@ -46807,10 +47794,9 @@ GameObject:
   - component: {fileID: 5826147216146127900}
   - component: {fileID: 5836329008136357726}
   - component: {fileID: 1998567975661816923}
-  - component: {fileID: 3897099099819949271}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: Ground Collider
-  m_TagString: Untagged
+  m_TagString: Cael_Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 123
@@ -46891,18 +47877,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 12.555129, y: 2.000995, z: 6.410514}
   m_Center: {x: -6.0369573, y: -0.9995085, z: -3.0058122}
---- !u!114 &3897099099819949271
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5812204492695182566}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6025999725805581941
 GameObject:
   m_ObjectHideFlags: 0
@@ -46916,7 +47890,7 @@ GameObject:
   - component: {fileID: 8471698850602720694}
   - component: {fileID: 2739038665361077645}
   - component: {fileID: 3827207665092367938}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: Cube_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48083,7 +49057,7 @@ GameObject:
   - component: {fileID: 1793892428120702543}
   - component: {fileID: 381612280962683213}
   - component: {fileID: 1046937651708610070}
-  m_Layer: 6
+  m_Layer: 15
   m_Name: Cube_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48270,7 +49244,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8406375748942940395}
   - component: {fileID: 7402428992866955445}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: wall_73_3x3m_door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48573,7 +49547,7 @@ GameObject:
   - component: {fileID: 8421542673145392559}
   - component: {fileID: 8427169396270430839}
   - component: {fileID: 1682275804156624696}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: roof_01_wall_b_wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48759,7 +49733,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8406290100669188727}
   - component: {fileID: 1682275804156624697}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: roof_01_wall_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49693,7 +50667,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8406028003439625421}
   - component: {fileID: 1682275804156624699}
-  m_Layer: 7
+  m_Layer: 16
   m_Name: roof_01_extension_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50101,11 +51075,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 827014521, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: UID
-      value: 2097799416
+      value: -1661067802
       objectReference: {fileID: 0}
     - target: {fileID: 1930961226, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: UID
-      value: 1768696040
+      value: -1798494394
       objectReference: {fileID: 0}
     - target: {fileID: 1260673417133536, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: m_Name
@@ -50171,11 +51145,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 827014521, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: UID
-      value: -1407888531
+      value: -1797298977
       objectReference: {fileID: 0}
     - target: {fileID: 1930961226, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: UID
-      value: 1880817624
+      value: 303042155
       objectReference: {fileID: 0}
     - target: {fileID: 1260673417133536, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: m_Name
@@ -50241,7 +51215,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1869601954648582079, guid: 4814fd68123a79641b746edca7584fb3, type: 3}
       propertyPath: UID
-      value: -1516714034
+      value: 294962331
       objectReference: {fileID: 0}
     - target: {fileID: 3288315558618631734, guid: 4814fd68123a79641b746edca7584fb3, type: 3}
       propertyPath: m_Name
