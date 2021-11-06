@@ -33,14 +33,14 @@ public class CrossKey : MonoBehaviour
 
         if (numOfLetters == 4)
         {
-            if (wordOne[0].text + wordOne[1].text + wordOne[2].text + wordOne[3].text == answer)
+            if (wordOne[0].text.ToLower() + wordOne[1].text.ToLower() + wordOne[2].text.ToLower() + wordOne[3].text.ToLower() == answer)
             {
                 CompletePuzzle();
             }
         }
         if (numOfLetters == 5)
         {
-            if (wordOne[0].text + wordOne[1].text + wordOne[2].text + wordOne[3].text + wordOne[4].text == answer)
+            if (wordOne[0].text.ToLower() + wordOne[1].text.ToLower() + wordOne[2].text.ToLower() + wordOne[3].text.ToLower() + wordOne[4].text.ToLower() == answer)
             {
                 CompletePuzzle();
             }
@@ -48,14 +48,14 @@ public class CrossKey : MonoBehaviour
 
         if (numOfLetters == 6)
         {
-            if (wordOne[0].text + wordOne[1].text + wordOne[2].text + wordOne[3].text + wordOne[4].text + wordOne[5].text == answer)
+            if (wordOne[0].text.ToLower() + wordOne[1].text.ToLower() + wordOne[2].text.ToLower() + wordOne[3].text.ToLower() + wordOne[4].text.ToLower() + wordOne[5].text.ToLower() == answer)
             {
                 CompletePuzzle();
             }
         }
         if (numOfLetters == 7)
         {
-            if (wordOne[0].text + wordOne[1].text + wordOne[2].text + wordOne[3].text + wordOne[4].text + wordOne[5].text + wordOne[6].text == answer)
+            if (wordOne[0].text.ToLower() + wordOne[1].text.ToLower() + wordOne[2].text.ToLower() + wordOne[3].text.ToLower() + wordOne[4].text.ToLower() + wordOne[5].text.ToLower() + wordOne[6].text.ToLower() == answer)
             {
                 CompletePuzzle();
             }
