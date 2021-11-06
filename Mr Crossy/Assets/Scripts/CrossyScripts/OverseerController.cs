@@ -55,6 +55,7 @@ public class OverseerController : MonoBehaviour
 
     private bool m_TitanLineTiming;
     private bool m_CrossyLineTiming;
+    private bool m_PursuitLineTiming;
 
     private bool m_IsTutorial = true;
     #endregion
@@ -149,19 +150,22 @@ public class OverseerController : MonoBehaviour
             distootle.DecreaseVignette();
         }
 
-
-        if(m_State == -1)
+        if(!m_IsTutorial)
         {
-            TitanVoiceLineTimer();
+            if (m_State == -1)
+            {
+                TitanVoiceLineTimer();
+            }
+            else if (m_State == 1)
+            {
+                CrossyPatrolVoiceLineTimer();
+            }
+            else if (m_State == 2)
+            {
+                CrossyAlertVoiceLineTimer();
+            }
         }
-        else if(m_State == 1)
-        {
-            CrossyPatrolVoiceLineTimer();
-        }
-        else if (m_State == 2)
-        {
-            CrossyAlertVoiceLineTimer();
-        }
+        
     }
 
     #region Methods
@@ -312,6 +316,27 @@ public class OverseerController : MonoBehaviour
         m_CrossyVoiceTime = Random.Range(m_CrossyVoiceTimeMin, m_CrossyVoiceTimeMax);
 
         m_CrossyLineTiming = false;
+    }
+
+    //Crossy Pursuit Voice Timer - Time Is Randomised
+    public void CrossyPursuitVoiceLineTimer()
+    {
+        if (!m_PursuitLineTiming) StartCoroutine(CrossyPursuitVoiceTimer());
+    }
+
+    IEnumerator CrossyPursuitVoiceTimer()
+    {
+        if (m_CrossyLineTiming) StopCoroutine(TitanVoiceTimer());
+
+        m_PursuitLineTiming = true;
+
+        Debug.Log("LinePlay - Crossy Alert");
+        //Do the Crossy Pursuit VoiceLine
+
+        //Replace with something to wait till line ended
+        yield return new WaitForSeconds(m_CrossyVoiceTime);
+
+        m_PursuitLineTiming = false;
     }
     #endregion
 }
