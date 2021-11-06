@@ -27,12 +27,14 @@ public class KeyPuzzles
 public class CrossKeyManager : MonoBehaviour
 {
     public int numOfKeys = 1;
+    public bool doorsLocked;
     public TMP_Text hintArea;
     public KeyPuzzles[] keyPuzzles;
     Transform cam;
     [HideInInspector] public bool puzzleOn;
     [HideInInspector] public Player_Controller controller;
     [HideInInspector] public HeadBob headBob;
+    GameObject newCrossKey;
 
     void Start()
     {
@@ -60,7 +62,7 @@ public class CrossKeyManager : MonoBehaviour
             int randomKey = Random.Range(0, keyPuzzles.Length);
             KeyPuzzles key = keyPuzzles[randomKey];
             Vector3 posOffset = key.crossKey.transform.position - key.crossKey.transform.GetComponent<Renderer>().bounds.center;
-            GameObject newCrossKey = Instantiate(key.crossKey, cam.position + cam.forward * 0.4f + posOffset, key.crossKey.transform.rotation);
+            newCrossKey = Instantiate(key.crossKey, cam.position + cam.forward * 0.4f + posOffset, key.crossKey.transform.rotation);
             newCrossKey.layer = 6;
             foreach(Transform t in newCrossKey.transform)
             {
@@ -295,8 +297,18 @@ public class CrossKeyManager : MonoBehaviour
         hintArea.text = "[C]LUE: " + puzzle.hint;
     }
 
-    public void PuzzleDeath()
+    public void PuzzleDeath(GameObject mrCrossy)
     {
         Debug.Log("Dead");
+        if (newCrossKey)
+        {
+            Destroy(newCrossKey);
+        }
+        Destroy(mrCrossy);
+        FindObjectOfType<MrCrossyDistortion>().DarkenScreen(1.5f);
+        hintArea.text = "";
+        Time.timeScale = 1;
+        Time.fixedDeltaTime = 0.02f;
+        FindObjectOfType<PlayerRespawn>().PlayerDie();
     }
 }

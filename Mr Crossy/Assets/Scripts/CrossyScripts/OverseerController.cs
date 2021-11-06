@@ -5,8 +5,11 @@ using BehaviorDesigner.Runtime;
 
 public class OverseerController : MonoBehaviour
 {
-    static BehaviorTree ObserverTree;
+    public static BehaviorTree ObserverTree;
+    [HideInInspector] public static bool m_PlayerInHouse;
+
     CrossyTheWatcher titan;
+    MrCrossyDistortion distootle;
 
     #region Fields
     [SerializeField] private bool startOnAwake;
@@ -35,10 +38,14 @@ public class OverseerController : MonoBehaviour
     [SerializeField] private float m_SearchTightAmt;
     [SerializeField] private float m_SearchRadiusAggro;
     [SerializeField] private Vector3 m_ValidationPosition;
+    [SerializeField] private List<GameObject> m_SpawnLighthouses = new List<GameObject>();
 
-    [Header("Titan Crossy Placement")]
+    [Header("Titan Crossy")]
     [SerializeField] private float m_CheckRadius;
     private int m_State;
+    private bool m_HideTitan;
+    [Header("Else Variables")]
+    private bool m_IsTutorial = true;
     #endregion
 
     #region Properties
@@ -62,20 +69,35 @@ public class OverseerController : MonoBehaviour
 
     public Vector3 ValidationPosition { get { return m_ValidationPosition; } }
     public int State { get { return m_State; } set { m_State = value; } }
+    public bool HideTitan { get { return m_HideTitan; } set { m_HideTitan = value; } }
+
+    public List<GameObject> SpawnLightHouses { get { return m_SpawnLighthouses; } }
+
+    public bool IsTutorial { get { return m_IsTutorial; } set { m_IsTutorial = value; } }
+
+    public bool IsInHouse { get { return m_PlayerInHouse; } }
 
     #endregion
 
     [Space(10)]
-    public List<Lighthouse> lighthouses = new List<Lighthouse>();
+    public List<Lighthouse> titanLighthouses = new List<Lighthouse>();
+
+
+    public Lighthouse storedHouse;
+    public float currDist;
+    private float storedDist = 0;
+    bool vignetteActivated = false;
 
     private void Awake()
     {
         m_Observer = gameObject;
         ObserverTree = gameObject.GetComponent<BehaviorTree>();
+        distootle = FindObjectOfType<MrCrossyDistortion>();
         if (startOnAwake)
         {
-            AwakenObserver();
-        } else ObserverTree.enabled = false;
+            TreeMalarkey.EnableTree(ObserverTree);
+        }
+        else TreeMalarkey.DisableTree(ObserverTree);
         titan = m_TitanCrossy.GetComponent<CrossyTheWatcher>();
     }
 
@@ -84,17 +106,51 @@ public class OverseerController : MonoBehaviour
         if (usePositioner) m_ValidationPosition = validationPositioner.transform.position;
 
         titan.m_state = m_State;
-        
-        if(LeftRadius())
+        titan.hidingTitan = m_HideTitan;
+
+        if(m_State == -1 && !m_IsTutorial)
         {
-            CheckClosestLighthouse();
+            bool left = LeftRadius();
+
+            if (left)
+            {
+                CheckClosestLighthouse();
+            }
+        }
+
+        if(m_State == 2)
+        {
+            vignetteActivated = true;
+            Debug.Log("potoatosondwich");
+            distootle.DistanceVignette(m_Crossy);
+            if(!FindObjectOfType<CrossKeyManager>().doorsLocked)
+            {
+                FindObjectOfType<CrossKeyManager>().doorsLocked = true;
+            }
+        }
+        else if (m_State != 2 && vignetteActivated)
+        {
+            vignetteActivated = false;
+            Debug.Log("VignetteNooooooo");
+            distootle.DecreaseVignette();
         }
     }
 
-
-    public static void AwakenObserver()
+    public void TutorialActive()
     {
-        ObserverTree.enabled = true;
+        m_IsTutorial = true;
+        titan.isTutorial = true;
+    }
+
+    public void TutorialEnded()
+    {
+        m_IsTutorial = false;
+        titan.isTutorial = false;
+    }
+
+    public void AwakenObserver()
+    {
+        TreeMalarkey.EnableTree(ObserverTree);
     }
 
     public bool LeftRadius()
@@ -103,34 +159,53 @@ public class OverseerController : MonoBehaviour
         Vector3 check = new Vector3(titan.lighthouse.selfTransform.position.x, 0f, titan.lighthouse.selfTransform.position.z);
         float dist = Vector3.Distance(playerPosition, check);
 
-        if (dist > m_CheckRadius) return true;
-        else return false;
+        if (dist > m_CheckRadius)
+        {
+            Debug.Log("Checkky");
+            return true;
+        }
+        else 
+        { 
+            return false; 
+        }
     }
 
     public void CheckClosestLighthouse()
     {
+        Debug.Log("StartLight");
         Vector3 playerPosition = new Vector3(m_Player.transform.position.x, 0f, m_Player.transform.position.z);
 
-        Lighthouse storedHouse = titan.lighthouse;
-        float storedDist = 0;
-        float currDist;
+        storedHouse = titan.lighthouse;
 
-        foreach(Lighthouse lighthouse in lighthouses)
+        foreach(Lighthouse lighthouse in titanLighthouses)
         {
             Vector3 check = new Vector3(lighthouse.selfTransform.position.x, 0f, lighthouse.selfTransform.position.z);
+
             currDist = Vector3.Distance(playerPosition, check);
-            if (storedDist == 0) storedDist = currDist;
-            if(currDist < storedDist)
+
+
+            if (storedDist == 0) 
+            { 
+                storedDist = currDist;
+                Debug.Log("setdist");
+            }
+
+            if(currDist <= storedDist)
             {
+                Debug.Log("SetHouse");
                 storedDist = currDist;
                 storedHouse = lighthouse;
             }
 
         }
-        if(storedHouse != titan.lighthouse)
+        if(storedHouse != titan.lighthouse && !titan.lighthousing)
         {
+            Debug.Log("DiffLight");
             titan.TitanCrossyHouse(storedHouse);
         }
+        storedDist = 0;
+        Debug.Log("EndLight");
 
+        
     }
 }
