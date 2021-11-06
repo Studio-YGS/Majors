@@ -7,6 +7,8 @@ using BehaviorDesigner.Runtime;
 
 //If you want stuff to happen when mr crossy attacks you, stuff it in the "CrossyAttack" method way down yonder
 
+//State Stuff -- Despawned = -1, Idle = 0, Patrol = 1, Alert = 2, Pursuit = 3
+
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(NavMeshAgent))]
 public class CrossyController : MonoBehaviour
@@ -16,37 +18,42 @@ public class CrossyController : MonoBehaviour
     NavMeshAgent agent;
 
     [Header("Debug Booleans")]
-    public bool overrideShouldRun;
-    public bool run;
-    public bool accelManipulation;
-    public bool lookCondition;
+    [HideInInspector] public bool overrideShouldRun;
+    [HideInInspector] public bool run;
+    [HideInInspector] public bool accelManipulation;
+    [HideInInspector] public bool lookCondition;
 
     private Transform headBone;
+    [Space(1)]
     public Transform vision;
     [SerializeField] private Transform m_CrossyDespawn;
+    
 
-    [SerializeField] private float m_PatrolRunDistance;
-    [SerializeField] private float m_AlertRunDistance;
-    private float m_RunDistance;
-
-    [Space(10)]
     [Header("Movement Variables")]
     [Tooltip("Mr. Crossy's walking speed.")]
     [SerializeField] private float m_WalkSpeed;
     [Tooltip("Mr. Crossy's running speed.")]
     [SerializeField] private float m_RunSpeed;
     private float m_MoveSpeed;
+
     [Tooltip("Mr. Crossy's acceleration rate.")]
     [SerializeField] private float m_BaseAcceleration;
-    [SerializeField] private float m_CornerAcceleration;
-    [SerializeField] private float m_Acceleration;
+    /*[SerializeField] */private float m_CornerAcceleration;
+    /*[SerializeField] */private float m_Acceleration;
+
     [Tooltip("Mr. Crossy's turning speed.")]
     /*[SerializeField]*/ private float m_WalkAngularSpeed;
     /*[SerializeField]*/ private float m_RunAngularSpeed;
     [SerializeField] private float m_AngularSpeed;
+
     [Tooltip("Distance from destination that Mr. Crossy can stop at.")]
     [SerializeField] private float m_StoppingDistance;
-    [SerializeField] private float m_CornerThreshold;
+    [SerializeField] private float m_AttackDistanceOffset;
+    /*[SerializeField] */private float m_CornerThreshold;
+
+    [SerializeField] private float m_PatrolRunDistance;
+    [SerializeField] private float m_AlertRunDistance;
+    private float m_RunDistance;
 
     private float m_DistanceToCorner;
 
@@ -55,15 +62,17 @@ public class CrossyController : MonoBehaviour
     private bool m_InPeripheral = false;
     private bool m_ShouldRun = false;
     private int m_State = -1;
-    [Space(10)]
     [Header("Detection Variables")]
+    [SerializeField] private float m_PursuitDistance;
     [SerializeField] private float m_DetectionTime;
-    [Space(10)]
+
     [SerializeField] private float m_FocalViewCone;
     [SerializeField] private float m_PeripheralViewCone;
-    [Space(10)]
+
     [SerializeField] private float m_FocalViewDist;
     [SerializeField] private float m_PeripheralViewDist;
+
+    private float distInterpolator;
 
     [Space(10)]
     [Header("IK Variables")]
@@ -78,6 +87,7 @@ public class CrossyController : MonoBehaviour
     [Range(0,2)] public float IKRightFootDistance;
 
     #region Properties
+
     public float WalkSpeed { get { return m_WalkSpeed; } set { m_WalkSpeed = value; } }
     public float RunSpeed { get { return m_RunSpeed; } set { m_RunSpeed = value; } }
     public float MoveSpeed { get { return m_MoveSpeed; } set { m_MoveSpeed = value; } }
@@ -95,6 +105,9 @@ public class CrossyController : MonoBehaviour
     public int State { get { return m_State; } set { m_State = value; } }
     public Vector3 CrossyDespawn { get { return m_CrossyDespawn.position; } set { m_CrossyDespawn.position = value; } }
 
+    public float PursuitDistance { get { return m_PursuitDistance; } }
+    public float AttackDistanceOffset { get { return m_AttackDistanceOffset; } }
+
     public float BaseDetectTime { get { return m_DetectionTime; } }
     public float CloseDetectTime { get { return m_DetectionTime*3; } }
 
@@ -105,8 +118,8 @@ public class CrossyController : MonoBehaviour
     #endregion
 
     [Space(10)]
-    [SerializeField] float mSpeed;
-    [SerializeField] float tSpeed;
+    /*[SerializeField] */float mSpeed;
+    /*[SerializeField] */float tSpeed;
     //[SerializeField] float veloDesire;
     float interpolator;
 
@@ -133,15 +146,15 @@ public class CrossyController : MonoBehaviour
 
         if (overrideShouldRun == false) // Sets 'm_ShouldRun' based on state and distance from target.
         {
-            if (m_State < 1) { m_ShouldRun = false; }
+            if (m_State <= 1) { m_ShouldRun = false; }
             else if (m_State == 1 || m_State == 2)
             {
-                m_RunDistance = (m_State == 1) ? m_AlertRunDistance : m_PatrolRunDistance;
+                m_RunDistance = (m_State == 2) ? m_AlertRunDistance : m_PatrolRunDistance;
 
                 if (agent.remainingDistance > m_RunDistance) m_ShouldRun = true;
                 else m_ShouldRun = false;
             }
-            else if (m_State > 2) { m_ShouldRun = true; }
+            else if (m_State == 3) { m_ShouldRun = true; }
         }
         else { m_ShouldRun = run; }
 
