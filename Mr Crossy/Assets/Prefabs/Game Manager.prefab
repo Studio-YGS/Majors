@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 2629922956381282753}
   - component: {fileID: 2629922956381282758}
   - component: {fileID: 6209574557737880101}
+  - component: {fileID: 880813859}
+  - component: {fileID: 7147785134658720668}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -69,3 +71,36 @@ MonoBehaviour:
   respawnPosition: {fileID: 0}
   crossyPosition: {fileID: 0}
   respawningText: {fileID: 0}
+--- !u!114 &880813859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2629922956381282759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecda580837f5937469baf332c631fe3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicVolume: 0.5
+  sfxVolume: 0.5
+  voiceVolume: 0.5
+  mainMenu: 0
+--- !u!114 &7147785134658720668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2629922956381282759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ece905b78fc731c4f89edfc944004bf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseMenuObject: {fileID: 0}
+  settingsMenuObject: {fileID: 0}
+  mainMenuObject: {fileID: 0}
+  streetName: {fileID: 0}
+  mainMenu: 0

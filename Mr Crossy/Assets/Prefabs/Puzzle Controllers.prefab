@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 696453472}
   - component: {fileID: 696453474}
   m_Layer: 0
-  m_Name: Top Left Puzzle Controller (1)
+  m_Name: Top Left Puzzle Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,9 +47,12 @@ MonoBehaviour:
   wordObject: {fileID: 0}
   assignedAltars: []
   word: 
+  currentStreet: 
   mistakeText: {fileID: 0}
+  streetText: {fileID: 0}
   wordsInPuzzle: 4
   canvasLetters: []
+  storedObjects: []
   winEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -80,14 +83,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: AnimationControl, Assembly-CSharp
-        m_MethodName: TutorialAnimations
+        m_MethodName: TutorialAnimationsTrue
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: tutorial_0.7.3
+          m_StringArgument: 0.7.3
           m_BoolArgument: 0
         m_CallState: 2
   steppingAway:
@@ -110,6 +113,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7026571350554647383}
   - component: {fileID: 7026571350554647382}
+  - component: {fileID: 990685495389597945}
   m_Layer: 0
   m_Name: Tutorial Puzzle Controller
   m_TagString: Untagged
@@ -150,9 +154,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   word: GATE
+  currentStreet: Home
   mistakeText: {fileID: 0}
+  streetText: {fileID: 0}
   wordsInPuzzle: 1
   canvasLetters: []
+  storedObjects: []
   winEvent:
     m_PersistentCalls:
       m_Calls:
@@ -170,14 +177,14 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: AnimationControl, Assembly-CSharp
-        m_MethodName: TutorialAnimations
+        m_MethodName: TutorialAnimationsTrue
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: tutorial_0.5.1_Wood
+          m_StringArgument: 0.5.1_W
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 7026571350554647380}
@@ -260,20 +267,117 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: AnimationControl, Assembly-CSharp
-        m_MethodName: TutorialAnimations
+        m_MethodName: TutorialAnimationsTrue
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: tutorial_0.5
+          m_StringArgument: 0.5
           m_BoolArgument: 0
         m_CallState: 2
   tutorialMistakeEvent:
     m_PersistentCalls:
       m_Calls: []
   tutorial: 1
+--- !u!114 &990685495389597945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7026571350554647380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 929ec0948db3c3b40b45ee8e9d981a2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sectionStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: AnimationControl, Assembly-CSharp
+        m_MethodName: LowerWalls
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: TutorialSectionStart, Assembly-CSharp
+        m_MethodName: NeedsRaycast
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: OverseerController, Assembly-CSharp
+        m_MethodName: AwakenObserver
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: OverseerController, Assembly-CSharp
+        m_MethodName: TutorialEnded
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: CrossyTheTutorial, Assembly-CSharp
+        m_MethodName: HideTitan
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  steppingAway:
+    m_PersistentCalls:
+      m_Calls: []
+  raycastEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  needsRaycast: 0
+  needsSecondRaycast: 0
+  needsCheck: 0
+  tutorialClues: []
 --- !u!1 &7026571351127810738
 GameObject:
   m_ObjectHideFlags: 0
