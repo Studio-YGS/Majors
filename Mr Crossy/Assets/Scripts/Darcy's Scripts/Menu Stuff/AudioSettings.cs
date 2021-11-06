@@ -8,12 +8,34 @@ public class AudioSettings : MonoBehaviour
 {
     EventInstance sfxVolumePreview;
 
+    MenuManager menuManager;
+
     Bus music, sfx, voice;
 
-    float musicVolume = 0.5f, sfxVolume = 0.5f, voiceVolume = 0.5f;
+    public float musicVolume = 0.5f, sfxVolume = 0.5f, voiceVolume = 0.5f;
+
+    public bool mainMenu;
 
     void Awake()
     {
+        if (mainMenu)
+        {
+            DontDestroyOnLoad(gameObject);
+        }
+
+        if(GameObject.Find("Audio Settings") && !mainMenu)
+        {
+            musicVolume = GameObject.Find("Audio Settings").GetComponent<AudioSettings>().musicVolume;
+            sfxVolume = GameObject.Find("Audio Settings").GetComponent<AudioSettings>().sfxVolume;
+            voiceVolume = GameObject.Find("Audio Settings").GetComponent<AudioSettings>().voiceVolume;
+
+            menuManager = FindObjectOfType<MenuManager>();
+
+            menuManager.UpdateSliders();
+
+            Destroy(GameObject.Find("Audio Settings"));
+        }
+
         sfx = RuntimeManager.GetBus("bus:/Master/SFX");
         music = RuntimeManager.GetBus("bus:/Master/Music");
         voice = RuntimeManager.GetBus("bus:/Master/Voice");
