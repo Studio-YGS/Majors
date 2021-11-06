@@ -26,11 +26,11 @@ public class MenuManager : MonoBehaviour
 
     void Start()
     {
-        if(instance != gameObject)
-        {
-            instance = gameObject;
-            DontDestroyOnLoad(instance);
-        }
+        //if(instance != gameObject)
+        //{
+        //    instance = gameObject;
+        //    DontDestroyOnLoad(instance);
+        //}
 
         if (!mainMenu)
         {
