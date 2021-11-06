@@ -2,13 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using FMODUnity;
-using TMPro;
+using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
-    GameObject instance;
-
     Player_Controller playerController;
 
     JournalOnSwitch journalOnSwitch;
@@ -16,22 +13,16 @@ public class MenuManager : MonoBehaviour
     JournalController journalController;
 
     [SerializeField]
-    GameObject pauseMenuObject, settingsMenuObject, mainMenuObject;
+    GameObject pauseMenuObject, settingsMenuObject, mainMenuObject, pressSpace, controlsUI, loadingAni;
 
     public GameObject streetName;
 
     float defTimeScale;
 
-    bool mainMenu = true;
+    public bool mainMenu;
 
     void Start()
     {
-        if(instance != gameObject)
-        {
-            instance = gameObject;
-            DontDestroyOnLoad(instance);
-        }
-
         if (!mainMenu)
         {
             playerController = FindObjectOfType<Player_Controller>();
@@ -61,6 +52,11 @@ public class MenuManager : MonoBehaviour
                     ClosePauseMenu();
                 }
             }
+        }
+
+        if (mainMenu && Input.GetKey(KeyCode.Space) && pressSpace.activeInHierarchy)
+        {
+            SceneManager.LoadScene("Main_Cael");
         }
     }
 
@@ -98,8 +94,13 @@ public class MenuManager : MonoBehaviour
 
     public void StartGame()
     {
-        mainMenu = false;
-        SceneManager.LoadScene("Main_Cael");
+        controlsUI.SetActive(true);
+
+        loadingAni.SetActive(true);
+
+        mainMenuObject.SetActive(false);
+
+        StartCoroutine(ReadingControls());
     }
 
     public void OpenSettingsMenu()
@@ -133,6 +134,43 @@ public class MenuManager : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void UpdateSliders()
+    {
+        AudioSettings audio = FindObjectOfType<AudioSettings>();
+
+        Slider[] sliders = settingsMenuObject.GetComponentsInChildren<Slider>();
+
+        for(int i = 0; i < sliders.Length; i++)
+        {
+            switch (sliders[i].name)
+            {
+                case "Music Slider":
+                    {
+                        sliders[i].value = audio.musicVolume;
+                        break;
+                    }
+                case "SFX Slider":
+                    {
+                        sliders[i].value = audio.sfxVolume;
+                        break;
+                    }
+                case "Voice Slider":
+                    {
+                        sliders[i].value = audio.voiceVolume;
+                        break;
+                    }
+            }
+        }
+    }
+
+    IEnumerator ReadingControls()
+    {
+        yield return new WaitForSeconds(5f);
+
+        pressSpace.SetActive(true);
+        StopCoroutine(ReadingControls());
     }
 
     public void ResolutionChange(int val)

@@ -14,15 +14,10 @@ public class TutorialController : MonoBehaviour
     Player_Controller playerController;
 
     [SerializeField]
-    GameObject controlsUI, spaceToContinue;
-
-    [SerializeField]
     GameObject[] objectsToSwitchOn;
 
     [SerializeField]
     TextMeshProUGUI conLetter;
-
-    bool canContinue = false;
 
     void Start()
     {
@@ -31,42 +26,17 @@ public class TutorialController : MonoBehaviour
         journalOnSwitch = FindObjectOfType<JournalOnSwitch>();
         journalTimer = FindObjectOfType<JournalTimer>();
 
-        ShowControls();
-
         journalTimer.canCount = false;
-    }
 
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Space) && canContinue)
-        {
-            canContinue = false;
-            spaceToContinue.SetActive(false);
-
-            StartTutorial();
-        }
-    }
-
-    void ShowControls()
-    {
-        controlsUI.SetActive(true);
-
-        playerController.DisableController();
-        playerController.inJournal = false;
-
-        journalController.DisableJournal();
-
-        StartCoroutine(ReadingControls());
+        StartTutorial();
     }
 
     void StartTutorial()
     {
-        controlsUI.SetActive(false);
-
         playerController.EnableController();
 
-        journalController.OpenMap();
         journalController.EnableJournal();
+        journalController.OpenMap();
 
         journalOnSwitch.journalClosed.SetActive(true);
 
@@ -85,31 +55,6 @@ public class TutorialController : MonoBehaviour
     {
         StartCoroutine(WaitForCrossy(waitTime));
     }
-
-    IEnumerator ReadingControls()
-    {
-        yield return new WaitForSeconds(5f);
-
-        canContinue = true;
-        spaceToContinue.SetActive(true);
-        StopCoroutine(ReadingControls());
-    }
-
-    //IEnumerator PlayerNeedsToWait(float waitTime)
-    //{
-    //    playerController.DisableController();
-    //    playerController.inJournal = false;
-
-    //    journalController.DisableJournal();
-
-    //    yield return new WaitForSeconds(waitTime);
-
-    //    playerController.EnableController();
-
-    //    journalController.EnableJournal();
-
-    //    StopCoroutine(PlayerNeedsToWait(5f));
-    //}
 
     IEnumerator WaitForCrossy(float waitTime)
     {
