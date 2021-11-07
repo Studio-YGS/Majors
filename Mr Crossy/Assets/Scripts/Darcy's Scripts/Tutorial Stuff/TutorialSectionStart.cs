@@ -87,7 +87,7 @@ public class TutorialSectionStart : MonoBehaviour
         needsSecondRaycast = need;
     }
 
-    public void CheckClues()
+    public void CheckClues(int number)
     {
         int count = 0;
 
@@ -100,9 +100,10 @@ public class TutorialSectionStart : MonoBehaviour
                     count++;
                 }
 
-                if (count == 4)
+                if (count == number)
                 {
                     sectionStart.Invoke();
+                    break;
                 }
             }
         }
@@ -111,14 +112,5 @@ public class TutorialSectionStart : MonoBehaviour
     public void ReadHowTo()
     {
         sectionStart.Invoke();
-    }
-
-    public void TutorialComplete()
-    {
-        if (needsCheck)
-        {
-            needsCheck = false;
-            sectionStart.Invoke();
-        }
     }
 }
