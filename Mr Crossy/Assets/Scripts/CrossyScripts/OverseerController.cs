@@ -22,6 +22,7 @@ public class OverseerController : MonoBehaviour
     [SerializeField] private GameObject m_Crossy;
     [SerializeField] private GameObject m_TitanCrossy;
     [SerializeField] private GameObject m_Player;
+    [HideInInspector] public CrossyStreetStalk m_StalkStreet;
     //[Space(10)]
     [Header("Behaviour Timers")]
     [SerializeField] private float m_TimeSpawn;
@@ -31,6 +32,9 @@ public class OverseerController : MonoBehaviour
     [SerializeField] private float m_TimeCalm;
     [SerializeField] private float m_TimePursuitSpawn;
     [SerializeField] private float m_TimePursuitBreak;
+    [SerializeField] private float m_TimeStreetStalkTick;
+    [SerializeField] private float m_TimeStalkLimit;
+    [SerializeField] private float m_StreetStalkChance;
     //[Space(10)]
     [Header("Area Parameters")]
     [SerializeField] private float m_SearchRadiusMax;
@@ -44,7 +48,19 @@ public class OverseerController : MonoBehaviour
     [SerializeField] private float m_CheckRadius;
     private int m_State;
     private bool m_HideTitan;
-    [Header("Else Variables")]
+
+    [Header("Voice Variables")]
+    [SerializeField] private float m_TitanVoiceTimeMin;
+    [SerializeField] private float m_TitanVoiceTimeMax;
+    private float m_TitanVoiceTime = 0;
+    [SerializeField] private float m_CrossyVoiceTimeMin;
+    [SerializeField] private float m_CrossyVoiceTimeMax;
+    private float m_CrossyVoiceTime = 0;
+
+    private bool m_TitanLineTiming;
+    private bool m_CrossyLineTiming;
+    private bool m_PursuitLineTiming;
+
     private bool m_IsTutorial = true;
     #endregion
 
@@ -54,6 +70,10 @@ public class OverseerController : MonoBehaviour
     public GameObject TitanCrossy { get { return m_TitanCrossy; } }
     public GameObject Player { get { return m_Player; } }
 
+    public CrossyStreetStalk StalkStreet { get { return m_StalkStreet; } }
+    public Vector3 StalkStreetPos { get { return m_StalkStreet.transform.position; } }
+    public List<GameObject> StalkStreetPoints { get { return m_StalkStreet.m_StreetStalkPoints; } }
+
     public float TimeTilSpawn { get { return m_TimeSpawn; } set { m_TimeSpawn = value; } }
     public float TimeTilTighten { get { return m_TimeTight; } }
     public float TimeTilPositionUpdate { get { return m_TimePosUpdate; } }
@@ -61,6 +81,9 @@ public class OverseerController : MonoBehaviour
     public float TimeTilPursuitedRespawn { get { return m_TimePursuitSpawn; } }
     public float TimeTilCalmed { get { return m_TimeCalm; } }
     public float TimeTilPursuitBreak { get { return m_TimePursuitBreak; } }
+    public float TimeStreetStalkTick { get { return m_TimeStreetStalkTick; } }
+    public float TimeStalkLimit { get { return m_TimeStalkLimit; } }
+    public float StreetStalkChance { get { return m_StreetStalkChance; } }
 
     public float SearchAreaTightenAmount { get { return m_SearchTightAmt; } }
     public float SearchAreaRadiusMax { get { return m_SearchRadiusMax; } }
@@ -99,6 +122,9 @@ public class OverseerController : MonoBehaviour
         }
         else TreeMalarkey.DisableTree(ObserverTree);
         titan = m_TitanCrossy.GetComponent<CrossyTheWatcher>();
+
+        m_TitanVoiceTime = Random.Range(m_TitanVoiceTimeMin, m_TitanVoiceTimeMax);
+        m_CrossyVoiceTime = Random.Range(m_CrossyVoiceTimeMin, m_CrossyVoiceTimeMax);
     }
 
     private void Update()
@@ -118,7 +144,7 @@ public class OverseerController : MonoBehaviour
             }
         }
 
-        if(m_State == 2)
+        if(m_State == 3)
         {
             vignetteActivated = true;
             Debug.Log("potoatosondwich");
@@ -128,14 +154,32 @@ public class OverseerController : MonoBehaviour
                 FindObjectOfType<CrossKeyManager>().doorsLocked = true;
             }
         }
-        else if (m_State != 2 && vignetteActivated)
+        else if (m_State != 3 && vignetteActivated)
         {
             vignetteActivated = false;
             Debug.Log("VignetteNooooooo");
             distootle.DecreaseVignette();
         }
+
+        if(!m_IsTutorial)
+        {
+            if (m_State == -1)
+            {
+                TitanVoiceLineTimer();
+            }
+            else if (m_State == 1)
+            {
+                CrossyPatrolVoiceLineTimer();
+            }
+            else if (m_State == 2)
+            {
+                CrossyAlertVoiceLineTimer();
+            }
+        }
+        
     }
 
+    #region Methods
     public void TutorialActive()
     {
         m_IsTutorial = true;
@@ -208,4 +252,102 @@ public class OverseerController : MonoBehaviour
 
         
     }
+    #endregion
+
+
+    #region VoiceStuff
+
+    //Titan Voice Timer - Time Is Randomised
+    public void TitanVoiceLineTimer()
+    {
+        if(!m_TitanLineTiming) StartCoroutine(TitanVoiceTimer());
+    }
+
+    IEnumerator TitanVoiceTimer()
+    {
+        if (m_CrossyLineTiming) StopCoroutine(CrossyPatrolVoiceTimer());
+
+        m_TitanLineTiming = true;
+
+        yield return new WaitForSeconds(m_TitanVoiceTime);
+
+        Debug.Log("LinePlay - Titan Crossy");
+        //Do the Titan Crossy VoiceLine
+
+        //Place Something to wait till line ended
+
+        m_TitanVoiceTime = Random.Range(m_TitanVoiceTimeMin, m_TitanVoiceTimeMax);
+
+        m_TitanLineTiming = false;
+    }
+
+    //Crossy Patrol Voice Timer - Time Is Randomised
+    public void CrossyPatrolVoiceLineTimer()
+    {
+        if (!m_CrossyLineTiming) StartCoroutine(CrossyPatrolVoiceTimer());
+    }
+
+    IEnumerator CrossyPatrolVoiceTimer()
+    {
+        if (m_TitanLineTiming) StopCoroutine(TitanVoiceTimer());
+
+        m_CrossyLineTiming = true;
+
+        yield return new WaitForSeconds(m_CrossyVoiceTime);
+
+        Debug.Log("LinePlay - Crossy Patrol");
+        //Do the Regular Crossy VoiceLine
+
+        //Place Something to wait till line ended
+
+        m_CrossyVoiceTime = Random.Range(m_CrossyVoiceTimeMin, m_CrossyVoiceTimeMax);
+
+        m_CrossyLineTiming = false;
+    }
+
+    //Crossy Alert Voice Timer - Time Is Randomised
+    public void CrossyAlertVoiceLineTimer()
+    {
+        if (!m_CrossyLineTiming) StartCoroutine(CrossyAlertVoiceTimer());
+    }
+
+    IEnumerator CrossyAlertVoiceTimer()
+    {
+        if (m_TitanLineTiming) StopCoroutine(TitanVoiceTimer());
+
+        m_CrossyLineTiming = true;
+
+        yield return new WaitForSeconds(m_CrossyVoiceTime);
+
+        Debug.Log("LinePlay - Crossy Alert");
+        //Do the Regular Crossy VoiceLine
+
+        //Place Something to wait till line ended
+
+        m_CrossyVoiceTime = Random.Range(m_CrossyVoiceTimeMin, m_CrossyVoiceTimeMax);
+
+        m_CrossyLineTiming = false;
+    }
+
+    //Crossy Pursuit Voice Timer - Time Is Randomised
+    public void CrossyPursuitVoiceLineTimer()
+    {
+        if (!m_PursuitLineTiming) StartCoroutine(CrossyPursuitVoiceTimer());
+    }
+
+    IEnumerator CrossyPursuitVoiceTimer()
+    {
+        if (m_CrossyLineTiming) StopCoroutine(TitanVoiceTimer());
+
+        m_PursuitLineTiming = true;
+
+        Debug.Log("LinePlay - Crossy Alert");
+        //Do the Crossy Pursuit VoiceLine
+
+        //Replace with something to wait till line ended
+        yield return new WaitForSeconds(m_CrossyVoiceTime);
+
+        m_PursuitLineTiming = false;
+    }
+    #endregion
 }
