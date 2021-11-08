@@ -36,9 +36,9 @@ public class AudioSettings : MonoBehaviour
             Destroy(GameObject.Find("Audio Settings"));
         }
 
-        sfx = RuntimeManager.GetBus("bus:/Master/SFX");
-        music = RuntimeManager.GetBus("bus:/Master/Music");
-        voice = RuntimeManager.GetBus("bus:/Master/Voice");
+        sfx = RuntimeManager.GetBus("bus:/SFX");
+        music = RuntimeManager.GetBus("bus:/Music");
+        voice = RuntimeManager.GetBus("bus:/Voice");
         sfxVolumePreview = RuntimeManager.CreateInstance("event:/UI_Multimedia/Tutorial_Info");
     }
 

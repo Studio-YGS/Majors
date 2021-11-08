@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using TMPro;
+using FMOD.Studio;
+using FMODUnity;
 
 //Written by Darcy Glover
 
@@ -103,6 +105,10 @@ public class PuzzleController : MonoBehaviour
 
             tutorialController.ChangeConLetter(letter);
 
+            //eventInstance = RuntimeManager.CreateInstance(""); //tutorial line 0.5 here
+
+            //eventInstance.start();
+
             tutorialEvent.Invoke();
             tutorial = false;
         }
@@ -117,7 +123,9 @@ public class PuzzleController : MonoBehaviour
             mistakeCount--;
             mistakeText.text = "Mistakes remaining: " + mistakeCount;
 
-            //play mistake sound here
+            AudioEvents audio = FindObjectOfType<AudioEvents>();
+
+            audio.WordSpeltIncorrectly();
 
             storedObjects.Clear();
 
@@ -166,7 +174,9 @@ public class PuzzleController : MonoBehaviour
     {
         completedWords++;
 
-        //play correct sound here
+        AudioEvents audio = FindObjectOfType<AudioEvents>();
+
+        audio.WordSpeltCorrectly();
 
         for(int i = 0; i < storedObjects.Count; i++)
         {
@@ -177,13 +187,6 @@ public class PuzzleController : MonoBehaviour
         }
 
         storedObjects.Clear();
-
-        if (completedWords == 3)
-        {
-            TutorialSectionStart tutorialSectionStart = GetComponent<TutorialSectionStart>();
-
-            tutorialSectionStart.TutorialComplete();
-        }
 
         if(completedWords == wordsInPuzzle)
         {

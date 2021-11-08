@@ -8,6 +8,8 @@ public class PlayerRespawn : MonoBehaviour
 
     JournalController journal;
 
+    AudioEvents audio;
+
     [SerializeField]
     Transform respawnPosition, crossyPosition;
 
@@ -51,6 +53,9 @@ public class PlayerRespawn : MonoBehaviour
         FindObjectOfType<CrossKeyManager>().doorsLocked = false;
         player = FindObjectOfType<Player_Controller>();
         journal = FindObjectOfType<JournalController>();
+        audio = FindObjectOfType<AudioEvents>();
+
+        audio.PlayerDie();
         
         player.gameObject.SetActive(false);
         player.DisableController();
