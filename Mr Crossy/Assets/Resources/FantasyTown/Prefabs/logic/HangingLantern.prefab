@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4160867209890146}
   - component: {fileID: 108909406181618168}
   - component: {fileID: 1930961226}
-  - component: {fileID: 827014521}
   m_Layer: 0
   m_Name: Spotlight
   m_TagString: Untagged
@@ -45,7 +44,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.92941177, b: 0.7490196, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0.5
   m_Range: 5.85
   m_SpotAngle: 160
   m_InnerSpotAngle: 152.43233
@@ -107,41 +106,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57f24a4aaa0761b45ba25e7e5108e2c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UID: 725443185
+  UID: 928582976
   color: {r: 1, g: 0.92941177, b: 0.7490196, a: 1}
-  intensity: 1
-  shadowSpread: 0.05
-  cutoff: 5.85
-  realisticFalloff: 1
-  samples: 8
-  projMode: 0
-  cookie: {fileID: 2800000, guid: 3a66602b8cc7fdd4ab57d07b4176432b, type: 3}
-  angle: 160
-  innerAngle: 95.2702
-  cubemap: {fileID: 0}
-  iesFile: {fileID: 0}
-  bitmask: 1
-  bakeToIndirect: 0
-  shadowmask: 0
-  indirectIntensity: 2
-  falloffMinRadius: 0.01
-  shadowmaskGroupID: 0
-  directionMode: 0
---- !u!114 &827014521
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1150500095953644}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57f24a4aaa0761b45ba25e7e5108e2c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  UID: 1172835454
-  color: {r: 1, g: 0.92941177, b: 0.7490196, a: 1}
-  intensity: 1
+  intensity: 0.5
   shadowSpread: 0.05
   cutoff: 5.85
   realisticFalloff: 1
