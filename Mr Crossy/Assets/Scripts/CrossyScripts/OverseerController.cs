@@ -22,6 +22,7 @@ public class OverseerController : MonoBehaviour
     [SerializeField] private GameObject m_Crossy;
     [SerializeField] private GameObject m_TitanCrossy;
     [SerializeField] private GameObject m_Player;
+    [HideInInspector] public CrossyStreetStalk m_StalkStreet;
     //[Space(10)]
     [Header("Behaviour Timers")]
     [SerializeField] private float m_TimeSpawn;
@@ -31,6 +32,9 @@ public class OverseerController : MonoBehaviour
     [SerializeField] private float m_TimeCalm;
     [SerializeField] private float m_TimePursuitSpawn;
     [SerializeField] private float m_TimePursuitBreak;
+    [SerializeField] private float m_TimeStreetStalkTick;
+    [SerializeField] private float m_TimeStalkLimit;
+    [SerializeField] private float m_StreetStalkChance;
     //[Space(10)]
     [Header("Area Parameters")]
     [SerializeField] private float m_SearchRadiusMax;
@@ -66,6 +70,10 @@ public class OverseerController : MonoBehaviour
     public GameObject TitanCrossy { get { return m_TitanCrossy; } }
     public GameObject Player { get { return m_Player; } }
 
+    public CrossyStreetStalk StalkStreet { get { return m_StalkStreet; } }
+    public Vector3 StalkStreetPos { get { return m_StalkStreet.transform.position; } }
+    public List<GameObject> StalkStreetPoints { get { return m_StalkStreet.m_StreetStalkPoints; } }
+
     public float TimeTilSpawn { get { return m_TimeSpawn; } set { m_TimeSpawn = value; } }
     public float TimeTilTighten { get { return m_TimeTight; } }
     public float TimeTilPositionUpdate { get { return m_TimePosUpdate; } }
@@ -73,6 +81,9 @@ public class OverseerController : MonoBehaviour
     public float TimeTilPursuitedRespawn { get { return m_TimePursuitSpawn; } }
     public float TimeTilCalmed { get { return m_TimeCalm; } }
     public float TimeTilPursuitBreak { get { return m_TimePursuitBreak; } }
+    public float TimeStreetStalkTick { get { return m_TimeStreetStalkTick; } }
+    public float TimeStalkLimit { get { return m_TimeStalkLimit; } }
+    public float StreetStalkChance { get { return m_StreetStalkChance; } }
 
     public float SearchAreaTightenAmount { get { return m_SearchTightAmt; } }
     public float SearchAreaRadiusMax { get { return m_SearchRadiusMax; } }

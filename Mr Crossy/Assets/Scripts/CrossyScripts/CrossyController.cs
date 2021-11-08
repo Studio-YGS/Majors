@@ -27,7 +27,6 @@ public class CrossyController : MonoBehaviour
     [Space(1)]
     public Transform vision;
     [SerializeField] private Transform m_CrossyDespawn;
-    
 
     [Header("Movement Variables")]
     [Tooltip("Mr. Crossy's walking speed.")]
