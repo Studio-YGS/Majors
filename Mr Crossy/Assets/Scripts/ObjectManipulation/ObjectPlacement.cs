@@ -40,6 +40,7 @@ public class ObjectPlacement : MonoBehaviour
                     }
                     PlacedObject = heldObject.gameObject;
                     heldObject.transform.position = transform.position + heldObject.placementOffset;
+                    FMODUnity.RuntimeManager.PlayOneShot("event:/2D/Puzzle/Altar_Placement");
                     heldObject.isPlacedDown = true;
                     heldObject.thisObjectHeld = false;
                     heldObject.transform.parent = null;
