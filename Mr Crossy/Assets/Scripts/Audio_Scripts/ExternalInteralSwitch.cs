@@ -21,6 +21,7 @@ public class ExternalInteralSwitch : MonoBehaviour
         {
             floors++;
             WalkIn();
+            FindObjectOfType<OverseerController>().m_PlayerInHouse = true;
         }
     }
     private void OnTriggerExit(Collider other)
@@ -30,6 +31,7 @@ public class ExternalInteralSwitch : MonoBehaviour
             if (floors >= 2)
             {
                 WalkOut();
+                FindObjectOfType<OverseerController>().m_PlayerInHouse = false;
             }
         }
     }
