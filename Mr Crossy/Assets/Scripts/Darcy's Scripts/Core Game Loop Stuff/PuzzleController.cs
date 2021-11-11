@@ -20,6 +20,8 @@ public class PuzzleController : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI mistakeText, streetText;
 
+    EventInstance eventInstance;
+
     int wordLength, mistakeCount = 3, completedWords = 0;
 
     public int wordsInPuzzle;
@@ -105,9 +107,9 @@ public class PuzzleController : MonoBehaviour
 
             tutorialController.ChangeConLetter(letter);
 
-            //eventInstance = RuntimeManager.CreateInstance(""); //tutorial line 0.5 here
+            eventInstance = RuntimeManager.CreateInstance("event:/MR_C_Tutorial/TUT.0.5");
 
-            //eventInstance.start();
+            eventInstance.start();
 
             tutorialEvent.Invoke();
             tutorial = false;

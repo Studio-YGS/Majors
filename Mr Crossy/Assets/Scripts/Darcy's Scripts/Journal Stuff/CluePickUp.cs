@@ -9,8 +9,6 @@ public class CluePickUp : MonoBehaviour
 
     public UnityEvent pickUp;
 
-    bool first = true;
-
     void Start()
     {
         playerController = FindObjectOfType<Player_Controller>();
@@ -24,22 +22,11 @@ public class CluePickUp : MonoBehaviour
         {
             if (hit.transform.gameObject.CompareTag("Clue") && hit.transform.gameObject.name == gameObject.name)
             {
-                pickUp.Invoke();
-
-                int number;
-
-                if (first)
-                {
-                    number = 4;
-                }
-                else
-                {
-                    number = 2;
-                }
+                pickUp.Invoke();              
 
                 if (GetComponentInParent<TutorialSectionStart>())
                 {
-                    GetComponentInParent<TutorialSectionStart>().CheckClues(number);
+                    GetComponentInParent<TutorialSectionStart>().CheckClues();
                 }
             }
         }

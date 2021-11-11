@@ -15,6 +15,8 @@ public class TutorialController : MonoBehaviour
 
     Player_Controller playerController;
 
+    OverseerController overseerController;
+
     EventInstance eventInstance;
 
     [SerializeField]
@@ -23,7 +25,7 @@ public class TutorialController : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI conLetter;
 
-    bool directed = false;
+    bool directed = false, spotted = false;
 
     void Start()
     {
@@ -31,10 +33,20 @@ public class TutorialController : MonoBehaviour
         playerController = FindObjectOfType<Player_Controller>();
         journalOnSwitch = FindObjectOfType<JournalOnSwitch>();
         journalTimer = FindObjectOfType<JournalTimer>();
+        overseerController = FindObjectOfType<OverseerController>();
 
         journalTimer.canCount = false;
 
         StartTutorial();
+    }
+
+    void Update()
+    {
+        if (overseerController.State == 3 && !spotted)
+        {
+            spotted = true;
+            GetComponent<TutorialSectionStart>().sectionStart.Invoke();
+        }
     }
 
     void StartTutorial()
@@ -46,11 +58,11 @@ public class TutorialController : MonoBehaviour
 
         journalOnSwitch.journalClosed.SetActive(true);
 
-        //eventInstance = RuntimeManager.CreateInstance(""); //tutorial 0.1 line here
+        eventInstance = RuntimeManager.CreateInstance("event:/MR_C_Tutorial/TUT.0.1");
 
-        //eventInstance.start();
+        eventInstance.start();
 
-        for(int i = 0; i < objectsToSwitchOn.Length; i++)
+        for (int i = 0; i < objectsToSwitchOn.Length; i++)
         {
             objectsToSwitchOn[i].SetActive(true);
         }
@@ -60,9 +72,9 @@ public class TutorialController : MonoBehaviour
     {
         if (!directed)
         {
-            //eventInstance = RuntimeManager.CreateInstance(""); //tutorial 0.2 line here
+            eventInstance = RuntimeManager.CreateInstance("event:/MR_C_Tutorial/TUT.0.2");
 
-            //eventInstance.start();
+            eventInstance.start();
 
             directed = true;
         }
@@ -82,9 +94,9 @@ public class TutorialController : MonoBehaviour
 
     IEnumerator WaitForCrossy(float waitTime)
     {
-        //eventInstance = RuntimeManager.CreateInstance(""); //tutorial line 0.6.1 here
+        eventInstance = RuntimeManager.CreateInstance("event:/MR_C_Tutorial/TUT.0.6");
 
-        //eventInstance.start();
+        eventInstance.start();
 
         yield return new WaitForSeconds(waitTime);
 
