@@ -16,12 +16,12 @@ public class AudioEvents : MonoBehaviour
 
         eventInstance.start();
 
-        //if (!correctWordVoiceLinePlayed)
-        //{
-        //    eventInstance = RuntimeManager.CreateInstance(""); //tutorial line 0.5.1.2 here
+        if (!correctWordVoiceLinePlayed)
+        {
+            eventInstance = RuntimeManager.CreateInstance("event:/MR_C_Tutorial/TUT.0.5.1.1");
 
-        //    eventInstance.start();
-        //}
+            eventInstance.start();
+        }
     }
 
     public void WordSpeltIncorrectly()
@@ -32,9 +32,9 @@ public class AudioEvents : MonoBehaviour
 
         if (!incorrectWordVoiceLinePlayed)
         {
-            //eventInstance = RuntimeManager.CreateInstance(""); //tutorial line 0.5.1.1 here
+            eventInstance = RuntimeManager.CreateInstance("event:/MR_C_Tutorial/TUT.0.5.1.2");
 
-            //eventInstance.start();
+            eventInstance.start();
         }
     }
 
