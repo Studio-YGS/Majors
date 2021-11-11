@@ -62,11 +62,6 @@ public class TutorialController : MonoBehaviour
 
         eventInstance.start();
 
-<<<<<<< Updated upstream
-=======
-        Debug.Log("game start line");
-
->>>>>>> Stashed changes
         for (int i = 0; i < objectsToSwitchOn.Length; i++)
         {
             objectsToSwitchOn[i].SetActive(true);
@@ -102,8 +97,6 @@ public class TutorialController : MonoBehaviour
         eventInstance = RuntimeManager.CreateInstance("event:/MR_C_Tutorial/TUT.0.6");
 
         eventInstance.start();
-
-        Debug.Log("explaining game line");
 
         yield return new WaitForSeconds(waitTime);
 

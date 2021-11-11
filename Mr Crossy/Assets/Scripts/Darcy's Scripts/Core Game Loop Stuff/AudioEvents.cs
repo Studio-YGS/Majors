@@ -18,16 +18,9 @@ public class AudioEvents : MonoBehaviour
 
         if (!correctWordVoiceLinePlayed)
         {
-<<<<<<< Updated upstream
             eventInstance = RuntimeManager.CreateInstance("event:/MR_C_Tutorial/TUT.0.5.1.1");
 
             eventInstance.start();
-=======
-            //eventInstance = RuntimeManager.CreateInstance(""); //tutorial line 0.5.1.2 here
-
-            //eventInstance.start();
-            Debug.Log("correct word line");
->>>>>>> Stashed changes
         }
     }
 
@@ -41,12 +34,7 @@ public class AudioEvents : MonoBehaviour
         {
             eventInstance = RuntimeManager.CreateInstance("event:/MR_C_Tutorial/TUT.0.5.1.2");
 
-<<<<<<< Updated upstream
             eventInstance.start();
-=======
-            //eventInstance.start();
-            Debug.Log("incorrect word line");
->>>>>>> Stashed changes
         }
     }
 
@@ -76,14 +64,5 @@ public class AudioEvents : MonoBehaviour
         eventInstance = RuntimeManager.CreateInstance("event:/2D/Bell/Bell_Tolls");
 
         eventInstance.start();
-    }
-
-    public void NotePickedUp()
-    {
-        //eventInstance = RuntimeManager.CreateInstance("");
-
-        //eventInstance.start();
-
-        Debug.Log("note picked up line");
     }
 }
