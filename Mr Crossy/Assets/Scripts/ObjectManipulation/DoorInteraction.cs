@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using TMPro;
 
 [RequireComponent(typeof(Rigidbody))]
 public class DoorInteraction : MonoBehaviour
@@ -9,6 +10,7 @@ public class DoorInteraction : MonoBehaviour
     [Header("Canvas")]
     public GameObject reticle;
     public GameObject hand;
+    public GameObject lockCheck;
     
     [Header("Door Controls")]
     public bool xForward;
@@ -71,6 +73,8 @@ public class DoorInteraction : MonoBehaviour
                             handon = true;
                             reticle.SetActive(false);
                             hand.SetActive(true);
+                            lockCheck.SetActive(true);
+                            lockCheck.GetComponentInChildren<TMP_Text>().text = "Use Crosskey to Unlock";
                         }
 
                         if (Input.GetMouseButtonDown(0) && !puzzleOn)
@@ -79,11 +83,14 @@ public class DoorInteraction : MonoBehaviour
                             FindObjectOfType<HeadBob>().enabled = false;
                             reticle.SetActive(false);
                             hand.SetActive(false);
-                            puzzleOn = true;
+                            lockCheck.SetActive(false);
                             Time.timeScale = 0.1f;
                             Time.fixedDeltaTime = Time.timeScale * 0.02f;
 
-                            TreeMalarkey.SendEventToTree(CrossyController.crossyTree, "SuperDespawn");
+                            if (CrossyController.crossyTree)
+                            {
+                                TreeMalarkey.SendEventToTree(CrossyController.crossyTree, "SuperDespawn");
+                            }
 
                             if (zForward)
                             {
@@ -123,11 +130,21 @@ public class DoorInteraction : MonoBehaviour
                                     createdMrCrossy = Instantiate(mrCrossy, transform.position + transform.forward * randomPos.x + transform.right * randomPos.z, Quaternion.LookRotation(player.position - (transform.position + transform.forward * randomPos.x + transform.right * randomPos.z)));
                                 }
                             }
+                            puzzleOn = true;
                             savedCamRot = cam.rotation;
                             StartCoroutine(RotateCamToNewPosition());
                             createdMrCrossy.GetComponent<NavMeshAgent>().SetDestination(player.position);
                             createdMrCrossy.GetComponent<CrossyCrossKeyVariant>().door = gameObject.GetComponent<DoorInteraction>();
                             distortion.IncreaseInsanity(createdMrCrossy);
+                        }
+                    }
+                    else
+                    {
+                        if (!handon)
+                        {
+                            handon = true;
+                            lockCheck.SetActive(true);
+                            lockCheck.GetComponentInChildren<TMP_Text>().text = "It's locked";
                         }
                     }
 
@@ -138,6 +155,8 @@ public class DoorInteraction : MonoBehaviour
                     reticle.SetActive(true);
                     hand.SetActive(false);
                     handon = false;
+                    lockCheck.SetActive(false);
+                    lockCheck.GetComponentInChildren<TMP_Text>().text = "";
                 }
             }
             else if (handon)
@@ -145,6 +164,8 @@ public class DoorInteraction : MonoBehaviour
                 reticle.SetActive(true);
                 hand.SetActive(false);
                 handon = false;
+                lockCheck.SetActive(false);
+                lockCheck.GetComponentInChildren<TMP_Text>().text = "";
             }
 
         }

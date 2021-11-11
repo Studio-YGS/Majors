@@ -457,7 +457,7 @@ GameObject:
   - component: {fileID: 475374043}
   - component: {fileID: 475374042}
   - component: {fileID: 475374041}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Audio_Int_Ext_Switcher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -670,7 +670,7 @@ GameObject:
   - component: {fileID: 630565772}
   - component: {fileID: 630565774}
   - component: {fileID: 630565773}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Box_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -803,7 +803,8 @@ GameObject:
   - component: {fileID: 792926106}
   - component: {fileID: 792926105}
   - component: {fileID: 792926104}
-  m_Layer: 0
+  - component: {fileID: 130023119}
+  m_Layer: 2
   m_Name: House Toggle (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -901,6 +902,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   houseInternals: {fileID: 0}
   audSwitcher: {fileID: 475374039}
+--- !u!114 &130023119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 792926103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &867562559
 GameObject:
   m_ObjectHideFlags: 0
@@ -1254,7 +1267,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1676057477}
-  m_Layer: 0
+  - component: {fileID: 2116690004}
+  m_Layer: 2
   m_Name: PostProcessing Daddy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1277,6 +1291,18 @@ Transform:
   m_Father: {fileID: 4511591260844454}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2116690004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1676057476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1748580659
 GameObject:
   m_ObjectHideFlags: 0
@@ -1397,7 +1423,7 @@ GameObject:
   - component: {fileID: 2069155720}
   - component: {fileID: 2069155722}
   - component: {fileID: 2069155721}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Box_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6068,6 +6094,7 @@ GameObject:
   - component: {fileID: 65608448951332566}
   - component: {fileID: 5422238250476443799}
   - component: {fileID: 2319968997721385492}
+  - component: {fileID: 2092420272}
   m_Layer: 0
   m_Name: door_wing_c
   m_TagString: Untagged
@@ -6083,7 +6110,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1529584279219902}
   m_LocalRotation: {x: 0.000000021855705, y: -0.000001385808, z: 2.7269968e-14, w: 1}
-  m_LocalPosition: {x: -4.59, y: 0, z: 7.21}
+  m_LocalPosition: {x: 0.013006687, y: -1.09, z: 0.0149998665}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2911013085918525701}
@@ -6186,13 +6213,26 @@ MonoBehaviour:
   zForward: 1
   rotationVal: 0
   openSpeed: 10
-  closeDistance: 15
+  closeDistance: 3
   isSafeHouse: 0
   spawnLeft: 0
   spawnRight: 0
   spawnBehind: 0
-  mrCrossy: {fileID: 0}
+  mrCrossy: {fileID: 1766410105212260, guid: 7771d473bdbab0747a713221d773e089, type: 3}
+  createdMrCrossy: {fileID: 0}
   puzzleOn: 0
+--- !u!114 &2092420272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1529584279219902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1530512464886562
 GameObject:
   m_ObjectHideFlags: 0
@@ -45537,7 +45577,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7516671173877312901}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -4.603, y: 1.09, z: 7.195}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4001865827388794}
@@ -46936,7 +46976,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1930961226, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: UID
-      value: -2030869890
+      value: 1054186283
       objectReference: {fileID: 0}
     - target: {fileID: 1260673417133536, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: m_Name
@@ -47002,7 +47042,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 314548403392371457, guid: 52a7cc039219b644b95b2f0e0bfc6c01, type: 3}
       propertyPath: UID
-      value: -1643995280
+      value: 653073781
       objectReference: {fileID: 0}
     - target: {fileID: 2190584204923344581, guid: 52a7cc039219b644b95b2f0e0bfc6c01, type: 3}
       propertyPath: m_RootOrder
@@ -47134,7 +47174,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1930961226, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: UID
-      value: 1609783035
+      value: 406161186
       objectReference: {fileID: 0}
     - target: {fileID: 1260673417133536, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: m_Name
