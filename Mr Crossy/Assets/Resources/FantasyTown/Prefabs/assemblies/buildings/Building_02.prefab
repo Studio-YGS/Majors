@@ -150,7 +150,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 423896244}
-  m_Layer: 0
+  - component: {fileID: 1785569523}
+  m_Layer: 2
   m_Name: PostProcessing Daddy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,6 +176,18 @@ Transform:
   m_Father: {fileID: 4019414894034250}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1785569523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 423896243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &610750260
 GameObject:
   m_ObjectHideFlags: 0
@@ -242,7 +255,7 @@ GameObject:
   - component: {fileID: 719879125}
   - component: {fileID: 719879124}
   - component: {fileID: 719879123}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Audio_Int_Ext_Switcher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -602,7 +615,7 @@ GameObject:
   - component: {fileID: 1211418408}
   - component: {fileID: 1211418410}
   - component: {fileID: 1211418409}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Box_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -833,7 +846,7 @@ GameObject:
   - component: {fileID: 1392853199}
   - component: {fileID: 1392853201}
   - component: {fileID: 1392853200}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Box_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1112,7 +1125,7 @@ GameObject:
   - component: {fileID: 1726396800}
   - component: {fileID: 1726396799}
   - component: {fileID: 517797004}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: House Toggle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1233,7 +1246,7 @@ GameObject:
   - component: {fileID: 1761458315}
   - component: {fileID: 1761458317}
   - component: {fileID: 1761458316}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Box_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1466,7 +1479,7 @@ GameObject:
   - component: {fileID: 2124236213}
   - component: {fileID: 2124236215}
   - component: {fileID: 2124236214}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Box_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15200,6 +15213,7 @@ GameObject:
   - component: {fileID: 65201656522468788}
   - component: {fileID: 1088255212}
   - component: {fileID: 1088255215}
+  - component: {fileID: 1100612365}
   m_Layer: 0
   m_Name: 'door_wing_c '
   m_TagString: Untagged
@@ -15215,7 +15229,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1732038817572576}
   m_LocalRotation: {x: -0, y: -0.00025746226, z: -0, w: -1}
-  m_LocalPosition: {x: -6.104004, y: 0, z: 0.96299934}
+  m_LocalPosition: {x: 0.009995937, y: -1.216, z: 0.0029993653}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7293109600913007826}
@@ -15314,17 +15328,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reticle: {fileID: 0}
   hand: {fileID: 0}
-  xForward: 1
-  zForward: 0
+  xForward: 0
+  zForward: 1
   rotationVal: 0
   openSpeed: 10
-  closeDistance: 45
+  closeDistance: 3
   isSafeHouse: 0
   spawnLeft: 0
   spawnRight: 0
   spawnBehind: 0
-  mrCrossy: {fileID: 0}
+  mrCrossy: {fileID: 1766410105212260, guid: 7771d473bdbab0747a713221d773e089, type: 3}
+  createdMrCrossy: {fileID: 0}
   puzzleOn: 0
+--- !u!114 &1100612365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1732038817572576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1733696467050366
 GameObject:
   m_ObjectHideFlags: 0
@@ -57455,7 +57482,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6866975454973621944}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -6.114, y: 1.216, z: 0.96}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4918990095970200}
@@ -58720,7 +58747,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1655849632259688464, guid: 16e348f1e23dcab4688f6023626710b7, type: 3}
       propertyPath: UID
-      value: 1473807931
+      value: 1979875860
       objectReference: {fileID: 0}
     - target: {fileID: 7515512456568480915, guid: 16e348f1e23dcab4688f6023626710b7, type: 3}
       propertyPath: m_Range
@@ -58802,7 +58829,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1930961226, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: UID
-      value: -332559799
+      value: 1494493523
       objectReference: {fileID: 0}
     - target: {fileID: 1260673417133536, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: m_Name
@@ -58934,7 +58961,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1655849632259688464, guid: 16e348f1e23dcab4688f6023626710b7, type: 3}
       propertyPath: UID
-      value: -376788350
+      value: 1850107909
       objectReference: {fileID: 0}
     - target: {fileID: 7623433157263152671, guid: 16e348f1e23dcab4688f6023626710b7, type: 3}
       propertyPath: m_Name

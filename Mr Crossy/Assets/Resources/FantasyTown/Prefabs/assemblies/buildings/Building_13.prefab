@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 25881437}
-  m_Layer: 0
+  - component: {fileID: 352298885}
+  m_Layer: 2
   m_Name: PostProcessing Daddy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31,6 +32,18 @@ Transform:
   m_Father: {fileID: 4048012297804772}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &352298885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 25881436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &66331208
 GameObject:
   m_ObjectHideFlags: 0
@@ -2336,7 +2349,7 @@ GameObject:
   - component: {fileID: 341893542}
   - component: {fileID: 341893544}
   - component: {fileID: 341893543}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Box_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3464,7 +3477,8 @@ GameObject:
   - component: {fileID: 498848064}
   - component: {fileID: 498848063}
   - component: {fileID: 498848062}
-  m_Layer: 0
+  - component: {fileID: 1171102054}
+  m_Layer: 2
   m_Name: House Toggle (13)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3562,6 +3576,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   houseInternals: {fileID: 0}
   audSwitcher: {fileID: 1395959104}
+--- !u!114 &1171102054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 498848061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &509202000
 GameObject:
   m_ObjectHideFlags: 0
@@ -10505,7 +10531,7 @@ GameObject:
   - component: {fileID: 1395959108}
   - component: {fileID: 1395959107}
   - component: {fileID: 1395959106}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Audio_Int_Ext_Switcher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22428,6 +22454,7 @@ GameObject:
   - component: {fileID: 65534736938115194}
   - component: {fileID: 1142776210}
   - component: {fileID: 1142776213}
+  - component: {fileID: 743509397}
   m_Layer: 0
   m_Name: door_wing_a
   m_TagString: Untagged
@@ -22442,8 +22469,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1944435053075806}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.134, y: 0, z: 0.299}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.005997181, y: -1.146, z: 0.0409998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3842815852556334994}
@@ -22546,13 +22573,26 @@ MonoBehaviour:
   zForward: 1
   rotationVal: 0
   openSpeed: 10
-  closeDistance: 15
+  closeDistance: 3
   isSafeHouse: 0
   spawnLeft: 0
   spawnRight: 0
   spawnBehind: 0
-  mrCrossy: {fileID: 0}
+  mrCrossy: {fileID: 1766410105212260, guid: 7771d473bdbab0747a713221d773e089, type: 3}
+  createdMrCrossy: {fileID: 0}
   puzzleOn: 0
+--- !u!114 &743509397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1944435053075806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1954828925563706
 GameObject:
   m_ObjectHideFlags: 0
@@ -22608,7 +22648,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1958443968915714}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -6.14, y: 1.146, z: 0.258}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4462538095120216}
@@ -37692,7 +37732,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 314548403392371457, guid: 52a7cc039219b644b95b2f0e0bfc6c01, type: 3}
       propertyPath: UID
-      value: -2065919863
+      value: 549144443
       objectReference: {fileID: 0}
     - target: {fileID: 2190584204923344581, guid: 52a7cc039219b644b95b2f0e0bfc6c01, type: 3}
       propertyPath: m_RootOrder
@@ -37762,7 +37802,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1930961226, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: UID
-      value: 425099180
+      value: -64969891
       objectReference: {fileID: 0}
     - target: {fileID: 1260673417133536, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: m_Name

@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 170556801}
   - component: {fileID: 170556800}
   - component: {fileID: 170556799}
-  m_Layer: 0
+  - component: {fileID: 159796570}
+  m_Layer: 2
   m_Name: House Toggle (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,6 +112,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   houseInternals: {fileID: 0}
   audSwitcher: {fileID: 1684578196}
+--- !u!114 &159796570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 170556798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &495207343
 GameObject:
   m_ObjectHideFlags: 0
@@ -300,7 +313,7 @@ GameObject:
   - component: {fileID: 771809237}
   - component: {fileID: 771809239}
   - component: {fileID: 771809238}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Box_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -427,7 +440,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 801530056}
-  m_Layer: 0
+  - component: {fileID: 295709335}
+  m_Layer: 2
   m_Name: PostProcessing Daddy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -450,6 +464,18 @@ Transform:
   m_Father: {fileID: 4590384607843576}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &295709335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 801530055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1022161928
 GameObject:
   m_ObjectHideFlags: 0
@@ -608,7 +634,7 @@ GameObject:
   - component: {fileID: 1564717884}
   - component: {fileID: 1564717886}
   - component: {fileID: 1564717885}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Box_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -993,7 +1019,7 @@ GameObject:
   - component: {fileID: 1684578200}
   - component: {fileID: 1684578199}
   - component: {fileID: 1684578198}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Audio_Int_Ext_Switcher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3398,7 +3424,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1172801199186768}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -4.738, y: 1.072, z: 7.214}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4815818262327902}
@@ -8391,6 +8417,7 @@ GameObject:
   - component: {fileID: 65059763838925902}
   - component: {fileID: 404298809334547927}
   - component: {fileID: 6823201229524141252}
+  - component: {fileID: 1132407075}
   m_Layer: 0
   m_Name: door_wing_a
   m_TagString: Untagged
@@ -8406,7 +8433,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1887721089672206}
   m_LocalRotation: {x: -0.000000021855692, y: -0.0000015348194, z: 9.330028e-14, w: 1}
-  m_LocalPosition: {x: -4.605, y: 0, z: 7.252}
+  m_LocalPosition: {x: 0.13300419, y: -1.072, z: 0.03799963}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1372408390970084108}
@@ -8509,13 +8536,26 @@ MonoBehaviour:
   zForward: 1
   rotationVal: 0
   openSpeed: 10
-  closeDistance: 15
+  closeDistance: 3
   isSafeHouse: 0
   spawnLeft: 0
   spawnRight: 0
   spawnBehind: 0
-  mrCrossy: {fileID: 0}
+  mrCrossy: {fileID: 1766410105212260, guid: 7771d473bdbab0747a713221d773e089, type: 3}
+  createdMrCrossy: {fileID: 0}
   puzzleOn: 0
+--- !u!114 &1132407075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1887721089672206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1892803692963830
 GameObject:
   m_ObjectHideFlags: 0
@@ -48544,7 +48584,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1930961226, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: UID
-      value: 62084744
+      value: 1297241545
       objectReference: {fileID: 0}
     - target: {fileID: 1260673417133536, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: m_Name
@@ -48610,11 +48650,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3687494349538049729, guid: f5626199ba1c75148a6842d88c50e199, type: 3}
       propertyPath: UID
-      value: -1157302580
+      value: 957175303
       objectReference: {fileID: 0}
     - target: {fileID: 5502804677015942778, guid: f5626199ba1c75148a6842d88c50e199, type: 3}
       propertyPath: UID
-      value: -1507548155
+      value: 1444413227
       objectReference: {fileID: 0}
     - target: {fileID: 5676606486502609884, guid: f5626199ba1c75148a6842d88c50e199, type: 3}
       propertyPath: m_RootOrder
@@ -48684,7 +48724,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1930961226, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: UID
-      value: -1686020516
+      value: -434591064
       objectReference: {fileID: 0}
     - target: {fileID: 1260673417133536, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: m_Name
