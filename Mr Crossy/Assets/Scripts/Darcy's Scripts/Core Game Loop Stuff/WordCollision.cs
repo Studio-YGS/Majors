@@ -12,6 +12,8 @@ public class WordCollision : MonoBehaviour
     [SerializeField]
     PuzzleController puzzleController;
 
+    [SerializeField] CrossyStreetStalk streetStalk;
+
     RespawnWordColliders respawn;
 
     void Start()
@@ -29,7 +31,11 @@ public class WordCollision : MonoBehaviour
             puzzleController.SetUpLetters();
             puzzleController.storedObjects.Clear();
 
+            FindObjectOfType<OverseerController>().m_StalkStreet = streetStalk;
+
             respawn.RespawnColliders();
+
+            
 
             gameObject.SetActive(false);
         }

@@ -13,7 +13,7 @@ public class houseToggle : MonoBehaviour
         if (other.gameObject.CompareTag("GameController"))
         {
             houseInternals.SetActive(true);
-            OverseerController.m_PlayerInHouse = true;
+            //FindObjectOfType<OverseerController>().m_PlayerInHouse = true;
         }
     }
     private void OnTriggerExit(Collider other)
@@ -23,7 +23,7 @@ public class houseToggle : MonoBehaviour
             if(audSwitcher.GetComponent<ExternalInteralSwitch>().floors >=1)
             {
                 houseInternals.SetActive(false);
-                OverseerController.m_PlayerInHouse = false;
+                //FindObjectOfType<OverseerController>().m_PlayerInHouse = false;
                 audSwitcher.GetComponent<ExternalInteralSwitch>().floors = 0;
             }
         }
