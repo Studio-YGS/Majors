@@ -11,6 +11,8 @@ public class TutorialSectionStart : MonoBehaviour
 
     public bool needsRaycast = false, needsSecondRaycast = false, needsCheck = false;
 
+    bool first = true;
+
     [SerializeField]
     GameObject[] tutorialClues;
 
@@ -53,18 +55,6 @@ public class TutorialSectionStart : MonoBehaviour
                 raycastEvent.Invoke();
             }
 
-            if (hit.transform.gameObject.CompareTag("Holdable") && Input.GetKeyDown(KeyCode.E) && needsSecondRaycast)
-            {
-                needsSecondRaycast = false;
-                sectionStart.Invoke();
-            }
-
-            if (hit.transform.gameObject.CompareTag("Note") && Input.GetKeyDown(KeyCode.E) && needsRaycast)
-            {
-                needsRaycast = false;
-                raycastEvent.Invoke();
-            }
-
             if (hit.transform.gameObject.CompareTag("Clue") && needsRaycast)
             { 
                 raycastEvent.Invoke();
@@ -87,7 +77,7 @@ public class TutorialSectionStart : MonoBehaviour
         needsSecondRaycast = need;
     }
 
-    public void CheckClues(int number)
+    public void CheckClues()
     {
         int count = 0;
 
@@ -100,9 +90,16 @@ public class TutorialSectionStart : MonoBehaviour
                     count++;
                 }
 
-                if (count == number)
+                if(count == 4 && first)
                 {
+                    first = false;
                     sectionStart.Invoke();
+                    break;
+                }
+
+                if (count == 6 && !first)
+                {
+                    steppingAway.Invoke();
                     break;
                 }
             }
@@ -112,5 +109,20 @@ public class TutorialSectionStart : MonoBehaviour
     public void ReadHowTo()
     {
         sectionStart.Invoke();
+    }
+
+    public void NoteTutorialLine()
+    {
+        sectionStart.Invoke();
+    }
+
+    public void ObjectsTeach() 
+    {
+        sectionStart.Invoke();
+    }
+
+    public void TutorialOver()
+    {
+        Debug.Log("Tutorial is completed");
     }
 }
