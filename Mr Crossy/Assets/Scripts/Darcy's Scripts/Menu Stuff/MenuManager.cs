@@ -21,6 +21,8 @@ public class MenuManager : MonoBehaviour
 
     public bool mainMenu;
 
+    AsyncOperation loadingScene;
+
     void Start()
     {
         if (!mainMenu)
@@ -54,10 +56,7 @@ public class MenuManager : MonoBehaviour
             }
         }
 
-        if (mainMenu && Input.GetKey(KeyCode.Space) && pressSpace.activeInHierarchy)
-        {
-            SceneManager.LoadScene("Main_Cael");
-        }
+        
     }
 
     public void OpenPauseMenu()
@@ -167,11 +166,35 @@ public class MenuManager : MonoBehaviour
 
     IEnumerator ReadingControls()
     {
-        yield return new WaitForSeconds(5f);
+        loadingScene = SceneManager.LoadSceneAsync("Main_Cael", LoadSceneMode.Single);
+        loadingScene.allowSceneActivation = false;
+        while (!loadingScene.isDone)
+        {
+            Debug.Log(loadingScene.progress);
+            if(loadingScene.progress >= 0.9f)
+            {
+                pressSpace.SetActive(true);
+                if (Input.GetKey(KeyCode.Space))
+                {
+                    //SceneManager.LoadScene("Main_Cael");
+                    loadingScene.allowSceneActivation = true;
+                }
+            }
 
-        pressSpace.SetActive(true);
-        StopCoroutine(ReadingControls());
+
+            yield return null;
+        }
+        
+
     }
+
+    //IEnumerator LoadingWait()
+    //{
+        
+    //    //yield return new WaitForSeconds(5f);
+
+    //    
+    //}
 
     public void ResolutionChange(int val)
     {
