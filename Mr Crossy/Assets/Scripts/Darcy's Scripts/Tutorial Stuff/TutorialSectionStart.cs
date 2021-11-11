@@ -55,12 +55,6 @@ public class TutorialSectionStart : MonoBehaviour
                 raycastEvent.Invoke();
             }
 
-            if (hit.transform.gameObject.CompareTag("Note") && Input.GetKeyDown(KeyCode.E) && needsRaycast)
-            {
-                needsRaycast = false;
-                raycastEvent.Invoke();
-            }
-
             if (hit.transform.gameObject.CompareTag("Clue") && needsRaycast)
             { 
                 raycastEvent.Invoke();
@@ -113,6 +107,11 @@ public class TutorialSectionStart : MonoBehaviour
     }
 
     public void ReadHowTo()
+    {
+        sectionStart.Invoke();
+    }
+
+    public void NoteTutorialLine()
     {
         sectionStart.Invoke();
     }

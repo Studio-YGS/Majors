@@ -65,4 +65,11 @@ public class AudioEvents : MonoBehaviour
 
         eventInstance.start();
     }
+
+    public void NotePickup()
+    {
+        eventInstance = RuntimeManager.CreateInstance("event:/MR_C_Tutorial/TUT.0.4.2");
+
+        eventInstance.start();
+    }
 }
