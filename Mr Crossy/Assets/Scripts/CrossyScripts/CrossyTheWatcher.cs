@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CrossyTheWatcher : MonoBehaviour
 {
-    Animator animator;
+    [HideInInspector] public Animator animator;
 
     public bool conditionIsTrue;
     public bool lerpPosition;
