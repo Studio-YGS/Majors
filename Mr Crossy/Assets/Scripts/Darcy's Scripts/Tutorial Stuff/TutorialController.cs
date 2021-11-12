@@ -55,6 +55,7 @@ public class TutorialController : MonoBehaviour
 
         journalController.EnableJournal();
         journalController.OpenMap();
+        journalController.DisableJournal();
 
         journalOnSwitch.journalClosed.SetActive(true);
 
