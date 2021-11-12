@@ -6,7 +6,7 @@ using BehaviorDesigner.Runtime;
 public class OverseerController : MonoBehaviour
 {
     public static BehaviorTree ObserverTree;
-    [HideInInspector] public static bool m_PlayerInHouse;
+    public bool m_PlayerInHouse;
 
     CrossyTheWatcher titan;
     MrCrossyDistortion distootle;
@@ -22,7 +22,7 @@ public class OverseerController : MonoBehaviour
     [SerializeField] private GameObject m_Crossy;
     [SerializeField] private GameObject m_TitanCrossy;
     [SerializeField] private GameObject m_Player;
-    [HideInInspector] public CrossyStreetStalk m_StalkStreet;
+    public CrossyStreetStalk m_StalkStreet;
     //[Space(10)]
     [Header("Behaviour Timers")]
     [SerializeField] private float m_TimeSpawn;
@@ -70,7 +70,7 @@ public class OverseerController : MonoBehaviour
     public GameObject TitanCrossy { get { return m_TitanCrossy; } }
     public GameObject Player { get { return m_Player; } }
 
-    public CrossyStreetStalk StalkStreet { get { return m_StalkStreet; } }
+    public CrossyStreetStalk StalkStreet { get { return m_StalkStreet; } set { m_StalkStreet = value; } }
     public Vector3 StalkStreetPos { get { return m_StalkStreet.transform.position; } }
     public List<GameObject> StalkStreetPoints { get { return m_StalkStreet.m_StreetStalkPoints; } }
 
@@ -98,7 +98,7 @@ public class OverseerController : MonoBehaviour
 
     public bool IsTutorial { get { return m_IsTutorial; } set { m_IsTutorial = value; } }
 
-    public bool IsInHouse { get { return m_PlayerInHouse; } }
+    public bool IsInHouse { get { return m_PlayerInHouse; } set { m_PlayerInHouse = value; } }
 
     #endregion
 
@@ -126,6 +126,7 @@ public class OverseerController : MonoBehaviour
         m_TitanVoiceTime = Random.Range(m_TitanVoiceTimeMin, m_TitanVoiceTimeMax);
         m_CrossyVoiceTime = Random.Range(m_CrossyVoiceTimeMin, m_CrossyVoiceTimeMax);
     }
+
 
     private void Update()
     {
@@ -180,6 +181,12 @@ public class OverseerController : MonoBehaviour
     }
 
     #region Methods
+
+    public void SetStalkies(CrossyStreetStalk stalky)
+    {
+        m_StalkStreet = stalky;
+    }
+
     public void TutorialActive()
     {
         m_IsTutorial = true;
