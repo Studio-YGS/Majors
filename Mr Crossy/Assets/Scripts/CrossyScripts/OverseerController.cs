@@ -18,6 +18,7 @@ public class OverseerController : MonoBehaviour
     NavMeshAgent crossyAgent;
 
     public EmitterRef emitter;
+    EventInstance eventInstance;
 
     
     #region Fields
@@ -63,18 +64,9 @@ public class OverseerController : MonoBehaviour
     [SerializeField] private string chaseParamName = "IsChasing";
     [SerializeField] private string deadParamName = "isDead";
 
-    [Range(0,1)][SerializeField] private float m_FMODDistanceMod = 1f;
+    [Range(0,1)] [SerializeField] private float m_FMODDistanceMod = 1f;
 
-    [SerializeField] private float m_TitanVoiceTimeMin;
-    [SerializeField] private float m_TitanVoiceTimeMax;
-    private float m_TitanVoiceTime = 0;
-    [SerializeField] private float m_CrossyVoiceTimeMin;
-    [SerializeField] private float m_CrossyVoiceTimeMax;
-    private float m_CrossyVoiceTime = 0;
-
-    private bool m_TitanLineTiming;
-    private bool m_CrossyLineTiming;
-    private bool m_PursuitLineTiming;
+    [Range(0f, 1f)] [SerializeField] private float m_TitanVoiceLineChance = 0.5f;
 
     [SerializeField] private bool m_IsTutorial = true;
     #endregion
@@ -126,7 +118,7 @@ public class OverseerController : MonoBehaviour
     private float storedDist = 0;
     bool vignetteActivated = false;
     float pathDistance = 100f;
-
+    bool playedTitanLine = false;
     private void Awake()
     {
         m_Observer = gameObject;
@@ -145,9 +137,6 @@ public class OverseerController : MonoBehaviour
         }
         else TreeMalarkey.DisableTree(ObserverTree);
         titan = m_TitanCrossy.GetComponent<CrossyTheWatcher>();
-
-        m_TitanVoiceTime = Random.Range(m_TitanVoiceTimeMin, m_TitanVoiceTimeMax);
-        m_CrossyVoiceTime = Random.Range(m_CrossyVoiceTimeMin, m_CrossyVoiceTimeMax);
 
         crossyAgent = m_Crossy.GetComponent<NavMeshAgent>();
     }
@@ -189,20 +178,8 @@ public class OverseerController : MonoBehaviour
 
         if(!m_IsTutorial)
         {
-            if(m_State >= 1) CrossyFMODFiddling(crossyAgent, m_Player.transform.position, m_State, false);
-
-            if (m_State == -1)
-            {
-                TitanVoiceLineTimer();
-            }
-            else if (m_State == 1)
-            {
-                CrossyPatrolVoiceLineTimer();
-            }
-            else if (m_State == 2)
-            {
-                CrossyAlertVoiceLineTimer();
-            }
+            if (m_State >= 1) CrossyFMODFiddling(crossyAgent, m_Player.transform.position, m_State, false);
+            else if (m_State == -1) TitanCrossyVoiceLines();
         }
 
         
@@ -332,97 +309,21 @@ public class OverseerController : MonoBehaviour
 
     #region VoiceStuff
 
-    //Titan Voice Timer - Time Is Randomised
-    public void TitanVoiceLineTimer()
+    void TitanCrossyVoiceLines()
     {
-        if(!m_TitanLineTiming) StartCoroutine(TitanVoiceTimer());
+        if (titan.animator.GetCurrentAnimatorStateInfo(0).IsName("TitanCrossyIdle") && !playedTitanLine)
+        {
+            eventInstance = RuntimeManager.CreateInstance("event:/MR_C_Titan/Titan_Oneliners");
+            float probability = Random.Range(0f, 1f);
+            if (probability < m_TitanVoiceLineChance)
+            {
+                eventInstance.start();
+            }
+
+            playedTitanLine = true;
+        }
+        else if(titan.animator.GetCurrentAnimatorStateInfo(0).IsName("TitanCrossyIdleHidden")) playedTitanLine = false;
     }
 
-    IEnumerator TitanVoiceTimer()
-    {
-        if (m_CrossyLineTiming) StopCoroutine(CrossyPatrolVoiceTimer());
-
-        m_TitanLineTiming = true;
-
-        yield return new WaitForSeconds(m_TitanVoiceTime);
-
-        Debug.Log("LinePlay - Titan Crossy");
-        //Do the Titan Crossy VoiceLine
-
-        //Place Something to wait till line ended
-
-        m_TitanVoiceTime = Random.Range(m_TitanVoiceTimeMin, m_TitanVoiceTimeMax);
-
-        m_TitanLineTiming = false;
-    }
-
-    //Crossy Patrol Voice Timer - Time Is Randomised
-    public void CrossyPatrolVoiceLineTimer()
-    {
-        if (!m_CrossyLineTiming) StartCoroutine(CrossyPatrolVoiceTimer());
-    }
-
-    IEnumerator CrossyPatrolVoiceTimer()
-    {
-        if (m_TitanLineTiming) StopCoroutine(TitanVoiceTimer());
-
-        m_CrossyLineTiming = true;
-
-        yield return new WaitForSeconds(m_CrossyVoiceTime);
-
-        Debug.Log("LinePlay - Crossy Patrol");
-        //Do the Regular Crossy VoiceLine
-
-        //Place Something to wait till line ended
-
-        m_CrossyVoiceTime = Random.Range(m_CrossyVoiceTimeMin, m_CrossyVoiceTimeMax);
-
-        m_CrossyLineTiming = false;
-    }
-
-    //Crossy Alert Voice Timer - Time Is Randomised
-    public void CrossyAlertVoiceLineTimer()
-    {
-        if (!m_CrossyLineTiming) StartCoroutine(CrossyAlertVoiceTimer());
-    }
-
-    IEnumerator CrossyAlertVoiceTimer()
-    {
-        if (m_TitanLineTiming) StopCoroutine(TitanVoiceTimer());
-
-        m_CrossyLineTiming = true;
-
-        yield return new WaitForSeconds(m_CrossyVoiceTime);
-
-        Debug.Log("LinePlay - Crossy Alert");
-        //Do the Regular Crossy VoiceLine
-
-        //Place Something to wait till line ended
-
-        m_CrossyVoiceTime = Random.Range(m_CrossyVoiceTimeMin, m_CrossyVoiceTimeMax);
-
-        m_CrossyLineTiming = false;
-    }
-
-    //Crossy Pursuit Voice Timer - Time Is Randomised
-    public void CrossyPursuitVoiceLineTimer()
-    {
-        if (!m_PursuitLineTiming) StartCoroutine(CrossyPursuitVoiceTimer());
-    }
-
-    IEnumerator CrossyPursuitVoiceTimer()
-    {
-        if (m_CrossyLineTiming) StopCoroutine(TitanVoiceTimer());
-
-        m_PursuitLineTiming = true;
-
-        Debug.Log("LinePlay - Crossy Alert");
-        //Do the Crossy Pursuit VoiceLine
-
-        //Replace with something to wait till line ended
-        yield return new WaitForSeconds(m_CrossyVoiceTime);
-
-        m_PursuitLineTiming = false;
-    }
     #endregion
-}
+    }
