@@ -63,14 +63,20 @@ public class CrossyController : MonoBehaviour
     private bool m_ShouldRun = false;
     private int m_State = -1;
     [Header("Detection Variables")]
+    [SerializeField] private float m_FocalViewDist;
+    [SerializeField] private float m_PeripheralViewDist;
     [SerializeField] private float m_PursuitDistance;
+    [SerializeField] private float m_UpperQuartDistance;
+    [SerializeField] private float m_LowerQuartDistance;
+    [Space(10)]
     [SerializeField] private float m_DetectionTime;
+    [SerializeField] private float m_HighestQuartMulti;
+    [SerializeField] private float m_UpperQuartMulti;
+    [SerializeField] private float m_LowerQuartMulti;
 
     [SerializeField] private float m_FocalViewCone;
     [SerializeField] private float m_PeripheralViewCone;
 
-    [SerializeField] private float m_FocalViewDist;
-    [SerializeField] private float m_PeripheralViewDist;
 
     private float distInterpolator;
 
@@ -114,7 +120,12 @@ public class CrossyController : MonoBehaviour
     public float FocalViewCone { get { return m_FocalViewCone; } set { m_FocalViewCone = value; } }
     public float PeripheralViewCone { get { return m_PeripheralViewCone; } set { m_PeripheralViewCone = value; } }
     public float FocalViewDist { get { return m_FocalViewDist; } set { m_FocalViewDist = value; } }
+    public float UpperQuartDistance { get { return m_UpperQuartDistance; } set { m_UpperQuartDistance = value; } }
+    public float LowerQuartDistance { get { return m_LowerQuartDistance; } set { m_LowerQuartDistance = value; } }
     public float PeripheralViewDist { get { return m_PeripheralViewDist; } set { m_PeripheralViewDist = value; } }
+    public float HighestQuartMulti { get { return m_HighestQuartMulti; } set { m_HighestQuartMulti = value; } }
+    public float UpperQuartMulti { get { return m_UpperQuartMulti; } set { m_UpperQuartMulti = value; } }
+    public float LowerQuartMulti { get { return m_LowerQuartMulti; } set { m_LowerQuartMulti = value; } }
     #endregion
 
     [Space(10)]
