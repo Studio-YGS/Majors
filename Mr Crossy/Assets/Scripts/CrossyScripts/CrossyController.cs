@@ -52,6 +52,7 @@ public class CrossyController : MonoBehaviour
 
     [SerializeField] private float m_PatrolRunDistance;
     [SerializeField] private float m_AlertRunDistance;
+    [SerializeField] private float m_ScaryDistance;
     private float m_RunDistance;
 
     private float m_DistanceToCorner;
@@ -143,19 +144,8 @@ public class CrossyController : MonoBehaviour
         //veloMag = agent.velocity.magnitude;
         m_DistanceToCorner = Vector3.Distance(transform.position, agent.steeringTarget);
 
-        if (overrideShouldRun == false) // Sets 'm_ShouldRun' based on state and distance from target.
-        {
-            if (m_State <= 1) { m_ShouldRun = false; }
-            else if (m_State == 1 || m_State == 2)
-            {
-                m_RunDistance = (m_State == 2) ? m_AlertRunDistance : m_PatrolRunDistance;
-
-                if (agent.remainingDistance > m_RunDistance) m_ShouldRun = true;
-                else m_ShouldRun = false;
-            }
-            else if (m_State == 3) { m_ShouldRun = true; }
-        }
-        else { m_ShouldRun = run; }
+        Running();
+        ScaryRunCondition();
 
         //NavAgent Fiddling
         MoveSpeed = (m_ShouldRun) ? RunSpeed : WalkSpeed;
@@ -194,6 +184,41 @@ public class CrossyController : MonoBehaviour
 
         mSpeed = velocity.z;
         tSpeed = velocity.x;
+    }
+
+    public void Running()
+    {
+        if (overrideShouldRun == false) // Sets 'm_ShouldRun' based on state and distance from target.
+        {
+            if (m_State <= 1) { m_ShouldRun = false; }
+            else if (m_State == 1 || m_State == 2)
+            {
+                m_RunDistance = (m_State == 2) ? m_AlertRunDistance : m_PatrolRunDistance;
+
+                if (agent.remainingDistance > m_RunDistance) m_ShouldRun = true;
+                else m_ShouldRun = false;
+            }
+            else if (m_State == 3) { m_ShouldRun = true; }
+        }
+        else { m_ShouldRun = run; }
+    }
+
+    public void ScaryRunCondition()
+    {
+        float distance = agent.remainingDistance;
+
+        if(m_State == 3 && distance <= m_ScaryDistance)
+        {
+            animator.SetBool("ScaryVariant", true);
+        }
+        else if (m_State == 4)
+        {
+            animator.SetBool("ScaryVariant", true);
+        }
+        else
+        {
+            animator.SetBool("ScaryVariant", false);
+        }
     }
 
     public void ForceDespawn()

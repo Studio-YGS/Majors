@@ -12,6 +12,8 @@ public class NoteController : MonoBehaviour
 
     int currentNote = 0;
 
+    bool tutorialLine = false;
+
     void Awake()
     {
         journalOnSwitch = FindObjectOfType<JournalOnSwitch>();
@@ -29,8 +31,16 @@ public class NoteController : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.E))
                 {
+                    hit.transform.gameObject.GetComponent<NoteAssign>().assignedNote.SetActive(true);
                     hit.transform.gameObject.SetActive(false);
+
                     PickUpNote();
+
+                    if (!tutorialLine)
+                    {
+                        GetComponent<TutorialSectionStart>().NoteTutorialLine();
+                        tutorialLine = true;
+                    }
                 }
             }
         }
@@ -38,12 +48,15 @@ public class NoteController : MonoBehaviour
 
     void PickUpNote()
     {
-        journalController.whichNotesPage = currentNote;
-        journalController.noteList.Add(currentNote);
-        journalController.OpenNotes();
+        if (!tutorialLine)
+        {
+            journalController.whichNotesPage = currentNote;
+            journalController.noteList.Add(currentNote);
+            journalController.OpenNotes();
 
-        journalOnSwitch.OpenOrClose();
+            journalOnSwitch.OpenOrClose();
 
-        currentNote++;
+            currentNote++;
+        }
     }
 }
