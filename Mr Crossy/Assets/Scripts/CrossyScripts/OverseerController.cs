@@ -1,7 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Gemstone;
 using BehaviorDesigner.Runtime;
+using UnityEngine.AI;
+using FMOD.Studio;
+using FMODUnity;
 
 public class OverseerController : MonoBehaviour
 {
@@ -10,7 +14,12 @@ public class OverseerController : MonoBehaviour
 
     CrossyTheWatcher titan;
     MrCrossyDistortion distootle;
+    CrossKeyManager keyMan;
+    NavMeshAgent crossyAgent;
 
+    public EmitterRef emitter;
+
+    
     #region Fields
     [SerializeField] private bool startOnAwake;
     [SerializeField] private bool usePositioner;
@@ -49,7 +58,13 @@ public class OverseerController : MonoBehaviour
     private int m_State;
     private bool m_HideTitan;
 
-    [Header("Voice Variables")]
+    [Header("FMOD Variables")]
+    [SerializeField] private string distanceParamName = "Distance";
+    [SerializeField] private string chaseParamName = "IsChasing";
+    [SerializeField] private string deadParamName = "isDead";
+
+    [Range(0,1)][SerializeField] private float m_FMODDistanceMod = 1f;
+
     [SerializeField] private float m_TitanVoiceTimeMin;
     [SerializeField] private float m_TitanVoiceTimeMax;
     private float m_TitanVoiceTime = 0;
@@ -61,7 +76,7 @@ public class OverseerController : MonoBehaviour
     private bool m_CrossyLineTiming;
     private bool m_PursuitLineTiming;
 
-    private bool m_IsTutorial = true;
+    [SerializeField] private bool m_IsTutorial = true;
     #endregion
 
     #region Properties
@@ -110,12 +125,20 @@ public class OverseerController : MonoBehaviour
     public float currDist;
     private float storedDist = 0;
     bool vignetteActivated = false;
+    float pathDistance = 100f;
 
     private void Awake()
     {
         m_Observer = gameObject;
         ObserverTree = gameObject.GetComponent<BehaviorTree>();
         distootle = FindObjectOfType<MrCrossyDistortion>();
+        keyMan = FindObjectOfType<CrossKeyManager>();
+
+
+        emitter.Target.SetParameter(distanceParamName, 100f);
+        emitter.Target.SetParameter(chaseParamName, 1f);
+        emitter.Target.SetParameter(deadParamName, 1f);
+
         if (startOnAwake)
         {
             TreeMalarkey.EnableTree(ObserverTree);
@@ -125,6 +148,8 @@ public class OverseerController : MonoBehaviour
 
         m_TitanVoiceTime = Random.Range(m_TitanVoiceTimeMin, m_TitanVoiceTimeMax);
         m_CrossyVoiceTime = Random.Range(m_CrossyVoiceTimeMin, m_CrossyVoiceTimeMax);
+
+        crossyAgent = m_Crossy.GetComponent<NavMeshAgent>();
     }
 
 
@@ -150,9 +175,9 @@ public class OverseerController : MonoBehaviour
             vignetteActivated = true;
             Debug.Log("potoatosondwich");
             distootle.DistanceVignette(m_Crossy);
-            if(!FindObjectOfType<CrossKeyManager>().doorsLocked)
+            if(!keyMan.doorsLocked)
             {
-                FindObjectOfType<CrossKeyManager>().doorsLocked = true;
+                keyMan.doorsLocked = true;
             }
         }
         else if (m_State != 3 && vignetteActivated)
@@ -164,6 +189,8 @@ public class OverseerController : MonoBehaviour
 
         if(!m_IsTutorial)
         {
+            if(m_State >= 1) CrossyFMODFiddling(crossyAgent, m_Player.transform.position, m_State, false);
+
             if (m_State == -1)
             {
                 TitanVoiceLineTimer();
@@ -177,7 +204,9 @@ public class OverseerController : MonoBehaviour
                 CrossyAlertVoiceLineTimer();
             }
         }
+
         
+
     }
 
     #region Methods
@@ -258,6 +287,45 @@ public class OverseerController : MonoBehaviour
         Debug.Log("EndLight");
 
         
+    }
+
+    public void CrossyFMODFiddling(NavMeshAgent agent, Vector3 playerPos, int state, bool dead)
+    {
+        
+        pathDistance = Mathf.Clamp(pathDistance, 0f, 100f);
+
+        NavMeshPath navPath = new NavMeshPath();
+
+        if(agent.CalculatePath(playerPos, navPath))
+        {
+            if(navPath.status == NavMeshPathStatus.PathComplete)
+            {
+                pathDistance = Emerald.GetPathLength(navPath);
+                Debug.Log("CrossyFMOD PathDistance: " + pathDistance);
+            }
+            
+        }
+
+        if(pathDistance <= 100f)
+        {
+            Debug.Log("CrossyFMOD ShouldBeSetting");
+            emitter.Target.SetParameter(distanceParamName, pathDistance);
+            Debug.Log("CrossyFMOD DidSet");
+        }
+        else emitter.Target.SetParameter(distanceParamName, 100f);
+
+        if (state == 3)
+        {
+            emitter.Target.SetParameter(chaseParamName, 0f);
+        }
+        else emitter.Target.SetParameter(chaseParamName, 1f);
+
+        if (dead)
+        {
+            emitter.Target.SetParameter(deadParamName, 0f);
+        }
+        else emitter.Target.SetParameter(deadParamName, 1f);
+
     }
     #endregion
 
