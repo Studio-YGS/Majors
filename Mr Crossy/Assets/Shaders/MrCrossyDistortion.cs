@@ -18,6 +18,7 @@ public class MrCrossyDistortion : MonoBehaviour
     bool vignetteReducing;
 
     public float insanityIncreaseRate;
+    public float distInsanityIncreaseRate;
     public GameObject mrCrossy;
     Transform player;
     public bool increasingInsanity;
@@ -41,55 +42,60 @@ public class MrCrossyDistortion : MonoBehaviour
             float distance = Vector3.Distance(player.position, mrCrossy.transform.position);
             if (increasingInsanity)
             {
-                if (motionBlur.GetFloat("_BlurMagnitude") < 0.007f / (distance/2))
+
+                motionBlur.SetFloat("_BlurMagnitude", 0.007f / (distance / 15));
+                motionBlur.SetFloat("_ScreenXMagnitude", 0.025f / (distance / 15));
+                motionBlur.SetFloat("_ScreenYMagnitude", 0.025f / (distance / 15));
+                screenBlur.SetFloat("_Magnitude", 0.02f / (distance / 15));
+                /*if (motionBlur.GetFloat("_BlurMagnitude") < 0.007f / (distance/2))
                 {
-                    motionBlur.SetFloat("_BlurMagnitude", motionBlur.GetFloat("_BlurMagnitude") + Time.deltaTime * insanityIncreaseRate);
+                    motionBlur.SetFloat("_BlurMagnitude", motionBlur.GetFloat("_BlurMagnitude") + Time.deltaTime * distInsanityIncreaseRate);
                 }
                 else if (motionBlur.GetFloat("_BlurMagnitude") > 0.007f / (distance / 2))
                 {
-                    motionBlur.SetFloat("_BlurMagnitude", motionBlur.GetFloat("_BlurMagnitude") - Time.deltaTime * (insanityIncreaseRate / 10));
-                }
+                    motionBlur.SetFloat("_BlurMagnitude", motionBlur.GetFloat("_BlurMagnitude") - Time.deltaTime * (distInsanityIncreaseRate / 10));
+                }*/
 
 
-                if (motionBlur.GetFloat("_ScreenXMagnitude") < 0.025f / (distance / 2))
-                {
-                    motionBlur.SetFloat("_ScreenXMagnitude", motionBlur.GetFloat("_ScreenXMagnitude") + Time.deltaTime * insanityIncreaseRate);
-                }
-                else if (motionBlur.GetFloat("_ScreenXMagnitude") > 0.025f / (distance / 2))
-                {
-                    motionBlur.SetFloat("_ScreenXMagnitude", motionBlur.GetFloat("_ScreenXMagnitude") - Time.deltaTime * (insanityIncreaseRate / 10));
-                }
+                //if (motionBlur.GetFloat("_ScreenXMagnitude") < 0.025f / (distance / 2))
+                //{
+                //    motionBlur.SetFloat("_ScreenXMagnitude", motionBlur.GetFloat("_ScreenXMagnitude") + Time.deltaTime * distInsanityIncreaseRate);
+                //}
+                //else if (motionBlur.GetFloat("_ScreenXMagnitude") > 0.025f / (distance / 2))
+                //{
+                //    motionBlur.SetFloat("_ScreenXMagnitude", motionBlur.GetFloat("_ScreenXMagnitude") - Time.deltaTime * (distInsanityIncreaseRate / 10));
+                //}
 
 
-                if (motionBlur.GetFloat("_ScreenYMagnitude") < 0.025f / (distance / 2))
-                {
-                    motionBlur.SetFloat("_ScreenYMagnitude", motionBlur.GetFloat("_ScreenYMagnitude") + Time.deltaTime * insanityIncreaseRate);
-                }
-                else if (motionBlur.GetFloat("_ScreenYMagnitude") > 0.025f / (distance / 2))
-                {
-                    motionBlur.SetFloat("_ScreenYMagnitude", motionBlur.GetFloat("_ScreenYMagnitude") - Time.deltaTime * (insanityIncreaseRate / 10));
-                }
+                //if (motionBlur.GetFloat("_ScreenYMagnitude") < 0.025f / (distance / 2))
+                //{
+                //    motionBlur.SetFloat("_ScreenYMagnitude", motionBlur.GetFloat("_ScreenYMagnitude") + Time.deltaTime * distInsanityIncreaseRate);
+                //}
+                //else if (motionBlur.GetFloat("_ScreenYMagnitude") > 0.025f / (distance / 2))
+                //{
+                //    motionBlur.SetFloat("_ScreenYMagnitude", motionBlur.GetFloat("_ScreenYMagnitude") - Time.deltaTime * (distInsanityIncreaseRate / 10));
+                //}
 
 
-                if (screenBlur.GetFloat("_Magnitude") < 0.02f / (distance / 2))
-                {
-                    screenBlur.SetFloat("_Magnitude", screenBlur.GetFloat("_Magnitude") + Time.deltaTime * insanityIncreaseRate);
-                }
-                else if (screenBlur.GetFloat("_Magnitude") > 0.02f / (distance / 2))
-                {
-                    screenBlur.SetFloat("_Magnitude", screenBlur.GetFloat("_Magnitude") - Time.deltaTime * (insanityIncreaseRate / 10));
-                }
+                //if (screenBlur.GetFloat("_Magnitude") < 0.02f / (distance / 2))
+                //{
+                //    screenBlur.SetFloat("_Magnitude", screenBlur.GetFloat("_Magnitude") + Time.deltaTime * distInsanityIncreaseRate);
+                //}
+                //else if (screenBlur.GetFloat("_Magnitude") > 0.02f / (distance / 2))
+                //{
+                //    screenBlur.SetFloat("_Magnitude", screenBlur.GetFloat("_Magnitude") - Time.deltaTime * (distInsanityIncreaseRate / 10));
+                //}
 
                 for (int i = 0; i < volume.Length; i++)
                 {
                     aberration[i].active = true;
                     if (aberration[i].intensity.value < 1 / (distance / 2))
                     {
-                        aberration[i].intensity.value += Time.deltaTime * (insanityIncreaseRate * 100f);
+                        aberration[i].intensity.value += Time.deltaTime * (distInsanityIncreaseRate * 100f);
                     }
                     else if (aberration[i].intensity.value > 1 / (distance / 2))
                     {
-                        aberration[i].intensity.value -= Time.deltaTime * (insanityIncreaseRate);
+                        aberration[i].intensity.value -= Time.deltaTime * (distInsanityIncreaseRate);
                     }
                 }
                 
@@ -101,35 +107,35 @@ public class MrCrossyDistortion : MonoBehaviour
         {
             if (motionBlur.GetFloat("_BlurMagnitude") > 0)
             {
-                motionBlur.SetFloat("_BlurMagnitude", motionBlur.GetFloat("_BlurMagnitude") - Time.deltaTime * (insanityIncreaseRate / 10));
+                motionBlur.SetFloat("_BlurMagnitude", motionBlur.GetFloat("_BlurMagnitude") - Time.deltaTime * (distInsanityIncreaseRate / 10));
             }
 
 
 
             if (motionBlur.GetFloat("_ScreenXMagnitude") > 0)
             {
-                motionBlur.SetFloat("_ScreenXMagnitude", motionBlur.GetFloat("_ScreenXMagnitude") - Time.deltaTime * (insanityIncreaseRate / 10));
+                motionBlur.SetFloat("_ScreenXMagnitude", motionBlur.GetFloat("_ScreenXMagnitude") - Time.deltaTime * (distInsanityIncreaseRate / 10));
             }
 
 
 
             if (motionBlur.GetFloat("_ScreenYMagnitude") > 0)
             {
-                motionBlur.SetFloat("_ScreenYMagnitude", motionBlur.GetFloat("_ScreenYMagnitude") - Time.deltaTime * (insanityIncreaseRate / 10));
+                motionBlur.SetFloat("_ScreenYMagnitude", motionBlur.GetFloat("_ScreenYMagnitude") - Time.deltaTime * (distInsanityIncreaseRate / 10));
             }
 
 
 
             if (screenBlur.GetFloat("_Magnitude") > 0)
             {
-                screenBlur.SetFloat("_Magnitude", screenBlur.GetFloat("_Magnitude") - Time.deltaTime * (insanityIncreaseRate / 10));
+                screenBlur.SetFloat("_Magnitude", screenBlur.GetFloat("_Magnitude") - Time.deltaTime * (distInsanityIncreaseRate / 10));
             }
 
             for (int i = 0; i < volume.Length; i++)
             {
                 if (aberration[i].intensity.value > 0)
                 {
-                    aberration[i].intensity.value -= Time.deltaTime * (insanityIncreaseRate * 10);
+                    aberration[i].intensity.value -= Time.deltaTime * (distInsanityIncreaseRate * 10);
                 }
 
                 if (aberration[i].intensity.value <= 0 && screenBlur.GetFloat("_Magnitude") <= 0 && motionBlur.GetFloat("_ScreenYMagnitude") <= 0
@@ -166,8 +172,38 @@ public class MrCrossyDistortion : MonoBehaviour
 
     public void ReduceInsanity()
     {
+        Debug.Log("SANE Reducy");
         increasingInsanity = false;
         reducingInsanity = true;
+    }
+
+    public void LerpInsanity()
+    {
+        if (motionBlur.GetFloat("_BlurMagnitude") < 0.007f)
+        {
+            motionBlur.SetFloat("_BlurMagnitude", motionBlur.GetFloat("_BlurMagnitude") + Time.deltaTime * insanityIncreaseRate);
+        }
+        if (motionBlur.GetFloat("_ScreenXMagnitude") < 0.025f)
+        {
+            motionBlur.SetFloat("_ScreenXMagnitude", motionBlur.GetFloat("_ScreenXMagnitude") + Time.deltaTime * insanityIncreaseRate);
+        }
+        if (motionBlur.GetFloat("_ScreenYMagnitude") < 0.025f)
+        {
+            motionBlur.SetFloat("_ScreenYMagnitude", motionBlur.GetFloat("_ScreenYMagnitude") + Time.deltaTime * insanityIncreaseRate);
+        }
+        if (screenBlur.GetFloat("_Magnitude") < 0.02f)
+        {
+            screenBlur.SetFloat("_Magnitude", screenBlur.GetFloat("_Magnitude") + Time.deltaTime * insanityIncreaseRate);
+        }
+
+        for (int i = 0; i < volume.Length; i++)
+        {
+            aberration[i].active = true;
+            if (aberration[i].intensity.value < 1)
+            {
+                aberration[i].intensity.value += Time.deltaTime * (insanityIncreaseRate * 100f);
+            }
+        }
     }
 
     public void IncreaseVignette()
