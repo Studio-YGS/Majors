@@ -74,11 +74,11 @@ public class Player_Controller : MonoBehaviour
 
 
 
-            if (Input.GetButtonDown("Jump") && isGrounded && canMove)
-            {
-                velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            //if (Input.GetButtonDown("Jump") && isGrounded && canMove)
+            //{
+            //    velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
 
-            }
+            //}
 
             velocity.y += gravity * Time.unscaledDeltaTime;
             move = transform.right * x + transform.forward * z;

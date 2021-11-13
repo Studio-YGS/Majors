@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class LightToggle : MonoBehaviour
 {
     GameObject[] lights;
     Transform player;
     public float maxDistance;
-    int activeCount;
+    public int activeCount;
     void Start()
     {
         lights = GameObject.FindGameObjectsWithTag("Light");
@@ -24,38 +25,43 @@ public class LightToggle : MonoBehaviour
         foreach(GameObject light in lights)
         {
             float distance = Vector3.Distance(light.transform.position, player.position);
-            RaycastHit hit;
+            //RaycastHit hit;
             if (distance < maxDistance && activeCount < 8)
             {
-                if(Physics.Raycast(player.position, light.GetComponentInChildren<Collider>().transform.position - player.transform.position, out hit))
+                if (light.GetComponentInChildren<Light>().enabled == false)
                 {
-                    if(hit.collider == light.GetComponentInChildren<Collider>())
-                    {
-                        if (light.GetComponentInChildren<Light>().enabled == false)
-                        {
-                            light.GetComponentInChildren<Light>().enabled = true;
-                            activeCount += 1;
-                        }
-                        //if (light.GetComponent<Renderer>() && light.GetComponent<Renderer>().isVisible || light.GetComponentInChildren<Renderer>().isVisible)
-                        //{
-
-                        //}
-                        //else
-                        //{
-                        //    if (light.GetComponentInChildren<Light>().enabled == true)
-                        //    {
-                        //        light.GetComponentInChildren<Light>().enabled = false;
-                        //    }
-                        //}
-                    }
-                    //else
-                    //{
-                    //    if (light.GetComponentInChildren<Light>().enabled == true)
-                    //    {
-                    //        light.GetComponentInChildren<Light>().enabled = false;
-                    //    }
-                    //}
+                    light.GetComponentInChildren<Light>().enabled = true;
+                    activeCount += 1;
                 }
+                //if (Physics.Raycast(player.position, light.GetComponentInChildren<Collider>().transform.position - player.transform.position, out hit))
+                //{
+                //    if(hit.collider == light.GetComponentInChildren<Collider>())
+                //    {
+                //        if (light.GetComponentInChildren<Light>().enabled == false)
+                //        {
+                //            light.GetComponentInChildren<Light>().enabled = true;
+                //            activeCount += 1;
+                //        }
+                //        //if (light.GetComponent<Renderer>() && light.GetComponent<Renderer>().isVisible || light.GetComponentInChildren<Renderer>().isVisible)
+                //        //{
+
+                //        //}
+                //        //else
+                //        //{
+                //        //    if (light.GetComponentInChildren<Light>().enabled == true)
+                //        //    {
+                //        //        light.GetComponentInChildren<Light>().enabled = false;
+                //        //    }
+                //        //}
+                //    }
+                //    //else
+                //    //{
+                //    //    if (light.GetComponentInChildren<Light>().enabled == true)
+                //    //    {
+                //    //        light.GetComponentInChildren<Light>().enabled = false;
+                //    //    }
+                //    //}
+                //}
 
             }
             //else
@@ -69,19 +75,43 @@ public class LightToggle : MonoBehaviour
             if(activeCount >= 8 && light.GetComponentInChildren<Light>().enabled == true)
             {
                 
-                if (Physics.Raycast(player.position, light.GetComponentInChildren<Collider>().transform.position - player.transform.position, out hit))
-                {
-                    if (hit.collider != light.GetComponentInChildren<Collider>())
-                    {
-                        light.GetComponentInChildren<Light>().enabled = false;
-                        activeCount -= 1;
-                    }
-                }
-                else if (distance > maxDistance)
+                //if (Physics.Raycast(player.position, light.GetComponentInChildren<Collider>().transform.position - player.transform.position, out hit))
+                //{
+                //    if (hit.collider != light.GetComponentInChildren<Collider>())
+                //    {
+                //        light.GetComponentInChildren<Light>().enabled = false;
+                //        activeCount -= 1;
+                //    }
+                //}
+                if (distance > maxDistance)
                 {
                     light.GetComponentInChildren<Light>().enabled = false;
                     activeCount -= 1;
                 }
+                else
+                {
+                    Dictionary<float, GameObject> distDic = new Dictionary<float, GameObject>();
+                    foreach(GameObject obj in lights)
+                    {
+                        if(obj.GetComponentInChildren<Light>().enabled == true)
+                        {
+                            float dist = Vector3.Distance(obj.transform.position, player.position);
+
+                            distDic.Add(dist, obj);
+                        }
+                    }
+                    
+                    List<float> distances = new List<float>();
+                    distances = distDic.Keys.ToList();
+                    distances.Sort();
+                    GameObject furthestObj = distDic[distances[distances.Count - 1]];
+                    furthestObj.GetComponentInChildren<Light>().enabled = false;
+                    activeCount -= 1;
+                    distDic.Clear();
+                    distances.Clear();
+                    
+                }
+                
             }
         }
 
