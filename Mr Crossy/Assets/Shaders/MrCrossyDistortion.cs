@@ -43,10 +43,23 @@ public class MrCrossyDistortion : MonoBehaviour
             if (increasingInsanity)
             {
                 //Mathf.Lerp(motionBlur.GetFloat("_ScreenXMagnitude"), 0.025f / ((distance / 20) * (distance / 20)), 0.025f);
-                motionBlur.SetFloat("_BlurMagnitude", Mathf.Lerp(motionBlur.GetFloat("_BlurMagnitude"), 0.007f / ((distance / 20) * (distance / 20)), 0.025f));
-                motionBlur.SetFloat("_ScreenXMagnitude", Mathf.Lerp(motionBlur.GetFloat("_ScreenXMagnitude"), 0.025f / ((distance / 20) * (distance / 20)), 0.025f));
-                motionBlur.SetFloat("_ScreenYMagnitude", Mathf.Lerp(motionBlur.GetFloat("_ScreenYMagnitude"), 0.025f / ((distance / 20) * (distance / 20)), 0.025f));
-                screenBlur.SetFloat("_Magnitude", Mathf.Lerp(motionBlur.GetFloat("_Magnitude"), 0.02f / ((distance / 20) * (distance / 20)), 0.025f));
+                if (motionBlur.GetFloat("_BlurMagnitude") < 0.007f)
+                {
+                    motionBlur.SetFloat("_BlurMagnitude", Mathf.Lerp(motionBlur.GetFloat("_BlurMagnitude"), 0.007f / ((distance / 20) * (distance / 20)), 0.025f));
+                }
+                if (motionBlur.GetFloat("_ScreenXMagnitude") < 0.025f)
+                {
+                    motionBlur.SetFloat("_ScreenXMagnitude", Mathf.Lerp(motionBlur.GetFloat("_ScreenXMagnitude"), 0.025f / ((distance / 20) * (distance / 20)), 0.025f));
+                }
+                if (motionBlur.GetFloat("_ScreenYMagnitude") < 0.025f)
+                {
+                    motionBlur.SetFloat("_ScreenYMagnitude", Mathf.Lerp(motionBlur.GetFloat("_ScreenYMagnitude"), 0.025f / ((distance / 20) * (distance / 20)), 0.025f));
+                }
+                if (screenBlur.GetFloat("_Magnitude") < 0.02f)
+                {
+                    screenBlur.SetFloat("_Magnitude", Mathf.Lerp(motionBlur.GetFloat("_Magnitude"), 0.02f / ((distance / 20) * (distance / 20)), 0.025f));
+                }
+                    
                 /*if (motionBlur.GetFloat("_BlurMagnitude") < 0.007f / (distance/2))
                 {
                     motionBlur.SetFloat("_BlurMagnitude", motionBlur.GetFloat("_BlurMagnitude") + Time.deltaTime * distInsanityIncreaseRate);
