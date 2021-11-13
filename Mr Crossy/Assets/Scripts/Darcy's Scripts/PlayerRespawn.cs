@@ -56,7 +56,8 @@ public class PlayerRespawn : MonoBehaviour
         audio = FindObjectOfType<AudioEvents>();
 
         audio.PlayerDie();
-        
+        FindObjectOfType<OverseerController>().deady = true;
+
         player.gameObject.SetActive(false);
         player.DisableController();
         player.transform.position = respawnPosition.position;
@@ -79,5 +80,6 @@ public class PlayerRespawn : MonoBehaviour
         player.EnableController();
 
         journal.EnableJournal();
+        FindObjectOfType<OverseerController>().deady = false;
     }
 }
