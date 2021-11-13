@@ -25,9 +25,8 @@ public class HeadBob : MonoBehaviour
 		baseSpeed = bobSpeed;
 		controller = GameObject.Find("Fps Character").GetComponent<Player_Controller>();
 	}
-
-	void Update()
-	{
+    private void FixedUpdate()
+    {
 		horizontal = Input.GetAxis("Horizontal");
 		vertical = Input.GetAxis("Vertical");
 
@@ -42,8 +41,8 @@ public class HeadBob : MonoBehaviour
 			bobSpeed = baseSpeed;
 		}
 
-        if (canBob)
-        {
+		if (canBob)
+		{
 			if (Mathf.Abs(horizontal) == 0 && Mathf.Abs(vertical) == 0)
 			{
 				timer = 0.0f;
@@ -72,6 +71,10 @@ public class HeadBob : MonoBehaviour
 
 			cam.localPosition = localPosition;
 		}
+	}
+    void Update()
+	{
+		
 
 		
 	}
