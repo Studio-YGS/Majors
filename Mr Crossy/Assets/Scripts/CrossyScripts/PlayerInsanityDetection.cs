@@ -35,15 +35,37 @@ public class PlayerInsanityDetection : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(m_Insane)
+        //if(m_Insane)
+        //{
+        //    calledInsane = true;
+        //    distortion.IncreaseInsanity(m_Crossy);
+        //}
+        //else if(!m_Insane && calledInsane)
+        //{
+        //    calledInsane = false;
+        //    distortion.ReduceInsanity();
+        //}
+
+        float distance = Vector3.Distance(transform.position, m_Crossy.transform.position);
+        Debug.Log("SANE Insanity Distance: " + distance);
+        if(distance < 40f && distance > 25f)
         {
             calledInsane = true;
             distortion.IncreaseInsanity(m_Crossy);
         }
-        else if(!m_Insane && calledInsane)
+        else if (distance < 25f && distance > 15f)
         {
-            calledInsane = false;
-            distortion.ReduceInsanity();
+            distortion.increasingInsanity = false;
         }
+        else if (distance < 15f)
+        {
+            distortion.LerpInsanity();
+        }
+        else if (distance > 40f && calledInsane)
+        {
+            distortion.ReduceInsanity();
+            calledInsane = false;
+        }
+        
     }
 }
