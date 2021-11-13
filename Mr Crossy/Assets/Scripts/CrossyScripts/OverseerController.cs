@@ -20,6 +20,7 @@ public class OverseerController : MonoBehaviour
     public EmitterRef emitter;
     EventInstance eventInstance;
 
+    public bool deady = false;
     
     #region Fields
     [SerializeField] private bool startOnAwake;
@@ -179,7 +180,7 @@ public class OverseerController : MonoBehaviour
 
         if(!m_IsTutorial)
         {
-            if (m_State >= 1) CrossyFMODFiddling(crossyAgent, m_Player.transform.position, m_State, false);
+            if (m_State >= 1) CrossyFMODFiddling(crossyAgent, m_Player.transform.position, m_State, deady);
             if (m_State == -1) TitanCrossyVoiceLines();
         }
 
