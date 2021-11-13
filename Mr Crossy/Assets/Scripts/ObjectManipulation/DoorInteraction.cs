@@ -135,7 +135,7 @@ public class DoorInteraction : MonoBehaviour
                             StartCoroutine(RotateCamToNewPosition());
                             createdMrCrossy.GetComponent<NavMeshAgent>().SetDestination(player.position);
                             createdMrCrossy.GetComponent<CrossyCrossKeyVariant>().door = gameObject.GetComponent<DoorInteraction>();
-                            distortion.IncreaseInsanity(createdMrCrossy);
+                            distortion.ReduceInsanity();
                         }
                     }
                     else
