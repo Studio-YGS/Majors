@@ -270,6 +270,9 @@ public class OverseerController : MonoBehaviour
 
     public void CrossyFMODFiddling(NavMeshAgent agent, Vector3 playerPos, int state, bool dead)
     {
+        CrossKeyManager key = FindObjectOfType<CrossKeyManager>();
+
+        bool hasChased = false;
         
         pathDistance = Mathf.Clamp(pathDistance, 0f, 100f);
 
@@ -293,18 +296,46 @@ public class OverseerController : MonoBehaviour
         }
         else emitter.Target.SetParameter(distanceParamName, 100f);
 
-        if (state == 3)
+        if (state == 3 || key.puzzleOn)
         {
+            hasChased = true;
             emitter.Target.SetParameter(chaseParamName, 0f);
+            Debug.Log("Chasing music");
         }
-        else emitter.Target.SetParameter(chaseParamName, 1f);
+        else if (!m_PlayerInHouse)
+        {
+            hasChased = false;
+            emitter.Target.SetParameter(chaseParamName, 1f);
+            Debug.Log("Stopped Chasing music");
+        }
 
         if (dead)
         {
             emitter.Target.SetParameter(deadParamName, 0f);
+            Debug.Log("DEAD SOUND");
         }
         else emitter.Target.SetParameter(deadParamName, 1f);
 
+        if (m_PlayerInHouse)
+        {
+            if (hasChased)
+            {
+                StartCoroutine(WaitForPuzzleOff());
+            }
+        }
+
+        IEnumerator WaitForPuzzleOff()
+        {
+            while (key.puzzleOn)
+            {
+                yield return null;
+            }
+
+            hasChased = false;
+            emitter.Target.SetParameter(deadParamName, 0f);
+            Debug.Log("DEAD SOUND");
+            StopCoroutine(WaitForPuzzleOff());
+        }
     }
     #endregion
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using FMODUnity;
 
 public class MenuManager : MonoBehaviour
 {
@@ -70,6 +71,13 @@ public class MenuManager : MonoBehaviour
 
         journalOnSwitch.HideTab();
 
+        for(int i = 0; i < GetComponent<TutorialController>().objectsToSwitchOn.Length; i++)
+        {
+            GetComponent<TutorialController>().objectsToSwitchOn[i].SetActive(false);
+        }
+
+        RuntimeManager.PauseAllEvents(true);
+
         streetName.SetActive(false);
 
         Time.timeScale = 0f;
@@ -85,6 +93,13 @@ public class MenuManager : MonoBehaviour
         journalController.EnableJournal();
 
         journalOnSwitch.ShowTab();
+
+        for (int i = 0; i < GetComponent<TutorialController>().objectsToSwitchOn.Length; i++)
+        {
+            GetComponent<TutorialController>().objectsToSwitchOn[i].SetActive(true);
+        }
+
+        RuntimeManager.PauseAllEvents(false);
 
         streetName.SetActive(true);
 

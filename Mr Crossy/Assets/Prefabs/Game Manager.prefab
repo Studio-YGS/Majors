@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 880813859}
   - component: {fileID: 7147785134658720668}
   - component: {fileID: 1948342450}
+  - component: {fileID: 1216256377}
+  - component: {fileID: 3529918932757500698}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -119,3 +121,85 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85238f1e6ae387646873ef338b53959a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1216256377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2629922956381282759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 635473113117eae42a25c2b7f4466d65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  screenBlur: {fileID: 2100000, guid: 5085346561a00014b9713e82ad4ff3ee, type: 2}
+  motionBlur: {fileID: 2100000, guid: 608b85e2f10678545a56b9dcaf3275dd, type: 2}
+  volume:
+  - {fileID: 11400000, guid: b56d638e14ab78e4d8d668aa6dcd2e31, type: 2}
+  - {fileID: 11400000, guid: 48ab4486beb174a4584699a670bb5964, type: 2}
+  mask: {fileID: 0}
+  vignette:
+  - {fileID: 0}
+  - {fileID: 0}
+  aberration:
+  - {fileID: 0}
+  - {fileID: 0}
+  colorAdjustments:
+  - {fileID: 0}
+  - {fileID: 0}
+  baseVignette: 0.4
+  vignetteIncreaseRate: 0.1
+  insanityIncreaseRate: 0.01
+  mrCrossy: {fileID: 0}
+  increasingInsanity: 1
+  reducingInsanity: 0
+--- !u!114 &3529918932757500698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2629922956381282759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 929ec0948db3c3b40b45ee8e9d981a2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sectionStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: AnimationControl, Assembly-CSharp
+        m_MethodName: TutorialAnimationsTrue
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 0.7.1
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1948342450}
+        m_TargetAssemblyTypeName: AudioEvents, Assembly-CSharp
+        m_MethodName: Warning
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  steppingAway:
+    m_PersistentCalls:
+      m_Calls: []
+  raycastEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  needsRaycast: 0
+  needsSecondRaycast: 0
+  needsCheck: 0
+  tutorialClues: []
