@@ -4,9 +4,16 @@ using UnityEngine;
 
 public class AnimationControl : MonoBehaviour
 {
-    public void OpenGate()
+    public void ControlGate(bool open)
     {
-        GetComponent<Animator>().SetBool("OpenGate", true);
+        if (open)
+        {
+            GetComponent<Animator>().SetBool("OpenGate", open);
+        }
+        else
+        {
+            GetComponent<Animator>().SetBool("OpenGate", open);
+        }
     }
 
     public void TutorialAnimationsTrue(string conName)

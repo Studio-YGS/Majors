@@ -113,7 +113,7 @@ public class FootstepDetector : MonoBehaviour
         if (textureValues[0] > 0)
         {
             //Debug.Log("Desert Grass - volume:" + textureValues[1]);
-            FMODUnity.RuntimeManager.PlayOneShot("event:/Footstep/Cobblestone");
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Footstep/Grass");
         }
         else if (textureValues[1] > 0)
         {
@@ -128,12 +128,12 @@ public class FootstepDetector : MonoBehaviour
         else if (textureValues[3] > 0)
         {
             //Debug.Log("leaf_Forest - volume:" + textureValues[6]);
-            FMODUnity.RuntimeManager.PlayOneShot("event:/Footstep/Cobblestone");
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Footstep/Grass");
         }
         else if (textureValues[4] > 0)
         {
             //Debug.Log("newlayer - volume:" + textureValues[7]);
-            FMODUnity.RuntimeManager.PlayOneShot("event:/Footstep/Cobblestone");
+            FMODUnity.RuntimeManager.PlayOneShot("event:/Footstep/Gravel");
         }
     }
 

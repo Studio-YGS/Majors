@@ -19,8 +19,7 @@ public class TutorialController : MonoBehaviour
 
     EventInstance eventInstance;
 
-    [SerializeField]
-    GameObject[] objectsToSwitchOn;
+    public GameObject[] objectsToSwitchOn;
 
     [SerializeField]
     TextMeshProUGUI conLetter;
@@ -88,18 +87,20 @@ public class TutorialController : MonoBehaviour
         conLetter.text = "[" + letter + "]";
     }
 
-    public void CrossyWait(float waitTime)
+    public void CrossyWait()
     {
-        StartCoroutine(WaitForCrossy(waitTime));
+        StartCoroutine(WaitForCrossy());
     }
 
-    IEnumerator WaitForCrossy(float waitTime)
+    IEnumerator WaitForCrossy()
     {
+        yield return new WaitForSeconds(5f);
+
         eventInstance = RuntimeManager.CreateInstance("event:/MR_C_Tutorial/TUT.0.6");
 
         eventInstance.start();
 
-        yield return new WaitForSeconds(waitTime);
+        yield return new WaitForSeconds(60f);
 
         journalController.EnableJournal();
         journalController.OpenHowTo();

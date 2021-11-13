@@ -20,6 +20,7 @@ public class OverseerController : MonoBehaviour
     public EmitterRef emitter;
     EventInstance eventInstance;
 
+    public bool deady = false;
     
     #region Fields
     [SerializeField] private bool startOnAwake;
@@ -31,6 +32,7 @@ public class OverseerController : MonoBehaviour
     private GameObject m_Observer;
     [SerializeField] private GameObject m_Crossy;
     [SerializeField] private GameObject m_TitanCrossy;
+    [SerializeField] private GameObject m_TitanHead;
     [SerializeField] private GameObject m_Player;
     public CrossyStreetStalk m_StalkStreet;
     //[Space(10)]
@@ -118,7 +120,7 @@ public class OverseerController : MonoBehaviour
     private float storedDist = 0;
     bool vignetteActivated = false;
     float pathDistance = 100f;
-    bool playedTitanLine = false;
+    [SerializeField] bool playedTitanLine = false;
     private void Awake()
     {
         m_Observer = gameObject;
@@ -178,8 +180,8 @@ public class OverseerController : MonoBehaviour
 
         if(!m_IsTutorial)
         {
-            if (m_State >= 1) CrossyFMODFiddling(crossyAgent, m_Player.transform.position, m_State, false);
-            else if (m_State == -1) TitanCrossyVoiceLines();
+            if (m_State >= 1) CrossyFMODFiddling(crossyAgent, m_Player.transform.position, m_State, deady);
+            if (m_State == -1) TitanCrossyVoiceLines();
         }
 
         
@@ -268,6 +270,9 @@ public class OverseerController : MonoBehaviour
 
     public void CrossyFMODFiddling(NavMeshAgent agent, Vector3 playerPos, int state, bool dead)
     {
+        CrossKeyManager key = FindObjectOfType<CrossKeyManager>();
+
+        bool hasChased = false;
         
         pathDistance = Mathf.Clamp(pathDistance, 0f, 100f);
 
@@ -291,18 +296,46 @@ public class OverseerController : MonoBehaviour
         }
         else emitter.Target.SetParameter(distanceParamName, 100f);
 
-        if (state == 3)
+        if (state == 3 || key.puzzleOn)
         {
+            hasChased = true;
             emitter.Target.SetParameter(chaseParamName, 0f);
+            Debug.Log("Chasing music");
         }
-        else emitter.Target.SetParameter(chaseParamName, 1f);
+        else if (!m_PlayerInHouse)
+        {
+            hasChased = false;
+            emitter.Target.SetParameter(chaseParamName, 1f);
+            Debug.Log("Stopped Chasing music");
+        }
 
         if (dead)
         {
             emitter.Target.SetParameter(deadParamName, 0f);
+            Debug.Log("DEAD SOUND");
         }
         else emitter.Target.SetParameter(deadParamName, 1f);
 
+        if (m_PlayerInHouse)
+        {
+            if (hasChased)
+            {
+                StartCoroutine(WaitForPuzzleOff());
+            }
+        }
+
+        IEnumerator WaitForPuzzleOff()
+        {
+            while (key.puzzleOn)
+            {
+                yield return null;
+            }
+
+            hasChased = false;
+            emitter.Target.SetParameter(deadParamName, 0f);
+            Debug.Log("DEAD SOUND");
+            StopCoroutine(WaitForPuzzleOff());
+        }
     }
     #endregion
 
@@ -313,16 +346,24 @@ public class OverseerController : MonoBehaviour
     {
         if (titan.animator.GetCurrentAnimatorStateInfo(0).IsName("TitanCrossyIdle") && !playedTitanLine)
         {
-            eventInstance = RuntimeManager.CreateInstance("event:/MR_C_Titan/Titan_Oneliners");
             float probability = Random.Range(0f, 1f);
+            Debug.Log("TitanFMOD probability: " + probability);
             if (probability < m_TitanVoiceLineChance)
             {
+                eventInstance = RuntimeManager.CreateInstance("event:/MR_C_Titan/Titan_Oneliners");
+                eventInstance.set3DAttributes(RuntimeUtils.To3DAttributes(m_TitanHead));
+                Debug.Log("TitanFMOD TitanPlayLine");
                 eventInstance.start();
             }
 
             playedTitanLine = true;
         }
-        else if(titan.animator.GetCurrentAnimatorStateInfo(0).IsName("TitanCrossyIdleHidden")) playedTitanLine = false;
+        else if (titan.animator.GetCurrentAnimatorStateInfo(0).IsName("TitanCrossyIdleHidden")) 
+        {
+            Debug.Log("TitanFMOD TitanPlayReset");
+            eventInstance.release();
+            playedTitanLine = false; 
+        }
     }
 
     #endregion
