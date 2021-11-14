@@ -62,9 +62,9 @@ public class OverseerController : MonoBehaviour
     private bool m_HideTitan;
 
     [Header("FMOD Variables")]
-    [SerializeField] private string distanceParamName = "Distance";
-    [SerializeField] private string chaseParamName = "IsChasing";
-    [SerializeField] private string deadParamName = "isDead";
+    public string distanceParamName = "Distance";
+    public string chaseParamName = "IsChasing";
+    public string deadParamName = "isDead";
 
     [Range(0,1)] [SerializeField] private float m_FMODDistanceMod = 1f;
 
@@ -180,7 +180,7 @@ public class OverseerController : MonoBehaviour
 
         if(!m_IsTutorial)
         {
-            if (m_State >= 1) CrossyFMODFiddling(crossyAgent, m_Player.transform.position, m_State, deady);
+            if (m_State >= 1 || keyMan.puzzleOn) CrossyFMODFiddling(crossyAgent, m_Player.transform.position, m_State, deady);
             if (m_State == -1) TitanCrossyVoiceLines();
         }
 

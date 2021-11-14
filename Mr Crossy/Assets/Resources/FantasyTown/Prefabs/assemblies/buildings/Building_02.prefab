@@ -270,7 +270,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 719879121}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.16412385, y: 0.202, z: 0.545}
+  m_LocalPosition: {x: -0.1641, y: 0.202, z: 0.658}
   m_LocalScale: {x: 0.0880946, y: 0.34026873, z: 0.016257}
   m_Children: []
   m_Father: {fileID: 1726396798}
@@ -1124,7 +1124,6 @@ GameObject:
   - component: {fileID: 1726396801}
   - component: {fileID: 1726396800}
   - component: {fileID: 1726396799}
-  - component: {fileID: 3003439707162093987}
   m_Layer: 0
   m_Name: House Toggle
   m_TagString: Untagged
@@ -1207,8 +1206,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.7610702, y: 1, z: 1.4761521}
-  m_Center: {x: 0.023762973, y: 0, z: -0.27002817}
+  m_Size: {x: 0.7610702, y: 1, z: 1.3751826}
+  m_Center: {x: 0.023762973, y: 0, z: -0.3205131}
 --- !u!114 &1726396799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1223,18 +1222,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   houseInternals: {fileID: 0}
   audSwitcher: {fileID: 719879121}
---- !u!114 &3003439707162093987
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1726396797}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1761458314
 GameObject:
   m_ObjectHideFlags: 0
@@ -14699,7 +14686,6 @@ GameObject:
   - component: {fileID: 4434541317486912}
   - component: {fileID: 33957127835707338}
   - component: {fileID: 23353160194558120}
-  - component: {fileID: 726760483457966067}
   m_Layer: 15
   m_Name: floor_02_3x3m (1)
   m_TagString: Cael_Floor
@@ -14770,18 +14756,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &726760483457966067
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1704295631444958}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1705606689830794
 GameObject:
   m_ObjectHideFlags: 0
@@ -15213,7 +15187,6 @@ GameObject:
   - component: {fileID: 65201656522468788}
   - component: {fileID: 1088255212}
   - component: {fileID: 1088255215}
-  - component: {fileID: 1100612365}
   m_Layer: 0
   m_Name: 'door_wing_c '
   m_TagString: Untagged
@@ -15334,25 +15307,15 @@ MonoBehaviour:
   rotationVal: 0
   openSpeed: 10
   closeDistance: 3
+  doorclose: {fileID: 166728590257356009}
   isSafeHouse: 0
   spawnLeft: 0
   spawnRight: 0
   spawnBehind: 0
+  spawnInfront: 0
   mrCrossy: {fileID: 1766410105212260, guid: 7771d473bdbab0747a713221d773e089, type: 3}
   createdMrCrossy: {fileID: 0}
   puzzleOn: 0
---- !u!114 &1100612365
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1732038817572576}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1733696467050366
 GameObject:
   m_ObjectHideFlags: 0
@@ -58748,7 +58711,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1655849632259688464, guid: 16e348f1e23dcab4688f6023626710b7, type: 3}
       propertyPath: UID
-      value: -1580605043
+      value: -368056465
       objectReference: {fileID: 0}
     - target: {fileID: 7515512456568480915, guid: 16e348f1e23dcab4688f6023626710b7, type: 3}
       propertyPath: m_Range
@@ -58830,7 +58793,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1930961226, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: UID
-      value: 753096002
+      value: -1917310834
       objectReference: {fileID: 0}
     - target: {fileID: 1260673417133536, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: m_Name
@@ -58953,6 +58916,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5390543055913031766, guid: 78b4e689916708845baea328fcc72b2e, type: 3}
   m_PrefabInstance: {fileID: 3456894054561496196}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &166728590257356009 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3290174296642338925, guid: 78b4e689916708845baea328fcc72b2e, type: 3}
+  m_PrefabInstance: {fileID: 3456894054561496196}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &9165042632792368087
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -58962,7 +58936,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1655849632259688464, guid: 16e348f1e23dcab4688f6023626710b7, type: 3}
       propertyPath: UID
-      value: -390039838
+      value: -1343809443
       objectReference: {fileID: 0}
     - target: {fileID: 7623433157263152671, guid: 16e348f1e23dcab4688f6023626710b7, type: 3}
       propertyPath: m_Name

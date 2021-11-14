@@ -11073,7 +11073,6 @@ GameObject:
   - component: {fileID: 65262028949317858}
   - component: {fileID: 868883316}
   - component: {fileID: 868883315}
-  - component: {fileID: 1110297029}
   m_Layer: 0
   m_Name: door_wing_c
   m_TagString: Untagged
@@ -11194,25 +11193,15 @@ MonoBehaviour:
   rotationVal: 0
   openSpeed: 10
   closeDistance: 3
+  doorclose: {fileID: 5512784625663753445}
   isSafeHouse: 0
   spawnLeft: 0
   spawnRight: 0
   spawnBehind: 0
+  spawnInfront: 0
   mrCrossy: {fileID: 1766410105212260, guid: 7771d473bdbab0747a713221d773e089, type: 3}
   createdMrCrossy: {fileID: 0}
   puzzleOn: 0
---- !u!114 &1110297029
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1935141538925360}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1955384752766818
 GameObject:
   m_ObjectHideFlags: 0
@@ -97128,6 +97117,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78b4e689916708845baea328fcc72b2e, type: 3}
+--- !u!114 &5512784625663753445 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3290174296642338925, guid: 78b4e689916708845baea328fcc72b2e, type: 3}
+  m_PrefabInstance: {fileID: 7000938527593659528}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &3163596386091787486 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5390543055913031766, guid: 78b4e689916708845baea328fcc72b2e, type: 3}

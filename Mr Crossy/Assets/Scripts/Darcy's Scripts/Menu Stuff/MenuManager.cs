@@ -37,7 +37,7 @@ public class MenuManager : MonoBehaviour
 
     void Update()
     {
-        if (!mainMenu)
+        if (!mainMenu && !FindObjectOfType<CrossKeyManager>().puzzleOn)
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
@@ -79,6 +79,8 @@ public class MenuManager : MonoBehaviour
         RuntimeManager.PauseAllEvents(true);
 
         streetName.SetActive(false);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
 
         Time.timeScale = 0f;
     }
@@ -102,6 +104,8 @@ public class MenuManager : MonoBehaviour
         RuntimeManager.PauseAllEvents(false);
 
         streetName.SetActive(true);
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Confined;
 
         Time.timeScale = defTimeScale;
     }

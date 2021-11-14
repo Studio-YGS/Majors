@@ -45,7 +45,8 @@ public class JournalOnSwitch : MonoBehaviour
         if (!journalController.disabled)
         {
             fpc.DisableController();
-
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
             pauseMenu.streetName.SetActive(false);
 
             //paper sound
@@ -61,7 +62,8 @@ public class JournalOnSwitch : MonoBehaviour
         if (!journalController.disabled)
         {
             fpc.EnableController();
-
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Confined;
             pauseMenu.streetName.SetActive(true);
 
             //paper sound

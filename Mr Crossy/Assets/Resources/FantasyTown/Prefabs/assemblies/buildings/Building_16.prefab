@@ -209,7 +209,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 195989151}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0735, y: -0.123, z: 0.49}
+  m_LocalPosition: {x: 0.0735, y: -0.123, z: 0.594}
   m_LocalScale: {x: 0.0880946, y: 0.34026873, z: 0.016257}
   m_Children: []
   m_Father: {fileID: 1618811453}
@@ -855,7 +855,6 @@ GameObject:
   - component: {fileID: 1618811451}
   - component: {fileID: 1618811450}
   - component: {fileID: 1618811449}
-  - component: {fileID: 1922119176}
   m_Layer: 0
   m_Name: House Toggle (16)
   m_TagString: Untagged
@@ -938,8 +937,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.7610702, y: 1.321273, z: 1.4761521}
-  m_Center: {x: 0.023762973, y: -0.16063796, z: -0.27002814}
+  m_Size: {x: 0.7610702, y: 1.321273, z: 1.3667392}
+  m_Center: {x: 0.023762971, y: -0.16063796, z: -0.324735}
 --- !u!114 &1618811449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -954,18 +953,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   houseInternals: {fileID: 0}
   audSwitcher: {fileID: 195989151}
---- !u!114 &1922119176
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1618811448}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1618919186
 GameObject:
   m_ObjectHideFlags: 0
@@ -2960,7 +2947,6 @@ GameObject:
   - component: {fileID: 65531535341091042}
   - component: {fileID: 1961050897}
   - component: {fileID: 1961050900}
-  - component: {fileID: 403975255}
   m_Layer: 0
   m_Name: door_wing_b
   m_TagString: Untagged
@@ -3081,25 +3067,15 @@ MonoBehaviour:
   rotationVal: 0
   openSpeed: 10
   closeDistance: 3
+  doorclose: {fileID: 9000658557754704563}
   isSafeHouse: 0
   spawnLeft: 0
   spawnRight: 0
   spawnBehind: 0
+  spawnInfront: 0
   mrCrossy: {fileID: 1766410105212260, guid: 7771d473bdbab0747a713221d773e089, type: 3}
   createdMrCrossy: {fileID: 0}
   puzzleOn: 0
---- !u!114 &403975255
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1195920453281526}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1201196217281900
 GameObject:
   m_ObjectHideFlags: 0
@@ -32927,6 +32903,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78b4e689916708845baea328fcc72b2e, type: 3}
+--- !u!114 &9000658557754704563 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3290174296642338925, guid: 78b4e689916708845baea328fcc72b2e, type: 3}
+  m_PrefabInstance: {fileID: 5855188943664857822}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1985736739474725512 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5390543055913031766, guid: 78b4e689916708845baea328fcc72b2e, type: 3}
@@ -32945,7 +32932,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1930961226, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: UID
-      value: 1668867353
+      value: 1986770009
       objectReference: {fileID: 0}
     - target: {fileID: 1260673417133536, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: m_Name
@@ -33015,7 +33002,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1930961226, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: UID
-      value: 1358735516
+      value: 1124681674
       objectReference: {fileID: 0}
     - target: {fileID: 1260673417133536, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: m_Name
@@ -33081,11 +33068,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3687494349538049729, guid: f5626199ba1c75148a6842d88c50e199, type: 3}
       propertyPath: UID
-      value: 325487747
+      value: 1227762393
       objectReference: {fileID: 0}
     - target: {fileID: 5502804677015942778, guid: f5626199ba1c75148a6842d88c50e199, type: 3}
       propertyPath: UID
-      value: 1592007298
+      value: 1918860707
       objectReference: {fileID: 0}
     - target: {fileID: 5676606486502609884, guid: f5626199ba1c75148a6842d88c50e199, type: 3}
       propertyPath: m_RootOrder

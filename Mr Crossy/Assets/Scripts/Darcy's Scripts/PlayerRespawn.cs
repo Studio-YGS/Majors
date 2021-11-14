@@ -77,6 +77,7 @@ public class PlayerRespawn : MonoBehaviour
         respawningText.SetActive(false);
 
         player.gameObject.SetActive(true);
+        player.enabled = true;
         player.EnableController();
 
         journal.EnableJournal();
