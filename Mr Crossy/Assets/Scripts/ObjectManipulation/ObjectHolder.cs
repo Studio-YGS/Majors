@@ -159,7 +159,7 @@ public class ObjectHolder : MonoBehaviour
             }
         }
 
-        if (thisObjectHeld)
+        if (thisObjectHeld && !FindObjectOfType<CrossKeyManager>().puzzleOn)
         {
             if (Input.GetMouseButtonDown(1))
             {
