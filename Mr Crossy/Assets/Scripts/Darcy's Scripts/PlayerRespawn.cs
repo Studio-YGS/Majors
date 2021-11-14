@@ -19,12 +19,14 @@ public class PlayerRespawn : MonoBehaviour
     GameObject respawningText;
 
     bool hasMoved = false;
+    OverseerController seer;
 
     void Start()
     {
         Debug.Log("starting");
         originalposition = crossyPosition.position;
         Debug.Log("set position" + CrossyController.crossyTree.gameObject.name);
+        seer = FindObjectOfType<OverseerController>();
     }
 
     public void Register()
@@ -79,7 +81,9 @@ public class PlayerRespawn : MonoBehaviour
         player.gameObject.SetActive(true);
         player.enabled = true;
         player.EnableController();
-
+        seer.emitter.Target.SetParameter(seer.deadParamName, 1f);
+        seer.emitter.Target.SetParameter(seer.distanceParamName, 100f);
+        seer.emitter.Target.SetParameter(seer.chaseParamName, 1f);
         journal.EnableJournal();
         FindObjectOfType<OverseerController>().deady = false;
     }

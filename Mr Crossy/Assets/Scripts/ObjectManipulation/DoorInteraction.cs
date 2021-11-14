@@ -91,7 +91,7 @@ public class DoorInteraction : MonoBehaviour
                             {
                                 TreeMalarkey.SendEventToTree(CrossyController.crossyTree, "SuperDespawn");
                             }
-                            Time.timeScale = 0.1f;
+                            Time.timeScale = 0.05f;
                             Time.fixedDeltaTime = Time.timeScale * 0.02f;
 
                             
@@ -606,7 +606,7 @@ public class DoorInteraction : MonoBehaviour
 
     public IEnumerator ReturnTimeScale()
     {
-        while (Time.timeScale <= 0.9f)
+        while (Time.timeScale <= 0.99f)
         {
             Time.timeScale = Mathf.Lerp(Time.timeScale, 1, 0.005f);
             Time.fixedDeltaTime = Time.timeScale * 0.02f;

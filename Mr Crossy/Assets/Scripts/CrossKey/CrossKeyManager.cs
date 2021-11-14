@@ -314,8 +314,7 @@ public class CrossKeyManager : MonoBehaviour
         Time.timeScale = 1;
         Time.fixedDeltaTime = 0.02f;
         seer.deady = true;
-        //seer.emitter.Target.SetParameter(seer.distanceParamName, 100f);
-        //emitter.Target.SetParameter(chaseParamName, 1f);
+        
         seer.emitter.Target.SetParameter(seer.deadParamName, 0f);
         FindObjectOfType<PlayerRespawn>().PlayerDie();
         puzzleOn = false;

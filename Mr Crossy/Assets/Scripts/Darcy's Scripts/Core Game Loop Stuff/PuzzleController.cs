@@ -37,6 +37,8 @@ public class PuzzleController : MonoBehaviour
 
     public bool tutorial;
 
+    public WordCollision wordCollision;
+
     void Start()
     {
         uiWord = " _ _ _ _";
@@ -83,8 +85,7 @@ public class PuzzleController : MonoBehaviour
             }
         }
     }
-
-    void PlayerWordControl() //this method forms the players word as they place objects, and also controls the win condition
+    public void PlayerWordControl() //this method forms the players word as they place objects, and also controls the win condition
     {
         playersWord = "";
         int playersWordLength;
@@ -118,6 +119,7 @@ public class PuzzleController : MonoBehaviour
         if(playersWord == word) //the script then checks to see if the players formed word is the same as the puzzle's answer
         {
             CompletionCheck();
+            wordCollision.puzzleComplete = true;
         }
 
         if (playersWordLength == wordLength && playersWord != word) //if the player has put all the letters on the altar but hasnt gotten the word right, it counts down a mistake.
@@ -180,13 +182,36 @@ public class PuzzleController : MonoBehaviour
 
         audio.WordSpeltCorrectly();
 
-        for(int i = 0; i < storedObjects.Count; i++)
+        if(storedObjects.Count > 0)
         {
-            storedObjects[i].GetComponent<Outline>().enabled = false;
-            storedObjects[i].GetComponentInChildren<ObjectPlacement>().enabled = false;
-            storedObjects[i].GetComponent<DetermineLetter>().storedObject.GetComponent<ObjectHolder>().enabled = false;
-            storedObjects[i].GetComponent<DetermineLetter>().storedObject.GetComponent<Outline>().enabled = false;
+            for (int i = 0; i < storedObjects.Count; i++)
+            {
+                if (storedObjects[i] != null)
+                {
+                    if (storedObjects[i].GetComponent<Outline>())
+                    {
+                        storedObjects[i].GetComponent<Outline>().enabled = false;
+                    }
+                    if (storedObjects[i].GetComponentInChildren<ObjectPlacement>())
+                    {
+                        storedObjects[i].GetComponentInChildren<ObjectPlacement>().enabled = false;
+                    }
+                    if (storedObjects[i].GetComponent<DetermineLetter>().storedObject.GetComponent<ObjectHolder>())
+                    {
+                        storedObjects[i].GetComponent<DetermineLetter>().storedObject.GetComponent<ObjectHolder>().enabled = false;
+                    }
+                    if (storedObjects[i].GetComponent<DetermineLetter>().storedObject.GetComponent<Outline>())
+                    {
+                        storedObjects[i].GetComponent<DetermineLetter>().storedObject.GetComponent<Outline>().enabled = false;
+                    }
+                }
+                    
+               
+                
+            }
         }
+
+        
 
         storedObjects.Clear();
 

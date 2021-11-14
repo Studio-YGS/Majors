@@ -176,6 +176,17 @@ public class OverseerController : MonoBehaviour
             vignetteActivated = false;
             Debug.Log("VignetteNooooooo");
             distootle.DecreaseVignette();
+            if (keyMan.doorsLocked)
+            {
+                keyMan.doorsLocked = false;
+            }
+        }
+        else if(m_State != 3)
+        {
+            if (keyMan.doorsLocked)
+            {
+                keyMan.doorsLocked = false;
+            }
         }
 
         if(!m_IsTutorial)

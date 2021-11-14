@@ -5,6 +5,7 @@ using UnityEngine;
 public class WordCollision : MonoBehaviour
 {
     public string word, street;
+    [HideInInspector]public bool puzzleComplete;
 
     [SerializeField, Tooltip("The object on the canvas with the TMP components as its children")]
     GameObject wordObject;
@@ -33,6 +34,11 @@ public class WordCollision : MonoBehaviour
             puzzleController.currentStreet = street;
             puzzleController.SetUpLetters();
             puzzleController.storedObjects.Clear();
+            puzzleController.wordCollision = gameObject.GetComponent<WordCollision>();
+            if (!puzzleComplete)
+            {
+                puzzleController.PlayerWordControl();
+            }
 
             menuManager.streetName.SetActive(true);
 
