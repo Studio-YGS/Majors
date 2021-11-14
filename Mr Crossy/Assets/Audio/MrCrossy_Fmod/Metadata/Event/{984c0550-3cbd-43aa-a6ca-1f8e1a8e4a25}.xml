@@ -23,7 +23,7 @@
 			<destination>{085d889b-b448-450d-82b1-04d20ad9a021}</destination>
 		</relationship>
 		<relationship name="markerTracks">
-			<destination>{0b5958dc-ddfa-4068-a748-aa4a86a2ddfe}</destination>
+			<destination>{8a2a5e76-ca8e-4af6-b6b5-bb847821575f}</destination>
 		</relationship>
 		<relationship name="groupTracks">
 			<destination>{85eecfe5-4c99-435f-961d-8371efcc6926}</destination>
@@ -57,7 +57,7 @@
 		</relationship>
 	</object>
 	<object class="EventAutomatableProperties" id="{085d889b-b448-450d-82b1-04d20ad9a021}" />
-	<object class="MarkerTrack" id="{0b5958dc-ddfa-4068-a748-aa4a86a2ddfe}" />
+	<object class="MarkerTrack" id="{8a2a5e76-ca8e-4af6-b6b5-bb847821575f}" />
 	<object class="GroupTrack" id="{85eecfe5-4c99-435f-961d-8371efcc6926}">
 		<relationship name="modules">
 			<destination>{cbcd24bb-f429-43b4-b2c8-d57f75dcfd73}</destination>
@@ -101,7 +101,7 @@
 	</object>
 	<object class="EventMixerGroup" id="{9ee560e5-7d2b-4f47-a733-892ad2fd0971}">
 		<property name="volume">
-			<value>2</value>
+			<value>-13.5</value>
 		</property>
 		<property name="name">
 			<value>Audio 1</value>
@@ -130,7 +130,7 @@
 			<destination>{0e3506ad-bee7-4ac6-bddc-9bdd67db0ad8}</destination>
 		</relationship>
 		<relationship name="markerTrack">
-			<destination>{0b5958dc-ddfa-4068-a748-aa4a86a2ddfe}</destination>
+			<destination>{8a2a5e76-ca8e-4af6-b6b5-bb847821575f}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusEffectChain" id="{46e14db0-eeed-4c27-a98a-77fb2dfc67e8}">
@@ -147,8 +147,11 @@
 		<property name="initialValue">
 			<value>-80</value>
 		</property>
+		<property name="attackTime">
+			<value>2000</value>
+		</property>
 		<property name="releaseTime">
-			<value>3200</value>
+			<value>5000</value>
 		</property>
 		<property name="finalValue">
 			<value>-80</value>
