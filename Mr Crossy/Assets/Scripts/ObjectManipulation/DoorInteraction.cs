@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using TMPro;
+using FMODUnity;
 
 [RequireComponent(typeof(Rigidbody))]
 public class DoorInteraction : MonoBehaviour
@@ -31,12 +32,14 @@ public class DoorInteraction : MonoBehaviour
     public float closeDistance = 45;
     //public bool locked;
     bool handon;
+    public StudioEventEmitter doorclose;
 
     [Header("Cross-Key Settings")]
     public bool isSafeHouse;
     public bool spawnLeft;
     public bool spawnRight;
     public bool spawnBehind;
+    public bool spawnInfront;
     public GameObject mrCrossy;
     [HideInInspector] public GameObject createdMrCrossy;
     Vector3 randomPos;
@@ -84,13 +87,14 @@ public class DoorInteraction : MonoBehaviour
                             reticle.SetActive(false);
                             hand.SetActive(false);
                             lockCheck.SetActive(false);
-                            Time.timeScale = 0.1f;
-                            Time.fixedDeltaTime = Time.timeScale * 0.02f;
-
                             if (CrossyController.crossyTree)
                             {
                                 TreeMalarkey.SendEventToTree(CrossyController.crossyTree, "SuperDespawn");
                             }
+                            Time.timeScale = 0.1f;
+                            Time.fixedDeltaTime = Time.timeScale * 0.02f;
+
+                            
 
                             if (zForward)
                             {
@@ -98,6 +102,12 @@ public class DoorInteraction : MonoBehaviour
                                 {
                                     randomPos = new Vector3(15, 0, Random.Range(-5, 5));
                                     createdMrCrossy = Instantiate(mrCrossy, transform.position - transform.forward * randomPos.x + transform.right * randomPos.z, Quaternion.LookRotation(player.position - (transform.position - transform.forward * randomPos.x + transform.right * randomPos.z)));
+
+                                }
+                                else if (spawnInfront)
+                                {
+                                    randomPos = new Vector3(15, 0, Random.Range(-5, 5));
+                                    createdMrCrossy = Instantiate(mrCrossy, transform.position + transform.forward * randomPos.x + transform.right * randomPos.z, Quaternion.LookRotation(player.position - (transform.position - transform.forward * randomPos.x + transform.right * randomPos.z)));
 
                                 }
                                 else if (spawnLeft)
@@ -117,6 +127,12 @@ public class DoorInteraction : MonoBehaviour
                                 {
                                     randomPos = new Vector3(Random.Range(-5, 5), 0, 15);
                                     createdMrCrossy = Instantiate(mrCrossy, transform.position + transform.forward * randomPos.x + transform.right * randomPos.z, Quaternion.LookRotation(player.position - (transform.position + transform.forward * randomPos.x + transform.right * randomPos.z)));
+
+                                }
+                                else if (spawnInfront)
+                                {
+                                    randomPos = new Vector3(Random.Range(-5, 5), 0, 15);
+                                    createdMrCrossy = Instantiate(mrCrossy, transform.position + transform.forward * randomPos.x - transform.right * randomPos.z, Quaternion.LookRotation(player.position - (transform.position + transform.forward * randomPos.x + transform.right * randomPos.z)));
 
                                 }
                                 else if (spawnLeft)
@@ -174,7 +190,11 @@ public class DoorInteraction : MonoBehaviour
 
         if (puzzleOn)
         {
-            createdMrCrossy.GetComponent<NavMeshAgent>().SetDestination(player.position);
+            if (createdMrCrossy)
+            {
+                createdMrCrossy.GetComponent<NavMeshAgent>().SetDestination(player.position);
+            }
+            
             if (moved)
             {
                 if (zForward)
@@ -247,22 +267,30 @@ public class DoorInteraction : MonoBehaviour
             
             if(Vector3.Distance(transform.position, player.position) > 5)
             {
-                FindObjectOfType<CrossKeyManager>().PuzzleDeath(createdMrCrossy);
+                if (createdMrCrossy)
+                {
+                    FindObjectOfType<CrossKeyManager>().PuzzleDeath(createdMrCrossy);
+                }
+                
                 puzzleTimer = false;
             }
             
         }
         if (puzzleTimer /*&& createdMrCrossy*/)
         {
-            if (zForward)
+            if (createdMrCrossy)
             {
-                createdMrCrossy.GetComponent<NavMeshAgent>().SetDestination(transform.position - transform.forward + transform.right *0.5f);
+                if (zForward)
+                {
+                    createdMrCrossy.GetComponent<NavMeshAgent>().SetDestination(transform.position - transform.forward + transform.right * 0.5f);
+                }
+                else if (xForward)
+                {
+                    createdMrCrossy.GetComponent<NavMeshAgent>().SetDestination(transform.position + transform.right);
+                }
+                FindObjectOfType<CrossyCrossKeyVariant>().lookAtTransform = transform;
             }
-            else if (xForward)
-            {
-                createdMrCrossy.GetComponent<NavMeshAgent>().SetDestination(transform.position + transform.right);
-            }
-            FindObjectOfType<CrossyCrossKeyVariant>().lookAtTransform = transform;
+            
             
             if (moved)
             {
@@ -306,9 +334,15 @@ public class DoorInteraction : MonoBehaviour
                     if (Input.GetMouseButtonDown(0))
                     {
                         moveable = true;
+                        if (moved)
+                        {
+                            StopCoroutine("WaitToClose");
+                            StartCoroutine("WaitToClose");
+                        }
                         if (!moved)
                         {
-                            StartCoroutine(WaitToClose());
+                            
+                            StartCoroutine("WaitToClose");
                             moved = true;
                         }
                         Vector3 direction = transform.parent.position - player.position;
@@ -533,6 +567,11 @@ public class DoorInteraction : MonoBehaviour
 
             yield return null;
         }
+        if (doorclose)
+        {
+            doorclose.Play();
+        }
+        
         rotationVal = 0;
         greaterThan = false;
         lessThan = false;
@@ -543,9 +582,9 @@ public class DoorInteraction : MonoBehaviour
     IEnumerator RotateCamToNewPosition()
     {
         
-        while (cam.rotation != Quaternion.Slerp(cam.rotation, Quaternion.LookRotation(createdMrCrossy.transform.position - cam.position), 0.005f))
+        while (cam.rotation != Quaternion.Slerp(cam.rotation, Quaternion.LookRotation(createdMrCrossy.transform.position - cam.position), 0.04f))
         {
-            cam.rotation = Quaternion.Slerp(cam.rotation, Quaternion.LookRotation(createdMrCrossy.transform.position - cam.position), 0.005f);
+            cam.rotation = Quaternion.Slerp(cam.rotation, Quaternion.LookRotation(createdMrCrossy.transform.position - cam.position), 0.04f);
 
             yield return null;
         }
@@ -556,7 +595,7 @@ public class DoorInteraction : MonoBehaviour
     {
         while (cam.rotation != savedCamRot)
         {
-            cam.rotation = Quaternion.Slerp(cam.rotation, savedCamRot, 0.025f);
+            cam.rotation = Quaternion.Slerp(cam.rotation, savedCamRot, 0.3f);
 
             yield return null;
         }

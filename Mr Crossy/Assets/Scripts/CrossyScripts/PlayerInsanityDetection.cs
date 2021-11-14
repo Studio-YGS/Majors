@@ -7,6 +7,7 @@ public class PlayerInsanityDetection : MonoBehaviour
     private MrCrossyDistortion distortion;
 
     private GameObject m_Crossy;
+    OverseerController seer;
     [SerializeField] private Transform m_Camera;
 
     [SerializeField] private float m_FieldOfView;
@@ -30,6 +31,7 @@ public class PlayerInsanityDetection : MonoBehaviour
     void Awake()
     {
         distortion = FindObjectOfType<MrCrossyDistortion>();
+        seer = FindObjectOfType<OverseerController>();
     }
 
     // Update is called once per frame
@@ -48,24 +50,33 @@ public class PlayerInsanityDetection : MonoBehaviour
 
         float distance = Vector3.Distance(transform.position, m_Crossy.transform.position);
         Debug.Log("SANE Insanity Distance: " + distance);
-        if(distance < 40f && distance > 25f)
+        if (!seer.m_PlayerInHouse && seer.State != -1)
         {
-            calledInsane = true;
-            distortion.IncreaseInsanity(m_Crossy);
+            if (distance < 25f && distance > 15f)
+            {
+                calledInsane = true;
+                distortion.IncreaseInsanity(m_Crossy);
+            }
+            else if (distance < 15f && distance > 10f)
+            {
+                distortion.increasingInsanity = false;
+            }
+            else if (distance < 10f)
+            {
+                distortion.LerpInsanity();
+            }
+            else if (distance > 25f && calledInsane)
+            {
+                distortion.ReduceInsanity();
+                calledInsane = false;
+            }
         }
-        else if (distance < 25f && distance > 15f)
-        {
-            distortion.increasingInsanity = false;
-        }
-        else if (distance < 15f)
-        {
-            distortion.LerpInsanity();
-        }
-        else if (distance > 40f && calledInsane)
+        else if (calledInsane)
         {
             distortion.ReduceInsanity();
             calledInsane = false;
         }
+        
         
     }
 }

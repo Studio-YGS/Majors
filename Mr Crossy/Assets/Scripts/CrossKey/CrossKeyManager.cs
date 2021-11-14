@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using FMOD.Studio;
+using FMODUnity;
 
 [System.Serializable]
 public class PuzzleOptions
@@ -35,12 +37,14 @@ public class CrossKeyManager : MonoBehaviour
     [HideInInspector] public Player_Controller controller;
     [HideInInspector] public HeadBob headBob;
     GameObject newCrossKey;
+    OverseerController seer;
 
     void Start()
     {
         cam = FindObjectOfType<Camera>().transform;
         controller = FindObjectOfType<Player_Controller>();
         headBob = FindObjectOfType<HeadBob>();
+        seer = FindObjectOfType<OverseerController>();
     }
 
     
@@ -309,6 +313,11 @@ public class CrossKeyManager : MonoBehaviour
         hintArea.text = "";
         Time.timeScale = 1;
         Time.fixedDeltaTime = 0.02f;
+        seer.deady = true;
+        //seer.emitter.Target.SetParameter(seer.distanceParamName, 100f);
+        //emitter.Target.SetParameter(chaseParamName, 1f);
+        seer.emitter.Target.SetParameter(seer.deadParamName, 0f);
         FindObjectOfType<PlayerRespawn>().PlayerDie();
+        puzzleOn = false;
     }
 }
