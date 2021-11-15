@@ -151,6 +151,8 @@ public class OverseerController : MonoBehaviour
         titan.m_state = m_State;
         titan.hidingTitan = m_HideTitan;
 
+        HouseyBoBousey();
+
         if(m_State == -1 && !m_IsTutorial)
         {
             bool left = LeftRadius();
@@ -192,14 +194,27 @@ public class OverseerController : MonoBehaviour
         if(!m_IsTutorial)
         {
             if (m_State >= 1 || keyMan.puzzleOn) CrossyFMODFiddling(crossyAgent, m_Player.transform.position, m_State, deady);
-            if (m_State == -1) TitanCrossyVoiceLines();
+            if (m_State == -1 && !m_PlayerInHouse) TitanCrossyVoiceLines();
         }
-
-        
-
     }
 
     #region Methods
+
+    public void HouseyBoBousey()
+    {
+        NavMeshHit hit;
+        NavMesh.SamplePosition(m_Player.transform.position, out hit, 1, NavMesh.AllAreas);
+        Debug.Log("NavArea: " + hit.mask.ToString());
+        if (hit.mask == 256)
+        {
+            m_PlayerInHouse = true;
+            if(keyMan.doorsLocked) keyMan.doorsLocked = false;
+        }
+        else if (hit.mask == 8 || hit.mask == 16 || hit.mask == 32)
+        {
+            m_PlayerInHouse = false;
+        }
+    }
 
     public void SetStalkies(CrossyStreetStalk stalky)
     {
