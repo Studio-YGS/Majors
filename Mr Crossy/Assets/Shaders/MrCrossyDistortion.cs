@@ -43,19 +43,19 @@ public class MrCrossyDistortion : MonoBehaviour
             if (increasingInsanity)
             {
                 //Mathf.Lerp(motionBlur.GetFloat("_ScreenXMagnitude"), 0.025f / ((distance / 20) * (distance / 20)), 0.025f);
-                if (motionBlur.GetFloat("_BlurMagnitude") < 0.0035f)
+                if (motionBlur.GetFloat("_BlurMagnitude") < 0.00175f)
                 {
                     motionBlur.SetFloat("_BlurMagnitude", Mathf.Lerp(motionBlur.GetFloat("_BlurMagnitude"), 0.0035f / ((distance / 20) * (distance / 20)), 0.025f));
                 }
-                if (motionBlur.GetFloat("_ScreenXMagnitude") < 0.025f)
+                if (motionBlur.GetFloat("_ScreenXMagnitude") < 0.0125f)
                 {
                     motionBlur.SetFloat("_ScreenXMagnitude", Mathf.Lerp(motionBlur.GetFloat("_ScreenXMagnitude"), 0.025f / ((distance / 20) * (distance / 20)), 0.025f));
                 }
-                if (motionBlur.GetFloat("_ScreenYMagnitude") < 0.025f)
+                if (motionBlur.GetFloat("_ScreenYMagnitude") < 0.0125f)
                 {
                     motionBlur.SetFloat("_ScreenYMagnitude", Mathf.Lerp(motionBlur.GetFloat("_ScreenYMagnitude"), 0.025f / ((distance / 20) * (distance / 20)), 0.025f));
                 }
-                if (screenBlur.GetFloat("_Magnitude") < 0.01f)
+                if (screenBlur.GetFloat("_Magnitude") < 0.005f)
                 {
                     screenBlur.SetFloat("_Magnitude", Mathf.Lerp(screenBlur.GetFloat("_Magnitude"), 0.01f / ((distance / 20) * (distance / 20)), 0.025f));
                 }
@@ -102,11 +102,11 @@ public class MrCrossyDistortion : MonoBehaviour
                 for (int i = 0; i < volume.Length; i++)
                 {
                     aberration[i].active = true;
-                    if (aberration[i].intensity.value < 1 / (distance / 2))
+                    if (aberration[i].intensity.value < 0.5f / (distance / 2))
                     {
                         aberration[i].intensity.value += Time.deltaTime * (distInsanityIncreaseRate * 100f);
                     }
-                    else if (aberration[i].intensity.value > 1 / (distance / 2))
+                    else if (aberration[i].intensity.value > 0.5f / (distance / 2))
                     {
                         aberration[i].intensity.value -= Time.deltaTime * (distInsanityIncreaseRate);
                     }
@@ -192,19 +192,19 @@ public class MrCrossyDistortion : MonoBehaviour
 
     public void LerpInsanity()
     {
-        if (motionBlur.GetFloat("_BlurMagnitude") < 0.0035f)
+        if (motionBlur.GetFloat("_BlurMagnitude") < 0.00175f)
         {
             motionBlur.SetFloat("_BlurMagnitude", motionBlur.GetFloat("_BlurMagnitude") + Time.deltaTime * insanityIncreaseRate);
         }
-        if (motionBlur.GetFloat("_ScreenXMagnitude") < 0.025f)
+        if (motionBlur.GetFloat("_ScreenXMagnitude") < 0.0125f)
         {
             motionBlur.SetFloat("_ScreenXMagnitude", motionBlur.GetFloat("_ScreenXMagnitude") + Time.deltaTime * insanityIncreaseRate);
         }
-        if (motionBlur.GetFloat("_ScreenYMagnitude") < 0.025f)
+        if (motionBlur.GetFloat("_ScreenYMagnitude") < 0.0125f)
         {
             motionBlur.SetFloat("_ScreenYMagnitude", motionBlur.GetFloat("_ScreenYMagnitude") + Time.deltaTime * insanityIncreaseRate);
         }
-        if (screenBlur.GetFloat("_Magnitude") < 0.01f)
+        if (screenBlur.GetFloat("_Magnitude") < 0.005f)
         {
             screenBlur.SetFloat("_Magnitude", screenBlur.GetFloat("_Magnitude") + Time.deltaTime * insanityIncreaseRate);
         }
@@ -212,7 +212,7 @@ public class MrCrossyDistortion : MonoBehaviour
         for (int i = 0; i < volume.Length; i++)
         {
             aberration[i].active = true;
-            if (aberration[i].intensity.value < 1)
+            if (aberration[i].intensity.value < 0.5f)
             {
                 aberration[i].intensity.value += Time.deltaTime * (insanityIncreaseRate * 100f);
             }

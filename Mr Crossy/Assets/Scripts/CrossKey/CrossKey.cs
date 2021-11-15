@@ -14,10 +14,12 @@ public class CrossKey : MonoBehaviour
     [HideInInspector] public string answer;
     public int numOfLetters;
     Transform cam;
+    public Canvas solveCanvas;
     [HideInInspector] public DoorInteraction door;
     void Start()
     {
         cam = FindObjectOfType<Camera>().transform;
+        solveCanvas.worldCamera = FindObjectOfType<Camera>();
     }
 
     // Update is called once per frame
