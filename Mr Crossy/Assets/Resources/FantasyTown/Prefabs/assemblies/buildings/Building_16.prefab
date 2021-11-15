@@ -2732,7 +2732,7 @@ GameObject:
   m_Name: wall_90_basement_9m (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &4700501071597608
@@ -2824,11 +2824,12 @@ GameObject:
   - component: {fileID: 213215020183039958}
   - component: {fileID: 213215020183039959}
   - component: {fileID: 213215020183039952}
+  - component: {fileID: 2724964512033066915}
   m_Layer: 15
   m_Name: floor_03_8x8m_stair_a
   m_TagString: Cael_Floor
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 8
   m_StaticEditorFlags: 121
   m_IsActive: 1
 --- !u!4 &4295439367241288
@@ -2933,6 +2934,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 6.212289, y: 0.2500308, z: 8.000031}
   m_Center: {x: -4.8938727, y: 0.12500022, z: 4.0000005}
+--- !u!114 &2724964512033066915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1176448561346106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1195920453281526
 GameObject:
   m_ObjectHideFlags: 0
@@ -4029,11 +4042,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4809550806071516}
+  - component: {fileID: 6498591914001345702}
   m_Layer: 15
   m_Name: floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 8
   m_StaticEditorFlags: 121
   m_IsActive: 1
 --- !u!4 &4809550806071516
@@ -4054,6 +4068,18 @@ Transform:
   m_Father: {fileID: 4060825447928270}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6498591914001345702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1306843764490998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1309832747674514
 GameObject:
   m_ObjectHideFlags: 0
@@ -7029,7 +7055,7 @@ GameObject:
   m_Name: wall_90_basement_9m (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &4148763144577088
@@ -7438,7 +7464,7 @@ GameObject:
   m_Name: floor_03_8x8m
   m_TagString: Cael_Floor
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 8
   m_StaticEditorFlags: 121
   m_IsActive: 1
 --- !u!4 &4386570137518886
@@ -7638,7 +7664,7 @@ GameObject:
   m_Name: wall_90_basement_9m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 4
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &4581963001066122
@@ -7809,12 +7835,12 @@ GameObject:
   - component: {fileID: 4795229409806820}
   - component: {fileID: 33096611501161508}
   - component: {fileID: 23758409267148306}
-  - component: {fileID: 213708837281110374}
+  - component: {fileID: 923974013882104105}
   m_Layer: 16
   m_Name: wall_90_basement_9m (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &4795229409806820
@@ -7880,7 +7906,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &213708837281110374
+--- !u!114 &923974013882104105
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -7903,12 +7929,13 @@ GameObject:
   - component: {fileID: 4474276364486234}
   - component: {fileID: 33101635339622366}
   - component: {fileID: 23217216624187460}
+  - component: {fileID: 9139793486242949178}
   m_Layer: 16
   m_Name: stone_14_stairs_01_sides
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 1
+  m_NavMeshLayer: 4
+  m_StaticEditorFlags: 41
   m_IsActive: 1
 --- !u!4 &4474276364486234
 Transform:
@@ -7973,6 +8000,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &9139793486242949178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1819607396920364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1825203208731952
 GameObject:
   m_ObjectHideFlags: 0
@@ -8472,11 +8511,12 @@ GameObject:
   - component: {fileID: 4740254719532452}
   - component: {fileID: 33888688491026256}
   - component: {fileID: 23427519020169772}
+  - component: {fileID: 7357387072050401297}
   m_Layer: 15
   m_Name: stairs_a_3m (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 8
   m_StaticEditorFlags: 121
   m_IsActive: 1
 --- !u!4 &4740254719532452
@@ -8543,6 +8583,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &7357387072050401297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1878284562270784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1878664504661778
 GameObject:
   m_ObjectHideFlags: 0
@@ -12844,11 +12896,12 @@ GameObject:
   - component: {fileID: 5683266970859057450}
   - component: {fileID: 5667779923387919090}
   - component: {fileID: 5636706009957759658}
+  - component: {fileID: 5348850769207587788}
   m_Layer: 15
   m_Name: Stairbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 8
   m_StaticEditorFlags: 121
   m_IsActive: 1
 --- !u!4 &5683266970859057450
@@ -12886,6 +12939,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5348850769207587788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5680074590354268114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5680074846994300160
 GameObject:
   m_ObjectHideFlags: 0
@@ -13153,12 +13218,12 @@ GameObject:
   - component: {fileID: 5674846423217488804}
   - component: {fileID: 5667610433965511166}
   - component: {fileID: 5657634026407354956}
-  - component: {fileID: 3036868007426422803}
+  - component: {fileID: 2425120306375362857}
   m_Layer: 15
   m_Name: wood_01_trim_8m_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 8
   m_StaticEditorFlags: 121
   m_IsActive: 1
 --- !u!4 &5674846423217488804
@@ -13224,7 +13289,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &3036868007426422803
+--- !u!114 &2425120306375362857
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -13879,12 +13944,12 @@ GameObject:
   - component: {fileID: 5674639527614470320}
   - component: {fileID: 5667765643933943572}
   - component: {fileID: 5657579623202772574}
-  - component: {fileID: 3036868007426422814}
+  - component: {fileID: 8649401488926341352}
   m_Layer: 15
   m_Name: wood_02_trim_2m (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 8
   m_StaticEditorFlags: 121
   m_IsActive: 1
 --- !u!4 &5674639527614470320
@@ -13950,7 +14015,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &3036868007426422814
+--- !u!114 &8649401488926341352
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -13973,12 +14038,12 @@ GameObject:
   - component: {fileID: 5675074210889933492}
   - component: {fileID: 5666936086567504254}
   - component: {fileID: 5657726837134260016}
-  - component: {fileID: 3036868007426422813}
+  - component: {fileID: 8978094999881226542}
   m_Layer: 15
   m_Name: wood_02_trim_2m (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 8
   m_StaticEditorFlags: 121
   m_IsActive: 1
 --- !u!4 &5675074210889933492
@@ -14044,7 +14109,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &3036868007426422813
+--- !u!114 &8978094999881226542
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -15185,11 +15250,12 @@ GameObject:
   - component: {fileID: 6555864973094186207}
   - component: {fileID: 6521875460147317075}
   - component: {fileID: 6532457639890333049}
+  - component: {fileID: 432597629261649160}
   m_Layer: 15
   m_Name: stairs_a_3m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 8
   m_StaticEditorFlags: 121
   m_IsActive: 1
 --- !u!4 &6555864973094186207
@@ -15256,6 +15322,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &432597629261649160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6552790890001157723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6552795699349161467
 GameObject:
   m_ObjectHideFlags: 0
@@ -15303,7 +15381,7 @@ GameObject:
   m_Name: wood_01_trim_8m_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 8
   m_StaticEditorFlags: 121
   m_IsActive: 1
 --- !u!4 &6549687326497485397
@@ -15529,12 +15607,13 @@ GameObject:
   - component: {fileID: 6549485030174638135}
   - component: {fileID: 6522026009392568569}
   - component: {fileID: 6532406141227181169}
+  - component: {fileID: 8348465718445764917}
   m_Layer: 16
   m_Name: stone_14_stairs_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 1
+  m_NavMeshLayer: 4
+  m_StaticEditorFlags: 41
   m_IsActive: 1
 --- !u!4 &6549485030174638135
 Transform:
@@ -15599,6 +15678,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &8348465718445764917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6552830053665032415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6552831458114733747
 GameObject:
   m_ObjectHideFlags: 0
@@ -15738,11 +15829,12 @@ GameObject:
   - component: {fileID: 6552840885051539770}
   - component: {fileID: 6552840885051539749}
   - component: {fileID: 6552840885051539748}
+  - component: {fileID: 5155927035063135447}
   m_Layer: 15
   m_Name: floor_03_8x8m_stair_a
   m_TagString: Cael_Floor
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 8
   m_StaticEditorFlags: 121
   m_IsActive: 1
 --- !u!4 &6555887857810819413
@@ -15847,6 +15939,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 6.253596, y: 0.2500308, z: 8.000031}
   m_Center: {x: -4.873219, y: 0.12500022, z: 4.0000005}
+--- !u!114 &5155927035063135447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6552840885051539751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6552846858385627429
 GameObject:
   m_ObjectHideFlags: 0
@@ -16444,11 +16548,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6549753016296935361}
+  - component: {fileID: 9018635206107016845}
   m_Layer: 15
   m_Name: floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 8
   m_StaticEditorFlags: 121
   m_IsActive: 1
 --- !u!4 &6549753016296935361
@@ -16469,6 +16574,18 @@ Transform:
   m_Father: {fileID: 4060825447928270}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9018635206107016845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6552974372647417323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6552997253758635325
 GameObject:
   m_ObjectHideFlags: 0
@@ -17596,11 +17713,12 @@ GameObject:
   - component: {fileID: 6555837433153159537}
   - component: {fileID: 6521756598137679691}
   - component: {fileID: 6490734370535273301}
+  - component: {fileID: 378678379815299469}
   m_Layer: 15
   m_Name: Stairbox
   m_TagString: Cael_Stair
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 8
   m_StaticEditorFlags: 121
   m_IsActive: 1
 --- !u!4 &6555837433153159537
@@ -17638,6 +17756,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &378678379815299469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6553139414443337235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6553149758434701477
 GameObject:
   m_ObjectHideFlags: 0
@@ -18250,7 +18380,7 @@ GameObject:
   m_Name: wood_02_trim_2m (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 8
   m_StaticEditorFlags: 121
   m_IsActive: 1
 --- !u!4 &6549480425626872129
@@ -19182,7 +19312,7 @@ GameObject:
   m_Name: wood_02_trim_2m (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 8
   m_StaticEditorFlags: 121
   m_IsActive: 1
 --- !u!4 &6549881785090036549
@@ -20944,11 +21074,12 @@ GameObject:
   - component: {fileID: 6555893160596685019}
   - component: {fileID: 6522281969443953411}
   - component: {fileID: 6493532513922943835}
+  - component: {fileID: 8414594954830732316}
   m_Layer: 16
   m_Name: Stairbox
   m_TagString: Stone
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 4
   m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &6555893160596685019
@@ -20986,6 +21117,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8414594954830732316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6554882143045889571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6554888821053743549
 GameObject:
   m_ObjectHideFlags: 0
@@ -32932,7 +33075,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1930961226, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: UID
-      value: 1986770009
+      value: 1880159355
       objectReference: {fileID: 0}
     - target: {fileID: 1260673417133536, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: m_Name
@@ -33002,7 +33145,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1930961226, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: UID
-      value: 1124681674
+      value: -1358886792
       objectReference: {fileID: 0}
     - target: {fileID: 1260673417133536, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: m_Name
@@ -33068,11 +33211,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3687494349538049729, guid: f5626199ba1c75148a6842d88c50e199, type: 3}
       propertyPath: UID
-      value: 1227762393
+      value: -1720986965
       objectReference: {fileID: 0}
     - target: {fileID: 5502804677015942778, guid: f5626199ba1c75148a6842d88c50e199, type: 3}
       propertyPath: UID
-      value: 1918860707
+      value: -1311853186
       objectReference: {fileID: 0}
     - target: {fileID: 5676606486502609884, guid: f5626199ba1c75148a6842d88c50e199, type: 3}
       propertyPath: m_RootOrder
