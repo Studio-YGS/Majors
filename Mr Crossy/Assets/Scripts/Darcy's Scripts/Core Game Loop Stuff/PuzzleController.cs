@@ -22,7 +22,7 @@ public class PuzzleController : MonoBehaviour
 
     EventInstance eventInstance;
 
-    int wordLength, mistakeCount = 3, completedWords = 0;
+    int wordLength, mistakeCount = 3, completedWords = 0, letterPoint;
 
     public int wordsInPuzzle;
 
@@ -73,17 +73,40 @@ public class PuzzleController : MonoBehaviour
 
     void DisplayLetter() 
     {
-        DetermineLetter letterSend = GameObject.Find(altarName).GetComponent<DetermineLetter>();
+        //DetermineLetter letterSend = GameObject.Find(altarName).GetComponent<DetermineLetter>();
 
-        letterSend.assignedLetter.text = letter;
+        //letterSend.assignedLetter.text = letter;
 
-        if(letterSend.overlappedAltars.Length > 0)
-        {
-            for(int i = 0; i < letterSend.overlappedAltars.Length; i++)
-            {
-                letterSend.overlappedAltars[i].GetComponent<OverlappedAltar>().assignedLetter.text = letter;
-            }
-        }
+        string[] splitName = altarName.Split('[', ']');
+
+        string firstLength = splitName[0];
+
+        Debug.Log("First string is: " + firstLength + " and is: " + firstLength.ToIntArray().Length + " characters long");
+
+        //for(int i = 0; i < splitName.Length; i++)
+        //{
+        //    Debug.Log("Int Array Length: " + splitName.Length + " from the altar: " + altarName);
+        //    Debug.Log(splitName[i]);
+        //}
+
+        //if (splitName[i] == )
+        //{
+
+        //}
+
+        letterPoint = firstLength.ToIntArray().Length;
+
+        Debug.Log("Letter point is equal to: " + letterPoint);
+
+        canvasLetters[letterPoint].text = letter;
+
+        //if(letterSend.overlappedAltars.Length > 0)
+        //{
+        //    for(int i = 0; i < letterSend.overlappedAltars.Length; i++)
+        //    {
+        //        letterSend.overlappedAltars[i].GetComponent<OverlappedAltar>().assignedLetter.text = letter;
+        //    }
+        //}
     }
     public void PlayerWordControl() //this method forms the players word as they place objects, and also controls the win condition
     {
@@ -96,9 +119,11 @@ public class PuzzleController : MonoBehaviour
         }
 
         playersWordLength = playersWord.ToIntArray().Length;
-        Debug.Log("Players word: " + playersWord + " is " + playersWordLength + " letters long.");
 
-        storedObjects.Add(GameObject.Find(altarName));
+        if (GameObject.Find(altarName) != null)
+        {
+            storedObjects.Add(GameObject.Find(altarName));
+        }
 
         WriteToUI();
 
@@ -108,6 +133,7 @@ public class PuzzleController : MonoBehaviour
 
             tutorialController.ChangeConLetter(letter);
 
+            Debug.Log("Starting voiceline for 0.5 from: " + gameObject.name);
             eventInstance = RuntimeManager.CreateInstance("event:/MR_C_Tutorial/TUT.0.5");
 
             eventInstance.start();
@@ -119,7 +145,10 @@ public class PuzzleController : MonoBehaviour
         if(playersWord == word) //the script then checks to see if the players formed word is the same as the puzzle's answer
         {
             CompletionCheck();
-            wordCollision.puzzleComplete = true;
+            if (wordCollision != null)
+            {
+                wordCollision.puzzleComplete = true;
+            }
         }
 
         if (playersWordLength == wordLength && playersWord != word) //if the player has put all the letters on the altar but hasnt gotten the word right, it counts down a mistake.
@@ -142,14 +171,6 @@ public class PuzzleController : MonoBehaviour
             {
                 GameOver();
             }
-        }
-    }
-
-    public void DisableAltars()
-    {
-        for(int i = 0; i < assignedAltars.Length; i++)
-        {
-            assignedAltars[i].GetComponentInChildren<ObjectPlacement>().enabled = false;
         }
     }
 
@@ -186,38 +207,31 @@ public class PuzzleController : MonoBehaviour
         {
             for (int i = 0; i < storedObjects.Count; i++)
             {
-                if (storedObjects[i] != null)
+                if (storedObjects[i].GetComponent<Outline>())
                 {
-                    if (storedObjects[i].GetComponent<Outline>())
-                    {
-                        storedObjects[i].GetComponent<Outline>().enabled = false;
-                    }
-                    if (storedObjects[i].GetComponentInChildren<ObjectPlacement>())
-                    {
-                        storedObjects[i].GetComponentInChildren<ObjectPlacement>().enabled = false;
-                    }
-                    if (storedObjects[i].GetComponent<DetermineLetter>().storedObject.GetComponent<ObjectHolder>())
-                    {
-                        storedObjects[i].GetComponent<DetermineLetter>().storedObject.GetComponent<ObjectHolder>().enabled = false;
-                    }
-                    if (storedObjects[i].GetComponent<DetermineLetter>().storedObject.GetComponent<Outline>())
-                    {
-                        storedObjects[i].GetComponent<DetermineLetter>().storedObject.GetComponent<Outline>().enabled = false;
-                    }
+                    storedObjects[i].GetComponent<Outline>().enabled = false;
                 }
-                    
-               
-                
+                if (storedObjects[i].GetComponentInChildren<ObjectPlacement>())
+                {
+                    storedObjects[i].GetComponentInChildren<ObjectPlacement>().enabled = false;
+                }
+                if (storedObjects[i].GetComponent<DetermineLetter>().storedObject.GetComponent<ObjectHolder>())
+                {
+                    storedObjects[i].GetComponent<DetermineLetter>().storedObject.GetComponent<ObjectHolder>().enabled = false;
+                }
+                if (storedObjects[i].GetComponent<DetermineLetter>().storedObject.GetComponent<Outline>())
+                {
+                    storedObjects[i].GetComponent<DetermineLetter>().storedObject.GetComponent<Outline>().enabled = false;
+                }
             }
         }
-
-        
 
         storedObjects.Clear();
 
         if(completedWords == wordsInPuzzle)
         {
             winEvent.Invoke();
+            Destroy(gameObject); //deleting unused puzzle controllers
         }
     }
 

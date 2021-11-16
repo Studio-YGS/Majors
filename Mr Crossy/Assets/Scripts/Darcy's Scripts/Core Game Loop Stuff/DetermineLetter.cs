@@ -1,14 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 //Written by Darcy Glover
 
 public class DetermineLetter : MonoBehaviour
 {
-    public TextMeshProUGUI assignedLetter;
-
     [Tooltip("Any altars that this letter overlaps")]
     public GameObject[] overlappedAltars;
 
