@@ -218,7 +218,7 @@ public class CrossyController : MonoBehaviour
     {
         float distance = agent.remainingDistance;
 
-        if(m_State == 3 && distance <= m_ScaryDistance)
+        if((m_State == 3 || m_State == 2) && distance <= m_ScaryDistance)
         {
             animator.SetBool("ScaryVariant", true);
         }
