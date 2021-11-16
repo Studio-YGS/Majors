@@ -18,6 +18,7 @@ public class AudioEvents : MonoBehaviour
 
         if (!correctWordVoiceLinePlayed)
         {
+            correctWordVoiceLinePlayed = true;
             eventInstance = RuntimeManager.CreateInstance("event:/MR_C_Tutorial/TUT.0.5.1.1");
 
             eventInstance.start();
@@ -32,6 +33,7 @@ public class AudioEvents : MonoBehaviour
 
         if (!incorrectWordVoiceLinePlayed)
         {
+            incorrectWordVoiceLinePlayed = true;
             eventInstance = RuntimeManager.CreateInstance("event:/MR_C_Tutorial/TUT.0.5.1.2");
 
             eventInstance.start();
