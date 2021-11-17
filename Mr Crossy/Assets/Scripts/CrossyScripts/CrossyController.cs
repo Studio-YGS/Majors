@@ -61,6 +61,7 @@ public class CrossyController : MonoBehaviour
     private bool m_InSight = false;
     private bool m_InPeripheral = false;
     private bool m_ShouldRun = false;
+    private bool m_ShouldBeStopped = false;
     private int m_State = -1;
     [Header("Detection Variables")]
     [SerializeField] private float m_FocalViewDist;
@@ -108,6 +109,7 @@ public class CrossyController : MonoBehaviour
     public bool ShouldRun { get { return m_ShouldRun; } set { m_ShouldRun = value; } }
     public bool InSight { get { return m_InSight; } set { m_InSight = value; } }
     public bool InPeripheral { get { return m_InPeripheral; } set { m_InPeripheral = value; } }
+    public bool ShouldBeStopped { get { return m_ShouldBeStopped; } set { m_ShouldBeStopped = value; } }
     public int State { get { return m_State; } set { m_State = value; } }
     public Vector3 CrossyDespawn { get { return m_CrossyDespawn.position; } set { m_CrossyDespawn.position = value; } }
 
@@ -157,6 +159,10 @@ public class CrossyController : MonoBehaviour
 
         Running();
         ScaryRunCondition();
+        StoppyStop();
+
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Spinspin")) animator.applyRootMotion = true;
+        else animator.applyRootMotion = false;
 
         //NavAgent Fiddling
         MoveSpeed = (m_ShouldRun) ? RunSpeed : WalkSpeed;
@@ -235,6 +241,19 @@ public class CrossyController : MonoBehaviour
     public void ForceDespawn()
     {
         crossyTree.SendEvent("Despawn");
+    }
+
+    public void StoppyStop()
+    {
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Spinspin") || animator.GetCurrentAnimatorStateInfo(0).IsName("Scream") || animator.GetCurrentAnimatorStateInfo(0).IsName("Agony") || animator.GetCurrentAnimatorStateInfo(0).IsName("LookAround"))
+        {
+            if(animator.GetCurrentAnimatorStateInfo(0).IsName("Movement") || animator.GetCurrentAnimatorStateInfo(0).IsName("AngyMove"))
+            {
+                m_ShouldBeStopped = false;
+            }
+            else m_ShouldBeStopped = true;
+        }
+        else m_ShouldBeStopped = false;
     }
 
     private void OnAnimatorIK(int layerIndex)

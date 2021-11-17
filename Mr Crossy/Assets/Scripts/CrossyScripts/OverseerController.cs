@@ -25,6 +25,7 @@ public class OverseerController : MonoBehaviour
     #region Fields
     [SerializeField] private bool startOnAwake;
     [SerializeField] private bool usePositioner;
+    [SerializeField] private Vector3 validationOffset;
 
     [Header("GameObjects")]
     public GameObject validationPositioner;
@@ -213,6 +214,12 @@ public class OverseerController : MonoBehaviour
         else if (hit.mask == 8 || hit.mask == 16 || hit.mask == 32)
         {
             m_PlayerInHouse = false;
+
+            validationPositioner.transform.position = new Vector3(
+            m_Player.transform.position.x + validationOffset.x,
+            m_Player.transform.position.y + validationOffset.y,
+            m_Player.transform.position.z + validationOffset.z
+            );
         }
     }
 
