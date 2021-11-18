@@ -87,13 +87,6 @@ public class TutorialController : MonoBehaviour
         conLetter.text = "[" + letter + "]";
     }
 
-    public void StreetNameBlank()
-    {
-        PuzzleController puzzleController = FindObjectOfType<PuzzleController>();
-
-        puzzleController.streetText.text = "";
-    }
-
     public void CrossyWait()
     {
         StartCoroutine(WaitForCrossy());
