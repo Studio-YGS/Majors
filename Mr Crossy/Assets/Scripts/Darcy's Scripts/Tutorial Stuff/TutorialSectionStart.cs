@@ -121,6 +121,11 @@ public class TutorialSectionStart : MonoBehaviour
         sectionStart.Invoke();
     }
 
+    public void CrosskeyPickedUp()
+    {
+        sectionStart.Invoke();
+    }
+
     public void TutorialOver()
     {
         Debug.Log("Tutorial is completed");

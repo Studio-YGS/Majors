@@ -49,6 +49,8 @@ public class JournalOnSwitch : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             pauseMenu.streetName.SetActive(false);
 
+            journalController.OpenMap();
+
             //paper sound
 
             open = true;

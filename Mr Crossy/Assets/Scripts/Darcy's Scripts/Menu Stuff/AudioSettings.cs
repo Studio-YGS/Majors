@@ -6,7 +6,9 @@ using FMODUnity;
 
 public class AudioSettings : MonoBehaviour
 {
-    EventInstance sfxVolumePreview;
+    EventInstance sfxVolumePreview, voiceVolumePreview;
+
+    Player_Controller player;
 
     MenuManager menuManager;
 
@@ -18,6 +20,8 @@ public class AudioSettings : MonoBehaviour
 
     void Awake()
     {
+        player = FindObjectOfType<Player_Controller>();
+
         if (mainMenu)
         {
             DontDestroyOnLoad(gameObject);
@@ -40,6 +44,7 @@ public class AudioSettings : MonoBehaviour
         music = RuntimeManager.GetBus("bus:/Music");
         voice = RuntimeManager.GetBus("bus:/Voice");
         sfxVolumePreview = RuntimeManager.CreateInstance("event:/UI_Multimedia/Tutorial_Info");
+        voiceVolumePreview = RuntimeManager.CreateInstance("event:/MR_C_Attack/Mr_C_Attack");
     }
 
     void Update()
@@ -70,5 +75,15 @@ public class AudioSettings : MonoBehaviour
     public void VoiceVolumeLevel(float newVoiceVolume)
     {
         voiceVolume = newVoiceVolume;
+
+        voiceVolumePreview.setPaused(false);
+
+        PLAYBACK_STATE pbState;
+        voiceVolumePreview.getPlaybackState(out pbState);
+
+        if (pbState != PLAYBACK_STATE.PLAYING)
+        {
+            voiceVolumePreview.start();
+        }
     }
 }
