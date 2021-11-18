@@ -5,9 +5,7 @@ using UnityEngine;
 public class WordCollision : MonoBehaviour
 {
     public string word, street;
-
-    [HideInInspector]
-    public bool puzzleComplete;
+    [HideInInspector]public bool puzzleComplete;
 
     [SerializeField, Tooltip("The object on the canvas with the TMP components as its children")]
     GameObject wordObject;
@@ -17,8 +15,7 @@ public class WordCollision : MonoBehaviour
 
     MenuManager menuManager;
 
-    [SerializeField] 
-    CrossyStreetStalk streetStalk;
+    [SerializeField] CrossyStreetStalk streetStalk;
 
     RespawnWordColliders respawn;
 

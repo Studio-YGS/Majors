@@ -38,8 +38,6 @@ public class PuzzleController : MonoBehaviour
 
     public bool tutorial;
 
-    public GameObject test;
-
     public UnityEvent winEvent, loseEvent, tutorialEvent, tutorialMistakeEvent;
 
     [HideInInspector]
@@ -47,8 +45,6 @@ public class PuzzleController : MonoBehaviour
 
     void Start()
     {
-        test = GameObject.Find("Journal Open");
-
         uiWord = " _ _ _ _";
 
         streetText = GameObject.Find("Street Name With Word").GetComponent<TextMeshProUGUI>();
@@ -92,10 +88,6 @@ public class PuzzleController : MonoBehaviour
         letterPoint = firstLength.ToIntArray().Length;
 
         canvasLetters[letterPoint].text = letter;
-
-        if(GameObject.Find(altarName).GetComponent<DetermineLetter>().overlappedWord != null)
-        {
-        }
     }
 
     void Test()
