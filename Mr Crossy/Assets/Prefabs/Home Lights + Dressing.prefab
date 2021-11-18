@@ -59527,9 +59527,6 @@ GameObject:
   - component: {fileID: 5410519223163515032}
   - component: {fileID: 9112164982691368932}
   - component: {fileID: 7012801923133067095}
-  - component: {fileID: 1525374001247736428}
-  - component: {fileID: 3674714812984600512}
-  - component: {fileID: 354384988196637812}
   - component: {fileID: 4812196617733495966}
   - component: {fileID: 6321543408641998944}
   m_Layer: 0
@@ -59602,73 +59599,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &1525374001247736428
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7012801923133067094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c771dc25b37682447906be6093940da8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectImage: {fileID: 4014434760419012456, guid: c9eea934591e8f4428c79ce2fbb600ac, type: 3}
-  objectName: '[L]ight Bulb'
-  image: {fileID: 0}
-  textName: {fileID: 0}
-  imageTwo: {fileID: 0}
-  textNameTwo: {fileID: 0}
-  hand: {fileID: 0}
-  thisObjectHeld: 0
-  isPlacedDown: 1
-  beingInspected: 0
-  controller: {fileID: 0}
-  ogScaleFactor: {x: 1, y: 1, z: 1}
-  pickupRange: 5
-  handOffset: {x: 0.16, y: 0.3, z: 0}
-  handRotation: {x: 0.3535712, y: 0.55137867, z: -0.407886, w: -0.63608015}
-  scaleFactor: {x: 3, y: 3, z: 3}
-  placementOffset: {x: 0, y: 0, z: 0}
-  rotationalSet: {x: 0.04361953, y: 0, z: 0, w: -0.99904823}
-  distanceFromFace: 0.5
-  updatePos: 0
---- !u!114 &3674714812984600512
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7012801923133067094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
-  outlineWidth: 2
-  distanceAway: 5
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!54 &354384988196637812
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7012801923133067094}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 1
 --- !u!64 &4812196617733495966
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -59678,7 +59608,7 @@ MeshCollider:
   m_GameObject: {fileID: 7012801923133067094}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
@@ -66169,11 +66099,7 @@ GameObject:
   - component: {fileID: 3390786584922541611}
   - component: {fileID: 7674994619840997435}
   - component: {fileID: 7012801924528879778}
-  - component: {fileID: 5938500977312700335}
-  - component: {fileID: 9218566977213181335}
-  - component: {fileID: 3187626756940505105}
   - component: {fileID: 7859019577404230265}
-  - component: {fileID: 1575530235698998295}
   m_Layer: 0
   m_Name: Bulb3 (1)
   m_TagString: Untagged
@@ -66244,73 +66170,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &5938500977312700335
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7012801924528879789}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c771dc25b37682447906be6093940da8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectImage: {fileID: 4014434760419012456, guid: c9eea934591e8f4428c79ce2fbb600ac, type: 3}
-  objectName: '[L]ight Bulb'
-  image: {fileID: 0}
-  textName: {fileID: 0}
-  imageTwo: {fileID: 0}
-  textNameTwo: {fileID: 0}
-  hand: {fileID: 0}
-  thisObjectHeld: 0
-  isPlacedDown: 1
-  beingInspected: 0
-  controller: {fileID: 0}
-  ogScaleFactor: {x: 1, y: 1, z: 1}
-  pickupRange: 5
-  handOffset: {x: 0.16, y: 0.3, z: 0}
-  handRotation: {x: 0.3535712, y: 0.55137867, z: -0.407886, w: -0.63608015}
-  scaleFactor: {x: 3, y: 3, z: 3}
-  placementOffset: {x: 0, y: 0, z: 0}
-  rotationalSet: {x: 0.04361953, y: 0, z: 0, w: -0.99904823}
-  distanceFromFace: 0.5
-  updatePos: 0
---- !u!114 &9218566977213181335
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7012801924528879789}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
-  outlineWidth: 2
-  distanceAway: 5
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!54 &3187626756940505105
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7012801924528879789}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 1
 --- !u!64 &7859019577404230265
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -66320,23 +66179,11 @@ MeshCollider:
   m_GameObject: {fileID: 7012801924528879789}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -5053925668127403250, guid: 432d1d38b52349d43b71084946571412, type: 3}
---- !u!114 &1575530235698998295
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7012801924528879789}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7012801924594674395
 GameObject:
   m_ObjectHideFlags: 0
@@ -69089,11 +68936,7 @@ GameObject:
   - component: {fileID: 3164080322761146466}
   - component: {fileID: 7954591506413954674}
   - component: {fileID: 7328788247901157099}
-  - component: {fileID: 6237106195120003558}
-  - component: {fileID: 8865760242793489374}
-  - component: {fileID: 2944181529740619352}
   - component: {fileID: 7635770222246986800}
-  - component: {fileID: 1241309336562917982}
   m_Layer: 0
   m_Name: Bulb3 (1)
   m_TagString: Untagged
@@ -69164,73 +69007,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &6237106195120003558
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7328788247901157092}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c771dc25b37682447906be6093940da8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectImage: {fileID: 4014434760419012456, guid: c9eea934591e8f4428c79ce2fbb600ac, type: 3}
-  objectName: '[L]ight Bulb'
-  image: {fileID: 0}
-  textName: {fileID: 0}
-  imageTwo: {fileID: 0}
-  textNameTwo: {fileID: 0}
-  hand: {fileID: 0}
-  thisObjectHeld: 0
-  isPlacedDown: 1
-  beingInspected: 0
-  controller: {fileID: 0}
-  ogScaleFactor: {x: 1, y: 1, z: 1}
-  pickupRange: 5
-  handOffset: {x: 0.16, y: 0.3, z: 0}
-  handRotation: {x: 0.3535712, y: 0.55137867, z: -0.407886, w: -0.63608015}
-  scaleFactor: {x: 3, y: 3, z: 3}
-  placementOffset: {x: 0, y: 0, z: 0}
-  rotationalSet: {x: 0.04361953, y: 0, z: 0, w: -0.99904823}
-  distanceFromFace: 0.5
-  updatePos: 0
---- !u!114 &8865760242793489374
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7328788247901157092}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  outlineMode: 0
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
-  outlineWidth: 2
-  distanceAway: 5
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
---- !u!54 &2944181529740619352
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7328788247901157092}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 1
 --- !u!64 &7635770222246986800
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -69240,23 +69016,11 @@ MeshCollider:
   m_GameObject: {fileID: 7328788247901157092}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -5053925668127403250, guid: 432d1d38b52349d43b71084946571412, type: 3}
---- !u!114 &1241309336562917982
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7328788247901157092}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7356569526037709286
 GameObject:
   m_ObjectHideFlags: 0
