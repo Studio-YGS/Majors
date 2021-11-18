@@ -67,10 +67,8 @@ public class OverseerController : MonoBehaviour
     public string chaseParamName = "IsChasing";
     public string deadParamName = "isDead";
 
-    [Range(0,1)] [SerializeField] private float m_FMODDistanceMod = 1f;
-
     [Range(0f, 1f)] [SerializeField] private float m_TitanVoiceLineChance = 0.5f;
-
+    [Space(10)]
     [SerializeField] private bool m_IsTutorial = true;
     #endregion
 
