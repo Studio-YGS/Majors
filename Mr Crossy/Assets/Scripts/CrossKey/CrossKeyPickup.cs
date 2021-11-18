@@ -31,6 +31,11 @@ public class CrossKeyPickup : MonoBehaviour
                 {
                     //for things the happen when key is picked up
                     manager.numOfKeys += 1;
+                    if (!manager.firstKeyPickedUp)
+                    {
+                        manager.gameObject.GetComponent<TutorialSectionStart>().CrosskeyPickedUp(); //tutorial ui prompt
+                        manager.firstKeyPickedUp = true;
+                    }
                     hoverText.gameObject.SetActive(false);
                     Destroy(gameObject);
                 }

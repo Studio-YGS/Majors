@@ -52,9 +52,9 @@ public class NoteController : MonoBehaviour
         {
             journalController.whichNotesPage = currentNote;
             journalController.noteList.Add(currentNote);
-            journalController.OpenNotes();
 
             journalOnSwitch.OpenOrClose();
+            journalController.OpenNotes();
 
             currentNote++;
         }

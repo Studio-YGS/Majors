@@ -33,7 +33,7 @@ public class CrossKeyManager : MonoBehaviour
     public TMP_Text hintArea;
     public KeyPuzzles[] keyPuzzles;
     Transform cam;
-    [HideInInspector] public bool puzzleOn;
+    [HideInInspector] public bool puzzleOn, firstKeyPickedUp;
     [HideInInspector] public Player_Controller controller;
     [HideInInspector] public HeadBob headBob;
     GameObject newCrossKey;
