@@ -30,7 +30,10 @@ public class AudioEvents : MonoBehaviour
         eventInstance = RuntimeManager.CreateInstance("event:/2D/Puzzle/Incorrect_Word");
 
         eventInstance.start();
+    }
 
+    public void TutorialWordIncorrect()
+    {
         if (!incorrectWordVoiceLinePlayed)
         {
             incorrectWordVoiceLinePlayed = true;

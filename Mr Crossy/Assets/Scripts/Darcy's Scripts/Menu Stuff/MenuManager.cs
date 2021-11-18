@@ -22,6 +22,8 @@ public class MenuManager : MonoBehaviour
 
     public bool mainMenu;
 
+    bool dontEnable;
+
     AsyncOperation loadingScene;
 
     void Start()
@@ -67,6 +69,15 @@ public class MenuManager : MonoBehaviour
         playerController.DisableController();
         playerController.inJournal = false;
 
+        if (journalController.disabled)
+        {
+            dontEnable = true;
+        }
+        else
+        {
+            dontEnable = false;
+        }
+
         journalController.DisableJournal();
 
         journalOnSwitch.HideTab();
@@ -92,7 +103,10 @@ public class MenuManager : MonoBehaviour
         playerController.EnableController();
         playerController.inJournal = false;
 
-        journalController.EnableJournal();
+        if (!dontEnable)
+        {
+            journalController.EnableJournal();
+        }
 
         journalOnSwitch.ShowTab();
 
@@ -187,6 +201,7 @@ public class MenuManager : MonoBehaviour
     {
         loadingScene = SceneManager.LoadSceneAsync("Main_Cael", LoadSceneMode.Single);
         loadingScene.allowSceneActivation = false;
+
         while (!loadingScene.isDone)
         {
             Debug.Log(loadingScene.progress);
@@ -195,25 +210,13 @@ public class MenuManager : MonoBehaviour
                 pressSpace.SetActive(true);
                 if (Input.GetKey(KeyCode.Space))
                 {
-                    //SceneManager.LoadScene("Main_Cael");
                     loadingScene.allowSceneActivation = true;
                 }
             }
-
-
             yield return null;
         }
-        
-
+       
     }
-
-    //IEnumerator LoadingWait()
-    //{
-        
-    //    //yield return new WaitForSeconds(5f);
-
-    //    
-    //}
 
     public void ResolutionChange(int val)
     {
