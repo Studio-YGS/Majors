@@ -6,17 +6,15 @@ using UnityEngine;
 
 public class DetermineLetter : MonoBehaviour
 {
-    [Tooltip("Any altars that this letter overlaps")]
-    public GameObject[] overlappedAltars;
-
     [HideInInspector]
     public GameObject storedObject;
 
     PuzzleController puzzleController;
 
-    string firstJLetter, wholeName; //the first letter of the the name of the object placed on the altar, and the entire name
+    string firstJLetter, wholeName;
 
-    public string overlappedWord;
+    [HideInInspector]
+    public string wordName;
 
     void OnEnable()
     {
@@ -29,7 +27,7 @@ public class DetermineLetter : MonoBehaviour
 
         string[] splitName = gameObject.name.Split('[', ']', ' ');
 
-        string word = "";
+        wordName  = "";
 
         int count = 0;
 
@@ -37,7 +35,7 @@ public class DetermineLetter : MonoBehaviour
         {
             if (splitName[i] != null)
             {
-                word += splitName[i];
+                wordName += splitName[i];
                 count++;
                 if (count == 3)
                 {
@@ -46,15 +44,15 @@ public class DetermineLetter : MonoBehaviour
             }
         }
 
-        Debug.Log("Combined the split array and have made: " + word + " from the altar: " + gameObject.name);
+        Debug.Log("Combined the split array and have made: " + wordName + " from the altar: " + gameObject.name);
 
         Debug.Log("Puzzle Controllers array length: " + puzzleControllers.Length);
 
         for (int i = 0; i < puzzleControllers.Length; i++)
         {
-            for (int x = 0; x < puzzleControllers[i].wordsInSection.Length; x++)
+            for (int x = 0; x < puzzleControllers[i].wordObjects.Count; x++)
             {
-                if (word == puzzleControllers[i].wordsInSection[x])
+                if (wordName == puzzleControllers[i].wordObjects[x].name)
                 {
                     puzzleController = puzzleControllers[i];
                     Debug.Log("Puzzle Controller for: " + gameObject.name + " is: " + puzzleController.gameObject.name);
@@ -69,14 +67,6 @@ public class DetermineLetter : MonoBehaviour
         wholeName = placedObject.name;
         firstJLetter = wholeName.Substring(1, 1);
         SendLetterAndName(firstJLetter);
-
-        //if(overlappedAltars.Length > 0)
-        //{
-        //    for(int i = 0; i < overlappedAltars.Length; i++)
-        //    {
-        //        overlappedAltars[i].GetComponent<OverlappedAltar>().ReceiveLetter(firstJLetter);
-        //    }
-        //}
     }
 
     public void ObjectPickedUp()
@@ -84,18 +74,15 @@ public class DetermineLetter : MonoBehaviour
         firstJLetter = ""; //setting the letters back to empty
 
         SendLetterAndName(firstJLetter);
-
-        if (overlappedAltars.Length > 0)
-        {
-            for (int i = 0; i < overlappedAltars.Length; i++)
-            {
-                overlappedAltars[i].GetComponent<OverlappedAltar>().ReceiveLetter(firstJLetter);
-            }
-        }
     }
 
     void SendLetterAndName(string letter) //sending the letter to the controller, as well as the name of the object it came from
     {
+        if(puzzleController == null)
+        {
+            AssignPuzzleController();
+        }
+
         puzzleController.ReceiveLetterAndName(letter, gameObject.name);
     }
 }

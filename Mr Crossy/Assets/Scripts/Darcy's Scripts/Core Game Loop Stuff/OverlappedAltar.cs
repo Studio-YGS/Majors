@@ -1,26 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 public class OverlappedAltar : MonoBehaviour
 {
-    public TextMeshProUGUI assignedLetter;
-
-    PuzzleController puzzleController;
-
-    string letter;
+    GameObject placedObject;
  
-    public void ReceiveLetter(string firstLetter)
+    public void ReceiveObject(GameObject sentObject)
     {
-        letter = firstLetter;
-        //SendLetterAndName();
+        placedObject = sentObject;
+        SendToChildren();
     }
 
-    void SendLetterAndName()
+    public void ObjectPickedUp()
     {
-        puzzleController = FindObjectOfType<PuzzleController>();
+        DetermineLetter[] childrenSend = GetComponentsInChildren<DetermineLetter>();
 
-        puzzleController.ReceiveLetterAndName(letter, gameObject.name);
+        for (int i = 0; i < childrenSend.Length; i++)
+        {
+            childrenSend[i].ObjectPickedUp();
+        }
+    }
+
+    void SendToChildren()
+    {
+        DetermineLetter[] childrenSend = GetComponentsInChildren<DetermineLetter>();
+
+        for(int i = 0; i < childrenSend.Length; i++)
+        {
+            childrenSend[i].ObjectPlaced(placedObject);
+        }
     }
 }

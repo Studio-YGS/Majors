@@ -54,10 +54,15 @@ public class ObjectPlacement : MonoBehaviour
                     gameObject.layer = 2;
                     heldObject.transform.localScale = heldObject.ogScaleFactor;
                     heldObject.PlacedOnPedestal(PlacedObject);
+
                     if (GetComponentInParent<DetermineLetter>())
                     {
                         DetermineLetter letter = GetComponentInParent<DetermineLetter>();
                         letter.ObjectPlaced(PlacedObject); //sending to darcy's script
+                    }
+                    else if (GetComponentInParent<OverlappedAltar>())
+                    {
+                        GetComponentInParent<OverlappedAltar>().ReceiveObject(PlacedObject); //overlapping altar stuff
                     }
                     
                     StartCoroutine(ColliderOn());
@@ -74,7 +79,11 @@ public class ObjectPlacement : MonoBehaviour
                     DetermineLetter letter = GetComponentInParent<DetermineLetter>();
                     letter.ObjectPickedUp(); //sending to darcy's script
                 }
-                    
+                else if (GetComponentInParent<OverlappedAltar>())
+                {
+                    GetComponentInParent<OverlappedAltar>().ObjectPickedUp(); //overlapping altar stuff
+                }
+
                 objectPlaced = false;
                 gameObject.layer = 0;
                 PlacedObject = null;
