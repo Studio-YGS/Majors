@@ -33,6 +33,7 @@ public class DoorInteraction : MonoBehaviour
     //public bool locked;
     bool handon;
     public StudioEventEmitter doorclose;
+    Player_Controller controller;
 
     [Header("Cross-Key Settings")]
     public bool isSafeHouse;
@@ -58,6 +59,7 @@ public class DoorInteraction : MonoBehaviour
         rotationVal = 0;
         player = GameObject.Find("Fps Character").transform;
         distortion = FindObjectOfType<MrCrossyDistortion>();
+        controller = FindObjectOfType<Player_Controller>();
     }
 
     void Update()
@@ -65,7 +67,7 @@ public class DoorInteraction : MonoBehaviour
         if (keyMan.doorsLocked && !isSafeHouse)
         {
             RaycastHit hit;
-            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 2))
+            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 2, controller.raycastLayerMask))
             {
                 if (hit.collider == gameObject.GetComponent<Collider>())
                 {
@@ -324,7 +326,7 @@ public class DoorInteraction : MonoBehaviour
         if (!keyMan.doorsLocked || isSafeHouse)
         {
             RaycastHit hit;
-            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 2))
+            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 2, controller.raycastLayerMask))
             {
                 if (hit.collider == gameObject.GetComponent<Collider>())
                 {
