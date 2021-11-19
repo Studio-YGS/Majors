@@ -120,7 +120,7 @@ public class ObjectHolder : MonoBehaviour
             Drop();
         }
 
-        if(objectsInHands.Count == 2 && thisObjectHeld)
+        if(objectsInHands.Count == 2 && thisObjectHeld && !FindObjectOfType<MenuManager>().menuOpen)
         {
             if(Input.GetAxis("Mouse ScrollWheel") != 0f )
             {
@@ -346,7 +346,7 @@ public class ObjectHolder : MonoBehaviour
             imageTwo.GetComponentInParent<Transform>().localScale = new Vector3(1.3f, 1.3f, 1.3f);
         }
 
-        
+        FMODUnity.RuntimeManager.PlayOneShot("event:/2D/Object Interaction/Object Pickup");
         itemObjectHolder.StopCoroutine("Dissolve");
         itemObjectHolder.dissolving = false;
         //itemObjectHolder.dissolveValue = 0;
