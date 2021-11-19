@@ -26,16 +26,13 @@ public class PlayerRespawn : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("starting");
         originalposition = crossyPosition.position;
-        Debug.Log("set position" + CrossyController.crossyTree.gameObject.name);
         seer = FindObjectOfType<OverseerController>();
     }
 
     public void Register()
     {
         TreeMalarkey.RegisterEventOnTree(CrossyController.crossyTree, "DeadNoises", PlayerDie);
-        Debug.Log("Registered event");
     }
 
     public void OnDisable()
@@ -49,7 +46,6 @@ public class PlayerRespawn : MonoBehaviour
         {
             Register();
             hasMoved = true;
-            Debug.Log("position is different");
         }
     }
 
