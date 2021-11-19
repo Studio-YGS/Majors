@@ -77,7 +77,7 @@ public class ObjectHolder : MonoBehaviour
     void Update()
     {
         RaycastHit hit;
-        if(Physics.Raycast(cam.position, cam.forward, out hit, pickupRange))
+        if(Physics.Raycast(cam.position, cam.forward, out hit, pickupRange, controller.raycastLayerMask))
         {
             if(hit.collider == gameObject.GetComponent<Collider>())
             {
@@ -271,7 +271,7 @@ public class ObjectHolder : MonoBehaviour
         heldObject.transform.parent = null;
         
         RaycastHit detectWall;
-        if (Physics.Raycast(cam.position, cam.forward, out detectWall, 0.5f))
+        if (Physics.Raycast(cam.position, cam.forward, out detectWall, 0.5f,controller.raycastLayerMask))
         {
             if (detectWall.collider == null)
             {

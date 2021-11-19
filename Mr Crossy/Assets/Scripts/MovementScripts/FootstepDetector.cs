@@ -6,6 +6,7 @@ public class FootstepDetector : MonoBehaviour
 {
     Transform player;
     CharacterController character;
+    Player_Controller controller;
     public Collider playerCollider;
     Terrain terrain;
     int posX;
@@ -19,6 +20,7 @@ public class FootstepDetector : MonoBehaviour
     RaycastHit hit;
     void Start()
     {
+        controller = FindObjectOfType<Player_Controller>();
         terrain = Terrain.activeTerrain;
         player = gameObject.transform;
         character = gameObject.GetComponent<CharacterController>();
@@ -67,7 +69,7 @@ public class FootstepDetector : MonoBehaviour
 
     bool PlayerGrounded()
     {
-        return Physics.Raycast(transform.position, Vector3.down, out hit, playerCollider.bounds.extents.y + 0.5f);
+        return Physics.Raycast(transform.position, Vector3.down, out hit, playerCollider.bounds.extents.y + 0.5f, controller.raycastLayerMask);
     }
 
     bool CheckOnTerrain()
