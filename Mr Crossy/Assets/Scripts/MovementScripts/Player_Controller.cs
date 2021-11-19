@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player_Controller : MonoBehaviour
 {
     public CharacterController controller;
+    public LayerMask raycastLayerMask;
     [HideInInspector]
     public float baseSpeed;
     public float speed;
