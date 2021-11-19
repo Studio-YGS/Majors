@@ -22,6 +22,7 @@ public class CrossyController : MonoBehaviour
     [HideInInspector] public bool run;
     [HideInInspector] public bool accelManipulation;
     [HideInInspector] public bool lookCondition;
+    public bool speedDebugLog;
 
     private Transform headBone;
     [Space(1)]
@@ -31,10 +32,13 @@ public class CrossyController : MonoBehaviour
     [Header("Movement Variables")]
     [Tooltip("Mr. Crossy's walking speed.")]
     [SerializeField] private float m_WalkSpeed;
-    [Tooltip("Mr. Crossy's running speed.")]
-    [SerializeField] private float m_RunSpeed;
+    [Tooltip("Mr. Crossy's full running speed.")]
+    [SerializeField] private float m_FullRunSpeed;
+    [Tooltip("Percentage of full running speed.")]
+    [Range(0,100)][SerializeField] private int m_SubRunPercent;
+    private float m_RunSpeed;
     private float m_MoveSpeed;
-
+    
     [Tooltip("Mr. Crossy's acceleration rate.")]
     [SerializeField] private float m_BaseAcceleration;
     /*[SerializeField] */private float m_CornerAcceleration;
@@ -96,12 +100,15 @@ public class CrossyController : MonoBehaviour
     #region Properties
 
     public float WalkSpeed { get { return m_WalkSpeed; } set { m_WalkSpeed = value; } }
-    public float RunSpeed { get { return m_RunSpeed; } set { m_RunSpeed = value; } }
-    public float MoveSpeed { get { return m_MoveSpeed; } set { m_MoveSpeed = value; } }
+    public float FullRunSpeed { get { return m_FullRunSpeed; } set { m_FullRunSpeed = value; } }
+    public float SubRunSpeed { get { return m_FullRunSpeed*(m_SubRunPercent/100f); } }
+    public float RunSpeed { get { return (m_InSight) ? FullRunSpeed : SubRunSpeed; } }
+    public float MoveSpeed { get { return (m_ShouldRun&&RunSpeed>WalkSpeed) ? RunSpeed : WalkSpeed; } }
 
     public float Acceleration { get { return m_Acceleration; } set { m_Acceleration = value; } }
     public float AngularSpeed { get { return m_AngularSpeed; } set { m_AngularSpeed = value; } }
     public float StoppingDistance { get { return m_StoppingDistance; } set { m_StoppingDistance = value; } }
+    public float RunDistance { get { return (m_State == 2) ? m_AlertRunDistance : m_PatrolRunDistance; } }
     public float VisionRotation { get { return vision.eulerAngles.x; }}
     public Vector3 VisionPosition { get { return vision.localPosition; }}
 
@@ -150,11 +157,21 @@ public class CrossyController : MonoBehaviour
         animator = GetComponent<Animator>();
         m_Mask = agent.areaMask;
         headBone = animator.GetBoneTransform(HumanBodyBones.Head);
+        //m_RunDistance = (m_State == 2) ? m_AlertRunDistance : m_PatrolRunDistance;
     }
 
     private void Update()
     {
-        //veloMag = agent.velocity.magnitude;
+        if(speedDebugLog)
+        {
+            Debug.Log("SPEEDSPEED: Base Walk Speed: " + WalkSpeed);
+            Debug.Log("SPEEDSPEED: Sub Run Speed: " + SubRunSpeed + ", at Percentage: " + m_SubRunPercent + "%");
+            Debug.Log("SPEEDSPEED: Full Run Speed: " + FullRunSpeed);
+            Debug.Log("SPEEDSPEED: Set Run Speed: " + RunSpeed);
+            Debug.Log("SPEEDSPEED: Current Move Speed: " + MoveSpeed);
+        }
+
+        //m_RunDistance = (m_State == 2) ? m_AlertRunDistance : m_PatrolRunDistance;
         m_DistanceToCorner = Vector3.Distance(transform.position, agent.steeringTarget);
 
         Running();
@@ -164,10 +181,10 @@ public class CrossyController : MonoBehaviour
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Spinspin")) animator.applyRootMotion = true;
         else animator.applyRootMotion = false;
 
-        //NavAgent Fiddling
-        MoveSpeed = (m_ShouldRun) ? RunSpeed : WalkSpeed;
-        
-        if(accelManipulation)
+        //RunSpeed = (m_InSight) ? FullRunSpeed : SubRunSpeed;
+        //MoveSpeed = (m_ShouldRun) ? RunSpeed : WalkSpeed;
+
+        if (accelManipulation)
         {
             if (m_DistanceToCorner <= m_CornerThreshold)
             {
@@ -207,12 +224,10 @@ public class CrossyController : MonoBehaviour
     {
         if (overrideShouldRun == false) // Sets 'm_ShouldRun' based on state and distance from target.
         {
-            if (m_State <= 1) { m_ShouldRun = false; }
+            if (m_State < 1) { m_ShouldRun = false; }
             else if (m_State == 1 || m_State == 2)
             {
-                m_RunDistance = (m_State == 2) ? m_AlertRunDistance : m_PatrolRunDistance;
-
-                if (agent.remainingDistance > m_RunDistance) m_ShouldRun = true;
+                if (agent.remainingDistance > RunDistance) m_ShouldRun = true;
                 else m_ShouldRun = false;
             }
             else if (m_State == 3) { m_ShouldRun = true; }
