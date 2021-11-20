@@ -46,6 +46,8 @@ public class CrossyTheWatcher : MonoBehaviour
         animator = GetComponent<Animator>();
         transform.rotation = lighthouse.selfTransform.rotation;
         //SetPosToLighthouse();
+        if(faceToTransform == null) faceToTransform = GameObject.Find("Fps Character").transform;
+        if(lookAtTransform == null) lookAtTransform = GameObject.Find("FirstPersonCharacter").transform;
     }
 
     // Update is called once per frame

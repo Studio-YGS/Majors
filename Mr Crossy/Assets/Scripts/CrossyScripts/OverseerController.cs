@@ -11,6 +11,7 @@ public class OverseerController : MonoBehaviour
 {
     public static BehaviorTree ObserverTree;
     public bool m_PlayerInHouse;
+    public bool allowVignette = true;
 
     CrossyTheWatcher titan;
     MrCrossyDistortion distootle;
@@ -25,6 +26,7 @@ public class OverseerController : MonoBehaviour
     #region Fields
     [SerializeField] private bool startOnAwake;
     [SerializeField] private bool usePositioner;
+    [SerializeField] private Vector3 validationOffset;
 
     [Header("GameObjects")]
     public GameObject validationPositioner;
@@ -66,10 +68,8 @@ public class OverseerController : MonoBehaviour
     public string chaseParamName = "IsChasing";
     public string deadParamName = "isDead";
 
-    [Range(0,1)] [SerializeField] private float m_FMODDistanceMod = 1f;
-
     [Range(0f, 1f)] [SerializeField] private float m_TitanVoiceLineChance = 0.5f;
-
+    [Space(10)]
     [SerializeField] private bool m_IsTutorial = true;
     #endregion
 
@@ -128,6 +128,7 @@ public class OverseerController : MonoBehaviour
         distootle = FindObjectOfType<MrCrossyDistortion>();
         keyMan = FindObjectOfType<CrossKeyManager>();
 
+        if (m_Player == null) m_Player = GameObject.Find("Fps Character");
 
         emitter.Target.SetParameter(distanceParamName, 100f);
         emitter.Target.SetParameter(chaseParamName, 1f);
@@ -165,9 +166,13 @@ public class OverseerController : MonoBehaviour
 
         if(m_State == 3)
         {
-            vignetteActivated = true;
-            Debug.Log("potoatosondwich");
-            distootle.DistanceVignette(m_Crossy);
+            if(allowVignette)
+            {
+                vignetteActivated = true;
+                Debug.Log("potoatosondwich");
+                distootle.DistanceVignette(m_Crossy);
+            }
+            
             if(!keyMan.doorsLocked)
             {
                 keyMan.doorsLocked = true;
@@ -175,9 +180,13 @@ public class OverseerController : MonoBehaviour
         }
         else if (m_State != 3 && vignetteActivated)
         {
-            vignetteActivated = false;
-            Debug.Log("VignetteNooooooo");
-            distootle.DecreaseVignette();
+            if(allowVignette)
+            {
+                vignetteActivated = false;
+                Debug.Log("VignetteNooooooo");
+                distootle.DecreaseVignette();
+            }
+            
             if (keyMan.doorsLocked)
             {
                 keyMan.doorsLocked = false;
@@ -213,6 +222,12 @@ public class OverseerController : MonoBehaviour
         else if (hit.mask == 8 || hit.mask == 16 || hit.mask == 32)
         {
             m_PlayerInHouse = false;
+
+            validationPositioner.transform.position = new Vector3(
+            m_Player.transform.position.x + validationOffset.x,
+            m_Player.transform.position.y + validationOffset.y,
+            m_Player.transform.position.z + validationOffset.z
+            );
         }
     }
 
@@ -393,4 +408,4 @@ public class OverseerController : MonoBehaviour
     }
 
     #endregion
-    }
+}
