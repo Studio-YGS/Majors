@@ -21,6 +21,7 @@ public class MenuManager : MonoBehaviour
     float defTimeScale;
 
     public bool mainMenu;
+    [HideInInspector] public bool menuOpen;
 
     bool dontEnable;
 
@@ -65,7 +66,7 @@ public class MenuManager : MonoBehaviour
     public void OpenPauseMenu()
     {
         pauseMenuObject.SetActive(true);
-
+        menuOpen = true;
         playerController.DisableController();
         playerController.inJournal = false;
 
@@ -99,7 +100,7 @@ public class MenuManager : MonoBehaviour
     public void ClosePauseMenu()
     {
         pauseMenuObject.SetActive(false);
-
+        menuOpen = false;
         playerController.EnableController();
         playerController.inJournal = false;
 

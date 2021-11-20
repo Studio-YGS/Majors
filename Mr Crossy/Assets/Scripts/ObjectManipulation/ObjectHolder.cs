@@ -77,7 +77,7 @@ public class ObjectHolder : MonoBehaviour
     void Update()
     {
         RaycastHit hit;
-        if(Physics.Raycast(cam.position, cam.forward, out hit, pickupRange))
+        if(Physics.Raycast(cam.position, cam.forward, out hit, pickupRange, controller.raycastLayerMask))
         {
             if(hit.collider == gameObject.GetComponent<Collider>())
             {
@@ -120,7 +120,7 @@ public class ObjectHolder : MonoBehaviour
             Drop();
         }
 
-        if(objectsInHands.Count == 2 && thisObjectHeld)
+        if(objectsInHands.Count == 2 && thisObjectHeld && !FindObjectOfType<MenuManager>().menuOpen)
         {
             if(Input.GetAxis("Mouse ScrollWheel") != 0f )
             {
@@ -271,7 +271,7 @@ public class ObjectHolder : MonoBehaviour
         heldObject.transform.parent = null;
         
         RaycastHit detectWall;
-        if (Physics.Raycast(cam.position, cam.forward, out detectWall, 0.5f))
+        if (Physics.Raycast(cam.position, cam.forward, out detectWall, 0.5f,controller.raycastLayerMask))
         {
             if (detectWall.collider == null)
             {
@@ -346,7 +346,7 @@ public class ObjectHolder : MonoBehaviour
             imageTwo.GetComponentInParent<Transform>().localScale = new Vector3(1.3f, 1.3f, 1.3f);
         }
 
-        
+        FMODUnity.RuntimeManager.PlayOneShot("event:/2D/Object Interaction/Object Pickup");
         itemObjectHolder.StopCoroutine("Dissolve");
         itemObjectHolder.dissolving = false;
         //itemObjectHolder.dissolveValue = 0;

@@ -323,4 +323,29 @@ public class MrCrossyDistortion : MonoBehaviour
         }
         //colorAdjustments.active = false;
     }
+
+    public void WhitenScreen(float speed)
+    {
+        StartCoroutine(BrightenScreen(speed));
+    }
+    IEnumerator BrightenScreen(float speed)
+    {
+        mask.SetActive(false);
+        while (vignette[0].intensity.value > baseVignette && colorAdjustments[0].colorFilter.value != new Color(255, 255, 255))
+        {
+            for (int i = 0; i < volume.Length; i++)
+            {
+                vignette[i].intensity.value -= Time.deltaTime * vignetteIncreaseRate * speed;
+                colorAdjustments[i].colorFilter.value = new Color(colorAdjustments[i].colorFilter.value.r + Time.deltaTime * vignetteIncreaseRate * speed,
+                    colorAdjustments[i].colorFilter.value.b + Time.deltaTime * vignetteIncreaseRate * speed, colorAdjustments[i].colorFilter.value.g + Time.deltaTime * vignetteIncreaseRate * speed);
+            }
+
+            yield return null;
+        }
+        for (int i = 0; i < volume.Length; i++)
+        {
+            vignette[i].intensity.value = baseVignette;
+            colorAdjustments[i].colorFilter.value = Color.white;
+        }
+    }
 }

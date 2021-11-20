@@ -373,7 +373,7 @@ GameObject:
   - component: {fileID: 8722387896311148537}
   - component: {fileID: 22544645}
   - component: {fileID: 1467431024583293643}
-  m_Layer: 2
+  m_Layer: 19
   m_Name: Fps Character
   m_TagString: GameController
   m_Icon: {fileID: 0}
@@ -427,6 +427,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 3960544938577410215}
+  raycastLayerMask:
+    serializedVersion: 2
+    m_Bits: 491763
   baseSpeed: 0
   speed: 4
   sprintSpeed: 5.5
@@ -711,6 +714,7 @@ MonoBehaviour:
       keyToothWordTwo: dam
       wordTwoSetBack: 0
   puzzleOn: 0
+  firstKeyPickedUp: 0
   controller: {fileID: 0}
   headBob: {fileID: 0}
 --- !u!114 &4219625583315256593
