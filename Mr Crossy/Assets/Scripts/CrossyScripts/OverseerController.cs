@@ -11,6 +11,7 @@ public class OverseerController : MonoBehaviour
 {
     public static BehaviorTree ObserverTree;
     public bool m_PlayerInHouse;
+    public bool allowVignette = true;
 
     CrossyTheWatcher titan;
     MrCrossyDistortion distootle;
@@ -127,6 +128,7 @@ public class OverseerController : MonoBehaviour
         distootle = FindObjectOfType<MrCrossyDistortion>();
         keyMan = FindObjectOfType<CrossKeyManager>();
 
+        if (m_Player == null) m_Player = GameObject.Find("Fps Character");
 
         emitter.Target.SetParameter(distanceParamName, 100f);
         emitter.Target.SetParameter(chaseParamName, 1f);
@@ -164,9 +166,13 @@ public class OverseerController : MonoBehaviour
 
         if(m_State == 3)
         {
-            vignetteActivated = true;
-            Debug.Log("potoatosondwich");
-            distootle.DistanceVignette(m_Crossy);
+            if(allowVignette)
+            {
+                vignetteActivated = true;
+                Debug.Log("potoatosondwich");
+                distootle.DistanceVignette(m_Crossy);
+            }
+            
             if(!keyMan.doorsLocked)
             {
                 keyMan.doorsLocked = true;
@@ -174,9 +180,13 @@ public class OverseerController : MonoBehaviour
         }
         else if (m_State != 3 && vignetteActivated)
         {
-            vignetteActivated = false;
-            Debug.Log("VignetteNooooooo");
-            distootle.DecreaseVignette();
+            if(allowVignette)
+            {
+                vignetteActivated = false;
+                Debug.Log("VignetteNooooooo");
+                distootle.DecreaseVignette();
+            }
+            
             if (keyMan.doorsLocked)
             {
                 keyMan.doorsLocked = false;
@@ -398,4 +408,4 @@ public class OverseerController : MonoBehaviour
     }
 
     #endregion
-    }
+}

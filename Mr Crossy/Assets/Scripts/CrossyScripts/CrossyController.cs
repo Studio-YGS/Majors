@@ -24,9 +24,10 @@ public class CrossyController : MonoBehaviour
     [HideInInspector] public bool lookCondition;
     public bool speedDebugLog;
 
-    private Transform headBone;
+    //private Transform headBone;
     [Space(1)]
-    public Transform vision;
+    [SerializeField] private Transform m_Vision;
+    [SerializeField] private Transform m_HindVision;
     [SerializeField] private Transform m_CrossyDespawn;
 
     [Header("Movement Variables")]
@@ -91,14 +92,20 @@ public class CrossyController : MonoBehaviour
     public string walkableTag;
 
     [Range(0,1)]public float lookAtWeight;
+    [SerializeField] private float lookUpRate;
+    [SerializeField] private float lookDownRate;
+    private float currentWeight = 0f;
     public Transform lookAtTransform;
     public Vector3 lookAtOffset;
+    private bool increaseLook;
+    private bool decreaseLook;
 
     [Range(0,2)] public float IKLeftFootDistance;
     [Range(0,2)] public float IKRightFootDistance;
 
     #region Properties
-
+    public Transform Vision { get { return m_Vision; } }
+    public Transform HindVision { get { return m_HindVision; } }
     public float WalkSpeed { get { return m_WalkSpeed; } set { m_WalkSpeed = value; } }
     public float FullRunSpeed { get { return m_FullRunSpeed; } set { m_FullRunSpeed = value; } }
     public float SubRunSpeed { get { return m_FullRunSpeed*(m_SubRunPercent/100f); } }
@@ -109,8 +116,6 @@ public class CrossyController : MonoBehaviour
     public float AngularSpeed { get { return m_AngularSpeed; } set { m_AngularSpeed = value; } }
     public float StoppingDistance { get { return m_StoppingDistance; } set { m_StoppingDistance = value; } }
     public float RunDistance { get { return (m_State == 2) ? m_AlertRunDistance : m_PatrolRunDistance; } }
-    public float VisionRotation { get { return vision.eulerAngles.x; }}
-    public Vector3 VisionPosition { get { return vision.localPosition; }}
 
     public int NavMeshMask { get { return m_Mask; } }
     public bool ShouldRun { get { return m_ShouldRun; } set { m_ShouldRun = value; } }
@@ -156,7 +161,7 @@ public class CrossyController : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         m_Mask = agent.areaMask;
-        headBone = animator.GetBoneTransform(HumanBodyBones.Head);
+        //headBone = animator.GetBoneTransform(HumanBodyBones.Head);
         //m_RunDistance = (m_State == 2) ? m_AlertRunDistance : m_PatrolRunDistance;
     }
 
@@ -239,9 +244,10 @@ public class CrossyController : MonoBehaviour
     {
         float distance = agent.remainingDistance;
 
-        if((m_State == 3 || m_State == 2) && distance <= m_ScaryDistance)
+        if((m_State == 3 || m_State == 2))
         {
-            animator.SetBool("ScaryVariant", true);
+            if(distance <= m_ScaryDistance) animator.SetBool("ScaryVariant", true);
+            else animator.SetBool("ScaryVariant", false);
         }
         else if (m_State == 4)
         {
@@ -280,10 +286,15 @@ public class CrossyController : MonoBehaviour
             {
                 if (lookCondition)
                 {
-                    animator.SetLookAtPosition(lookAtTransform.position + lookAtOffset);
-                    animator.SetLookAtWeight(lookAtWeight);
+                    StartCoroutine(IncreaseLook());
                 }
-                else animator.SetLookAtWeight(0f);
+                else
+                {
+                    StartCoroutine(DecreaseLook());
+                }
+
+                animator.SetLookAtPosition(lookAtTransform.position + lookAtOffset);
+                animator.SetLookAtWeight(currentWeight);
             }
             
             //Foot Stuff
@@ -326,18 +337,48 @@ public class CrossyController : MonoBehaviour
 
     }
 
-    public void OnEnable()
+    IEnumerator IncreaseLook()
     {
-        TreeMalarkey.RegisterEventOnTree(crossyTree, "Schlepp", Flibbity);
+        increaseLook = true;
+        StopCoroutine(DecreaseLook());
+        while (currentWeight < lookAtWeight)
+        {
+            currentWeight += lookUpRate * Time.deltaTime;
+
+            yield return null;
+        }
+        currentWeight = lookAtWeight;
+
+        increaseLook = false;
     }
 
-    public void Flibbity()
+    IEnumerator DecreaseLook()
+    {
+        decreaseLook = true;
+        StopCoroutine(IncreaseLook());
+        while (currentWeight > 0f)
+        {
+            currentWeight -= lookDownRate * Time.deltaTime;
+
+            yield return null;
+        }
+        currentWeight = 0f;
+
+        decreaseLook = false;
+    }
+
+    public void OnEnable()
+    {
+        TreeMalarkey.RegisterEventOnTree(crossyTree, "Darken", DarkenEvent);
+    }
+
+    public void DarkenEvent()
     {
         FindObjectOfType<MrCrossyDistortion>().DarkenScreen(1.5f);
     }
 
     public void OnDisable()
     {
-        TreeMalarkey.UnregisterEventOnTree(crossyTree, "Schlepp", Flibbity);
+        TreeMalarkey.UnregisterEventOnTree(crossyTree, "Darken", DarkenEvent);
     }
 }
