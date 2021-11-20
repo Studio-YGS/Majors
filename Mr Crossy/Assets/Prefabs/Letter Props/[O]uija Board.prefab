@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8995509697023108492
+--- !u!1 &5547432040295199627
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,50 +8,49 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1926050203039827377}
-  - component: {fileID: 8199814563093115541}
-  - component: {fileID: 5866395934105207731}
-  - component: {fileID: 8995509697023108481}
-  - component: {fileID: 8995509697023108480}
-  - component: {fileID: 8995509697023108483}
-  - component: {fileID: 8995509697023108482}
-  - component: {fileID: 8995509697023108493}
+  - component: {fileID: 2624375865445491735}
+  - component: {fileID: 5064935539222869600}
+  - component: {fileID: 6069316074206682385}
+  - component: {fileID: 5547432040295199631}
+  - component: {fileID: 5547432040295199630}
+  - component: {fileID: 5547432040295199625}
+  - component: {fileID: 5547432040295199624}
   m_Layer: 0
-  m_Name: '[G]as mask'
+  m_Name: '[O]uija Board'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1926050203039827377
+--- !u!4 &2624375865445491735
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8995509697023108492}
-  m_LocalRotation: {x: -0, y: -1, z: -0, w: -0.00000035762784}
-  m_LocalPosition: {x: -3.4959595, y: 1.0717859, z: -17.155415}
-  m_LocalScale: {x: 3.0285647, y: 3.0285647, z: 3.0285647}
+  m_GameObject: {fileID: 5547432040295199627}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: -0.28090477, y: 0.9541888, z: -17.594002}
+  m_LocalScale: {x: 39.704216, y: 0.5206917, z: 23.407684}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &8199814563093115541
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!33 &5064935539222869600
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8995509697023108492}
-  m_Mesh: {fileID: -6367451218664853545, guid: 4ca0aacfb44d9c54090a8803d5e86889, type: 3}
---- !u!23 &5866395934105207731
+  m_GameObject: {fileID: 5547432040295199627}
+  m_Mesh: {fileID: 4068373912626513877, guid: e8fd534d9a42174498b0b92d035f67da, type: 3}
+--- !u!23 &6069316074206682385
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8995509697023108492}
+  m_GameObject: {fileID: 5547432040295199627}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 1
@@ -64,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5aa891d2297fd60489716214b48dd643, type: 2}
+  - {fileID: 2100000, guid: 3a2f1ed296d6fb243a201af476c55bd2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -86,40 +85,26 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &8995509697023108481
-CapsuleCollider:
+--- !u!65 &5547432040295199631
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8995509697023108492}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.024089642
-  m_Height: 0.07419267
-  m_Direction: 1
-  m_Center: {x: 1.118571e-15, y: -0.028458819, z: 0.02852251}
---- !u!135 &8995509697023108480
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8995509697023108492}
+  m_GameObject: {fileID: 5547432040295199627}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.046626534
-  m_Center: {x: -0, y: 0.01892865, z: -0.01}
---- !u!54 &8995509697023108483
+  m_Size: {x: 0.01, y: 0.010192177, z: 0.009948611}
+  m_Center: {x: 5.842145e-18, y: 0.0000000060535967, z: -0.000025694026}
+--- !u!54 &5547432040295199630
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8995509697023108492}
+  m_GameObject: {fileID: 5547432040295199627}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -129,13 +114,13 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &8995509697023108482
+--- !u!114 &5547432040295199625
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8995509697023108492}
+  m_GameObject: {fileID: 5547432040295199627}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
@@ -148,35 +133,35 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
---- !u!114 &8995509697023108493
+--- !u!114 &5547432040295199624
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8995509697023108492}
+  m_GameObject: {fileID: 5547432040295199627}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c771dc25b37682447906be6093940da8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   objectImage: {fileID: 4860654920025106680, guid: c9eea934591e8f4428c79ce2fbb600ac, type: 3}
-  objectName: '[G]as Mask - nd img'
+  objectName: '[O]uija Board nd mg'
   image: {fileID: 0}
   textName: {fileID: 0}
   imageTwo: {fileID: 0}
   textNameTwo: {fileID: 0}
   hand: {fileID: 0}
-  thisObjectHeld: 0
-  isPlacedDown: 1
+  thisObjectHeld: 1
+  isPlacedDown: 0
   beingInspected: 0
   controller: {fileID: 0}
-  ogScaleFactor: {x: 3.0285647, y: 3.0285647, z: 3.0285647}
+  ogScaleFactor: {x: 39.704216, y: 0.5206917, z: 23.407684}
   pickupRange: 5
-  handOffset: {x: 0.03, y: 0.48, z: -0.08}
-  handRotation: {x: 0, y: 0.77698123, z: 0, w: -0.6295237}
-  scaleFactor: {x: 3.028565, y: 3.028565, z: 3.028565}
-  placementOffset: {x: 0, y: 0.06, z: 0}
-  rotationalSet: {x: -0.5, y: 0, z: 0, w: 0.8660254}
+  handOffset: {x: 0, y: 0.3, z: 0}
+  handRotation: {x: -0.33127087, y: 0.65013725, z: -0.56986636, w: -0.37793335}
+  scaleFactor: {x: 39.70422, y: 0.5206917, z: 23.40768}
+  placementOffset: {x: 0, y: 0, z: 0}
+  rotationalSet: {x: 0, y: 0, z: 0, w: 0}
   distanceFromFace: 0.5
   updatePos: 0

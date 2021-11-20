@@ -11,11 +11,10 @@ GameObject:
   - component: {fileID: 4256894444941814007}
   - component: {fileID: 4256894444942616791}
   - component: {fileID: 4256894444943583767}
-  - component: {fileID: 4256894444947675767}
   - component: {fileID: 5498202329700114319}
   - component: {fileID: 3327863717688019096}
   - component: {fileID: 4725991093105558534}
-  - component: {fileID: -585055901259171776}
+  - component: {fileID: 4579201789759567318}
   m_Layer: 0
   m_Name: '[H]ighlighter'
   m_TagString: Untagged
@@ -86,20 +85,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &4256894444947675767
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4256894444941391063}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 528332e707103b54a9543c58aa14f34e, type: 3}
 --- !u!54 &5498202329700114319
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -167,15 +152,16 @@ MonoBehaviour:
   rotationalSet: {x: 0, y: 0, z: 0, w: 0}
   distanceFromFace: 1.2
   updatePos: 0
---- !u!114 &-585055901259171776
-MonoBehaviour:
+--- !u!65 &4579201789759567318
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4256894444941391063}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  serializedVersion: 2
+  m_Size: {x: 0.1048003, y: 0.01286648, z: 0.023513243}
+  m_Center: {x: -0.0014271904, y: 0.006476896, z: 4.656613e-10}
