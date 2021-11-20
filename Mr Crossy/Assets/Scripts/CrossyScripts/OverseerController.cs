@@ -178,7 +178,7 @@ public class OverseerController : MonoBehaviour
                 keyMan.doorsLocked = true;
             }
         }
-        else if (m_State != 3 && vignetteActivated)
+        else if (m_State != 3 && vignetteActivated && !deady)
         {
             if(allowVignette)
             {

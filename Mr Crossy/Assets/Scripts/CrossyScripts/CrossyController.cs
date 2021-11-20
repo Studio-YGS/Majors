@@ -374,7 +374,9 @@ public class CrossyController : MonoBehaviour
 
     public void DarkenEvent()
     {
+        Debug.Log("EVENT received");
         FindObjectOfType<MrCrossyDistortion>().DarkenScreen(1.5f);
+        Debug.Log("EVENT methid called");
     }
 
     public void OnDisable()
