@@ -39,6 +39,8 @@ public class CrossyTheTutorial : MonoBehaviour
         animator = GetComponent<Animator>();
         transform.rotation = lighthouse.selfTransform.rotation;
         //AwakenTitan();
+        if (faceToTransform == null) faceToTransform = GameObject.Find("Fps Character").transform;
+        if (lookAtTransform == null) lookAtTransform = GameObject.Find("FirstPersonCharacter").transform;
     }
 
     // Update is called once per frame

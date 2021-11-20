@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerInsanityDetection : MonoBehaviour
 {
     private MrCrossyDistortion distortion;
+    public bool allowInsanity = true;
 
     private GameObject m_Crossy;
     OverseerController seer;
@@ -48,24 +49,32 @@ public class PlayerInsanityDetection : MonoBehaviour
         //    distortion.ReduceInsanity();
         //}
 
-        float distance = Vector3.Distance(transform.position, m_Crossy.transform.position);
-        Debug.Log("SANE Insanity Distance: " + distance);
-        if (!seer.m_PlayerInHouse && seer.State != -1)
+        if(allowInsanity)
         {
-            if (distance < 25f && distance > 15f)
+            float distance = Vector3.Distance(transform.position, m_Crossy.transform.position);
+            Debug.Log("SANE Insanity Distance: " + distance);
+            if (!seer.m_PlayerInHouse && seer.State != -1)
             {
-                calledInsane = true;
-                distortion.IncreaseInsanity(m_Crossy);
+                if (distance < 25f && distance > 15f)
+                {
+                    calledInsane = true;
+                    distortion.IncreaseInsanity(m_Crossy);
+                }
+                else if (distance < 15f && distance > 10f)
+                {
+                    distortion.increasingInsanity = false;
+                }
+                else if (distance < 10f)
+                {
+                    distortion.LerpInsanity();
+                }
+                else if (distance > 25f && calledInsane)
+                {
+                    distortion.ReduceInsanity();
+                    calledInsane = false;
+                }
             }
-            else if (distance < 15f && distance > 10f)
-            {
-                distortion.increasingInsanity = false;
-            }
-            else if (distance < 10f)
-            {
-                distortion.LerpInsanity();
-            }
-            else if (distance > 25f && calledInsane)
+            else if (calledInsane)
             {
                 distortion.ReduceInsanity();
                 calledInsane = false;
@@ -76,7 +85,5 @@ public class PlayerInsanityDetection : MonoBehaviour
             distortion.ReduceInsanity();
             calledInsane = false;
         }
-        
-        
     }
 }
