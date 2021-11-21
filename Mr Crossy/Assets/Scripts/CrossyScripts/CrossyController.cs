@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using BehaviorDesigner.Runtime;
+using FMODUnity;
+using FMOD.Studio;
 
 
 //If you want stuff to happen when mr crossy attacks you, stuff it in the "CrossyAttack" method way down yonder
@@ -16,6 +18,7 @@ public class CrossyController : MonoBehaviour
     public static BehaviorTree crossyTree;
     Animator animator;
     NavMeshAgent agent;
+    EventInstance attackLines;
 
     [Header("Debug Booleans")]
     [HideInInspector] public bool overrideShouldRun;
@@ -69,6 +72,7 @@ public class CrossyController : MonoBehaviour
     private bool m_ShouldRun = false;
     private bool m_ShouldBeStopped = false;
     private int m_State = -1;
+
     [Header("Detection Variables")]
     [SerializeField] private float m_FocalViewDist;
     [SerializeField] private float m_PeripheralViewDist;
@@ -352,7 +356,6 @@ public class CrossyController : MonoBehaviour
 
         increaseLook = false;
     }
-
     IEnumerator DecreaseLook()
     {
         decreaseLook = true;
@@ -371,6 +374,7 @@ public class CrossyController : MonoBehaviour
     public void OnEnable()
     {
         TreeMalarkey.RegisterEventOnTree(crossyTree, "Darken", DarkenEvent);
+        TreeMalarkey.RegisterEventOnTree(crossyTree, "PlayAttack", AttackSound);
     }
 
     public void DarkenEvent()
@@ -380,8 +384,15 @@ public class CrossyController : MonoBehaviour
         Debug.Log("EVENT methid called");
     }
 
+    public void AttackSound()
+    {
+        attackLines = RuntimeManager.CreateInstance("event:/MR_C_Attack/Mr_C_Attack");
+        attackLines.start();
+    }
+
     public void OnDisable()
     {
         TreeMalarkey.UnregisterEventOnTree(crossyTree, "Darken", DarkenEvent);
+        TreeMalarkey.UnregisterEventOnTree(crossyTree, "PlayAttack", AttackSound);
     }
 }
