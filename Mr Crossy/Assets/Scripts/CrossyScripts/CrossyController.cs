@@ -22,6 +22,7 @@ public class CrossyController : MonoBehaviour
     [HideInInspector] public bool run;
     [HideInInspector] public bool accelManipulation;
     [HideInInspector] public bool lookCondition;
+    [SerializeField] private bool allowScaryRun;
     public bool speedDebugLog;
 
     //private Transform headBone;
@@ -180,7 +181,7 @@ public class CrossyController : MonoBehaviour
         m_DistanceToCorner = Vector3.Distance(transform.position, agent.steeringTarget);
 
         Running();
-        ScaryRunCondition();
+        if(allowScaryRun) ScaryRunCondition();
         StoppyStop();
 
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Spinspin")) animator.applyRootMotion = true;
@@ -244,7 +245,7 @@ public class CrossyController : MonoBehaviour
     {
         float distance = agent.remainingDistance;
 
-        if((m_State == 3 || m_State == 2))
+        if(m_State == 3)
         {
             if(distance <= m_ScaryDistance) animator.SetBool("ScaryVariant", true);
             else animator.SetBool("ScaryVariant", false);

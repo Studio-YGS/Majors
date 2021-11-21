@@ -62,6 +62,8 @@ public class OverseerController : MonoBehaviour
     [SerializeField] private float m_CheckRadius;
     private int m_State;
     private bool m_HideTitan;
+    private bool m_TimerActive;
+    [SerializeField] private float m_TitanAwakenThresh;
 
     [Header("FMOD Variables")]
     public string distanceParamName = "Distance";
@@ -154,13 +156,21 @@ public class OverseerController : MonoBehaviour
 
         HouseyBoBousey();
 
+        if(titan.animator.GetCurrentAnimatorStateInfo(0).IsName("TitanCrossyIdle"))
+        {
+            if(!m_TimerActive && !titan.allowHide)
+            {
+                StartCoroutine(AllowHideTimer());
+            }
+        }
+
         if(m_State == -1 && !m_IsTutorial)
         {
             bool left = LeftRadius();
 
             if (left)
             {
-                CheckClosestLighthouse();
+                if (titan.allowHide) CheckClosestLighthouse();
             }
         }
 
@@ -208,6 +218,15 @@ public class OverseerController : MonoBehaviour
     }
 
     #region Methods
+
+    IEnumerator AllowHideTimer()
+    {
+        m_TimerActive = true;
+
+        yield return new WaitForSeconds(m_TitanAwakenThresh);
+        titan.allowHide = true;
+        m_TimerActive = false;
+    }
 
     public void HouseyBoBousey()
     {
