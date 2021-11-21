@@ -569,11 +569,12 @@ public class DoorInteraction : MonoBehaviour
 
             yield return null;
         }
-        //if (doorclose)
-        //{
-        //    doorclose.Play();
-        //}
-        
+        if (doorclose)
+        {
+            doorclose.Play();
+            //jack the poopoohead
+        }
+
         rotationVal = 0;
         greaterThan = false;
         lessThan = false;
