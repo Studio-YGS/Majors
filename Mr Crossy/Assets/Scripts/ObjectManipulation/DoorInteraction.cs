@@ -28,7 +28,7 @@ public class DoorInteraction : MonoBehaviour
     Transform player;
     float angleRelativeToPlayer;
     float relativeAngle;
-    public float openSpeed = 10;
+    float openSpeed = 3;
     public float closeDistance = 45;
     //public bool locked;
     bool handon;
