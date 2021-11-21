@@ -40,6 +40,7 @@ public class CrossyTheWatcher : MonoBehaviour
     [HideInInspector] public bool lighthousing;
     [HideInInspector] public bool hidingTitan;
     [HideInInspector] public bool isTutorial = true;
+    [HideInInspector] public bool allowHide = false;
 
     private void Start()
     {
@@ -166,6 +167,7 @@ public class CrossyTheWatcher : MonoBehaviour
     public void AwakenTitan()
     {
         animator.SetTrigger("TitanAwaken");
+        allowHide = false;
     }
 
     //Hides Titan Crossy
