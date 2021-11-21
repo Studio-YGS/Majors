@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMOD.Studio;
+using FMODUnity;
 
 public class JournalController : MonoBehaviour
 {
@@ -21,6 +23,8 @@ public class JournalController : MonoBehaviour
     public int whichNotesPage = 0;
 
     public bool disabled = false, tutorial = true, readingHowTo = false;
+
+    EventInstance eventInstance;
 
     void Start()
     {
@@ -188,7 +192,10 @@ public class JournalController : MonoBehaviour
                         break;
                     }
             }
-            //paper sound
+
+            eventInstance = RuntimeManager.CreateInstance("event:/2D/Paper/Paper Turn");
+
+            eventInstance.start();
         }
         else
         {
@@ -207,7 +214,10 @@ public class JournalController : MonoBehaviour
                         break;
                     }
             }
-            //paper sound
+
+            eventInstance = RuntimeManager.CreateInstance("event:/2D/Paper/Paper Turn");
+
+            eventInstance.start();
         }
     }
 

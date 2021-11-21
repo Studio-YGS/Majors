@@ -9,7 +9,7 @@ public class TutorialSectionStart : MonoBehaviour
 
     public UnityEvent sectionStart, steppingAway, raycastEvent;
 
-    public bool needsRaycast = false, needsSecondRaycast = false, needsCheck = false;
+    public bool needsRaycast = false, needsSecondRaycast = false, needsCheck = false, atGate;
 
     bool first = true;
 
@@ -56,7 +56,7 @@ public class TutorialSectionStart : MonoBehaviour
             }
 
             if (hit.transform.gameObject.CompareTag("Clue") && needsRaycast)
-            { 
+            {
                 raycastEvent.Invoke();
             }
 
@@ -64,6 +64,25 @@ public class TutorialSectionStart : MonoBehaviour
             {
                 raycastEvent.Invoke();
             }
+
+            if(hit.transform.gameObject.CompareTag("Gate") && atGate)
+            {
+                LockedPrompt prompt = FindObjectOfType<LockedPrompt>();
+
+                prompt.locked.SetActive(true);
+            }
+            else if(!hit.transform.gameObject.CompareTag("Gate") && atGate)
+            {
+                LockedPrompt prompt = FindObjectOfType<LockedPrompt>();
+
+                prompt.locked.SetActive(false);
+            }
+        }
+        else if(!Physics.Raycast(playerController.cam.position, playerController.cam.TransformDirection(Vector3.forward), 2f))
+        {
+            LockedPrompt prompt = FindObjectOfType<LockedPrompt>();
+
+            prompt.locked.SetActive(false);
         }
     }
 

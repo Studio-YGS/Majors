@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using FMOD.Studio;
+using FMODUnity;
 
 public class CluePickUp : MonoBehaviour
 {
     Player_Controller playerController;
 
     public UnityEvent pickUp;
+
+    EventInstance eventInstance;
 
     void Start()
     {
@@ -22,7 +26,11 @@ public class CluePickUp : MonoBehaviour
         {
             if (hit.transform.gameObject.CompareTag("Clue") && hit.transform.gameObject.name == gameObject.name)
             {
-                pickUp.Invoke();              
+                pickUp.Invoke();
+
+                eventInstance = RuntimeManager.CreateInstance("event:/2D/Paper/Paper Up");
+
+                eventInstance.start();
 
                 if (GetComponentInParent<TutorialSectionStart>())
                 {

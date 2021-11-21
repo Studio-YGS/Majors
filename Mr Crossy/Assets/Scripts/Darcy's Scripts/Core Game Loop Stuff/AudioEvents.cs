@@ -57,13 +57,6 @@ public class AudioEvents : MonoBehaviour
         eventInstance.start();
     }
 
-    public void PlayerDie()
-    {
-        //random voiceline here
-
-        Debug.Log("random voice line");
-    }
-
     public void BellToll()
     {
         eventInstance = RuntimeManager.CreateInstance("event:/2D/Bell/Bell_Tolls");
@@ -74,6 +67,13 @@ public class AudioEvents : MonoBehaviour
     public void NotePickup()
     {
         eventInstance = RuntimeManager.CreateInstance("event:/MR_C_Tutorial/TUT.0.4.2");
+
+        eventInstance.start();
+    }
+
+    public void HoverOver()
+    {
+        eventInstance = RuntimeManager.CreateInstance("event:/UI_Multimedia/Hover Menu UI");
 
         eventInstance.start();
     }

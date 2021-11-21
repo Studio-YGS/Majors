@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMOD.Studio;
+using FMODUnity;
 
 public class NoteController : MonoBehaviour
 {
@@ -13,6 +15,8 @@ public class NoteController : MonoBehaviour
     int currentNote = 0;
 
     bool tutorialLine = false;
+
+    EventInstance eventInstance;
 
     void Awake()
     {
@@ -33,6 +37,10 @@ public class NoteController : MonoBehaviour
                 {
                     hit.transform.gameObject.GetComponent<NoteAssign>().assignedNote.SetActive(true);
                     hit.transform.gameObject.SetActive(false);
+
+                    eventInstance = RuntimeManager.CreateInstance("event:/2D/Paper/Paper Up");
+
+                    eventInstance.start();
 
                     PickUpNote();
 
