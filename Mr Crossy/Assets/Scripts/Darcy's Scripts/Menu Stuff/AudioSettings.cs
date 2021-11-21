@@ -8,8 +8,6 @@ public class AudioSettings : MonoBehaviour
 {
     EventInstance sfxVolumePreview, voiceVolumePreview;
 
-    Player_Controller player;
-
     MenuManager menuManager;
 
     Bus music, sfx, voice;
@@ -20,8 +18,6 @@ public class AudioSettings : MonoBehaviour
 
     void Awake()
     {
-        player = FindObjectOfType<Player_Controller>();
-
         if (mainMenu)
         {
             DontDestroyOnLoad(gameObject);
@@ -75,8 +71,6 @@ public class AudioSettings : MonoBehaviour
     public void VoiceVolumeLevel(float newVoiceVolume)
     {
         voiceVolume = newVoiceVolume;
-
-        voiceVolumePreview.setPaused(false);
 
         PLAYBACK_STATE pbState;
         voiceVolumePreview.getPlaybackState(out pbState);

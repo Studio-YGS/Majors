@@ -21,7 +21,8 @@ public class MenuManager : MonoBehaviour
     float defTimeScale;
 
     public bool mainMenu;
-    [HideInInspector] public bool menuOpen;
+    [HideInInspector] 
+    public bool menuOpen;
 
     bool dontEnable;
 
@@ -107,9 +108,8 @@ public class MenuManager : MonoBehaviour
         if (!dontEnable)
         {
             journalController.EnableJournal();
+            journalOnSwitch.ShowTab();
         }
-
-        journalOnSwitch.ShowTab();
 
         for (int i = 0; i < GetComponent<TutorialController>().objectsToSwitchOn.Length; i++)
         {
