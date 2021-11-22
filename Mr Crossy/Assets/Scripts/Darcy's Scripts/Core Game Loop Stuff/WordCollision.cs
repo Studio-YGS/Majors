@@ -43,20 +43,26 @@ public class WordCollision : MonoBehaviour
         puzzleController.word = word;
         puzzleController.wordObjects.Clear();
 
-        for (int i = 0; i < wordObjects.Length; i++)
+        if(wordObjects != null)
         {
-            puzzleController.wordObjects.Add(wordObjects[i]);
-
-            if(wordObjects[i].name == word)
+            for (int i = 0; i < wordObjects.Length; i++)
             {
-                wordPoint = i;
+                if(wordObjects[i] != null)
+                {
+                    puzzleController.wordObjects.Add(wordObjects[i]);
+
+                    if (wordObjects[i].name == word)
+                    {
+                        wordPoint = i;
+                        puzzleController.SetUpLetters(wordPoint);
+                    }
+                }
             }
         }
 
         puzzleController.currentStreet = street;
-        puzzleController.SetUpLetters(wordPoint);
         puzzleController.storedObjects.Clear();
-        puzzleController.wordCollision = gameObject.GetComponent<WordCollision>();
+        puzzleController.wordCollision = GetComponent<WordCollision>();
 
         if (!puzzleComplete)
         {
