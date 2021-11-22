@@ -41,9 +41,10 @@ public class MenuManager : MonoBehaviour
 
     void Update()
     {
-        if (!mainMenu && !FindObjectOfType<CrossKeyManager>().puzzleOn)
+
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (!mainMenu && !FindObjectOfType<CrossKeyManager>().puzzleOn)
             {
                 if (!playerController.inJournal && !pauseMenuObject.activeInHierarchy && !settingsMenuObject.activeInHierarchy)
                 {
@@ -59,9 +60,12 @@ public class MenuManager : MonoBehaviour
                     ClosePauseMenu();
                 }
             }
+            
+                
         }
 
-        
+
+
     }
 
     public void OpenPauseMenu()
