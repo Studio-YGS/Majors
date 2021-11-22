@@ -58,6 +58,11 @@ public class OverseerController : MonoBehaviour
     [SerializeField] private Vector3 m_ValidationPosition;
     [SerializeField] private List<GameObject> m_SpawnLighthouses = new List<GameObject>();
 
+    [Header("Heal 'N' Die")]
+    [SerializeField] private int m_DeathChanceMax;
+    private int m_DeathChanceRemain;
+    [SerializeField] private float m_HealTimer;
+
     [Header("Titan Crossy")]
     [SerializeField] private float m_CheckRadius;
     private int m_State;
@@ -100,6 +105,10 @@ public class OverseerController : MonoBehaviour
     public float SearchAreaRadiusMax { get { return m_SearchRadiusMax; } }
     public float SearchAreaRadiusMin { get { return m_SearchRadiusMin; } }
     public float SearchAreaRadiusAlert { get { return m_SearchRadiusAggro; } }
+
+    public float HealTimer { get { return m_HealTimer; } }
+    public int DeathChanceMaximum { get { return m_DeathChanceMax; } }
+    public int DeathChanceRemaining { get { return m_DeathChanceRemain; } set { m_DeathChanceRemain = value; } }
 
     public Vector3 ValidationPosition { get { return m_ValidationPosition; } }
     public int State { get { return m_State; } set { m_State = value; } }
