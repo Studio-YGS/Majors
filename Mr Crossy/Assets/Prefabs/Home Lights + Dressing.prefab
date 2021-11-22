@@ -24845,7 +24845,7 @@ GameObject:
   - component: {fileID: 3090029485767343147}
   - component: {fileID: 3090029485766048779}
   - component: {fileID: 3090029485764918987}
-  - component: {fileID: 3090029485769264811}
+  - component: {fileID: 6232483324115974009}
   m_Layer: 15
   m_Name: WashingMachine
   m_TagString: Untagged
@@ -24917,8 +24917,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &3090029485769264811
-MeshCollider:
+--- !u!65 &6232483324115974009
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -24927,10 +24927,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 1dab676b8bbc6bb448d5c7008f9076d3, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 1.4518917, y: 2.5085778, z: 0.7675717}
+  m_Center: {x: 0.34518647, y: 1.2549617, z: 0.08466679}
 --- !u!1 &3090029485871139428
 GameObject:
   m_ObjectHideFlags: 0
@@ -32821,6 +32820,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fea18f05dcd46c442b9e24292f9e097c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prompt: {fileID: 0}
 --- !u!114 &5869872712172551871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32845,7 +32845,9 @@ MonoBehaviour:
   needsRaycast: 0
   needsSecondRaycast: 0
   needsCheck: 0
+  atGate: 0
   tutorialClues: []
+  locked: {fileID: 0}
 --- !u!1 &4402580748467499239
 GameObject:
   m_ObjectHideFlags: 0
@@ -36143,8 +36145,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.9135898, y: 0.9885214, z: 0.86254746}
-  m_Center: {x: 0.6005658, y: -0.31342143, z: 0.30048084}
+  m_Size: {x: 1.9135898, y: 0.9885212, z: 1.5600134}
+  m_Center: {x: 0.6005658, y: -0.3134214, z: 0.64921373}
 --- !u!1 &5157686079113625561
 GameObject:
   m_ObjectHideFlags: 0
@@ -42497,7 +42499,9 @@ MonoBehaviour:
   needsRaycast: 0
   needsSecondRaycast: 0
   needsCheck: 0
+  atGate: 0
   tutorialClues: []
+  locked: {fileID: 0}
 --- !u!1 &5578521438918776903
 GameObject:
   m_ObjectHideFlags: 0
