@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMOD.Studio;
+using FMODUnity;
 
 public class JournalOnSwitch : MonoBehaviour
 {
@@ -13,6 +15,8 @@ public class JournalOnSwitch : MonoBehaviour
     JournalController journalController;
 
     MenuManager pauseMenu;
+
+    EventInstance eventInstance;
 
     void Start()
     {
@@ -51,7 +55,9 @@ public class JournalOnSwitch : MonoBehaviour
 
             journalController.OpenMap();
 
-            //paper sound
+            eventInstance = RuntimeManager.CreateInstance("event:/2D/Paper/Paper Up");
+
+            eventInstance.start();
 
             open = true;
             journalClosed.SetActive(false);
@@ -68,7 +74,9 @@ public class JournalOnSwitch : MonoBehaviour
             Cursor.lockState = CursorLockMode.Confined;
             pauseMenu.streetName.SetActive(true);
 
-            //paper sound
+            eventInstance = RuntimeManager.CreateInstance("event:/2D/Paper/Paper Up");
+
+            eventInstance.start();
 
             open = false;
             journalClosed.SetActive(true);

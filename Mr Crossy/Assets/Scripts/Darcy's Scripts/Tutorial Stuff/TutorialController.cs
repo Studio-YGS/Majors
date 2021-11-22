@@ -56,8 +56,6 @@ public class TutorialController : MonoBehaviour
         journalController.OpenMap();
         journalController.DisableJournal();
 
-        journalOnSwitch.journalClosed.SetActive(true);
-
         eventInstance = RuntimeManager.CreateInstance("event:/MR_C_Tutorial/TUT.0.1");
 
         eventInstance.start();

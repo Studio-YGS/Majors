@@ -52,11 +52,6 @@ MonoBehaviour:
   objectsToSwitchOn:
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   conLetter: {fileID: 0}
 --- !u!114 &6209574557737880101
 MonoBehaviour:
@@ -73,6 +68,9 @@ MonoBehaviour:
   respawnPosition: {fileID: 0}
   crossyPosition: {fileID: 0}
   respawningText: {fileID: 0}
+  houseAudio2D: {fileID: 0}
+  houseAudio3D: {fileID: 0}
+  exSwitch: {fileID: 0}
 --- !u!114 &880813859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,6 +107,7 @@ MonoBehaviour:
   loadingAni: {fileID: 0}
   streetName: {fileID: 0}
   mainMenu: 0
+  menuOpen: 0
 --- !u!114 &1948342450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,7 +136,7 @@ MonoBehaviour:
   motionBlur: {fileID: 2100000, guid: 608b85e2f10678545a56b9dcaf3275dd, type: 2}
   volume:
   - {fileID: 11400000, guid: b56d638e14ab78e4d8d668aa6dcd2e31, type: 2}
-  - {fileID: 11400000, guid: 48ab4486beb174a4584699a670bb5964, type: 2}
+  - {fileID: 11400000, guid: 9666de3bc8816e14c82afb49b241ea5b, type: 2}
   mask: {fileID: 0}
   vignette:
   - {fileID: 0}
@@ -150,7 +149,8 @@ MonoBehaviour:
   - {fileID: 0}
   baseVignette: 0.4
   vignetteIncreaseRate: 0.1
-  insanityIncreaseRate: 0.01
+  insanityIncreaseRate: 0.002
+  distInsanityIncreaseRate: 0.025
   mrCrossy: {fileID: 0}
   increasingInsanity: 1
   reducingInsanity: 0
