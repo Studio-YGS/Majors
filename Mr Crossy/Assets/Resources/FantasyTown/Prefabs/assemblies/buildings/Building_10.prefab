@@ -196,8 +196,7 @@ GameObject:
   - component: {fileID: 130531322}
   - component: {fileID: 130531321}
   - component: {fileID: 130531320}
-  - component: {fileID: 130531319}
-  - component: {fileID: 1038837404}
+  - component: {fileID: 611754103}
   m_Layer: 0
   m_Name: House Toggle (10)
   m_TagString: Untagged
@@ -213,7 +212,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 130531318}
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: -3.1100006, y: 1.66, z: 8.09}
+  m_LocalPosition: {x: -4.938, y: 1.66, z: 8.09}
   m_LocalScale: {x: 7.6162, y: 2.8143375, z: 2.3784}
   m_Children:
   - {fileID: 35125459}
@@ -280,9 +279,9 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.7610702, y: 1.321273, z: 1.4761521}
-  m_Center: {x: 0.023762973, y: -0.16063796, z: -0.27002814}
---- !u!114 &130531319
+  m_Size: {x: 0.24410023, y: 1.321273, z: 1.0930154}
+  m_Center: {x: 0, y: -0.16063796, z: 0.43082318}
+--- !u!114 &611754103
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -291,23 +290,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 130531318}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5c893c8559593c4cae08746e5cd4848, type: 3}
+  m_Script: {fileID: 11500000, guid: da34ca9441e080f44b3cf55585439d41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  houseInternals: {fileID: 0}
-  audSwitcher: {fileID: 35125458}
---- !u!114 &1038837404
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 130531318}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  internals: {fileID: 0}
+  audioSwitch: {fileID: 35125460}
+  door: {fileID: 1229420044}
 --- !u!1 &169986147
 GameObject:
   m_ObjectHideFlags: 0
@@ -2149,8 +2137,8 @@ MonoBehaviour:
   lockCheck: {fileID: 0}
   xForward: 0
   zForward: 1
+  moved: 0
   rotationVal: 0
-  openSpeed: 10
   closeDistance: 3
   doorclose: {fileID: 4838376640403744551}
   isSafeHouse: 0
@@ -86584,7 +86572,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1930961226, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: UID
-      value: 2040923342
+      value: 91985485
       objectReference: {fileID: 0}
     - target: {fileID: 1260673417133536, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: m_Name
@@ -86654,7 +86642,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1930961226, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: UID
-      value: -897505854
+      value: -1130066547
       objectReference: {fileID: 0}
     - target: {fileID: 1260673417133536, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: m_Name
@@ -86724,7 +86712,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1930961226, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: UID
-      value: -725152280
+      value: 1785949016
       objectReference: {fileID: 0}
     - target: {fileID: 1260673417133536, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: m_Name
@@ -86790,7 +86778,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 314548403392371457, guid: 52a7cc039219b644b95b2f0e0bfc6c01, type: 3}
       propertyPath: UID
-      value: 1036708898
+      value: 1561630602
       objectReference: {fileID: 0}
     - target: {fileID: 2190584204923344581, guid: 52a7cc039219b644b95b2f0e0bfc6c01, type: 3}
       propertyPath: m_RootOrder

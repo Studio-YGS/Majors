@@ -15,26 +15,26 @@ public class ExternalInteralSwitch : MonoBehaviour
 
 
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("GameController"))
-        {
-            floors++;
-            WalkIn();
-            FindObjectOfType<OverseerController>().m_PlayerInHouse = true;
-        }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.CompareTag("GameController"))
-        {
-            if (floors >= 2)
-            {
-                WalkOut();
-                FindObjectOfType<OverseerController>().m_PlayerInHouse = false;
-            }
-        }
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.gameObject.CompareTag("GameController"))
+    //    {
+    //        floors++;
+    //        WalkIn();
+    //        FindObjectOfType<OverseerController>().m_PlayerInHouse = true;
+    //    }
+    //}
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.gameObject.CompareTag("GameController"))
+    //    {
+    //        if (floors >= 2)
+    //        {
+    //            WalkOut();
+    //            FindObjectOfType<OverseerController>().m_PlayerInHouse = false;
+    //        }
+    //    }
+    //}
     public void WalkIn()
     {
         foreach (GameObject threeDSound in outdoorThreeDSounds)

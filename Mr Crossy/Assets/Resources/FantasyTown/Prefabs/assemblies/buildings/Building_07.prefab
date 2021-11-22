@@ -959,8 +959,7 @@ GameObject:
   - component: {fileID: 1212815100}
   - component: {fileID: 1212815099}
   - component: {fileID: 1212815098}
-  - component: {fileID: 1212815097}
-  - component: {fileID: 1260946200}
+  - component: {fileID: 1750039542}
   m_Layer: 0
   m_Name: House Toggle (7)
   m_TagString: Untagged
@@ -976,7 +975,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1212815096}
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: -5.039997, y: 1.66, z: 8.18}
+  m_LocalPosition: {x: -7.02, y: 1.66, z: 8.18}
   m_LocalScale: {x: 7.6162, y: 2.8143375, z: 2.3784}
   m_Children:
   - {fileID: 313788431}
@@ -1043,9 +1042,9 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.7610702, y: 1.098113, z: 1.4761521}
-  m_Center: {x: 0.023762973, y: -0.049056787, z: -0.27002814}
---- !u!114 &1212815097
+  m_Size: {x: 0.22338334, y: 1.098113, z: 1.0242454}
+  m_Center: {x: 0, y: -0.049056787, z: 0.429344}
+--- !u!114 &1750039542
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1054,23 +1053,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1212815096}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5c893c8559593c4cae08746e5cd4848, type: 3}
+  m_Script: {fileID: 11500000, guid: da34ca9441e080f44b3cf55585439d41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  houseInternals: {fileID: 0}
-  audSwitcher: {fileID: 313788430}
---- !u!114 &1260946200
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1212815096}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  internals: {fileID: 0}
+  audioSwitch: {fileID: 313788432}
+  door: {fileID: 868883315}
 --- !u!1 &1255768576
 GameObject:
   m_ObjectHideFlags: 0
@@ -11294,8 +11282,8 @@ MonoBehaviour:
   lockCheck: {fileID: 0}
   xForward: 0
   zForward: 1
+  moved: 0
   rotationVal: 0
-  openSpeed: 10
   closeDistance: 3
   doorclose: {fileID: 5512784625663753445}
   isSafeHouse: 0
@@ -97325,11 +97313,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78b4e689916708845baea328fcc72b2e, type: 3}
---- !u!4 &3163596386091787486 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5390543055913031766, guid: 78b4e689916708845baea328fcc72b2e, type: 3}
-  m_PrefabInstance: {fileID: 7000938527593659528}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5512784625663753445 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3290174296642338925, guid: 78b4e689916708845baea328fcc72b2e, type: 3}
@@ -97341,3 +97324,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &3163596386091787486 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5390543055913031766, guid: 78b4e689916708845baea328fcc72b2e, type: 3}
+  m_PrefabInstance: {fileID: 7000938527593659528}
+  m_PrefabAsset: {fileID: 0}

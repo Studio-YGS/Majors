@@ -17,7 +17,7 @@ public class DoorInteraction : MonoBehaviour
     public bool xForward;
     public bool zForward;
     bool moveable = false;
-    bool moved;
+    [HideInInspector] public bool moved;
     bool greaterThan;
     bool lessThan;
     bool equalTo = true;
@@ -343,8 +343,16 @@ public class DoorInteraction : MonoBehaviour
                         }
                         if (!moved)
                         {
-                            
                             StartCoroutine("WaitToClose");
+                            if (isSafeHouse)
+                            {
+                                FMODUnity.RuntimeManager.PlayOneShot("event:/3D/Doors/Surburban/Door Open");
+                            }
+                            else
+                            {
+                                FMODUnity.RuntimeManager.PlayOneShot("event:/3D/Doors/Calekirk Doors/Door Open");
+                            }
+
                             moved = true;
                         }
                         Vector3 direction = transform.parent.position - player.position;

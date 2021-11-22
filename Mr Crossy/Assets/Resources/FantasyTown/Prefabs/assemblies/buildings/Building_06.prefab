@@ -1619,7 +1619,7 @@ GameObject:
   - component: {fileID: 1972421365}
   - component: {fileID: 1972421364}
   - component: {fileID: 1972421363}
-  - component: {fileID: 1972421362}
+  - component: {fileID: 422620540}
   m_Layer: 0
   m_Name: House Toggle (6)
   m_TagString: Untagged
@@ -1635,7 +1635,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1972421361}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.209999, y: 0.65999997, z: 0.84000015}
+  m_LocalPosition: {x: -5.54, y: 0.65999997, z: 0.84000015}
   m_LocalScale: {x: 7.6162, y: 2.8143375, z: 2.3784}
   m_Children:
   - {fileID: 145596007}
@@ -1702,9 +1702,9 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.7610702, y: 1.098113, z: 1.4303256}
-  m_Center: {x: 0.023762973, y: -0.049056787, z: -0.2929414}
---- !u!114 &1972421362
+  m_Size: {x: 0.25520155, y: 1.098113, z: 0.97586536}
+  m_Center: {x: 0, y: -0.049056787, z: 0.5719313}
+--- !u!114 &422620540
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1713,11 +1713,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1972421361}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5c893c8559593c4cae08746e5cd4848, type: 3}
+  m_Script: {fileID: 11500000, guid: da34ca9441e080f44b3cf55585439d41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  houseInternals: {fileID: 0}
-  audSwitcher: {fileID: 145596006}
+  internals: {fileID: 0}
+  audioSwitch: {fileID: 145596008}
+  door: {fileID: 5185812637115078786}
 --- !u!1 &2001547379
 GameObject:
   m_ObjectHideFlags: 0
@@ -10670,8 +10671,8 @@ MonoBehaviour:
   lockCheck: {fileID: 0}
   xForward: 0
   zForward: 1
+  moved: 0
   rotationVal: 0
-  openSpeed: 10
   closeDistance: 3
   doorclose: {fileID: 6720586987759584339}
   isSafeHouse: 0
@@ -51239,7 +51240,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1930961226, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: UID
-      value: 712154334
+      value: -496819120
       objectReference: {fileID: 0}
     - target: {fileID: 1260673417133536, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: m_Name
@@ -51309,7 +51310,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1930961226, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: UID
-      value: -1435707631
+      value: -1046112236
       objectReference: {fileID: 0}
     - target: {fileID: 1260673417133536, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: m_Name
@@ -51375,7 +51376,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1869601954648582079, guid: 4814fd68123a79641b746edca7584fb3, type: 3}
       propertyPath: UID
-      value: 667634665
+      value: -1791219576
       objectReference: {fileID: 0}
     - target: {fileID: 3288315558618631734, guid: 4814fd68123a79641b746edca7584fb3, type: 3}
       propertyPath: m_Name
