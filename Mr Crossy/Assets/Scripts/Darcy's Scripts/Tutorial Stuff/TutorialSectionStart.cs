@@ -70,9 +70,10 @@ public class TutorialSectionStart : MonoBehaviour
 
             if(hit.transform.gameObject.CompareTag("Gate") && atGate)
             {
-                LockedPrompt prompt = FindObjectOfType<LockedPrompt>();
-
-                prompt.locked.SetActive(true);
+                if (locked != null)
+                {
+                    locked.SetActive(true);
+                }
             }
             else if(!hit.transform.gameObject.CompareTag("Gate") && atGate)
             {
@@ -138,6 +139,11 @@ public class TutorialSectionStart : MonoBehaviour
     public void ReadHowTo()
     {
         sectionStart.Invoke();
+    }
+
+    public void WaitForCrossy()
+    {
+        steppingAway.Invoke();
     }
 
     public void NoteTutorialLine()
