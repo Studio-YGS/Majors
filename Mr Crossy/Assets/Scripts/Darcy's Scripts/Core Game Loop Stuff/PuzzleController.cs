@@ -35,6 +35,8 @@ public class PuzzleController : MonoBehaviour
 
     public bool tutorial;
 
+    bool tenPlayed = false;
+
     public UnityEvent winEvent, loseEvent, tutorialEvent, tutorialMistakeEvent;
 
     [HideInInspector]
@@ -128,6 +130,15 @@ public class PuzzleController : MonoBehaviour
 
             tutorialEvent.Invoke();
             tutorial = false;
+        }
+
+        if(playersWord == "TEN" && !tenPlayed)
+        {
+            tenPlayed = true;
+
+            eventInstance = RuntimeManager.CreateInstance("event:/MR_C_SolvedPuzzles/I.SP.1_Ten");
+
+            eventInstance.start();
         }
 
         if(playersWord == word) //the script then checks to see if the players formed word is the same as the puzzle's answer

@@ -22,7 +22,9 @@ public class JournalController : MonoBehaviour
     [HideInInspector]
     public int whichNotesPage = 0;
 
-    public bool disabled = false, tutorial = true, readingHowTo = false;
+    public bool disabled = false, tutorial = true;
+    [HideInInspector]
+    public bool readingHowTo = false, waitForCrossy = false;
 
     EventInstance eventInstance;
 
@@ -42,16 +44,28 @@ public class JournalController : MonoBehaviour
             Arrows(false);
         }
 
-        if(Input.GetKeyDown(KeyCode.Tab) && readingHowTo)
+        if(Input.GetKeyDown(KeyCode.Tab))
         {
-            readingHowTo = false;
+            if (readingHowTo)
+            {
+                readingHowTo = false;
 
-            GetComponent<TutorialSectionStart>().ReadHowTo();
+                GetComponent<TutorialSectionStart>().ReadHowTo();
 
-            //GetComponent<JournalTimer>().canCount = true;
-            //GetComponent<JournalTimer>().StartTimer();
+                //GetComponent<JournalTimer>().canCount = true;
+                //GetComponent<JournalTimer>().StartTimer();
 
-            OpenMap();
+                OpenMap();
+            }
+
+            if (waitForCrossy)
+            {
+                waitForCrossy = false;
+
+                GetComponent<TutorialSectionStart>().WaitForCrossy();
+
+                OpenMap();
+            }
         }
     }
 
@@ -234,5 +248,10 @@ public class JournalController : MonoBehaviour
     public void SetTutorialBool(bool set)
     {
         tutorial = set;
+    }
+
+    public void SetCrossyBool(bool set)
+    {
+        waitForCrossy = set;
     }
 }

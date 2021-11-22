@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using FMOD.Studio;
 using FMODUnity;
+using TMPro;
 
 public class CluePickUp : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class CluePickUp : MonoBehaviour
     public UnityEvent pickUp;
 
     EventInstance eventInstance;
+
+    [SerializeField]
+    TextMeshProUGUI prompt;
 
     void Start()
     {
@@ -22,21 +26,35 @@ public class CluePickUp : MonoBehaviour
     {
         RaycastHit hit;
 
-        if(Input.GetKeyDown(KeyCode.E) && Physics.Raycast(playerController.cam.position, playerController.cam.TransformDirection(Vector3.forward), out hit, 2f))
+        if(Physics.Raycast(playerController.cam.position, playerController.cam.TransformDirection(Vector3.forward), out hit, 2f))
         {
             if (hit.transform.gameObject.CompareTag("Clue") && hit.transform.gameObject.name == gameObject.name)
             {
-                pickUp.Invoke();
+                prompt.text = "Press E to pick up clue(s).";
+                prompt.gameObject.SetActive(true);
 
-                eventInstance = RuntimeManager.CreateInstance("event:/2D/Paper/Paper Up");
-
-                eventInstance.start();
-
-                if (GetComponentInParent<TutorialSectionStart>())
+                if (Input.GetKeyDown(KeyCode.E))
                 {
-                    GetComponentInParent<TutorialSectionStart>().CheckClues();
+                    pickUp.Invoke();
+
+                    eventInstance = RuntimeManager.CreateInstance("event:/2D/Paper/Paper Up");
+
+                    eventInstance.start();
+
+                    //if (GetComponentInParent<TutorialSectionStart>())
+                    //{
+                    //    GetComponentInParent<TutorialSectionStart>().CheckClues();
+                    //}
                 }
             }
+            else
+            {
+                prompt.gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            prompt.gameObject.SetActive(false);
         }
     }
 }

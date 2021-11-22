@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using FMOD.Studio;
 using FMODUnity;
 
@@ -18,6 +19,9 @@ public class NoteController : MonoBehaviour
 
     EventInstance eventInstance;
 
+    [SerializeField]
+    TextMeshProUGUI prompt;
+
     void Awake()
     {
         journalOnSwitch = FindObjectOfType<JournalOnSwitch>();
@@ -33,6 +37,9 @@ public class NoteController : MonoBehaviour
         {
             if(hit.transform.gameObject.CompareTag("Note"))
             {
+                prompt.text = "Press E to read note.";
+                prompt.gameObject.SetActive(true);
+
                 if (Input.GetKeyDown(KeyCode.E))
                 {
                     hit.transform.gameObject.GetComponent<NoteAssign>().assignedNote.SetActive(true);
@@ -51,20 +58,29 @@ public class NoteController : MonoBehaviour
                     }
                 }
             }
+            else
+            {
+                prompt.gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            prompt.gameObject.SetActive(false);
         }
     }
 
     void PickUpNote()
     {
-        if (!tutorialLine)
-        {
-            journalController.whichNotesPage = currentNote;
-            journalController.noteList.Add(currentNote);
+        //if (!tutorialLine)
+        //{
 
-            journalOnSwitch.OpenOrClose();
-            journalController.OpenNotes();
+        //}
+        journalController.whichNotesPage = currentNote;
+        journalController.noteList.Add(currentNote);
 
-            currentNote++;
-        }
+        journalOnSwitch.OpenOrClose();
+        journalController.OpenNotes();
+
+        currentNote++;
     }
 }
