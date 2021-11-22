@@ -41,10 +41,10 @@ public class CluePickUp : MonoBehaviour
 
                     eventInstance.start();
 
-                    if (GetComponentInParent<TutorialSectionStart>())
-                    {
-                        GetComponentInParent<TutorialSectionStart>().CheckClues();
-                    }
+                    //if (GetComponentInParent<TutorialSectionStart>())
+                    //{
+                    //    GetComponentInParent<TutorialSectionStart>().CheckClues();
+                    //}
                 }
             }
             else
