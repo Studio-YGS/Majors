@@ -1276,8 +1276,8 @@ GameObject:
   - component: {fileID: 1998263961}
   - component: {fileID: 1998263960}
   - component: {fileID: 1998263959}
-  - component: {fileID: 1998263957}
-  - component: {fileID: 884860034}
+  - component: {fileID: 22060271}
+  - component: {fileID: 22060270}
   m_Layer: 0
   m_Name: House Toggle (9)
   m_TagString: Untagged
@@ -1293,7 +1293,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1998263956}
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: -5, y: 1.66, z: 8.01}
+  m_LocalPosition: {x: -6.9, y: 1.66, z: 6.672}
   m_LocalScale: {x: 7.6162, y: 2.8143375, z: 2.3784}
   m_Children:
   - {fileID: 347573794}
@@ -1349,7 +1349,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &1998263957
+--- !u!65 &22060271
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998263956}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.23441541, y: 1, z: 0.98946697}
+  m_Center: {x: 0, y: -0.00000012707355, z: 0.09152461}
+--- !u!114 &22060270
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1358,23 +1371,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1998263956}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5c893c8559593c4cae08746e5cd4848, type: 3}
+  m_Script: {fileID: 11500000, guid: da34ca9441e080f44b3cf55585439d41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  houseInternals: {fileID: 0}
-  audSwitcher: {fileID: 347573793}
---- !u!114 &884860034
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1998263956}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  internals: {fileID: 0}
+  audioSwitch: {fileID: 347573795}
+  door: {fileID: 478781549154034277}
 --- !u!1 &2037594557
 GameObject:
   m_ObjectHideFlags: 0
@@ -7539,8 +7541,8 @@ MonoBehaviour:
   lockCheck: {fileID: 0}
   xForward: 0
   zForward: 1
+  moved: 0
   rotationVal: 0
-  openSpeed: 10
   closeDistance: 3
   doorclose: {fileID: 3615102989049337659}
   isSafeHouse: 0
@@ -92727,7 +92729,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1930961226, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: UID
-      value: 801842322
+      value: 680369369
       objectReference: {fileID: 0}
     - target: {fileID: 1260673417133536, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: m_Name
@@ -92797,7 +92799,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1930961226, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: UID
-      value: 669039413
+      value: 480467700
       objectReference: {fileID: 0}
     - target: {fileID: 1260673417133536, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: m_Name
@@ -92867,7 +92869,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1930961226, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: UID
-      value: 1697998463
+      value: 2028832550
       objectReference: {fileID: 0}
     - target: {fileID: 1260673417133536, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: m_Name
@@ -92933,11 +92935,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3687494349538049729, guid: f5626199ba1c75148a6842d88c50e199, type: 3}
       propertyPath: UID
-      value: -1932346909
+      value: 1227407677
       objectReference: {fileID: 0}
     - target: {fileID: 5502804677015942778, guid: f5626199ba1c75148a6842d88c50e199, type: 3}
       propertyPath: UID
-      value: -1912415536
+      value: 651379527
       objectReference: {fileID: 0}
     - target: {fileID: 5676606486502609884, guid: f5626199ba1c75148a6842d88c50e199, type: 3}
       propertyPath: m_RootOrder

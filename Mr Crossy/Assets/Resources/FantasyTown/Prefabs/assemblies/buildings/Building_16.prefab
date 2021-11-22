@@ -854,7 +854,7 @@ GameObject:
   - component: {fileID: 1618811452}
   - component: {fileID: 1618811451}
   - component: {fileID: 1618811450}
-  - component: {fileID: 1618811449}
+  - component: {fileID: 354581122}
   m_Layer: 0
   m_Name: House Toggle (16)
   m_TagString: Untagged
@@ -937,9 +937,9 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.7610702, y: 1.321273, z: 1.3667392}
-  m_Center: {x: 0.023762971, y: -0.16063796, z: -0.324735}
---- !u!114 &1618811449
+  m_Size: {x: 0.2514995, y: 1.321273, z: 1.1184249}
+  m_Center: {x: 0.069957264, y: -0.16063796, z: 0.3689287}
+--- !u!114 &354581122
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -948,11 +948,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1618811448}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5c893c8559593c4cae08746e5cd4848, type: 3}
+  m_Script: {fileID: 11500000, guid: da34ca9441e080f44b3cf55585439d41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  houseInternals: {fileID: 0}
-  audSwitcher: {fileID: 195989151}
+  internals: {fileID: 0}
+  audioSwitch: {fileID: 195989153}
+  door: {fileID: 1961050900}
 --- !u!1 &1618919186
 GameObject:
   m_ObjectHideFlags: 0
@@ -3077,8 +3078,8 @@ MonoBehaviour:
   lockCheck: {fileID: 0}
   xForward: 0
   zForward: 1
+  moved: 0
   rotationVal: 0
-  openSpeed: 10
   closeDistance: 3
   doorclose: {fileID: 9000658557754704563}
   isSafeHouse: 0
@@ -33075,7 +33076,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1930961226, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: UID
-      value: 1880159355
+      value: 1916720962
       objectReference: {fileID: 0}
     - target: {fileID: 1260673417133536, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: m_Name
@@ -33145,7 +33146,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1930961226, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: UID
-      value: -1358886792
+      value: 513755953
       objectReference: {fileID: 0}
     - target: {fileID: 1260673417133536, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: m_Name
@@ -33211,11 +33212,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3687494349538049729, guid: f5626199ba1c75148a6842d88c50e199, type: 3}
       propertyPath: UID
-      value: -1720986965
+      value: 80876414
       objectReference: {fileID: 0}
     - target: {fileID: 5502804677015942778, guid: f5626199ba1c75148a6842d88c50e199, type: 3}
       propertyPath: UID
-      value: -1311853186
+      value: -925441178
       objectReference: {fileID: 0}
     - target: {fileID: 5676606486502609884, guid: f5626199ba1c75148a6842d88c50e199, type: 3}
       propertyPath: m_RootOrder

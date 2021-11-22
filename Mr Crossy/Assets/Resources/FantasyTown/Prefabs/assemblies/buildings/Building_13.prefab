@@ -3476,8 +3476,7 @@ GameObject:
   - component: {fileID: 498848065}
   - component: {fileID: 498848064}
   - component: {fileID: 498848063}
-  - component: {fileID: 498848062}
-  - component: {fileID: 1171102054}
+  - component: {fileID: 1920498641}
   m_Layer: 0
   m_Name: House Toggle (13)
   m_TagString: Untagged
@@ -3493,7 +3492,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 498848061}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.2300034, y: 1.45, z: -1.1599998}
+  m_LocalPosition: {x: -5.59, y: 1.45, z: -1.1599998}
   m_LocalScale: {x: 7.6162, y: 2.8143375, z: 2.3784}
   m_Children:
   - {fileID: 1395959105}
@@ -3560,9 +3559,9 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.7610702, y: 1.321273, z: 1.4761521}
-  m_Center: {x: 0.023762973, y: -0.16063796, z: -0.27002814}
---- !u!114 &498848062
+  m_Size: {x: 0.26564342, y: 1.321273, z: 1.151119}
+  m_Center: {x: 0, y: -0.16063796, z: 0.5485771}
+--- !u!114 &1920498641
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3571,23 +3570,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 498848061}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5c893c8559593c4cae08746e5cd4848, type: 3}
+  m_Script: {fileID: 11500000, guid: da34ca9441e080f44b3cf55585439d41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  houseInternals: {fileID: 0}
-  audSwitcher: {fileID: 1395959104}
---- !u!114 &1171102054
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 498848061}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  internals: {fileID: 0}
+  audioSwitch: {fileID: 1395959106}
+  door: {fileID: 1142776213}
 --- !u!1 &509202000
 GameObject:
   m_ObjectHideFlags: 0
@@ -22623,8 +22611,8 @@ MonoBehaviour:
   lockCheck: {fileID: 0}
   xForward: 0
   zForward: 1
+  moved: 0
   rotationVal: 0
-  openSpeed: 10
   closeDistance: 3
   doorclose: {fileID: 5922918394176597929}
   isSafeHouse: 0
@@ -37826,7 +37814,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 314548403392371457, guid: 52a7cc039219b644b95b2f0e0bfc6c01, type: 3}
       propertyPath: UID
-      value: -2085778532
+      value: -95825322
       objectReference: {fileID: 0}
     - target: {fileID: 2190584204923344581, guid: 52a7cc039219b644b95b2f0e0bfc6c01, type: 3}
       propertyPath: m_RootOrder
@@ -37896,7 +37884,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1930961226, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: UID
-      value: -634551022
+      value: -1783321837
       objectReference: {fileID: 0}
     - target: {fileID: 1260673417133536, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: m_Name
