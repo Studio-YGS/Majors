@@ -16,6 +16,9 @@ public class TutorialSectionStart : MonoBehaviour
     [SerializeField]
     GameObject[] tutorialClues;
 
+    [SerializeField]
+    GameObject locked;
+
     void Start()
     {
         playerController = FindObjectOfType<Player_Controller>();
@@ -73,16 +76,18 @@ public class TutorialSectionStart : MonoBehaviour
             }
             else if(!hit.transform.gameObject.CompareTag("Gate") && atGate)
             {
-                LockedPrompt prompt = FindObjectOfType<LockedPrompt>();
-
-                prompt.locked.SetActive(false);
+                if(locked != null)
+                {
+                    locked.SetActive(false);
+                }
             }
         }
         else if(!Physics.Raycast(playerController.cam.position, playerController.cam.TransformDirection(Vector3.forward), 2f))
         {
-            LockedPrompt prompt = FindObjectOfType<LockedPrompt>();
-
-            prompt.locked.SetActive(false);
+            if (locked != null)
+            {
+                locked.SetActive(false);
+            }
         }
     }
 
@@ -94,6 +99,11 @@ public class TutorialSectionStart : MonoBehaviour
     public void NeedsSecondRaycast(bool need)
     {
         needsSecondRaycast = need;
+    }
+
+    public void AtGate(bool at)
+    {
+        atGate = at;
     }
 
     public void CheckClues()
