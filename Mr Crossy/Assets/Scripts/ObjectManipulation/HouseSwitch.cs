@@ -8,6 +8,7 @@ public class HouseSwitch : MonoBehaviour
     public GameObject internals;
     public ExternalInteralSwitch audioSwitch;
     public DoorInteraction door;
+    bool waiting;
     
     private void OnTriggerEnter(Collider other)
     {
@@ -18,12 +19,17 @@ public class HouseSwitch : MonoBehaviour
             if (angle > 180 * 0.5f)
             {
                 //forward - leaving building
-                
+                Debug.Log("wrong enter");
             }
             else
             {
                 //back - entering building 
-                StopCoroutine("Left");
+                Debug.Log("enter");
+                if (waiting)
+                {
+                    StopCoroutine("Left");
+                }
+                
                 internals.SetActive(true);
             }
         }
@@ -51,10 +57,12 @@ public class HouseSwitch : MonoBehaviour
 
     IEnumerator Left()
     {
+        waiting = true;
         while (door.moved)
         {
             yield return null;
         }
         internals.SetActive(false);
+        waiting = false;
     }
 }
