@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 using TMPro;
 using FMOD.Studio;
 using FMODUnity;
@@ -65,7 +66,7 @@ public class PuzzleController : MonoBehaviour
 
         wordLength = canvasLetters.Count;
 
-        if (word != wordObjects[whichObject].name)
+        if (word == wordObjects[whichObject].name)
         {
             WriteToUI();
         }
@@ -202,6 +203,16 @@ public class PuzzleController : MonoBehaviour
         AudioEvents audio = FindObjectOfType<AudioEvents>();
 
         audio.WordSpeltCorrectly();
+
+        for(int i = 0; i < wordObjects.Count; i++)
+        {
+            if(word == wordObjects[i].name)
+            {
+                Debug.Log(wordObjects[i].name);
+                wordObjects[i].GetComponentInChildren<Image>().enabled = true;
+                break;
+            }
+        }
 
         if(storedObjects.Count > 0)
         {
