@@ -491,11 +491,18 @@
 		</relationship>
 	</object>
 	<object class="MultiSound" id="{951c3104-3b34-4104-a1e8-0bef8cf18165}">
+		<property name="isAsync">
+			<value>true</value>
+		</property>
 		<property name="length">
 			<value>5.3343827671913857</value>
 		</property>
+		<property name="quantizationInterval">
+			<value>3</value>
+		</property>
 		<relationship name="triggerConditions">
 			<destination>{ff0bf80e-1f35-40d4-b247-3b6ab515e6f5}</destination>
+			<destination>{53c64e75-1fbc-4ae3-94c5-4826264eee65}</destination>
 		</relationship>
 		<relationship name="sounds">
 			<destination>{180c154d-1db0-4f5c-a429-ca69b3a8cb40}</destination>
@@ -1280,6 +1287,17 @@
 		</property>
 		<relationship name="parameter">
 			<destination>{3fd05cab-a8cf-428c-a934-d4ecc2a090a3}</destination>
+		</relationship>
+	</object>
+	<object class="ParameterCondition" id="{53c64e75-1fbc-4ae3-94c5-4826264eee65}">
+		<property name="minimum">
+			<value>1</value>
+		</property>
+		<property name="maximum">
+			<value>1</value>
+		</property>
+		<relationship name="parameter">
+			<destination>{0175718c-83cd-4f2c-a7cf-141a7f0b58b6}</destination>
 		</relationship>
 	</object>
 	<object class="SingleSound" id="{180c154d-1db0-4f5c-a429-ca69b3a8cb40}">
