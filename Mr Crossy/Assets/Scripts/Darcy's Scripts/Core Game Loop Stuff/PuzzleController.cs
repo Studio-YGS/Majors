@@ -155,8 +155,8 @@ public class PuzzleController : MonoBehaviour
         {
             if (!tutorial)
             {
-                mistakeCount--;
-                mistakeText.text = "Mistakes remaining: " + mistakeCount;
+                mistakeCount++;
+                mistakeText.text = mistakeCount.ToString();
             }
 
             AudioEvents audio = FindObjectOfType<AudioEvents>();
@@ -168,7 +168,7 @@ public class PuzzleController : MonoBehaviour
                 tutorialMistakeEvent.Invoke();
             }
 
-            if(mistakeCount == 0)
+            if(mistakeCount == 3)
             {
                 GameOver();
             }

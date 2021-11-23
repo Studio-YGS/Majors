@@ -34,4 +34,16 @@ public class AnimationControl : MonoBehaviour
         Debug.Log("Lowering Walls");
         GetComponent<Animator>().SetBool("WallDown", true);
     }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0f;
+        Time.fixedDeltaTime = Time.timeScale * 0.02f;
+    }
+
+    public void PlayGame()
+    {
+        Time.timeScale = 0.05f;
+        Time.fixedDeltaTime = Time.timeScale * 0.02f;
+    }
 }
