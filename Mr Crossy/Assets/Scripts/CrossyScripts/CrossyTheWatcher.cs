@@ -40,7 +40,7 @@ public class CrossyTheWatcher : MonoBehaviour
     [HideInInspector] public bool lighthousing;
     [HideInInspector] public bool hidingTitan;
     [HideInInspector] public bool isTutorial = true;
-    [HideInInspector] public bool allowHide = false;
+    [HideInInspector] public bool allowHide = true;
 
     private void Start()
     {

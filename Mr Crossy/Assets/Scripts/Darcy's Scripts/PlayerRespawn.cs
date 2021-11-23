@@ -18,8 +18,6 @@ public class PlayerRespawn : MonoBehaviour
 
     bool hasMoved = false;
     OverseerController seer;
-    public GameObject houseAudio2D;
-    public GameObject houseAudio3D;
     public ExternalInteralSwitch exSwitch;
 
     void Start()
@@ -71,6 +69,8 @@ public class PlayerRespawn : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTime);
         FindObjectOfType<MrCrossyDistortion>().mask.SetActive(false);
+        FindObjectOfType<MrCrossyDistortion>().ReduceInsanity();
+        FindObjectOfType<MrCrossyDistortion>().DecreaseVignette();
         respawningText.SetActive(false);
 
         player.gameObject.SetActive(true);
@@ -79,9 +79,7 @@ public class PlayerRespawn : MonoBehaviour
         seer.emitter.Target.SetParameter(seer.deadParamName, 1f);
         seer.emitter.Target.SetParameter(seer.distanceParamName, 100f);
         seer.emitter.Target.SetParameter(seer.chaseParamName, 1f);
-        houseAudio2D.SetActive(true);
-        houseAudio3D.SetActive(true);
-        exSwitch.floors = 1;
+        exSwitch.WalkIn();
         journal.EnableJournal();
         FindObjectOfType<OverseerController>().deady = false;
     }

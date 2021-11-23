@@ -234,11 +234,11 @@ public class MrCrossyDistortion : MonoBehaviour
                 vignette[i].intensity.value += Time.deltaTime * vignetteIncreaseRate;
             }
             //colorAdjustments.active = true;
-            if (colorAdjustments[i].colorFilter.value != Color.black)
-            {
-                colorAdjustments[i].colorFilter.value = new Color(colorAdjustments[i].colorFilter.value.r - Time.deltaTime * vignetteIncreaseRate,
-                    colorAdjustments[i].colorFilter.value.b - Time.deltaTime * vignetteIncreaseRate, colorAdjustments[i].colorFilter.value.g - Time.deltaTime * vignetteIncreaseRate);
-            }
+            //if (colorAdjustments[i].colorFilter.value != Color.black)
+            //{
+            //    colorAdjustments[i].colorFilter.value = new Color(colorAdjustments[i].colorFilter.value.r - Time.deltaTime * vignetteIncreaseRate,
+            //        colorAdjustments[i].colorFilter.value.b - Time.deltaTime * vignetteIncreaseRate, colorAdjustments[i].colorFilter.value.g - Time.deltaTime * vignetteIncreaseRate);
+            //}
         }
            
         
@@ -250,8 +250,8 @@ public class MrCrossyDistortion : MonoBehaviour
         //colorAdjustments.active = true;
         for (int i = 0; i < volume.Length; i++)
         {
-            colorAdjustments[i].colorFilter.value = new Color(colorAdjustments[i].colorFilter.value.r - (Time.unscaledDeltaTime * (vignetteIncreaseRate * 10 / distance)),
-                colorAdjustments[i].colorFilter.value.b - (Time.unscaledDeltaTime * (vignetteIncreaseRate*10 / distance)), colorAdjustments[i].colorFilter.value.g - (Time.unscaledDeltaTime * (vignetteIncreaseRate * 10 / distance)));
+            //colorAdjustments[i].colorFilter.value = new Color(colorAdjustments[i].colorFilter.value.r - (Time.unscaledDeltaTime * (vignetteIncreaseRate * 10 / distance)),
+                //colorAdjustments[i].colorFilter.value.b - (Time.unscaledDeltaTime * (vignetteIncreaseRate*10 / distance)), colorAdjustments[i].colorFilter.value.g - (Time.unscaledDeltaTime * (vignetteIncreaseRate * 10 / distance)));
             vignette[i].intensity.value += Time.deltaTime * vignetteIncreaseRate / (distance / 4);
         }
             
@@ -270,13 +270,13 @@ public class MrCrossyDistortion : MonoBehaviour
     {
         vignetteReducing = true;
         //mask.SetActive(false);
-        while(vignette[0].intensity.value > baseVignette && colorAdjustments[0].colorFilter.value != new Color (255,255,255))
+        while(vignette[0].intensity.value > baseVignette /*&& colorAdjustments[0].colorFilter.value != new Color (255,255,255)*/)
         {
             for (int i = 0; i < volume.Length; i++)
             {
                 vignette[i].intensity.value -= Time.deltaTime * vignetteIncreaseRate;
-                colorAdjustments[i].colorFilter.value = new Color(colorAdjustments[i].colorFilter.value.r + Time.deltaTime * vignetteIncreaseRate,
-                    colorAdjustments[i].colorFilter.value.b + Time.deltaTime * vignetteIncreaseRate, colorAdjustments[i].colorFilter.value.g + Time.deltaTime * vignetteIncreaseRate);
+                //colorAdjustments[i].colorFilter.value = new Color(colorAdjustments[i].colorFilter.value.r + Time.deltaTime * vignetteIncreaseRate,
+                    //colorAdjustments[i].colorFilter.value.b + Time.deltaTime * vignetteIncreaseRate, colorAdjustments[i].colorFilter.value.g + Time.deltaTime * vignetteIncreaseRate);
             }
                 
             yield return null;
@@ -284,7 +284,7 @@ public class MrCrossyDistortion : MonoBehaviour
         for (int i = 0; i < volume.Length; i++)
         {
             vignette[i].intensity.value = baseVignette;
-            colorAdjustments[i].colorFilter.value = Color.white;
+            //colorAdjustments[i].colorFilter.value = Color.white;
         }
             
         //colorAdjustments.active = false;
@@ -309,8 +309,8 @@ public class MrCrossyDistortion : MonoBehaviour
             for (int i = 0; i < volume.Length; i++)
             {
                 vignette[i].intensity.value += Time.deltaTime * vignetteIncreaseRate * speed;
-                colorAdjustments[i].colorFilter.value = new Color(colorAdjustments[i].colorFilter.value.r - Time.deltaTime * vignetteIncreaseRate * speed,
-                    colorAdjustments[i].colorFilter.value.b - Time.deltaTime * vignetteIncreaseRate * speed, colorAdjustments[i].colorFilter.value.g - Time.deltaTime * vignetteIncreaseRate * speed);
+                //colorAdjustments[i].colorFilter.value = new Color(colorAdjustments[i].colorFilter.value.r - Time.deltaTime * vignetteIncreaseRate * speed,
+                    //colorAdjustments[i].colorFilter.value.b - Time.deltaTime * vignetteIncreaseRate * speed, colorAdjustments[i].colorFilter.value.g - Time.deltaTime * vignetteIncreaseRate * speed);
             }
                 
             yield return null;
@@ -331,13 +331,13 @@ public class MrCrossyDistortion : MonoBehaviour
     IEnumerator BrightenScreen(float speed)
     {
         mask.SetActive(false);
-        while (vignette[0].intensity.value > baseVignette && colorAdjustments[0].colorFilter.value != new Color(255, 255, 255))
+        while (vignette[0].intensity.value > baseVignette /*&& colorAdjustments[0].colorFilter.value != new Color(255, 255, 255)*/)
         {
             for (int i = 0; i < volume.Length; i++)
             {
                 vignette[i].intensity.value -= Time.deltaTime * vignetteIncreaseRate * speed;
-                colorAdjustments[i].colorFilter.value = new Color(colorAdjustments[i].colorFilter.value.r + Time.deltaTime * vignetteIncreaseRate * speed,
-                    colorAdjustments[i].colorFilter.value.b + Time.deltaTime * vignetteIncreaseRate * speed, colorAdjustments[i].colorFilter.value.g + Time.deltaTime * vignetteIncreaseRate * speed);
+                //colorAdjustments[i].colorFilter.value = new Color(colorAdjustments[i].colorFilter.value.r + Time.deltaTime * vignetteIncreaseRate * speed,
+                    //colorAdjustments[i].colorFilter.value.b + Time.deltaTime * vignetteIncreaseRate * speed, colorAdjustments[i].colorFilter.value.g + Time.deltaTime * vignetteIncreaseRate * speed);
             }
 
             yield return null;
@@ -345,7 +345,7 @@ public class MrCrossyDistortion : MonoBehaviour
         for (int i = 0; i < volume.Length; i++)
         {
             vignette[i].intensity.value = baseVignette;
-            colorAdjustments[i].colorFilter.value = Color.white;
+            //colorAdjustments[i].colorFilter.value = Color.white;
         }
     }
 }
