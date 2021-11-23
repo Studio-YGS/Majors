@@ -74,8 +74,10 @@ public class OverseerController : MonoBehaviour
     public string distanceParamName = "Distance";
     public string chaseParamName = "IsChasing";
     public string deadParamName = "isDead";
+    public string titanParamName = "Titan";
 
     [Range(0f, 1f)] [SerializeField] private float m_TitanVoiceLineChance = 0.5f;
+    private int m_TitanNoisyNum = 0;
     [Space(10)]
     [SerializeField] private bool m_IsTutorial = true;
     #endregion
@@ -144,6 +146,7 @@ public class OverseerController : MonoBehaviour
         emitter.Target.SetParameter(distanceParamName, 100f);
         emitter.Target.SetParameter(chaseParamName, 1f);
         emitter.Target.SetParameter(deadParamName, 1f);
+        emitter.Target.SetParameter(titanParamName, 1f);
 
         if (startOnAwake)
         {
@@ -164,6 +167,7 @@ public class OverseerController : MonoBehaviour
         titan.hidingTitan = m_HideTitan;
 
         HouseyBoBousey();
+
 
         if(titan.animator.GetCurrentAnimatorStateInfo(0).IsName("TitanCrossyIdle"))
         {
@@ -222,7 +226,11 @@ public class OverseerController : MonoBehaviour
         if(!m_IsTutorial)
         {
             if (m_State >= 1 || keyMan.puzzleOn) CrossyFMODFiddling(crossyAgent, m_Player.transform.position, m_State, deady);
-            if (m_State == -1 && !m_PlayerInHouse) TitanCrossyVoiceLines();
+            if (m_State == -1 && !m_PlayerInHouse)
+            { 
+                TitanCrossyVoiceLines();
+                TitanUppyDownyNoisies();
+            }
         }
     }
 
@@ -235,6 +243,13 @@ public class OverseerController : MonoBehaviour
         yield return new WaitForSeconds(m_TitanAwakenThresh);
         titan.allowHide = true;
         m_TimerActive = false;
+    }
+
+    IEnumerator TitanSoundNeutral()
+    {
+        m_TitanNoisyNum = 0;
+        yield return new WaitForSeconds(1);
+        emitter.Target.SetParameter(titanParamName, m_TitanNoisyNum);
     }
 
     public void HouseyBoBousey()
@@ -401,7 +416,7 @@ public class OverseerController : MonoBehaviour
             }
 
             hasChased = false;
-            emitter.Target.SetParameter(deadParamName, 0f);
+            emitter.Target.SetParameter(deadParamName, 2f);
             Debug.Log("DEAD SOUND");
             StopCoroutine(WaitForPuzzleOff());
         }
@@ -432,6 +447,35 @@ public class OverseerController : MonoBehaviour
             Debug.Log("TitanFMOD TitanPlayReset");
             eventInstance.release();
             playedTitanLine = false; 
+        }
+    }
+
+    void TitanUppyDownyNoisies()
+    {
+        if(titan.animator.GetCurrentAnimatorStateInfo(0).IsName("TitanCrossyIdleHidden") || titan.animator.GetCurrentAnimatorStateInfo(0).IsName("TitanCrossyIdle"))
+        {
+            if(m_TitanNoisyNum != 0)
+            {
+                StartCoroutine(TitanSoundNeutral());
+            }
+        }
+        else if (titan.animator.GetCurrentAnimatorStateInfo(0).IsName("TitanCrossyRising"))
+        {
+            if(m_TitanNoisyNum != 1)
+            {
+                StopCoroutine(TitanSoundNeutral());
+                m_TitanNoisyNum = 1;
+                emitter.Target.SetParameter(titanParamName, m_TitanNoisyNum);
+            }
+        }
+        else if (titan.animator.GetCurrentAnimatorStateInfo(0).IsName("TitanCrossyHide"))
+        {
+            if (m_TitanNoisyNum != 2)
+            {
+                StopCoroutine(TitanSoundNeutral());
+                m_TitanNoisyNum = 2;
+                emitter.Target.SetParameter(titanParamName, m_TitanNoisyNum);
+            }
         }
     }
 
