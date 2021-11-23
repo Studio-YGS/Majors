@@ -38,7 +38,8 @@ public class CrossKeyManager : MonoBehaviour
     [HideInInspector] public HeadBob headBob;
     GameObject newCrossKey;
     OverseerController seer;
-
+    bool firstTime = true;
+    public AnimationControl animControl;
     void Start()
     {
         cam = FindObjectOfType<Camera>().transform;
@@ -54,7 +55,12 @@ public class CrossKeyManager : MonoBehaviour
     }
     public void StartCrossKeyPuzzle(DoorInteraction door)
     {
-        
+        if (firstTime)
+        {
+            animControl.TutorialAnimationsTrue("0.7.2");
+            firstTime = false;
+        }
+
         if(numOfKeys > 0 && !puzzleOn)
         {
             numOfKeys -= 1;
