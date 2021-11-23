@@ -15,17 +15,17 @@ public class JournalTimer : MonoBehaviour
     bool timerGoing = false;
     public bool canCount = true;
 
-    float elapsedTime;
+    public float elapsedTime;
 
     void Awake()
     {
         instance = this;
     }
 
-    void Start()
-    {
-        StartTimer();
-    }
+    //void Start()
+    //{
+    //    StartTimer();
+    //}
 
     public void StartTimer() //starts from 0 
     {
@@ -47,13 +47,21 @@ public class JournalTimer : MonoBehaviour
 
     IEnumerator UpdateTimer()
     {
-        while (timerGoing && canCount)
+        while (timerGoing /*&& canCount*/)
         {
             elapsedTime += Time.deltaTime;
             timePlaying = TimeSpan.FromSeconds(elapsedTime);
 
-            string textStr = "Time: " + timePlaying.ToString("hh':'mm':'ss"); //formatted into hours, minutes and seconds
-            timerText.text = textStr;
+            if(elapsedTime <= 60f)
+            {
+                string textStr = timePlaying.ToString("ss"); //formatted into seconds
+                timerText.text = textStr;
+            }
+            else if (elapsedTime > 60f)
+            {
+                string textStr = timePlaying.ToString("mm':'ss"); //formatted into minutes and seconds
+                timerText.text = textStr;
+            }
 
             yield return null;
         }
