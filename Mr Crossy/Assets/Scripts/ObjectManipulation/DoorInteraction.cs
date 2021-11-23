@@ -34,6 +34,7 @@ public class DoorInteraction : MonoBehaviour
     bool handon;
     public StudioEventEmitter doorclose;
     Player_Controller controller;
+    float startMouseSens;
 
     [Header("Cross-Key Settings")]
     public bool isSafeHouse;
@@ -60,6 +61,7 @@ public class DoorInteraction : MonoBehaviour
         player = GameObject.Find("Fps Character").transform;
         distortion = FindObjectOfType<MrCrossyDistortion>();
         controller = FindObjectOfType<Player_Controller>();
+        startMouseSens = controller.mouseSensitivity;
     }
 
     void Update()
@@ -302,6 +304,7 @@ public class DoorInteraction : MonoBehaviour
                     //countdownTimer += Time.deltaTime;
                     if(distortion.vignette[0].intensity.value >= 1)
                     {
+                        Debug.Log("death-intensity");
                         FindObjectOfType<CrossKeyManager>().PuzzleDeath(createdMrCrossy);
                         
                         StopCoroutine("WaitForPuzzleEnd");
@@ -336,6 +339,7 @@ public class DoorInteraction : MonoBehaviour
                     if (Input.GetMouseButtonDown(0))
                     {
                         moveable = true;
+                        controller.mouseSensitivity = controller.mouseSensitivity / 2;
                         if (moved)
                         {
                             StopCoroutine("WaitToClose");
@@ -400,7 +404,7 @@ public class DoorInteraction : MonoBehaviour
                     lessThan = false;
                     equalTo = true;
                 }
-
+                controller.mouseSensitivity = startMouseSens;
                 moveable = false;
             }
 
