@@ -71,7 +71,7 @@ public class JournalOnSwitch : MonoBehaviour
         {
             fpc.EnableController();
             Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.lockState = CursorLockMode.Locked;
             pauseMenu.streetName.SetActive(true);
 
             eventInstance = RuntimeManager.CreateInstance("event:/2D/Paper/Paper Up");
