@@ -10,7 +10,7 @@ public class WordCollision : MonoBehaviour
     public bool puzzleComplete;
 
     [SerializeField]
-    GameObject[] wordObjects;
+    GameObject[] wordObjects, altars;
 
     [SerializeField]
     PuzzleController puzzleController;
@@ -38,7 +38,7 @@ public class WordCollision : MonoBehaviour
 
     void SetUpController()
     {
-        int wordPoint = 0;
+        int wordPoint;
 
         puzzleController.word = word;
         puzzleController.wordObjects.Clear();
@@ -76,5 +76,29 @@ public class WordCollision : MonoBehaviour
         respawn.RespawnColliders();
 
         gameObject.SetActive(false);
+    }
+
+    public void DisableAltars()
+    {
+        if (altars.Length > 0)
+        {
+            for (int i = 0; i < altars.Length; i++)
+            {
+                if (altars[i].GetComponent<Outline>())
+                {
+                    altars[i].GetComponent<Outline>().enabled = false;
+                    altars[i].GetComponentInChildren<ObjectPlacement>().enabled = false;
+                    altars[i].GetComponent<DetermineLetter>().storedObject.GetComponent<ObjectHolder>().enabled = false;
+                    altars[i].GetComponent<DetermineLetter>().storedObject.GetComponent<Outline>().enabled = false;
+                }
+                else if (altars[i].GetComponentInParent<OverlappedAltar>())
+                {
+                    altars[i].GetComponentInParent<Outline>().enabled = false;
+                    altars[i].GetComponentInParent<OverlappedAltar>().GetComponentInChildren<ObjectPlacement>().enabled = false;
+                    altars[i].GetComponentInParent<DetermineLetter>().storedObject.GetComponent<ObjectHolder>().enabled = false;
+                    altars[i].GetComponentInParent<DetermineLetter>().storedObject.GetComponent<Outline>().enabled = false;
+                }
+            }
+        }
     }
 }

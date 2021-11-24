@@ -41,7 +41,6 @@ public class MenuManager : MonoBehaviour
 
     void Update()
     {
-
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (!mainMenu && !FindObjectOfType<CrossKeyManager>().puzzleOn)
@@ -59,13 +58,8 @@ public class MenuManager : MonoBehaviour
                 {
                     ClosePauseMenu();
                 }
-            }
-            
-                
+            }             
         }
-
-
-
     }
 
     public void OpenPauseMenu()
@@ -171,6 +165,11 @@ public class MenuManager : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene("Main_Cael");
     }
 
     public void UpdateSliders()
