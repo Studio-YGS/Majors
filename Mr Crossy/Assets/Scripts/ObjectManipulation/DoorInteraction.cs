@@ -116,12 +116,12 @@ public class DoorInteraction : MonoBehaviour
                                 }
                                 else if (spawnLeft)
                                 {
-                                    randomPos = new Vector3(Random.Range(0, 5), 0, -15);
+                                    randomPos = new Vector3(Random.Range(3, 6), 0, -15);
                                     createdMrCrossy = Instantiate(mrCrossy, transform.position - transform.forward * randomPos.x + transform.right * randomPos.z, Quaternion.LookRotation(player.position - (transform.position - transform.forward * randomPos.x + transform.right * randomPos.z)));
                                 }
                                 else if (spawnRight)
                                 {
-                                    randomPos = new Vector3(Random.Range(0, 5), 0, 15);
+                                    randomPos = new Vector3(Random.Range(3, 6), 0, 15);
                                     createdMrCrossy = Instantiate(mrCrossy, transform.position - transform.forward * randomPos.x + transform.right * randomPos.z, Quaternion.LookRotation(player.position - (transform.position - transform.forward * randomPos.x + transform.right * randomPos.z)));
                                 }
                             }
@@ -141,12 +141,12 @@ public class DoorInteraction : MonoBehaviour
                                 }
                                 else if (spawnLeft)
                                 {
-                                    randomPos = new Vector3(-15, 0, Random.Range(0, 5));
+                                    randomPos = new Vector3(-15, 0, Random.Range(3, 6));
                                     createdMrCrossy = Instantiate(mrCrossy, transform.position + transform.forward * randomPos.x + transform.right * randomPos.z, Quaternion.LookRotation(player.position - (transform.position + transform.forward * randomPos.x + transform.right * randomPos.z)));
                                 }
                                 else if (spawnRight)
                                 {
-                                    randomPos = new Vector3(15, 0, Random.Range(0, 5));
+                                    randomPos = new Vector3(15, 0, Random.Range(3, 6));
                                     createdMrCrossy = Instantiate(mrCrossy, transform.position + transform.forward * randomPos.x + transform.right * randomPos.z, Quaternion.LookRotation(player.position - (transform.position + transform.forward * randomPos.x + transform.right * randomPos.z)));
                                 }
                             }
