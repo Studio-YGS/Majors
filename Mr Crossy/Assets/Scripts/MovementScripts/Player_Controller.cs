@@ -51,7 +51,8 @@ public class Player_Controller : MonoBehaviour
 
         //locking cursor and making it invisible
         //Cursor.visible = false; //cursor cant be invisible for journal to work :(
-        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
 

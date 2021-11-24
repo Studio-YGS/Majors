@@ -124,8 +124,7 @@ public class MenuManager : MonoBehaviour
 
         streetName.SetActive(true);
         Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Confined;
-
+        Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = defTimeScale;
     }
 
