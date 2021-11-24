@@ -43,7 +43,7 @@ public class MenuManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (!mainMenu && !FindObjectOfType<CrossKeyManager>().puzzleOn)
+            if (!mainMenu && !FindObjectOfType<CrossKeyManager>().puzzleOn && !journalController.readingHowTo && !journalController.waitForCrossy)
             {
                 if (!playerController.inJournal && !pauseMenuObject.activeInHierarchy && !settingsMenuObject.activeInHierarchy)
                 {
