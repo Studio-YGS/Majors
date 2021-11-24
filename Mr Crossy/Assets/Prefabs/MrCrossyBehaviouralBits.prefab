@@ -179,6 +179,85 @@ Transform:
   m_Father: {fileID: 9156822279031068857}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &857967713596071001
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7704490229251760828}
+  - component: {fileID: 5858985510254089507}
+  m_Layer: 0
+  m_Name: HouseAlleyBlock
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7704490229251760828
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 857967713596071001}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 26.31, y: 30.378, z: 0.882}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1189208849481314627}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!208 &5858985510254089507
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 857967713596071001}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 2.5, y: 0.5, z: 0.75}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
+--- !u!1 &1155389272541442889
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1189208849481314627}
+  m_Layer: 0
+  m_Name: NavMeshObstacles
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1189208849481314627
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1155389272541442889}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 7704490229251760828}
+  - {fileID: 2370840480088752616}
+  m_Father: {fileID: 9156822279072007365}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1240579892341974088
 GameObject:
   m_ObjectHideFlags: 0
@@ -479,6 +558,53 @@ Transform:
   m_Father: {fileID: 835025518506200653}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 85.212, z: 0}
+--- !u!1 &3948715633467761301
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2370840480088752616}
+  - component: {fileID: 3021451857086423510}
+  m_Layer: 0
+  m_Name: HouseAlleyBlock_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2370840480088752616
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3948715633467761301}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 24.7, y: 30.378, z: 15.74}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1189208849481314627}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!208 &3021451857086423510
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3948715633467761301}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 2.5, y: 0.5, z: 0.75}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &4176038451585652760
 GameObject:
   m_ObjectHideFlags: 0
@@ -1585,6 +1711,7 @@ Transform:
   - {fileID: 5110019796660590625}
   - {fileID: 9159689994958144303}
   - {fileID: 8168184354101519481}
+  - {fileID: 1189208849481314627}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2952,14 +3079,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab1623e85b2551f4287fc9ccdf5d6144, type: 3}
---- !u!1 &9157462719394744215 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1766410105212260, guid: ab1623e85b2551f4287fc9ccdf5d6144, type: 3}
-  m_PrefabInstance: {fileID: 9156822280283704051}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &9159689994958144303 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4029557201914332, guid: ab1623e85b2551f4287fc9ccdf5d6144, type: 3}
+  m_PrefabInstance: {fileID: 9156822280283704051}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &9157462719394744215 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1766410105212260, guid: ab1623e85b2551f4287fc9ccdf5d6144, type: 3}
   m_PrefabInstance: {fileID: 9156822280283704051}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &9156822280389476487
