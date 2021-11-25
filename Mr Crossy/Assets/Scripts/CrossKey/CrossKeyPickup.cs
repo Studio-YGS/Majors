@@ -9,18 +9,20 @@ public class CrossKeyPickup : MonoBehaviour
     Transform cam;
     TMP_Text hoverText;
     bool turnOffHoverText;
+    Player_Controller controller;
     void Start()
     {
         manager = FindObjectOfType<CrossKeyManager>();
         cam = FindObjectOfType<Camera>().transform;
         hoverText = GameObject.Find("Canvas").transform.Find("Hover Name").GetComponent<TMP_Text>();
+        controller = FindObjectOfType<Player_Controller>();
     }
 
     
     void Update()
     {
         RaycastHit hit;
-        if (Physics.Raycast(cam.position, cam.forward, out hit, 5))
+        if (Physics.Raycast(cam.position, cam.forward, out hit, 5, controller.raycastLayerMask))
         {
             if (hit.collider == gameObject.GetComponent<Collider>())
             {
