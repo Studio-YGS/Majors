@@ -91,24 +91,6 @@ public class JournalController : MonoBehaviour
             {
                 logPages[i].SetActive(true);
             }
-
-            //logPages[whichLogPage].SetActive(true);
-
-            //if (whichLogPage == 0)
-            //{
-            //    leftArrow.SetActive(false);
-            //    rightArrow.SetActive(true);
-            //}
-            //else if (whichLogPage == logPages.Length - 1)
-            //{
-            //    leftArrow.SetActive(true);
-            //    rightArrow.SetActive(false);
-            //}
-            //else
-            //{
-            //    leftArrow.SetActive(true);
-            //    rightArrow.SetActive(true);
-            //}
         }
     }
 

@@ -8,6 +8,8 @@ public class PlayerRespawn : MonoBehaviour
 
     JournalController journal;
 
+    PuzzleController puzzleController;
+
     [SerializeField]
     Transform respawnPosition, crossyPosition;
 
@@ -24,6 +26,9 @@ public class PlayerRespawn : MonoBehaviour
     {
         originalposition = crossyPosition.position;
         seer = FindObjectOfType<OverseerController>();
+        player = FindObjectOfType<Player_Controller>();
+        journal = FindObjectOfType<JournalController>();
+        puzzleController = FindObjectOfType<PuzzleController>();
     }
 
     public void Register()
@@ -48,10 +53,8 @@ public class PlayerRespawn : MonoBehaviour
     public void PlayerDie()
     {
         FindObjectOfType<CrossKeyManager>().doorsLocked = false;
-        player = FindObjectOfType<Player_Controller>();
-        journal = FindObjectOfType<JournalController>();
 
-        FindObjectOfType<OverseerController>().deady = true;
+        seer.deady = true;
 
         player.gameObject.SetActive(false);
         player.DisableController();
@@ -60,9 +63,12 @@ public class PlayerRespawn : MonoBehaviour
         journal.OpenMap();
         journal.DisableJournal();
 
-        respawningText.SetActive(true);
+        if(!puzzleController.GameOverCheck())
+        {
+            respawningText.SetActive(true);
 
-        StartCoroutine(WaitForRespawn(5f));
+            StartCoroutine(WaitForRespawn(5f));
+        }
     }
 
     IEnumerator WaitForRespawn(float waitTime)

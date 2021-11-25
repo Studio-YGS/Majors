@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class DetermineLetter : MonoBehaviour
 {
-    [HideInInspector]
+    //[HideInInspector]
     public GameObject storedObject;
 
     PuzzleController puzzleController;
@@ -25,7 +25,7 @@ public class DetermineLetter : MonoBehaviour
     {
         PuzzleController[] puzzleControllers = FindObjectsOfType<PuzzleController>();
 
-        string[] splitName = gameObject.name.Split('[', ']', ' ');
+        string[] splitName = gameObject.name.Split('[', ']', ',', ' ');
 
         wordName  = "";
 

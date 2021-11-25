@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 170556801}
   - component: {fileID: 170556800}
   - component: {fileID: 1689057094}
-  m_Layer: 0
+  - component: {fileID: 458561206}
+  m_Layer: 2
   m_Name: House Toggle (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,6 +113,18 @@ MonoBehaviour:
   internals: {fileID: 0}
   audioSwitch: {fileID: 1684578198}
   door: {fileID: 6823201229524141252}
+--- !u!114 &458561206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 170556798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &495207343
 GameObject:
   m_ObjectHideFlags: 0
@@ -3437,14 +3450,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1172801199186768}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.738, y: 1.072, z: 7.214}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: -3.255, y: 1.072, z: 7.244}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4815818262327902}
   m_Father: {fileID: 4590384607843576}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &1180161591057936
 GameObject:
   m_ObjectHideFlags: 0
@@ -48770,7 +48783,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1930961226, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: UID
-      value: -1661737351
+      value: 421022774
       objectReference: {fileID: 0}
     - target: {fileID: 1260673417133536, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: m_Name
@@ -48836,11 +48849,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3687494349538049729, guid: f5626199ba1c75148a6842d88c50e199, type: 3}
       propertyPath: UID
-      value: 329169065
+      value: -887325400
       objectReference: {fileID: 0}
     - target: {fileID: 5502804677015942778, guid: f5626199ba1c75148a6842d88c50e199, type: 3}
       propertyPath: UID
-      value: 568565775
+      value: 736721820
       objectReference: {fileID: 0}
     - target: {fileID: 5676606486502609884, guid: f5626199ba1c75148a6842d88c50e199, type: 3}
       propertyPath: m_RootOrder
@@ -48910,7 +48923,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1930961226, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: UID
-      value: 1372998331
+      value: -1706679023
       objectReference: {fileID: 0}
     - target: {fileID: 1260673417133536, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: m_Name
@@ -49024,6 +49037,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78b4e689916708845baea328fcc72b2e, type: 3}
+--- !u!4 &1372408390970084108 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5390543055913031766, guid: 78b4e689916708845baea328fcc72b2e, type: 3}
+  m_PrefabInstance: {fileID: 6468515349727581018}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8389577629213152055 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3290174296642338925, guid: 78b4e689916708845baea328fcc72b2e, type: 3}
@@ -49035,8 +49053,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &1372408390970084108 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5390543055913031766, guid: 78b4e689916708845baea328fcc72b2e, type: 3}
-  m_PrefabInstance: {fileID: 6468515349727581018}
-  m_PrefabAsset: {fileID: 0}

@@ -189,45 +189,11 @@ public class OverseerController : MonoBehaviour
             }
         }
 
-        if(m_State == 3)
-        {
-            if(allowVignette)
-            {
-                vignetteActivated = true;
-                Debug.Log("potoatosondwich");
-                distootle.DistanceVignette(m_Crossy);
-            }
-            
-            if(!keyMan.doorsLocked)
-            {
-                keyMan.doorsLocked = true;
-            }
-        }
-        else if (m_State != 3 && vignetteActivated && !deady)
-        {
-            if(allowVignette)
-            {
-                vignetteActivated = false;
-                Debug.Log("VignetteNooooooo");
-                distootle.DecreaseVignette();
-            }
-            
-            if (keyMan.doorsLocked)
-            {
-                keyMan.doorsLocked = false;
-            }
-        }
-        else if(m_State != 3)
-        {
-            if (keyMan.doorsLocked)
-            {
-                keyMan.doorsLocked = false;
-            }
-        }
+        VignetteProcessor();
 
         if(!m_IsTutorial)
         {
-            if (m_State >= 1 || keyMan.puzzleOn || attemptingSafe) CrossyFMODFiddling(crossyAgent, m_Player.transform.position, m_State, deady);
+            if (m_State >= 1 || keyMan.puzzleOn || attemptingSafe) CrossyFMODFiddling(crossyAgent, m_ValidationPosition, m_State, deady);
             if (m_State == -1 && !m_PlayerInHouse)
             { 
                 TitanCrossyVoiceLines();
@@ -254,24 +220,84 @@ public class OverseerController : MonoBehaviour
         emitter.Target.SetParameter(titanParamName, m_TitanNoisyNum);
     }
 
+    public void VignetteProcessor()
+    {
+        if (m_State == 3)
+        {
+            if (allowVignette)
+            {
+                vignetteActivated = true;
+                Debug.Log("potoatosondwich");
+                distootle.DistanceVignette(m_Crossy);
+            }
+
+            if (!keyMan.doorsLocked)
+            {
+                keyMan.doorsLocked = true;
+            }
+        }
+        else if (m_State != 3 && vignetteActivated && !deady)
+        {
+            if (allowVignette)
+            {
+                vignetteActivated = false;
+                Debug.Log("VignetteNooooooo");
+                distootle.DecreaseVignette();
+            }
+
+            if (keyMan.doorsLocked)
+            {
+                keyMan.doorsLocked = false;
+            }
+        }
+        else if (m_State != 3)
+        {
+            if (keyMan.doorsLocked)
+            {
+                keyMan.doorsLocked = false;
+            }
+        }
+    }
     public void HouseyBoBousey()
     {
-        NavMeshHit hit;
-        NavMesh.SamplePosition(m_Player.transform.position, out hit, 1, NavMesh.AllAreas);
-        Debug.Log("NavArea: " + hit.mask.ToString());
-        if (hit.mask == 256)
+        NavMeshHit baseHit;
+        
+        NavMesh.SamplePosition(m_Player.transform.position, out baseHit, 1, NavMesh.AllAreas);
+        Debug.Log("NavArea: " + baseHit.mask.ToString());
+        if (baseHit.mask == 256)
         {
+            NavMeshHit validationHit;
+
             m_PlayerInHouse = true;
             if(keyMan.doorsLocked) keyMan.doorsLocked = false;
+
+            NavMesh.SamplePosition(validationPositioner.transform.position, out validationHit, 1, NavMesh.AllAreas);
+            if(validationHit.mask == 256)
+            {
+                NavMeshHit validHit;
+                if(NavMesh.SamplePosition(validationPositioner.transform.position, out validHit, 3, 8))
+                {
+                    validationPositioner.transform.position = validHit.position;
+                }
+                else if (NavMesh.SamplePosition(validationPositioner.transform.position, out validHit, 3, 16))
+                {
+                    validationPositioner.transform.position = validHit.position;
+                }
+                else if (NavMesh.SamplePosition(validationPositioner.transform.position, out validHit, 3, 32))
+                {
+                    validationPositioner.transform.position = validHit.position;
+                }
+            }
         }
-        else if (hit.mask == 8 || hit.mask == 16 || hit.mask == 32)
+        else if (baseHit.mask == 8 || baseHit.mask == 16 || baseHit.mask == 32)
         {
             m_PlayerInHouse = false;
 
-            validationPositioner.transform.position = new Vector3(
-            m_Player.transform.position.x + validationOffset.x,
-            m_Player.transform.position.y + validationOffset.y,
-            m_Player.transform.position.z + validationOffset.z
+            validationPositioner.transform.position = new Vector3
+            (
+                m_Player.transform.position.x,
+                baseHit.position.y,
+                m_Player.transform.position.z
             );
         }
     }
