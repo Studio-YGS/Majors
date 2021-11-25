@@ -53,9 +53,9 @@ public class PlayerRespawn : MonoBehaviour
     public void PlayerDie()
     {
         FindObjectOfType<CrossKeyManager>().doorsLocked = false;
-
+        FindObjectOfType<ObjectHolder>().DeathDrop();
         seer.deady = true;
-
+        FindObjectOfType<MrCrossyDistortion>().ResetDamage();
         player.gameObject.SetActive(false);
         player.DisableController();
         player.transform.position = respawnPosition.position;

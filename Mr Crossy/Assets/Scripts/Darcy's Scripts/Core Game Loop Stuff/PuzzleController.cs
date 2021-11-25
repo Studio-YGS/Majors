@@ -145,11 +145,25 @@ public class PuzzleController : MonoBehaviour
 
         if(playersWord == word) //the script then checks to see if the players formed word is the same as the puzzle's answer
         {
+            CompletionCheck();
+
             if (wordCollision != null)
             {
                 wordCollision.puzzleComplete = true;
+                wordCollision.DisableAltars();
+
+                if (wordCollision.overlappedStreets.Length > 0)
+                {
+                    for (int i = 0; i < wordCollision.overlappedStreets.Length; i++)
+                    {
+                        if (!GameObject.Find(wordCollision.overlappedStreets[i]).GetComponent<WordCollision>().altarsDisabled)
+                        {
+                            wordCollision = GameObject.Find(wordCollision.overlappedStreets[i]).GetComponent<WordCollision>();
+                            PlayerWordControl();
+                        }
+                    }
+                }
             }
-            CompletionCheck();
         }
 
         if (playersWordLength == wordLength && playersWord != word) //if the player has put all the letters on the altar but hasnt gotten the word right, it counts down a mistake.
@@ -199,11 +213,6 @@ public class PuzzleController : MonoBehaviour
                 wordObjects[i].GetComponentInChildren<Image>().enabled = true;
                 break;
             }
-        }
-
-        if(wordCollision != null)
-        {
-            wordCollision.DisableAltars();
         }
 
         if(completedWords == wordsInPuzzle)

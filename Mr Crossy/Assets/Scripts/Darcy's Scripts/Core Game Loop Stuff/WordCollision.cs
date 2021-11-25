@@ -6,8 +6,10 @@ public class WordCollision : MonoBehaviour
 {
     public string word, street;
 
+    public string[] overlappedStreets;
+
     [HideInInspector]
-    public bool puzzleComplete;
+    public bool puzzleComplete, altarsDisabled;
 
     [SerializeField]
     GameObject[] wordObjects, altars;
@@ -38,8 +40,6 @@ public class WordCollision : MonoBehaviour
 
     void SetUpController()
     {
-        int wordPoint;
-
         puzzleController.word = word;
         puzzleController.wordObjects.Clear();
 
@@ -53,8 +53,7 @@ public class WordCollision : MonoBehaviour
 
                     if (wordObjects[i].name == word)
                     {
-                        wordPoint = i;
-                        puzzleController.SetUpLetters(wordPoint);
+                        puzzleController.SetUpLetters(i);
                     }
                 }
             }
@@ -84,21 +83,23 @@ public class WordCollision : MonoBehaviour
         {
             for (int i = 0; i < altars.Length; i++)
             {
-                if (altars[i].GetComponent<Outline>())
+                if (altars[i].GetComponent<OverlappedAltar>())
+                {
+                    altars[i].GetComponent<Outline>().enabled = false;
+                    altars[i].GetComponentInChildren<ObjectPlacement>().enabled = false;
+                    altars[i].GetComponentInChildren<DetermineLetter>().storedObject.GetComponent<ObjectHolder>().enabled = false;
+                    altars[i].GetComponentInChildren<DetermineLetter>().storedObject.GetComponent<Outline>().enabled = false;
+                }
+                else if (altars[i].GetComponent<DetermineLetter>())
                 {
                     altars[i].GetComponent<Outline>().enabled = false;
                     altars[i].GetComponentInChildren<ObjectPlacement>().enabled = false;
                     altars[i].GetComponent<DetermineLetter>().storedObject.GetComponent<ObjectHolder>().enabled = false;
                     altars[i].GetComponent<DetermineLetter>().storedObject.GetComponent<Outline>().enabled = false;
                 }
-                else if (altars[i].GetComponentInParent<OverlappedAltar>())
-                {
-                    altars[i].GetComponentInParent<Outline>().enabled = false;
-                    altars[i].GetComponentInParent<OverlappedAltar>().GetComponentInChildren<ObjectPlacement>().enabled = false;
-                    altars[i].GetComponentInParent<DetermineLetter>().storedObject.GetComponent<ObjectHolder>().enabled = false;
-                    altars[i].GetComponentInParent<DetermineLetter>().storedObject.GetComponent<Outline>().enabled = false;
-                }
             }
+
+            altarsDisabled = true;
         }
     }
 }
