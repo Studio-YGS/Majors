@@ -23,6 +23,7 @@ public class MrCrossyDistortion : MonoBehaviour
     Transform player;
     public bool increasingInsanity;
     public bool reducingInsanity;
+    public int hits;
     void Start()
     {
         for (int i = 0; i < volume.Length; i++)
@@ -37,7 +38,12 @@ public class MrCrossyDistortion : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(mrCrossy != null)
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            HitByCrossy();
+        }
+
+        if (mrCrossy != null)
         {
             float distance = Vector3.Distance(player.position, mrCrossy.transform.position);
             if (increasingInsanity)
@@ -175,6 +181,12 @@ public class MrCrossyDistortion : MonoBehaviour
         motionBlur.SetFloat("_ScreenXMagnitude", 0f);
         motionBlur.SetFloat("_ScreenYMagnitude", 0f);
         screenBlur.SetFloat("_Magnitude", 0f);
+        for (int i = 0; i < volume.Length; i++)
+        {
+            vignette[i].color.value = new Color32(204, 16, 16, 1);
+            vignette[i].intensity.value = 0;
+            colorAdjustments[i].colorFilter.value = Color.white;
+        }
     }
 
     public void IncreaseInsanity(GameObject crossy)
@@ -228,17 +240,16 @@ public class MrCrossyDistortion : MonoBehaviour
         }
         for (int i = 0; i < volume.Length; i++)
         {
-            if (vignette[i].intensity.value < 1)
-            {
-                //mask.SetActive(true);
-                vignette[i].intensity.value += Time.deltaTime * vignetteIncreaseRate;
-            }
-            //colorAdjustments.active = true;
-            //if (colorAdjustments[i].colorFilter.value != Color.black)
+            //if (vignette[i].intensity.value < 1)
             //{
-            //    colorAdjustments[i].colorFilter.value = new Color(colorAdjustments[i].colorFilter.value.r - Time.deltaTime * vignetteIncreaseRate,
-            //        colorAdjustments[i].colorFilter.value.b - Time.deltaTime * vignetteIncreaseRate, colorAdjustments[i].colorFilter.value.g - Time.deltaTime * vignetteIncreaseRate);
+            //    //mask.SetActive(true);
+            //    vignette[i].intensity.value += Time.deltaTime * vignetteIncreaseRate;
             //}
+            //colorAdjustments.active = true;
+            if (colorAdjustments[i].colorFilter.value != Color.black)
+            {
+                colorAdjustments[i].colorFilter.value = Color.Lerp(colorAdjustments[i].colorFilter.value, Color.black, 0.06f);
+            }
         }
            
         
@@ -250,9 +261,8 @@ public class MrCrossyDistortion : MonoBehaviour
         //colorAdjustments.active = true;
         for (int i = 0; i < volume.Length; i++)
         {
-            //colorAdjustments[i].colorFilter.value = new Color(colorAdjustments[i].colorFilter.value.r - (Time.unscaledDeltaTime * (vignetteIncreaseRate * 10 / distance)),
-                //colorAdjustments[i].colorFilter.value.b - (Time.unscaledDeltaTime * (vignetteIncreaseRate*10 / distance)), colorAdjustments[i].colorFilter.value.g - (Time.unscaledDeltaTime * (vignetteIncreaseRate * 10 / distance)));
-            vignette[i].intensity.value += Time.deltaTime * vignetteIncreaseRate / (distance / 4);
+            colorAdjustments[i].colorFilter.value = Color.Lerp(colorAdjustments[i].colorFilter.value, Color.black + Color.white / Mathf.Clamp((10 / distance),1,10), 0.07f);
+            //vignette[i].intensity.value += Time.deltaTime * vignetteIncreaseRate / (distance / 4);
         }
             
     }
@@ -270,13 +280,13 @@ public class MrCrossyDistortion : MonoBehaviour
     {
         vignetteReducing = true;
         //mask.SetActive(false);
-        while(vignette[0].intensity.value > baseVignette /*&& colorAdjustments[0].colorFilter.value != new Color (255,255,255)*/)
+        while(/*vignette[0].intensity.value > baseVignette &&*/ colorAdjustments[0].colorFilter.value != Color.white)
         {
             for (int i = 0; i < volume.Length; i++)
             {
-                vignette[i].intensity.value -= Time.deltaTime * vignetteIncreaseRate;
-                //colorAdjustments[i].colorFilter.value = new Color(colorAdjustments[i].colorFilter.value.r + Time.deltaTime * vignetteIncreaseRate,
-                    //colorAdjustments[i].colorFilter.value.b + Time.deltaTime * vignetteIncreaseRate, colorAdjustments[i].colorFilter.value.g + Time.deltaTime * vignetteIncreaseRate);
+                //vignette[i].intensity.value -= Time.deltaTime * vignetteIncreaseRate;
+                colorAdjustments[i].colorFilter.value = Color.Lerp(colorAdjustments[i].colorFilter.value, Color.white, 0.2f);
+                
             }
                 
             yield return null;
@@ -284,7 +294,7 @@ public class MrCrossyDistortion : MonoBehaviour
         for (int i = 0; i < volume.Length; i++)
         {
             vignette[i].intensity.value = baseVignette;
-            //colorAdjustments[i].colorFilter.value = Color.white;
+            colorAdjustments[i].colorFilter.value = Color.white;
         }
             
         //colorAdjustments.active = false;
@@ -308,9 +318,8 @@ public class MrCrossyDistortion : MonoBehaviour
             time += Time.unscaledDeltaTime;
             for (int i = 0; i < volume.Length; i++)
             {
-                vignette[i].intensity.value += Time.deltaTime * vignetteIncreaseRate * speed;
-                //colorAdjustments[i].colorFilter.value = new Color(colorAdjustments[i].colorFilter.value.r - Time.deltaTime * vignetteIncreaseRate * speed,
-                    //colorAdjustments[i].colorFilter.value.b - Time.deltaTime * vignetteIncreaseRate * speed, colorAdjustments[i].colorFilter.value.g - Time.deltaTime * vignetteIncreaseRate * speed);
+                //vignette[i].intensity.value += Time.deltaTime * vignetteIncreaseRate * speed;
+                colorAdjustments[i].colorFilter.value = Color.Lerp(colorAdjustments[i].colorFilter.value, Color.black, 0.1f);
             }
                 
             yield return null;
@@ -331,13 +340,12 @@ public class MrCrossyDistortion : MonoBehaviour
     IEnumerator BrightenScreen(float speed)
     {
         mask.SetActive(false);
-        while (vignette[0].intensity.value > baseVignette /*&& colorAdjustments[0].colorFilter.value != new Color(255, 255, 255)*/)
+        while (/*vignette[0].intensity.value > baseVignette &&*/ colorAdjustments[0].colorFilter.value != Color.white)
         {
             for (int i = 0; i < volume.Length; i++)
             {
-                vignette[i].intensity.value -= Time.deltaTime * vignetteIncreaseRate * speed;
-                //colorAdjustments[i].colorFilter.value = new Color(colorAdjustments[i].colorFilter.value.r + Time.deltaTime * vignetteIncreaseRate * speed,
-                    //colorAdjustments[i].colorFilter.value.b + Time.deltaTime * vignetteIncreaseRate * speed, colorAdjustments[i].colorFilter.value.g + Time.deltaTime * vignetteIncreaseRate * speed);
+                //vignette[i].intensity.value -= Time.deltaTime * vignetteIncreaseRate * speed;
+                colorAdjustments[i].colorFilter.value = Color.Lerp(colorAdjustments[i].colorFilter.value, Color.white, 0.02f);
             }
 
             yield return null;
@@ -345,7 +353,90 @@ public class MrCrossyDistortion : MonoBehaviour
         for (int i = 0; i < volume.Length; i++)
         {
             vignette[i].intensity.value = baseVignette;
-            //colorAdjustments[i].colorFilter.value = Color.white;
+            colorAdjustments[i].colorFilter.value = Color.white;
         }
+    }
+
+    public void HitByCrossy()
+    {
+        StopCoroutine("ReduceDamage");
+        hits += 1;
+        StartCoroutine("TakeDamage");
+    }
+
+    public void ResetDamage()
+    {
+        for (int i = 0; i < volume.Length; i++)
+        {
+            vignette[i].color.value = new Color32(204, 16, 16, 1);
+            vignette[i].intensity.value = 0;
+        }
+        hits = 0;
+    }
+
+    IEnumerator TakeDamage()
+    {
+        if(hits == 1)
+        {
+            while (vignette[0].intensity.value < 0.4)
+            {
+                for (int i = 0; i < volume.Length; i++)
+                {
+                    vignette[i].intensity.value = Mathf.Lerp(vignette[i].intensity.value, 0.4f, 0.07f);
+                }
+
+                yield return null;
+            }
+        }
+        else if(hits == 2)
+        {
+            while (vignette[0].intensity.value < 0.6)
+            {
+                for (int i = 0; i < volume.Length; i++)
+                {
+                    vignette[i].intensity.value = Mathf.Lerp(vignette[i].intensity.value, 0.61f, 0.07f);
+                }
+
+                yield return null;
+            }
+        }
+        else if(hits >= 3)
+        {
+            while (vignette[0].intensity.value < 0.6 && vignette[0].color.value != Color.red)
+            {
+                for (int i = 0; i < volume.Length; i++)
+                {
+                    vignette[i].intensity.value = Mathf.Lerp(vignette[i].intensity.value, 0.61f, 0.07f);
+                    vignette[i].color.value = Color.Lerp(vignette[i].color.value, Color.red, 0.07f);
+                }
+
+                yield return null;
+            }
+        }
+    }
+
+    public void lowerDamage()
+    {
+        StartCoroutine("ReduceDamage");
+    }
+
+    IEnumerator ReduceDamage()
+    {
+        while (vignette[0].intensity.value >= 0)
+        {
+            for (int i = 0; i < volume.Length; i++)
+            {
+                vignette[i].intensity.value = Mathf.Lerp(vignette[i].intensity.value, 0.61f, 0.04f);
+                vignette[i].color.value = Color.Lerp(vignette[i].color.value, new Color32(204, 16, 16, 1), 0.07f);
+            }
+
+            yield return null;    
+        }
+        for (int i = 0; i < volume.Length; i++)
+        {
+            vignette[i].color.value = new Color32(204, 16, 16, 1);
+            vignette[i].intensity.value = 0;
+        }
+        hits = 0;
     }
 }

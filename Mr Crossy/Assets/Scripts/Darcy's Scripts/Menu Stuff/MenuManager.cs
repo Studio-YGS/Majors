@@ -213,6 +213,7 @@ public class MenuManager : MonoBehaviour
                 pressSpace.SetActive(true);
                 if (Input.GetKey(KeyCode.Space))
                 {
+                    pressSpace.SetActive(false);
                     loadingScene.allowSceneActivation = true;
                 }
             }

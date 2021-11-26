@@ -45,7 +45,7 @@ public class ObjectHolder : MonoBehaviour
     [Header("When Inspecting")]
     public float distanceFromFace = 1.2f;
     [Header("Testing Pos In Hand")]
-    public bool updatePos;
+    //public bool updatePos;
     Vector3 newHandPosition = Vector3.zero;
     Quaternion newHandRotation = new Quaternion(0, 0, 0, 0);
     Vector3 newScaleFactor;
@@ -73,13 +73,13 @@ public class ObjectHolder : MonoBehaviour
         ogScaleFactor = transform.localScale;
     }
 
-    
+
     void Update()
     {
         RaycastHit hit;
-        if(Physics.Raycast(cam.position, cam.forward, out hit, pickupRange, controller.raycastLayerMask))
+        if (Physics.Raycast(cam.position, cam.forward, out hit, pickupRange, controller.raycastLayerMask))
         {
-            if(hit.collider == gameObject.GetComponent<Collider>())
+            if (hit.collider == gameObject.GetComponent<Collider>())
             {
                 hoverText.text = "Pick Up " + objectName;
                 hoverText.gameObject.SetActive(true);
@@ -99,7 +99,7 @@ public class ObjectHolder : MonoBehaviour
                 }
                 else if (Input.GetKeyDown(KeyCode.E) && objectsInHands.Count == 0)
                 {
-                    
+
                     PickUpObject(intereactedObject);
                 }
             }
@@ -120,11 +120,13 @@ public class ObjectHolder : MonoBehaviour
             Drop();
         }
 
-        if(objectsInHands.Count == 2 && thisObjectHeld && !FindObjectOfType<MenuManager>().menuOpen)
+
+
+        if (Input.GetAxis("Mouse ScrollWheel") != 0f)
         {
-            if(Input.GetAxis("Mouse ScrollWheel") != 0f )
+            if (objectsInHands.Count == 2 && thisObjectHeld && !FindObjectOfType<MenuManager>().menuOpen)
             {
-                if(objectsInHands[0].activeSelf == true)
+                if (objectsInHands[0].activeSelf == true)
                 {
                     objectsInHands[0].SetActive(false);
                     objectsInHands[1].SetActive(true);
@@ -141,7 +143,10 @@ public class ObjectHolder : MonoBehaviour
                     image.GetComponentInParent<Transform>().localScale = new Vector3(1.3f, 1.3f, 1.3f);
                 }
             }
-            if (Input.GetKeyDown(KeyCode.Alpha1))
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            if (objectsInHands.Count == 2 && thisObjectHeld && !FindObjectOfType<MenuManager>().menuOpen)
             {
                 objectsInHands[1].SetActive(false);
                 objectsInHands[0].SetActive(true);
@@ -149,7 +154,10 @@ public class ObjectHolder : MonoBehaviour
                 imageTwo.GetComponentInParent<Transform>().localScale = new Vector3(1f, 1f, 1f);
                 image.GetComponentInParent<Transform>().localScale = new Vector3(1.3f, 1.3f, 1.3f);
             }
-            else if (Input.GetKeyDown(KeyCode.Alpha2))
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            if (objectsInHands.Count == 2 && thisObjectHeld && !FindObjectOfType<MenuManager>().menuOpen)
             {
                 objectsInHands[0].SetActive(false);
                 objectsInHands[1].SetActive(true);
@@ -159,9 +167,9 @@ public class ObjectHolder : MonoBehaviour
             }
         }
 
-        if (thisObjectHeld && !FindObjectOfType<CrossKeyManager>().puzzleOn)
+        if (Input.GetMouseButtonDown(1))
         {
-            if (Input.GetMouseButtonDown(1))
+            if (thisObjectHeld && !FindObjectOfType<CrossKeyManager>().puzzleOn)
             {
                 Vector3 posOffset = transform.position - transform.GetComponent<Renderer>().bounds.center;
                 transform.position = cam.position + cam.forward * distanceFromFace + posOffset;
@@ -170,7 +178,10 @@ public class ObjectHolder : MonoBehaviour
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
             }
-            else if (Input.GetMouseButtonUp(1))
+        }
+        else if (Input.GetMouseButtonUp(1))
+        {
+            if (thisObjectHeld && !FindObjectOfType<CrossKeyManager>().puzzleOn)
             {
                 controller.enabled = true;
                 beingInspected = false;
@@ -179,14 +190,16 @@ public class ObjectHolder : MonoBehaviour
                 transform.position = hand.TransformPoint(handOffset);
                 transform.localRotation = handRotation;
             }
-            if (Input.GetMouseButton(0) && Input.GetMouseButton(1))
+        }
+        if (Input.GetMouseButton(0) && Input.GetMouseButton(1))
+        {
+            if (thisObjectHeld && !FindObjectOfType<CrossKeyManager>().puzzleOn)
             {
                 float rotX = Input.GetAxis("Mouse X") * 200 * Mathf.Deg2Rad;
                 float rotY = Input.GetAxis("Mouse Y") * 200 * Mathf.Deg2Rad;
                 transform.RotateAround(transform.GetComponent<Renderer>().bounds.center, cam.up, -rotX);
                 transform.RotateAround(transform.GetComponent<Renderer>().bounds.center, cam.right, rotY);
             }
-
         }
 
         //if(dissolving == true)
@@ -202,31 +215,44 @@ public class ObjectHolder : MonoBehaviour
         //        mat.SetFloat("Vector1_1bfaaeffe0534a91a219fc6f2e1eae9e", dissolveValue);
         //    }
         //}
-        
-        if(updatePos && thisObjectHeld)
-        {
-            
-            if(handOffset != newHandPosition)
-            {
-                transform.position = hand.TransformPoint(handOffset);
-                newHandPosition = handOffset;
-            }
-            if(handRotation != newHandRotation)
-            {
-                transform.localRotation = handRotation;
-                newHandRotation = handRotation;
-            }
-            if(scaleFactor != newScaleFactor)
-            {
-                transform.localScale = scaleFactor;
-                newScaleFactor = scaleFactor;
-            }
-            
-        }
+
+        //if(updatePos && thisObjectHeld)
+        //{
+
+        //    if(handOffset != newHandPosition)
+        //    {
+        //        transform.position = hand.TransformPoint(handOffset);
+        //        newHandPosition = handOffset;
+        //    }
+        //    if(handRotation != newHandRotation)
+        //    {
+        //        transform.localRotation = handRotation;
+        //        newHandRotation = handRotation;
+        //    }
+        //    if(scaleFactor != newScaleFactor)
+        //    {
+        //        transform.localScale = scaleFactor;
+        //        newScaleFactor = scaleFactor;
+        //    }
+
+        //}
 
     }
 
-
+    public void DeathDrop()
+    {
+        if(objectsInHands.Count == 1)
+        {
+            DropCurrentObject(heldObject);
+        }
+        else if(objectsInHands.Count == 2)
+        {
+            DropCurrentObject(heldObject);
+            objectsInHands[0].SetActive(true);
+            heldObject = objectsInHands[0];
+            DropCurrentObject(heldObject);
+        }
+    }
     public void Drop()
     {
         if (thisObjectHeld)
