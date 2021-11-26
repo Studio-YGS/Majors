@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8760329071730283194}
   - component: {fileID: 957248520598312679}
   - component: {fileID: 6808376072398809984}
-  - component: {fileID: 7474067844339563492}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -55,18 +54,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7474067844339563492
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 967317234650984922}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2697632506296754566
 GameObject:
   m_ObjectHideFlags: 0
@@ -110,7 +97,6 @@ GameObject:
   - component: {fileID: 6824708758834749208}
   - component: {fileID: 3799944658272820408}
   - component: {fileID: 5603684198956544233}
-  - component: {fileID: 3765608749458255960}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -153,18 +139,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3765608749458255960
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7978530141700318180}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &9155726054523503897
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,7 +153,7 @@ GameObject:
   - component: {fileID: 9136801386054106522}
   - component: {fileID: 1514012006511976514}
   - component: {fileID: 7241815564764514308}
-  - component: {fileID: -1678319726473538930}
+  - component: {fileID: 439783832023954190}
   m_Layer: 0
   m_Name: '[R]evolver'
   m_TagString: Untagged
@@ -317,16 +291,16 @@ MonoBehaviour:
   placementOffset: {x: 0, y: 0, z: 0}
   rotationalSet: {x: 0, y: 0, z: 0, w: 0}
   distanceFromFace: 1.2
-  updatePos: 1
---- !u!114 &-1678319726473538930
-MonoBehaviour:
+--- !u!65 &439783832023954190
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9155726054523503897}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  serializedVersion: 2
+  m_Size: {x: 0.39328396, y: 0.074998714, z: 0.19083518}
+  m_Center: {x: 0.1360305, y: 0.007298209, z: 0.016278073}
