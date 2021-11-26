@@ -1,5 +1,49 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &560026110
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 560026111}
+  - component: {fileID: 560026112}
+  m_Layer: 2
+  m_Name: Block_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &560026111
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 560026110}
+  m_LocalRotation: {x: -0, y: -0, z: -1.1641532e-10, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1845980514}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &560026112
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 560026110}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.037985243, y: 0.86295, z: 0.15532672}
+  m_Center: {x: 0.8212289, y: 0.06852528, z: 0.004703922}
 --- !u!1 &753770409
 GameObject:
   m_ObjectHideFlags: 0
@@ -32,6 +76,50 @@ Transform:
   m_Father: {fileID: 8971736289818287687}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1434876215
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1434876216}
+  - component: {fileID: 1434876217}
+  m_Layer: 2
+  m_Name: Block_2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1434876216
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1434876215}
+  m_LocalRotation: {x: -0, y: -0, z: -1.1641532e-10, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1845980514}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1434876217
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1434876215}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.04343144, y: 0.86295, z: 0.15532672}
+  m_Center: {x: -0.8064949, y: 0.06852528, z: 0.004703499}
 --- !u!1 &1494177809
 GameObject:
   m_ObjectHideFlags: 0
@@ -113,6 +201,52 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &1845980513
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1845980514}
+  - component: {fileID: 1845980515}
+  m_Layer: 2
+  m_Name: Block
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1845980514
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1845980513}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 560026111}
+  - {fileID: 1434876216}
+  m_Father: {fileID: 8971736289818287687}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1845980515
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1845980513}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5995883, y: 0.86295, z: 0.03901916}
+  m_Center: {x: 0.0012501049, y: 0.06852528, z: 0.07641521}
 --- !u!1 &1851649395
 GameObject:
   m_ObjectHideFlags: 0
@@ -332,7 +466,7 @@ GameObject:
   - component: {fileID: 4813587782912519797}
   m_Layer: 0
   m_Name: First Clues
-  m_TagString: Untagged
+  m_TagString: Clue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -430,6 +564,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: JournalOnSwitch, Assembly-CSharp
+        m_MethodName: ForceOpenOrClose
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: JournalController, Assembly-CSharp
+        m_MethodName: SetCrossyBool
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   prompt: {fileID: 0}
 --- !u!65 &4813587782912519797
 BoxCollider:
@@ -456,6 +614,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &989328822
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6627730345952961485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8631661279861916925
 GameObject:
   m_ObjectHideFlags: 0
@@ -469,7 +639,6 @@ GameObject:
   - component: {fileID: 7838847494414296360}
   - component: {fileID: 919132147802924911}
   - component: {fileID: 919132147802924912}
-  - component: {fileID: 349109959}
   m_Layer: 2
   m_Name: Noticeboard
   m_TagString: Untagged
@@ -491,6 +660,7 @@ Transform:
   - {fileID: 471163374867162958}
   - {fileID: 1961625213872791380}
   - {fileID: 753770410}
+  - {fileID: 1845980514}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -584,134 +754,6 @@ LODGroup:
     renderers:
     - renderer: {fileID: 2123416454}
   m_Enabled: 1
---- !u!114 &349109959
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8631661279861916925}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 929ec0948db3c3b40b45ee8e9d981a2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sectionStart:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: JournalController, Assembly-CSharp
-        m_MethodName: SetTutorialBool
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: TutorialController, Assembly-CSharp
-        m_MethodName: CrossyWait
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 60
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: CrossyTheTutorial, Assembly-CSharp
-        m_MethodName: AwakenTitan
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: JournalController, Assembly-CSharp
-        m_MethodName: DisableJournal
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: AnimationControl, Assembly-CSharp
-        m_MethodName: ControlGate
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  steppingAway:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 349109959}
-        m_TargetAssemblyTypeName: TutorialSectionStart, Assembly-CSharp
-        m_MethodName: TutorialOver
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  raycastEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  needsRaycast: 0
-  needsSecondRaycast: 0
-  needsCheck: 1
-  atGate: 0
-  tutorialClues:
-  - {fileID: 2854986778840587602}
-  - {fileID: 6627730345952961485}
-  - {fileID: 3471506466704783016}
-  - {fileID: 1303604655066485751}
-  - {fileID: 5149602989196356323}
-  - {fileID: 5234108396926007502}
 --- !u!1001 &1871236191576304161
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -795,11 +837,6 @@ PrefabInstance:
     - {fileID: 7344799368886583381, guid: 8c7f0c1d0185d3b40a7602e4c1ea9465, type: 3}
     - {fileID: 3997902690433813072, guid: 8c7f0c1d0185d3b40a7602e4c1ea9465, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 8c7f0c1d0185d3b40a7602e4c1ea9465, type: 3}
---- !u!1 &5234108396926007502 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5860518738023633647, guid: 8c7f0c1d0185d3b40a7602e4c1ea9465, type: 3}
-  m_PrefabInstance: {fileID: 1871236191576304161}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3985891684494680171 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3361739452517943882, guid: 8c7f0c1d0185d3b40a7602e4c1ea9465, type: 3}
@@ -818,7 +855,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1067764905288035531, guid: 8d04ccdce411f83418be8eba6f1fb6c3, type: 3}
       propertyPath: m_TagString
-      value: Clue
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 8152223425097020526, guid: 8d04ccdce411f83418be8eba6f1fb6c3, type: 3}
       propertyPath: m_RootOrder
@@ -882,11 +919,6 @@ PrefabInstance:
 --- !u!4 &7918637678384139090 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8152223425097020526, guid: 8d04ccdce411f83418be8eba6f1fb6c3, type: 3}
-  m_PrefabInstance: {fileID: 2073383164639379260}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1303604655066485751 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1067764905288035531, guid: 8d04ccdce411f83418be8eba6f1fb6c3, type: 3}
   m_PrefabInstance: {fileID: 2073383164639379260}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4475604878170528454
@@ -976,11 +1008,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 475244983433980032, guid: 43f347659660dfa4597db97a4131a19a, type: 3}
   m_PrefabInstance: {fileID: 4475604878170528454}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &5149602989196356323 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8749256361147805733, guid: 43f347659660dfa4597db97a4131a19a, type: 3}
-  m_PrefabInstance: {fileID: 4475604878170528454}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4852747927784468895
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1050,7 +1077,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7261667228555275469, guid: 8c4d3621e34c7ee4e9dd7d4015de454f, type: 3}
       propertyPath: m_TagString
-      value: Clue
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 209776045017560178, guid: 8c4d3621e34c7ee4e9dd7d4015de454f, type: 3}
@@ -1078,7 +1105,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3712618119057911679, guid: 59233d51223e338419505d8f1d4ad0e1, type: 3}
       propertyPath: m_TagString
-      value: Clue
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 5509639603263698906, guid: 59233d51223e338419505d8f1d4ad0e1, type: 3}
       propertyPath: m_RootOrder
@@ -1139,14 +1166,14 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 6172754412783122368, guid: 59233d51223e338419505d8f1d4ad0e1, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 59233d51223e338419505d8f1d4ad0e1, type: 3}
---- !u!1 &6627730345952961485 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3712618119057911679, guid: 59233d51223e338419505d8f1d4ad0e1, type: 3}
-  m_PrefabInstance: {fileID: 7529934052623273138}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2596781650080611176 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5509639603263698906, guid: 59233d51223e338419505d8f1d4ad0e1, type: 3}
+  m_PrefabInstance: {fileID: 7529934052623273138}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6627730345952961485 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3712618119057911679, guid: 59233d51223e338419505d8f1d4ad0e1, type: 3}
   m_PrefabInstance: {fileID: 7529934052623273138}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8447589869145801721
@@ -1216,6 +1243,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TEN Clue
       objectReference: {fileID: 0}
+    - target: {fileID: 4978336345299039569, guid: c86efcb3d719fdb42b28dfe3f19bb6c2, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 51697580, guid: c86efcb3d719fdb42b28dfe3f19bb6c2, type: 3}
     - {fileID: 3373365152992124099, guid: c86efcb3d719fdb42b28dfe3f19bb6c2, type: 3}
@@ -1224,10 +1255,5 @@ PrefabInstance:
 --- !u!4 &5755237727519649293 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4243912585761779188, guid: c86efcb3d719fdb42b28dfe3f19bb6c2, type: 3}
-  m_PrefabInstance: {fileID: 8447589869145801721}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &3471506466704783016 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4978336345299039569, guid: c86efcb3d719fdb42b28dfe3f19bb6c2, type: 3}
   m_PrefabInstance: {fileID: 8447589869145801721}
   m_PrefabAsset: {fileID: 0}

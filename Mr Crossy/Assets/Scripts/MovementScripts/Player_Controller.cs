@@ -51,7 +51,8 @@ public class Player_Controller : MonoBehaviour
 
         //locking cursor and making it invisible
         //Cursor.visible = false; //cursor cant be invisible for journal to work :(
-        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
 
@@ -66,7 +67,7 @@ public class Player_Controller : MonoBehaviour
             rotation.y += Input.GetAxis("Mouse X") * mouseSensitivity;
             rotation.x += -Input.GetAxis("Mouse Y") * mouseSensitivity;
 
-            rotation.x = Mathf.Clamp(rotation.x, -30f, 30f);
+            rotation.x = Mathf.Clamp(rotation.x, -90f, 90f);
             playerBody.transform.eulerAngles = new Vector2(0, rotation.y );
             cam.transform.localRotation = Quaternion.Euler(rotation.x , 0, 0);
 

@@ -12,17 +12,16 @@ using FMODUnity;
 public class PuzzleController : MonoBehaviour
 {
     public string word, currentStreet;
+    string playersWord, letter, altarName, uiWord;
 
     [SerializeField]
-    TextMeshProUGUI mistakeText;
-    
+    TextMeshProUGUI mistakeText; 
     [HideInInspector]
     public TextMeshProUGUI streetText;
 
     EventInstance eventInstance;
 
-    int wordLength, mistakeCount = 3, completedWords = 0, letterPoint;
-
+    int wordLength, mistakeCount, completedWords, letterPoint, objectPoint;
     public int wordsInPuzzle, section;
 
     //[HideInInspector]
@@ -32,11 +31,8 @@ public class PuzzleController : MonoBehaviour
     public List<GameObject> storedObjects = new List<GameObject>();
     public List<GameObject> wordObjects = new List<GameObject>();
 
-    string playersWord, letter, altarName, uiWord;
-
     public bool tutorial;
-
-    bool tenPlayed = false;
+    bool tenPlayed;
 
     public UnityEvent winEvent, loseEvent, tutorialEvent, tutorialMistakeEvent;
 
@@ -57,16 +53,18 @@ public class PuzzleController : MonoBehaviour
 
     public void SetUpLetters(int whichObject)
     {
+        objectPoint = whichObject;
+
         canvasLetters.Clear();
 
-        foreach (TextMeshProUGUI tmp in wordObjects[whichObject].GetComponentsInChildren<TextMeshProUGUI>())
+        foreach (TextMeshProUGUI tmp in wordObjects[objectPoint].GetComponentsInChildren<TextMeshProUGUI>())
         {
             canvasLetters.Add(tmp);
         }
 
         wordLength = canvasLetters.Count;
 
-        if (word == wordObjects[whichObject].name)
+        if (word == wordObjects[objectPoint].name)
         {
             WriteToUI();
         }
@@ -117,7 +115,10 @@ public class PuzzleController : MonoBehaviour
             storedObjects.Add(GameObject.Find(altarName));
         }
 
-        WriteToUI();
+        if(word == wordObjects[objectPoint].name)
+        {
+            WriteToUI();
+        }
 
         if (tutorial)
         {
@@ -144,34 +145,20 @@ public class PuzzleController : MonoBehaviour
 
         if(playersWord == word) //the script then checks to see if the players formed word is the same as the puzzle's answer
         {
-            CompletionCheck();
             if (wordCollision != null)
             {
                 wordCollision.puzzleComplete = true;
             }
+            CompletionCheck();
         }
 
         if (playersWordLength == wordLength && playersWord != word) //if the player has put all the letters on the altar but hasnt gotten the word right, it counts down a mistake.
         {
-            if (!tutorial)
-            {
-                mistakeCount--;
-                mistakeText.text = "Mistakes remaining: " + mistakeCount;
-            }
-
             AudioEvents audio = FindObjectOfType<AudioEvents>();
 
             audio.WordSpeltIncorrectly();
 
-            if (gameObject.name.Contains("Tutorial"))
-            {      
-                tutorialMistakeEvent.Invoke();
-            }
-
-            if(mistakeCount == 0)
-            {
-                GameOver();
-            }
+            GameOverCheck();
         }
     }
 
@@ -214,38 +201,50 @@ public class PuzzleController : MonoBehaviour
             }
         }
 
-        if(storedObjects.Count > 0)
+        if(wordCollision != null)
         {
-            for (int i = 0; i < storedObjects.Count; i++)
-            {
-                if (storedObjects[i].GetComponent<Outline>())
-                {
-                    storedObjects[i].GetComponent<Outline>().enabled = false;
-                    storedObjects[i].GetComponentInChildren<ObjectPlacement>().enabled = false;
-                    storedObjects[i].GetComponent<DetermineLetter>().storedObject.GetComponent<ObjectHolder>().enabled = false;
-                    storedObjects[i].GetComponent<DetermineLetter>().storedObject.GetComponent<Outline>().enabled = false;
-                }
-                else if (storedObjects[i].GetComponentInParent<OverlappedAltar>())
-                {
-                    storedObjects[i].GetComponentInParent<Outline>().enabled = false;
-                    storedObjects[i].GetComponentInParent<OverlappedAltar>().GetComponentInChildren<ObjectPlacement>().enabled = false;
-                    storedObjects[i].GetComponentInParent<DetermineLetter>().storedObject.GetComponent<ObjectHolder>().enabled = false;
-                    storedObjects[i].GetComponentInParent<DetermineLetter>().storedObject.GetComponent<Outline>().enabled = false;
-                }
-            }
+            wordCollision.DisableAltars();
         }
-
-        storedObjects.Clear();
 
         if(completedWords == wordsInPuzzle)
         {
             winEvent.Invoke();
-            Destroy(gameObject); //deleting unused puzzle controllers
+        }
+    }
+
+    public bool GameOverCheck()
+    {
+        if (!gameObject.name.Contains("Tutorial"))
+        {
+            mistakeCount++;
+            mistakeText.text = mistakeCount.ToString();
+        }
+        else if(gameObject.name.Contains("Tutorial"))
+        {
+            tutorialMistakeEvent.Invoke();
+        }
+
+        if (mistakeCount == 3)
+        {
+            GameOver();
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 
     void GameOver()
     {
         loseEvent.Invoke();
+        StartCoroutine(StartAgain());
+    }
+
+    IEnumerator StartAgain()
+    {
+        yield return new WaitForSeconds(3f);
+
+        FindObjectOfType<MenuManager>().RestartGame();
     }
 }

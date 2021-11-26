@@ -24,7 +24,7 @@ public class TutorialController : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI conLetter;
 
-    bool directed = false, spotted = false;
+    bool directed = false, doneTalk = false, spotted = false;
 
     void Start()
     {
@@ -34,9 +34,9 @@ public class TutorialController : MonoBehaviour
         journalTimer = FindObjectOfType<JournalTimer>();
         overseerController = FindObjectOfType<OverseerController>();
 
-        journalTimer.canCount = false;
-
         StartTutorial();
+
+        StartCoroutine(DoneTalk());
     }
 
     void Update()
@@ -68,16 +68,16 @@ public class TutorialController : MonoBehaviour
 
     public void DirectToNote()
     {
-        if (!directed)
+        if (!directed && doneTalk)
         {
             eventInstance = RuntimeManager.CreateInstance("event:/MR_C_Tutorial/TUT.0.2");
 
             eventInstance.start();
 
             directed = true;
-        }
 
-        StartCoroutine(DirectionTimer());
+            StartCoroutine(DirectionTimer());
+        }
     }
 
     public void ChangeConLetter(string letter)
@@ -112,6 +112,15 @@ public class TutorialController : MonoBehaviour
 
         journalOnSwitch.OpenOrClose();
         journalController.OpenHowTo();
+    }
+    
+    IEnumerator DoneTalk()
+    {
+        yield return new WaitForSeconds(11f);
+
+        doneTalk = true;
+
+        StopCoroutine(DoneTalk());
     }
 
     IEnumerator DirectionTimer()

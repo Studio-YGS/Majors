@@ -76,6 +76,8 @@ public class OverseerController : MonoBehaviour
     public string deadParamName = "isDead";
     public string titanParamName = "Titan";
 
+    bool attemptingSafe = false;
+
     [Range(0f, 1f)] [SerializeField] private float m_TitanVoiceLineChance = 0.5f;
     private int m_TitanNoisyNum = 0;
     [Space(10)]
@@ -187,45 +189,11 @@ public class OverseerController : MonoBehaviour
             }
         }
 
-        if(m_State == 3)
-        {
-            if(allowVignette)
-            {
-                vignetteActivated = true;
-                Debug.Log("potoatosondwich");
-                distootle.DistanceVignette(m_Crossy);
-            }
-            
-            if(!keyMan.doorsLocked)
-            {
-                keyMan.doorsLocked = true;
-            }
-        }
-        else if (m_State != 3 && vignetteActivated && !deady)
-        {
-            if(allowVignette)
-            {
-                vignetteActivated = false;
-                Debug.Log("VignetteNooooooo");
-                distootle.DecreaseVignette();
-            }
-            
-            if (keyMan.doorsLocked)
-            {
-                keyMan.doorsLocked = false;
-            }
-        }
-        else if(m_State != 3)
-        {
-            if (keyMan.doorsLocked)
-            {
-                keyMan.doorsLocked = false;
-            }
-        }
+        VignetteProcessor();
 
         if(!m_IsTutorial)
         {
-            if (m_State >= 1 || keyMan.puzzleOn) CrossyFMODFiddling(crossyAgent, m_Player.transform.position, m_State, deady);
+            if (m_State >= 1 || keyMan.puzzleOn || attemptingSafe) CrossyFMODFiddling(crossyAgent, m_ValidationPosition, m_State, deady);
             if (m_State == -1 && !m_PlayerInHouse)
             { 
                 TitanCrossyVoiceLines();
@@ -252,24 +220,84 @@ public class OverseerController : MonoBehaviour
         emitter.Target.SetParameter(titanParamName, m_TitanNoisyNum);
     }
 
+    public void VignetteProcessor()
+    {
+        if (m_State == 3)
+        {
+            if (allowVignette)
+            {
+                vignetteActivated = true;
+                Debug.Log("potoatosondwich");
+                distootle.DistanceVignette(m_Crossy);
+            }
+
+            if (!keyMan.doorsLocked)
+            {
+                keyMan.doorsLocked = true;
+            }
+        }
+        else if (m_State != 3 && vignetteActivated && !deady)
+        {
+            if (allowVignette)
+            {
+                vignetteActivated = false;
+                Debug.Log("VignetteNooooooo");
+                distootle.DecreaseVignette();
+            }
+
+            if (keyMan.doorsLocked)
+            {
+                keyMan.doorsLocked = false;
+            }
+        }
+        else if (m_State != 3)
+        {
+            if (keyMan.doorsLocked)
+            {
+                keyMan.doorsLocked = false;
+            }
+        }
+    }
     public void HouseyBoBousey()
     {
-        NavMeshHit hit;
-        NavMesh.SamplePosition(m_Player.transform.position, out hit, 1, NavMesh.AllAreas);
-        Debug.Log("NavArea: " + hit.mask.ToString());
-        if (hit.mask == 256)
+        NavMeshHit baseHit;
+        
+        NavMesh.SamplePosition(m_Player.transform.position, out baseHit, 1, NavMesh.AllAreas);
+        Debug.Log("NavArea: " + baseHit.mask.ToString());
+        if (baseHit.mask == 256)
         {
+            NavMeshHit validationHit;
+
             m_PlayerInHouse = true;
             if(keyMan.doorsLocked) keyMan.doorsLocked = false;
+
+            NavMesh.SamplePosition(validationPositioner.transform.position, out validationHit, 1, NavMesh.AllAreas);
+            if(validationHit.mask == 256)
+            {
+                NavMeshHit validHit;
+                if(NavMesh.SamplePosition(validationPositioner.transform.position, out validHit, 3, 8))
+                {
+                    validationPositioner.transform.position = validHit.position;
+                }
+                else if (NavMesh.SamplePosition(validationPositioner.transform.position, out validHit, 3, 16))
+                {
+                    validationPositioner.transform.position = validHit.position;
+                }
+                else if (NavMesh.SamplePosition(validationPositioner.transform.position, out validHit, 3, 32))
+                {
+                    validationPositioner.transform.position = validHit.position;
+                }
+            }
         }
-        else if (hit.mask == 8 || hit.mask == 16 || hit.mask == 32)
+        else if (baseHit.mask == 8 || baseHit.mask == 16 || baseHit.mask == 32)
         {
             m_PlayerInHouse = false;
 
-            validationPositioner.transform.position = new Vector3(
-            m_Player.transform.position.x + validationOffset.x,
-            m_Player.transform.position.y + validationOffset.y,
-            m_Player.transform.position.z + validationOffset.z
+            validationPositioner.transform.position = new Vector3
+            (
+                m_Player.transform.position.x,
+                baseHit.position.y,
+                m_Player.transform.position.z
             );
         }
     }
@@ -376,7 +404,7 @@ public class OverseerController : MonoBehaviour
         {
             Debug.Log("CrossyFMOD ShouldBeSetting");
             emitter.Target.SetParameter(distanceParamName, pathDistance);
-            Debug.Log("CrossyFMOD DidSet");
+            Debug.Log("ADAPTIVE: Distance: " + pathDistance);
         }
         else emitter.Target.SetParameter(distanceParamName, 100f);
 
@@ -384,25 +412,29 @@ public class OverseerController : MonoBehaviour
         {
             hasChased = true;
             emitter.Target.SetParameter(chaseParamName, 0f);
-            Debug.Log("Chasing music");
+            Debug.Log("ADAPTIVE: Chase Started: State = " + state + ", PuzzleOn = " + key.puzzleOn);
         }
         else if (!m_PlayerInHouse)
         {
             hasChased = false;
             emitter.Target.SetParameter(chaseParamName, 1f);
-            Debug.Log("Stopped Chasing music");
+            Debug.Log("ADAPTIVE: Chase Stopped: State = " + state + ", PuzzleOn = " + key.puzzleOn);
         }
 
         if (dead)
         {
             emitter.Target.SetParameter(deadParamName, 0f);
-            Debug.Log("DEAD SOUND");
+            Debug.Log("ADAPTIVE: Dead Played: " + 0f);
         }
-        else emitter.Target.SetParameter(deadParamName, 1f);
+        else if(!dead && !attemptingSafe)
+        { 
+            emitter.Target.SetParameter(deadParamName, 1f);
+            Debug.Log("ADAPTIVE: Not Dead/Safe: " + 1f);
+        }
 
         if (m_PlayerInHouse)
         {
-            if (hasChased)
+            if (hasChased && !attemptingSafe)
             {
                 StartCoroutine(WaitForPuzzleOff());
             }
@@ -410,14 +442,17 @@ public class OverseerController : MonoBehaviour
 
         IEnumerator WaitForPuzzleOff()
         {
+            attemptingSafe = true;
             while (key.puzzleOn)
             {
                 yield return null;
             }
 
             hasChased = false;
+            emitter.Target.SetParameter(chaseParamName, 1f);
             emitter.Target.SetParameter(deadParamName, 2f);
-            Debug.Log("DEAD SOUND");
+            Debug.Log("ADAPTIVE: Safe Played: " + 2f);
+            attemptingSafe = false;
             StopCoroutine(WaitForPuzzleOff());
         }
     }

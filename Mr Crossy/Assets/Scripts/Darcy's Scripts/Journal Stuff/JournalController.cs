@@ -52,8 +52,7 @@ public class JournalController : MonoBehaviour
 
                 GetComponent<TutorialSectionStart>().ReadHowTo();
 
-                //GetComponent<JournalTimer>().canCount = true;
-                //GetComponent<JournalTimer>().StartTimer();
+                GetComponent<JournalTimer>().StartTimer();
 
                 OpenMap();
             }
@@ -90,25 +89,7 @@ public class JournalController : MonoBehaviour
 
             for (int i = 0; i < logPages.Length; i++)
             {
-                logPages[i].SetActive(false);
-            }
-
-            logPages[whichLogPage].SetActive(true);
-
-            if (whichLogPage == 0)
-            {
-                leftArrow.SetActive(false);
-                rightArrow.SetActive(true);
-            }
-            else if (whichLogPage == logPages.Length - 1)
-            {
-                leftArrow.SetActive(true);
-                rightArrow.SetActive(false);
-            }
-            else
-            {
-                leftArrow.SetActive(true);
-                rightArrow.SetActive(true);
+                logPages[i].SetActive(true);
             }
         }
     }
