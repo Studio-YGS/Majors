@@ -36,7 +36,7 @@ public class PuzzleController : MonoBehaviour
 
     public UnityEvent winEvent, loseEvent, tutorialEvent, tutorialMistakeEvent;
 
-    //[HideInInspector]
+    [HideInInspector]
     public WordCollision wordCollision;
 
     void Start()
@@ -66,14 +66,7 @@ public class PuzzleController : MonoBehaviour
 
         if (word == wordObjects[objectPoint].name)
         {
-            if(wordCollision == null)
-            {
-                WriteToUI();
-            }
-            else if(!wordCollision.dontWrite)
-            {
-                WriteToUI();
-            }
+            WriteToUI();
         }
     }
 
@@ -124,14 +117,7 @@ public class PuzzleController : MonoBehaviour
 
         if(word == wordObjects[objectPoint].name)
         {
-            if (wordCollision == null)
-            {
-                WriteToUI();
-            }
-            else if (!wordCollision.dontWrite)
-            {
-                WriteToUI();
-            }
+            WriteToUI();
         }
 
         if (tutorial)
@@ -157,31 +143,24 @@ public class PuzzleController : MonoBehaviour
             eventInstance.start();
         }
 
-        if(playersWord == word && wordCollision == null) //the script then checks to see if the players formed word is the same as the puzzle's answer
+        if(playersWord == word) //the script then checks to see if the players formed word is the same as the puzzle's answer
         {
-            CompletionCheck();       
-        }
-        else if (wordCollision != null && playersWord == word)
-        {
-            if(playersWord == word)
+            CompletionCheck();
+
+            if (wordCollision != null)
             {
                 wordCollision.puzzleComplete = true;
                 wordCollision.DisableAltars();
-            }
 
-            if (wordCollision.overlappedStreets.Length > 0)
-            {
-                Debug.Log("Starting the overlapped streets loop.");
-                for (int i = 0; i < wordCollision.overlappedStreets.Length; i++)
+                if (wordCollision.overlappedStreets.Length > 0)
                 {
-                    if (!GameObject.Find(wordCollision.overlappedStreets[i]).GetComponent<WordCollision>().altarsDisabled)
+                    for (int i = 0; i < wordCollision.overlappedStreets.Length; i++)
                     {
-                        Debug.Log("Altars disabled if statement has been accessed for: " + wordCollision.overlappedStreets[i]);
-                        wordCollision = GameObject.Find(wordCollision.overlappedStreets[i]).GetComponent<WordCollision>();
-                        wordCollision.dontWrite = true;
-                        wordCollision.SetUpController();
-                        wordCollision.dontWrite = false;
-                        Debug.Log("Just completed SetUpController for: " + wordCollision.gameObject.name);
+                        if (!GameObject.Find(wordCollision.overlappedStreets[i]).GetComponent<WordCollision>().altarsDisabled)
+                        {
+                            wordCollision = GameObject.Find(wordCollision.overlappedStreets[i]).GetComponent<WordCollision>();
+                            PlayerWordControl();
+                        }
                     }
                 }
             }
@@ -213,7 +192,6 @@ public class PuzzleController : MonoBehaviour
             }
         }
 
-        Debug.Log("current st: " + currentStreet + ",  current altar word: " + currentAltarWord);
         uiWord = currentStreet + ": " + currentAltarWord;
 
         streetText.text = uiWord;
