@@ -322,6 +322,7 @@ public class OverseerController : MonoBehaviour
     public void AwakenObserver()
     {
         TreeMalarkey.EnableTree(ObserverTree);
+        distootle.ShoobyDooby();
     }
 
     public bool LeftRadius()

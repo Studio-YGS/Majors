@@ -76,6 +76,14 @@ public class CrossyTheWatcher : MonoBehaviour
                     AwakenTitan();
                 }
             }
+            else if(hidingTitan)
+            {
+                if (m_state != -1 && animator.GetCurrentAnimatorStateInfo(0).IsName("TitanCrossyIdle"))
+                {
+                    if (lighthousing) { StopCoroutine(SwitchLighthouse(lighthouse)); lighthousing = false; }
+                    HideTitan();
+                }
+            }
         }
 
     }
