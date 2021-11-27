@@ -77,7 +77,6 @@ public class PlayerRespawn : MonoBehaviour
         FindObjectOfType<MrCrossyDistortion>().mask.SetActive(false);
         FindObjectOfType<MrCrossyDistortion>().ReduceInsanity();
         FindObjectOfType<MrCrossyDistortion>().DecreaseVignette();
-        FindObjectOfType<MrCrossyDistortion>().ResetDamage();
         respawningText.SetActive(false);
 
         player.gameObject.SetActive(true);

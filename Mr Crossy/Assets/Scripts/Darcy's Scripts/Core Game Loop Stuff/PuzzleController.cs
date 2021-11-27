@@ -66,11 +66,11 @@ public class PuzzleController : MonoBehaviour
 
         if (word == wordObjects[objectPoint].name)
         {
-            if(wordCollision == null)
+            if (wordCollision == null)
             {
                 WriteToUI();
             }
-            else if(!wordCollision.dontWrite)
+            else if (!wordCollision.dontWrite)
             {
                 WriteToUI();
             }
@@ -108,7 +108,7 @@ public class PuzzleController : MonoBehaviour
     public void PlayerWordControl() //this method forms the players word as they place objects, and also controls the win condition
     {
         playersWord = "";
-        int playersWordLength;
+        int playersWordLength = 0;
 
         for(int i = 0; i < wordLength; i++) //the player's word becomes equal to all the texts within the canvas letters combined
         {
@@ -157,17 +157,21 @@ public class PuzzleController : MonoBehaviour
             eventInstance.start();
         }
 
-        if(playersWord == word && wordCollision == null) //the script then checks to see if the players formed word is the same as the puzzle's answer
+        if (playersWord == word && wordCollision == null) //the script then checks to see if the players formed word is the same as the puzzle's answer
         {
-            CompletionCheck();       
+            CompletionCheck();
         }
-        else if (wordCollision != null && playersWord == word)
+
+        if (wordCollision != null)
         {
-            if(playersWord == word)
+            if (playersWord == word)
             {
                 wordCollision.puzzleComplete = true;
                 wordCollision.DisableAltars();
+                CompletionCheck();
             }
+
+            Debug.Log("Word Collision's overlapped streets length is: " + wordCollision.overlappedStreets.Length);
 
             if (wordCollision.overlappedStreets.Length > 0)
             {
@@ -176,28 +180,35 @@ public class PuzzleController : MonoBehaviour
                 {
                     if (!GameObject.Find(wordCollision.overlappedStreets[i]).GetComponent<WordCollision>().altarsDisabled)
                     {
-                        Debug.Log("Altars disabled if statement has been accessed for: " + wordCollision.overlappedStreets[i]);
+                        WordCollision temp = wordCollision;
+                        Debug.Log("Altars disabled if statement has been accessed for: " + wordCollision.overlappedStreets[i] + ". Temp is: " + temp.gameObject.name);
                         wordCollision = GameObject.Find(wordCollision.overlappedStreets[i]).GetComponent<WordCollision>();
                         wordCollision.dontWrite = true;
                         wordCollision.SetUpController();
                         wordCollision.dontWrite = false;
                         Debug.Log("Just completed SetUpController for: " + wordCollision.gameObject.name);
+                        wordCollision = temp;
+                        Debug.Log("Word collision has been reverted back to: " + wordCollision.gameObject.name + " from: " + temp.gameObject.name);
+                        wordCollision.dontCheck = true;
+                        wordCollision.SetUpController();
+                        wordCollision.dontCheck = false;
                     }
                 }
             }
         }
 
-        if (playersWordLength == wordLength && playersWord != word) //if the player has put all the letters on the altar but hasnt gotten the word right, it counts down a mistake.
+        if (playersWordLength == wordLength && playersWord != word && !wordCollision.puzzleComplete) //if the player has put all the letters on the altar but hasnt gotten the word right, it counts down a mistake.
         {
             AudioEvents audio = FindObjectOfType<AudioEvents>();
 
             audio.WordSpeltIncorrectly();
 
+            Debug.Log("Game Over check calling from the player controller by: " + wordCollision.gameObject.name + ". Players word length, word length, playersword: " + playersWordLength + " " + wordLength + " " + playersWord);
             GameOverCheck();
         }
     }
 
-    void WriteToUI()
+    public void WriteToUI()
     {
         string currentAltarWord = "";
 
@@ -214,6 +225,7 @@ public class PuzzleController : MonoBehaviour
         }
 
         Debug.Log("current st: " + currentStreet + ",  current altar word: " + currentAltarWord);
+
         uiWord = currentStreet + ": " + currentAltarWord;
 
         streetText.text = uiWord;
@@ -247,6 +259,7 @@ public class PuzzleController : MonoBehaviour
     {
         if (!gameObject.name.Contains("Tutorial"))
         {
+            Debug.LogError("MISTAKE");
             mistakeCount++;
             mistakeText.text = mistakeCount.ToString();
         }
