@@ -9,7 +9,7 @@ public class WordCollision : MonoBehaviour
     public string[] overlappedStreets;
 
     //[HideInInspector]
-    public bool puzzleComplete, altarsDisabled, dontWrite;
+    public bool puzzleComplete, altarsDisabled, dontWrite, dontCheck;
 
     [SerializeField]
     GameObject[] wordObjects, altars;
@@ -40,6 +40,8 @@ public class WordCollision : MonoBehaviour
 
     public void SetUpController()
     {
+        respawn.RespawnColliders();
+
         puzzleController.wordCollision = GetComponent<WordCollision>();
         puzzleController.word = word;
         puzzleController.wordObjects.Clear();
@@ -63,7 +65,7 @@ public class WordCollision : MonoBehaviour
 
         puzzleController.storedObjects.Clear();
 
-        if (!puzzleComplete)
+        if (!puzzleComplete && !dontCheck)
         {
             puzzleController.PlayerWordControl();
         }
@@ -71,8 +73,6 @@ public class WordCollision : MonoBehaviour
         menuManager.streetName.SetActive(true);
 
         FindObjectOfType<OverseerController>().m_StalkStreet = streetStalk;
-
-        respawn.RespawnColliders();
 
         gameObject.SetActive(false);
     }
