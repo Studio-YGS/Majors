@@ -34,6 +34,8 @@ public class CrossyController : MonoBehaviour
     [SerializeField] private Transform m_HindVision;
     [SerializeField] private Transform m_CrossyDespawn;
 
+    [SerializeField] private Material crossyGlow;
+
     [Header("Movement Variables")]
     [Tooltip("Mr. Crossy's walking speed.")]
     [SerializeField] private float m_WalkSpeed;
@@ -92,6 +94,9 @@ public class CrossyController : MonoBehaviour
 
     [SerializeField] private float m_FocalViewCone;
     [SerializeField] private float m_PeripheralViewCone;
+    [Space]
+    [Range(0.01f, 0.9f)]
+    [SerializeField] private float m_EyeAlertPoint = 0.5f;
 
     [Header("Particle Effects")]
     [SerializeField] private GameObject m_WarpParticleOne;
@@ -199,6 +204,8 @@ public class CrossyController : MonoBehaviour
 
         //m_RunDistance = (m_State == 2) ? m_AlertRunDistance : m_PatrolRunDistance;
         m_DistanceToCorner = Vector3.Distance(transform.position, agent.steeringTarget);
+
+        CrossyEye();
 
         Running();
         if(allowScaryRun) ScaryRunCondition();
@@ -387,6 +394,33 @@ public class CrossyController : MonoBehaviour
         decreaseLook = false;
     }
 
+    public void CrossyEye()
+    {
+        if(crossyGlow)
+        {
+            Color colour = crossyGlow.color;
+
+            if (m_State < 2)
+            {
+                colour.a = 0f;
+            }
+            else if (m_State == 2)
+            {
+                colour.a = m_EyeAlertPoint;
+            }
+            else if (m_State == 3)
+            {
+                if (agent.remainingDistance < RunDistance)
+                {
+                    float interp = Mathf.InverseLerp(0f, RunDistance, agent.remainingDistance);
+
+                    colour.a = Mathf.Lerp(m_EyeAlertPoint, 1, interp);
+                }
+            }
+
+            crossyGlow.color = colour;
+        }
+    }
     public void OnEnable()
     {
         TreeMalarkey.RegisterEventOnTree(crossyTree, "Darken", DarkenEvent);
