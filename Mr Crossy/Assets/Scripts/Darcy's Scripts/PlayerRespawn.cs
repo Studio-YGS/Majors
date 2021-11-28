@@ -16,7 +16,8 @@ public class PlayerRespawn : MonoBehaviour
     Vector3 originalposition;
 
     [SerializeField]
-    GameObject respawningText;
+    GameObject deathVideoObject;
+    [SerializeField] float deathWaitTime = 7.3f;
 
     bool hasMoved = false;
     OverseerController seer;
@@ -65,9 +66,9 @@ public class PlayerRespawn : MonoBehaviour
 
         if(!puzzleController.GameOverCheck())
         {
-            respawningText.SetActive(true);
+            deathVideoObject.SetActive(true);
 
-            StartCoroutine(WaitForRespawn(5f));
+            StartCoroutine(WaitForRespawn(deathWaitTime));
         }
     }
 
@@ -77,7 +78,7 @@ public class PlayerRespawn : MonoBehaviour
         FindObjectOfType<MrCrossyDistortion>().mask.SetActive(false);
         FindObjectOfType<MrCrossyDistortion>().ReduceInsanity();
         FindObjectOfType<MrCrossyDistortion>().DecreaseVignette();
-        respawningText.SetActive(false);
+        deathVideoObject.SetActive(false);
 
         player.gameObject.SetActive(true);
         player.enabled = true;
