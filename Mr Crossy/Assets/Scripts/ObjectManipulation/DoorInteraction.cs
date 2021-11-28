@@ -207,26 +207,28 @@ public class DoorInteraction : MonoBehaviour
                     {
                         if (greaterThan)
                         {
-                            if (rotationVal <= 0)
+                            if (rotationVal <= 5)
                             {
                                 moveable = false;
                                 //Destroy(createdMrCrossy);
                                 rotationVal = 0;
                                 transform.localRotation = Quaternion.Euler(0, rotationVal, 0);
                                 puzzleOn = false;
+                                doorclose.Play();
                                 StartCoroutine("WaitForPuzzleEnd");
                                 moved = false;
                             }
                         }
                         else if (lessThan)
                         {
-                            if (rotationVal >= 0)
+                            if (rotationVal >= 5)
                             {
                                 moveable = false;
                                 //Destroy(createdMrCrossy);
                                 rotationVal = 0;
                                 transform.localRotation = Quaternion.Euler(0, rotationVal, 0);
                                 puzzleOn = false;
+                                doorclose.Play();
                                 StartCoroutine("WaitForPuzzleEnd");
                                 moved = false;
                             }
@@ -240,7 +242,7 @@ public class DoorInteraction : MonoBehaviour
                     {
                         if (greaterThan)
                         {
-                            if (rotationVal <= 0)
+                            if (rotationVal <= 5)
                             {
                                 moveable = false;
                                 //Destroy(createdMrCrossy);
@@ -253,7 +255,7 @@ public class DoorInteraction : MonoBehaviour
                         }
                         else if (lessThan)
                         {
-                            if (rotationVal >= 0)
+                            if (rotationVal >= -5)
                             {
                                 moveable = false;
                                 //Destroy(createdMrCrossy);
@@ -302,7 +304,7 @@ public class DoorInteraction : MonoBehaviour
                 {
                     
                     //countdownTimer += Time.deltaTime;
-                    if(distortion.vignette[0].intensity.value >= 1)
+                    if(distortion.colorAdjustments[0].colorFilter.value == Color.black)
                     {
                         Debug.Log("death-intensity");
                         FindObjectOfType<CrossKeyManager>().PuzzleDeath(createdMrCrossy);
@@ -524,13 +526,55 @@ public class DoorInteraction : MonoBehaviour
                     }
                 }
                 transform.localRotation = Quaternion.Euler(0, rotationVal, 0);
-
-
             }
         }
         
     }
 
+    //private void OnTriggerstay(Collider other)
+    //{
+    //    if(other.tag == "GameController")
+    //    {
+    //        Debug.Log("triggers");
+    //        Vector3 direction = transform.position - player.position;
+    //        if (xForward)
+    //        {
+    //            relativeAngle = Vector3.Angle(direction, transform.right);
+    //        }
+    //        else if (zForward)
+    //        {
+    //            relativeAngle = Vector3.Angle(direction, transform.forward);
+    //        }
+
+    //        if (relativeAngle > 180 * 0.5f)
+    //        {
+                
+    //            if (gameObject.GetComponent<Collider>().bounds.Contains(other.transform.position))
+    //            {
+    //                rotationVal += (Vector3.Distance(player.GetComponent<Collider>().bounds.extents, transform.position) + 0.5f);
+    //            }
+                
+    //        }
+    //        else if (relativeAngle < 180 * 0.5f)
+    //        {
+                
+    //            if (gameObject.GetComponent<Collider>().bounds.Contains(other.transform.position))
+    //            {
+    //                rotationVal -= (Vector3.Distance(player.GetComponent<Collider>().bounds.extents, transform.position) + 0.5f);
+    //            }
+                    
+    //        }
+
+            
+    //    }
+    //}
+    //private void OnControllerColliderHit(ControllerColliderHit hit)
+    //{
+    //    if(hit.gameObject == player.gameObject)
+    //    {
+    //        Debug.Log("player");
+    //    }
+    //}
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject == player.gameObject)
@@ -549,12 +593,38 @@ public class DoorInteraction : MonoBehaviour
             if (relativeAngle > 180 * 0.5f)
             {
                 touchingPlayerRight = true;
+                //rotationVal += 7;
             }
             else if (relativeAngle < 180 * 0.5f)
             {
                 touchingPlayerLeft = true;
+                //rotationVal -= 7;
             }
 
+            
+
+        }
+    }
+
+    public void PlayerContact()
+    {
+        Vector3 direction = transform.position - player.position;
+        if (xForward)
+        {
+            relativeAngle = Vector3.Angle(direction, transform.right);
+        }
+        else if (zForward)
+        {
+            relativeAngle = Vector3.Angle(direction, transform.forward);
+        }
+
+        if (relativeAngle > 180 * 0.5f)
+        {
+            touchingPlayerRight = true;
+        }
+        else if (relativeAngle < 180 * 0.5f)
+        {
+            touchingPlayerLeft = true;
         }
     }
 
@@ -566,6 +636,12 @@ public class DoorInteraction : MonoBehaviour
             touchingPlayerRight = false;
             touchingPlayerLeft = false;
         }
+    }
+
+    public void LostPlayerContact()
+    {
+        touchingPlayerRight = false;
+        touchingPlayerLeft = false;
     }
 
     IEnumerator WaitToClose()

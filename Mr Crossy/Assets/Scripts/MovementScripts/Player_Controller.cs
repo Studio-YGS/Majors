@@ -42,6 +42,13 @@ public class Player_Controller : MonoBehaviour
     public float reducedHeight;
     public float originalHeight;
 
+    bool playerHit;
+    DoorInteraction contactDoor;
+    float contactVal;
+    //public bool zForward;
+    //public bool zBackwards;
+    //public bool xRight;
+    //public bool xLeft;
     void Start()
     {
         baseSpeed = speed;
@@ -74,7 +81,23 @@ public class Player_Controller : MonoBehaviour
             x = Input.GetAxis("Horizontal");
             z = Input.GetAxis("Vertical");
 
+            //if (xLeft)
+            //{
+            //    x = Mathf.Clamp(x, 0, 1);
+            //}
+            //else if (xRight)
+            //{
+            //    x = Mathf.Clamp(x, -1, 0);
+            //}
 
+            //if (zForward)
+            //{
+            //    z = Mathf.Clamp(z, -1, 0);
+            //}
+            //else if (zBackwards)
+            //{
+            //    z = Mathf.Clamp(z, 0, 1);
+            //}
 
             //if (Input.GetButtonDown("Jump") && isGrounded && canMove)
             //{
@@ -85,7 +108,6 @@ public class Player_Controller : MonoBehaviour
             velocity.y += gravity * Time.unscaledDeltaTime;
             move = transform.right * x + transform.forward * z;
             controller.Move(velocity * Time.unscaledDeltaTime);
-
 
             if (Input.GetKeyDown(KeyCode.C) && isGrounded)
             {
@@ -194,4 +216,126 @@ public class Player_Controller : MonoBehaviour
         canMove = false;
         UnlockCursor();
     }
+
+    
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.gameObject.GetComponent<DoorInteraction>())
+        {
+            Debug.Log("oof45");
+            playerHit = true;
+            hit.gameObject.GetComponent<DoorInteraction>().PlayerContact();
+            contactDoor = hit.gameObject.GetComponent<DoorInteraction>();
+            contactVal = hit.gameObject.GetComponent<DoorInteraction>().rotationVal;
+        }
+        //else if (playerHit && !hit.gameObject.GetComponent<DoorInteraction>())
+        //{
+        //    if(z != 0 || x != 0 || contactDoor.rotationVal != contactVal)
+        //    {
+        //        contactDoor.GetComponent<DoorInteraction>().LostPlayerContact();
+        //        playerHit = false;
+        //    }
+            
+        //}
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.GetComponent<DoorInteraction>())
+        {
+            Debug.Log("oof45");
+            //playerHit = true;
+            collision.gameObject.GetComponent<DoorInteraction>().PlayerContact();
+            contactDoor = collision.gameObject.GetComponent<DoorInteraction>();
+            contactVal = collision.gameObject.GetComponent<DoorInteraction>().rotationVal;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.GetComponent<DoorInteraction>())
+        {
+            if (z != 0 || x != 0 || contactDoor.rotationVal != contactVal)
+            {
+                contactDoor.GetComponent<DoorInteraction>().LostPlayerContact();
+               playerHit = false;
+            }
+
+        }
+    }
+
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.GetComponent<DoorInteraction>())
+    //    {
+    //        Debug.Log("door");
+    //        if (x > 0)
+    //        {
+    //            xRight = true;
+
+    //        }
+    //        else if (x < 0)
+    //        {
+    //            xLeft = true;
+
+    //        }
+
+    //        if (z > 0)
+    //        {
+    //            zForward = true;
+
+    //        }
+    //        else if (z < 0)
+    //        {
+    //            zBackwards = true;
+
+    //        }
+    //    }
+    //}
+
+    //private void OnCollisionStay(Collision collision)
+    //{
+    //    if (collision.gameObject.GetComponent<DoorInteraction>())
+    //    {
+    //        Debug.Log("door2");
+    //        if (x > 0)
+    //        {
+    //            xRight = true;
+
+    //        }
+    //        else if (x < 0)
+    //        {
+    //            xLeft = true;
+
+    //        }
+
+    //        if (z > 0)
+    //        {
+    //            zForward = true;
+
+    //        }
+    //        else if (z < 0)
+    //        {
+    //            zBackwards = true;
+
+    //        }
+    //    }
+    //}
+
+    //private void OnCollisionExit(Collision collision)
+    //{
+    //    if (collision.gameObject.GetComponent<DoorInteraction>())
+    //    {
+
+    //        xRight = false;
+
+    //        xLeft = false;
+
+    //        zForward = false;
+
+    //        zBackwards = false;
+
+
+    //    }
+    //}
 }

@@ -249,7 +249,7 @@ public class MrCrossyDistortion : MonoBehaviour
             //colorAdjustments.active = true;
             if (colorAdjustments[i].colorFilter.value != Color.black)
             {
-                colorAdjustments[i].colorFilter.value = Color.Lerp(colorAdjustments[i].colorFilter.value, Color.black, 0.06f);
+                colorAdjustments[i].colorFilter.value = Color.Lerp(colorAdjustments[i].colorFilter.value, Color.black, 0.04f);
             }
         }
 
@@ -452,6 +452,7 @@ public class MrCrossyDistortion : MonoBehaviour
         if (CrossyController.crossyTree)
         {
             TreeMalarkey.RegisterEventOnTree(CrossyController.crossyTree, "CrossyHit", HitByCrossy);
+            TreeMalarkey.RegisterEventOnTree(CrossyController.crossyTree, "VignetteDecrease", DecreaseVignette);
         }
     }
 
@@ -464,6 +465,7 @@ public class MrCrossyDistortion : MonoBehaviour
         if (CrossyController.crossyTree)
         {
             TreeMalarkey.UnregisterEventOnTree(CrossyController.crossyTree, "CrossyHit", HitByCrossy);
+            TreeMalarkey.UnregisterEventOnTree(CrossyController.crossyTree, "VignetteDecrease", DecreaseVignette);
         }
     }
 }
