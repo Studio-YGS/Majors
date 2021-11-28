@@ -452,6 +452,7 @@ public class MrCrossyDistortion : MonoBehaviour
         if (CrossyController.crossyTree)
         {
             TreeMalarkey.RegisterEventOnTree(CrossyController.crossyTree, "CrossyHit", HitByCrossy);
+            TreeMalarkey.RegisterEventOnTree(CrossyController.crossyTree, "VignetteDecrease", DecreaseVignette);
         }
     }
 
@@ -464,6 +465,7 @@ public class MrCrossyDistortion : MonoBehaviour
         if (CrossyController.crossyTree)
         {
             TreeMalarkey.UnregisterEventOnTree(CrossyController.crossyTree, "CrossyHit", HitByCrossy);
+            TreeMalarkey.UnregisterEventOnTree(CrossyController.crossyTree, "VignetteDecrease", DecreaseVignette);
         }
     }
 }
