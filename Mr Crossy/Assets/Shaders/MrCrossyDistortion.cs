@@ -249,7 +249,7 @@ public class MrCrossyDistortion : MonoBehaviour
             //colorAdjustments.active = true;
             if (colorAdjustments[i].colorFilter.value != Color.black)
             {
-                colorAdjustments[i].colorFilter.value = Color.Lerp(colorAdjustments[i].colorFilter.value, Color.black, 0.06f);
+                colorAdjustments[i].colorFilter.value = Color.Lerp(colorAdjustments[i].colorFilter.value, Color.black, 0.04f);
             }
         }
 
