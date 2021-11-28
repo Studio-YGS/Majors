@@ -35,6 +35,7 @@ public class DoorInteraction : MonoBehaviour
     public StudioEventEmitter doorclose;
     Player_Controller controller;
     float startMouseSens;
+    public KeyLockDoor keyDoor;
 
     [Header("Cross-Key Settings")]
     public bool isSafeHouse;
@@ -328,7 +329,7 @@ public class DoorInteraction : MonoBehaviour
             }
         }
 
-        if (!keyMan.doorsLocked || isSafeHouse)
+        if (!keyMan.doorsLocked && keyDoor == null || isSafeHouse && keyDoor == null)
         {
             RaycastHit hit;
             if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 2, controller.raycastLayerMask))
