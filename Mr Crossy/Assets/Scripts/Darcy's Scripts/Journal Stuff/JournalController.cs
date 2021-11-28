@@ -9,6 +9,8 @@ public class JournalController : MonoBehaviour
     [SerializeField]
     GameObject[] notePages, logPages;
 
+    JournalOnSwitch journalOnSwitch;
+
     [HideInInspector]
     public List<int> noteList = new List<int>(0); 
 
@@ -24,13 +26,14 @@ public class JournalController : MonoBehaviour
 
     public bool disabled = false, tutorial = true;
     [HideInInspector]
-    public bool readingHowTo = false, waitForCrossy = false;
+    public bool readingHowTo = false, waitForCrossy = false, logTab, notesTab;
 
     EventInstance eventInstance;
 
     void Start()
     {
         mapPage = tutMap;
+        journalOnSwitch = FindObjectOfType<JournalOnSwitch>();
     }
 
     void Update()
@@ -65,6 +68,33 @@ public class JournalController : MonoBehaviour
 
                 OpenMap();
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            if (!journalOnSwitch.open)
+            {
+                journalOnSwitch.OpenOrClose();
+            }
+            OpenMap();
+        }
+
+        if (Input.GetKeyDown(KeyCode.N) && notesTab)
+        {
+            if (!journalOnSwitch.open)
+            {
+                journalOnSwitch.OpenOrClose();
+            }
+            OpenNotes();
+        }
+
+        if (Input.GetKeyDown(KeyCode.L) && logTab)
+        {
+            if (!journalOnSwitch.open)
+            {
+                journalOnSwitch.OpenOrClose();
+            }
+            OpenLog();
         }
     }
 
@@ -234,5 +264,15 @@ public class JournalController : MonoBehaviour
     public void SetCrossyBool(bool set)
     {
         waitForCrossy = set;
+    }
+
+    public void SetLogTabBool(bool set)
+    {
+        logTab = set;
+    }
+
+    public void SetNotesTabBool(bool set)
+    {
+        notesTab = set;
     }
 }
