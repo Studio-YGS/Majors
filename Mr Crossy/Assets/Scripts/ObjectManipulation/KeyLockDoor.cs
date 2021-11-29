@@ -14,6 +14,7 @@ public class KeyLockDoor : MonoBehaviour
     bool displayedTheMessage;
     bool unlocked;
     public UnityEvent openActions;
+    public Animator gateAnim;
     void Start()
     {
         cam = GameObject.Find("FirstPersonCharacter").transform;
@@ -63,5 +64,18 @@ public class KeyLockDoor : MonoBehaviour
             displayMessageLocked.SetActive(false);
             displayMessageUnlocked.SetActive(false);
         }
+    }
+
+    public void FoundKey()
+    {
+        hasKey = true;
+    }
+    public void Unlock()
+    {
+        unlocked = true;
+    }
+    public void PlayAnim()
+    {
+        gateAnim.SetBool("OpenGate", true);
     }
 }

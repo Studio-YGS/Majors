@@ -94,7 +94,7 @@ public class PlayerRespawn : MonoBehaviour
     IEnumerator WaitForRespawn(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
-        FindObjectOfType<MrCrossyDistortion>().mask.SetActive(false);
+        
         FindObjectOfType<MrCrossyDistortion>().ReduceInsanity();
         FindObjectOfType<MrCrossyDistortion>().DecreaseVignette();
         deathVideoObject.SetActive(false);
@@ -106,7 +106,7 @@ public class PlayerRespawn : MonoBehaviour
         player.enabled = true;
 
         street.GetComponent<TextMeshProUGUI>().text = "Home.";
-
+        FindObjectOfType<MrCrossyDistortion>().mask.GetComponent<Animator>().SetTrigger("FadeAway");
         if (!tutorialPlayed)
         {
             tutorialPlayed = true;
