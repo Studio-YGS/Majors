@@ -57,4 +57,9 @@ public class CluePickUp : MonoBehaviour
             prompt.gameObject.SetActive(false);
         }
     }
+
+    public void PickUpOverride()
+    {
+        pickUp.Invoke();
+    }
 }

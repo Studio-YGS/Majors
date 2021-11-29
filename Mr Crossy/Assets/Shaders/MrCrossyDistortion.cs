@@ -24,6 +24,7 @@ public class MrCrossyDistortion : MonoBehaviour
     public bool increasingInsanity;
     public bool reducingInsanity;
     public int hits;
+    private bool healing;
     void Start()
     {
         for (int i = 0; i < volume.Length; i++)
@@ -65,7 +66,7 @@ public class MrCrossyDistortion : MonoBehaviour
                 {
                     screenBlur.SetFloat("_Magnitude", Mathf.Lerp(screenBlur.GetFloat("_Magnitude"), 0.01f / ((distance / 20) * (distance / 20)), 0.025f));
                 }
-                    
+
                 /*if (motionBlur.GetFloat("_BlurMagnitude") < 0.007f / (distance/2))
                 {
                     motionBlur.SetFloat("_BlurMagnitude", motionBlur.GetFloat("_BlurMagnitude") + Time.deltaTime * distInsanityIncreaseRate);
@@ -117,10 +118,10 @@ public class MrCrossyDistortion : MonoBehaviour
                         aberration[i].intensity.value -= Time.deltaTime * (distInsanityIncreaseRate);
                     }
                 }
-                
+
             }
 
-            
+
         }
         if (reducingInsanity)
         {
@@ -170,7 +171,7 @@ public class MrCrossyDistortion : MonoBehaviour
                     reducingInsanity = false;
                 }
             }
-                
+
         }
 
     }
@@ -183,7 +184,7 @@ public class MrCrossyDistortion : MonoBehaviour
         screenBlur.SetFloat("_Magnitude", 0f);
         for (int i = 0; i < volume.Length; i++)
         {
-            vignette[i].color.value = new Color32(204, 16, 16, 1);
+            vignette[i].color.value = Color.red;
             vignette[i].intensity.value = 0;
             colorAdjustments[i].colorFilter.value = Color.white;
         }
@@ -248,11 +249,11 @@ public class MrCrossyDistortion : MonoBehaviour
             //colorAdjustments.active = true;
             if (colorAdjustments[i].colorFilter.value != Color.black)
             {
-                colorAdjustments[i].colorFilter.value = Color.Lerp(colorAdjustments[i].colorFilter.value, Color.black, 0.06f);
+                colorAdjustments[i].colorFilter.value = Color.Lerp(colorAdjustments[i].colorFilter.value, Color.black, 0.04f);
             }
         }
-           
-        
+
+
     }
 
     public void DistanceVignette(GameObject crossy)
@@ -261,10 +262,10 @@ public class MrCrossyDistortion : MonoBehaviour
         //colorAdjustments.active = true;
         for (int i = 0; i < volume.Length; i++)
         {
-            colorAdjustments[i].colorFilter.value = Color.Lerp(colorAdjustments[i].colorFilter.value, Color.black + Color.white / Mathf.Clamp((10 / distance),1,10), 0.07f);
+            colorAdjustments[i].colorFilter.value = Color.Lerp(colorAdjustments[i].colorFilter.value, Color.black + Color.white / Mathf.Clamp((10 / distance), 1, 10), 0.07f);
             //vignette[i].intensity.value += Time.deltaTime * vignetteIncreaseRate / (distance / 4);
         }
-            
+
     }
 
 
@@ -280,23 +281,23 @@ public class MrCrossyDistortion : MonoBehaviour
     {
         vignetteReducing = true;
         //mask.SetActive(false);
-        while(/*vignette[0].intensity.value > baseVignette &&*/ colorAdjustments[0].colorFilter.value != Color.white)
+        while (/*vignette[0].intensity.value > baseVignette &&*/ colorAdjustments[0].colorFilter.value != Color.white)
         {
             for (int i = 0; i < volume.Length; i++)
             {
                 //vignette[i].intensity.value -= Time.deltaTime * vignetteIncreaseRate;
                 colorAdjustments[i].colorFilter.value = Color.Lerp(colorAdjustments[i].colorFilter.value, Color.white, 0.2f);
-                
+
             }
-                
+
             yield return null;
         }
         for (int i = 0; i < volume.Length; i++)
         {
-            vignette[i].intensity.value = baseVignette;
+            //vignette[i].intensity.value = baseVignette;
             colorAdjustments[i].colorFilter.value = Color.white;
         }
-            
+
         //colorAdjustments.active = false;
         vignetteReducing = false;
     }
@@ -309,7 +310,7 @@ public class MrCrossyDistortion : MonoBehaviour
 
     IEnumerator BlackenScreen(float speed)
     {
-        
+
         StopCoroutine("ReduceVignette");
         //colorAdjustments.active = true;
         float time = 0;
@@ -321,7 +322,7 @@ public class MrCrossyDistortion : MonoBehaviour
                 //vignette[i].intensity.value += Time.deltaTime * vignetteIncreaseRate * speed;
                 colorAdjustments[i].colorFilter.value = Color.Lerp(colorAdjustments[i].colorFilter.value, Color.black, 0.1f);
             }
-                
+
             yield return null;
         }
         mask.SetActive(true);
@@ -352,14 +353,14 @@ public class MrCrossyDistortion : MonoBehaviour
         }
         for (int i = 0; i < volume.Length; i++)
         {
-            vignette[i].intensity.value = baseVignette;
+            //vignette[i].intensity.value = baseVignette;
             colorAdjustments[i].colorFilter.value = Color.white;
         }
     }
 
     public void HitByCrossy()
     {
-        StopCoroutine("ReduceDamage");
+        if (healing) { StopCoroutine("ReduceDamage"); healing = false; }
         hits += 1;
         StartCoroutine("TakeDamage");
     }
@@ -368,7 +369,8 @@ public class MrCrossyDistortion : MonoBehaviour
     {
         for (int i = 0; i < volume.Length; i++)
         {
-            vignette[i].color.value = new Color32(204, 16, 16, 1);
+            //vignette[i].color.value = new Color32(204, 16, 16, 1);
+            vignette[i].color.value = Color.red;
             vignette[i].intensity.value = 0;
         }
         hits = 0;
@@ -376,7 +378,7 @@ public class MrCrossyDistortion : MonoBehaviour
 
     IEnumerator TakeDamage()
     {
-        if(hits == 1)
+        if (hits == 1)
         {
             while (vignette[0].intensity.value < 0.4)
             {
@@ -388,7 +390,7 @@ public class MrCrossyDistortion : MonoBehaviour
                 yield return null;
             }
         }
-        else if(hits == 2)
+        else if (hits == 2)
         {
             while (vignette[0].intensity.value < 0.6)
             {
@@ -400,7 +402,7 @@ public class MrCrossyDistortion : MonoBehaviour
                 yield return null;
             }
         }
-        else if(hits >= 3)
+        else if (hits >= 3)
         {
             while (vignette[0].intensity.value < 0.6 && vignette[0].color.value != Color.red)
             {
@@ -417,26 +419,53 @@ public class MrCrossyDistortion : MonoBehaviour
 
     public void lowerDamage()
     {
-        StartCoroutine("ReduceDamage");
+        if (!healing) StartCoroutine("ReduceDamage");
     }
 
     IEnumerator ReduceDamage()
     {
+        healing = true;
         while (vignette[0].intensity.value >= 0)
         {
             for (int i = 0; i < volume.Length; i++)
             {
-                vignette[i].intensity.value = Mathf.Lerp(vignette[i].intensity.value, 0.61f, 0.04f);
-                vignette[i].color.value = Color.Lerp(vignette[i].color.value, new Color32(204, 16, 16, 1), 0.07f);
+                vignette[i].intensity.value = Mathf.Lerp(vignette[i].intensity.value, 0f, 0.04f);
+                //vignette[i].color.value = Color.Lerp(vignette[i].color.value, new Color32(204, 16, 16, 1), 0.07f);
             }
 
-            yield return null;    
+            yield return null;
         }
         for (int i = 0; i < volume.Length; i++)
         {
-            vignette[i].color.value = new Color32(204, 16, 16, 1);
+            //vignette[i].color.value = new Color32(204, 16, 16, 1);
             vignette[i].intensity.value = 0;
         }
         hits = 0;
+        healing = false;
+    }
+    public void ShoobyDooby()
+    {
+        if (OverseerController.ObserverTree)
+        {
+            TreeMalarkey.RegisterEventOnTree(OverseerController.ObserverTree, "Healing", lowerDamage);
+        }
+        if (CrossyController.crossyTree)
+        {
+            TreeMalarkey.RegisterEventOnTree(CrossyController.crossyTree, "CrossyHit", HitByCrossy);
+            TreeMalarkey.RegisterEventOnTree(CrossyController.crossyTree, "VignetteDecrease", DecreaseVignette);
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (OverseerController.ObserverTree)
+        {
+            TreeMalarkey.UnregisterEventOnTree(OverseerController.ObserverTree, "Healing", lowerDamage);
+        }
+        if (CrossyController.crossyTree)
+        {
+            TreeMalarkey.UnregisterEventOnTree(CrossyController.crossyTree, "CrossyHit", HitByCrossy);
+            TreeMalarkey.UnregisterEventOnTree(CrossyController.crossyTree, "VignetteDecrease", DecreaseVignette);
+        }
     }
 }

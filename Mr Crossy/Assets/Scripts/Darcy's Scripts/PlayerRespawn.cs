@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using TMPro;
 
 public class PlayerRespawn : MonoBehaviour
 {
@@ -16,9 +18,20 @@ public class PlayerRespawn : MonoBehaviour
     Vector3 originalposition;
 
     [SerializeField]
-    GameObject respawningText;
+    TextMeshProUGUI deathCountText;
 
-    bool hasMoved = false;
+    [SerializeField]
+    GameObject street;
+
+    [SerializeField]
+    GameObject deathVideoObject;
+    [SerializeField] float deathWaitTime = 7.3f;
+
+    public UnityEvent deathTutorial;
+
+    int deathCount;
+
+    bool hasMoved = false, tutorialPlayed;
     OverseerController seer;
     public ExternalInteralSwitch exSwitch;
 
@@ -28,7 +41,6 @@ public class PlayerRespawn : MonoBehaviour
         seer = FindObjectOfType<OverseerController>();
         player = FindObjectOfType<Player_Controller>();
         journal = FindObjectOfType<JournalController>();
-        puzzleController = FindObjectOfType<PuzzleController>();
     }
 
     public void Register()
@@ -63,12 +75,12 @@ public class PlayerRespawn : MonoBehaviour
         journal.OpenMap();
         journal.DisableJournal();
 
-        if(!puzzleController.GameOverCheck())
-        {
-            respawningText.SetActive(true);
+        deathCount++;
+        deathCountText.text = deathCount.ToString();
 
-            StartCoroutine(WaitForRespawn(5f));
-        }
+        deathVideoObject.SetActive(true);
+
+        StartCoroutine(WaitForRespawn(deathWaitTime));
     }
 
     IEnumerator WaitForRespawn(float waitTime)
@@ -77,10 +89,30 @@ public class PlayerRespawn : MonoBehaviour
         FindObjectOfType<MrCrossyDistortion>().mask.SetActive(false);
         FindObjectOfType<MrCrossyDistortion>().ReduceInsanity();
         FindObjectOfType<MrCrossyDistortion>().DecreaseVignette();
-        respawningText.SetActive(false);
+        deathVideoObject.SetActive(false);
+
+        puzzleController = FindObjectOfType<PuzzleController>();
+        puzzleController.MistakeCounter();
 
         player.gameObject.SetActive(true);
         player.enabled = true;
+
+        street.GetComponent<TextMeshProUGUI>().text = "Home.";
+
+        if (!tutorialPlayed)
+        {
+            tutorialPlayed = true;
+
+            deathTutorial.Invoke();
+        }
+        else
+        {
+            ReleaseToPlayer();
+        }
+    }
+
+    public void ReleaseToPlayer()
+    {
         player.EnableController();
         seer.emitter.Target.SetParameter(seer.deadParamName, 1f);
         seer.emitter.Target.SetParameter(seer.distanceParamName, 100f);
