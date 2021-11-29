@@ -17,6 +17,7 @@ public class ObjectOpener : MonoBehaviour
     bool InteractionTwo;
 
     public UnityEvent FirstObjectInteractionActions;
+    public UnityEvent keyPickup;
     public GameObject key;
     [Header("First Interaction")]
     public float xAngle;
@@ -90,7 +91,8 @@ public class ObjectOpener : MonoBehaviour
                             holder.Drop();
                             key.SetActive(false);
                             holder.controller.enabled = true;
-                            
+                            keyPickup.Invoke();
+                            FMODUnity.RuntimeManager.PlayOneShot("event:/2D/Object Interaction/Key Pickup");
                             Cursor.visible = false;
                             Cursor.lockState = CursorLockMode.Locked;
 
