@@ -22,7 +22,7 @@ public class PlayerRespawn : MonoBehaviour
     bool hasMoved = false;
     OverseerController seer;
     public ExternalInteralSwitch exSwitch;
-
+    [HideInInspector]public bool crossyDeath;
     void Start()
     {
         originalposition = crossyPosition.position;
@@ -66,9 +66,18 @@ public class PlayerRespawn : MonoBehaviour
 
         if(!puzzleController.GameOverCheck())
         {
-            deathVideoObject.SetActive(true);
+            if (!crossyDeath)
+            {
+                deathVideoObject.SetActive(true);
+                StartCoroutine(WaitForRespawn(deathWaitTime));
+            }
+            else
+            {
+                StartCoroutine(WaitForRespawn(2));
+            }
+            
 
-            StartCoroutine(WaitForRespawn(deathWaitTime));
+            
         }
     }
 
@@ -79,7 +88,7 @@ public class PlayerRespawn : MonoBehaviour
         FindObjectOfType<MrCrossyDistortion>().ReduceInsanity();
         FindObjectOfType<MrCrossyDistortion>().DecreaseVignette();
         deathVideoObject.SetActive(false);
-
+        crossyDeath = false;
         player.gameObject.SetActive(true);
         player.enabled = true;
         player.EnableController();
