@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using TMPro;
 
 public class PlayerRespawn : MonoBehaviour
 {
@@ -16,20 +18,29 @@ public class PlayerRespawn : MonoBehaviour
     Vector3 originalposition;
 
     [SerializeField]
+    TextMeshProUGUI deathCountText;
+
+    [SerializeField]
+    GameObject street;
+
+    [SerializeField]
     GameObject deathVideoObject;
     [SerializeField] float deathWaitTime = 7.3f;
 
-    bool hasMoved = false;
+    public UnityEvent deathTutorial;
+
+    int deathCount;
+
+    bool hasMoved = false, tutorialPlayed;
     OverseerController seer;
     public ExternalInteralSwitch exSwitch;
-    [HideInInspector]public bool crossyDeath;
+
     void Start()
     {
         originalposition = crossyPosition.position;
         seer = FindObjectOfType<OverseerController>();
         player = FindObjectOfType<Player_Controller>();
         journal = FindObjectOfType<JournalController>();
-        puzzleController = FindObjectOfType<PuzzleController>();
     }
 
     public void Register()
@@ -64,21 +75,12 @@ public class PlayerRespawn : MonoBehaviour
         journal.OpenMap();
         journal.DisableJournal();
 
-        if(!puzzleController.GameOverCheck())
-        {
-            if (!crossyDeath)
-            {
-                deathVideoObject.SetActive(true);
-                StartCoroutine(WaitForRespawn(deathWaitTime));
-            }
-            else
-            {
-                StartCoroutine(WaitForRespawn(2));
-            }
-            
+        deathCount++;
+        deathCountText.text = deathCount.ToString();
 
-            
-        }
+        deathVideoObject.SetActive(true);
+
+        StartCoroutine(WaitForRespawn(deathWaitTime));
     }
 
     IEnumerator WaitForRespawn(float waitTime)
@@ -88,9 +90,29 @@ public class PlayerRespawn : MonoBehaviour
         FindObjectOfType<MrCrossyDistortion>().ReduceInsanity();
         FindObjectOfType<MrCrossyDistortion>().DecreaseVignette();
         deathVideoObject.SetActive(false);
-        crossyDeath = false;
+
+        puzzleController = FindObjectOfType<PuzzleController>();
+        puzzleController.MistakeCounter();
+
         player.gameObject.SetActive(true);
         player.enabled = true;
+
+        street.GetComponent<TextMeshProUGUI>().text = "Home.";
+
+        if (!tutorialPlayed)
+        {
+            tutorialPlayed = true;
+
+            deathTutorial.Invoke();
+        }
+        else
+        {
+            ReleaseToPlayer();
+        }
+    }
+
+    public void ReleaseToPlayer()
+    {
         player.EnableController();
         seer.emitter.Target.SetParameter(seer.deadParamName, 1f);
         seer.emitter.Target.SetParameter(seer.distanceParamName, 100f);
