@@ -325,13 +325,19 @@ public class MrCrossyDistortion : MonoBehaviour
 
             yield return null;
         }
-        mask.SetActive(true);
+        StartCoroutine(WaitForMask(speed));
         //for (int i = 0; i < volume.Length; i++)
         //{
         //    colorAdjustments[i].colorFilter.value = Color.white;
         //    vignette[i].intensity.value = baseVignette;
         //}
         //colorAdjustments.active = false;
+    }
+
+    IEnumerator WaitForMask(float waitTime)
+    {
+        yield return new WaitForSecondsRealtime(waitTime);
+        mask.SetActive(true);
     }
 
     public void WhitenScreen(float speed)

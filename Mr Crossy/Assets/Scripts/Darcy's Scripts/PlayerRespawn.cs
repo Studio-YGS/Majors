@@ -34,6 +34,7 @@ public class PlayerRespawn : MonoBehaviour
     bool hasMoved = false, tutorialPlayed;
     OverseerController seer;
     public ExternalInteralSwitch exSwitch;
+    [HideInInspector] public bool crossyDeath;
 
     void Start()
     {
@@ -77,10 +78,17 @@ public class PlayerRespawn : MonoBehaviour
 
         deathCount++;
         deathCountText.text = deathCount.ToString();
+        if (!crossyDeath)
+        {
+            deathVideoObject.SetActive(true);
 
-        deathVideoObject.SetActive(true);
-
-        StartCoroutine(WaitForRespawn(deathWaitTime));
+            StartCoroutine(WaitForRespawn(deathWaitTime));
+        }
+        else
+        {
+            StartCoroutine(WaitForRespawn(2));
+        }
+        
     }
 
     IEnumerator WaitForRespawn(float waitTime)
@@ -93,7 +101,7 @@ public class PlayerRespawn : MonoBehaviour
 
         puzzleController = FindObjectOfType<PuzzleController>();
         puzzleController.MistakeCounter();
-
+        crossyDeath = false;
         player.gameObject.SetActive(true);
         player.enabled = true;
 
