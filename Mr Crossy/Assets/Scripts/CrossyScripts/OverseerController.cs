@@ -148,7 +148,7 @@ public class OverseerController : MonoBehaviour
         emitter.Target.SetParameter(distanceParamName, 100f);
         emitter.Target.SetParameter(chaseParamName, 1f);
         emitter.Target.SetParameter(deadParamName, 1f);
-        emitter.Target.SetParameter(titanParamName, 1f);
+        emitter.Target.SetParameter(titanParamName, 0f);
 
         if (startOnAwake)
         {
@@ -492,6 +492,7 @@ public class OverseerController : MonoBehaviour
         {
             if(m_TitanNoisyNum != 0)
             {
+                Debug.Log("UPPYDOWNY: Doing Neutral");
                 StartCoroutine(TitanSoundNeutral());
             }
         }
@@ -499,6 +500,7 @@ public class OverseerController : MonoBehaviour
         {
             if(m_TitanNoisyNum != 1)
             {
+                Debug.Log("UPPYDOWNY: Doing Uppy");
                 StopCoroutine(TitanSoundNeutral());
                 m_TitanNoisyNum = 1;
                 emitter.Target.SetParameter(titanParamName, m_TitanNoisyNum);
@@ -508,6 +510,7 @@ public class OverseerController : MonoBehaviour
         {
             if (m_TitanNoisyNum != 2)
             {
+                Debug.Log("UPPYDOWNY: Doing Downy");
                 StopCoroutine(TitanSoundNeutral());
                 m_TitanNoisyNum = 2;
                 emitter.Target.SetParameter(titanParamName, m_TitanNoisyNum);
