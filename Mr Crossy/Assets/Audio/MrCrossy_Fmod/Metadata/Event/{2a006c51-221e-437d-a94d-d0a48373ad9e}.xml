@@ -5,7 +5,7 @@
 			<value>Gate Open</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>2</value>
 		</property>
 		<relationship name="folder">
 			<destination>{0098bbac-aac8-4249-b5a3-403bc0eaf1d0}</destination>
@@ -98,7 +98,7 @@
 	</object>
 	<object class="EventMixerGroup" id="{aadb3e67-ae0f-47cf-9b90-522410d604ad}">
 		<property name="volume">
-			<value>-9</value>
+			<value>-18</value>
 		</property>
 		<property name="name">
 			<value>Audio 1</value>
@@ -116,6 +116,8 @@
 	<object class="MixerBusEffectChain" id="{46ded182-246d-4c77-b68e-07635833ed9f}">
 		<relationship name="effects">
 			<destination>{a4fe9e29-2b57-46d7-87c4-ede2901e85cc}</destination>
+			<destination>{0da75ae1-73e5-4676-b7fe-f5d2af58349e}</destination>
+			<destination>{7fbba11e-bcb3-496c-8ff5-b6765d7d5943}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{01b821bc-ca6d-49db-9e4b-d56cb8e8041f}" />
@@ -127,5 +129,11 @@
 	</object>
 	<object class="MixerBusPanner" id="{cd5ca9d9-71ee-4401-a061-937acf3f93da}" />
 	<object class="MixerBusFader" id="{a4fe9e29-2b57-46d7-87c4-ede2901e85cc}" />
+	<object class="SpatialiserEffect" id="{0da75ae1-73e5-4676-b7fe-f5d2af58349e}">
+		<property name="minimumDistance">
+			<value>5</value>
+		</property>
+	</object>
+	<object class="SFXReverbEffect" id="{7fbba11e-bcb3-496c-8ff5-b6765d7d5943}" />
 	<object class="MixerBusFader" id="{8b7fbf3a-06d9-438e-8ef5-61fe33adb3ff}" />
 </objects>
