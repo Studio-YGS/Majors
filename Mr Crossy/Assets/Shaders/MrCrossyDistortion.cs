@@ -34,16 +34,13 @@ public class MrCrossyDistortion : MonoBehaviour
             volume[i].TryGet<ColorAdjustments>(out colorAdjustments[i]);
         }
         player = FindObjectOfType<Camera>().transform;
+        mask.SetActive(true);
+        mask.GetComponent<Animator>().SetTrigger("FadeAway");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            HitByCrossy();
-        }
-
         if (mrCrossy != null)
         {
             float distance = Vector3.Distance(player.position, mrCrossy.transform.position);

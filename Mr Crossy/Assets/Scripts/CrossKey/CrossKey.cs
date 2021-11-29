@@ -72,6 +72,8 @@ public class CrossKey : MonoBehaviour
         //FindObjectOfType<CrossKeyManager>().headBob.enabled = true;
         //Time.timeScale = 1;
         //Time.fixedDeltaTime = 0.02f;
+        FMODUnity.RuntimeManager.PlayOneShot("event:/2D/Doors & Gates/Door Unlock");
+        FMODUnity.RuntimeManager.PlayOneShot("event:/2D/Puzzle/Correct_Word");
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         FindObjectOfType<CrossKeyManager>().doorsLocked = false;
