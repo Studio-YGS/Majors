@@ -204,7 +204,7 @@ public class PuzzleController : MonoBehaviour
             audio.WordSpeltIncorrectly();
 
             Debug.Log("Game Over check calling from the player controller by: " + wordCollision.gameObject.name + ". Players word length, word length, playersword: " + playersWordLength + " " + wordLength + " " + playersWord);
-            GameOverCheck();
+            MistakeCounter();
         }
     }
 
@@ -255,7 +255,7 @@ public class PuzzleController : MonoBehaviour
         }
     }
 
-    public bool GameOverCheck()
+    public void MistakeCounter()
     {
         if (!gameObject.name.Contains("Tutorial"))
         {
@@ -268,27 +268,27 @@ public class PuzzleController : MonoBehaviour
             tutorialMistakeEvent.Invoke();
         }
 
-        if (mistakeCount == 3)
-        {
-            GameOver();
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        //if (mistakeCount == 3)
+        //{
+        //    GameOver();
+        //    return true;
+        //}
+        //else
+        //{
+        //    return false;
+        //}
     }
 
-    void GameOver()
-    {
-        loseEvent.Invoke();
-        StartCoroutine(StartAgain());
-    }
+    //void GameOver()
+    //{
+    //    loseEvent.Invoke();
+    //    StartCoroutine(StartAgain());
+    //}
 
-    IEnumerator StartAgain()
-    {
-        yield return new WaitForSeconds(3f);
+    //IEnumerator StartAgain()
+    //{
+    //    yield return new WaitForSeconds(3f);
 
-        FindObjectOfType<MenuManager>().RestartGame();
-    }
+    //    FindObjectOfType<MenuManager>().RestartGame();
+    //}
 }
