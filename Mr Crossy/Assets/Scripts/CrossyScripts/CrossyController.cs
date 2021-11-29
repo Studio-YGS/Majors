@@ -177,6 +177,11 @@ public class CrossyController : MonoBehaviour
 
     public GameObject WarpParticleOne { get { return m_WarpParticleOne; } }
     public GameObject WarpParticleTwo { get { return m_WarpParticleTwo; } }
+
+    public ParticleSystem PartiboiOne { get { return m_WarpParticleOne.GetComponent<ParticleSystem>(); } }
+    public ParticleSystem PartiboiTwo { get { return m_WarpParticleTwo.GetComponent<ParticleSystem>(); } }
+    public StudioEventEmitter SoundiboiOne { get { return m_WarpParticleOne.GetComponent<StudioEventEmitter>(); } }
+    public StudioEventEmitter SoundiboiTwo { get { return m_WarpParticleTwo.GetComponent<StudioEventEmitter>(); } }
     public float ParticleWaitTime { get { return m_ParticleWait; } }
 
     #endregion
@@ -493,6 +498,10 @@ public class CrossyController : MonoBehaviour
     {
         TreeMalarkey.RegisterEventOnTree(crossyTree, "Darken", DarkenEvent);
         TreeMalarkey.RegisterEventOnTree(crossyTree, "PlayAttack", AttackSound);
+        TreeMalarkey.RegisterEventOnTree(crossyTree, "WooshOne", WooshSingle);
+        TreeMalarkey.RegisterEventOnTree(crossyTree, "WooshTwo", WooshBothle);
+        TreeMalarkey.RegisterEventOnTree(OverseerController.ObserverTree, "WooshOne", WooshSingle);
+        TreeMalarkey.RegisterEventOnTree(OverseerController.ObserverTree, "WooshTwo", WooshBothle);
     }
 
     public void DarkenEvent()
@@ -508,9 +517,27 @@ public class CrossyController : MonoBehaviour
         attackLines.start();
     }
 
+    public void WooshSingle()
+    {
+        PartiboiOne.Play();
+        SoundiboiOne.Play();
+    }
+
+    public void WooshBothle()
+    {
+        PartiboiOne.Play();
+        SoundiboiOne.Play();
+        PartiboiTwo.Play();
+        SoundiboiTwo.Play();
+    }
+
     public void OnDisable()
     {
         TreeMalarkey.UnregisterEventOnTree(crossyTree, "Darken", DarkenEvent);
         TreeMalarkey.UnregisterEventOnTree(crossyTree, "PlayAttack", AttackSound);
+        TreeMalarkey.UnregisterEventOnTree(crossyTree, "WooshOne", WooshSingle);
+        TreeMalarkey.UnregisterEventOnTree(crossyTree, "WooshTwo", WooshBothle);
+        TreeMalarkey.UnregisterEventOnTree(OverseerController.ObserverTree, "WooshOne", WooshSingle);
+        TreeMalarkey.UnregisterEventOnTree(OverseerController.ObserverTree, "WooshTwo", WooshBothle);
     }
 }
