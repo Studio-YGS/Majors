@@ -105,4 +105,9 @@ public class WordCollision : MonoBehaviour
             altarsDisabled = true;
         }
     }
+
+    public void SetHomeText()
+    {
+        puzzleController.streetText.text = "Home.";
+    }
 }

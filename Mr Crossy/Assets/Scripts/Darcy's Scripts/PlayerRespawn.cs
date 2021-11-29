@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using TMPro;
 
 public class PlayerRespawn : MonoBehaviour
 {
@@ -17,10 +18,18 @@ public class PlayerRespawn : MonoBehaviour
     Vector3 originalposition;
 
     [SerializeField]
+    TextMeshProUGUI deathCountText;
+
+    [SerializeField]
+    GameObject street;
+
+    [SerializeField]
     GameObject deathVideoObject;
     [SerializeField] float deathWaitTime = 7.3f;
 
     public UnityEvent deathTutorial;
+
+    int deathCount;
 
     bool hasMoved = false, tutorialPlayed;
     OverseerController seer;
@@ -32,7 +41,6 @@ public class PlayerRespawn : MonoBehaviour
         seer = FindObjectOfType<OverseerController>();
         player = FindObjectOfType<Player_Controller>();
         journal = FindObjectOfType<JournalController>();
-        puzzleController = FindObjectOfType<PuzzleController>();
     }
 
     public void Register()
@@ -67,12 +75,12 @@ public class PlayerRespawn : MonoBehaviour
         journal.OpenMap();
         journal.DisableJournal();
 
-        if(!puzzleController.GameOverCheck())
-        {
-            deathVideoObject.SetActive(true);
+        deathCount++;
+        deathCountText.text = deathCount.ToString();
 
-            StartCoroutine(WaitForRespawn(deathWaitTime));
-        }
+        deathVideoObject.SetActive(true);
+
+        StartCoroutine(WaitForRespawn(deathWaitTime));
     }
 
     IEnumerator WaitForRespawn(float waitTime)
@@ -82,6 +90,14 @@ public class PlayerRespawn : MonoBehaviour
         FindObjectOfType<MrCrossyDistortion>().ReduceInsanity();
         FindObjectOfType<MrCrossyDistortion>().DecreaseVignette();
         deathVideoObject.SetActive(false);
+
+        puzzleController = FindObjectOfType<PuzzleController>();
+        puzzleController.MistakeCounter();
+
+        player.gameObject.SetActive(true);
+        player.enabled = true;
+
+        street.GetComponent<TextMeshProUGUI>().text = "Home.";
 
         if (!tutorialPlayed)
         {
@@ -97,8 +113,6 @@ public class PlayerRespawn : MonoBehaviour
 
     public void ReleaseToPlayer()
     {
-        player.gameObject.SetActive(true);
-        player.enabled = true;
         player.EnableController();
         seer.emitter.Target.SetParameter(seer.deadParamName, 1f);
         seer.emitter.Target.SetParameter(seer.distanceParamName, 100f);
