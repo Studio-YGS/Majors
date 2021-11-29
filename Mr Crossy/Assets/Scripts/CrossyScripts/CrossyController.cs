@@ -402,7 +402,7 @@ public class CrossyController : MonoBehaviour
             Color colour = crossyGlow.color;
             Color emColour = crossyGlow.GetColor("_EmissionColor");
 
-            if (m_State < 2)
+            if (m_State < 1)
             {
                 if (colour.a > 0f)
                 {
@@ -410,7 +410,7 @@ public class CrossyController : MonoBehaviour
                     if (!loweringEye) StartCoroutine(LowerEyeGlow(colour, 0f));
                 }
             }
-            else if (m_State >= 2)
+            else if (m_State >= 1)
             {
                 if(!m_InPeripheral && !m_InSight)
                 {
