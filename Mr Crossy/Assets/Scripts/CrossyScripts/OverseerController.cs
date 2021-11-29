@@ -77,6 +77,7 @@ public class OverseerController : MonoBehaviour
     public string titanParamName = "Titan";
 
     bool attemptingSafe = false;
+    bool hasChased = false;
 
     [Range(0f, 1f)] [SerializeField] private float m_TitanVoiceLineChance = 0.5f;
     private int m_TitanNoisyNum = 0;
@@ -193,7 +194,7 @@ public class OverseerController : MonoBehaviour
 
         if(!m_IsTutorial)
         {
-            if (m_State >= 1 || keyMan.puzzleOn || attemptingSafe) CrossyFMODFiddling(crossyAgent, m_ValidationPosition, m_State, deady);
+            if (m_State >= 1 || keyMan.puzzleOn || attemptingSafe || hasChased) CrossyFMODFiddling(crossyAgent, m_ValidationPosition, m_State, deady);
             if (m_State == -1 && !m_PlayerInHouse)
             { 
                 TitanCrossyVoiceLines();
@@ -385,8 +386,6 @@ public class OverseerController : MonoBehaviour
     {
         CrossKeyManager key = FindObjectOfType<CrossKeyManager>();
 
-        bool hasChased = false;
-        
         pathDistance = Mathf.Clamp(pathDistance, 0f, 100f);
 
         NavMeshPath navPath = new NavMeshPath();
@@ -415,10 +414,12 @@ public class OverseerController : MonoBehaviour
             emitter.Target.SetParameter(chaseParamName, 0f);
             Debug.Log("ADAPTIVE: Chase Started: State = " + state + ", PuzzleOn = " + key.puzzleOn);
         }
-        else if (!m_PlayerInHouse)
+        else if (!m_PlayerInHouse && state < 2)
         {
-            hasChased = false;
-            emitter.Target.SetParameter(chaseParamName, 1f);
+            if (hasChased && !attemptingSafe)
+            {
+                StartCoroutine(WaitForPuzzleOff());
+            }
             Debug.Log("ADAPTIVE: Chase Stopped: State = " + state + ", PuzzleOn = " + key.puzzleOn);
         }
 

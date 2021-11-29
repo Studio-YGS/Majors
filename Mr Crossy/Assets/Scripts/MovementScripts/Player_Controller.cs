@@ -143,7 +143,7 @@ public class Player_Controller : MonoBehaviour
             if (stamina <= 0)
             {
                 //when the player runs out of stamina
-                FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Out of Stamina/Out of Breath");
+                //FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Out of Stamina/Out of Breath");
                 speed = baseSpeed;
             }
 
