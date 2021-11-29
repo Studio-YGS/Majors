@@ -110,7 +110,10 @@ public class TutorialController : MonoBehaviour
         journalController.EnableJournal();
         journalController.readingHowTo = true;
 
-        journalOnSwitch.OpenOrClose();
+        if (!journalOnSwitch.open)
+        {
+            journalOnSwitch.OpenOrClose();
+        }
         journalController.OpenHowTo();
     }
     

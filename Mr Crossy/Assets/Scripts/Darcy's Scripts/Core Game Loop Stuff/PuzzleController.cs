@@ -31,7 +31,7 @@ public class PuzzleController : MonoBehaviour
     public List<GameObject> storedObjects = new List<GameObject>();
     public List<GameObject> wordObjects = new List<GameObject>();
 
-    public bool tutorial;
+    public bool tutorial, devPuzzleCompletion;
     bool tenPlayed;
 
     public UnityEvent winEvent, loseEvent, tutorialEvent, tutorialMistakeEvent;
@@ -48,6 +48,15 @@ public class PuzzleController : MonoBehaviour
         if (tutorial)
         {
             SetUpLetters(0);
+        }
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.B) && Input.GetKeyDown(KeyCode.LeftAlt))
+        {
+            completedWords = wordsInPuzzle;
+            CompletionCheck();
         }
     }
 
@@ -249,7 +258,7 @@ public class PuzzleController : MonoBehaviour
             }
         }
 
-        if(completedWords == wordsInPuzzle)
+        if(completedWords >= wordsInPuzzle)
         {
             winEvent.Invoke();
         }
@@ -259,7 +268,7 @@ public class PuzzleController : MonoBehaviour
     {
         if (!gameObject.name.Contains("Tutorial"))
         {
-            Debug.LogError("MISTAKE");
+            Debug.Log("MISTAKE");
             mistakeCount++;
             mistakeText.text = mistakeCount.ToString();
         }
@@ -277,6 +286,11 @@ public class PuzzleController : MonoBehaviour
         //{
         //    return false;
         //}
+    }
+
+    public void SetDevBool(bool set)
+    {
+        devPuzzleCompletion = set;
     }
 
     //void GameOver()

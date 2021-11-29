@@ -188,6 +188,7 @@ public class MrCrossyDistortion : MonoBehaviour
             vignette[i].intensity.value = 0;
             colorAdjustments[i].colorFilter.value = Color.white;
         }
+        hits = 0;
     }
 
     public void IncreaseInsanity(GameObject crossy)
@@ -325,13 +326,19 @@ public class MrCrossyDistortion : MonoBehaviour
 
             yield return null;
         }
-        mask.SetActive(true);
+        StartCoroutine(WaitForMask(speed));
         //for (int i = 0; i < volume.Length; i++)
         //{
         //    colorAdjustments[i].colorFilter.value = Color.white;
         //    vignette[i].intensity.value = baseVignette;
         //}
         //colorAdjustments.active = false;
+    }
+
+    IEnumerator WaitForMask(float waitTime)
+    {
+        yield return new WaitForSecondsRealtime(waitTime);
+        mask.SetActive(true);
     }
 
     public void WhitenScreen(float speed)
@@ -367,12 +374,14 @@ public class MrCrossyDistortion : MonoBehaviour
 
     public void ResetDamage()
     {
+        StopCoroutine("TakeDamage");
         for (int i = 0; i < volume.Length; i++)
         {
             //vignette[i].color.value = new Color32(204, 16, 16, 1);
             vignette[i].color.value = Color.red;
             vignette[i].intensity.value = 0;
         }
+        
         hits = 0;
     }
 
