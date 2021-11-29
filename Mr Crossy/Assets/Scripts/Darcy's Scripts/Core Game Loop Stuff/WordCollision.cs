@@ -72,7 +72,10 @@ public class WordCollision : MonoBehaviour
 
         menuManager.streetName.SetActive(true);
 
-        FindObjectOfType<OverseerController>().m_StalkStreet = streetStalk;
+        if(streetStalk != null)
+        {
+            FindObjectOfType<OverseerController>().m_StalkStreet = streetStalk;
+        }
 
         gameObject.SetActive(false);
     }
