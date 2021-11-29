@@ -49,52 +49,64 @@ public class JournalController : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Tab))
         {
-            if (readingHowTo)
+            if (!FindObjectOfType<CrossKeyManager>().puzzleOn)
             {
-                readingHowTo = false;
+                if (readingHowTo)
+                {
+                    readingHowTo = false;
 
-                GetComponent<TutorialSectionStart>().ReadHowTo();
+                    GetComponent<TutorialSectionStart>().ReadHowTo();
 
-                GetComponent<JournalTimer>().StartTimer();
+                    GetComponent<JournalTimer>().StartTimer();
 
-                OpenMap();
-            }
+                    OpenMap();
+                }
 
-            if (waitForCrossy)
-            {
-                waitForCrossy = false;
+                if (waitForCrossy)
+                {
+                    waitForCrossy = false;
 
-                GetComponent<TutorialSectionStart>().WaitForCrossy();
+                    GetComponent<TutorialSectionStart>().WaitForCrossy();
 
-                OpenMap();
+                    OpenMap();
+                }
             }
         }
 
         if (Input.GetKeyDown(KeyCode.M))
         {
-            if (!journalOnSwitch.open)
+            if(!FindObjectOfType<CrossKeyManager>().puzzleOn)
             {
-                journalOnSwitch.OpenOrClose();
+                if (!journalOnSwitch.open)
+                {
+                    journalOnSwitch.OpenOrClose();
+                }
+                OpenMap();
             }
-            OpenMap();
         }
 
         if (Input.GetKeyDown(KeyCode.N) && notesTab)
         {
-            if (!journalOnSwitch.open)
+            if (!FindObjectOfType<CrossKeyManager>().puzzleOn)
             {
-                journalOnSwitch.OpenOrClose();
+                if (!journalOnSwitch.open)
+                {
+                    journalOnSwitch.OpenOrClose();
+                }
+                OpenNotes();
             }
-            OpenNotes();
         }
 
         if (Input.GetKeyDown(KeyCode.L) && logTab)
         {
-            if (!journalOnSwitch.open)
+            if (!FindObjectOfType<CrossKeyManager>().puzzleOn)
             {
-                journalOnSwitch.OpenOrClose();
+                if (!journalOnSwitch.open)
+                {
+                    journalOnSwitch.OpenOrClose();
+                }
+                OpenLog();
             }
-            OpenLog();
         }
     }
 
