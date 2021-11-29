@@ -60,7 +60,7 @@ public class CrossyController : MonoBehaviour
     [Tooltip("Mr. Crossy's acceleration rate.")]
     [SerializeField] private float m_BaseAcceleration;
     /*[SerializeField] */
-    private float m_CornerAcceleration;
+    private float m_StoppingAcceleration = 120f;
     /*[SerializeField] */
     private float m_Acceleration;
 
@@ -145,7 +145,7 @@ public class CrossyController : MonoBehaviour
     public float RunSpeed { get { return (m_InSight) ? FullRunSpeed : SubRunSpeed; } }
     public float MoveSpeed { get { return (m_ShouldRun && RunSpeed > WalkSpeed) ? RunSpeed : WalkSpeed; } }
 
-    public float Acceleration { get { return m_Acceleration; } set { m_Acceleration = value; } }
+    public float Acceleration { get { return (m_ShouldBeStopped) ? m_StoppingAcceleration : m_BaseAcceleration; } set { m_Acceleration = value; } }
     public float AngularSpeed { get { return m_AngularSpeed; } set { m_AngularSpeed = value; } }
     public float StoppingDistance { get { return m_StoppingDistance; } set { m_StoppingDistance = value; } }
     public float RunDistance { get { return (m_State == 2) ? m_AlertRunDistance : m_PatrolRunDistance; } }
@@ -231,22 +231,9 @@ public class CrossyController : MonoBehaviour
         //RunSpeed = (m_InSight) ? FullRunSpeed : SubRunSpeed;
         //MoveSpeed = (m_ShouldRun) ? RunSpeed : WalkSpeed;
 
-        if (accelManipulation)
-        {
-            if (m_DistanceToCorner <= m_CornerThreshold)
-            {
-                interpolator = Mathf.InverseLerp(m_CornerThreshold, 0f, m_DistanceToCorner);
+        //Acceleration = (m_ShouldBeStopped) ? m_StoppingAcceleration : m_BaseAcceleration;
 
-            }
-            else if (interpolator < 1f)
-            {
-                interpolator = 1f;
-            }
-        }
-
-        Acceleration = (accelManipulation) ? Mathf.Lerp(m_BaseAcceleration, m_CornerAcceleration, interpolator) : m_BaseAcceleration;
-
-        agent.acceleration = Acceleration;
+        //agent.acceleration = Acceleration;
 
         if (m_InSight || m_InPeripheral) lookCondition = true;
         else lookCondition = false;
@@ -415,7 +402,7 @@ public class CrossyController : MonoBehaviour
             Color colour = crossyGlow.color;
             Color emColour = crossyGlow.GetColor("_EmissionColor");
 
-            if (m_State < 2)
+            if (m_State < 1)
             {
                 if (colour.a > 0f)
                 {
@@ -423,7 +410,7 @@ public class CrossyController : MonoBehaviour
                     if (!loweringEye) StartCoroutine(LowerEyeGlow(colour, 0f));
                 }
             }
-            else if (m_State >= 2)
+            else if (m_State >= 1)
             {
                 if(!m_InPeripheral && !m_InSight)
                 {
