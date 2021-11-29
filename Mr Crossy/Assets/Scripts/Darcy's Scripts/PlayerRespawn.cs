@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerRespawn : MonoBehaviour
 {
@@ -19,7 +20,9 @@ public class PlayerRespawn : MonoBehaviour
     GameObject deathVideoObject;
     [SerializeField] float deathWaitTime = 7.3f;
 
-    bool hasMoved = false;
+    public UnityEvent deathTutorial;
+
+    bool hasMoved = false, tutorialPlayed;
     OverseerController seer;
     public ExternalInteralSwitch exSwitch;
 
@@ -80,6 +83,20 @@ public class PlayerRespawn : MonoBehaviour
         FindObjectOfType<MrCrossyDistortion>().DecreaseVignette();
         deathVideoObject.SetActive(false);
 
+        if (!tutorialPlayed)
+        {
+            tutorialPlayed = true;
+
+            deathTutorial.Invoke();
+        }
+        else
+        {
+            ReleaseToPlayer();
+        }
+    }
+
+    public void ReleaseToPlayer()
+    {
         player.gameObject.SetActive(true);
         player.enabled = true;
         player.EnableController();

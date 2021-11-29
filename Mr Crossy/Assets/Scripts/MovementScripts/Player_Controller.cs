@@ -177,18 +177,18 @@ public class Player_Controller : MonoBehaviour
                 }
             }
         }
-        if (Input.GetKeyDown(KeyCode.Escape) && inJournal)
-        {
-            JournalController journalController = FindObjectOfType<JournalController>();
+        //if (Input.GetKeyDown(KeyCode.Escape) && inJournal)
+        //{
+        //    JournalController journalController = FindObjectOfType<JournalController>();
 
-            if (!journalController.disabled)
-            {
-                JournalOnSwitch journal = FindObjectOfType<JournalOnSwitch>();
+        //    if (!journalController.disabled)
+        //    {
+        //        JournalOnSwitch journal = FindObjectOfType<JournalOnSwitch>();
 
-                journal.OpenOrClose();
-                EnableController();
-            }
-        }
+        //        journal.OpenOrClose();
+        //        EnableController();
+        //    }
+        //}
     }
     
     //methods for journal
