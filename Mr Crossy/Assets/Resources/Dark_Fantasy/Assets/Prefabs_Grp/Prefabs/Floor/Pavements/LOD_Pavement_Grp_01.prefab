@@ -51,6 +51,19 @@ LODGroup:
     renderers:
     - renderer: {fileID: 3109302957669269916}
   m_Enabled: 1
+--- !u!65 &9123015253158963189
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3469613260907307081}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.917307, y: 0.14201222, z: 2.9616907}
+  m_Center: {x: 0.0000012516975, y: 0, z: 0}
 --- !u!1001 &9156031904855266830
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -106,8 +119,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pavement_Grp_01_Lod0
       objectReference: {fileID: 0}
+    - target: {fileID: 5707829161290626631, guid: c7210d031b612a4439e5a7f11b083a5f, type: 3}
+      propertyPath: m_TagString
+      value: Stone
+      objectReference: {fileID: 0}
+    - target: {fileID: 6068235534310332306, guid: c7210d031b612a4439e5a7f11b083a5f, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7210d031b612a4439e5a7f11b083a5f, type: 3}
+--- !u!1 &3469613260907307081 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5707829161290626631, guid: c7210d031b612a4439e5a7f11b083a5f, type: 3}
+  m_PrefabInstance: {fileID: 9156031904855266830}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4282178104755829491 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4935268776794369277, guid: c7210d031b612a4439e5a7f11b083a5f, type: 3}
