@@ -330,7 +330,7 @@ public class CrossKeyManager : MonoBehaviour
         {
             seer.deady = true;
 
-            seer.emitter.Target.SetParameter(seer.deadParamName, 0f);
+            if(!seer.attemptingDie) seer.DeadNoises();
         }
         deathCrossy.SetActive(true);
         StartCoroutine(WaitForDeath());
