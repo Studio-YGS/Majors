@@ -51,15 +51,6 @@ public class PuzzleController : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.B) && Input.GetKeyDown(KeyCode.LeftAlt))
-        {
-            completedWords = wordsInPuzzle;
-            CompletionCheck();
-        }
-    }
-
     public void SetUpLetters(int whichObject)
     {
         objectPoint = whichObject;
@@ -288,9 +279,10 @@ public class PuzzleController : MonoBehaviour
         //}
     }
 
-    public void SetDevBool(bool set)
+    public void DevSkip()
     {
-        devPuzzleCompletion = set;
+        completedWords = wordsInPuzzle;
+        CompletionCheck();
     }
 
     //void GameOver()
