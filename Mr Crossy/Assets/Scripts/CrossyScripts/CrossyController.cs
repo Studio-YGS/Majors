@@ -19,6 +19,7 @@ public class CrossyController : MonoBehaviour
     Animator animator;
     NavMeshAgent agent;
     EventInstance attackLines;
+    EventInstance attackChild;
 
     [Header("Debug Booleans")]
     [HideInInspector] public bool overrideShouldRun;
@@ -498,6 +499,7 @@ public class CrossyController : MonoBehaviour
     {
         TreeMalarkey.RegisterEventOnTree(crossyTree, "Darken", DarkenEvent);
         TreeMalarkey.RegisterEventOnTree(crossyTree, "PlayAttack", AttackSound);
+        TreeMalarkey.RegisterEventOnTree(crossyTree, "PlayDamage", AttackHitSound);
         TreeMalarkey.RegisterEventOnTree(crossyTree, "WooshOne", WooshSingle);
         TreeMalarkey.RegisterEventOnTree(crossyTree, "WooshTwo", WooshBothle);
     }
@@ -521,6 +523,12 @@ public class CrossyController : MonoBehaviour
         attackLines.start();
     }
 
+    public void AttackHitSound()
+    {
+        attackChild = RuntimeManager.CreateInstance("event:/Character/Hit and damage/Child Hit and Damage");
+        attackChild.start();
+    }
+
     public void WooshSingle()
     {
         PartiboiOne.Play();
@@ -539,6 +547,7 @@ public class CrossyController : MonoBehaviour
     {
         TreeMalarkey.UnregisterEventOnTree(crossyTree, "Darken", DarkenEvent);
         TreeMalarkey.UnregisterEventOnTree(crossyTree, "PlayAttack", AttackSound);
+        TreeMalarkey.UnregisterEventOnTree(crossyTree, "PlayDamage", AttackHitSound);
         TreeMalarkey.UnregisterEventOnTree(crossyTree, "WooshOne", WooshSingle);
         TreeMalarkey.UnregisterEventOnTree(crossyTree, "WooshTwo", WooshBothle);
         TreeMalarkey.UnregisterEventOnTree(OverseerController.ObserverTree, "WooshOne", WooshSingle);
