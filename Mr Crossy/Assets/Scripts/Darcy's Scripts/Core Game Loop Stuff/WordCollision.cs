@@ -17,6 +17,8 @@ public class WordCollision : MonoBehaviour
     [SerializeField]
     PuzzleController puzzleController;
 
+    OverseerController seer;
+
     MenuManager menuManager;
 
     [SerializeField] 
@@ -28,6 +30,7 @@ public class WordCollision : MonoBehaviour
     {
         menuManager = FindObjectOfType<MenuManager>();
         respawn = FindObjectOfType<RespawnWordColliders>();
+        seer = FindObjectOfType<OverseerController>();
     }
 
     void OnTriggerEnter(Collider other)
@@ -74,7 +77,7 @@ public class WordCollision : MonoBehaviour
 
         if(streetStalk != null)
         {
-            FindObjectOfType<OverseerController>().m_StalkStreet = streetStalk;
+            seer.m_StalkStreet = streetStalk;
         }
 
         gameObject.SetActive(false);
