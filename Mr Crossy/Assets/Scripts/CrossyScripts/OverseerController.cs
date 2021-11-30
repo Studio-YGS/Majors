@@ -324,6 +324,7 @@ public class OverseerController : MonoBehaviour
     {
         TreeMalarkey.EnableTree(ObserverTree);
         distootle.ShoobyDooby();
+        m_Crossy.GetComponent<CrossyController>().RegisterEvents();
     }
 
     public bool LeftRadius()

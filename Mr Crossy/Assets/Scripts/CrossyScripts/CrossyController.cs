@@ -500,6 +500,10 @@ public class CrossyController : MonoBehaviour
         TreeMalarkey.RegisterEventOnTree(crossyTree, "PlayAttack", AttackSound);
         TreeMalarkey.RegisterEventOnTree(crossyTree, "WooshOne", WooshSingle);
         TreeMalarkey.RegisterEventOnTree(crossyTree, "WooshTwo", WooshBothle);
+    }
+
+    public void RegisterEvents()
+    {
         TreeMalarkey.RegisterEventOnTree(OverseerController.ObserverTree, "WooshOne", WooshSingle);
         TreeMalarkey.RegisterEventOnTree(OverseerController.ObserverTree, "WooshTwo", WooshBothle);
     }
