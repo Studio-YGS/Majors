@@ -43,6 +43,8 @@ public class Player_Controller : MonoBehaviour
     public float originalHeight;
 
     bool playerHit;
+    bool sprintingLimit;
+    bool outOfBreath;
     DoorInteraction contactDoor;
     float contactVal;
     //public bool zForward;
@@ -126,24 +128,31 @@ public class Player_Controller : MonoBehaviour
             }
 
 
-            if (Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.C) && stamina > 0)
+            if (Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.C) && stamina > 0 && !sprintingLimit)
             {
                 speed = sprintSpeed;
                 stamina -= Time.unscaledDeltaTime * 2;
+                
             }
-            else if (Input.GetKeyUp(KeyCode.LeftShift) && !Input.GetKey(KeyCode.C))
+            else if (Input.GetKeyUp(KeyCode.LeftShift) /*&& !Input.GetKey(KeyCode.C)*/)
             {
                 speed = baseSpeed;
+                sprintingLimit = false;
             }
 
-            if(stamina < 8 && !Input.GetKey(KeyCode.LeftShift))
+            if(stamina < 8 && !Input.GetKey(KeyCode.LeftShift) || sprintingLimit)
             {
                 stamina += Time.unscaledDeltaTime;
             }
             if (stamina <= 0)
             {
                 //when the player runs out of stamina
-                FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Out of Stamina/Out of Breath");
+                
+                if (!outOfBreath && !sprintingLimit)
+                {
+                    StartCoroutine(OutOfBreath());
+                }
+                sprintingLimit = true;
                 speed = baseSpeed;
             }
 
@@ -192,6 +201,14 @@ public class Player_Controller : MonoBehaviour
         //}
     }
     
+    IEnumerator OutOfBreath()
+    {
+        outOfBreath = true;
+        FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Out of Stamina/Out of Breath");
+        yield return new WaitForSecondsRealtime(2);
+        outOfBreath = false;
+    }
+
     //methods for journal
     public void LockCursor()
     {
