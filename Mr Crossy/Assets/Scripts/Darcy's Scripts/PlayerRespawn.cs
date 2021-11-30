@@ -68,6 +68,7 @@ public class PlayerRespawn : MonoBehaviour
         FindObjectOfType<CrossKeyManager>().doorsLocked = false;
         FindObjectOfType<ObjectHolder>().DeathDrop();
         seer.deady = true;
+        if (!seer.attemptingDie) seer.DeadNoises();
         FindObjectOfType<MrCrossyDistortion>().ResetDamage();
         player.gameObject.SetActive(false);
         player.DisableController();
@@ -122,9 +123,9 @@ public class PlayerRespawn : MonoBehaviour
     public void ReleaseToPlayer()
     {
         player.EnableController();
-        seer.emitter.Target.SetParameter(seer.deadParamName, 1f);
-        seer.emitter.Target.SetParameter(seer.distanceParamName, 100f);
-        seer.emitter.Target.SetParameter(seer.chaseParamName, 1f);
+        seer.emitter.Params[2].Value = 1f;
+        seer.emitter.Params[0].Value = 100f;
+        seer.emitter.Params[1].Value = 1f;
         exSwitch.WalkIn();
         journal.EnableJournal();
         FindObjectOfType<OverseerController>().deady = false;
