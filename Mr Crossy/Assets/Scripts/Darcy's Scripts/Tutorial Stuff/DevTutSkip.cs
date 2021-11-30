@@ -5,13 +5,13 @@ using UnityEngine.Events;
 
 public class DevTutSkip : MonoBehaviour
 {
-    public UnityEvent skipTutorial;
+    public UnityEvent openUI;
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.O) && Input.GetKeyDown(KeyCode.K) && Input.GetKeyDown(KeyCode.F))
         {
-            skipTutorial.Invoke();
+            openUI.Invoke();
         }
     }
 }

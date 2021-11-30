@@ -290,9 +290,10 @@ GameObject:
   - component: {fileID: 1901430411}
   - component: {fileID: 1901430410}
   - component: {fileID: 1901430409}
+  - component: {fileID: 604895077}
   m_Layer: 0
   m_Name: Coffee_TreasureHunt
-  m_TagString: Untagged
+  m_TagString: Clue
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 1
@@ -374,6 +375,82 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &604895077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1901430408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09463e7ee10f0b34789d13e83f628649, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickUp:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1901430408}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  prompt: {fileID: 0}
 --- !u!1 &2003792105
 GameObject:
   m_ObjectHideFlags: 0
@@ -495,9 +572,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1961625213872791380}
-  - component: {fileID: 8189302310934111574}
   - component: {fileID: 7097143065454076482}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Second Clues
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -521,22 +597,6 @@ Transform:
   m_Father: {fileID: 8971736289818287687}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8189302310934111574
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 76331091954852839}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09463e7ee10f0b34789d13e83f628649, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pickUp:
-    m_PersistentCalls:
-      m_Calls: []
-  prompt: {fileID: 0}
 --- !u!65 &7097143065454076482
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -923,6 +983,10 @@ PrefabInstance:
       value: WARD Clue
       objectReference: {fileID: 0}
     - target: {fileID: 5860518738023633647, guid: 8c7f0c1d0185d3b40a7602e4c1ea9465, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5860518738023633647, guid: 8c7f0c1d0185d3b40a7602e4c1ea9465, type: 3}
       propertyPath: m_TagString
       value: Clue
       objectReference: {fileID: 0}
@@ -1092,6 +1156,10 @@ PrefabInstance:
     - target: {fileID: 8749256361147805733, guid: 43f347659660dfa4597db97a4131a19a, type: 3}
       propertyPath: m_Name
       value: CHOICE Clue
+      objectReference: {fileID: 0}
+    - target: {fileID: 8749256361147805733, guid: 43f347659660dfa4597db97a4131a19a, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8749256361147805733, guid: 43f347659660dfa4597db97a4131a19a, type: 3}
       propertyPath: m_TagString
