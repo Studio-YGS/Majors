@@ -6,7 +6,7 @@ using FMODUnity;
 
 public class JournalOnSwitch : MonoBehaviour
 {
-    [HideInInspector]
+    //[HideInInspector]
     public bool open = false;
 
     public GameObject journalOpen, journalClosed;
