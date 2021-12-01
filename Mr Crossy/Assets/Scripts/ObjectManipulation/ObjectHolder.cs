@@ -45,7 +45,7 @@ public class ObjectHolder : MonoBehaviour
     [Header("When Inspecting")]
     public float distanceFromFace = 1.2f;
     [Header("Testing Pos In Hand")]
-    //public bool updatePos;
+    public bool updatePos; // This is a comment, rare on a script like this out in the wild west, but this bool lets the designers mod the transform
     Vector3 newHandPosition = Vector3.zero;
     Quaternion newHandRotation = new Quaternion(0, 0, 0, 0);
     Vector3 newScaleFactor;
@@ -216,26 +216,26 @@ public class ObjectHolder : MonoBehaviour
         //    }
         //}
 
-        //if(updatePos && thisObjectHeld)
-        //{
+        if (updatePos && thisObjectHeld)
+        {
 
-        //    if(handOffset != newHandPosition)
-        //    {
-        //        transform.position = hand.TransformPoint(handOffset);
-        //        newHandPosition = handOffset;
-        //    }
-        //    if(handRotation != newHandRotation)
-        //    {
-        //        transform.localRotation = handRotation;
-        //        newHandRotation = handRotation;
-        //    }
-        //    if(scaleFactor != newScaleFactor)
-        //    {
-        //        transform.localScale = scaleFactor;
-        //        newScaleFactor = scaleFactor;
-        //    }
+            if (handOffset != newHandPosition)
+            {
+                transform.position = hand.TransformPoint(handOffset);
+                newHandPosition = handOffset;
+            }
+            if (handRotation != newHandRotation)
+            {
+                transform.localRotation = handRotation;
+                newHandRotation = handRotation;
+            }
+            if (scaleFactor != newScaleFactor)
+            {
+                transform.localScale = scaleFactor;
+                newScaleFactor = scaleFactor;
+            }
 
-        //}
+        }
 
     }
 
