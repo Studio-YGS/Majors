@@ -9,6 +9,8 @@ public class JournalController : MonoBehaviour
     [SerializeField]
     GameObject[] notePages, logPages;
 
+    JournalOnSwitch journalOnSwitch;
+
     [HideInInspector]
     public List<int> noteList = new List<int>(0); 
 
@@ -24,13 +26,14 @@ public class JournalController : MonoBehaviour
 
     public bool disabled = false, tutorial = true;
     [HideInInspector]
-    public bool readingHowTo = false, waitForCrossy = false;
+    public bool readingHowTo = false, waitForCrossy = false, logTab, notesTab;
 
     EventInstance eventInstance;
 
     void Start()
     {
         mapPage = tutMap;
+        journalOnSwitch = FindObjectOfType<JournalOnSwitch>();
     }
 
     void Update()
@@ -46,24 +49,63 @@ public class JournalController : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Tab))
         {
-            if (readingHowTo)
+            if (!FindObjectOfType<CrossKeyManager>().puzzleOn)
             {
-                readingHowTo = false;
+                if (readingHowTo)
+                {
+                    readingHowTo = false;
 
-                GetComponent<TutorialSectionStart>().ReadHowTo();
+                    GetComponent<TutorialSectionStart>().ReadHowTo();
 
-                GetComponent<JournalTimer>().StartTimer();
+                    GetComponent<JournalTimer>().StartTimer();
 
+                    OpenMap();
+                }
+
+                if (waitForCrossy)
+                {
+                    waitForCrossy = false;
+
+                    GetComponent<TutorialSectionStart>().WaitForCrossy();
+
+                    OpenMap();
+                }
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            if(!FindObjectOfType<CrossKeyManager>().puzzleOn)
+            {
+                if (!journalOnSwitch.open)
+                {
+                    journalOnSwitch.OpenOrClose();
+                }
                 OpenMap();
             }
+        }
 
-            if (waitForCrossy)
+        if (Input.GetKeyDown(KeyCode.N) && notesTab)
+        {
+            if (!FindObjectOfType<CrossKeyManager>().puzzleOn)
             {
-                waitForCrossy = false;
+                if (!journalOnSwitch.open)
+                {
+                    journalOnSwitch.OpenOrClose();
+                }
+                OpenNotes();
+            }
+        }
 
-                GetComponent<TutorialSectionStart>().WaitForCrossy();
-
-                OpenMap();
+        if (Input.GetKeyDown(KeyCode.L) && logTab)
+        {
+            if (!FindObjectOfType<CrossKeyManager>().puzzleOn)
+            {
+                if (!journalOnSwitch.open)
+                {
+                    journalOnSwitch.OpenOrClose();
+                }
+                OpenLog();
             }
         }
     }
@@ -234,5 +276,15 @@ public class JournalController : MonoBehaviour
     public void SetCrossyBool(bool set)
     {
         waitForCrossy = set;
+    }
+
+    public void SetLogTabBool(bool set)
+    {
+        logTab = set;
+    }
+
+    public void SetNotesTabBool(bool set)
+    {
+        notesTab = set;
     }
 }

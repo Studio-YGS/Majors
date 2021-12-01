@@ -19,6 +19,7 @@ public class CrossyController : MonoBehaviour
     Animator animator;
     NavMeshAgent agent;
     EventInstance attackLines;
+    EventInstance attackChild;
 
     [Header("Debug Booleans")]
     [HideInInspector] public bool overrideShouldRun;
@@ -34,7 +35,18 @@ public class CrossyController : MonoBehaviour
     [SerializeField] private Transform m_HindVision;
     [SerializeField] private Transform m_CrossyDespawn;
 
+    [Header("Eye Glow")]
     [SerializeField] private Material crossyGlow;
+    [SerializeField] private float m_AlertUnSeenValue;
+    [SerializeField] private float m_AlertPerifValue;
+    [SerializeField] private float m_AlertFocalValue;
+    [SerializeField] private float m_PursitUnseenValue;
+    [SerializeField] private float m_PursitFocalValue;
+
+    [SerializeField] private float m_EyeRaiseRate;
+    [SerializeField] private float m_EyeLowerRate;
+    bool raisingEye;
+    bool loweringEye;
 
     [Header("Movement Variables")]
     [Tooltip("Mr. Crossy's walking speed.")]
@@ -49,7 +61,7 @@ public class CrossyController : MonoBehaviour
     [Tooltip("Mr. Crossy's acceleration rate.")]
     [SerializeField] private float m_BaseAcceleration;
     /*[SerializeField] */
-    private float m_CornerAcceleration;
+    private float m_StoppingAcceleration = 120f;
     /*[SerializeField] */
     private float m_Acceleration;
 
@@ -91,6 +103,7 @@ public class CrossyController : MonoBehaviour
     [SerializeField] private float m_HighestQuartMulti;
     [SerializeField] private float m_UpperQuartMulti;
     [SerializeField] private float m_LowerQuartMulti;
+    [SerializeField] private float m_ReverseMulti;
 
     [SerializeField] private float m_FocalViewCone;
     [SerializeField] private float m_PeripheralViewCone;
@@ -133,7 +146,7 @@ public class CrossyController : MonoBehaviour
     public float RunSpeed { get { return (m_InSight) ? FullRunSpeed : SubRunSpeed; } }
     public float MoveSpeed { get { return (m_ShouldRun && RunSpeed > WalkSpeed) ? RunSpeed : WalkSpeed; } }
 
-    public float Acceleration { get { return m_Acceleration; } set { m_Acceleration = value; } }
+    public float Acceleration { get { return (m_ShouldBeStopped) ? m_StoppingAcceleration : m_BaseAcceleration; } set { m_Acceleration = value; } }
     public float AngularSpeed { get { return m_AngularSpeed; } set { m_AngularSpeed = value; } }
     public float StoppingDistance { get { return m_StoppingDistance; } set { m_StoppingDistance = value; } }
     public float RunDistance { get { return (m_State == 2) ? m_AlertRunDistance : m_PatrolRunDistance; } }
@@ -161,9 +174,15 @@ public class CrossyController : MonoBehaviour
     public float HighestQuartMulti { get { return m_HighestQuartMulti; } set { m_HighestQuartMulti = value; } }
     public float UpperQuartMulti { get { return m_UpperQuartMulti; } set { m_UpperQuartMulti = value; } }
     public float LowerQuartMulti { get { return m_LowerQuartMulti; } set { m_LowerQuartMulti = value; } }
+    public float ReverseMulti { get { return m_ReverseMulti; } set { m_ReverseMulti = value; } }
 
     public GameObject WarpParticleOne { get { return m_WarpParticleOne; } }
     public GameObject WarpParticleTwo { get { return m_WarpParticleTwo; } }
+
+    public ParticleSystem PartiboiOne { get { return m_WarpParticleOne.GetComponent<ParticleSystem>(); } }
+    public ParticleSystem PartiboiTwo { get { return m_WarpParticleTwo.GetComponent<ParticleSystem>(); } }
+    public StudioEventEmitter SoundiboiOne { get { return m_WarpParticleOne.GetComponent<StudioEventEmitter>(); } }
+    public StudioEventEmitter SoundiboiTwo { get { return m_WarpParticleTwo.GetComponent<StudioEventEmitter>(); } }
     public float ParticleWaitTime { get { return m_ParticleWait; } }
 
     #endregion
@@ -183,6 +202,7 @@ public class CrossyController : MonoBehaviour
 
     private void Awake()
     {
+        crossyGlow.EnableKeyword("_EMISSION");
         crossyTree = GetComponent<BehaviorTree>();
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
@@ -217,22 +237,9 @@ public class CrossyController : MonoBehaviour
         //RunSpeed = (m_InSight) ? FullRunSpeed : SubRunSpeed;
         //MoveSpeed = (m_ShouldRun) ? RunSpeed : WalkSpeed;
 
-        if (accelManipulation)
-        {
-            if (m_DistanceToCorner <= m_CornerThreshold)
-            {
-                interpolator = Mathf.InverseLerp(m_CornerThreshold, 0f, m_DistanceToCorner);
+        //Acceleration = (m_ShouldBeStopped) ? m_StoppingAcceleration : m_BaseAcceleration;
 
-            }
-            else if (interpolator < 1f)
-            {
-                interpolator = 1f;
-            }
-        }
-
-        Acceleration = (accelManipulation) ? Mathf.Lerp(m_BaseAcceleration, m_CornerAcceleration, interpolator) : m_BaseAcceleration;
-
-        agent.acceleration = Acceleration;
+        //agent.acceleration = Acceleration;
 
         if (m_InSight || m_InPeripheral) lookCondition = true;
         else lookCondition = false;
@@ -399,32 +406,108 @@ public class CrossyController : MonoBehaviour
         if(crossyGlow)
         {
             Color colour = crossyGlow.color;
+            Color emColour = crossyGlow.GetColor("_EmissionColor");
 
-            if (m_State < 2)
+            if (m_State < 1)
             {
-                colour.a = 0f;
-            }
-            else if (m_State == 2)
-            {
-                colour.a = m_EyeAlertPoint;
-            }
-            else if (m_State == 3)
-            {
-                if (agent.remainingDistance < RunDistance)
+                if (colour.a > 0f)
                 {
-                    float interp = Mathf.InverseLerp(0f, RunDistance, agent.remainingDistance);
-
-                    colour.a = Mathf.Lerp(m_EyeAlertPoint, 1, interp);
+                    if (raisingEye) { StopCoroutine(RaiseEyeGlow(colour, 0f)); raisingEye = false; }
+                    if (!loweringEye) StartCoroutine(LowerEyeGlow(colour, 0f));
                 }
             }
-
-            crossyGlow.color = colour;
+            else if (m_State >= 1)
+            {
+                if(!m_InPeripheral && !m_InSight)
+                {
+                    emColour.a = 0.5f;
+                    if(colour.a < m_AlertUnSeenValue)
+                    {
+                        if (loweringEye) { StopCoroutine(LowerEyeGlow(colour, m_AlertUnSeenValue)); loweringEye = false; }
+                        if (!raisingEye) StartCoroutine(RaiseEyeGlow(colour, m_AlertUnSeenValue));
+                    }
+                    else if (colour.a > m_AlertUnSeenValue)
+                    {
+                        if (raisingEye) { StopCoroutine(RaiseEyeGlow(colour, m_AlertUnSeenValue)); raisingEye = false; }
+                        if (!loweringEye) StartCoroutine(LowerEyeGlow(colour, m_AlertUnSeenValue));
+                    }
+                    crossyGlow.SetColor("_EmissionColor", emColour);
+                }
+                else if (m_InPeripheral && !m_InSight)
+                {
+                    emColour.a = 0.7f;
+                    if (colour.a < m_AlertPerifValue)
+                    {
+                        if (loweringEye) { StopCoroutine(LowerEyeGlow(colour, m_AlertPerifValue)); loweringEye = false; }
+                        if (!raisingEye) StartCoroutine(RaiseEyeGlow(colour, m_AlertPerifValue));
+                    }
+                    else if (colour.a > m_AlertPerifValue)
+                    {
+                        if (raisingEye) { StopCoroutine(RaiseEyeGlow(colour, m_AlertPerifValue)); raisingEye = false; }
+                        if (!loweringEye) StartCoroutine(LowerEyeGlow(colour, m_AlertPerifValue));
+                    }
+                    crossyGlow.SetColor("_EmissionColor", emColour);
+                }
+                else if (m_InSight)
+                {
+                    emColour.a = 1f;
+                    if (colour.a < m_AlertFocalValue)
+                    {
+                        if (loweringEye) { StopCoroutine(LowerEyeGlow(colour, m_AlertFocalValue)); loweringEye = false; }
+                        if (!raisingEye) StartCoroutine(RaiseEyeGlow(colour, m_AlertFocalValue));
+                    }
+                    else if (colour.a > m_AlertFocalValue)
+                    {
+                        if (raisingEye) { StopCoroutine(RaiseEyeGlow(colour, m_AlertFocalValue)); raisingEye = false; }
+                        if (!loweringEye) StartCoroutine(LowerEyeGlow(colour, m_AlertFocalValue));
+                    }
+                    crossyGlow.SetColor("_EmissionColor", emColour);
+                }
+            }
         }
     }
+
+    public IEnumerator RaiseEyeGlow(Color colour, float raiseTo)
+    {
+        raisingEye = true;
+        while(colour.a < raiseTo)
+        {
+            colour.a += Time.deltaTime * m_EyeRaiseRate;
+            crossyGlow.color = colour;
+            yield return null;
+        }
+        colour.a = raiseTo;
+        crossyGlow.color = colour;
+        raisingEye = false;
+    }
+
+    public IEnumerator LowerEyeGlow(Color colour, float lowerTo)
+    {
+        loweringEye = true;
+        while (colour.a > lowerTo)
+        {
+            colour.a -= Time.deltaTime * m_EyeLowerRate;
+            crossyGlow.color = colour;
+            yield return null;
+        }
+        colour.a = lowerTo;
+        crossyGlow.color = colour;
+        loweringEye = false;
+    }
+
     public void OnEnable()
     {
         TreeMalarkey.RegisterEventOnTree(crossyTree, "Darken", DarkenEvent);
         TreeMalarkey.RegisterEventOnTree(crossyTree, "PlayAttack", AttackSound);
+        TreeMalarkey.RegisterEventOnTree(crossyTree, "PlayDamage", AttackHitSound);
+        TreeMalarkey.RegisterEventOnTree(crossyTree, "WooshOne", WooshSingle);
+        TreeMalarkey.RegisterEventOnTree(crossyTree, "WooshTwo", WooshBothle);
+    }
+
+    public void RegisterEvents()
+    {
+        TreeMalarkey.RegisterEventOnTree(OverseerController.ObserverTree, "WooshOne", WooshSingle);
+        TreeMalarkey.RegisterEventOnTree(OverseerController.ObserverTree, "WooshTwo", WooshBothle);
     }
 
     public void DarkenEvent()
@@ -440,9 +523,34 @@ public class CrossyController : MonoBehaviour
         attackLines.start();
     }
 
+    public void AttackHitSound()
+    {
+        attackChild = RuntimeManager.CreateInstance("event:/Character/Hit and damage/Child Hit and Damage");
+        attackChild.start();
+    }
+
+    public void WooshSingle()
+    {
+        PartiboiOne.Play();
+        SoundiboiOne.Play();
+    }
+
+    public void WooshBothle()
+    {
+        PartiboiOne.Play();
+        SoundiboiOne.Play();
+        PartiboiTwo.Play();
+        SoundiboiTwo.Play();
+    }
+
     public void OnDisable()
     {
         TreeMalarkey.UnregisterEventOnTree(crossyTree, "Darken", DarkenEvent);
         TreeMalarkey.UnregisterEventOnTree(crossyTree, "PlayAttack", AttackSound);
+        TreeMalarkey.UnregisterEventOnTree(crossyTree, "PlayDamage", AttackHitSound);
+        TreeMalarkey.UnregisterEventOnTree(crossyTree, "WooshOne", WooshSingle);
+        TreeMalarkey.UnregisterEventOnTree(crossyTree, "WooshTwo", WooshBothle);
+        TreeMalarkey.UnregisterEventOnTree(OverseerController.ObserverTree, "WooshOne", WooshSingle);
+        TreeMalarkey.UnregisterEventOnTree(OverseerController.ObserverTree, "WooshTwo", WooshBothle);
     }
 }

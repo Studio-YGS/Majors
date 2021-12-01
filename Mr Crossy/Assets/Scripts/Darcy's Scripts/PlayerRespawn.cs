@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using TMPro;
 
 public class PlayerRespawn : MonoBehaviour
 {
@@ -16,11 +18,23 @@ public class PlayerRespawn : MonoBehaviour
     Vector3 originalposition;
 
     [SerializeField]
-    GameObject respawningText;
+    TextMeshProUGUI deathCountText;
 
-    bool hasMoved = false;
+    [SerializeField]
+    GameObject street;
+
+    [SerializeField]
+    GameObject deathVideoObject;
+    [SerializeField] float deathWaitTime = 7.3f;
+
+    public UnityEvent deathTutorial;
+
+    int deathCount;
+
+    bool hasMoved = false, tutorialPlayed;
     OverseerController seer;
     public ExternalInteralSwitch exSwitch;
+    [HideInInspector] public bool crossyDeath;
 
     void Start()
     {
@@ -28,7 +42,6 @@ public class PlayerRespawn : MonoBehaviour
         seer = FindObjectOfType<OverseerController>();
         player = FindObjectOfType<Player_Controller>();
         journal = FindObjectOfType<JournalController>();
-        puzzleController = FindObjectOfType<PuzzleController>();
     }
 
     public void Register()
@@ -55,6 +68,7 @@ public class PlayerRespawn : MonoBehaviour
         FindObjectOfType<CrossKeyManager>().doorsLocked = false;
         FindObjectOfType<ObjectHolder>().DeathDrop();
         seer.deady = true;
+        if (!seer.attemptingDie) seer.DeadNoises();
         FindObjectOfType<MrCrossyDistortion>().ResetDamage();
         player.gameObject.SetActive(false);
         player.DisableController();
@@ -63,28 +77,55 @@ public class PlayerRespawn : MonoBehaviour
         journal.OpenMap();
         journal.DisableJournal();
 
-        if(!puzzleController.GameOverCheck())
+        deathCount++;
+        deathCountText.text = deathCount.ToString();
+        if (!crossyDeath)
         {
-            respawningText.SetActive(true);
+            deathVideoObject.SetActive(true);
 
-            StartCoroutine(WaitForRespawn(5f));
+            StartCoroutine(WaitForRespawn(deathWaitTime));
         }
+        else
+        {
+            StartCoroutine(WaitForRespawn(2));
+        }
+        
     }
 
     IEnumerator WaitForRespawn(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
-        FindObjectOfType<MrCrossyDistortion>().mask.SetActive(false);
+        
         FindObjectOfType<MrCrossyDistortion>().ReduceInsanity();
         FindObjectOfType<MrCrossyDistortion>().DecreaseVignette();
-        respawningText.SetActive(false);
+        deathVideoObject.SetActive(false);
 
+        puzzleController = FindObjectOfType<PuzzleController>();
+        puzzleController.MistakeCounter();
+        crossyDeath = false;
         player.gameObject.SetActive(true);
         player.enabled = true;
+
+        street.GetComponent<TextMeshProUGUI>().text = "Home.";
+        FindObjectOfType<MrCrossyDistortion>().mask.GetComponent<Animator>().SetTrigger("FadeAway");
+        if (!tutorialPlayed)
+        {
+            tutorialPlayed = true;
+
+            deathTutorial.Invoke();
+        }
+        else
+        {
+            ReleaseToPlayer();
+        }
+    }
+
+    public void ReleaseToPlayer()
+    {
         player.EnableController();
-        seer.emitter.Target.SetParameter(seer.deadParamName, 1f);
-        seer.emitter.Target.SetParameter(seer.distanceParamName, 100f);
-        seer.emitter.Target.SetParameter(seer.chaseParamName, 1f);
+        seer.emitter.Params[2].Value = 1f;
+        seer.emitter.Params[0].Value = 100f;
+        seer.emitter.Params[1].Value = 1f;
         exSwitch.WalkIn();
         journal.EnableJournal();
         FindObjectOfType<OverseerController>().deady = false;

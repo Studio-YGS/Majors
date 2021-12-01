@@ -34,16 +34,13 @@ public class MrCrossyDistortion : MonoBehaviour
             volume[i].TryGet<ColorAdjustments>(out colorAdjustments[i]);
         }
         player = FindObjectOfType<Camera>().transform;
+        mask.SetActive(true);
+        mask.GetComponent<Animator>().SetTrigger("FadeAway");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            HitByCrossy();
-        }
-
         if (mrCrossy != null)
         {
             float distance = Vector3.Distance(player.position, mrCrossy.transform.position);
@@ -188,6 +185,7 @@ public class MrCrossyDistortion : MonoBehaviour
             vignette[i].intensity.value = 0;
             colorAdjustments[i].colorFilter.value = Color.white;
         }
+        hits = 0;
     }
 
     public void IncreaseInsanity(GameObject crossy)
@@ -249,7 +247,7 @@ public class MrCrossyDistortion : MonoBehaviour
             //colorAdjustments.active = true;
             if (colorAdjustments[i].colorFilter.value != Color.black)
             {
-                colorAdjustments[i].colorFilter.value = Color.Lerp(colorAdjustments[i].colorFilter.value, Color.black, 0.06f);
+                colorAdjustments[i].colorFilter.value = Color.Lerp(colorAdjustments[i].colorFilter.value, Color.black, 0.04f);
             }
         }
 
@@ -325,13 +323,19 @@ public class MrCrossyDistortion : MonoBehaviour
 
             yield return null;
         }
-        mask.SetActive(true);
+        StartCoroutine(WaitForMask(speed));
         //for (int i = 0; i < volume.Length; i++)
         //{
         //    colorAdjustments[i].colorFilter.value = Color.white;
         //    vignette[i].intensity.value = baseVignette;
         //}
         //colorAdjustments.active = false;
+    }
+
+    IEnumerator WaitForMask(float waitTime)
+    {
+        yield return new WaitForSecondsRealtime(waitTime);
+        mask.SetActive(true);
     }
 
     public void WhitenScreen(float speed)
@@ -367,12 +371,14 @@ public class MrCrossyDistortion : MonoBehaviour
 
     public void ResetDamage()
     {
+        StopCoroutine("TakeDamage");
         for (int i = 0; i < volume.Length; i++)
         {
             //vignette[i].color.value = new Color32(204, 16, 16, 1);
             vignette[i].color.value = Color.red;
             vignette[i].intensity.value = 0;
         }
+        
         hits = 0;
     }
 
@@ -452,6 +458,7 @@ public class MrCrossyDistortion : MonoBehaviour
         if (CrossyController.crossyTree)
         {
             TreeMalarkey.RegisterEventOnTree(CrossyController.crossyTree, "CrossyHit", HitByCrossy);
+            TreeMalarkey.RegisterEventOnTree(CrossyController.crossyTree, "VignetteDecrease", DecreaseVignette);
         }
     }
 
@@ -464,6 +471,7 @@ public class MrCrossyDistortion : MonoBehaviour
         if (CrossyController.crossyTree)
         {
             TreeMalarkey.UnregisterEventOnTree(CrossyController.crossyTree, "CrossyHit", HitByCrossy);
+            TreeMalarkey.UnregisterEventOnTree(CrossyController.crossyTree, "VignetteDecrease", DecreaseVignette);
         }
     }
 }

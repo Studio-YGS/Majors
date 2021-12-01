@@ -17,6 +17,8 @@ public class WordCollision : MonoBehaviour
     [SerializeField]
     PuzzleController puzzleController;
 
+    OverseerController seer;
+
     MenuManager menuManager;
 
     [SerializeField] 
@@ -28,6 +30,7 @@ public class WordCollision : MonoBehaviour
     {
         menuManager = FindObjectOfType<MenuManager>();
         respawn = FindObjectOfType<RespawnWordColliders>();
+        seer = FindObjectOfType<OverseerController>();
     }
 
     void OnTriggerEnter(Collider other)
@@ -72,7 +75,10 @@ public class WordCollision : MonoBehaviour
 
         menuManager.streetName.SetActive(true);
 
-        FindObjectOfType<OverseerController>().m_StalkStreet = streetStalk;
+        if(streetStalk != null)
+        {
+            seer.m_StalkStreet = streetStalk;
+        }
 
         gameObject.SetActive(false);
     }
@@ -101,5 +107,10 @@ public class WordCollision : MonoBehaviour
 
             altarsDisabled = true;
         }
+    }
+
+    public void SetHomeText()
+    {
+        puzzleController.streetText.text = "Home.";
     }
 }

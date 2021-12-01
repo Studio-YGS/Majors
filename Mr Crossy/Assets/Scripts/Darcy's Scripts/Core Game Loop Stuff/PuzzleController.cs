@@ -31,7 +31,7 @@ public class PuzzleController : MonoBehaviour
     public List<GameObject> storedObjects = new List<GameObject>();
     public List<GameObject> wordObjects = new List<GameObject>();
 
-    public bool tutorial;
+    public bool tutorial, devPuzzleCompletion;
     bool tenPlayed;
 
     public UnityEvent winEvent, loseEvent, tutorialEvent, tutorialMistakeEvent;
@@ -204,7 +204,7 @@ public class PuzzleController : MonoBehaviour
             audio.WordSpeltIncorrectly();
 
             Debug.Log("Game Over check calling from the player controller by: " + wordCollision.gameObject.name + ". Players word length, word length, playersword: " + playersWordLength + " " + wordLength + " " + playersWord);
-            GameOverCheck();
+            MistakeCounter();
         }
     }
 
@@ -249,17 +249,17 @@ public class PuzzleController : MonoBehaviour
             }
         }
 
-        if(completedWords == wordsInPuzzle)
+        if(completedWords >= wordsInPuzzle)
         {
             winEvent.Invoke();
         }
     }
 
-    public bool GameOverCheck()
+    public void MistakeCounter()
     {
         if (!gameObject.name.Contains("Tutorial"))
         {
-            Debug.LogError("MISTAKE");
+            Debug.Log("MISTAKE");
             mistakeCount++;
             mistakeText.text = mistakeCount.ToString();
         }
@@ -268,27 +268,33 @@ public class PuzzleController : MonoBehaviour
             tutorialMistakeEvent.Invoke();
         }
 
-        if (mistakeCount == 3)
-        {
-            GameOver();
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        //if (mistakeCount == 3)
+        //{
+        //    GameOver();
+        //    return true;
+        //}
+        //else
+        //{
+        //    return false;
+        //}
     }
 
-    void GameOver()
+    public void DevSkip()
     {
-        loseEvent.Invoke();
-        StartCoroutine(StartAgain());
+        completedWords = wordsInPuzzle;
+        CompletionCheck();
     }
 
-    IEnumerator StartAgain()
-    {
-        yield return new WaitForSeconds(3f);
+    //void GameOver()
+    //{
+    //    loseEvent.Invoke();
+    //    StartCoroutine(StartAgain());
+    //}
 
-        FindObjectOfType<MenuManager>().RestartGame();
-    }
+    //IEnumerator StartAgain()
+    //{
+    //    yield return new WaitForSeconds(3f);
+
+    //    FindObjectOfType<MenuManager>().RestartGame();
+    //}
 }
