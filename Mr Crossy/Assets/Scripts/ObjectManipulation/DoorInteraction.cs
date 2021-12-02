@@ -12,6 +12,8 @@ public class DoorInteraction : MonoBehaviour
     public GameObject reticle;
     public GameObject hand;
     public GameObject lockCheck;
+    JournalOnSwitch journal;
+    MenuManager menu;
     
     [Header("Door Controls")]
     public bool xForward;
@@ -63,11 +65,13 @@ public class DoorInteraction : MonoBehaviour
         distortion = FindObjectOfType<MrCrossyDistortion>();
         controller = FindObjectOfType<Player_Controller>();
         startMouseSens = controller.mouseSensitivity;
+        journal = FindObjectOfType<JournalOnSwitch>();
+        menu = FindObjectOfType<MenuManager>();
     }
 
     void Update()
     {
-        if (keyMan.doorsLocked && !isSafeHouse)
+        if (keyMan.doorsLocked && !isSafeHouse && !journal.open && !menu.menuOpen)
         {
             RaycastHit hit;
             if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 2, controller.raycastLayerMask))
@@ -329,7 +333,7 @@ public class DoorInteraction : MonoBehaviour
             }
         }
 
-        if (!keyMan.doorsLocked && keyDoor == null || isSafeHouse && keyDoor == null)
+        if (!keyMan.doorsLocked && keyDoor == null && !journal.open && !menu.menuOpen || isSafeHouse && keyDoor == null && !journal.open && !menu.menuOpen)
         {
             RaycastHit hit;
             if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 2, controller.raycastLayerMask))
@@ -412,7 +416,7 @@ public class DoorInteraction : MonoBehaviour
             }
 
 
-            if (moveable)
+            if (moveable && !journal.open && !menu.menuOpen)
             {
                 rotationVal = Mathf.Clamp(rotationVal, -90f, 90f);
                 if (angleRelativeToPlayer > 180 * 0.5f)
