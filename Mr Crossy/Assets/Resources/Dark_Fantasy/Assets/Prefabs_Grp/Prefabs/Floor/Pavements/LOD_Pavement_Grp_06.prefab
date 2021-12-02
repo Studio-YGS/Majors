@@ -1,5 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!65 &2288013927603203723
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 574266266251621456}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.9468255, y: 0.20591804, z: 4.088603}
+  m_Center: {x: -0.06658727, y: 0, z: 0.00000047683716}
 --- !u!1 &8089149295857433439
 GameObject:
   m_ObjectHideFlags: 0
@@ -46,7 +59,7 @@ LODGroup:
   m_AnimateCrossFading: 0
   m_LastLODIsBillboard: 0
   m_LODs:
-  - screenRelativeHeight: 0.076382704
+  - screenRelativeHeight: 0.0121781025
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 2087638674564273541}
@@ -106,8 +119,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pavement_Grp_06_Lod0
       objectReference: {fileID: 0}
+    - target: {fileID: 770412988258342540, guid: 897aac3990dd7bc4ea0025bcecfa879e, type: 3}
+      propertyPath: m_TagString
+      value: Stone
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 897aac3990dd7bc4ea0025bcecfa879e, type: 3}
+--- !u!1 &574266266251621456 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 770412988258342540, guid: 897aac3990dd7bc4ea0025bcecfa879e, type: 3}
+  m_PrefabInstance: {fileID: 957360887026852572}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &915326443475087082 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 142670616456858678, guid: 897aac3990dd7bc4ea0025bcecfa879e, type: 3}
