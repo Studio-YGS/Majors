@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class DetermineLetter : MonoBehaviour
 {
-    //[HideInInspector]
+    [HideInInspector]
     public GameObject storedObject;
 
     PuzzleController puzzleController;

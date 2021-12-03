@@ -22,12 +22,12 @@ public class PuzzleController : MonoBehaviour
     EventInstance eventInstance;
 
     int wordLength, mistakeCount, completedWords, letterPoint, objectPoint;
-    public int wordsInPuzzle, section;
+    public int wordsInPuzzle;
 
-    //[HideInInspector]
+    [HideInInspector]
     public List<TextMeshProUGUI> canvasLetters = new List<TextMeshProUGUI>();
 
-    //[HideInInspector]
+    [HideInInspector]
     public List<GameObject> storedObjects = new List<GameObject>();
     public List<GameObject> wordObjects = new List<GameObject>();
 
@@ -36,7 +36,7 @@ public class PuzzleController : MonoBehaviour
 
     public UnityEvent winEvent, loseEvent, tutorialEvent, tutorialMistakeEvent;
 
-    //[HideInInspector]
+    [HideInInspector]
     public WordCollision wordCollision;
 
     void Start()
