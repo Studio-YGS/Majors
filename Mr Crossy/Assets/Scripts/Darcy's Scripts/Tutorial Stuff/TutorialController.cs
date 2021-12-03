@@ -41,10 +41,13 @@ public class TutorialController : MonoBehaviour
 
     void Update()
     {
-        if (overseerController.State == 3 && !spotted)
+        if(overseerController != null)
         {
-            spotted = true;
-            GetComponent<TutorialSectionStart>().sectionStart.Invoke();
+            if (overseerController.State == 3 && !spotted)
+            {
+                spotted = true;
+                GetComponent<TutorialSectionStart>().sectionStart.Invoke();
+            }
         }
     }
 
