@@ -13,7 +13,10 @@ public class PlayerRespawn : MonoBehaviour
     PuzzleController puzzleController;
 
     [SerializeField]
-    Transform respawnPosition, crossyPosition;
+    Transform crossyPosition;
+    Transform respawnPosition;
+    [SerializeField]
+    Transform[] respawnPoints;
 
     Vector3 originalposition;
 
@@ -61,6 +64,11 @@ public class PlayerRespawn : MonoBehaviour
             Register();
             hasMoved = true;
         }
+
+        if (Input.GetKeyDown(KeyCode.I)) //testing, delete before submission
+        {
+            PlayerDie();
+        }
     }
 
     public void PlayerDie()
@@ -92,10 +100,26 @@ public class PlayerRespawn : MonoBehaviour
         
     }
 
+    public void ReleaseToPlayer()
+    {
+        player.EnableController();
+        seer.emitter.Params[2].Value = 1f;
+        seer.emitter.Params[0].Value = 100f;
+        seer.emitter.Params[1].Value = 1f;
+        exSwitch.WalkIn();
+        journal.EnableJournal();
+        FindObjectOfType<OverseerController>().deady = false;
+    }
+
+    public void SwitchRespawnPoint(int whichPoint)
+    {
+        respawnPosition = respawnPoints[whichPoint - 1];
+    }
+
     IEnumerator WaitForRespawn(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
-        
+
         FindObjectOfType<MrCrossyDistortion>().ReduceInsanity();
         FindObjectOfType<MrCrossyDistortion>().DecreaseVignette();
         deathVideoObject.SetActive(false);
@@ -118,16 +142,5 @@ public class PlayerRespawn : MonoBehaviour
         {
             ReleaseToPlayer();
         }
-    }
-
-    public void ReleaseToPlayer()
-    {
-        player.EnableController();
-        seer.emitter.Params[2].Value = 1f;
-        seer.emitter.Params[0].Value = 100f;
-        seer.emitter.Params[1].Value = 1f;
-        exSwitch.WalkIn();
-        journal.EnableJournal();
-        FindObjectOfType<OverseerController>().deady = false;
     }
 }
