@@ -90,7 +90,7 @@ public class ObjectOpener : MonoBehaviour
                             //other stuff when key is picked up
                             holder.Drop();
                             key.SetActive(false);
-                            holder.controller.enabled = true;
+                            holder.vHolder.controller.enabled = true;
                             keyPickup.Invoke();
                             FMODUnity.RuntimeManager.PlayOneShot("event:/2D/Object Interaction/Key Pickup");
                             Cursor.visible = false;
