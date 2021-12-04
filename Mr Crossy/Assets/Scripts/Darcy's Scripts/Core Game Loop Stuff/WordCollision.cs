@@ -8,7 +8,7 @@ public class WordCollision : MonoBehaviour
 
     public string[] overlappedStreets;
 
-    //[HideInInspector]
+    [HideInInspector]
     public bool puzzleComplete, altarsDisabled, dontWrite, dontCheck;
 
     [SerializeField]
@@ -38,6 +38,14 @@ public class WordCollision : MonoBehaviour
         if (other.CompareTag("GameController"))
         {
             SetUpController();
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("GameController"))
+        {
+            puzzleController.streetText.text = "";
         }
     }
 

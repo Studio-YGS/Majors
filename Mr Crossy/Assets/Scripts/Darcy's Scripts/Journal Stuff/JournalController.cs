@@ -19,7 +19,7 @@ public class JournalController : MonoBehaviour
 
     GameObject mapPage;
 
-    int whichTab = 1, whichLogPage = 0;
+    int whichTab = 1; //,whichLogPage = 0;
 
     [HideInInspector]
     public int whichNotesPage = 0;
@@ -33,6 +33,11 @@ public class JournalController : MonoBehaviour
     void Start()
     {
         mapPage = tutMap;
+
+        if (!tutorial)
+        {
+            SetToGameMap();
+        }
         journalOnSwitch = FindObjectOfType<JournalOnSwitch>();
     }
 
@@ -218,7 +223,7 @@ public class JournalController : MonoBehaviour
             {
                 case 1:
                     {
-                        whichLogPage++;
+                        //whichLogPage++;
                         OpenLog();
                         break;
                     }
@@ -240,7 +245,7 @@ public class JournalController : MonoBehaviour
             {
                 case 1:
                     {
-                        whichLogPage--;
+                        //whichLogPage--;
                         OpenLog();
                         break;
                     }

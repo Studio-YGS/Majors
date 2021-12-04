@@ -131,6 +131,10 @@ public class OverseerController : MonoBehaviour
     #endregion
 
     [Space(10)]
+    public List<Lighthouse> districtOneLighthouses = new List<Lighthouse>();
+    public List<Lighthouse> districtTwoLighthouses = new List<Lighthouse>();
+    public List<Lighthouse> districtThreeLighthouses = new List<Lighthouse>();
+
     public List<Lighthouse> titanLighthouses = new List<Lighthouse>();
 
 
@@ -155,6 +159,7 @@ public class OverseerController : MonoBehaviour
         emitter.Params[3].Value = 0f;
 
         ParameterHell();
+
 
         if (startOnAwake)
         {
@@ -346,7 +351,7 @@ public class OverseerController : MonoBehaviour
         Vector3 check = new Vector3(titan.lighthouse.selfTransform.position.x, 0f, titan.lighthouse.selfTransform.position.z);
         float dist = Vector3.Distance(playerPosition, check);
 
-        if (dist > m_CheckRadius)
+        if (dist > titan.lighthouse.checkRadius)
         {
             Debug.Log("Checkky");
             return true;
