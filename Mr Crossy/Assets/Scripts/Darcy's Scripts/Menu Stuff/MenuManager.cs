@@ -124,7 +124,7 @@ public class MenuManager : MonoBehaviour
 
     public void StartGame()
     {
-        controlsUI.SetActive(true);
+        OpenControlsUI();
 
         loadingAni.SetActive(true);
 
@@ -161,14 +161,30 @@ public class MenuManager : MonoBehaviour
         }
     }
 
+    public void OpenControlsUI()
+    {
+        controlsUI.SetActive(true);
+        settingsMenuObject.SetActive(false);
+
+        if (!mainMenu)
+        {
+            controlsUI.GetComponentInChildren<Button>().gameObject.SetActive(true);
+        }
+        else
+        {
+            controlsUI.GetComponentInChildren<Button>().gameObject.SetActive(false);
+        }
+    }
+
+    public void CloseControlsUI()
+    {
+        controlsUI.SetActive(false);
+        OpenSettingsMenu();
+    }
+
     public void QuitGame()
     {
         Application.Quit();
-    }
-
-    public void RestartGame()
-    {
-        SceneManager.LoadScene("Main_Cael");
     }
 
     public void UpdateSliders()
