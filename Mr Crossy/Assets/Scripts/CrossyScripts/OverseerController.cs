@@ -10,6 +10,9 @@ using FMODUnity;
 public class OverseerController : MonoBehaviour
 {
     public static BehaviorTree ObserverTree;
+
+    public static float CrossyPathDistance = 0f;
+
     public bool m_PlayerInHouse;
     public bool allowVignette = true;
 
@@ -71,10 +74,10 @@ public class OverseerController : MonoBehaviour
     [SerializeField] private float m_TitanAwakenThresh;
 
     [Header("FMOD Variables")]
-    public string distanceParamName = "Distance";
-    public string chaseParamName = "IsChasing";
-    public string deadParamName = "isDead";
-    public string titanParamName = "Titan";
+    //public string distanceParamName = "Distance";
+    //public string chaseParamName = "IsChasing";
+    //public string deadParamName = "isDead";
+    //public string titanParamName = "Titan";
 
     [SerializeField] bool attemptingSafe = false;
     [HideInInspector] public bool attemptingDie = false;
@@ -118,7 +121,7 @@ public class OverseerController : MonoBehaviour
     public int DeathChanceMaximum { get { return m_DeathChanceMax; } }
     public int DeathChanceRemaining { get { return m_DeathChanceRemain; } set { m_DeathChanceRemain = value; } }
 
-    public Vector3 ValidationPosition { get { return m_ValidationPosition; } }
+    public Vector3 ValidationPosition { get { return (usePositioner) ? validationPositioner.transform.position : m_ValidationPosition; } }
     public int State { get { return m_State; } set { m_State = value; } }
     public bool HideTitan { get { return m_HideTitan; } set { m_HideTitan = value; } }
 
@@ -175,47 +178,47 @@ public class OverseerController : MonoBehaviour
 
     private void Update()
     {
-        if (usePositioner) m_ValidationPosition = validationPositioner.transform.position;
+        //if (usePositioner) m_ValidationPosition = validationPositioner.transform.position;
 
         titan.m_state = m_State;
         titan.hidingTitan = m_HideTitan;
 
         HouseyBoBousey();
 
-
-        if(titan.animator.GetCurrentAnimatorStateInfo(0).IsName("TitanCrossyIdle"))
-        {
-            if(!m_TimerActive && !titan.allowHide)
-            {
-                StartCoroutine(AllowHideTimer());
-            }
-        }
-
-        if(m_State == -1 && !m_IsTutorial)
-        {
-            bool left = LeftRadius();
-
-            if (left)
-            {
-                if (titan.allowHide) CheckClosestLighthouse();
-            }
-        }
-
-        VignetteProcessor();
-
         if(!m_IsTutorial)
         {
             if (m_State >= 1 || keyMan.puzzleOn || attemptingSafe || hasChased || emitter.Params[1].Value == 0f) fiddleFMOD = true;
             else fiddleFMOD = false;
 
-            if (fiddleFMOD) CrossyFMODFiddling(crossyAgent, m_ValidationPosition, m_State, deady);
+            if (fiddleFMOD) CrossyFMODFiddling(CrossyPathDistance, m_State, deady);
+
+            VignetteProcessor();
 
             ParameterHell();
+            GetCrossyPlayerDistance();
 
-            if (m_State == -1 && !m_PlayerInHouse)
-            { 
-                TitanCrossyVoiceLines();
-                TitanUppyDownyNoisies();
+            if (m_State == -1)
+            {
+                if (titan.animator.GetCurrentAnimatorStateInfo(0).IsName("TitanCrossyIdle"))
+                {
+                    if (!m_TimerActive && !titan.allowHide)
+                    {
+                        StartCoroutine(AllowHideTimer());
+                    }
+                }
+
+                if (!m_PlayerInHouse)
+                {
+                    TitanCrossyVoiceLines();
+                    TitanUppyDownyNoisies();
+                }
+
+                bool left = LeftRadius();
+
+                if (left)
+                {
+                    if (titan.allowHide) CheckClosestLighthouse();
+                }
             }
         }
 
@@ -246,7 +249,7 @@ public class OverseerController : MonoBehaviour
             if (allowVignette)
             {
                 vignetteActivated = true;
-                Debug.Log("potoatosondwich");
+                //Debug.Log("potoatosondwich");
                 distootle.DistanceVignette(m_Crossy);
             }
 
@@ -255,22 +258,18 @@ public class OverseerController : MonoBehaviour
                 keyMan.doorsLocked = true;
             }
         }
-        else if (m_State != 3 && vignetteActivated && !deady)
+        else if (m_State != 3)
         {
             if (allowVignette)
             {
-                vignetteActivated = false;
-                Debug.Log("VignetteNooooooo");
-                distootle.DecreaseVignette();
+                if(vignetteActivated && !deady)
+                {
+                    vignetteActivated = false;
+                    //Debug.Log("VignetteNooooooo");
+                    distootle.DecreaseVignette();
+                }
             }
 
-            if (keyMan.doorsLocked)
-            {
-                keyMan.doorsLocked = false;
-            }
-        }
-        else if (m_State != 3)
-        {
             if (keyMan.doorsLocked)
             {
                 keyMan.doorsLocked = false;
@@ -348,7 +347,8 @@ public class OverseerController : MonoBehaviour
     public bool LeftRadius()
     {
         Vector3 playerPosition = new Vector3(m_Player.transform.position.x, 0f, m_Player.transform.position.z);
-        Vector3 check = new Vector3(titan.lighthouse.selfTransform.position.x, 0f, titan.lighthouse.selfTransform.position.z);
+        //Vector3 check = new Vector3(titan.lighthouse.selfTransform.position.x, 0f, titan.lighthouse.selfTransform.position.z);
+        Vector3 check = titan.lighthouse.CheckCentre;
         float dist = Vector3.Distance(playerPosition, check);
 
         if (dist > titan.lighthouse.checkRadius)
@@ -401,31 +401,31 @@ public class OverseerController : MonoBehaviour
         
     }
 
-    public void ParameterHell()
+    public void GetCrossyPlayerDistance()
     {
-        emitter.Target.SetParameter(distanceParamName, emitter.Params[0].Value);
-        emitter.Target.SetParameter(chaseParamName, emitter.Params[1].Value);
-        emitter.Target.SetParameter(deadParamName, emitter.Params[2].Value);
-        emitter.Target.SetParameter(titanParamName, emitter.Params[3].Value);
+        NavMeshPath navPath = new NavMeshPath();
+
+        if(NavMesh.CalculatePath(m_Crossy.transform.position, m_Player.transform.position, crossyAgent.areaMask, navPath))
+        {
+            if(navPath.status != NavMeshPathStatus.PathInvalid)
+            {
+                CrossyPathDistance = Emerald.GetPathLength(navPath);
+            }
+        }
     }
 
-    public void CrossyFMODFiddling(NavMeshAgent agent, Vector3 playerPos, int state, bool dead)
+    public void ParameterHell()
+    {
+        emitter.Target.SetParameter(emitter.Params[0].Name, emitter.Params[0].Value);
+        emitter.Target.SetParameter(emitter.Params[1].Name, emitter.Params[1].Value);
+        emitter.Target.SetParameter(emitter.Params[2].Name, emitter.Params[2].Value);
+        emitter.Target.SetParameter(emitter.Params[3].Name, emitter.Params[3].Value);
+    }
+
+    public void CrossyFMODFiddling(float pathDistance, int state, bool dead)
     {
         CrossKeyManager key = FindObjectOfType<CrossKeyManager>();
 
-        pathDistance = Mathf.Clamp(pathDistance, 0f, 100f);
-
-        NavMeshPath navPath = new NavMeshPath();
-
-        if(agent.CalculatePath(playerPos, navPath))
-        {
-            if(navPath.status == NavMeshPathStatus.PathComplete)
-            {
-                pathDistance = Emerald.GetPathLength(navPath);
-                Debug.Log("CrossyFMOD PathDistance: " + pathDistance);
-            }
-            
-        }
 
         if(pathDistance <= 100f)
         {
@@ -445,9 +445,9 @@ public class OverseerController : MonoBehaviour
         {
             if (hasChased && !attemptingSafe)
             {
-                Safe();
+                StartCoroutine(WaitForPuzzleOff());
+                Debug.Log("ADAPTIVE: Chase Stopped: State = " + state + ", PuzzleOn = " + key.puzzleOn);
             }
-            Debug.Log("ADAPTIVE: Chase Stopped: State = " + state + ", PuzzleOn = " + key.puzzleOn);
         }
 
         if (dead)
@@ -504,10 +504,10 @@ public class OverseerController : MonoBehaviour
     {
         attemptingDie = true;
 
-        emitter.Params[2].Value = 0f;
-        emitter.Params[1].Value = 1f;
+        emitter.Params[2].Value = 0f; //Makes dead
+        emitter.Params[1].Value = 1f; //Makes chase stop
         yield return new WaitForSeconds(1f);
-        emitter.Params[2].Value = 1f;
+        emitter.Params[2].Value = 1f; // Makes not dead
 
         attemptingDie = true;
     }

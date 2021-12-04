@@ -51,24 +51,24 @@ public class PlayerInsanityDetection : MonoBehaviour
 
         if(allowInsanity)
         {
-            float distance = Vector3.Distance(transform.position, m_Crossy.transform.position);
-            Debug.Log("SANE Insanity Distance: " + distance);
+            //float distance = Vector3.Distance(transform.position, m_Crossy.transform.position);
+            Debug.Log("SANE Insanity Distance: " + OverseerController.CrossyPathDistance);
             if (!seer.m_PlayerInHouse && seer.State != -1)
             {
-                if (distance < 25f && distance > 15f)
+                if (OverseerController.CrossyPathDistance < 25f && OverseerController.CrossyPathDistance > 15f)
                 {
                     calledInsane = true;
                     distortion.IncreaseInsanity(m_Crossy);
                 }
-                else if (distance < 15f && distance > 10f)
+                else if (OverseerController.CrossyPathDistance < 15f && OverseerController.CrossyPathDistance > 10f)
                 {
                     distortion.increasingInsanity = false;
                 }
-                else if (distance < 10f)
+                else if (OverseerController.CrossyPathDistance < 10f)
                 {
                     distortion.LerpInsanity();
                 }
-                else if (distance > 25f && calledInsane)
+                else if (OverseerController.CrossyPathDistance > 25f && calledInsane)
                 {
                     distortion.ReduceInsanity();
                     calledInsane = false;

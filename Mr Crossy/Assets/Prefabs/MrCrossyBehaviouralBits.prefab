@@ -69,6 +69,36 @@ MonoBehaviour:
   - {fileID: 8312820857253969908}
   - {fileID: 5005020955852768335}
   - {fileID: 6310565660754090825}
+--- !u!1 &226014984811338029
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5611911380968464095}
+  m_Layer: 0
+  m_Name: RightHandGuide
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5611911380968464095
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 226014984811338029}
+  m_LocalRotation: {x: -0.48850393, y: -0, z: -0.00000004470348, w: 0.87256175}
+  m_LocalPosition: {x: 23.98, y: 73.19, z: 6.88}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 454107749539412316}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: -58.485, y: 0, z: 0}
 --- !u!1 &502164744513761139
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,8 +122,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 502164744513761139}
-  m_LocalRotation: {x: 0.04536551, y: 0.06462722, z: -0.019485151, w: 0.99668735}
-  m_LocalPosition: {x: -8.3, y: 81.74, z: 14.77}
+  m_LocalRotation: {x: 0.047747638, y: 0.21126375, z: -0.012564375, w: 0.9761813}
+  m_LocalPosition: {x: -6.419997, y: 83.12, z: 18.899988}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1579431942847114501}
@@ -266,6 +296,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8978735886809878110}
   - component: {fileID: 5811972392081937860}
+  - component: {fileID: 6162429413380358903}
   m_Layer: 0
   m_Name: Lighthouse2-4
   m_TagString: Untagged
@@ -310,15 +341,28 @@ MonoBehaviour:
   rightHandGuideGoal: {fileID: 2297805328866505686}
   hiddenYOffset: -85
   hiddenPosition: {x: 0, y: 0, z: 0}
+  checkOffset: {x: 20, y: 0, z: 20}
+  checkRadius: 40
   minAngle: 0
   maxAngle: 0
   currentAngle: 0
-  checkRadius: 0
   gizmoHandGoalRadius: 1
   gizmoGuideGoalRadius: 1
-  radialColour: {r: 1, g: 0, b: 0, a: 0.09803922}
+  radialColour: {r: 1, g: 0.7599125, b: 0, a: 0.09803922}
   handGoalColour: {r: 0, g: 0.122285366, b: 1, a: 0.2}
   guideGoalColour: {r: 0.041940928, g: 1, b: 0, a: 0.19215687}
+--- !u!114 &6162429413380358903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1115992111496327217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1155389272541442889
 GameObject:
   m_ObjectHideFlags: 0
@@ -405,8 +449,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1347708749686425359}
-  m_LocalRotation: {x: 0.04139173, y: -0.032631334, z: 0.008029516, w: 0.9985778}
-  m_LocalPosition: {x: 15.55, y: 78.72, z: 17.21}
+  m_LocalRotation: {x: -0.23038465, y: -0.09618653, z: 0.0035999264, w: 0.9683275}
+  m_LocalPosition: {x: 15.770004, y: 75.47, z: 15.620003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8340896909828062992}
@@ -451,6 +495,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1221245167549586336}
+  - component: {fileID: 7625936419108637634}
   m_Layer: 0
   m_Name: DistrictOneLightHouses
   m_TagString: Untagged
@@ -471,9 +516,22 @@ Transform:
   m_Children:
   - {fileID: 9156822278858920127}
   - {fileID: 9156822279873305550}
+  - {fileID: 454107749539412316}
   m_Father: {fileID: 9156822279288125374}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7625936419108637634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1614850493535380558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1650830187080387679
 GameObject:
   m_ObjectHideFlags: 0
@@ -504,6 +562,83 @@ Transform:
   m_Father: {fileID: 9156822279031068857}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2382232920500890640
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 454107749539412316}
+  - component: {fileID: 5150112882759812722}
+  - component: {fileID: 1056915778257991004}
+  m_Layer: 0
+  m_Name: Lighthouse1-3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &454107749539412316
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2382232920500890640}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 163.8, y: -28.7, z: 57.1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 3846120951951216901}
+  - {fileID: 8872792532102004436}
+  - {fileID: 5700476814647588188}
+  - {fileID: 5611911380968464095}
+  m_Father: {fileID: 1221245167549586336}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!114 &5150112882759812722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2382232920500890640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bebbed80517f1f449e47b07584167ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selfTransform: {fileID: 454107749539412316}
+  leftHandFinalGoal: {fileID: 3846120951951216901}
+  rightHandFinalGoal: {fileID: 8872792532102004436}
+  leftHandGuideGoal: {fileID: 5700476814647588188}
+  rightHandGuideGoal: {fileID: 5611911380968464095}
+  hiddenYOffset: -85
+  hiddenPosition: {x: 0, y: 0, z: 0}
+  checkOffset: {x: -25.8, y: 0, z: 5.99}
+  checkRadius: 40
+  minAngle: 0
+  maxAngle: 0
+  currentAngle: 0
+  gizmoHandGoalRadius: 1
+  gizmoGuideGoalRadius: 1
+  radialColour: {r: 1, g: 0, b: 0, a: 0.09803922}
+  handGoalColour: {r: 0, g: 0.122285366, b: 1, a: 0.2}
+  guideGoalColour: {r: 0.041940928, g: 1, b: 0, a: 0.19215687}
+--- !u!114 &1056915778257991004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2382232920500890640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2464223965320385978
 GameObject:
   m_ObjectHideFlags: 0
@@ -527,13 +662,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2464223965320385978}
-  m_LocalRotation: {x: -0.50198716, y: -0.2922349, z: -0.18506345, w: 0.7926912}
-  m_LocalPosition: {x: -17.35, y: 75.84, z: 10.27}
+  m_LocalRotation: {x: -0.29564062, y: -0.3558797, z: -0.11977641, w: 0.87840754}
+  m_LocalPosition: {x: -17.02, y: 79.22, z: 11.08}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8978735886809878110}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: -64.69, y: -40.474, z: 0}
+  m_LocalEulerAnglesHint: {x: -37.203, y: -44.11, z: 0}
 --- !u!1 &2527239734133537610
 GameObject:
   m_ObjectHideFlags: 0
@@ -647,8 +782,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2983120829677683182}
-  m_LocalRotation: {x: -0, y: 0.4592706, z: -0, w: 0.88829637}
-  m_LocalPosition: {x: 29.45, y: 82.35, z: 15.51}
+  m_LocalRotation: {x: 0.045171015, y: 0.4586764, z: -0.023354497, w: 0.88714725}
+  m_LocalPosition: {x: 31.57, y: 83.12, z: 17.019999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8978735886809878110}
@@ -664,6 +799,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1579431942847114501}
   - component: {fileID: 5625902871858595188}
+  - component: {fileID: 6995742260090741435}
   m_Layer: 0
   m_Name: Lighthouse2-1
   m_TagString: Untagged
@@ -708,15 +844,28 @@ MonoBehaviour:
   rightHandGuideGoal: {fileID: 2833592829521954217}
   hiddenYOffset: -85
   hiddenPosition: {x: 0, y: 0, z: 0}
+  checkOffset: {x: -37.2, y: 0, z: -29}
+  checkRadius: 32.3
   minAngle: 0
   maxAngle: 0
   currentAngle: 0
-  checkRadius: 0
   gizmoHandGoalRadius: 1
   gizmoGuideGoalRadius: 1
-  radialColour: {r: 1, g: 0, b: 0, a: 0.09803922}
+  radialColour: {r: 1, g: 0.7599125, b: 0, a: 0.09803922}
   handGoalColour: {r: 0, g: 0.122285366, b: 1, a: 0.2}
   guideGoalColour: {r: 0.041940928, g: 1, b: 0, a: 0.19215687}
+--- !u!114 &6995742260090741435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3244835934301365111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3308251296573123583
 GameObject:
   m_ObjectHideFlags: 0
@@ -740,8 +889,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3308251296573123583}
-  m_LocalRotation: {x: 0.035713382, y: 0.46354488, z: -0.018702647, w: 0.8851559}
-  m_LocalPosition: {x: 21.08, y: 85.61, z: 16.85}
+  m_LocalRotation: {x: 0.12241086, y: 0.5394416, z: -0.057031147, w: 0.83112323}
+  m_LocalPosition: {x: 24.169994, y: 86.19, z: 20.109993}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1579431942847114501}
@@ -800,13 +949,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3373635603585794141}
-  m_LocalRotation: {x: -0.5281082, y: -0.111670084, z: -0.036769595, w: 0.8409991}
-  m_LocalPosition: {x: 17.53, y: 73.29, z: 12.73}
+  m_LocalRotation: {x: -0.59552896, y: -0.054914296, z: 0.0128799975, w: 0.8013513}
+  m_LocalPosition: {x: 15.55, y: 77.58, z: 12.99}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8340896909828062992}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -72.372, y: -19.955, z: 16.507}
 --- !u!1 &3384202262039102051
 GameObject:
   m_ObjectHideFlags: 0
@@ -890,13 +1039,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3568734427990138512}
-  m_LocalRotation: {x: -0.27878347, y: 0.46740752, z: 0.15815872, w: 0.8238907}
-  m_LocalPosition: {x: 13.7, y: 78.37, z: 13.91}
+  m_LocalRotation: {x: -0.29246244, y: 0.5003683, z: 0.20947886, w: 0.7875379}
+  m_LocalPosition: {x: 20.63, y: 82.63, z: 18.37}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1579431942847114501}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: -37.389, y: 59.134, z: 0}
+  m_LocalEulerAnglesHint: {x: -42.089, y: 63.753, z: 2.879}
 --- !u!1 &3748387444383969784
 GameObject:
   m_ObjectHideFlags: 0
@@ -1381,13 +1530,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5966151300094638026}
-  m_LocalRotation: {x: -0.43797022, y: 0.06605829, z: 0.013880022, w: 0.8964518}
-  m_LocalPosition: {x: -9.49, y: 72.92, z: 7.96}
+  m_LocalRotation: {x: -0.46949235, y: -0.16398686, z: -0.08463398, w: 0.8634364}
+  m_LocalPosition: {x: -2.24, y: 78.49, z: 16.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1579431942847114501}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: -51.913, y: 9.921, z: -3.065}
+  m_LocalEulerAnglesHint: {x: -56.983, y: -21.954, z: 0.823}
 --- !u!1 &6052923410462018801
 GameObject:
   m_ObjectHideFlags: 0
@@ -1502,10 +1651,11 @@ MonoBehaviour:
   rightHandGuideGoal: {fileID: 944623468249023213}
   hiddenYOffset: -85
   hiddenPosition: {x: 0, y: 0, z: 0}
+  checkOffset: {x: 0, y: 0, z: 0}
+  checkRadius: 0
   minAngle: 0
   maxAngle: 0
   currentAngle: 0
-  checkRadius: 0
   gizmoHandGoalRadius: 1
   gizmoGuideGoalRadius: 1
   radialColour: {r: 1, g: 0, b: 0, a: 0.09803922}
@@ -1564,8 +1714,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6439879625296843053}
-  m_LocalRotation: {x: 0, y: -0.34590417, z: 0, w: 0.93826985}
-  m_LocalPosition: {x: -18.94, y: 80.01, z: 12.13}
+  m_LocalRotation: {x: 0.13267644, y: -0.37162805, z: 0.05375278, w: 0.9172787}
+  m_LocalPosition: {x: -21.98, y: 81.14, z: 16.19}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8978735886809878110}
@@ -1641,6 +1791,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8340896909828062992}
   - component: {fileID: 2413661027617061008}
+  - component: {fileID: 96974581356940556}
   m_Layer: 0
   m_Name: Lighthouse2-2
   m_TagString: Untagged
@@ -1685,15 +1836,28 @@ MonoBehaviour:
   rightHandGuideGoal: {fileID: 2174604670323496490}
   hiddenYOffset: -85
   hiddenPosition: {x: 0, y: 0, z: 0}
+  checkOffset: {x: -29.86, y: 0, z: 0}
+  checkRadius: 35.65
   minAngle: 0
   maxAngle: 0
   currentAngle: 0
-  checkRadius: 0
   gizmoHandGoalRadius: 1
   gizmoGuideGoalRadius: 1
-  radialColour: {r: 1, g: 0, b: 0, a: 0.09803922}
+  radialColour: {r: 1, g: 0.7599125, b: 0, a: 0.09803922}
   handGoalColour: {r: 0, g: 0.122285366, b: 1, a: 0.2}
   guideGoalColour: {r: 0.041940928, g: 1, b: 0, a: 0.19215687}
+--- !u!114 &96974581356940556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6722424285307054050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6825160810072520641
 GameObject:
   m_ObjectHideFlags: 0
@@ -1724,6 +1888,36 @@ Transform:
   m_Father: {fileID: 9156822280017623519}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7614290395754888114
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8872792532102004436}
+  m_Layer: 0
+  m_Name: RightHandHold
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8872792532102004436
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7614290395754888114}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 23.980007, y: 76.92, z: 9.169996}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 454107749539412316}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7667473230209038565
 GameObject:
   m_ObjectHideFlags: 0
@@ -1747,8 +1941,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7667473230209038565}
-  m_LocalRotation: {x: 0.047715902, y: 0.114316046, z: -0.00620413, w: 0.9922785}
-  m_LocalPosition: {x: -21.7, y: 78.61, z: 16.06}
+  m_LocalRotation: {x: -0.23450744, y: 0.105262116, z: 0.00017615406, w: 0.9663986}
+  m_LocalPosition: {x: -22.100006, y: 74.11, z: 14.380001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8340896909828062992}
@@ -1807,13 +2001,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8104538074592670473}
-  m_LocalRotation: {x: -0.6208333, y: 0.09244887, z: 0.07217647, w: 0.77511925}
-  m_LocalPosition: {x: -22.450003, y: 70.77, z: 14.570007}
+  m_LocalRotation: {x: -0.4082817, y: 0.10343329, z: 0.019536847, w: 0.9067667}
+  m_LocalPosition: {x: -22.72, y: 75.6, z: 11.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8340896909828062992}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: -77.365, y: 14.211, z: -0.76}
+  m_LocalEulerAnglesHint: {x: -48.114, y: 14.896, z: -4.211}
 --- !u!1 &8121940380024211858
 GameObject:
   m_ObjectHideFlags: 0
@@ -1874,6 +2068,66 @@ Transform:
   m_Father: {fileID: 9156822279031068857}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8136096633143774462
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3846120951951216901}
+  m_Layer: 0
+  m_Name: LeftHandHold
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3846120951951216901
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8136096633143774462}
+  m_LocalRotation: {x: 0.0770553, y: -0.18358602, z: 0.014436854, w: 0.9798726}
+  m_LocalPosition: {x: -21.460003, y: 82.85, z: 6.6499968}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 454107749539412316}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -22.298, y: -6.638, z: 0}
+--- !u!1 &8291821155316722771
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5700476814647588188}
+  m_Layer: 0
+  m_Name: LeftHandGuide
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5700476814647588188
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8291821155316722771}
+  m_LocalRotation: {x: -0.44415078, y: -0.164279, z: -0.0832149, w: 0.8768226}
+  m_LocalPosition: {x: -19.7, y: 80.96, z: 2.12}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 454107749539412316}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: -53.729, y: -21.223, z: 0}
 --- !u!1 &8312820857253969908
 GameObject:
   m_ObjectHideFlags: 0
@@ -2175,10 +2429,11 @@ MonoBehaviour:
   rightHandGuideGoal: {fileID: 9156822280879613705}
   hiddenYOffset: -85
   hiddenPosition: {x: 0, y: 0, z: 0}
+  checkOffset: {x: 3.6, y: 0, z: -34.5}
+  checkRadius: 38.2
   minAngle: 0
   maxAngle: 0
   currentAngle: 0
-  checkRadius: 0
   gizmoHandGoalRadius: 1
   gizmoGuideGoalRadius: 1
   radialColour: {r: 1, g: 0, b: 0, a: 0.09803922}
@@ -2423,6 +2678,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9156822279073723689}
   - component: {fileID: 9156822279073723688}
+  - component: {fileID: 7682566822876616139}
   m_Layer: 0
   m_Name: Lighthouse2-5
   m_TagString: Untagged
@@ -2467,15 +2723,28 @@ MonoBehaviour:
   rightHandGuideGoal: {fileID: 9156822279470515433}
   hiddenYOffset: -85
   hiddenPosition: {x: 0, y: 0, z: 0}
+  checkOffset: {x: 23.7, y: 0, z: 14.51}
+  checkRadius: 37.65
   minAngle: 0
   maxAngle: 0
   currentAngle: 0
-  checkRadius: 0
   gizmoHandGoalRadius: 1
   gizmoGuideGoalRadius: 1
-  radialColour: {r: 1, g: 0, b: 0, a: 0.09803922}
+  radialColour: {r: 1, g: 0.7599125, b: 0, a: 0.09803922}
   handGoalColour: {r: 0, g: 0.122285366, b: 1, a: 0.2}
   guideGoalColour: {r: 0.041940928, g: 1, b: 0, a: 0.19215687}
+--- !u!114 &7682566822876616139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9156822279073723690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9156822279115591003
 GameObject:
   m_ObjectHideFlags: 0
@@ -2590,10 +2859,11 @@ MonoBehaviour:
   rightHandGuideGoal: {fileID: 9156822278917384569}
   hiddenYOffset: -85
   hiddenPosition: {x: 0, y: 0, z: 0}
+  checkOffset: {x: 0, y: 0, z: 0}
+  checkRadius: 0
   minAngle: 0
   maxAngle: 0
   currentAngle: 0
-  checkRadius: 0
   gizmoHandGoalRadius: 1
   gizmoGuideGoalRadius: 1
   radialColour: {r: 1, g: 0, b: 0, a: 0.09803922}
@@ -2739,6 +3009,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9156822279452833551}
   - component: {fileID: 9156822279452833550}
+  - component: {fileID: 9055573639171561803}
   m_Layer: 0
   m_Name: Lighthouse2-3
   m_TagString: Untagged
@@ -2783,15 +3054,28 @@ MonoBehaviour:
   rightHandGuideGoal: {fileID: 9156822279195267767}
   hiddenYOffset: -85
   hiddenPosition: {x: 0, y: 0, z: 0}
+  checkOffset: {x: -5.5, y: 0, z: 33.28}
+  checkRadius: 34.32
   minAngle: 0
   maxAngle: 0
   currentAngle: 0
-  checkRadius: 0
   gizmoHandGoalRadius: 1
   gizmoGuideGoalRadius: 1
-  radialColour: {r: 1, g: 0, b: 0, a: 0.09803922}
+  radialColour: {r: 1, g: 0.7599125, b: 0, a: 0.09803922}
   handGoalColour: {r: 0, g: 0.122285366, b: 1, a: 0.2}
   guideGoalColour: {r: 0.041940928, g: 1, b: 0, a: 0.19215687}
+--- !u!114 &9055573639171561803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9156822279452833584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9156822279455108113
 GameObject:
   m_ObjectHideFlags: 0
@@ -3083,10 +3367,11 @@ MonoBehaviour:
   rightHandGuideGoal: {fileID: 9156822280220260400}
   hiddenYOffset: -85
   hiddenPosition: {x: 0, y: 0, z: 0}
+  checkOffset: {x: -41.91, y: 0, z: 21.6}
+  checkRadius: 41.2
   minAngle: 0
   maxAngle: 0
   currentAngle: 0
-  checkRadius: 0
   gizmoHandGoalRadius: 1
   gizmoGuideGoalRadius: 1
   radialColour: {r: 1, g: 0, b: 0, a: 0.09803922}
@@ -3460,10 +3745,11 @@ MonoBehaviour:
   rightHandGuideGoal: {fileID: 9156822279981747012}
   hiddenYOffset: -85
   hiddenPosition: {x: 0, y: 0, z: 0}
+  checkOffset: {x: 0, y: 0, z: 0}
+  checkRadius: 0
   minAngle: 0
   maxAngle: 0
   currentAngle: 0
-  checkRadius: 0
   gizmoHandGoalRadius: 1
   gizmoGuideGoalRadius: 1
   radialColour: {r: 1, g: 0, b: 0, a: 0.09803922}
@@ -3984,7 +4270,7 @@ PrefabInstance:
     - target: {fileID: 2445453549263042026, guid: b39bfe06d1e07ab41ad4d915b1d2d2ed, type: 3}
       propertyPath: lighthouse
       value: 
-      objectReference: {fileID: 5625902871858595188}
+      objectReference: {fileID: 5150112882759812722}
     - target: {fileID: 2445453549263042026, guid: b39bfe06d1e07ab41ad4d915b1d2d2ed, type: 3}
       propertyPath: faceToTransform
       value: 
@@ -3995,9 +4281,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b39bfe06d1e07ab41ad4d915b1d2d2ed, type: 3}
---- !u!4 &9159689995062085979 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4029557201914332, guid: b39bfe06d1e07ab41ad4d915b1d2d2ed, type: 3}
+--- !u!1 &9157847964119478537 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1309976393904526, guid: b39bfe06d1e07ab41ad4d915b1d2d2ed, type: 3}
   m_PrefabInstance: {fileID: 9156822280389476487}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &9157462719558192611 stripped
@@ -4005,9 +4291,9 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1766410105212260, guid: b39bfe06d1e07ab41ad4d915b1d2d2ed, type: 3}
   m_PrefabInstance: {fileID: 9156822280389476487}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &9157847964119478537 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1309976393904526, guid: b39bfe06d1e07ab41ad4d915b1d2d2ed, type: 3}
+--- !u!4 &9159689995062085979 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4029557201914332, guid: b39bfe06d1e07ab41ad4d915b1d2d2ed, type: 3}
   m_PrefabInstance: {fileID: 9156822280389476487}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &9156822280902360631
@@ -4035,7 +4321,7 @@ PrefabInstance:
       objectReference: {fileID: 9157462719558192611}
     - target: {fileID: 796532654218381237, guid: 76af31e83f7e1244ba0c5ca72a2ed92a, type: 3}
       propertyPath: titanLighthouses.Array.size
-      value: 6
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 796532654218381237, guid: 76af31e83f7e1244ba0c5ca72a2ed92a, type: 3}
       propertyPath: m_SpawnLighthouses.Array.size
@@ -4048,31 +4334,31 @@ PrefabInstance:
     - target: {fileID: 796532654218381237, guid: 76af31e83f7e1244ba0c5ca72a2ed92a, type: 3}
       propertyPath: titanLighthouses.Array.data[1]
       value: 
-      objectReference: {fileID: 9156822279135554896}
+      objectReference: {fileID: 9156822279873305549}
     - target: {fileID: 796532654218381237, guid: 76af31e83f7e1244ba0c5ca72a2ed92a, type: 3}
       propertyPath: titanLighthouses.Array.data[2]
       value: 
-      objectReference: {fileID: 9156822280450934824}
+      objectReference: {fileID: 5150112882759812722}
     - target: {fileID: 796532654218381237, guid: 76af31e83f7e1244ba0c5ca72a2ed92a, type: 3}
       propertyPath: titanLighthouses.Array.data[3]
       value: 
-      objectReference: {fileID: 9156822279073723688}
+      objectReference: {fileID: 5625902871858595188}
     - target: {fileID: 796532654218381237, guid: 76af31e83f7e1244ba0c5ca72a2ed92a, type: 3}
       propertyPath: titanLighthouses.Array.data[4]
       value: 
-      objectReference: {fileID: 9156822279452833550}
+      objectReference: {fileID: 2413661027617061008}
     - target: {fileID: 796532654218381237, guid: 76af31e83f7e1244ba0c5ca72a2ed92a, type: 3}
       propertyPath: titanLighthouses.Array.data[5]
       value: 
-      objectReference: {fileID: 9156822279873305549}
+      objectReference: {fileID: 9156822279452833550}
     - target: {fileID: 796532654218381237, guid: 76af31e83f7e1244ba0c5ca72a2ed92a, type: 3}
       propertyPath: titanLighthouses.Array.data[6]
       value: 
-      objectReference: {fileID: 9156822278858920126}
+      objectReference: {fileID: 5811972392081937860}
     - target: {fileID: 796532654218381237, guid: 76af31e83f7e1244ba0c5ca72a2ed92a, type: 3}
       propertyPath: titanLighthouses.Array.data[7]
       value: 
-      objectReference: {fileID: 9156822279135554896}
+      objectReference: {fileID: 9156822279073723688}
     - target: {fileID: 796532654218381237, guid: 76af31e83f7e1244ba0c5ca72a2ed92a, type: 3}
       propertyPath: titanLighthouses.Array.data[8]
       value: 
@@ -4121,6 +4407,58 @@ PrefabInstance:
       propertyPath: m_SpawnLighthouses.Array.data[7]
       value: 
       objectReference: {fileID: 113506652504236972}
+    - target: {fileID: 796532654218381237, guid: 76af31e83f7e1244ba0c5ca72a2ed92a, type: 3}
+      propertyPath: districtOneLighthouses.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 796532654218381237, guid: 76af31e83f7e1244ba0c5ca72a2ed92a, type: 3}
+      propertyPath: districtTwoLighthouses.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 796532654218381237, guid: 76af31e83f7e1244ba0c5ca72a2ed92a, type: 3}
+      propertyPath: districtThreeLighthouses.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 796532654218381237, guid: 76af31e83f7e1244ba0c5ca72a2ed92a, type: 3}
+      propertyPath: districtOneLighthouses.Array.data[0]
+      value: 
+      objectReference: {fileID: 9156822278858920126}
+    - target: {fileID: 796532654218381237, guid: 76af31e83f7e1244ba0c5ca72a2ed92a, type: 3}
+      propertyPath: districtOneLighthouses.Array.data[1]
+      value: 
+      objectReference: {fileID: 9156822279873305549}
+    - target: {fileID: 796532654218381237, guid: 76af31e83f7e1244ba0c5ca72a2ed92a, type: 3}
+      propertyPath: districtOneLighthouses.Array.data[2]
+      value: 
+      objectReference: {fileID: 5150112882759812722}
+    - target: {fileID: 796532654218381237, guid: 76af31e83f7e1244ba0c5ca72a2ed92a, type: 3}
+      propertyPath: districtTwoLighthouses.Array.data[0]
+      value: 
+      objectReference: {fileID: 5625902871858595188}
+    - target: {fileID: 796532654218381237, guid: 76af31e83f7e1244ba0c5ca72a2ed92a, type: 3}
+      propertyPath: districtTwoLighthouses.Array.data[1]
+      value: 
+      objectReference: {fileID: 2413661027617061008}
+    - target: {fileID: 796532654218381237, guid: 76af31e83f7e1244ba0c5ca72a2ed92a, type: 3}
+      propertyPath: districtTwoLighthouses.Array.data[2]
+      value: 
+      objectReference: {fileID: 9156822279452833550}
+    - target: {fileID: 796532654218381237, guid: 76af31e83f7e1244ba0c5ca72a2ed92a, type: 3}
+      propertyPath: districtTwoLighthouses.Array.data[3]
+      value: 
+      objectReference: {fileID: 5811972392081937860}
+    - target: {fileID: 796532654218381237, guid: 76af31e83f7e1244ba0c5ca72a2ed92a, type: 3}
+      propertyPath: districtTwoLighthouses.Array.data[4]
+      value: 
+      objectReference: {fileID: 9156822279073723688}
+    - target: {fileID: 796532654218381237, guid: 76af31e83f7e1244ba0c5ca72a2ed92a, type: 3}
+      propertyPath: districtThreeLighthouses.Array.data[0]
+      value: 
+      objectReference: {fileID: 9156822279135554896}
+    - target: {fileID: 796532654218381237, guid: 76af31e83f7e1244ba0c5ca72a2ed92a, type: 3}
+      propertyPath: districtThreeLighthouses.Array.data[1]
+      value: 
+      objectReference: {fileID: 9156822280450934824}
     - target: {fileID: 1029258597979052622, guid: 76af31e83f7e1244ba0c5ca72a2ed92a, type: 3}
       propertyPath: m_RootOrder
       value: 5
