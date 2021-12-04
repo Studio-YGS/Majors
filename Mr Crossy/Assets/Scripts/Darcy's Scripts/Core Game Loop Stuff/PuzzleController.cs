@@ -31,7 +31,7 @@ public class PuzzleController : MonoBehaviour
     public List<GameObject> storedObjects = new List<GameObject>();
     public List<GameObject> wordObjects = new List<GameObject>();
 
-    public bool tutorial, devPuzzleCompletion;
+    public bool tutorial;
     bool tenPlayed;
 
     public UnityEvent winEvent, loseEvent, tutorialEvent, tutorialMistakeEvent;
@@ -108,7 +108,7 @@ public class PuzzleController : MonoBehaviour
     public void PlayerWordControl() //this method forms the players word as they place objects, and also controls the win condition
     {
         playersWord = "";
-        int playersWordLength = 0;
+        int playersWordLength;
 
         for(int i = 0; i < wordLength; i++) //the player's word becomes equal to all the texts within the canvas letters combined
         {
@@ -227,6 +227,11 @@ public class PuzzleController : MonoBehaviour
         Debug.Log("current st: " + currentStreet + ",  current altar word: " + currentAltarWord);
 
         uiWord = currentStreet + ": " + currentAltarWord;
+
+        if(currentStreet == "")
+        {
+            uiWord = "";
+        }
 
         streetText.text = uiWord;
     }

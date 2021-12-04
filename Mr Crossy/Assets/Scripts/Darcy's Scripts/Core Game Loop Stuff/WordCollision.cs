@@ -46,6 +46,7 @@ public class WordCollision : MonoBehaviour
         if (other.CompareTag("GameController"))
         {
             puzzleController.streetText.text = "";
+            puzzleController.WriteToUI();
         }
     }
 
