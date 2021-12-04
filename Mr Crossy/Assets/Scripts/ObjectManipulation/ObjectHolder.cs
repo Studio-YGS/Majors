@@ -10,6 +10,7 @@ public class ObjectHolder : MonoBehaviour
 {
     public Sprite objectImage;
     public string objectName;
+    public ObjectVariableHolder vHolder;
     [HideInInspector] public Image image;
     [HideInInspector] public TMP_Text textName;
     [HideInInspector] public Image imageTwo;
@@ -44,32 +45,33 @@ public class ObjectHolder : MonoBehaviour
     public Quaternion rotationalSet;
     [Header("When Inspecting")]
     public float distanceFromFace = 1.2f;
-    [Header("Testing Pos In Hand")]
+    //[Header("Testing Pos In Hand")]
     //public bool updatePos;
-    Vector3 newHandPosition = Vector3.zero;
-    Quaternion newHandRotation = new Quaternion(0, 0, 0, 0);
-    Vector3 newScaleFactor;
+    //Vector3 newHandPosition = Vector3.zero;
+    //Quaternion newHandRotation = new Quaternion(0, 0, 0, 0);
+    //Vector3 newScaleFactor;
 
     void Start()
     {
         thisObjectHeld = false;
+        vHolder = FindObjectOfType<ObjectVariableHolder>();
         mat = gameObject.GetComponent<MeshRenderer>().material;
         startPos = transform.position;
         startRot = transform.rotation;
-        hand = GameObject.FindGameObjectWithTag("Hand").transform;
+        hand = vHolder.hand;
         objectInspectPoint = hand.GetComponentInChildren<Transform>();
-        cam = FindObjectOfType<Camera>().transform;
-        controller = FindObjectOfType<Player_Controller>();
-        image = GameObject.Find("Canvas").transform.Find("Item Square 1").transform.Find("Object Image").GetComponent<Image>();
-        textName = GameObject.Find("Canvas").transform.Find("Object Name").GetComponent<TMP_Text>();
+        cam = vHolder.cam; ;
+        controller = vHolder.controller;
+        image = vHolder.image;
+        textName = vHolder.textName;
         
-        imageTwo = GameObject.Find("Canvas").transform.Find("Item Square 2").transform.Find("Object Image").GetComponent<Image>();
-        textNameTwo = GameObject.Find("Canvas").transform.Find("Object Name 2").GetComponent<TMP_Text>();
+        imageTwo = vHolder.imageTwo;
+        textNameTwo = vHolder.textNameTwo;
 
-        hoverText = GameObject.Find("Canvas").transform.Find("Hover Name").GetComponent<TMP_Text>();
-        newHandPosition = handOffset;
-        newHandRotation = handRotation;
-        newScaleFactor = scaleFactor;
+        hoverText = vHolder.hoverText;
+        //newHandPosition = handOffset;
+        //newHandRotation = handRotation;
+        //newScaleFactor = scaleFactor;
         ogScaleFactor = transform.localScale;
     }
 
@@ -133,6 +135,7 @@ public class ObjectHolder : MonoBehaviour
                     heldObject = objectsInHands[1];
                     image.GetComponentInParent<Transform>().localScale = new Vector3(1f, 1f, 1f);
                     imageTwo.GetComponentInParent<Transform>().localScale = new Vector3(1.3f, 1.3f, 1.3f);
+                    Debug.Log("Change");
                 }
                 else if (objectsInHands[1].activeSelf == true)
                 {
@@ -144,6 +147,7 @@ public class ObjectHolder : MonoBehaviour
                 }
             }
         }
+        
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             if (objectsInHands.Count == 2 && thisObjectHeld && !FindObjectOfType<MenuManager>().menuOpen)
