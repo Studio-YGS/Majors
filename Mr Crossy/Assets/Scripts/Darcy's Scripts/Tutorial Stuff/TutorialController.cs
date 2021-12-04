@@ -4,14 +4,13 @@ using UnityEngine;
 using TMPro;
 using FMOD.Studio;
 using FMODUnity;
+using UnityEngine.Events;
 
 public class TutorialController : MonoBehaviour
 {
     JournalController journalController;
 
     JournalOnSwitch journalOnSwitch;
-
-    JournalTimer journalTimer;
 
     Player_Controller playerController;
 
@@ -20,6 +19,8 @@ public class TutorialController : MonoBehaviour
     EventInstance eventInstance;
 
     public GameObject[] objectsToSwitchOn;
+
+    public UnityEvent showTabs;
 
     [SerializeField]
     TextMeshProUGUI conLetter;
@@ -31,7 +32,6 @@ public class TutorialController : MonoBehaviour
         journalController = FindObjectOfType<JournalController>();
         playerController = FindObjectOfType<Player_Controller>();
         journalOnSwitch = FindObjectOfType<JournalOnSwitch>();
-        journalTimer = FindObjectOfType<JournalTimer>();
         overseerController = FindObjectOfType<OverseerController>();
 
         StartTutorial();
@@ -41,10 +41,13 @@ public class TutorialController : MonoBehaviour
 
     void Update()
     {
-        if (overseerController.State == 3 && !spotted)
+        if(overseerController != null)
         {
-            spotted = true;
-            GetComponent<TutorialSectionStart>().sectionStart.Invoke();
+            if (overseerController.State == 3 && !spotted)
+            {
+                spotted = true;
+                GetComponent<TutorialSectionStart>().sectionStart.Invoke();
+            }
         }
     }
 
@@ -115,6 +118,7 @@ public class TutorialController : MonoBehaviour
             journalOnSwitch.OpenOrClose();
         }
         journalController.OpenHowTo();
+        showTabs.Invoke();
     }
     
     IEnumerator DoneTalk()

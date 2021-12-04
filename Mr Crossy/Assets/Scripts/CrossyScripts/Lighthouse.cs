@@ -22,8 +22,9 @@ public class Lighthouse : MonoBehaviour
     public float maxAngle;
 
     [HideInInspector] public float currentAngle;
+    public float checkRadius;
     [Header("Gizmo settings")]
-    [SerializeField] private float gizmoCheckRadius;
+    
     [SerializeField] private float gizmoHandGoalRadius;
     [SerializeField] private float gizmoGuideGoalRadius;
     [Space(10)]
@@ -44,7 +45,7 @@ public class Lighthouse : MonoBehaviour
     {
 #if UNITY_EDITOR
         Handles.color = radialColour;
-        Handles.DrawSolidDisc(selfTransform.position, selfTransform.up, gizmoCheckRadius);
+        Handles.DrawSolidDisc(selfTransform.position, selfTransform.up, checkRadius);
 
         Gizmos.color = handGoalColour;
         Gizmos.DrawSphere(leftHandFinalGoal.position, gizmoHandGoalRadius);
