@@ -143,7 +143,7 @@ public class JournalController : MonoBehaviour
 
     public void OpenMap()
     {
-        if (!disabled)
+        if (!disabled && mapPage != null)
         {
             log.SetActive(false);
             mapPage.SetActive(true);
