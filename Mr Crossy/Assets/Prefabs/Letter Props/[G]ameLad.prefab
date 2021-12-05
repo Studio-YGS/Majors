@@ -161,6 +161,8 @@ GameObject:
   - component: {fileID: 4302778372441060245}
   - component: {fileID: 4302778372441060234}
   - component: {fileID: 4302778372441060247}
+  - component: {fileID: 4657273129812587251}
+  - component: {fileID: 1968083680354367294}
   m_Layer: 0
   m_Name: Controler
   m_TagString: Untagged
@@ -305,8 +307,62 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.021709671, y: 0.0057446808, z: 0.019911615}
-  m_Center: {x: -0.00005306213, y: 0.0039150664, z: -0.00035595693}
+  m_Size: {x: 0.021709671, y: 0.009407609, z: 0.019911615}
+  m_Center: {x: -0.000053062286, y: 0.0020836038, z: -0.00035595658}
+--- !u!114 &4657273129812587251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4302778372441060235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0581f2900b0ab5e4ea811320e7a88f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FirstObjectInteractionActions:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1968083680354367294}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Open
+          m_BoolArgument: 0
+        m_CallState: 2
+  keyPickup:
+    m_PersistentCalls:
+      m_Calls: []
+  nothingInside: 1
+  key: {fileID: 0}
+  isGamelad: 1
+  xAngle: 90
+  yAngle: 180
+--- !u!95 &1968083680354367294
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4302778372441060235}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bfee6681535777c41b7c0ad46f5139cb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4765109992365900678
 GameObject:
   m_ObjectHideFlags: 0
@@ -419,7 +475,7 @@ BoxCollider:
   m_GameObject: {fileID: 4765109992365900678}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.021603549, y: 0.0035106593, z: 0.018824806}
   m_Center: {x: -0.0000000011968367, y: 0.0028338225, z: -0.00089953473}
