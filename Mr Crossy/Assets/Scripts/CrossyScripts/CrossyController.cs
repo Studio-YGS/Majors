@@ -303,11 +303,7 @@ public class CrossyController : MonoBehaviour
     {
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Spinspin") || animator.GetCurrentAnimatorStateInfo(0).IsName("Scream") || animator.GetCurrentAnimatorStateInfo(0).IsName("Agony") || animator.GetCurrentAnimatorStateInfo(0).IsName("LookAround"))
         {
-            if(animator.GetCurrentAnimatorStateInfo(0).IsName("Movement") || animator.GetCurrentAnimatorStateInfo(0).IsName("AngyMove"))
-            {
-                m_ShouldBeStopped = false;
-            }
-            else m_ShouldBeStopped = true;
+            m_ShouldBeStopped = true;
         }
         else m_ShouldBeStopped = false;
     }

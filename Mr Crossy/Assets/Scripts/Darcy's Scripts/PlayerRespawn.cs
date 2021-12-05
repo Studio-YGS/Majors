@@ -64,11 +64,6 @@ public class PlayerRespawn : MonoBehaviour
             Register();
             hasMoved = true;
         }
-
-        if (Input.GetKeyDown(KeyCode.I)) //testing, delete before submission
-        {
-            PlayerDie();
-        }
     }
 
     public void PlayerDie()
@@ -103,9 +98,26 @@ public class PlayerRespawn : MonoBehaviour
     public void ReleaseToPlayer()
     {
         player.EnableController();
-        seer.emitter.Params[2].Value = 1f;
-        seer.emitter.Params[0].Value = 100f;
-        seer.emitter.Params[1].Value = 1f;
+
+        if (seer.emitter.Params[2].Value != 1f)
+        {
+            seer.emitter.Params[2].Value = 1f;
+            seer.emitter.Target.SetParameter(seer.emitter.Params[1].Name, seer.emitter.Params[1].Value);
+        }
+        //seer.emitter.Params[2].Value = 1f;
+        if (seer.emitter.Params[0].Value != 100f)
+        {
+            seer.emitter.Params[0].Value = 100f;
+            seer.emitter.Target.SetParameter(seer.emitter.Params[0].Name, seer.emitter.Params[0].Value);
+        }
+        //seer.emitter.Params[0].Value = 100f;
+        if (seer.emitter.Params[1].Value != 1f)
+        {
+            seer.emitter.Params[1].Value = 1f;
+            seer.emitter.Target.SetParameter(seer.emitter.Params[1].Name, seer.emitter.Params[1].Value);
+        }
+        //seer.emitter.Params[1].Value = 1f;
+
         exSwitch.WalkIn();
         journal.EnableJournal();
         FindObjectOfType<OverseerController>().deady = false;

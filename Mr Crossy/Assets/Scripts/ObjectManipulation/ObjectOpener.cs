@@ -18,7 +18,9 @@ public class ObjectOpener : MonoBehaviour
 
     public UnityEvent FirstObjectInteractionActions;
     public UnityEvent keyPickup;
+    public bool nothingInside;
     public GameObject key;
+    public bool isGamelad;
     [Header("First Interaction")]
     public float xAngle;
     public float yAngle;
@@ -40,39 +42,73 @@ public class ObjectOpener : MonoBehaviour
         //Debug.Log(UnityEditor.TransformUtils.GetInspectorRotation(gameObject.transform).x);
         //Debug.Log(Quaternion.Euler(0, 0, 30).z);
         //Debug.Log(Quaternion.LookRotation(player.position));
+
         if (holder.beingInspected)
         {
             direction = player.position - transform.position;
             //rotDirection = player.position  - transform.position + (player.forward * rotationOffset.z) + (player.up * rotationOffset.y) + (player.right * rotationOffset.x);
-            angleXRelativeToPlayer = Vector3.Angle(direction, -transform.right);
-            angleYRelativeToPlayer = Vector3.Angle(direction, transform.up);
-            if (angleXRelativeToPlayer < xAngle * 0.5f /*&& angleYRelativeToPlayer < yAngle * 0.5f*/ &&
-                transform.localRotation.x  < Quaternion.Euler(30,0,0).x && transform.localRotation.x  > Quaternion.Euler(-30, 0, 0).x &&
-                transform.localRotation.z < Quaternion.Euler(0, 0, 30).z && transform.localRotation.z > Quaternion.Euler(0, 0, -30).z && !InteractionOne)
+
+            if (isGamelad)
             {
-                if (!turnOff )
+                angleXRelativeToPlayer = Vector3.Angle(direction, -transform.forward);
+                angleYRelativeToPlayer = Vector3.Angle(direction, -transform.up);
+                if (angleXRelativeToPlayer < xAngle * 0.5f /*&& angleYRelativeToPlayer < yAngle * 0.5f*/ &&
+                    transform.localRotation.x < Quaternion.Euler(120, 0, 0).x && transform.localRotation.x > Quaternion.Euler(-120, 0, 0).x /*&&*/
+                    /*transform.localRotation.z < Quaternion.Euler(0, 0, 120).z && transform.localRotation.z > Quaternion.Euler(0, 0, -120).z*/ && !InteractionOne)
                 {
-                    pressE.SetActive(true);
-                    turnOff = true;
+                    if (!turnOff)
+                    {
+                        pressE.SetActive(true);
+                        turnOff = true;
+                    }
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        FirstObjectInteractionActions.Invoke();
+                        InteractionOne = true;
+                        pressE.SetActive(false);
+                        //holder.enabled = false;
+                        //StartCoroutine(RotateToNewPosition());
+                    }
                 }
-                if (Input.GetKeyDown(KeyCode.E) )
+                else if (turnOff && !InteractionOne)
                 {
-                    FirstObjectInteractionActions.Invoke();
-                    InteractionOne = true;
                     pressE.SetActive(false);
-                    //holder.enabled = false;
-                    //StartCoroutine(RotateToNewPosition());
+                    turnOff = false;
                 }
             }
-            else if (turnOff && !InteractionOne)
+            else
             {
-                pressE.SetActive(false);
-                turnOff = false;
+                angleXRelativeToPlayer = Vector3.Angle(direction, -transform.right);
+                angleYRelativeToPlayer = Vector3.Angle(direction, transform.up);
+                if (angleXRelativeToPlayer < xAngle * 0.5f /*&& angleYRelativeToPlayer < yAngle * 0.5f*/ &&
+                    transform.localRotation.x < Quaternion.Euler(30, 0, 0).x && transform.localRotation.x > Quaternion.Euler(-30, 0, 0).x &&
+                    transform.localRotation.z < Quaternion.Euler(0, 0, 30).z && transform.localRotation.z > Quaternion.Euler(0, 0, -30).z && !InteractionOne)
+                {
+                    if (!turnOff)
+                    {
+                        pressE.SetActive(true);
+                        turnOff = true;
+                    }
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        FirstObjectInteractionActions.Invoke();
+                        InteractionOne = true;
+                        pressE.SetActive(false);
+                        //holder.enabled = false;
+                        //StartCoroutine(RotateToNewPosition());
+                    }
+                }
+                else if (turnOff && !InteractionOne)
+                {
+                    pressE.SetActive(false);
+                    turnOff = false;
+                }
             }
+            
             //transform.RotateAround(transform.GetComponent<Renderer>().bounds.center, player.up, 1);
             //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(rotationOffset), 0.01f);
 
-            if (InteractionOne && !InteractionTwo)
+            if (InteractionOne && !InteractionTwo && !nothingInside)
             {
                 RaycastHit hit;
                 if (Physics.Raycast(player.position, key.transform.position - player.position, out hit, 5))

@@ -45,6 +45,8 @@ public class NoteController : MonoBehaviour
                     hit.transform.gameObject.GetComponent<NoteAssign>().assignedNote.SetActive(true);
                     hit.transform.gameObject.SetActive(false);
 
+                    currentNote = hit.transform.gameObject.GetComponent<NoteAssign>().page;
+
                     eventInstance = RuntimeManager.CreateInstance("event:/2D/Paper/Paper Up");
 
                     eventInstance.start();
@@ -71,16 +73,11 @@ public class NoteController : MonoBehaviour
 
     void PickUpNote()
     {
-        //if (!tutorialLine)
-        //{
-
-        //}
         journalController.whichNotesPage = currentNote;
         journalController.noteList.Add(currentNote);
+        journalController.pickedUpNotes++;
 
         journalOnSwitch.OpenOrClose();
         journalController.OpenNotes();
-
-        currentNote++;
     }
 }

@@ -25,7 +25,7 @@ public class TutorialController : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI conLetter;
 
-    bool directed = false, doneTalk = false, spotted = false;
+    bool directed, doneTalk, spotted, fiveMinute, canPlayFive = true;
 
     void Start()
     {
@@ -100,6 +100,16 @@ public class TutorialController : MonoBehaviour
         StartCoroutine(WaitForCrossy());
     }
 
+    public void StartFiveMinuteTimer()
+    {
+        StartCoroutine(FiveMinuteTimer());
+    }
+
+    public void SetCanPlayFiveBool(bool set)
+    {
+        canPlayFive = set;
+    }
+
     IEnumerator WaitForCrossy()
     {
         yield return new WaitForSeconds(5f);
@@ -108,7 +118,7 @@ public class TutorialController : MonoBehaviour
 
         eventInstance.start();
 
-        yield return new WaitForSeconds(60f);
+        yield return new WaitForSeconds(31.5f);
 
         journalController.EnableJournal();
         journalController.readingHowTo = true;
@@ -137,5 +147,17 @@ public class TutorialController : MonoBehaviour
         directed = false;
 
         StopCoroutine(DirectionTimer());
+    }
+
+    IEnumerator FiveMinuteTimer()
+    {
+        yield return new WaitForSeconds(300f);
+
+        if (!fiveMinute && canPlayFive)
+        {
+            eventInstance = RuntimeManager.CreateInstance("event:/MR_C_Tutorial/TUT.0.5.1.3");
+
+            eventInstance.start();
+        }
     }
 }

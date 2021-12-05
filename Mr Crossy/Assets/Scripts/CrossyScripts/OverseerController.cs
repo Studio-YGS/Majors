@@ -59,7 +59,11 @@ public class OverseerController : MonoBehaviour
     [SerializeField] private float m_SearchTightAmt;
     [SerializeField] private float m_SearchRadiusAggro;
     [SerializeField] private Vector3 m_ValidationPosition;
-    [SerializeField] private List<GameObject> m_SpawnLighthouses = new List<GameObject>();
+
+    public List<GameObject> distOneSpawnLighthouses = new List<GameObject>();
+    public List<GameObject> distTwoSpawnLighthouses = new List<GameObject>();
+    public List<GameObject> distThreeSpawnLighthouses = new List<GameObject>();
+    private List<GameObject> m_SpawnLighthouses = new List<GameObject>();
 
     [Header("Heal 'N' Die")]
     [SerializeField] private int m_DeathChanceMax;
@@ -138,7 +142,7 @@ public class OverseerController : MonoBehaviour
     public List<Lighthouse> districtTwoLighthouses = new List<Lighthouse>();
     public List<Lighthouse> districtThreeLighthouses = new List<Lighthouse>();
 
-    public List<Lighthouse> titanLighthouses = new List<Lighthouse>();
+    [HideInInspector] public List<Lighthouse> titanLighthouses = new List<Lighthouse>();
 
 
     public Lighthouse storedHouse;
@@ -191,10 +195,18 @@ public class OverseerController : MonoBehaviour
             else fiddleFMOD = false;
 
             if (fiddleFMOD) CrossyFMODFiddling(CrossyPathDistance, m_State, deady);
+            else
+            {
+                if(emitter.Params[0].Value != 100f)
+                {
+                    emitter.Params[0].Value = 100f;
+                    emitter.Target.SetParameter(emitter.Params[0].Name, emitter.Params[0].Value);
+                }
+            }
 
             VignetteProcessor();
 
-            ParameterHell();
+            //ParameterHell();
             GetCrossyPlayerDistance();
 
             if (m_State == -1)
@@ -240,6 +252,7 @@ public class OverseerController : MonoBehaviour
         m_TitanNoisyNum = 0;
         yield return new WaitForSeconds(1);
         emitter.Params[3].Value = m_TitanNoisyNum;
+        emitter.Target.SetParameter(emitter.Params[3].Name, emitter.Params[3].Value);
     }
 
     public void VignetteProcessor()
@@ -332,18 +345,21 @@ public class OverseerController : MonoBehaviour
             case 1:
                 {
                     //titanLighthouses.Clear();
+                    m_SpawnLighthouses = distOneSpawnLighthouses;
                     titanLighthouses = districtOneLighthouses;
                     break;
                 }
             case 2:
                 {
                     //titanLighthouses.Clear();
+                    m_SpawnLighthouses = distTwoSpawnLighthouses;
                     titanLighthouses = districtTwoLighthouses;
                     break;
                 }
             case 3:
                 {
                     //titanLighthouses.Clear();
+                    m_SpawnLighthouses = distThreeSpawnLighthouses;
                     titanLighthouses = districtThreeLighthouses;
                     break;
                 }
@@ -450,37 +466,46 @@ public class OverseerController : MonoBehaviour
 
     public void CrossyFMODFiddling(float pathDistance, int state, bool dead)
     {
-        CrossKeyManager key = FindObjectOfType<CrossKeyManager>();
 
-
-        if(pathDistance <= 100f)
+        if (pathDistance <= 100f && state != -1)
         {
             Debug.Log("CrossyFMOD ShouldBeSetting");
             emitter.Params[0].Value = pathDistance;
+            emitter.Target.SetParameter(emitter.Params[0].Name, emitter.Params[0].Value);
             Debug.Log("ADAPTIVE: Distance: " + pathDistance);
         }
-        else emitter.Params[0].Value = 100f;
-
-        if (state == 3 || key.puzzleOn)
+        else
         {
-            hasChased = true;
-            emitter.Params[1].Value = 0f;
-            Debug.Log("ADAPTIVE: Chase Started: State = " + state + ", PuzzleOn = " + key.puzzleOn);
+            emitter.Params[0].Value = 100f;
+            emitter.Target.SetParameter(emitter.Params[0].Name, emitter.Params[0].Value);
         }
-        else if (!m_PlayerInHouse && (state == 1 || state == 0 || state == -1))
+
+        
+        if (!m_PlayerInHouse && state < 3 && !keyMan.puzzleOn)
         {
-            if (hasChased && !attemptingSafe)
+            if (hasChased && !attemptingSafe && !keyMan.puzzleOn)
             {
                 StartCoroutine(WaitForPuzzleOff());
-                Debug.Log("ADAPTIVE: Chase Stopped: State = " + state + ", PuzzleOn = " + key.puzzleOn);
+                Debug.Log("ADAPTIVE: Chase Stopped: State = " + state + ", PuzzleOn = " + keyMan.puzzleOn);
             }
         }
-
-        if (dead)
+        else if (state == 3 && !attemptingSafe && !attemptingDie || keyMan.puzzleOn && !attemptingSafe && !attemptingDie)
         {
-            if(!attemptingDie) DeadNoises();
-            Debug.Log("ADAPTIVE: Dead Played: " + 0f);
+            hasChased = true;
+            if (emitter.Params[1].Value != 0f)
+            {
+                emitter.Params[1].Value = 0f;
+                emitter.Target.SetParameter(emitter.Params[1].Name, emitter.Params[1].Value);
+            }
+            Debug.Log("ADAPTIVE: Chase Started: State = " + state + ", PuzzleOn = " + keyMan.puzzleOn);
         }
+
+
+        //if (dead)
+        //{
+        //    if(!attemptingDie) DeadNoises();
+        //    Debug.Log("ADAPTIVE: Dead Played: " + 0f);
+        //}
         //else if(!dead && !attemptingSafe)
         //{ 
         //    emitter.Target.SetParameter(deadParamName, 1f);
@@ -489,35 +514,53 @@ public class OverseerController : MonoBehaviour
 
         if (m_PlayerInHouse)
         {
-            if (hasChased && !attemptingSafe)
+            if (hasChased && !attemptingSafe && !attemptingDie)
             {
                 StartCoroutine(WaitForPuzzleOff());
             }
         }
 
-        IEnumerator WaitForPuzzleOff()
+        
+    }
+
+    IEnumerator WaitForPuzzleOff()
+    {
+        attemptingSafe = true;
+        yield return new WaitForSecondsRealtime(0.1f);
+        while (keyMan.puzzleOn)
         {
-            attemptingSafe = true;
-            while (key.puzzleOn)
-            {
-                yield return null;
-            }
-
-            Safe();
-            yield return new WaitForSeconds(1f);
-            emitter.Params[2].Value = 1f;
-
-            hasChased = false;
-            Debug.Log("ADAPTIVE: Safe Played: " + 2f);
-            attemptingSafe = false;
-            StopCoroutine(WaitForPuzzleOff());
+            yield return null;
         }
 
-        void Safe()
+        Safe();
+
+        yield return new WaitForSeconds(1f);
+
+        if (emitter.Params[2].Value != 1f)
         {
-            Debug.Log("ADAPTIVE: Safe Method Called");
+            emitter.Params[2].Value = 1f;
+            emitter.Target.SetParameter(emitter.Params[2].Name, emitter.Params[2].Value);
+        }
+
+        hasChased = false;
+        Debug.Log("ADAPTIVE: Safe Played: " + 2f);
+        attemptingSafe = false;
+        StopCoroutine(WaitForPuzzleOff());
+    }
+
+    void Safe()
+    {
+        Debug.Log("ADAPTIVE: Safe Method Called");
+        if (emitter.Params[1].Value != 1f)
+        {
+            Debug.Log("ADAPTIVE: Chasing set false");
             emitter.Params[1].Value = 1f;
+            emitter.Target.SetParameter(emitter.Params[1].Name, emitter.Params[1].Value);
+        }
+        if (emitter.Params[2].Value != 2f)
+        {
             emitter.Params[2].Value = 2f;
+            emitter.Target.SetParameter(emitter.Params[2].Name, emitter.Params[2].Value);
         }
     }
 
@@ -530,13 +573,45 @@ public class OverseerController : MonoBehaviour
     {
         attemptingDie = true;
 
-        emitter.Params[2].Value = 0f; //Makes dead
-        emitter.Params[1].Value = 1f; //Makes chase stop
+        if (emitter.Params[2].Value != 0f)
+        {
+            emitter.Params[2].Value = 0f;
+            emitter.Target.SetParameter(emitter.Params[2].Name, emitter.Params[2].Value);
+        } //Makes dead
+        if (emitter.Params[1].Value != 1f)
+        {
+            Debug.Log("ADAPTIVE: Chasing set false");
+            emitter.Params[1].Value = 1f;
+            emitter.Target.SetParameter(emitter.Params[1].Name, emitter.Params[1].Value);
+        } //Makes chase stop
         yield return new WaitForSeconds(1f);
-        emitter.Params[2].Value = 1f; // Makes not dead
-
-        attemptingDie = true;
+        if (emitter.Params[2].Value != 1f)
+        {
+            emitter.Params[2].Value = 1f;
+            emitter.Target.SetParameter(emitter.Params[2].Name, emitter.Params[2].Value);
+        } // Makes not dead
+        hasChased = false;
+        attemptingDie = false;
     }
+
+    private void OnEnable()
+    {
+        TreeMalarkey.RegisterEventOnTree(CrossyController.crossyTree, "Despawn", TheDespawnThing);
+    }
+
+    public void TheDespawnThing()
+    {
+        if (hasChased && !attemptingSafe && !attemptingDie)
+        {
+            StartCoroutine(WaitForPuzzleOff());
+        }
+    }
+
+    private void OnDisable()
+    {
+        TreeMalarkey.UnregisterEventOnTree(CrossyController.crossyTree, "Despawn", TheDespawnThing);
+    }
+
     #endregion
 
 
@@ -584,6 +659,7 @@ public class OverseerController : MonoBehaviour
                 StopCoroutine(TitanSoundNeutral());
                 m_TitanNoisyNum = 1;
                 emitter.Params[3].Value = m_TitanNoisyNum;
+                emitter.Target.SetParameter(emitter.Params[3].Name, emitter.Params[3].Value);
             }
         }
         else if (titan.animator.GetCurrentAnimatorStateInfo(0).IsName("TitanCrossyHide"))
@@ -594,6 +670,7 @@ public class OverseerController : MonoBehaviour
                 StopCoroutine(TitanSoundNeutral());
                 m_TitanNoisyNum = 2;
                 emitter.Params[3].Value = m_TitanNoisyNum;
+                emitter.Target.SetParameter(emitter.Params[3].Name, emitter.Params[3].Value);
             }
         }
     }
