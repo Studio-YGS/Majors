@@ -21,7 +21,10 @@ public class SwitchyBoy : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        switchTrigger.Invoke();
+        if (other.CompareTag("GameController"))
+        {
+            switchTrigger.Invoke();
+        }
     }
 
     public void ControllerSwitch(int whichController)

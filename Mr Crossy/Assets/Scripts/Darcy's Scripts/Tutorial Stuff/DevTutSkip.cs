@@ -14,4 +14,11 @@ public class DevTutSkip : MonoBehaviour
             openUI.Invoke();
         }
     }
+
+    public void SolveCurrentWord()
+    {
+        PuzzleController puzzleController = FindObjectOfType<PuzzleController>();
+
+        puzzleController.CompleteCurrentWord();
+    }
 }

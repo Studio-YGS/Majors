@@ -11,7 +11,7 @@ public class JournalController : MonoBehaviour
 
     JournalOnSwitch journalOnSwitch;
 
-    [HideInInspector]
+    //[HideInInspector]
     public List<int> noteList = new List<int>(0); 
 
     [SerializeField]
@@ -21,8 +21,8 @@ public class JournalController : MonoBehaviour
 
     int whichTab = 1; //,whichLogPage = 0;
 
-    [HideInInspector]
-    public int whichNotesPage = 0;
+    //[HideInInspector]
+    public int whichNotesPage = 0, pickedUpNotes = -1;
 
     public bool disabled = false, tutorial = true;
     [HideInInspector]
@@ -180,20 +180,20 @@ public class JournalController : MonoBehaviour
 
                 notePages[whichNotesPage].SetActive(true);
 
-                if (whichNotesPage == 0 && noteList.Count > 1)
+                if (whichNotesPage == 0)
                 {
                     leftArrow.SetActive(false);
                     rightArrow.SetActive(true);
                 }
-                else if (whichNotesPage == noteList.Count && noteList.Count > 1 || whichNotesPage == noteList.Count - 1 && noteList.Count > 1)
-                {
-                    leftArrow.SetActive(true);
-                    rightArrow.SetActive(false);
-                }
-                else if (whichNotesPage > 0)
+                else if (whichNotesPage == 1)
                 {
                     leftArrow.SetActive(true);
                     rightArrow.SetActive(true);
+                }
+                else if (whichNotesPage == 2)
+                {
+                    leftArrow.SetActive(true);
+                    rightArrow.SetActive(false);
                 }
             }
         }

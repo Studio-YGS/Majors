@@ -64,11 +64,6 @@ public class PlayerRespawn : MonoBehaviour
             Register();
             hasMoved = true;
         }
-
-        if (Input.GetKeyDown(KeyCode.I)) //testing, delete before submission
-        {
-            PlayerDie();
-        }
     }
 
     public void PlayerDie()
