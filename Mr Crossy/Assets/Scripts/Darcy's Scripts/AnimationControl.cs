@@ -20,7 +20,6 @@ public class AnimationControl : MonoBehaviour
     {
         Debug.Log("Trying to activate: " + conName);
         GetComponent<Animator>().SetBool(conName, true);
-        //play sound here
     }
 
     public void TutorialAnimationsFalse(string conName)

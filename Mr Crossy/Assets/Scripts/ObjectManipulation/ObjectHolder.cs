@@ -16,7 +16,7 @@ public class ObjectHolder : MonoBehaviour
     //[HideInInspector] public Image imageTwo;
     //[HideInInspector] public TMP_Text textNameTwo;
     //TMP_Text hoverText;
-    bool turnOffHoverText;
+    bool turnOffHoverText, forcedRaycast;
     Vector3 startPos;
     Quaternion startRot;
     //Material mat;
@@ -31,6 +31,7 @@ public class ObjectHolder : MonoBehaviour
     [HideInInspector] public bool thisObjectHeld;
     [HideInInspector] public bool isPlacedDown;
     [HideInInspector] public bool beingInspected;
+    [HideInInspector] public static bool objectBeingInspected;
     //Vector3 posLastFrame;
     //[HideInInspector] public Player_Controller controller;
 
@@ -85,6 +86,11 @@ public class ObjectHolder : MonoBehaviour
             {
                 vHolder.hoverText.text = "Pick Up " + objectName;
                 vHolder.hoverText.gameObject.SetActive(true);
+                if (!forcedRaycast && GameObject.Find("Game Manager"))
+                {
+                    forcedRaycast = true;
+                    GameObject.Find("Game Manager").GetComponent<TutorialSectionStart>().ForceRaycast();
+                }
                 turnOffHoverText = true;
                 GameObject intereactedObject = hit.collider.gameObject;
                 if (Input.GetKeyDown(KeyCode.E) && objectsInHands.Count == 2)
@@ -173,22 +179,24 @@ public class ObjectHolder : MonoBehaviour
 
         if (Input.GetMouseButtonDown(1))
         {
-            if (thisObjectHeld && !FindObjectOfType<CrossKeyManager>().puzzleOn)
+            if (thisObjectHeld && !FindObjectOfType<CrossKeyManager>().puzzleOn && !DoorInteraction.beingMoved)
             {
                 Vector3 posOffset = transform.position - transform.GetComponent<Renderer>().bounds.center;
                 transform.position = vHolder.cam.position + vHolder.cam.forward * distanceFromFace + posOffset;
                 vHolder.controller.enabled = false;
                 beingInspected = true;
+                objectBeingInspected = true;
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
             }
         }
         else if (Input.GetMouseButtonUp(1))
         {
-            if (thisObjectHeld && !FindObjectOfType<CrossKeyManager>().puzzleOn)
+            if (thisObjectHeld && !FindObjectOfType<CrossKeyManager>().puzzleOn && !DoorInteraction.beingMoved)
             {
                 vHolder.controller.enabled = true;
                 beingInspected = false;
+                objectBeingInspected = false;
                 Cursor.visible = false;
                 Cursor.lockState = CursorLockMode.Locked;
                 transform.position = vHolder.hand.TransformPoint(handOffset);
@@ -197,7 +205,7 @@ public class ObjectHolder : MonoBehaviour
         }
         if (Input.GetMouseButton(0) && Input.GetMouseButton(1))
         {
-            if (thisObjectHeld && !FindObjectOfType<CrossKeyManager>().puzzleOn)
+            if (thisObjectHeld && !FindObjectOfType<CrossKeyManager>().puzzleOn && !DoorInteraction.beingMoved)
             {
                 float rotX = Input.GetAxis("Mouse X") * 200 * Mathf.Deg2Rad;
                 float rotY = Input.GetAxis("Mouse Y") * 200 * Mathf.Deg2Rad;

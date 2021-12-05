@@ -52,11 +52,10 @@ public class TutorialSectionStart : MonoBehaviour
                 raycastEvent.Invoke();
             }
 
-            if(hit.transform.gameObject.CompareTag("Holdable") && needsRaycast)
-            {
-                needsRaycast = false;
-                raycastEvent.Invoke();
-            }
+            //if(hit.transform.gameObject.CompareTag("Holdable") && needsRaycast)
+            //{
+                
+            //}
 
             if (hit.transform.gameObject.CompareTag("Clue") && needsRaycast)
             {
@@ -159,6 +158,12 @@ public class TutorialSectionStart : MonoBehaviour
     public void CrosskeyPickedUp()
     {
         sectionStart.Invoke();
+    }
+
+    public void ForceRaycast()
+    {
+        needsRaycast = false;
+        raycastEvent.Invoke();
     }
 
     public void TutorialOver()
