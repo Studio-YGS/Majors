@@ -162,11 +162,8 @@ public class TutorialSectionStart : MonoBehaviour
 
     public void ForceRaycast()
     {
-        if (needsRaycast)
-        {
-            needsRaycast = false;
-            raycastEvent.Invoke();
-        }
+        needsRaycast = false;
+        raycastEvent.Invoke();
     }
 
     public void TutorialOver()

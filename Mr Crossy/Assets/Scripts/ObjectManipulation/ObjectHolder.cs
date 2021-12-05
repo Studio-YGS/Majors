@@ -16,7 +16,7 @@ public class ObjectHolder : MonoBehaviour
     //[HideInInspector] public Image imageTwo;
     //[HideInInspector] public TMP_Text textNameTwo;
     //TMP_Text hoverText;
-    bool turnOffHoverText;
+    bool turnOffHoverText, forcedRaycast;
     Vector3 startPos;
     Quaternion startRot;
     //Material mat;
@@ -86,6 +86,11 @@ public class ObjectHolder : MonoBehaviour
             {
                 vHolder.hoverText.text = "Pick Up " + objectName;
                 vHolder.hoverText.gameObject.SetActive(true);
+                if (!forcedRaycast && GameObject.Find("Game Manager"))
+                {
+                    forcedRaycast = true;
+                    GameObject.Find("Game Manager").GetComponent<TutorialSectionStart>().ForceRaycast();
+                }
                 turnOffHoverText = true;
                 GameObject intereactedObject = hit.collider.gameObject;
                 if (Input.GetKeyDown(KeyCode.E) && objectsInHands.Count == 2)
