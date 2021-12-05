@@ -9,12 +9,14 @@ public class SwitchyBoy : MonoBehaviour
     GameObject districtOne, districtTwo;
 
     PlayerRespawn playerRespawn;
+    OverseerController seer;
 
     public UnityEvent switchTrigger;
 
     void Start()
     {
         playerRespawn = FindObjectOfType<PlayerRespawn>();
+        seer = FindObjectOfType<OverseerController>();
     }
 
     void OnTriggerEnter(Collider other)
@@ -31,6 +33,7 @@ public class SwitchyBoy : MonoBehaviour
                     districtOne.SetActive(true);
                     districtTwo.SetActive(false);
                     playerRespawn.SwitchRespawnPoint(whichController);
+                    seer.SetLighthouseGroup(whichController);
                     break;
                 }
             case 2:
@@ -38,6 +41,7 @@ public class SwitchyBoy : MonoBehaviour
                     districtOne.SetActive(false);
                     districtTwo.SetActive(true);
                     playerRespawn.SwitchRespawnPoint(whichController);
+                    seer.SetLighthouseGroup(whichController);
                     break;
                 }
         }
