@@ -325,6 +325,31 @@ public class OverseerController : MonoBehaviour
         m_StalkStreet = stalky;
     }
 
+    public void SetLighthouseGroup(int district)
+    {
+        switch (district)
+        {
+            case 1:
+                {
+                    //titanLighthouses.Clear();
+                    titanLighthouses = districtOneLighthouses;
+                    break;
+                }
+            case 2:
+                {
+                    //titanLighthouses.Clear();
+                    titanLighthouses = districtTwoLighthouses;
+                    break;
+                }
+            case 3:
+                {
+                    //titanLighthouses.Clear();
+                    titanLighthouses = districtThreeLighthouses;
+                    break;
+                }
+        }
+    }
+
     public void TutorialActive()
     {
         m_IsTutorial = true;
@@ -339,6 +364,7 @@ public class OverseerController : MonoBehaviour
 
     public void AwakenObserver()
     {
+        SetLighthouseGroup(1);
         TreeMalarkey.EnableTree(ObserverTree);
         distootle.ShoobyDooby();
         m_Crossy.GetComponent<CrossyController>().RegisterEvents();

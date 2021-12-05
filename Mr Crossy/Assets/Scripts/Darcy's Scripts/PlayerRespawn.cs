@@ -122,6 +122,8 @@ public class PlayerRespawn : MonoBehaviour
 
         FindObjectOfType<MrCrossyDistortion>().ReduceInsanity();
         FindObjectOfType<MrCrossyDistortion>().DecreaseVignette();
+        FindObjectOfType<MrCrossyDistortion>().colorAdjustments[0].colorFilter.value = Color.white;
+        FindObjectOfType<MrCrossyDistortion>().colorAdjustments[1].colorFilter.value = Color.white;
         deathVideoObject.SetActive(false);
 
         puzzleController = FindObjectOfType<PuzzleController>();
