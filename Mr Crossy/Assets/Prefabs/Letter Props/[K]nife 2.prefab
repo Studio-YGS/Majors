@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4830980781826032275
+--- !u!1 &811161749716458690
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,49 +8,49 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3348526078260846767}
-  - component: {fileID: 6295616107059808798}
-  - component: {fileID: 805157484788291393}
-  - component: {fileID: 4830980781826032279}
-  - component: {fileID: 4830980781826032278}
-  - component: {fileID: 4830980781826032277}
-  - component: {fileID: 4830980781826032276}
+  - component: {fileID: 664404404369524827}
+  - component: {fileID: 3922772277880902316}
+  - component: {fileID: 2024006231363681219}
+  - component: {fileID: 811161749716458750}
+  - component: {fileID: 811161749716458689}
+  - component: {fileID: 811161749716458688}
+  - component: {fileID: 811161749716458691}
   m_Layer: 0
-  m_Name: '[Q]uill 1'
+  m_Name: '[K]nife 2'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3348526078260846767
+--- !u!4 &664404404369524827
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4830980781826032275}
+  m_GameObject: {fileID: 811161749716458690}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.4349875, y: 0.92643684, z: -17.585442}
-  m_LocalScale: {x: 1.4764225, y: 1.4764225, z: 1.4764225}
+  m_LocalPosition: {x: -3.2806754, y: 0.92929614, z: -17.7177}
+  m_LocalScale: {x: 1.9981924, y: 1.9981924, z: 1.9981924}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &6295616107059808798
+--- !u!33 &3922772277880902316
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4830980781826032275}
-  m_Mesh: {fileID: -7214527753089268999, guid: de057525aaf3e7d49bafa7acd0de1f07, type: 3}
---- !u!23 &805157484788291393
+  m_GameObject: {fileID: 811161749716458690}
+  m_Mesh: {fileID: 4898376589914736847, guid: de057525aaf3e7d49bafa7acd0de1f07, type: 3}
+--- !u!23 &2024006231363681219
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4830980781826032275}
+  m_GameObject: {fileID: 811161749716458690}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f1119c7ea706a2a4fb83bc5dcc43bd3d, type: 2}
+  - {fileID: 2100000, guid: 7f13fd1258f2079498afa05351efca98, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -85,13 +85,26 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!54 &4830980781826032279
+--- !u!65 &811161749716458750
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 811161749716458690}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.099156275, y: 0.0042424137, z: 0.014129097}
+  m_Center: {x: 0.000003881752, y: -2.3283063e-10, z: 0.000070869915}
+--- !u!54 &811161749716458689
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4830980781826032275}
+  m_GameObject: {fileID: 811161749716458690}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -101,13 +114,13 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &4830980781826032278
+--- !u!114 &811161749716458688
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4830980781826032275}
+  m_GameObject: {fileID: 811161749716458690}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
@@ -120,43 +133,30 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
---- !u!114 &4830980781826032277
+--- !u!114 &811161749716458691
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4830980781826032275}
+  m_GameObject: {fileID: 811161749716458690}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c771dc25b37682447906be6093940da8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   objectImage: {fileID: 4860654920025106680, guid: c9eea934591e8f4428c79ce2fbb600ac, type: 3}
-  objectName: '[Q]uill_Nds Img'
+  objectName: '[K]nife_Nds Img'
   vHolder: {fileID: 0}
   thisObjectHeld: 1
   isPlacedDown: 0
   beingInspected: 0
-  ogScaleFactor: {x: 1.4764225, y: 1.4764225, z: 1.4764225}
+  ogScaleFactor: {x: 1.9981924, y: 1.9981924, z: 1.9981924}
   pickupRange: 5
-  handOffset: {x: -0.35, y: 0.55, z: -0.34}
-  handRotation: {x: -0.347768, y: -0.080733985, z: 0.15501061, w: 0.92114675}
+  handOffset: {x: -0.35, y: 0.56, z: -0.39}
+  handRotation: {x: -0.03132189, y: 0.18126154, z: -0.71808904, w: -0.67120147}
   scaleFactor: {x: 1, y: 1, z: 1}
   placementOffset: {x: 0, y: 0, z: 0}
   rotationalSet: {x: 0, y: 0, z: 0, w: 0}
-  distanceFromFace: 0.2
+  distanceFromFace: 0.15
   updatePos: 0
---- !u!65 &4830980781826032276
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4830980781826032275}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.031559557, y: 0.0036957448, z: 0.12765434}
-  m_Center: {x: 0, y: -3.4924597e-10, z: -0.0000000037252903}
