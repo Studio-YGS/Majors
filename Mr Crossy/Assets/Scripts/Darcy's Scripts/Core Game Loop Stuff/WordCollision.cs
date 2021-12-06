@@ -41,14 +41,16 @@ public class WordCollision : MonoBehaviour
         }
     }
 
-    void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("GameController"))
-        {
-            puzzleController.streetText.text = "";
-            puzzleController.WriteToUI();
-        }
-    }
+    //void OnTriggerExit(Collider other)
+    //{
+    //    if (other.CompareTag("GameController"))
+    //    {
+    //        Debug.Log("Exiting word collider");
+    //        puzzleController.streetText.text = "";
+    //        Debug.Log("Writing to UI with " + puzzleController.streetText.text + ".");
+    //        //puzzleController.WriteToUI();
+    //    }
+    //}
 
     public void SetUpController()
     {

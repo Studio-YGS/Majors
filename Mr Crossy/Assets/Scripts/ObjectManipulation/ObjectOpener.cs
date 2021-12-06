@@ -15,6 +15,7 @@ public class ObjectOpener : MonoBehaviour
     bool turnOff;
     bool InteractionOne;
     bool InteractionTwo;
+    bool tutorialPlayed;
 
     public UnityEvent FirstObjectInteractionActions;
     public UnityEvent keyPickup;
@@ -47,6 +48,12 @@ public class ObjectOpener : MonoBehaviour
         {
             direction = player.position - transform.position;
             //rotDirection = player.position  - transform.position + (player.forward * rotationOffset.z) + (player.up * rotationOffset.y) + (player.right * rotationOffset.x);
+
+            if (!tutorialPlayed)
+            {
+                tutorialPlayed = true;
+                GetComponent<TutorialSectionStart>().ObjectsTeach();
+            }
 
             if (isGamelad)
             {
