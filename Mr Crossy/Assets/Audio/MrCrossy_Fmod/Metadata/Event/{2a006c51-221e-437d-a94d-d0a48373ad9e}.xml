@@ -125,6 +125,7 @@
 	<object class="MixerBusEffectChain" id="{a4bbe88b-ecb1-464d-9181-d6eeae24919e}">
 		<relationship name="effects">
 			<destination>{8b7fbf3a-06d9-438e-8ef5-61fe33adb3ff}</destination>
+			<destination>{2f5a6250-c4a4-4edf-b810-fa1ce1d6e5e8}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{cd5ca9d9-71ee-4401-a061-937acf3f93da}" />
@@ -136,4 +137,12 @@
 	</object>
 	<object class="SFXReverbEffect" id="{7fbba11e-bcb3-496c-8ff5-b6765d7d5943}" />
 	<object class="MixerBusFader" id="{8b7fbf3a-06d9-438e-8ef5-61fe33adb3ff}" />
+	<object class="SpatialiserEffect" id="{2f5a6250-c4a4-4edf-b810-fa1ce1d6e5e8}">
+		<property name="minimumDistance">
+			<value>5</value>
+		</property>
+		<property name="maximumDistance">
+			<value>10</value>
+		</property>
+	</object>
 </objects>

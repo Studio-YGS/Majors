@@ -115,9 +115,9 @@
 	</object>
 	<object class="GroupTrack" id="{ff4e9722-ebf7-4a26-8b18-0b9c2fb0e3a8}">
 		<relationship name="modules">
-			<destination>{0399aa20-662b-4e19-89e0-203d73303b26}</destination>
 			<destination>{9024a944-a8b9-4bd7-9712-f524a400b211}</destination>
 			<destination>{c26fce29-61ba-4704-9a36-ca9cac7dd524}</destination>
+			<destination>{7e1f768f-ce29-4268-b583-330e7432e55c}</destination>
 		</relationship>
 		<relationship name="mixerGroup">
 			<destination>{e882bc0b-d598-43f8-ae8d-0387cd739972}</destination>
@@ -193,7 +193,6 @@
 		<relationship name="modules">
 			<destination>{28dd8b5c-5614-4c9e-b69e-37d530ab36d6}</destination>
 			<destination>{a30c5840-3c79-45f7-a83f-684770128e57}</destination>
-			<destination>{0399aa20-662b-4e19-89e0-203d73303b26}</destination>
 			<destination>{75d52126-4571-4853-a3b9-f637466f1b58}</destination>
 			<destination>{dcdfad00-2c3d-4b9c-bcad-29cd41910a78}</destination>
 			<destination>{80142ec9-9912-44bd-b1ae-157324536cf8}</destination>
@@ -206,6 +205,7 @@
 			<destination>{951c3104-3b34-4104-a1e8-0bef8cf18165}</destination>
 			<destination>{8542822d-981e-464d-8b61-37e0cfdee898}</destination>
 			<destination>{72730d0b-dec2-4638-854e-9898a0bdac38}</destination>
+			<destination>{7e1f768f-ce29-4268-b583-330e7432e55c}</destination>
 		</relationship>
 		<relationship name="markers">
 			<destination>{30c1dbea-fa88-4dfd-a98d-594c68cfcb42}</destination>
@@ -401,17 +401,6 @@
 			<destination>{15fb6896-d833-4725-b678-94cda5f6e015}</destination>
 		</relationship>
 	</object>
-	<object class="SingleSound" id="{0399aa20-662b-4e19-89e0-203d73303b26}">
-		<property name="start">
-			<value>30.857142857142854</value>
-		</property>
-		<property name="length">
-			<value>27.428583333333332</value>
-		</property>
-		<relationship name="audioFile">
-			<destination>{be398c08-ce64-4f54-9c14-7a3917953983}</destination>
-		</relationship>
-	</object>
 	<object class="TransitionSourceSound" id="{9024a944-a8b9-4bd7-9712-f524a400b211}">
 		<property name="length">
 			<value>0</value>
@@ -425,9 +414,20 @@
 			<value>4.671435611023238</value>
 		</property>
 	</object>
+	<object class="SingleSound" id="{7e1f768f-ce29-4268-b583-330e7432e55c}">
+		<property name="start">
+			<value>30.857142857142854</value>
+		</property>
+		<property name="length">
+			<value>27.428583333333332</value>
+		</property>
+		<relationship name="audioFile">
+			<destination>{8244fa1a-e61a-4fcb-9643-106bce970418}</destination>
+		</relationship>
+	</object>
 	<object class="EventMixerGroup" id="{e882bc0b-d598-43f8-ae8d-0387cd739972}">
 		<property name="volume">
-			<value>1</value>
+			<value>-2.5</value>
 		</property>
 		<property name="name">
 			<value>Chase</value>
