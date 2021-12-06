@@ -34,6 +34,7 @@ public class CrossyController : MonoBehaviour
     [SerializeField] private Transform m_Vision;
     [SerializeField] private Transform m_HindVision;
     [SerializeField] private Transform m_CrossyDespawn;
+    [SerializeField] private GameObject screecher;
 
     [Header("Eye Glow")]
     [SerializeField] private Material crossyGlow;
@@ -202,6 +203,7 @@ public class CrossyController : MonoBehaviour
 
     private void Awake()
     {
+        screecher.SetActive(false);
         crossyGlow.EnableKeyword("_EMISSION");
         crossyTree = GetComponent<BehaviorTree>();
         agent = GetComponent<NavMeshAgent>();
@@ -264,13 +266,14 @@ public class CrossyController : MonoBehaviour
     {
         if (overrideShouldRun == false) // Sets 'm_ShouldRun' based on state and distance from target.
         {
-            if (m_State < 1) { m_ShouldRun = false; }
+            if (m_State < 1) { m_ShouldRun = false; screecher.SetActive(false); }
             else if (m_State == 1 || m_State == 2)
             {
+                screecher.SetActive(true);
                 if (agent.remainingDistance > RunDistance) m_ShouldRun = true;
                 else m_ShouldRun = false;
             }
-            else if (m_State == 3) { m_ShouldRun = true; }
+            else if (m_State == 3) { m_ShouldRun = true; screecher.SetActive(false); }
         }
         else { m_ShouldRun = run; }
     }
