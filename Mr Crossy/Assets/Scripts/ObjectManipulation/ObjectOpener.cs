@@ -133,6 +133,7 @@ public class ObjectOpener : MonoBehaviour
                         {
                             //other stuff when key is picked up
                             holder.Drop();
+                            holder.ObjectDroppedWhileInspecting();
                             key.SetActive(false);
                             holder.vHolder.controller.enabled = true;
                             keyPickup.Invoke();

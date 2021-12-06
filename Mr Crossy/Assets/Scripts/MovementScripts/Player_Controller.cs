@@ -34,7 +34,7 @@ public class Player_Controller : MonoBehaviour
     [HideInInspector]
     public bool isGrounded;
 
-    public float mouseSensitivity = 100f;
+    public float mouseSensitivity = 2.5f;
     public Transform cam;
     private Vector3 camStart;
     private Vector2 rotation = Vector2.zero;
@@ -207,6 +207,18 @@ public class Player_Controller : MonoBehaviour
         FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Out of Stamina/Out of Breath");
         yield return new WaitForSecondsRealtime(2);
         outOfBreath = false;
+    }
+
+    public void MouseSensitivityChange(float newValue)
+    {
+        newValue = newValue * 5f;
+
+        mouseSensitivity = newValue;
+
+        if(mouseSensitivity < 0.5f)
+        {
+            mouseSensitivity = 0.5f;
+        }
     }
 
     //methods for journal

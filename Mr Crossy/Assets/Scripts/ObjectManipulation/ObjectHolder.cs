@@ -252,6 +252,11 @@ public class ObjectHolder : MonoBehaviour
 
     }
 
+    public void ObjectDroppedWhileInspecting()
+    {
+        objectBeingInspected = false;
+    }
+
     public void DeathDrop()
     {
         if(objectsInHands.Count == 1)
