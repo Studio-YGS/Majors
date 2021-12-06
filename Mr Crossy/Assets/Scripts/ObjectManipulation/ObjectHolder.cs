@@ -16,7 +16,8 @@ public class ObjectHolder : MonoBehaviour
     //[HideInInspector] public Image imageTwo;
     //[HideInInspector] public TMP_Text textNameTwo;
     //TMP_Text hoverText;
-    bool turnOffHoverText, forcedRaycast;
+    bool turnOffHoverText;
+    public static bool forcedRaycast;
     Vector3 startPos;
     Quaternion startRot;
     //Material mat;

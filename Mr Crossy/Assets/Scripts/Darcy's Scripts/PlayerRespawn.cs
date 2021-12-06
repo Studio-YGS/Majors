@@ -45,6 +45,7 @@ public class PlayerRespawn : MonoBehaviour
         seer = FindObjectOfType<OverseerController>();
         player = FindObjectOfType<Player_Controller>();
         journal = FindObjectOfType<JournalController>();
+        respawnPosition = respawnPoints[0];
     }
 
     public void Register()
