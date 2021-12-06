@@ -25,6 +25,7 @@ public class ObjectOpener : MonoBehaviour
     [Header("First Interaction")]
     public float xAngle;
     public float yAngle;
+    public GameObject keyPickupText;
     //public Vector3 rotationOffset;
     void Start()
     {
@@ -125,7 +126,7 @@ public class ObjectOpener : MonoBehaviour
                         Debug.Log("hit");
                         if (!turnOff)
                         {
-                            pressE.SetActive(true);
+                            keyPickupText.SetActive(true);
                             turnOff = true;
                         }
                         if (Input.GetKeyUp(KeyCode.E))
@@ -140,13 +141,13 @@ public class ObjectOpener : MonoBehaviour
                             Cursor.lockState = CursorLockMode.Locked;
 
                             InteractionTwo = true;
-                            pressE.SetActive(false);
+                            keyPickupText.SetActive(false);
                             holder.beingInspected = false;
                         }
                     }
                     else if (turnOff)
                     {
-                        pressE.SetActive(false);
+                        keyPickupText.SetActive(false);
                         turnOff = false;
                     }
                 }
@@ -154,14 +155,14 @@ public class ObjectOpener : MonoBehaviour
             }
             else if (turnOff && InteractionOne)
             {
-                pressE.SetActive(false);
+                keyPickupText.SetActive(false);
                 turnOff = false;
             }
 
         }
         else if (turnOff)
         {
-            pressE.SetActive(false);
+            keyPickupText.SetActive(false);
             turnOff = false;
         }
 

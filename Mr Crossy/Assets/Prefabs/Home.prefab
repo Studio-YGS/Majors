@@ -1098,7 +1098,7 @@ GameObject:
   - component: {fileID: 1346153294}
   - component: {fileID: 1346153296}
   - component: {fileID: 1346153295}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Box Volume_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1278,7 +1278,7 @@ GameObject:
   - component: {fileID: 1824612384}
   - component: {fileID: 1824612386}
   - component: {fileID: 1824612385}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Box Volume_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1458,7 +1458,7 @@ GameObject:
   - component: {fileID: 1960602191}
   - component: {fileID: 1960602194}
   - component: {fileID: 1960602193}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Box Volume_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8568,7 +8568,7 @@ GameObject:
   - component: {fileID: 953006259443979472}
   - component: {fileID: 953006259443979477}
   - component: {fileID: 953006259443979478}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Box Volume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28800,13 +28800,14 @@ GameObject:
   - component: {fileID: 7864230794551929498}
   - component: {fileID: 6876533112293674927}
   - component: {fileID: 6038392145154764080}
-  m_Layer: 15
+  - component: {fileID: 3883063791880640413}
+  m_Layer: 2
   m_Name: Nostalgia Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1337075357336896094
 Transform:
   m_ObjectHideFlags: 0
@@ -28883,6 +28884,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.5357152, y: 0.58677715, z: 1.9791043}
   m_Center: {x: -0.2678604, y: 0.20661074, z: 0.33281255}
+--- !u!114 &3883063791880640413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2790121791549935102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71ee5ea51c030484a941110902794c69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nostalgia: {fileID: 3093713181043716673}
+  homeDrone: {fileID: 1115267435}
 --- !u!1 &2906489951870865241
 GameObject:
   m_ObjectHideFlags: 0

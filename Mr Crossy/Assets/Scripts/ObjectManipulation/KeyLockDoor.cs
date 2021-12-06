@@ -70,6 +70,16 @@ public class KeyLockDoor : MonoBehaviour
     {
         hasKey = true;
     }
+
+    public void UnlockAndPlayEvent()
+    {
+        if (door)
+        {
+            door.keyDoor = null;
+        }
+        openActions.Invoke();
+        unlocked = true;
+    }
     public void Unlock()
     {
         unlocked = true;
