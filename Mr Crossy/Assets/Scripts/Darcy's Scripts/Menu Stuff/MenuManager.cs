@@ -184,7 +184,7 @@ public class MenuManager : MonoBehaviour
 
     public void QuitGame()
     {
-        Application.Quit();
+        StartCoroutine("QuitGag");
     }
 
     public void UpdateSliders()
@@ -236,6 +236,13 @@ public class MenuManager : MonoBehaviour
             yield return null;
         }
        
+    }
+
+    public IEnumerator QuitGag()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/MR_C_Random/I_Quit");
+        yield return new WaitForSeconds(7f);
+        Application.Quit();
     }
 
     public void ResolutionChange(int val)
