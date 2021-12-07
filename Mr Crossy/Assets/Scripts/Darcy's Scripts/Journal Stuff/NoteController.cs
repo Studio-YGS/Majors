@@ -44,6 +44,7 @@ public class NoteController : MonoBehaviour
                 {
                     hit.transform.gameObject.GetComponent<NoteAssign>().assignedNote.SetActive(true);
                     hit.transform.gameObject.SetActive(false);
+                    GameObject.Find(hit.transform.gameObject.name).SetActive(false);
 
                     currentNote = hit.transform.gameObject.GetComponent<NoteAssign>().page;
 
