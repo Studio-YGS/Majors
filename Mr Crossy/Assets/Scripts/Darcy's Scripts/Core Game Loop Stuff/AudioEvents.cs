@@ -16,7 +16,7 @@ public class AudioEvents : MonoBehaviour
 
         eventInstance.start();
 
-        if (!correctWordVoiceLinePlayed)
+        if (!correctWordVoiceLinePlayed && !gameObject.name.Contains("NiNi"))
         {
             correctWordVoiceLinePlayed = true;
             eventInstance = RuntimeManager.CreateInstance("event:/MR_C_Tutorial/TUT.0.5.1.1");
