@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
 
 [RequireComponent(typeof(MeshFilter))]
@@ -95,3 +96,4 @@ public class AdvanceMeshMerge : MonoBehaviour
         transform.rotation = oldRot;
     }
 }
+#endif

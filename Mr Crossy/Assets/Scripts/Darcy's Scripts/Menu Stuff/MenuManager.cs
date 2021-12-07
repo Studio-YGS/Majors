@@ -218,7 +218,7 @@ public class MenuManager : MonoBehaviour
 
     IEnumerator ReadingControls()
     {
-        loadingScene = SceneManager.LoadSceneAsync("Main_Cael", LoadSceneMode.Single);
+        loadingScene = SceneManager.LoadSceneAsync("Submission", LoadSceneMode.Single);
         loadingScene.allowSceneActivation = false;
 
         while (!loadingScene.isDone)
