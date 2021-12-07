@@ -494,6 +494,7 @@ public class CrossyController : MonoBehaviour
         loweringEye = false;
     }
 
+    #region TreeEvents
     public void OnEnable()
     {
         TreeMalarkey.RegisterEventOnTree(crossyTree, "Darken", DarkenEvent);
@@ -552,4 +553,5 @@ public class CrossyController : MonoBehaviour
         TreeMalarkey.UnregisterEventOnTree(OverseerController.ObserverTree, "WooshOne", WooshSingle);
         TreeMalarkey.UnregisterEventOnTree(OverseerController.ObserverTree, "WooshTwo", WooshBothle);
     }
+    #endregion
 }
