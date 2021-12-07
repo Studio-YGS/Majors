@@ -84,7 +84,7 @@ public class OverseerController : MonoBehaviour
     //public string titanParamName = "Titan";
 
     [SerializeField] bool attemptingSafe = false;
-    [HideInInspector] public bool attemptingDie = false;
+    public bool attemptingDie = false;
     [SerializeField] bool hasChased = false;
     [SerializeField] bool fiddleFMOD = false;
 
@@ -134,6 +134,11 @@ public class OverseerController : MonoBehaviour
     public bool IsTutorial { get { return m_IsTutorial; } set { m_IsTutorial = value; } }
 
     public bool IsInHouse { get { return m_PlayerInHouse; } set { m_PlayerInHouse = value; } }
+
+    public bool Chasing { get { return hasChased; } }
+    public bool AttemptingSafe { get { return attemptingSafe; } }
+    public bool AttemptingDie { get { return attemptingDie; } }
+    public bool Puzzling { get { return keyMan.puzzleOn; } }
 
     #endregion
 
@@ -191,10 +196,10 @@ public class OverseerController : MonoBehaviour
 
         if(!m_IsTutorial)
         {
-            if (m_State >= 1 || keyMan.puzzleOn || attemptingSafe || hasChased || emitter.Params[1].Value == 0f) fiddleFMOD = true;
+            if (m_State >= 1 && !m_PlayerInHouse || keyMan.puzzleOn) fiddleFMOD = true;
             else fiddleFMOD = false;
 
-            if (fiddleFMOD) CrossyFMODFiddling(CrossyPathDistance, m_State, deady);
+            if (fiddleFMOD) CrossyFmodDistance();
             else
             {
                 if(emitter.Params[0].Value != 100f)
@@ -203,6 +208,19 @@ public class OverseerController : MonoBehaviour
                     emitter.Target.SetParameter(emitter.Params[0].Name, emitter.Params[0].Value);
                 }
             }
+
+            //if (m_State >= 1 || keyMan.puzzleOn || attemptingSafe || hasChased || emitter.Params[1].Value == 0f) fiddleFMOD = true;
+            //else fiddleFMOD = false;
+
+            //if (fiddleFMOD) CrossyFMODFiddling(CrossyPathDistance, m_State, deady);
+            //else
+            //{
+            //    if(emitter.Params[0].Value != 100f)
+            //    {
+            //        emitter.Params[0].Value = 100f;
+            //        emitter.Target.SetParameter(emitter.Params[0].Name, emitter.Params[0].Value);
+            //    }
+            //}
 
             VignetteProcessor();
 
@@ -384,6 +402,7 @@ public class OverseerController : MonoBehaviour
         TreeMalarkey.EnableTree(ObserverTree);
         distootle.ShoobyDooby();
         m_Crossy.GetComponent<CrossyController>().RegisterEvents();
+        ObserverRegister();
     }
 
     public bool LeftRadius()
@@ -464,6 +483,20 @@ public class OverseerController : MonoBehaviour
         emitter.Target.SetParameter(emitter.Params[3].Name, emitter.Params[3].Value);
     }
 
+    public void CrossyFmodDistance()
+    {
+        if(CrossyPathDistance <= 100)
+        {
+            emitter.Params[0].Value = pathDistance;
+            emitter.Target.SetParameter(emitter.Params[0].Name, emitter.Params[0].Value);
+        }
+        else
+        {
+            emitter.Params[0].Value = 100f;
+            emitter.Target.SetParameter(emitter.Params[0].Name, emitter.Params[0].Value);
+        }
+    }
+
     public void CrossyFMODFiddling(float pathDistance, int state, bool dead)
     {
 
@@ -521,12 +554,12 @@ public class OverseerController : MonoBehaviour
         }
 
         
-    }
+    } //Obsolete hopefully
 
     IEnumerator WaitForPuzzleOff()
     {
         attemptingSafe = true;
-        yield return new WaitForSecondsRealtime(0.1f);
+        //yield return new WaitForSecondsRealtime(0.5f);
         while (keyMan.puzzleOn)
         {
             yield return null;
@@ -593,23 +626,58 @@ public class OverseerController : MonoBehaviour
         hasChased = false;
         attemptingDie = false;
     }
+    #endregion
 
+    #region TreeEvents
     private void OnEnable()
     {
-        TreeMalarkey.RegisterEventOnTree(CrossyController.crossyTree, "Despawn", TheDespawnThing);
+        TreeMalarkey.RegisterEventOnTree(CrossyController.crossyTree, "DespawnAudio", TheDespawnThing);
+        TreeMalarkey.RegisterEventOnTree(CrossyController.crossyTree, "PursuitAudio", PursuitAudio);
+        TreeMalarkey.RegisterEventOnTree(CrossyController.crossyTree, "DeadAudio", DeadAudio);
+        TreeMalarkey.RegisterEventOnTree(CrossyController.crossyTree, "SafeAudio", SafeAudio);
+    }
+
+    public void ObserverRegister()
+    {
+        TreeMalarkey.RegisterEventOnTree(ObserverTree, "PursuitAudio", PursuitAudio);
+        TreeMalarkey.RegisterEventOnTree(ObserverTree, "DeadAudio", DeadAudio);
+        TreeMalarkey.RegisterEventOnTree(ObserverTree, "SafeAudio", SafeAudio);
+    }
+
+    public void PursuitAudio()
+    {
+        hasChased = true;
+        if (emitter.Params[1].Value != 0f)
+        {
+            emitter.Params[1].Value = 0f;
+            emitter.Target.SetParameter(emitter.Params[1].Name, emitter.Params[1].Value);
+        }
+    }
+
+    public void DeadAudio()
+    {
+        StartCoroutine(DeadSounds());
+    }
+
+    public void SafeAudio()
+    {
+        StartCoroutine(WaitForPuzzleOff());
     }
 
     public void TheDespawnThing()
     {
-        if (hasChased && !attemptingSafe && !attemptingDie)
-        {
-            StartCoroutine(WaitForPuzzleOff());
-        }
+        StartCoroutine(WaitForPuzzleOff());
     }
 
     private void OnDisable()
     {
-        TreeMalarkey.UnregisterEventOnTree(CrossyController.crossyTree, "Despawn", TheDespawnThing);
+        TreeMalarkey.UnregisterEventOnTree(CrossyController.crossyTree, "DespawnAudio", TheDespawnThing);
+        TreeMalarkey.UnregisterEventOnTree(CrossyController.crossyTree, "PursuitAudio", PursuitAudio);
+        TreeMalarkey.UnregisterEventOnTree(CrossyController.crossyTree, "DeadAudio", DeadAudio);
+        TreeMalarkey.UnregisterEventOnTree(CrossyController.crossyTree, "SafeAudio", SafeAudio);
+        TreeMalarkey.UnregisterEventOnTree(ObserverTree, "PursuitAudio", PursuitAudio);
+        TreeMalarkey.UnregisterEventOnTree(ObserverTree, "DeadAudio", DeadAudio);
+        TreeMalarkey.UnregisterEventOnTree(ObserverTree, "SafeAudio", SafeAudio);
     }
 
     #endregion
