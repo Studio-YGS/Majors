@@ -251,7 +251,7 @@ public class PuzzleController : MonoBehaviour
             }
         }
 
-        if (completedWords >= wordsInPuzzle)
+        if (completedWords == wordsInPuzzle)
         {
             winEvent.Invoke();
         }
