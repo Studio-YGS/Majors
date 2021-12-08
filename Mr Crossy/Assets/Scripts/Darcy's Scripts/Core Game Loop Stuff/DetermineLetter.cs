@@ -16,11 +16,6 @@ public class DetermineLetter : MonoBehaviour
     [HideInInspector]
     public string wordName;
 
-    void OnEnable()
-    {
-        AssignPuzzleController();
-    }
-
     public void AssignPuzzleController()
     {
         PuzzleController[] puzzleControllers = FindObjectsOfType<PuzzleController>();

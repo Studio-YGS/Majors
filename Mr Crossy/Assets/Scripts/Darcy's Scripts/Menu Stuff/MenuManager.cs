@@ -24,7 +24,7 @@ public class MenuManager : MonoBehaviour
     [HideInInspector] 
     public bool menuOpen;
 
-    bool dontEnable;
+    bool dontEnable, quitGagPlaying;
 
     AsyncOperation loadingScene;
 
@@ -43,7 +43,7 @@ public class MenuManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (!mainMenu && !FindObjectOfType<CrossKeyManager>().puzzleOn && !journalController.readingHowTo && !journalController.waitForCrossy)
+            if (!mainMenu && !FindObjectOfType<CrossKeyManager>().puzzleOn && !journalController.readingHowTo && !journalController.waitForCrossy && !controlsUI.activeInHierarchy)
             {
                 if (!playerController.inJournal && !pauseMenuObject.activeInHierarchy && !settingsMenuObject.activeInHierarchy)
                 {
@@ -184,7 +184,12 @@ public class MenuManager : MonoBehaviour
 
     public void QuitGame()
     {
-        StartCoroutine("QuitGag");
+        if (!quitGagPlaying)
+        {
+            quitGagPlaying = true;
+            StartCoroutine("QuitGag");
+        }
+        //Application.Quit();
     }
 
     public void UpdateSliders()
