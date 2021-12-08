@@ -531,12 +531,14 @@ public class CrossyController : MonoBehaviour
 
     public void WooshSingle()
     {
+        Debug.Log("EVENT FROM TREE: WooshSingle");
         PartiboiOne.Play();
         SoundiboiOne.Play();
     }
 
     public void WooshBothle()
     {
+        Debug.Log("EVENT FROM TREE: WooshBothle");
         PartiboiOne.Play();
         SoundiboiOne.Play();
         PartiboiTwo.Play();
