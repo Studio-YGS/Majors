@@ -235,7 +235,10 @@ public class PuzzleController : MonoBehaviour
 
     void CompletionCheck()
     {
-        completedWords++;
+        if (!cheating)
+        {
+            completedWords++;
+        }
 
         AudioEvents audio = FindObjectOfType<AudioEvents>();
 
@@ -305,8 +308,10 @@ public class PuzzleController : MonoBehaviour
 
     public void DevSkip()
     {
+        cheating = true;
         completedWords = wordsInPuzzle;
         CompletionCheck();
+        cheating = false;
     }
 
     public void CompleteCurrentWord()
