@@ -3365,7 +3365,7 @@ BoxCollider:
   m_GameObject: {fileID: 1265155440079432}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 3.0000122, y: 3.0000114, z: 0.30001247}
   m_Center: {x: -1.5000004, y: 1.5, z: -0.15000051}
@@ -6429,6 +6429,7 @@ GameObject:
   - component: {fileID: 65468415751901960}
   - component: {fileID: 729792534}
   - component: {fileID: 729792537}
+  - component: {fileID: 1749647778099215355}
   m_Layer: 0
   m_Name: door_wing_c
   m_TagString: Untagged
@@ -6559,6 +6560,22 @@ MonoBehaviour:
   mrCrossy: {fileID: 1766410105212260, guid: 7771d473bdbab0747a713221d773e089, type: 3}
   createdMrCrossy: {fileID: 0}
   puzzleOn: 0
+--- !u!208 &1749647778099215355
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1801443037458996}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.614, y: 1.1, z: 0.2}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.597, y: 1.1, z: -0.037}
+  m_TimeToStationary: 0.2
 --- !u!1 &1822454903033184
 GameObject:
   m_ObjectHideFlags: 0
@@ -13762,7 +13779,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1930961226, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: UID
-      value: -1180895738
+      value: 460746695
       objectReference: {fileID: 0}
     - target: {fileID: 1260673417133536, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: m_Name
@@ -13828,7 +13845,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 314548403392371457, guid: 52a7cc039219b644b95b2f0e0bfc6c01, type: 3}
       propertyPath: UID
-      value: -1888916249
+      value: 886659335
       objectReference: {fileID: 0}
     - target: {fileID: 2190584204923344581, guid: 52a7cc039219b644b95b2f0e0bfc6c01, type: 3}
       propertyPath: m_RootOrder

@@ -646,6 +646,7 @@ public class OverseerController : MonoBehaviour
 
     public void PursuitAudio()
     {
+        Debug.Log("EVENT FROM TREE: Pursuit");
         hasChased = true;
         if (emitter.Params[1].Value != 0f)
         {
@@ -656,16 +657,19 @@ public class OverseerController : MonoBehaviour
 
     public void DeadAudio()
     {
+        Debug.Log("EVENT FROM TREE: Dead");
         StartCoroutine(DeadSounds());
     }
 
     public void SafeAudio()
     {
+        Debug.Log("EVENT FROM TREE: Safe");
         StartCoroutine(WaitForPuzzleOff());
     }
 
     public void TheDespawnThing()
     {
+        Debug.Log("EVENT FROM TREE: Despawn");
         StartCoroutine(WaitForPuzzleOff());
     }
 
