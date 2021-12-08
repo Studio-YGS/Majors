@@ -62,7 +62,7 @@ public class CrossyController : MonoBehaviour
     [Tooltip("Mr. Crossy's acceleration rate.")]
     [SerializeField] private float m_BaseAcceleration;
     /*[SerializeField] */
-    private float m_StoppingAcceleration = 120f;
+    [SerializeField] private float m_StoppingAcceleration = 120f;
     /*[SerializeField] */
     private float m_Acceleration;
 
@@ -141,13 +141,13 @@ public class CrossyController : MonoBehaviour
     #region Properties
     public Transform Vision { get { return m_Vision; } }
     public Transform HindVision { get { return m_HindVision; } }
-    public float WalkSpeed { get { return m_WalkSpeed; } set { m_WalkSpeed = value; } }
-    public float FullRunSpeed { get { return m_FullRunSpeed; } set { m_FullRunSpeed = value; } }
+    public float WalkSpeed { get { return m_WalkSpeed; } /*set { m_WalkSpeed = value; }*/ }
+    public float FullRunSpeed { get { return m_FullRunSpeed; } /*set { m_FullRunSpeed = value; }*/ }
     public float SubRunSpeed { get { return m_FullRunSpeed * (m_SubRunPercent / 100f); } }
     public float RunSpeed { get { return (m_InSight) ? FullRunSpeed : SubRunSpeed; } }
     public float MoveSpeed { get { return (m_ShouldRun && RunSpeed > WalkSpeed) ? RunSpeed : WalkSpeed; } }
 
-    public float Acceleration { get { return (m_ShouldBeStopped) ? m_StoppingAcceleration : m_BaseAcceleration; } set { m_Acceleration = value; } }
+    public float Acceleration { get { return (ShouldBeStopped) ? m_StoppingAcceleration : m_BaseAcceleration; } set { m_Acceleration = value; } }
     public float AngularSpeed { get { return m_AngularSpeed; } set { m_AngularSpeed = value; } }
     public float StoppingDistance { get { return m_StoppingDistance; } set { m_StoppingDistance = value; } }
     public float RunDistance { get { return (m_State == 2) ? m_AlertRunDistance : m_PatrolRunDistance; } }
@@ -156,7 +156,7 @@ public class CrossyController : MonoBehaviour
     public bool ShouldRun { get { return m_ShouldRun; } set { m_ShouldRun = value; } }
     public bool InSight { get { return m_InSight; } set { m_InSight = value; } }
     public bool InPeripheral { get { return m_InPeripheral; } set { m_InPeripheral = value; } }
-    public bool ShouldBeStopped { get { return m_ShouldBeStopped; } set { m_ShouldBeStopped = value; } }
+    public bool ShouldBeStopped { get { return animator.GetCurrentAnimatorStateInfo(0).IsName("Spinspin") || animator.GetCurrentAnimatorStateInfo(0).IsName("Scream") || animator.GetCurrentAnimatorStateInfo(0).IsName("Agony") || animator.GetCurrentAnimatorStateInfo(0).IsName("LookAround"); } /*set { m_ShouldBeStopped = value; }*/ }
     public int State { get { return m_State; } set { m_State = value; } }
     public Vector3 CrossyDespawn { get { return m_CrossyDespawn.position; } set { m_CrossyDespawn.position = value; } }
 
@@ -231,7 +231,7 @@ public class CrossyController : MonoBehaviour
 
         Running();
         if(allowScaryRun) ScaryRunCondition();
-        StoppyStop();
+        //StoppyStop();
 
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("Spinspin")) animator.applyRootMotion = true;
         else animator.applyRootMotion = false;
