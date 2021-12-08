@@ -68,6 +68,10 @@ public class DoorInteraction : MonoBehaviour
         startMouseSens = controller.mouseSensitivity;
         journal = FindObjectOfType<JournalOnSwitch>();
         menu = FindObjectOfType<MenuManager>();
+
+        Rigidbody rb = GetComponent<Rigidbody>();
+        rb.centerOfMass = Vector3.zero;
+        rb.inertiaTensorRotation = Quaternion.identity;
     }
 
     void Update()
