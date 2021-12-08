@@ -184,12 +184,12 @@ public class MenuManager : MonoBehaviour
 
     public void QuitGame()
     {
-        if (!quitGagPlaying)
-        {
-            quitGagPlaying = true;
-            StartCoroutine("QuitGag");
-        }
-        //Application.Quit();
+        //if (!quitGagPlaying)
+        //{
+        //    quitGagPlaying = true;
+        //    StartCoroutine("QuitGag");
+        //}
+        Application.Quit();
     }
 
     public void UpdateSliders()
