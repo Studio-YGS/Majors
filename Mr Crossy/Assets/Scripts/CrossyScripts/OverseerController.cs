@@ -268,6 +268,17 @@ public class OverseerController : MonoBehaviour
         {
             PursuitAudio();
         }
+        else if (hasChased)
+        {
+            if(deady)
+            {
+                if (!attemptingSafe && !attemptingDie) DeadAudio();
+            }
+            else if (m_State != 3 && !keyMan.puzzleOn && !deady || m_PlayerInHouse && !keyMan.puzzleOn)
+            {
+                if (!attemptingSafe && !attemptingDie) StartCoroutine(WaitForPuzzleOff());
+            }
+        }
 
     }
 
@@ -336,6 +347,8 @@ public class OverseerController : MonoBehaviour
 
             m_PlayerInHouse = true;
             if(keyMan.doorsLocked) keyMan.doorsLocked = false;
+
+            
 
             NavMesh.SamplePosition(validationPositioner.transform.position, out validationHit, 1, NavMesh.AllAreas);
             if(validationHit.mask == 256)
@@ -656,6 +669,7 @@ public class OverseerController : MonoBehaviour
 
     public void ObserverRegister()
     {
+        
         TreeMalarkey.RegisterEventOnTree(ObserverTree, "PursuitAudio", PursuitAudio);
         TreeMalarkey.RegisterEventOnTree(ObserverTree, "DeadAudio", DeadAudio);
         TreeMalarkey.RegisterEventOnTree(ObserverTree, "SafeAudio", SafeAudio);
@@ -664,11 +678,12 @@ public class OverseerController : MonoBehaviour
     public void PursuitAudio()
     {
         Debug.Log("EVENT FROM TREE: Pursuit");
+        hasChased = true;
         if (emitter.Params[1].Value != 0f)
         {
             emitter.Params[1].Value = 0f;
             emitter.Target.SetParameter(emitter.Params[1].Name, emitter.Params[1].Value);
-            hasChased = true;
+            
         }
     }
 
