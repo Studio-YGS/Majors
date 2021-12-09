@@ -194,14 +194,27 @@ public class PuzzleController : MonoBehaviour
             }
         }
 
-        if (playersWordLength == wordLength && playersWord != word && !wordCollision.puzzleComplete) //if the player has put all the letters on the altar but hasnt gotten the word right, it counts down a mistake.
+        if (playersWordLength == wordLength && playersWord != word) //if the player has put all the letters on the altar but hasnt gotten the word right, it counts down a mistake.
         {
-            AudioEvents audio = FindObjectOfType<AudioEvents>();
+            if (wordCollision != null)
+            {
+                if (!wordCollision.puzzleComplete)
+                {
+                    AudioEvents audio = FindObjectOfType<AudioEvents>();
 
-            audio.WordSpeltIncorrectly();
+                    audio.WordSpeltIncorrectly();
 
-            Debug.Log("Game Over check calling from the player controller by: " + wordCollision.gameObject.name + ". Players word length, word length, playersword: " + playersWordLength + " " + wordLength + " " + playersWord);
-            MistakeCounter();
+                    MistakeCounter();
+                }
+            }
+            else if(wordCollision == null)
+            {
+                AudioEvents audio = FindObjectOfType<AudioEvents>();
+
+                audio.WordSpeltIncorrectly();
+
+                MistakeCounter();
+            }
         }
     }
 
@@ -240,6 +253,11 @@ public class PuzzleController : MonoBehaviour
             completedWords++;
         }
 
+        if (gameObject.name.Contains("Tutorial"))
+        {
+            TutorialAltarDisable();
+        }
+
         AudioEvents audio = FindObjectOfType<AudioEvents>();
 
         audio.WordSpeltCorrectly();
@@ -271,6 +289,17 @@ public class PuzzleController : MonoBehaviour
         else if (gameObject.name.Contains("Tutorial"))
         {
             tutorialMistakeEvent.Invoke();
+        }
+    }
+
+    void TutorialAltarDisable()
+    {
+        for(int i = 0; i < storedObjects.Count; i++)
+        {
+            storedObjects[i].GetComponent<Outline>().enabled = false;
+            storedObjects[i].GetComponentInChildren<ObjectPlacement>().enabled = false;
+            storedObjects[i].GetComponent<DetermineLetter>().storedObject.GetComponent<Outline>().enabled = false;
+            storedObjects[i].GetComponent<DetermineLetter>().storedObject.GetComponent<ObjectHolder>().enabled = false;
         }
     }
 
