@@ -215,7 +215,18 @@ public class CrossyController : MonoBehaviour
 
     private void Update()
     {
-        if(speedDebugLog)
+        if(m_State != -1)
+        {
+            if (ShouldBeStopped)
+            {
+                agent.isStopped = true;
+            }
+            else agent.isStopped = false;
+        }
+        //Debug.Log("STOP: SHOULD BE: " + ShouldBeStopped);
+        //Debug.Log("STOP: AGENT IS: " + agent.isStopped);
+
+        if (speedDebugLog)
         {
             Debug.Log("SPEEDSPEED: Base Walk Speed: " + WalkSpeed);
             Debug.Log("SPEEDSPEED: Sub Run Speed: " + SubRunSpeed + ", at Percentage: " + m_SubRunPercent + "%");
