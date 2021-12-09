@@ -660,11 +660,11 @@ public class OverseerController : MonoBehaviour
     public void PursuitAudio()
     {
         Debug.Log("EVENT FROM TREE: Pursuit");
-        hasChased = true;
         if (emitter.Params[1].Value != 0f)
         {
             emitter.Params[1].Value = 0f;
             emitter.Target.SetParameter(emitter.Params[1].Name, emitter.Params[1].Value);
+            hasChased = true;
         }
     }
 
