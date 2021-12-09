@@ -21,8 +21,7 @@ public class CrossyTheWatcher : MonoBehaviour
     [Range(0,1)] public float headLookAtWeight;
     //[Range(0,1)] public float spineLookAtWeight;
     //[Range(0,1)] public float spinerLookAtWeight;
-    public List<MeshRenderer> eyeRendy = new List<MeshRenderer>();
-    public List<SkinnedMeshRenderer> crossyRendy = new List<SkinnedMeshRenderer>();
+    public List<GameObject> Rendy = new List<GameObject>();
 
     public Lighthouse lighthouse;
 
@@ -34,6 +33,7 @@ public class CrossyTheWatcher : MonoBehaviour
 
     bool eyeGlowing;
     bool skinned;
+    bool skinCheck;
 
     [Header("TestWeights")]
     [Range(0,1)]public float heightWeight;
@@ -110,7 +110,7 @@ public class CrossyTheWatcher : MonoBehaviour
                 }
             }
 
-            SkinningMyBoy();
+            if (!skinCheck) SkinningMyBoy();
         }
 
     }
@@ -171,36 +171,30 @@ public class CrossyTheWatcher : MonoBehaviour
 
     public void SkinningMyBoy()
     {
+        skinCheck = true;
         if(animator.GetCurrentAnimatorStateInfo(0).IsName("TitanCrossyIdleHidden"))
         {
-            if(!skinned)
+            if(!skinned && hidingTitan)
             {
-                foreach (MeshRenderer skin in eyeRendy)
+                foreach (GameObject skin in Rendy)
                 {
-                    skin.enabled = false;
-                }
-                foreach (SkinnedMeshRenderer skin in crossyRendy)
-                {
-                    skin.enabled = false;
+                    skin.SetActive(false);
                 }
                 skinned = true;
             }
         }
         else
         {
-            if(skinned)
+            if(skinned && !hidingTitan)
             {
-                foreach (MeshRenderer skin in eyeRendy)
+                foreach (GameObject skin in Rendy)
                 {
-                    skin.enabled = true;
-                }
-                foreach (SkinnedMeshRenderer skin in crossyRendy)
-                {
-                    skin.enabled = true;
+                    skin.SetActive(true);
                 }
                 skinned = false;
             }
         }
+        skinCheck = false;
     }
 
 
