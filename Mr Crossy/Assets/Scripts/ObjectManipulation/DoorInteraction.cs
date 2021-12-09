@@ -281,7 +281,7 @@ public class DoorInteraction : MonoBehaviour
                 }
             }
             
-            if(Vector3.Distance(transform.position, player.position) > 5)
+            if(Vector3.Distance(transform.position, player.position) > 10)
             {
                 if (createdMrCrossy)
                 {
