@@ -264,6 +264,10 @@ public class OverseerController : MonoBehaviour
                 
             }
         }
+        if (!hasChased && m_State == 3)
+        {
+            PursuitAudio();
+        }
 
     }
 
