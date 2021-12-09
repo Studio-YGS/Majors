@@ -225,11 +225,13 @@ public class Player_Controller : MonoBehaviour
     public void LockCursor()
     {
         cursorImage.SetActive(true);
+        Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
     public void UnlockCursor()
     {
         cursorImage.SetActive(false);
+        Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
     }
 

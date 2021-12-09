@@ -12,6 +12,8 @@ public class SwitchyBoy : MonoBehaviour
     OverseerController seer;
 
     public UnityEvent switchTrigger;
+    public ExternalInteralSwitch d1InternalSwitch;
+    public ExternalInteralSwitch d2InternalSwitch;
 
     void Start()
     {
@@ -35,6 +37,7 @@ public class SwitchyBoy : MonoBehaviour
                 {
                     districtOne.SetActive(true);
                     districtTwo.SetActive(false);
+                    playerRespawn.exSwitch = d1InternalSwitch;
                     playerRespawn.SwitchRespawnPoint(whichController);
                     seer.SetLighthouseGroup(whichController);
                     break;
@@ -43,6 +46,7 @@ public class SwitchyBoy : MonoBehaviour
                 {
                     districtOne.SetActive(false);
                     districtTwo.SetActive(true);
+                    playerRespawn.exSwitch = d2InternalSwitch;
                     playerRespawn.SwitchRespawnPoint(whichController);
                     seer.SetLighthouseGroup(whichController);
                     break;
