@@ -21,7 +21,8 @@ public class CrossyTheWatcher : MonoBehaviour
     [Range(0,1)] public float headLookAtWeight;
     //[Range(0,1)] public float spineLookAtWeight;
     //[Range(0,1)] public float spinerLookAtWeight;
-    
+    public List<MeshRenderer> eyeRendy = new List<MeshRenderer>();
+    public List<SkinnedMeshRenderer> crossyRendy = new List<SkinnedMeshRenderer>();
 
     public Lighthouse lighthouse;
 
@@ -32,6 +33,7 @@ public class CrossyTheWatcher : MonoBehaviour
     public float eyeGlowDownRate;
 
     bool eyeGlowing;
+    bool skinned;
 
     [Header("TestWeights")]
     [Range(0,1)]public float heightWeight;
@@ -56,6 +58,8 @@ public class CrossyTheWatcher : MonoBehaviour
         //SetPosToLighthouse();
         if(faceToTransform == null) faceToTransform = GameObject.Find("Fps Character").transform;
         if(lookAtTransform == null) lookAtTransform = GameObject.Find("FirstPersonCharacter").transform;
+
+        SkinningMyBoy();
     }
 
     // Update is called once per frame
@@ -105,6 +109,8 @@ public class CrossyTheWatcher : MonoBehaviour
                     }
                 }
             }
+
+            SkinningMyBoy();
         }
 
     }
@@ -159,6 +165,40 @@ public class CrossyTheWatcher : MonoBehaviour
                     animator.SetIKPosition(AvatarIKGoal.RightHand, Vector3.Lerp(lighthouse.rightHandGuideGoal.position, lighthouse.rightHandFinalGoal.position, animator.GetFloat("IKRightGoal")));
                     animator.SetIKRotation(AvatarIKGoal.RightHand, Quaternion.Slerp(lighthouse.rightHandGuideGoal.rotation, lighthouse.rightHandFinalGoal.rotation, animator.GetFloat("IKRightGoal")));
                 }
+            }
+        }
+    }
+
+    public void SkinningMyBoy()
+    {
+        if(animator.GetCurrentAnimatorStateInfo(0).IsName("TitanCrossyIdleHidden"))
+        {
+            if(!skinned)
+            {
+                foreach (MeshRenderer skin in eyeRendy)
+                {
+                    skin.enabled = false;
+                }
+                foreach (SkinnedMeshRenderer skin in crossyRendy)
+                {
+                    skin.enabled = false;
+                }
+                skinned = true;
+            }
+        }
+        else
+        {
+            if(skinned)
+            {
+                foreach (MeshRenderer skin in eyeRendy)
+                {
+                    skin.enabled = true;
+                }
+                foreach (SkinnedMeshRenderer skin in crossyRendy)
+                {
+                    skin.enabled = true;
+                }
+                skinned = false;
             }
         }
     }

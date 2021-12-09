@@ -19,7 +19,8 @@ public class CrossyTheTutorial : MonoBehaviour
     [Range(0,1)] public float headLookAtWeight;
     //[Range(0,1)] public float spineLookAtWeight;
     //[Range(0,1)] public float spinerLookAtWeight;
-    
+
+    public List<SkinnedMeshRenderer> crossyRendy = new List<SkinnedMeshRenderer>();
 
     public Lighthouse lighthouse;
 
@@ -33,6 +34,8 @@ public class CrossyTheTutorial : MonoBehaviour
 
     [HideInInspector] public bool hidingTitan;
     [HideInInspector] public bool isTutorial = true;
+
+    bool skinned;
 
     private void Start()
     {
@@ -59,6 +62,34 @@ public class CrossyTheTutorial : MonoBehaviour
             
         }
 
+        SkinningMyBoy();
+
+    }
+
+    public void SkinningMyBoy()
+    {
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("TitanCrossyIdleHidden"))
+        {
+            if (!skinned)
+            {
+                foreach (SkinnedMeshRenderer skin in crossyRendy)
+                {
+                    skin.enabled = false;
+                }
+                skinned = true;
+            }
+        }
+        else
+        {
+            if (skinned)
+            {
+                foreach (SkinnedMeshRenderer skin in crossyRendy)
+                {
+                    skin.enabled = true;
+                }
+                skinned = false;
+            }
+        }
     }
 
     private void OnAnimatorIK(int layerIndex)

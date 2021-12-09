@@ -9,6 +9,12 @@ using FMODUnity;
 
 public class OverseerController : MonoBehaviour
 {
+#if UNITY_EDITOR
+    [Header("EditorOnly")]
+    public bool CrossyQuickSpawn;
+    public float QuickTime;
+#endif
+
     public static BehaviorTree ObserverTree;
 
     public static float CrossyPathDistance = 0f;
@@ -158,6 +164,10 @@ public class OverseerController : MonoBehaviour
     [SerializeField] bool playedTitanLine = false;
     private void Awake()
     {
+#if UNITY_EDITOR
+        if (CrossyQuickSpawn) m_TimeSpawn = QuickTime;
+#endif
+
         m_Observer = gameObject;
         ObserverTree = gameObject.GetComponent<BehaviorTree>();
         distootle = FindObjectOfType<MrCrossyDistortion>();
@@ -198,7 +208,7 @@ public class OverseerController : MonoBehaviour
         {
             if (m_State >= 1 && !m_PlayerInHouse || keyMan.puzzleOn) fiddleFMOD = true;
             else fiddleFMOD = false;
-
+            GetCrossyPlayerDistance();
             if (fiddleFMOD) CrossyFmodDistance();
             else
             {
@@ -225,7 +235,7 @@ public class OverseerController : MonoBehaviour
             VignetteProcessor();
 
             //ParameterHell();
-            GetCrossyPlayerDistance();
+            
 
             if (m_State == -1)
             {
@@ -487,7 +497,7 @@ public class OverseerController : MonoBehaviour
     {
         if(CrossyPathDistance <= 100)
         {
-            emitter.Params[0].Value = pathDistance;
+            emitter.Params[0].Value = CrossyPathDistance;
             emitter.Target.SetParameter(emitter.Params[0].Name, emitter.Params[0].Value);
         }
         else
