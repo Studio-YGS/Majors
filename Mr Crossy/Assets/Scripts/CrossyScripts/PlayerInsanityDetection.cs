@@ -66,6 +66,7 @@ public class PlayerInsanityDetection : MonoBehaviour
                 }
                 else if (OverseerController.CrossyPathDistance < 10f)
                 {
+                    calledInsane = true;
                     distortion.LerpInsanity();
                 }
                 else if (OverseerController.CrossyPathDistance > 25f && calledInsane)

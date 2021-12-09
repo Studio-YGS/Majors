@@ -231,7 +231,7 @@ public class OverseerController : MonoBehaviour
             //        emitter.Target.SetParameter(emitter.Params[0].Name, emitter.Params[0].Value);
             //    }
             //}
-
+            TitanUppyDownyNoisies();
             VignetteProcessor();
 
             //ParameterHell();
@@ -250,15 +250,18 @@ public class OverseerController : MonoBehaviour
                 if (!m_PlayerInHouse)
                 {
                     TitanCrossyVoiceLines();
-                    TitanUppyDownyNoisies();
+                    
                 }
-
-                bool left = LeftRadius();
-
-                if (left)
+                if (!titan.lighthousing)
                 {
-                    if (titan.allowHide) CheckClosestLighthouse();
+                    bool left = LeftRadius();
+
+                    if (left)
+                    {
+                        if (titan.allowHide) CheckClosestLighthouse();
+                    }
                 }
+                
             }
         }
 
