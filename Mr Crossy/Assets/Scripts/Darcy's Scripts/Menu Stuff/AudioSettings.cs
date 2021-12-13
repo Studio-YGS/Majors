@@ -59,25 +59,25 @@ public class AudioSettings : MonoBehaviour
     {
         sfxVolume = newSFXVolume;
 
-        PLAYBACK_STATE pbState;
-        sfxVolumePreview.getPlaybackState(out pbState);
+        //PLAYBACK_STATE pbState;
+        //sfxVolumePreview.getPlaybackState(out pbState);
 
-        if(pbState != PLAYBACK_STATE.PLAYING)
-        {
-            sfxVolumePreview.start();
-        }
+        //if(pbState != PLAYBACK_STATE.PLAYING)
+        //{
+        //    sfxVolumePreview.start();
+        //}
     }
 
     public void VoiceVolumeLevel(float newVoiceVolume)
     {
         voiceVolume = newVoiceVolume;
 
-        PLAYBACK_STATE pbState;
-        voiceVolumePreview.getPlaybackState(out pbState);
+        //PLAYBACK_STATE pbState;
+        //voiceVolumePreview.getPlaybackState(out pbState);
 
-        if (pbState != PLAYBACK_STATE.PLAYING)
-        {
-            voiceVolumePreview.start();
-        }
+        //if (pbState != PLAYBACK_STATE.PLAYING)
+        //{
+        //    voiceVolumePreview.start();
+        //}
     }
 }

@@ -21,7 +21,7 @@ public class CrossyTheWatcher : MonoBehaviour
     [Range(0,1)] public float headLookAtWeight;
     //[Range(0,1)] public float spineLookAtWeight;
     //[Range(0,1)] public float spinerLookAtWeight;
-    
+    public List<GameObject> Rendy = new List<GameObject>();
 
     public Lighthouse lighthouse;
 
@@ -32,6 +32,8 @@ public class CrossyTheWatcher : MonoBehaviour
     public float eyeGlowDownRate;
 
     bool eyeGlowing;
+    bool skinned;
+    bool skinCheck;
 
     [Header("TestWeights")]
     [Range(0,1)]public float heightWeight;
@@ -56,6 +58,8 @@ public class CrossyTheWatcher : MonoBehaviour
         //SetPosToLighthouse();
         if(faceToTransform == null) faceToTransform = GameObject.Find("Fps Character").transform;
         if(lookAtTransform == null) lookAtTransform = GameObject.Find("FirstPersonCharacter").transform;
+
+        SkinningMyBoy();
     }
 
     // Update is called once per frame
@@ -105,6 +109,8 @@ public class CrossyTheWatcher : MonoBehaviour
                     }
                 }
             }
+
+            if (!skinCheck) SkinningMyBoy();
         }
 
     }
@@ -161,6 +167,34 @@ public class CrossyTheWatcher : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void SkinningMyBoy()
+    {
+        skinCheck = true;
+        if(animator.GetCurrentAnimatorStateInfo(0).IsName("TitanCrossyIdleHidden"))
+        {
+            if(!skinned && hidingTitan)
+            {
+                foreach (GameObject skin in Rendy)
+                {
+                    skin.SetActive(false);
+                }
+                skinned = true;
+            }
+        }
+        else
+        {
+            if(skinned && !hidingTitan)
+            {
+                foreach (GameObject skin in Rendy)
+                {
+                    skin.SetActive(true);
+                }
+                skinned = false;
+            }
+        }
+        skinCheck = false;
     }
 
 

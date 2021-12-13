@@ -121,7 +121,11 @@ public class LightToggle : MonoBehaviour
         foreach (GameObject light in lights)
         {
             float dist = Vector3.Distance(light.transform.position, player.position);
-            distDic.Add(dist, light);
+            if (!distDic.ContainsKey(dist))
+            {
+                distDic.Add(dist, light);
+            }
+            
 
         }
         distances = distDic.Keys.ToList();

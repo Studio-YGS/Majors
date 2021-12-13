@@ -63,7 +63,6 @@ public class CrossyCrossKeyVariant : MonoBehaviour
         {
             if(hit.collider == gameObject.GetComponent<Collider>())
             {
-                Debug.Log("hit");
                 FindObjectOfType<MrCrossyDistortion>().DistanceVignette(gameObject);
             }
             

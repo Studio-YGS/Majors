@@ -15,13 +15,17 @@ public class ObjectOpener : MonoBehaviour
     bool turnOff;
     bool InteractionOne;
     bool InteractionTwo;
+    bool tutorialPlayed;
 
     public UnityEvent FirstObjectInteractionActions;
     public UnityEvent keyPickup;
+    public bool nothingInside;
     public GameObject key;
+    public bool isGamelad;
     [Header("First Interaction")]
     public float xAngle;
     public float yAngle;
+    public GameObject keyPickupText;
     //public Vector3 rotationOffset;
     void Start()
     {
@@ -40,39 +44,79 @@ public class ObjectOpener : MonoBehaviour
         //Debug.Log(UnityEditor.TransformUtils.GetInspectorRotation(gameObject.transform).x);
         //Debug.Log(Quaternion.Euler(0, 0, 30).z);
         //Debug.Log(Quaternion.LookRotation(player.position));
+
         if (holder.beingInspected)
         {
             direction = player.position - transform.position;
             //rotDirection = player.position  - transform.position + (player.forward * rotationOffset.z) + (player.up * rotationOffset.y) + (player.right * rotationOffset.x);
-            angleXRelativeToPlayer = Vector3.Angle(direction, -transform.right);
-            angleYRelativeToPlayer = Vector3.Angle(direction, transform.up);
-            if (angleXRelativeToPlayer < xAngle * 0.5f /*&& angleYRelativeToPlayer < yAngle * 0.5f*/ &&
-                transform.localRotation.x  < Quaternion.Euler(30,0,0).x && transform.localRotation.x  > Quaternion.Euler(-30, 0, 0).x &&
-                transform.localRotation.z < Quaternion.Euler(0, 0, 30).z && transform.localRotation.z > Quaternion.Euler(0, 0, -30).z && !InteractionOne)
+
+            if (!tutorialPlayed)
             {
-                if (!turnOff )
+                tutorialPlayed = true;
+                GetComponent<TutorialSectionStart>().ObjectsTeach();
+            }
+
+            if (isGamelad)
+            {
+                angleXRelativeToPlayer = Vector3.Angle(direction, -transform.forward);
+                angleYRelativeToPlayer = Vector3.Angle(direction, -transform.up);
+                if (angleXRelativeToPlayer < xAngle * 0.5f /*&& angleYRelativeToPlayer < yAngle * 0.5f*/ &&
+                    transform.localRotation.x < Quaternion.Euler(120, 0, 0).x && transform.localRotation.x > Quaternion.Euler(-120, 0, 0).x /*&&*/
+                    /*transform.localRotation.z < Quaternion.Euler(0, 0, 120).z && transform.localRotation.z > Quaternion.Euler(0, 0, -120).z*/ && !InteractionOne)
                 {
-                    pressE.SetActive(true);
-                    turnOff = true;
+                    if (!turnOff)
+                    {
+                        pressE.SetActive(true);
+                        turnOff = true;
+                    }
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        FirstObjectInteractionActions.Invoke();
+                        InteractionOne = true;
+                        pressE.SetActive(false);
+                        //holder.enabled = false;
+                        //StartCoroutine(RotateToNewPosition());
+                    }
                 }
-                if (Input.GetKeyDown(KeyCode.E) )
+                else if (turnOff && !InteractionOne)
                 {
-                    FirstObjectInteractionActions.Invoke();
-                    InteractionOne = true;
                     pressE.SetActive(false);
-                    //holder.enabled = false;
-                    //StartCoroutine(RotateToNewPosition());
+                    turnOff = false;
                 }
             }
-            else if (turnOff && !InteractionOne)
+            else
             {
-                pressE.SetActive(false);
-                turnOff = false;
+                angleXRelativeToPlayer = Vector3.Angle(direction, -transform.right);
+                angleYRelativeToPlayer = Vector3.Angle(direction, transform.up);
+                if (angleXRelativeToPlayer < xAngle * 0.5f /*&& angleYRelativeToPlayer < yAngle * 0.5f*/ &&
+                    transform.localRotation.x < Quaternion.Euler(30, 0, 0).x && transform.localRotation.x > Quaternion.Euler(-30, 0, 0).x &&
+                    transform.localRotation.z < Quaternion.Euler(0, 0, 30).z && transform.localRotation.z > Quaternion.Euler(0, 0, -30).z && !InteractionOne)
+                {
+                    if (!turnOff)
+                    {
+                        pressE.SetActive(true);
+                        turnOff = true;
+                    }
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        FirstObjectInteractionActions.Invoke();
+                        InteractionOne = true;
+                        pressE.SetActive(false);
+                        //holder.enabled = false;
+                        //StartCoroutine(RotateToNewPosition());
+                    }
+                }
+                else if (turnOff && !InteractionOne)
+                {
+                    pressE.SetActive(false);
+                    turnOff = false;
+                }
             }
+            
             //transform.RotateAround(transform.GetComponent<Renderer>().bounds.center, player.up, 1);
             //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(rotationOffset), 0.01f);
 
-            if (InteractionOne && !InteractionTwo)
+            if (InteractionOne && !InteractionTwo && !nothingInside)
             {
                 RaycastHit hit;
                 if (Physics.Raycast(player.position, key.transform.position - player.position, out hit, 5))
@@ -82,28 +126,29 @@ public class ObjectOpener : MonoBehaviour
                         Debug.Log("hit");
                         if (!turnOff)
                         {
-                            pressE.SetActive(true);
+                            keyPickupText.SetActive(true);
                             turnOff = true;
                         }
                         if (Input.GetKeyUp(KeyCode.E))
                         {
                             //other stuff when key is picked up
                             holder.Drop();
+                            holder.ObjectDroppedWhileInspecting();
                             key.SetActive(false);
-                            holder.controller.enabled = true;
+                            holder.vHolder.controller.enabled = true;
                             keyPickup.Invoke();
                             FMODUnity.RuntimeManager.PlayOneShot("event:/2D/Object Interaction/Key Pickup");
                             Cursor.visible = false;
                             Cursor.lockState = CursorLockMode.Locked;
 
                             InteractionTwo = true;
-                            pressE.SetActive(false);
+                            keyPickupText.SetActive(false);
                             holder.beingInspected = false;
                         }
                     }
                     else if (turnOff)
                     {
-                        pressE.SetActive(false);
+                        keyPickupText.SetActive(false);
                         turnOff = false;
                     }
                 }
@@ -111,14 +156,14 @@ public class ObjectOpener : MonoBehaviour
             }
             else if (turnOff && InteractionOne)
             {
-                pressE.SetActive(false);
+                keyPickupText.SetActive(false);
                 turnOff = false;
             }
 
         }
         else if (turnOff)
         {
-            pressE.SetActive(false);
+            keyPickupText.SetActive(false);
             turnOff = false;
         }
 
