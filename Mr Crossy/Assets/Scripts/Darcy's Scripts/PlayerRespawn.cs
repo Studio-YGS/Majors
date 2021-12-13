@@ -13,7 +13,10 @@ public class PlayerRespawn : MonoBehaviour
     PuzzleController puzzleController;
 
     [SerializeField]
-    Transform respawnPosition, crossyPosition;
+    Transform crossyPosition;
+    Transform respawnPosition;
+    [SerializeField]
+    Transform[] respawnPoints;
 
     Vector3 originalposition;
 
@@ -42,6 +45,7 @@ public class PlayerRespawn : MonoBehaviour
         seer = FindObjectOfType<OverseerController>();
         player = FindObjectOfType<Player_Controller>();
         journal = FindObjectOfType<JournalController>();
+        respawnPosition = respawnPoints[0];
     }
 
     public void Register()
@@ -92,12 +96,47 @@ public class PlayerRespawn : MonoBehaviour
         
     }
 
+    public void ReleaseToPlayer()
+    {
+        player.EnableController();
+
+        if (seer.emitter.Params[2].Value != 1f)
+        {
+            seer.emitter.Params[2].Value = 1f;
+            seer.emitter.Target.SetParameter(seer.emitter.Params[1].Name, seer.emitter.Params[1].Value);
+        }
+        //seer.emitter.Params[2].Value = 1f;
+        if (seer.emitter.Params[0].Value != 100f)
+        {
+            seer.emitter.Params[0].Value = 100f;
+            seer.emitter.Target.SetParameter(seer.emitter.Params[0].Name, seer.emitter.Params[0].Value);
+        }
+        //seer.emitter.Params[0].Value = 100f;
+        if (seer.emitter.Params[1].Value != 1f)
+        {
+            seer.emitter.Params[1].Value = 1f;
+            seer.emitter.Target.SetParameter(seer.emitter.Params[1].Name, seer.emitter.Params[1].Value);
+        }
+        //seer.emitter.Params[1].Value = 1f;
+
+        exSwitch.WalkIn();
+        journal.EnableJournal();
+        FindObjectOfType<OverseerController>().deady = false;
+    }
+
+    public void SwitchRespawnPoint(int whichPoint)
+    {
+        respawnPosition = respawnPoints[whichPoint - 1];
+    }
+
     IEnumerator WaitForRespawn(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
-        
+
         FindObjectOfType<MrCrossyDistortion>().ReduceInsanity();
         FindObjectOfType<MrCrossyDistortion>().DecreaseVignette();
+        FindObjectOfType<MrCrossyDistortion>().colorAdjustments[0].colorFilter.value = Color.white;
+        FindObjectOfType<MrCrossyDistortion>().colorAdjustments[1].colorFilter.value = Color.white;
         deathVideoObject.SetActive(false);
 
         puzzleController = FindObjectOfType<PuzzleController>();
@@ -118,16 +157,5 @@ public class PlayerRespawn : MonoBehaviour
         {
             ReleaseToPlayer();
         }
-    }
-
-    public void ReleaseToPlayer()
-    {
-        player.EnableController();
-        seer.emitter.Params[2].Value = 1f;
-        seer.emitter.Params[0].Value = 100f;
-        seer.emitter.Params[1].Value = 1f;
-        exSwitch.WalkIn();
-        journal.EnableJournal();
-        FindObjectOfType<OverseerController>().deady = false;
     }
 }

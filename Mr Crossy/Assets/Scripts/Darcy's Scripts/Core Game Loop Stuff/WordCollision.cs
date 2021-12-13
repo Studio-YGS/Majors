@@ -41,54 +41,60 @@ public class WordCollision : MonoBehaviour
         }
     }
 
-    void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("GameController"))
-        {
-            puzzleController.streetText.text = "";
-        }
-    }
+    //void OnTriggerExit(Collider other)
+    //{
+    //    if (other.CompareTag("GameController"))
+    //    {
+    //        Debug.Log("Exiting word collider");
+    //        puzzleController.streetText.text = "";
+    //        Debug.Log("Writing to UI with " + puzzleController.streetText.text + ".");
+    //        //puzzleController.WriteToUI();
+    //    }
+    //}
 
     public void SetUpController()
     {
-        respawn.RespawnColliders();
-
-        puzzleController.wordCollision = GetComponent<WordCollision>();
-        puzzleController.word = word;
-        puzzleController.wordObjects.Clear();
-        puzzleController.currentStreet = street;
-
-        if (wordObjects != null)
+        if (!gameObject.name.Contains("Home"))
         {
-            for (int i = 0; i < wordObjects.Length; i++)
-            {
-                if(wordObjects[i] != null)
-                {
-                    puzzleController.wordObjects.Add(wordObjects[i]);
+            respawn.RespawnColliders();
 
-                    if (wordObjects[i].name == word)
+            puzzleController.wordCollision = GetComponent<WordCollision>();
+            puzzleController.word = word;
+            puzzleController.wordObjects.Clear();
+            puzzleController.currentStreet = street;
+
+            if (wordObjects != null)
+            {
+                for (int i = 0; i < wordObjects.Length; i++)
+                {
+                    if (wordObjects[i] != null)
                     {
-                        puzzleController.SetUpLetters(i);
+                        puzzleController.wordObjects.Add(wordObjects[i]);
+
+                        if (wordObjects[i].name == word)
+                        {
+                            puzzleController.SetUpLetters(i);
+                        }
                     }
                 }
             }
+
+            puzzleController.storedObjects.Clear();
+
+            if (!puzzleComplete && !dontCheck)
+            {
+                puzzleController.PlayerWordControl();
+            }
+
+            menuManager.streetName.SetActive(true);
+
+            if (streetStalk != null)
+            {
+                seer.m_StalkStreet = streetStalk;
+            }
+
+            gameObject.SetActive(false);
         }
-
-        puzzleController.storedObjects.Clear();
-
-        if (!puzzleComplete && !dontCheck)
-        {
-            puzzleController.PlayerWordControl();
-        }
-
-        menuManager.streetName.SetActive(true);
-
-        if(streetStalk != null)
-        {
-            seer.m_StalkStreet = streetStalk;
-        }
-
-        gameObject.SetActive(false);
     }
 
     public void DisableAltars()

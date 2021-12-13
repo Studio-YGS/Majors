@@ -93,7 +93,6 @@ GameObject:
   - component: {fileID: 174695453}
   - component: {fileID: 174695455}
   - component: {fileID: 174695454}
-  - component: {fileID: 174695456}
   m_Layer: 0
   m_Name: Wood Creak_4
   m_TagString: Untagged
@@ -152,18 +151,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minWait: 4
   maxWait: 20
---- !u!114 &174695456
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 174695452}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &193306889
 GameObject:
   m_ObjectHideFlags: 0
@@ -174,7 +161,6 @@ GameObject:
   m_Component:
   - component: {fileID: 193306890}
   - component: {fileID: 193306892}
-  - component: {fileID: 193306891}
   m_Layer: 0
   m_Name: Modulated Wind
   m_TagString: Untagged
@@ -219,18 +205,6 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 0
   OverrideMaxDistance: 0
---- !u!114 &193306891
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 193306889}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &267145679
 GameObject:
   m_ObjectHideFlags: 0
@@ -296,7 +270,6 @@ GameObject:
   - component: {fileID: 274973110}
   - component: {fileID: 274973112}
   - component: {fileID: 274973111}
-  - component: {fileID: 274973113}
   m_Layer: 0
   m_Name: External_Sound_3
   m_TagString: Untagged
@@ -331,16 +304,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CollisionTag: 
-  Event: event:/3D/Metal/Metal_Squeak_LRV
+  Event: event:/3D/Creepy/Distant_Humanoid
   PlayEvent: 0
   StopEvent: 12
   AllowFadeout: 1
   TriggerOnce: 0
   Preload: 0
   Params: []
-  OverrideAttenuation: 1
-  OverrideMinDistance: 3
-  OverrideMaxDistance: 10
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!114 &274973111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -355,18 +328,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minWait: 4
   maxWait: 20
---- !u!114 &274973113
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 274973109}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &313788430
 GameObject:
   m_ObjectHideFlags: 0
@@ -704,7 +665,6 @@ GameObject:
   m_Component:
   - component: {fileID: 880477365}
   - component: {fileID: 880477367}
-  - component: {fileID: 880477366}
   m_Layer: 0
   m_Name: Unpleasantries_(Only if needed)
   m_TagString: Untagged
@@ -739,7 +699,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CollisionTag: GameController
-  Event: event:/2D/Interior_Unpleasantries/Spider_Sensation
+  Event: event:/2D/Interior_Unpleasantries/Virulent Snow
   PlayEvent: 11
   StopEvent: 12
   AllowFadeout: 1
@@ -749,18 +709,6 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 0
   OverrideMaxDistance: 0
---- !u!114 &880477366
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 880477364}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &982726900
 GameObject:
   m_ObjectHideFlags: 0
@@ -772,7 +720,6 @@ GameObject:
   - component: {fileID: 982726901}
   - component: {fileID: 982726903}
   - component: {fileID: 982726902}
-  - component: {fileID: 982726904}
   m_Layer: 0
   m_Name: External_Sound_1
   m_TagString: Untagged
@@ -831,18 +778,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minWait: 4
   maxWait: 20
---- !u!114 &982726904
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 982726900}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1075119069
 GameObject:
   m_ObjectHideFlags: 0
@@ -896,7 +831,7 @@ GameObject:
   - component: {fileID: 1153713654}
   - component: {fileID: 1153713656}
   - component: {fileID: 1153713655}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Box_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1478,7 +1413,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1537249917}
-  - component: {fileID: 6803898598560991907}
   m_Layer: 0
   m_Name: Internal_Audio_Daddy
   m_TagString: Untagged
@@ -1502,18 +1436,6 @@ Transform:
   m_Father: {fileID: 4065147009251574}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6803898598560991907
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1537249916}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1575277903
 GameObject:
   m_ObjectHideFlags: 0
@@ -1607,7 +1529,7 @@ GameObject:
   - component: {fileID: 1630175607}
   - component: {fileID: 1630175609}
   - component: {fileID: 1630175608}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Box_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2034,7 +1956,7 @@ GameObject:
   m_Name: wall_90_basement_8m (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 1
+  m_NavMeshLayer: 4
   m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4297134514185046
@@ -2125,7 +2047,7 @@ GameObject:
   m_Name: wall_09_2x2m_assembly_a (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &4182172673810896
@@ -2156,7 +2078,7 @@ GameObject:
   m_Name: floor_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &4931525050212374
@@ -2283,7 +2205,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 8
-  m_StaticEditorFlags: 121
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4008384101110210
 Transform:
@@ -2325,7 +2247,7 @@ GameObject:
   m_Name: wall_12_3x2m (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &4411050895896622
@@ -2359,8 +2281,8 @@ GameObject:
   m_Name: roof_01_wall_b_wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4519114089114140
 Transform:
@@ -2451,7 +2373,7 @@ GameObject:
   m_Name: exterior
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &4541135453824588
@@ -2502,7 +2424,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 8
-  m_StaticEditorFlags: 121
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4162144208850154
 Transform:
@@ -2595,8 +2517,8 @@ GameObject:
   m_Name: window_07_frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4307855352917070
 Transform:
@@ -2686,7 +2608,7 @@ GameObject:
   m_Name: wall_02_3x3m_assembly_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &4233240043774274
@@ -2720,8 +2642,8 @@ GameObject:
   m_Name: wood_04_plank_6m (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4192982168202698
 Transform:
@@ -2844,8 +2766,8 @@ GameObject:
   m_Name: wood_04_plank_6m (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4302569273046014
 Transform:
@@ -2938,8 +2860,8 @@ GameObject:
   m_Name: wood_04_plank_6m (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4637066881123364
 Transform:
@@ -3032,7 +2954,7 @@ GameObject:
   m_Name: base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 4
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &4011362206128188
@@ -3133,8 +3055,8 @@ GameObject:
   m_Name: window_shutter_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4273721004355532
 Transform:
@@ -3224,8 +3146,8 @@ GameObject:
   m_Name: props
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4323019771887538
 Transform:
@@ -3264,8 +3186,8 @@ GameObject:
   m_Name: wood_ceiling
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 120
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 122
   m_IsActive: 1
 --- !u!4 &4072825948441632
 Transform:
@@ -3346,8 +3268,8 @@ GameObject:
   m_Name: wood_01_trim_8m_b (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4178693729862526
 Transform:
@@ -3440,8 +3362,8 @@ GameObject:
   m_Name: window_07_wing_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4450074935862572
 Transform:
@@ -3535,8 +3457,8 @@ GameObject:
   m_Name: window_shutter_03 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4164787011941974
 Transform:
@@ -3670,7 +3592,7 @@ GameObject:
   m_Name: roof
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &4648951030790048
@@ -3705,8 +3627,8 @@ GameObject:
   m_Name: window_07_wing_glass_inside
   m_TagString: GlassInside
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4041928309333362
 Transform:
@@ -3797,8 +3719,8 @@ GameObject:
   m_Name: window_02 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4847815730353946
 Transform:
@@ -3842,8 +3764,8 @@ GameObject:
   m_Name: wood_01_trim_8m_a (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4077306262568224
 Transform:
@@ -3936,7 +3858,7 @@ GameObject:
   m_Name: wall_90_basement_8m (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 1
+  m_NavMeshLayer: 4
   m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4535287039651374
@@ -4030,8 +3952,8 @@ GameObject:
   m_Name: wall_08_2x2m_wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4227553560268368
 Transform:
@@ -4124,8 +4046,8 @@ GameObject:
   m_Name: wood_02_trim_3m (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4089848844237480
 Transform:
@@ -4218,8 +4140,8 @@ GameObject:
   m_Name: wood_02_trim_3m_b (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4365130475394138
 Transform:
@@ -4311,7 +4233,7 @@ GameObject:
   m_Name: roof_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &4791407809653378
@@ -4393,8 +4315,8 @@ GameObject:
   m_Name: window_shutter_01 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4000780402976072
 Transform:
@@ -4487,8 +4409,8 @@ GameObject:
   m_Name: roof_01_top_trim_b (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4310421649872264
 Transform:
@@ -4578,8 +4500,8 @@ GameObject:
   m_Name: roof_detail_02 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &4815758991838946
 Transform:
@@ -4610,7 +4532,7 @@ GameObject:
   m_Name: wall_05_3x2m_assembly_a (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &4090016328702124
@@ -4641,7 +4563,7 @@ GameObject:
   m_Name: wall_02_3x3m_assembly_a (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &4976677400263422
@@ -4675,8 +4597,8 @@ GameObject:
   m_Name: wood_04_plank_6m (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4511341151576186
 Transform:
@@ -4769,8 +4691,8 @@ GameObject:
   m_Name: wall_15_3x2m_wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4082202666847088
 Transform:
@@ -4860,7 +4782,7 @@ GameObject:
   m_Name: roof_01_wall_a_assembly_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &4561936695541436
@@ -4895,7 +4817,7 @@ GameObject:
   m_Name: floor_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &4394150052848946
@@ -4926,7 +4848,7 @@ GameObject:
   m_Name: wall_20_3x6m (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &4407117040142388
@@ -4957,7 +4879,7 @@ GameObject:
   m_Name: floor_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &4589975056641656
@@ -4988,7 +4910,7 @@ GameObject:
   m_Name: roof_floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &4860484191296324
@@ -5022,8 +4944,8 @@ GameObject:
   m_Name: wood_ceiling_end_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 120
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 122
   m_IsActive: 1
 --- !u!4 &4299438766949882
 Transform:
@@ -5101,7 +5023,7 @@ GameObject:
   m_Name: wall_05_3x2m_assembly_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &4797059067258782
@@ -5134,8 +5056,8 @@ GameObject:
   m_Name: wall_09_2x2m_wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4394526296901352
 Transform:
@@ -5225,7 +5147,7 @@ GameObject:
   m_Name: wall_08_2x2m_assembly_a (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &4243014794993782
@@ -5257,8 +5179,8 @@ GameObject:
   m_Name: window_03 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4688616748333634
 Transform:
@@ -5302,8 +5224,8 @@ GameObject:
   m_Name: Interior
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 121
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &4848678282586350
 Transform:
@@ -5406,7 +5328,7 @@ GameObject:
   m_Name: wall_05_3x2m_assembly_a (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &4338780074932230
@@ -5438,8 +5360,8 @@ GameObject:
   m_Name: window_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4060518855360200
 Transform:
@@ -5483,8 +5405,8 @@ GameObject:
   m_Name: roof_01_scaffold_01 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4402499839601642
 Transform:
@@ -5576,8 +5498,8 @@ GameObject:
   m_Name: wood_ceiling_end_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 120
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 122
   m_IsActive: 1
 --- !u!4 &4119921239336854
 Transform:
@@ -5656,8 +5578,8 @@ GameObject:
   m_Name: window_08 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4530993366545044
 Transform:
@@ -5698,7 +5620,7 @@ GameObject:
   m_Name: wall_02_3x3m_assembly_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &4672750221934918
@@ -5729,8 +5651,8 @@ GameObject:
   m_Name: roof_detail_05_b (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &4143766706915974
 Transform:
@@ -5765,8 +5687,8 @@ GameObject:
   m_Name: wood_02_trim_3m_b (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4270348541404910
 Transform:
@@ -5859,8 +5781,8 @@ GameObject:
   m_Name: wood_02_trim_3m_b (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4373599513779752
 Transform:
@@ -5953,8 +5875,8 @@ GameObject:
   m_Name: wood_04_plank_6m (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4808310186617634
 Transform:
@@ -6047,8 +5969,8 @@ GameObject:
   m_Name: stone_13_trim_2m (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4214118740667152
 Transform:
@@ -6138,7 +6060,7 @@ GameObject:
   m_Name: wall_20_3x6m (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &4063710548682970
@@ -6172,8 +6094,8 @@ GameObject:
   m_Name: wood_05_trim_8m_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4124925775591860
 Transform:
@@ -6263,7 +6185,7 @@ GameObject:
   m_Name: wall_15_3x2m (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &4776577349539586
@@ -6294,7 +6216,7 @@ GameObject:
   m_Name: wall_15_3x2m (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &4616954711538454
@@ -6401,7 +6323,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 8
-  m_StaticEditorFlags: 121
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4875391289191898
 Transform:
@@ -6494,8 +6416,8 @@ GameObject:
   m_Name: wall_05_3x2m_wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4324959495554384
 Transform:
@@ -6588,8 +6510,8 @@ GameObject:
   m_Name: wood_02_trim_3m_b (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4209864312368726
 Transform:
@@ -6682,8 +6604,8 @@ GameObject:
   m_Name: wall_20_3x6m_wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4090652893387324
 Transform:
@@ -6776,8 +6698,8 @@ GameObject:
   m_Name: roof_01_wall_a_wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4875016707663858
 Transform:
@@ -6914,8 +6836,8 @@ GameObject:
   m_Name: wood_02_trim_3m (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4480874359354256
 Transform:
@@ -7008,8 +6930,8 @@ GameObject:
   m_Name: wood_02_trim_3m_b (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4747574589162306
 Transform:
@@ -7183,8 +7105,8 @@ GameObject:
   m_Name: wood_01_trim_8m_b (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4843716818073068
 Transform:
@@ -7277,8 +7199,8 @@ GameObject:
   m_Name: wood_01_trim_8m_a (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4561319563912522
 Transform:
@@ -7371,8 +7293,8 @@ GameObject:
   m_Name: stone_13_trim_2m (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4843296103236488
 Transform:
@@ -7463,8 +7385,8 @@ GameObject:
   m_Name: wood_ceiling (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 120
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 122
   m_IsActive: 0
 --- !u!4 &4589570675193874
 Transform:
@@ -7512,8 +7434,8 @@ GameObject:
   m_Name: roof_detail_05_a_glass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &4930737286341480
 Transform:
@@ -7636,8 +7558,8 @@ GameObject:
   m_Name: window_08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4154309433596952
 Transform:
@@ -7681,8 +7603,8 @@ GameObject:
   m_Name: wood_02_trim_3m (19)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4826665217292532
 Transform:
@@ -7774,8 +7696,8 @@ GameObject:
   m_Name: wood_ceiling_end_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 120
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 122
   m_IsActive: 1
 --- !u!4 &4753723011603200
 Transform:
@@ -7856,8 +7778,8 @@ GameObject:
   m_Name: wood_04_plank_6m (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4322147067763522
 Transform:
@@ -7948,7 +7870,7 @@ GameObject:
   m_Name: walls_side_d (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4775139038038980
@@ -7992,7 +7914,7 @@ GameObject:
   m_Name: wall_08_2x2m_assembly_a (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &4433187176685862
@@ -8024,7 +7946,7 @@ GameObject:
   m_Name: walls_side_a (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4074432598631544
@@ -8070,8 +7992,8 @@ GameObject:
   m_Name: wall_10_3x2m_wood_door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4707562722715666
 Transform:
@@ -8164,8 +8086,8 @@ GameObject:
   m_Name: wood_04_plank_6m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4687541172243164
 Transform:
@@ -8258,8 +8180,8 @@ GameObject:
   m_Name: window_shutter_02 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4152037851627342
 Transform:
@@ -8352,8 +8274,8 @@ GameObject:
   m_Name: wood_02_trim_3m (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4419258400710530
 Transform:
@@ -8446,8 +8368,8 @@ GameObject:
   m_Name: wall_02_3x3m_wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4010789172319110
 Transform:
@@ -8540,8 +8462,8 @@ GameObject:
   m_Name: stone_13_trim_2m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4915645419934122
 Transform:
@@ -8658,7 +8580,7 @@ BoxCollider:
   m_GameObject: {fileID: 1602497086675962}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 8, y: 0.25000012, z: 8}
   m_Center: {x: -4, y: 0.12499993, z: -4}
@@ -8676,8 +8598,8 @@ GameObject:
   m_Name: window_02 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4577717508509518
 Transform:
@@ -8720,8 +8642,8 @@ GameObject:
   m_Name: wood_ceiling_end_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 120
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 122
   m_IsActive: 1
 --- !u!4 &4207519655542508
 Transform:
@@ -8802,7 +8724,7 @@ GameObject:
   m_Name: Exterior
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &4558430410892864
@@ -8900,8 +8822,8 @@ GameObject:
   m_Name: window_05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4067715810282874
 Transform:
@@ -8945,8 +8867,8 @@ GameObject:
   m_Name: wood_04_plank_6m (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4333868845967556
 Transform:
@@ -9036,7 +8958,7 @@ GameObject:
   m_Name: wall_03_3x5m_assembly_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &4730194345508722
@@ -9070,8 +8992,8 @@ GameObject:
   m_Name: wood_07_trim_5m (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4133970829607606
 Transform:
@@ -9163,8 +9085,8 @@ GameObject:
   m_Name: roof_detail_05_a_roof
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &4000366516140718
 Transform:
@@ -9244,7 +9166,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 8
-  m_StaticEditorFlags: 121
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &4539012467041880
 Transform:
@@ -9285,7 +9207,7 @@ GameObject:
   m_Name: roof_01_wall_a (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &4332557547464706
@@ -9317,8 +9239,8 @@ GameObject:
   m_Name: wood_ceiling (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 120
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 122
   m_IsActive: 0
 --- !u!4 &4083317401068444
 Transform:
@@ -9367,8 +9289,8 @@ GameObject:
   m_Name: window_shutter_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4313715100074996
 Transform:
@@ -9461,8 +9383,8 @@ GameObject:
   m_Name: stone_13_trim_2m (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4994689789804588
 Transform:
@@ -9555,7 +9477,7 @@ GameObject:
   m_Name: roof_01_wall_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &4230443861217222
@@ -9649,8 +9571,8 @@ GameObject:
   m_Name: wall_12_3x2m_wood_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4895418035684698
 Transform:
@@ -9740,7 +9662,7 @@ GameObject:
   m_Name: wall_09_2x2m_assembly_a (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4131421997525790
@@ -9771,7 +9693,7 @@ GameObject:
   m_Name: wall_01_3x3m_assembly_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &4707984713857352
@@ -9827,6 +9749,7 @@ Transform:
   - {fileID: 1622872679}
   - {fileID: 1537249917}
   - {fileID: 7204501283545910864}
+  - {fileID: 7249265912444592657}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -9846,8 +9769,8 @@ GameObject:
   m_Name: wood_04_plank_6m (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4255519842799706
 Transform:
@@ -9939,7 +9862,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 8
-  m_StaticEditorFlags: 121
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &4517740417199882
 Transform:
@@ -10013,8 +9936,8 @@ GameObject:
   m_Name: wall_03_3x5m_wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4179762760900686
 Transform:
@@ -10105,8 +10028,8 @@ GameObject:
   m_Name: window_07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4208468369195946
 Transform:
@@ -10147,7 +10070,7 @@ GameObject:
   m_Name: walls_front
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &4404027927250402
@@ -10228,8 +10151,8 @@ GameObject:
   m_Name: wood_04_plank_6m (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4181067233441592
 Transform:
@@ -10346,7 +10269,7 @@ BoxCollider:
   m_GameObject: {fileID: 1843253569902590}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 8, y: 0.25000012, z: 8}
   m_Center: {x: -4, y: 0.12499993, z: -4}
@@ -10366,8 +10289,8 @@ GameObject:
   m_Name: wood_02_trim_3m (18)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4052997930488638
 Transform:
@@ -10458,7 +10381,7 @@ GameObject:
   m_Name: walls_side_a (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4408967133931932
@@ -10504,8 +10427,8 @@ GameObject:
   m_Name: wood_07_trim_5m (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4193568754014054
 Transform:
@@ -10595,7 +10518,7 @@ GameObject:
   m_Name: wall_20_3x6m (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &4249611269614678
@@ -10627,8 +10550,8 @@ GameObject:
   m_Name: wood_ceiling (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 120
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 122
   m_IsActive: 0
 --- !u!4 &4848777219654726
 Transform:
@@ -10675,8 +10598,8 @@ GameObject:
   m_Name: window_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4003719001737236
 Transform:
@@ -10720,8 +10643,8 @@ GameObject:
   m_Name: roof_01_scaffold_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4958480464997960
 Transform:
@@ -10814,8 +10737,8 @@ GameObject:
   m_Name: roof_detail_03 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &4657972538767196
 Transform:
@@ -10907,7 +10830,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4314916609164012
 Transform:
@@ -10950,8 +10873,8 @@ GameObject:
   m_Name: roof_detail_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &4147370949087332
 Transform:
@@ -11030,6 +10953,7 @@ GameObject:
   - component: {fileID: 65262028949317858}
   - component: {fileID: 868883316}
   - component: {fileID: 868883315}
+  - component: {fileID: 5554136001240876586}
   m_Layer: 0
   m_Name: door_wing_c
   m_TagString: Untagged
@@ -11160,6 +11084,22 @@ MonoBehaviour:
   mrCrossy: {fileID: 1766410105212260, guid: 7771d473bdbab0747a713221d773e089, type: 3}
   createdMrCrossy: {fileID: 0}
   puzzleOn: 0
+--- !u!208 &5554136001240876586
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1935141538925360}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.614, y: 1.1, z: 0.2}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.597, y: 1.1, z: -0.037}
+  m_TimeToStationary: 0.2
 --- !u!1 &1955384752766818
 GameObject:
   m_ObjectHideFlags: 0
@@ -11173,7 +11113,7 @@ GameObject:
   m_Name: floor_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &4064421676246354
@@ -11207,8 +11147,8 @@ GameObject:
   m_Name: wood_06_trim_8m_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4778289344023742
 Transform:
@@ -11298,7 +11238,7 @@ GameObject:
   m_Name: wall_05_3x2m_assembly_a (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &4002382940080056
@@ -11332,8 +11272,8 @@ GameObject:
   m_Name: window_shutter_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4084114991122566
 Transform:
@@ -11426,8 +11366,8 @@ GameObject:
   m_Name: wood_02_trim_3m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4139029123036830
 Transform:
@@ -11519,7 +11459,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 8
-  m_StaticEditorFlags: 121
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &4985892348401698
 Transform:
@@ -11564,7 +11504,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 8
-  m_StaticEditorFlags: 121
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4240595726857500
 Transform:
@@ -11654,8 +11594,8 @@ GameObject:
   m_Name: roof_detail_05_b (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &4180943709039618
 Transform:
@@ -11688,7 +11628,7 @@ GameObject:
   m_Name: Front
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4074660270970842
@@ -11734,8 +11674,8 @@ GameObject:
   m_Name: wall_01_3x3m_wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4162662032525384
 Transform:
@@ -11812,6 +11752,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &273668053323946894
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7249265912444592657}
+  - component: {fileID: 588588283696520204}
+  m_Layer: 2
+  m_Name: Occlussion Cover_3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7249265912444592657
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273668053323946894}
+  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
+  m_LocalPosition: {x: -4.0099945, y: 15.25, z: 4.84}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4065147009251574}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!192 &588588283696520204
+OcclusionArea:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273668053323946894}
+  serializedVersion: 2
+  m_Size: {x: 10.480009, y: 23.80303, z: 11.813063}
+  m_Center: {x: -0.069925904, y: -4.2543383, z: -0.36718202}
+  m_IsViewVolume: 1
 --- !u!1 &946199439798536044
 GameObject:
   m_ObjectHideFlags: 0
@@ -11895,8 +11877,8 @@ GameObject:
   m_Name: wall_12_3x2m_wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &1011667887069701864
 Transform:
@@ -11989,8 +11971,8 @@ GameObject:
   m_Name: wood_02_trim_2m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &1014804365634340832
 Transform:
@@ -12137,7 +12119,7 @@ GameObject:
   m_Name: wall_08_2x2m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &1014505156491487646
@@ -12171,8 +12153,8 @@ GameObject:
   m_Name: wood_01_trim_8m_a (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &1014947923086282474
 Transform:
@@ -12265,8 +12247,8 @@ GameObject:
   m_Name: window_03_wing_a_glass_inside
   m_TagString: GlassInside
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &1011766937708453886
 Transform:
@@ -12359,8 +12341,8 @@ GameObject:
   m_Name: window_02_wing_b_glass_inside
   m_TagString: GlassInside
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &1012111040806465490
 Transform:
@@ -12450,7 +12432,7 @@ GameObject:
   m_Name: roof_01_wall_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &1014965201279951856
@@ -12483,7 +12465,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &1011736402141839216
 Transform:
@@ -12527,8 +12509,8 @@ GameObject:
   m_Name: wood_02_trim_2m (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &1014493287339537306
 Transform:
@@ -12618,7 +12600,7 @@ GameObject:
   m_Name: wall_10_3x2m_door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &1011702552987042076
@@ -12651,8 +12633,8 @@ GameObject:
   m_Name: window_05_wing_glass_inside
   m_TagString: GlassInside
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &1014723772274975576
 Transform:
@@ -12742,7 +12724,7 @@ GameObject:
   m_Name: wall_12_3x2m_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &1014804133258997900
@@ -12775,8 +12757,8 @@ GameObject:
   m_Name: window_02_wing_a_glass_inside
   m_TagString: GlassInside
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &1012063963835296142
 Transform:
@@ -12869,8 +12851,8 @@ GameObject:
   m_Name: window_shutter_04 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &1011972937048206306
 Transform:
@@ -12960,7 +12942,7 @@ GameObject:
   m_Name: wall_15_3x2m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &1012035764848183514
@@ -12993,8 +12975,8 @@ GameObject:
   m_Name: window_08_wing_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &1011975060815858312
 Transform:
@@ -13129,7 +13111,7 @@ GameObject:
   m_Name: wall_09_2x2m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &1011973586946345506
@@ -13163,8 +13145,8 @@ GameObject:
   m_Name: window_03_wing_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &1014722128647022132
 Transform:
@@ -13258,8 +13240,8 @@ GameObject:
   m_Name: roof_detail_05_b_roof
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &1011726980459713886
 Transform:
@@ -13352,8 +13334,8 @@ GameObject:
   m_Name: wood_01_trim_8m_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &1014513405217010106
 Transform:
@@ -13446,8 +13428,8 @@ GameObject:
   m_Name: window_08_frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &1014747100792389602
 Transform:
@@ -13537,7 +13519,7 @@ GameObject:
   m_Name: wall_03_3x5m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &1014976818270667310
@@ -13612,7 +13594,7 @@ GameObject:
   m_Name: roof_01_extension_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &1012137803366192936
@@ -13646,8 +13628,8 @@ GameObject:
   m_Name: window_03_wing_b_glass_inside
   m_TagString: GlassInside
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &1011866502550823296
 Transform:
@@ -13740,8 +13722,8 @@ GameObject:
   m_Name: window_02_frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &1011806831897302556
 Transform:
@@ -13831,7 +13813,7 @@ GameObject:
   m_Name: wall_20_3x6m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &1012069140803869842
@@ -13864,8 +13846,8 @@ GameObject:
   m_Name: window_shutter_05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &1014926626474118798
 Transform:
@@ -13958,8 +13940,8 @@ GameObject:
   m_Name: wood_02_trim_3m (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &1014885632726740338
 Transform:
@@ -14052,8 +14034,8 @@ GameObject:
   m_Name: window_05_wing_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &1014516080394399392
 Transform:
@@ -14144,8 +14126,8 @@ GameObject:
   m_Name: roof_detail_05_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &1014491406825763134
 Transform:
@@ -14177,7 +14159,7 @@ GameObject:
   m_Name: walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &1014826527396472976
@@ -14215,8 +14197,8 @@ GameObject:
   m_Name: wood_02_trim_3m (16)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &1011744035954253894
 Transform:
@@ -14309,8 +14291,8 @@ GameObject:
   m_Name: window_shutter_04 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &1012058618545075656
 Transform:
@@ -14403,8 +14385,8 @@ GameObject:
   m_Name: window_03_wing_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &1014842678499377932
 Transform:
@@ -14495,8 +14477,8 @@ GameObject:
   m_Name: roof_detail_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &1011821569383761170
 Transform:
@@ -14530,8 +14512,8 @@ GameObject:
   m_Name: roof_detail_05_b_glass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &1012010336889198364
 Transform:
@@ -14624,8 +14606,8 @@ GameObject:
   m_Name: window_02_wing_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &1011750143348944578
 Transform:
@@ -14716,7 +14698,7 @@ GameObject:
   m_Name: wall_05_3x2m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &1011654676883531464
@@ -14750,8 +14732,8 @@ GameObject:
   m_Name: window_03_frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &1014784772851106820
 Transform:
@@ -14844,8 +14826,8 @@ GameObject:
   m_Name: window_shutter_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &1011785930540912946
 Transform:
@@ -14935,7 +14917,7 @@ GameObject:
   m_Name: wall_01_3x3m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &1014983968102596146
@@ -14968,8 +14950,8 @@ GameObject:
   m_Name: roof_detail_02_stones
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &1011846823226834598
 Transform:
@@ -15050,8 +15032,8 @@ GameObject:
   m_Name: window_05_frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &1012183482544269070
 Transform:
@@ -15144,8 +15126,8 @@ GameObject:
   m_Name: wood_02_trim_3m (15)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &1012070718897946700
 Transform:
@@ -15238,8 +15220,8 @@ GameObject:
   m_Name: wood_02_trim_2m (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &1011785637150820148
 Transform:
@@ -15332,8 +15314,8 @@ GameObject:
   m_Name: wood_02_trim_3m (17)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &1014879771476017882
 Transform:
@@ -15423,8 +15405,8 @@ GameObject:
   m_Name: roof_detail_05_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &1014623756655465664
 Transform:
@@ -15483,7 +15465,7 @@ BoxCollider:
   m_GameObject: {fileID: 1010656183226884686}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 8, y: 0.25000012, z: 8}
   m_Center: {x: -4, y: 0.12499993, z: -4}
@@ -15503,8 +15485,8 @@ GameObject:
   m_Name: window_08_wing_glass_inside
   m_TagString: GlassInside
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &1014729969569154040
 Transform:
@@ -15597,8 +15579,8 @@ GameObject:
   m_Name: window_02_wing_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &1011850395969496478
 Transform:
@@ -15689,7 +15671,7 @@ GameObject:
   m_Name: wall_02_3x3m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &1014761404808554664
@@ -15754,7 +15736,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &8756623879108994926
 Transform:
@@ -15806,7 +15788,7 @@ MeshRenderer:
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
+  m_ScaleInLightmap: 0.2711569
   m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
@@ -15837,7 +15819,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &1994672539706692201
 Transform:
@@ -15892,7 +15874,7 @@ MeshRenderer:
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
+  m_ScaleInLightmap: 0.2711569
   m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
@@ -15922,8 +15904,8 @@ GameObject:
   m_Name: Front
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &1472870629220390235
 Transform:
@@ -16138,8 +16120,8 @@ GameObject:
   m_Name: wood_02_trim_3m (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &2828676165767874064
 Transform:
@@ -16232,8 +16214,8 @@ GameObject:
   m_Name: wood_02_trim_3m (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &2828647082016936224
 Transform:
@@ -16326,8 +16308,8 @@ GameObject:
   m_Name: wall_12_3x2m_wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &2828294309147616350
 Transform:
@@ -16420,8 +16402,8 @@ GameObject:
   m_Name: wood_02_trim_3m (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &2828329936209264186
 Transform:
@@ -16514,8 +16496,8 @@ GameObject:
   m_Name: wood_02_trim_3m (13)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &2828537502471392044
 Transform:
@@ -16608,8 +16590,8 @@ GameObject:
   m_Name: wood_01_trim_8m_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &2828648099268728314
 Transform:
@@ -16702,8 +16684,8 @@ GameObject:
   m_Name: wood_02_trim_3m (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &2828364076558038704
 Transform:
@@ -16796,8 +16778,8 @@ GameObject:
   m_Name: wood_02_trim_3m (14)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &2828615876324498918
 Transform:
@@ -16890,8 +16872,8 @@ GameObject:
   m_Name: wood_02_trim_3m (15)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &2837204582225066984
 Transform:
@@ -16984,8 +16966,8 @@ GameObject:
   m_Name: wood_01_trim_8m_a (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &2828272513298112942
 Transform:
@@ -17071,13 +17053,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2828657101007865718}
-  - component: {fileID: 2831588895293294625}
   m_Layer: 0
   m_Name: trims
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &2828657101007865718
 Transform:
@@ -17093,18 +17074,6 @@ Transform:
   m_Father: {fileID: 6332357170089136417}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2831588895293294625
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2831588895293294626}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2831591943131193826
 GameObject:
   m_ObjectHideFlags: 0
@@ -17121,8 +17090,8 @@ GameObject:
   m_Name: wood_02_trim_3m (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &2837033873318981282
 Transform:
@@ -17215,8 +17184,8 @@ GameObject:
   m_Name: wood_02_trim_3m (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &2828678835647374694
 Transform:
@@ -17309,8 +17278,8 @@ GameObject:
   m_Name: wood_02_trim_3m (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &2828444306820671318
 Transform:
@@ -17403,7 +17372,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5342146046229902685
 Transform:
@@ -17457,7 +17426,7 @@ MeshRenderer:
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
+  m_ScaleInLightmap: 0.2711569
   m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
@@ -17519,7 +17488,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &7537251727744312757
 Transform:
@@ -17572,7 +17541,7 @@ MeshRenderer:
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
+  m_ScaleInLightmap: 0.2711569
   m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
@@ -17603,8 +17572,8 @@ GameObject:
   m_Name: window_08_frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5183590135831981679
 Transform:
@@ -17697,8 +17666,8 @@ GameObject:
   m_Name: window_shutter_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5183087184468959457
 Transform:
@@ -17791,8 +17760,8 @@ GameObject:
   m_Name: window_shutter_04 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5183439180246812749
 Transform:
@@ -17885,8 +17854,8 @@ GameObject:
   m_Name: wood_02_trim_2m (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5183382225235588059
 Transform:
@@ -17979,8 +17948,8 @@ GameObject:
   m_Name: wood_01_trim_8m_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5183947240711232961
 Transform:
@@ -18073,8 +18042,8 @@ GameObject:
   m_Name: wall_05_3x2m_wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5183209136373172861
 Transform:
@@ -18167,8 +18136,8 @@ GameObject:
   m_Name: wood_02_trim_3m_b (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5183604005742813563
 Transform:
@@ -18261,8 +18230,8 @@ GameObject:
   m_Name: wall_20_3x6m_wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5183538533501998353
 Transform:
@@ -18353,8 +18322,8 @@ GameObject:
   m_Name: window_08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5183619991070577461
 Transform:
@@ -18398,8 +18367,8 @@ GameObject:
   m_Name: window_03_frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5183223199651831655
 Transform:
@@ -18492,8 +18461,8 @@ GameObject:
   m_Name: wood_01_trim_8m_a (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5183636299293912191
 Transform:
@@ -18586,8 +18555,8 @@ GameObject:
   m_Name: wood_02_trim_3m_b (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5184194424394812527
 Transform:
@@ -18680,8 +18649,8 @@ GameObject:
   m_Name: wall_02_3x3m_wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5183387478539705515
 Transform:
@@ -18774,8 +18743,8 @@ GameObject:
   m_Name: window_05_wing_glass_inside
   m_TagString: GlassInside
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5183949416561522217
 Transform:
@@ -18868,8 +18837,8 @@ GameObject:
   m_Name: window_02_wing_a_glass_inside
   m_TagString: GlassInside
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5183504298877025535
 Transform:
@@ -18962,8 +18931,8 @@ GameObject:
   m_Name: window_08_wing_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5183452502764150777
 Transform:
@@ -19057,8 +19026,8 @@ GameObject:
   m_Name: window_shutter_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5183216514962050265
 Transform:
@@ -19182,8 +19151,8 @@ GameObject:
   m_Name: window_03_wing_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5183438950735152469
 Transform:
@@ -19275,8 +19244,8 @@ GameObject:
   m_Name: window_05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5183461925959811671
 Transform:
@@ -19320,8 +19289,8 @@ GameObject:
   m_Name: window_08_wing_glass_inside
   m_TagString: GlassInside
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5183501527817109539
 Transform:
@@ -19414,8 +19383,8 @@ GameObject:
   m_Name: wood_01_trim_8m_a (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5183455092993962509
 Transform:
@@ -19508,8 +19477,8 @@ GameObject:
   m_Name: window_shutter_05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5183086136415672927
 Transform:
@@ -19602,8 +19571,8 @@ GameObject:
   m_Name: window_02_wing_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5183086101054602843
 Transform:
@@ -19697,8 +19666,8 @@ GameObject:
   m_Name: wood_02_trim_3m_b (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5183267861074926455
 Transform:
@@ -19791,8 +19760,8 @@ GameObject:
   m_Name: window_shutter_03 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5183611708221618555
 Transform:
@@ -19885,8 +19854,8 @@ GameObject:
   m_Name: window_05_wing_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5183224288584570561
 Transform:
@@ -19980,8 +19949,8 @@ GameObject:
   m_Name: window_07_wing_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5183335212279736833
 Transform:
@@ -20075,8 +20044,8 @@ GameObject:
   m_Name: window_03_wing_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5183213619444206995
 Transform:
@@ -20214,8 +20183,8 @@ GameObject:
   m_Name: wall_15_3x2m_wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5183546438502073437
 Transform:
@@ -20308,8 +20277,8 @@ GameObject:
   m_Name: window_03_wing_b_glass_inside
   m_TagString: GlassInside
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5183304913447204081
 Transform:
@@ -20402,8 +20371,8 @@ GameObject:
   m_Name: window_02_frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5183478180099303631
 Transform:
@@ -20496,8 +20465,8 @@ GameObject:
   m_Name: wall_09_2x2m_wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5183278631770753477
 Transform:
@@ -20590,8 +20559,8 @@ GameObject:
   m_Name: wood_02_trim_3m_b (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5183257773170430213
 Transform:
@@ -20682,8 +20651,8 @@ GameObject:
   m_Name: window_08 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5183977776610557369
 Transform:
@@ -20727,8 +20696,8 @@ GameObject:
   m_Name: window_shutter_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5183439640327258075
 Transform:
@@ -20821,8 +20790,8 @@ GameObject:
   m_Name: wood_02_trim_3m_b (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5183083947295451587
 Transform:
@@ -20915,8 +20884,8 @@ GameObject:
   m_Name: wood_02_trim_3m (16)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5183217339298641207
 Transform:
@@ -21009,8 +20978,8 @@ GameObject:
   m_Name: window_03_wing_a_glass_inside
   m_TagString: GlassInside
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5183383930000649007
 Transform:
@@ -21101,8 +21070,8 @@ GameObject:
   m_Name: window_07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5183602678525217927
 Transform:
@@ -21146,8 +21115,8 @@ GameObject:
   m_Name: wood_02_trim_2m (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5183599079887201577
 Transform:
@@ -21240,8 +21209,8 @@ GameObject:
   m_Name: window_05_frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5183622151142879871
 Transform:
@@ -21334,8 +21303,8 @@ GameObject:
   m_Name: wood_02_trim_3m (17)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5184066088893732779
 Transform:
@@ -21427,7 +21396,7 @@ GameObject:
   m_Name: wall_03_3x5m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5329100526060834051
@@ -21506,7 +21475,7 @@ GameObject:
   m_Name: wall_12_3x2m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5329019875776851045
@@ -21539,8 +21508,8 @@ GameObject:
   m_Name: window_02_wing_b_glass_inside
   m_TagString: GlassInside
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326353053354287535
 Transform:
@@ -21633,8 +21602,8 @@ GameObject:
   m_Name: wood_01_trim_8m_b (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326292837539698191
 Transform:
@@ -21771,8 +21740,8 @@ GameObject:
   m_Name: window_shutter_05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326419958871834627
 Transform:
@@ -21864,7 +21833,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 8
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2
   m_IsActive: 0
 --- !u!4 &5326435405880712187
 Transform:
@@ -21908,8 +21877,8 @@ GameObject:
   m_Name: wall_12_3x2m_wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326604158428485087
 Transform:
@@ -22090,8 +22059,8 @@ GameObject:
   m_Name: wood_01_trim_8m_a (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326191741996214353
 Transform:
@@ -22184,8 +22153,8 @@ GameObject:
   m_Name: window_05_wing_glass_inside
   m_TagString: GlassInside
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5328987619140480085
 Transform:
@@ -22278,8 +22247,8 @@ GameObject:
   m_Name: window_08_frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5328941042578616527
 Transform:
@@ -22372,8 +22341,8 @@ GameObject:
   m_Name: roof_detail_05_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5329030505914134233
 Transform:
@@ -22466,8 +22435,8 @@ GameObject:
   m_Name: window_02_wing_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326622380666509653
 Transform:
@@ -22561,8 +22530,8 @@ GameObject:
   m_Name: window_02_frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326159854721249939
 Transform:
@@ -22655,8 +22624,8 @@ GameObject:
   m_Name: window_08_frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5329335256532134011
 Transform:
@@ -22748,7 +22717,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 8
-  m_StaticEditorFlags: 121
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326195036163202009
 Transform:
@@ -22793,8 +22762,8 @@ GameObject:
   m_Name: wall_20_3x6m_wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5329054310621043017
 Transform:
@@ -22887,8 +22856,8 @@ GameObject:
   m_Name: window_02_wing_a_glass_inside
   m_TagString: GlassInside
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326603495491310177
 Transform:
@@ -23022,7 +22991,7 @@ GameObject:
   m_Name: wall_15_3x2m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5329253188139887429
@@ -23055,8 +23024,8 @@ GameObject:
   m_Name: wall_20_3x6m_wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326324806643645925
 Transform:
@@ -23148,7 +23117,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 8
-  m_StaticEditorFlags: 121
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326225391879653357
 Transform:
@@ -23193,7 +23162,7 @@ GameObject:
   m_Name: wall_20_3x6m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5329298521053084725
@@ -23287,8 +23256,8 @@ GameObject:
   m_Name: window_03_wing_b_glass_inside
   m_TagString: GlassInside
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326623119410671277
 Transform:
@@ -23381,8 +23350,8 @@ GameObject:
   m_Name: window_03_frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5329202612102551303
 Transform:
@@ -23475,8 +23444,8 @@ GameObject:
   m_Name: window_08_wing_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5329315307733903875
 Transform:
@@ -23569,8 +23538,8 @@ GameObject:
   m_Name: wood_ceiling_end_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 120
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 122
   m_IsActive: 1
 --- !u!4 &5329082278678902355
 Transform:
@@ -23651,8 +23620,8 @@ GameObject:
   m_Name: window_02_wing_a_glass_inside
   m_TagString: GlassInside
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326383208645620895
 Transform:
@@ -23742,7 +23711,7 @@ GameObject:
   m_Name: wall_05_3x2m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5326361169329931801
@@ -23776,7 +23745,7 @@ GameObject:
   m_Name: roof_01_extension_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5326347961864640517
@@ -23927,8 +23896,8 @@ GameObject:
   m_Name: wood_ceiling_end_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 120
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 122
   m_IsActive: 1
 --- !u!4 &5329141882405767779
 Transform:
@@ -24009,8 +23978,8 @@ GameObject:
   m_Name: wall_15_3x2m_wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326232097654693377
 Transform:
@@ -24103,8 +24072,8 @@ GameObject:
   m_Name: wood_02_trim_3m (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5329217643215213133
 Transform:
@@ -24197,8 +24166,8 @@ GameObject:
   m_Name: window_02_frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326518149542535607
 Transform:
@@ -24288,7 +24257,7 @@ GameObject:
   m_Name: wall_20_3x6m (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5328964804185916571
@@ -24322,8 +24291,8 @@ GameObject:
   m_Name: wood_02_trim_3m (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5329238479120804279
 Transform:
@@ -24413,7 +24382,7 @@ GameObject:
   m_Name: wall_08_2x2m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5329229386875490233
@@ -24446,8 +24415,8 @@ GameObject:
   m_Name: roof_detail_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5326562253388538331
 Transform:
@@ -24526,8 +24495,8 @@ GameObject:
   m_Name: window_03 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5329090039356043059
 Transform:
@@ -24615,8 +24584,8 @@ GameObject:
   m_Name: window_02_frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326492046540593457
 Transform:
@@ -24709,8 +24678,8 @@ GameObject:
   m_Name: wood_02_trim_3m (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5328945675053507385
 Transform:
@@ -24803,8 +24772,8 @@ GameObject:
   m_Name: window_02_wing_b_glass_inside
   m_TagString: GlassInside
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326446015285141045
 Transform:
@@ -24897,8 +24866,8 @@ GameObject:
   m_Name: window_07_wing_glass_inside
   m_TagString: GlassInside
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326418748721774189
 Transform:
@@ -24991,8 +24960,8 @@ GameObject:
   m_Name: window_05_wing_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5329271594515161485
 Transform:
@@ -25129,7 +25098,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326197296658074349
 Transform:
@@ -25173,7 +25142,7 @@ GameObject:
   m_Name: wall_20_3x6m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5329056303615494027
@@ -25267,8 +25236,8 @@ GameObject:
   m_Name: roof_detail_05_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5329194558863097363
 Transform:
@@ -25358,7 +25327,7 @@ GameObject:
   m_Name: wall_15_3x2m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5326328582370771801
@@ -25392,8 +25361,8 @@ GameObject:
   m_Name: wood_02_trim_3m (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326549616197521591
 Transform:
@@ -25486,8 +25455,8 @@ GameObject:
   m_Name: wood_02_trim_3m (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326176113367181565
 Transform:
@@ -25652,7 +25621,7 @@ GameObject:
   m_Name: wall_20_3x6m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5329074678627320195
@@ -25746,8 +25715,8 @@ GameObject:
   m_Name: wall_02_3x3m_wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5329078789238161707
 Transform:
@@ -25840,7 +25809,7 @@ GameObject:
   m_Name: wall_12_3x2m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5326409007216176225
@@ -25934,8 +25903,8 @@ GameObject:
   m_Name: wall_20_3x6m_wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326629729288240865
 Transform:
@@ -26072,8 +26041,8 @@ GameObject:
   m_Name: window_shutter_03 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326406573717191009
 Transform:
@@ -26166,8 +26135,8 @@ GameObject:
   m_Name: wood_01_trim_8m_a (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5329320891989259125
 Transform:
@@ -26260,8 +26229,8 @@ GameObject:
   m_Name: wood_02_trim_3m (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5329247704401875587
 Transform:
@@ -26354,8 +26323,8 @@ GameObject:
   m_Name: window_03_wing_a_glass_inside
   m_TagString: GlassInside
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326540182536278227
 Transform:
@@ -26448,8 +26417,8 @@ GameObject:
   m_Name: window_02_wing_b_glass_inside
   m_TagString: GlassInside
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326233445619638527
 Transform:
@@ -26620,7 +26589,7 @@ GameObject:
   m_Name: wall_12_3x2m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5326277466510144337
@@ -26653,7 +26622,7 @@ GameObject:
   m_Name: wall_08_2x2m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5329191748193855155
@@ -26779,8 +26748,8 @@ GameObject:
   m_Name: wall_20_3x6m_wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5329233930973908689
 Transform:
@@ -26870,7 +26839,7 @@ GameObject:
   m_Name: wall_20_3x6m (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5326206458707017131
@@ -26904,8 +26873,8 @@ GameObject:
   m_Name: window_shutter_04 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326587103909327591
 Transform:
@@ -26998,8 +26967,8 @@ GameObject:
   m_Name: wall_20_3x6m_wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326239998259367757
 Transform:
@@ -27089,7 +27058,7 @@ GameObject:
   m_Name: wall_20_3x6m (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5326495153812414505
@@ -27123,8 +27092,8 @@ GameObject:
   m_Name: window_07_frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326630355098191625
 Transform:
@@ -27217,8 +27186,8 @@ GameObject:
   m_Name: wall_20_3x6m_wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326337226223363431
 Transform:
@@ -27311,8 +27280,8 @@ GameObject:
   m_Name: wood_02_trim_2m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5328998100723108045
 Transform:
@@ -27405,8 +27374,8 @@ GameObject:
   m_Name: wall_05_3x2m_wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326437731063074849
 Transform:
@@ -27499,8 +27468,8 @@ GameObject:
   m_Name: wood_02_trim_3m (13)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326605254994364087
 Transform:
@@ -27593,8 +27562,8 @@ GameObject:
   m_Name: wood_07_trim_5m (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326459555618465405
 Transform:
@@ -27687,8 +27656,8 @@ GameObject:
   m_Name: wood_02_trim_3m (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326390063353672609
 Transform:
@@ -27779,8 +27748,8 @@ GameObject:
   m_Name: window_02 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5329333135792968525
 Transform:
@@ -27824,8 +27793,8 @@ GameObject:
   m_Name: wood_02_trim_2m (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5329197608669265079
 Transform:
@@ -27961,8 +27930,8 @@ GameObject:
   m_Name: wood_ceiling_end_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 120
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 122
   m_IsActive: 1
 --- !u!4 &5328971232940145265
 Transform:
@@ -28040,7 +28009,7 @@ GameObject:
   m_Name: wall_20_3x6m (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5326578548734637207
@@ -28071,7 +28040,7 @@ GameObject:
   m_Name: wall_02_3x3m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5326552316990193979
@@ -28104,8 +28073,8 @@ GameObject:
   m_Name: window_02_wing_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5329290946970271365
 Transform:
@@ -28199,8 +28168,8 @@ GameObject:
   m_Name: wood_02_trim_3m (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326543908833301767
 Transform:
@@ -28293,8 +28262,8 @@ GameObject:
   m_Name: wood_01_trim_8m_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326206848707696737
 Transform:
@@ -28387,8 +28356,8 @@ GameObject:
   m_Name: window_08_wing_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326606067616605491
 Transform:
@@ -28482,8 +28451,8 @@ GameObject:
   m_Name: wall_20_3x6m_wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326383538202447675
 Transform:
@@ -28576,8 +28545,8 @@ GameObject:
   m_Name: wood_02_trim_3m (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326597813043859169
 Transform:
@@ -28669,7 +28638,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326421755819815005
 Transform:
@@ -28713,7 +28682,7 @@ GameObject:
   m_Name: roof_01_wall_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5329106091628244189
@@ -28851,8 +28820,8 @@ GameObject:
   m_Name: wall_15_3x2m_wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326350428767032695
 Transform:
@@ -28944,8 +28913,8 @@ GameObject:
   m_Name: wood_ceiling
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 120
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 122
   m_IsActive: 1
 --- !u!4 &5326253712074962073
 Transform:
@@ -29026,8 +28995,8 @@ GameObject:
   m_Name: window_shutter_02 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326301660641454655
 Transform:
@@ -29119,8 +29088,8 @@ GameObject:
   m_Name: wood_ceiling_end_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 120
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 122
   m_IsActive: 1
 --- !u!4 &5329148271653916273
 Transform:
@@ -29201,8 +29170,8 @@ GameObject:
   m_Name: window_shutter_04 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326184675568428239
 Transform:
@@ -29339,8 +29308,8 @@ GameObject:
   m_Name: window_shutter_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5329199727765475093
 Transform:
@@ -29433,8 +29402,8 @@ GameObject:
   m_Name: wood_02_trim_3m (14)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5329215273407940265
 Transform:
@@ -29525,8 +29494,8 @@ GameObject:
   m_Name: window_02 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5328972266151352895
 Transform:
@@ -29570,8 +29539,8 @@ GameObject:
   m_Name: wood_01_trim_8m_a (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326375452676467765
 Transform:
@@ -29661,7 +29630,7 @@ GameObject:
   m_Name: walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5329035646417729761
@@ -29700,8 +29669,8 @@ GameObject:
   m_Name: wood_02_trim_3m (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5328943175449217929
 Transform:
@@ -29794,8 +29763,8 @@ GameObject:
   m_Name: window_02_frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5329075926540880301
 Transform:
@@ -29918,8 +29887,8 @@ GameObject:
   m_Name: wood_02_trim_3m (15)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5329124039604844147
 Transform:
@@ -30012,8 +29981,8 @@ GameObject:
   m_Name: window_shutter_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5329136824779381761
 Transform:
@@ -30105,7 +30074,7 @@ GameObject:
   m_Name: wall_05_3x2m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5326357962222566225
@@ -30187,8 +30156,8 @@ GameObject:
   m_Name: window_03_wing_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5329128864464920459
 Transform:
@@ -30282,8 +30251,8 @@ GameObject:
   m_Name: wall_20_3x6m_wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5328898540782918373
 Transform:
@@ -30376,8 +30345,8 @@ GameObject:
   m_Name: wood_02_trim_2m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5329355178912120135
 Transform:
@@ -30469,7 +30438,7 @@ GameObject:
   m_Name: wall_09_2x2m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5326184021408892175
@@ -30549,8 +30518,8 @@ GameObject:
   m_Name: window_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5329305505206420475
 Transform:
@@ -30594,8 +30563,8 @@ GameObject:
   m_Name: wood_01_trim_8m_a (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5328984273084308887
 Transform:
@@ -30688,8 +30657,8 @@ GameObject:
   m_Name: window_08_wing_glass_inside
   m_TagString: GlassInside
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326145338014063231
 Transform:
@@ -30780,8 +30749,8 @@ GameObject:
   m_Name: window_05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326176104901072907
 Transform:
@@ -30824,7 +30793,7 @@ GameObject:
   m_Name: wall_02_3x3m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5329022390112342511
@@ -30906,8 +30875,8 @@ GameObject:
   m_Name: wood_01_trim_8m_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5329286857805495959
 Transform:
@@ -31000,8 +30969,8 @@ GameObject:
   m_Name: wood_02_trim_2m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5329254114397678071
 Transform:
@@ -31138,8 +31107,8 @@ GameObject:
   m_Name: window_03_wing_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5328933591747946777
 Transform:
@@ -31233,8 +31202,8 @@ GameObject:
   m_Name: roof_detail_05_b_roof
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5326431164884933235
 Transform:
@@ -31370,7 +31339,7 @@ GameObject:
   m_Name: wall_08_2x2m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5326436764437192513
@@ -31452,8 +31421,8 @@ GameObject:
   m_Name: window_03_wing_b_glass_inside
   m_TagString: GlassInside
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5328914144911417359
 Transform:
@@ -31545,7 +31514,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326308767221325461
 Transform:
@@ -31633,8 +31602,8 @@ GameObject:
   m_Name: wood_01_trim_8m_a (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326579048509986299
 Transform:
@@ -31724,7 +31693,7 @@ GameObject:
   m_Name: walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5326317349227358759
@@ -31759,8 +31728,8 @@ GameObject:
   m_Name: wall_15_3x2m_wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326566881532297575
 Transform:
@@ -31853,8 +31822,8 @@ GameObject:
   m_Name: wood_02_trim_3m (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5329235036502394867
 Transform:
@@ -31947,8 +31916,8 @@ GameObject:
   m_Name: wood_02_trim_3m (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5329037045500902317
 Transform:
@@ -32041,8 +32010,8 @@ GameObject:
   m_Name: wood_01_trim_8m_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5329334892781964841
 Transform:
@@ -32132,7 +32101,7 @@ GameObject:
   m_Name: wall_05_3x2m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5329051707030277043
@@ -32165,8 +32134,8 @@ GameObject:
   m_Name: wood_ceiling_end_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 120
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 122
   m_IsActive: 1
 --- !u!4 &5328894131818821139
 Transform:
@@ -32247,8 +32216,8 @@ GameObject:
   m_Name: window_02_wing_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326621309379645435
 Transform:
@@ -32341,7 +32310,7 @@ GameObject:
   m_Name: wall_05_3x2m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5326410537833261541
@@ -32423,8 +32392,8 @@ GameObject:
   m_Name: window_03_wing_a_glass_inside
   m_TagString: GlassInside
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326122159687184755
 Transform:
@@ -32517,8 +32486,8 @@ GameObject:
   m_Name: window_02_wing_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326454189804495343
 Transform:
@@ -32681,7 +32650,7 @@ GameObject:
   m_Name: wall_20_3x6m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5326454781126231055
@@ -32714,8 +32683,8 @@ GameObject:
   m_Name: window_02_wing_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326288222267780437
 Transform:
@@ -32809,8 +32778,8 @@ GameObject:
   m_Name: window_03_wing_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5328983981695110177
 Transform:
@@ -32904,8 +32873,8 @@ GameObject:
   m_Name: window_shutter_04 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5329259267326155969
 Transform:
@@ -32997,8 +32966,8 @@ GameObject:
   m_Name: roof_detail_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5326525682950408767
 Transform:
@@ -33079,8 +33048,8 @@ GameObject:
   m_Name: roof_detail_05_b_glass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5326151639550023729
 Transform:
@@ -33173,7 +33142,7 @@ GameObject:
   m_Name: wall_15_3x2m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5326278193304345763
@@ -33264,7 +33233,7 @@ GameObject:
   m_Name: wall_20_3x6m (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5329041874598993987
@@ -33298,8 +33267,8 @@ GameObject:
   m_Name: window_02_wing_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326428064001820231
 Transform:
@@ -33393,8 +33362,8 @@ GameObject:
   m_Name: window_05_frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5329341160413148467
 Transform:
@@ -33484,7 +33453,7 @@ GameObject:
   m_Name: walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5328985850916473527
@@ -33525,7 +33494,7 @@ GameObject:
   m_Name: wall_15_3x2m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5326237950907222811
@@ -33618,7 +33587,7 @@ GameObject:
   m_Name: wall_20_3x6m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5326604833646888739
@@ -33700,8 +33669,8 @@ GameObject:
   m_Name: window_02_wing_a_glass_inside
   m_TagString: GlassInside
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326611559968730985
 Transform:
@@ -33794,8 +33763,8 @@ GameObject:
   m_Name: wall_20_3x6m_wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326415399936036893
 Transform:
@@ -33885,7 +33854,7 @@ GameObject:
   m_Name: wall_02_3x3m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5326575753995483507
@@ -33919,8 +33888,8 @@ GameObject:
   m_Name: window_shutter_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326559105573363231
 Transform:
@@ -34013,8 +33982,8 @@ GameObject:
   m_Name: wood_02_trim_3m (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326467729597183779
 Transform:
@@ -34107,8 +34076,8 @@ GameObject:
   m_Name: wood_07_trim_5m (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5329162853848227513
 Transform:
@@ -34201,7 +34170,7 @@ GameObject:
   m_Name: wall_15_3x2m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5329352619254883499
@@ -34295,7 +34264,7 @@ GameObject:
   m_Name: wall_20_3x6m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5329215462582557377
@@ -34389,8 +34358,8 @@ GameObject:
   m_Name: window_shutter_04 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5328904056089672023
 Transform:
@@ -34481,8 +34450,8 @@ GameObject:
   m_Name: window_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326474799658652887
 Transform:
@@ -34526,8 +34495,8 @@ GameObject:
   m_Name: wood_02_trim_3m (13)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5328983963906318633
 Transform:
@@ -34617,7 +34586,7 @@ GameObject:
   m_Name: walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5326596625804254857
@@ -34652,7 +34621,7 @@ GameObject:
   m_Name: wall_09_2x2m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5326185745110614463
@@ -34734,8 +34703,8 @@ GameObject:
   m_Name: roof_detail_05_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5329179783277950595
 Transform:
@@ -34828,8 +34797,8 @@ GameObject:
   m_Name: wall_12_3x2m_wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5329290931512052361
 Transform:
@@ -34921,8 +34890,8 @@ GameObject:
   m_Name: wood_ceiling_end_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 120
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 122
   m_IsActive: 1
 --- !u!4 &5328992553973519183
 Transform:
@@ -35003,8 +34972,8 @@ GameObject:
   m_Name: roof_detail_05_b_glass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5328937791480646895
 Transform:
@@ -35097,8 +35066,8 @@ GameObject:
   m_Name: window_02_wing_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5329202539016968487
 Transform:
@@ -35191,7 +35160,7 @@ GameObject:
   m_Name: wall_01_3x3m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5329124171245629727
@@ -35273,8 +35242,8 @@ GameObject:
   m_Name: roof_detail_05_b_roof
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5329172012059064471
 Transform:
@@ -35367,8 +35336,8 @@ GameObject:
   m_Name: window_03_wing_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326451285336265005
 Transform:
@@ -35461,8 +35430,8 @@ GameObject:
   m_Name: wood_ceiling_end_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 120
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 122
   m_IsActive: 1
 --- !u!4 &5329223701937423483
 Transform:
@@ -35543,8 +35512,8 @@ GameObject:
   m_Name: wood_02_trim_2m (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326558883584673817
 Transform:
@@ -35637,8 +35606,8 @@ GameObject:
   m_Name: wood_02_trim_3m (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5329295740176037133
 Transform:
@@ -35731,8 +35700,8 @@ GameObject:
   m_Name: wood_02_trim_3m (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5329352132799932667
 Transform:
@@ -35825,8 +35794,8 @@ GameObject:
   m_Name: wood_02_trim_3m (14)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326332221925530307
 Transform:
@@ -35916,7 +35885,7 @@ GameObject:
   m_Name: wall_12_3x2m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5328958049779881439
@@ -35949,8 +35918,8 @@ GameObject:
   m_Name: window_shutter_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326362906645810625
 Transform:
@@ -36043,8 +36012,8 @@ GameObject:
   m_Name: wood_02_trim_3m (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326163965527672291
 Transform:
@@ -36137,7 +36106,7 @@ GameObject:
   m_Name: wall_20_3x6m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5326151051224618161
@@ -36230,8 +36199,8 @@ GameObject:
   m_Name: roof_detail_02_stones
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5326603783151120779
 Transform:
@@ -36312,8 +36281,8 @@ GameObject:
   m_Name: window_shutter_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326381191382731641
 Transform:
@@ -36403,7 +36372,7 @@ GameObject:
   m_Name: wall_20_3x6m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5326554678707738389
@@ -36436,8 +36405,8 @@ GameObject:
   m_Name: wood_02_trim_3m (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326419860146868377
 Transform:
@@ -36530,8 +36499,8 @@ GameObject:
   m_Name: window_02_wing_a_glass_inside
   m_TagString: GlassInside
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5329081408192998821
 Transform:
@@ -36623,7 +36592,7 @@ GameObject:
   m_Name: wall_20_3x6m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5326479824899992057
@@ -36705,8 +36674,8 @@ GameObject:
   m_Name: window_shutter_04 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326251254655220453
 Transform:
@@ -36799,8 +36768,8 @@ GameObject:
   m_Name: wood_02_trim_3m (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326393262953171607
 Transform:
@@ -36890,7 +36859,7 @@ GameObject:
   m_Name: walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5328967692624832445
@@ -37017,8 +36986,8 @@ GameObject:
   m_Name: wood_02_trim_3m (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326340754706769161
 Transform:
@@ -37111,8 +37080,8 @@ GameObject:
   m_Name: window_02_wing_b_glass_inside
   m_TagString: GlassInside
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326213067188498855
 Transform:
@@ -37205,8 +37174,8 @@ GameObject:
   m_Name: window_02_wing_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326623845881883315
 Transform:
@@ -37300,8 +37269,8 @@ GameObject:
   m_Name: wall_08_2x2m_wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5329007786536735217
 Transform:
@@ -37393,7 +37362,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5329032883922275879
 Transform:
@@ -37437,8 +37406,8 @@ GameObject:
   m_Name: window_08_wing_glass_inside
   m_TagString: GlassInside
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5328923014781160661
 Transform:
@@ -37530,7 +37499,7 @@ GameObject:
   m_Name: wall_05_3x2m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5326281983629213289
@@ -37611,8 +37580,8 @@ GameObject:
   m_Name: roof_detail_05_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5329309040552745965
 Transform:
@@ -37693,8 +37662,8 @@ GameObject:
   m_Name: wood_02_trim_3m (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5329031083120418887
 Transform:
@@ -37786,7 +37755,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326556878926879065
 Transform:
@@ -37874,8 +37843,8 @@ GameObject:
   m_Name: wood_02_trim_3m (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5329340719843251187
 Transform:
@@ -37965,7 +37934,7 @@ GameObject:
   m_Name: wall_20_3x6m (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5329082245880859189
@@ -37999,8 +37968,8 @@ GameObject:
   m_Name: window_02_wing_b_glass_inside
   m_TagString: GlassInside
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5329287827483975171
 Transform:
@@ -38090,7 +38059,7 @@ GameObject:
   m_Name: wall_09_2x2m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5328943653432878575
@@ -38124,8 +38093,8 @@ GameObject:
   m_Name: wall_20_3x6m_wood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5328971123094797147
 Transform:
@@ -38217,7 +38186,7 @@ GameObject:
   m_Name: wall_02_3x3m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5328884978376796037
@@ -38299,8 +38268,8 @@ GameObject:
   m_Name: window_03_frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5328913882782586543
 Transform:
@@ -38393,7 +38362,7 @@ GameObject:
   m_Name: wall_20_3x6m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5329122508484593319
@@ -38487,8 +38456,8 @@ GameObject:
   m_Name: window_shutter_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5329261606140736823
 Transform:
@@ -38581,8 +38550,8 @@ GameObject:
   m_Name: wood_02_trim_3m (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326485747914146869
 Transform:
@@ -38675,8 +38644,8 @@ GameObject:
   m_Name: wood_02_trim_3m (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5326397623685693803
 Transform:
@@ -38769,7 +38738,7 @@ GameObject:
   m_Name: wall_20_3x6m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &5329322884387725453
@@ -38893,8 +38862,8 @@ GameObject:
   m_Name: window_02_wing_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5328894926211662125
 Transform:
@@ -38987,8 +38956,8 @@ GameObject:
   m_Name: wood_ceiling_end_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 120
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 122
   m_IsActive: 1
 --- !u!4 &5326457290613565983
 Transform:
@@ -39098,8 +39067,8 @@ GameObject:
   m_Name: wood_ceiling
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 120
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 122
   m_IsActive: 1
 --- !u!4 &5328933219747686051
 Transform:
@@ -39178,7 +39147,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &8532177044881922958
 Transform:
@@ -39261,7 +39230,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &6332357169389356326
 Transform:
@@ -39291,18 +39260,18 @@ LODGroup:
   serializedVersion: 2
   m_LocalReferencePoint: {x: -7.711111, y: 10.902542, z: 19.864767}
   m_Size: 24.084747
-  m_FadeMode: 0
+  m_FadeMode: 1
   m_AnimateCrossFading: 0
   m_LastLODIsBillboard: 0
   m_LODs:
-  - screenRelativeHeight: 0.6
+  - screenRelativeHeight: 0.13557845
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 7728698774296521192}
     - renderer: {fileID: 1595179237694167209}
     - renderer: {fileID: 9195718164840242177}
     - renderer: {fileID: 3147012490209789498}
-  - screenRelativeHeight: 0.24
+  - screenRelativeHeight: 0.057490375
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 6465622789946006692}
@@ -39325,8 +39294,8 @@ GameObject:
   m_Name: Windows
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &6332357169519016760
 Transform:
@@ -39536,7 +39505,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &6332357170089136417
 Transform:
@@ -39577,8 +39546,8 @@ GameObject:
   m_Name: Roof Stuff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &6332357170620243861
 Transform:
@@ -39664,8 +39633,8 @@ GameObject:
   m_Name: wood_02_trim_3m (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &6962654377174026557
 Transform:
@@ -39758,8 +39727,8 @@ GameObject:
   m_Name: wood_02_trim_3m (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &6962696075025260045
 Transform:
@@ -39852,8 +39821,8 @@ GameObject:
   m_Name: wood_02_trim_3m (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &6962672558935525205
 Transform:
@@ -39946,7 +39915,7 @@ GameObject:
   m_Name: wall_23_3x1m (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &6962818686798726623
@@ -40040,8 +40009,8 @@ GameObject:
   m_Name: wood_02_trim_3m (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &6962866663665338401
 Transform:
@@ -40134,8 +40103,8 @@ GameObject:
   m_Name: wood_02_trim_3m (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &6962658282924075595
 Transform:
@@ -40228,7 +40197,7 @@ GameObject:
   m_Name: wall_12_3x2m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &6962715691115098599
@@ -40366,8 +40335,8 @@ GameObject:
   m_Name: wood_01_trim_8m_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &6962645073230863063
 Transform:
@@ -40460,8 +40429,8 @@ GameObject:
   m_Name: wood_02_trim_3m (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &6962976911794649501
 Transform:
@@ -40554,8 +40523,8 @@ GameObject:
   m_Name: wood_02_trim_3m (13)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &6963078939247772673
 Transform:
@@ -40648,8 +40617,8 @@ GameObject:
   m_Name: wood_02_trim_3m (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &6962872543357743383
 Transform:
@@ -40742,8 +40711,8 @@ GameObject:
   m_Name: wood_02_trim_3m (14)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &6962683355937215179
 Transform:
@@ -40836,8 +40805,8 @@ GameObject:
   m_Name: wood_02_trim_3m (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &6963004433688307835
 Transform:
@@ -40929,8 +40898,8 @@ GameObject:
   m_Name: Back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_NavMeshLayer: 8
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &9155555139997538628
 Transform:
@@ -41041,7 +41010,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 122
+  m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &6814654916832321381
 Transform:
@@ -41102,7 +41071,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1930961226, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: UID
-      value: 1443808181
+      value: -1521923049
       objectReference: {fileID: 0}
     - target: {fileID: 1260673417133536, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: m_Name
@@ -41172,7 +41141,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1930961226, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: UID
-      value: -287532351
+      value: -160678207
       objectReference: {fileID: 0}
     - target: {fileID: 1260673417133536, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: m_Name
@@ -41242,7 +41211,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1930961226, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: UID
-      value: -1342111144
+      value: 1961217766
       objectReference: {fileID: 0}
     - target: {fileID: 1260673417133536, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: m_Name
@@ -41308,11 +41277,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3687494349538049729, guid: f5626199ba1c75148a6842d88c50e199, type: 3}
       propertyPath: UID
-      value: -764463830
+      value: -629117095
       objectReference: {fileID: 0}
     - target: {fileID: 5502804677015942778, guid: f5626199ba1c75148a6842d88c50e199, type: 3}
       propertyPath: UID
-      value: -1790594362
+      value: -2141056307
       objectReference: {fileID: 0}
     - target: {fileID: 5676606486502609884, guid: f5626199ba1c75148a6842d88c50e199, type: 3}
       propertyPath: m_RootOrder
@@ -41426,11 +41395,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78b4e689916708845baea328fcc72b2e, type: 3}
---- !u!4 &3163596386091787486 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5390543055913031766, guid: 78b4e689916708845baea328fcc72b2e, type: 3}
-  m_PrefabInstance: {fileID: 7000938527593659528}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5512784625663753445 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3290174296642338925, guid: 78b4e689916708845baea328fcc72b2e, type: 3}
@@ -41442,3 +41406,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &3163596386091787486 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5390543055913031766, guid: 78b4e689916708845baea328fcc72b2e, type: 3}
+  m_PrefabInstance: {fileID: 7000938527593659528}
+  m_PrefabAsset: {fileID: 0}

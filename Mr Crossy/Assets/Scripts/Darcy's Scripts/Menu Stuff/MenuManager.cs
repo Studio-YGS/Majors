@@ -24,7 +24,7 @@ public class MenuManager : MonoBehaviour
     [HideInInspector] 
     public bool menuOpen;
 
-    bool dontEnable;
+    bool dontEnable, quitGagPlaying;
 
     AsyncOperation loadingScene;
 
@@ -43,7 +43,7 @@ public class MenuManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (!mainMenu && !FindObjectOfType<CrossKeyManager>().puzzleOn && !journalController.readingHowTo && !journalController.waitForCrossy)
+            if (!mainMenu && !FindObjectOfType<CrossKeyManager>().puzzleOn && !journalController.readingHowTo && !journalController.waitForCrossy && !controlsUI.activeInHierarchy)
             {
                 if (!playerController.inJournal && !pauseMenuObject.activeInHierarchy && !settingsMenuObject.activeInHierarchy)
                 {
@@ -124,7 +124,7 @@ public class MenuManager : MonoBehaviour
 
     public void StartGame()
     {
-        controlsUI.SetActive(true);
+        OpenControlsUI();
 
         loadingAni.SetActive(true);
 
@@ -161,14 +161,35 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-    public void QuitGame()
+    public void OpenControlsUI()
     {
-        Application.Quit();
+        controlsUI.SetActive(true);
+        settingsMenuObject.SetActive(false);
+
+        if (!mainMenu)
+        {
+            controlsUI.GetComponentInChildren<Button>().gameObject.SetActive(true);
+        }
+        else
+        {
+            controlsUI.GetComponentInChildren<Button>().gameObject.SetActive(false);
+        }
     }
 
-    public void RestartGame()
+    public void CloseControlsUI()
     {
-        SceneManager.LoadScene("Main_Cael");
+        controlsUI.SetActive(false);
+        OpenSettingsMenu();
+    }
+
+    public void QuitGame()
+    {
+        //if (!quitGagPlaying)
+        //{
+        //    quitGagPlaying = true;
+        //    StartCoroutine("QuitGag");
+        //}
+        Application.Quit();
     }
 
     public void UpdateSliders()
@@ -202,7 +223,7 @@ public class MenuManager : MonoBehaviour
 
     IEnumerator ReadingControls()
     {
-        loadingScene = SceneManager.LoadSceneAsync("Main_Cael", LoadSceneMode.Single);
+        loadingScene = SceneManager.LoadSceneAsync("Submission", LoadSceneMode.Single);
         loadingScene.allowSceneActivation = false;
 
         while (!loadingScene.isDone)
@@ -220,6 +241,13 @@ public class MenuManager : MonoBehaviour
             yield return null;
         }
        
+    }
+
+    public IEnumerator QuitGag()
+    {
+        FMODUnity.RuntimeManager.PlayOneShot("event:/MR_C_Random/I_Quit");
+        yield return new WaitForSeconds(7f);
+        Application.Quit();
     }
 
     public void ResolutionChange(int val)

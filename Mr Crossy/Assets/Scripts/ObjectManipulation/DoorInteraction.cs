@@ -20,6 +20,7 @@ public class DoorInteraction : MonoBehaviour
     public bool zForward;
     bool moveable = false;
     [HideInInspector] public bool moved;
+    [HideInInspector] public static bool beingMoved;
     bool greaterThan;
     bool lessThan;
     bool equalTo = true;
@@ -67,6 +68,10 @@ public class DoorInteraction : MonoBehaviour
         startMouseSens = controller.mouseSensitivity;
         journal = FindObjectOfType<JournalOnSwitch>();
         menu = FindObjectOfType<MenuManager>();
+
+        Rigidbody rb = GetComponent<Rigidbody>();
+        rb.centerOfMass = Vector3.zero;
+        rb.inertiaTensorRotation = Quaternion.identity;
     }
 
     void Update()
@@ -276,7 +281,7 @@ public class DoorInteraction : MonoBehaviour
                 }
             }
             
-            if(Vector3.Distance(transform.position, player.position) > 5)
+            if(Vector3.Distance(transform.position, player.position) > 10)
             {
                 if (createdMrCrossy)
                 {
@@ -343,9 +348,10 @@ public class DoorInteraction : MonoBehaviour
                     handon = true;
                     reticle.SetActive(false);
                     hand.SetActive(true);
-                    if (Input.GetMouseButtonDown(0))
+                    if (Input.GetMouseButtonDown(0) && !ObjectHolder.objectBeingInspected)
                     {
                         moveable = true;
+                        beingMoved = true;
                         controller.mouseSensitivity = controller.mouseSensitivity / 2;
                         if (moved)
                         {
@@ -412,6 +418,7 @@ public class DoorInteraction : MonoBehaviour
                     equalTo = true;
                 }
                 controller.mouseSensitivity = startMouseSens;
+                beingMoved = false;
                 moveable = false;
             }
 

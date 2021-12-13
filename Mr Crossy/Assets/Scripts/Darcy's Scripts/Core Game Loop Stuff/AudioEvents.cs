@@ -8,7 +8,7 @@ public class AudioEvents : MonoBehaviour
 {
     EventInstance eventInstance;
 
-    bool incorrectWordVoiceLinePlayed = false, correctWordVoiceLinePlayed = false;
+    bool incorrectWordVoiceLinePlayed, correctWordVoiceLinePlayed, firstBellToll = true;
 
     public void WordSpeltCorrectly()
     {
@@ -16,7 +16,7 @@ public class AudioEvents : MonoBehaviour
 
         eventInstance.start();
 
-        if (!correctWordVoiceLinePlayed)
+        if (!correctWordVoiceLinePlayed && !gameObject.name.Contains("NiNi"))
         {
             correctWordVoiceLinePlayed = true;
             eventInstance = RuntimeManager.CreateInstance("event:/MR_C_Tutorial/TUT.0.5.1.1");
@@ -62,6 +62,15 @@ public class AudioEvents : MonoBehaviour
         eventInstance = RuntimeManager.CreateInstance("event:/2D/Bell/Bell_Tolls");
 
         eventInstance.start();
+
+        if (firstBellToll)
+        {
+            firstBellToll = false;
+
+            eventInstance = RuntimeManager.CreateInstance("event:/MR_C_SolvedPuzzles/I.SP.2_FirstNoticeboard");
+
+            eventInstance.start();
+        }
     }
 
     public void NotePickup()
@@ -74,6 +83,27 @@ public class AudioEvents : MonoBehaviour
     public void HoverOver()
     {
         eventInstance = RuntimeManager.CreateInstance("event:/UI_Multimedia/Hover Menu UI");
+
+        eventInstance.start();
+    }
+
+    public void UnlockDistrictTwo()
+    {
+        eventInstance = RuntimeManager.CreateInstance("event:/MR_C_SolvedPuzzles/Unlock_D2_Gate");
+
+        eventInstance.start();
+    }
+
+    public void CleanTrophy()
+    {
+        eventInstance = RuntimeManager.CreateInstance("event:/MR_C_SolvedPuzzles/I.SP.3.1_Trophy");
+
+        eventInstance.start();
+    }
+
+    public void SubmissionLine()
+    {
+        eventInstance = RuntimeManager.CreateInstance("event:/MR_C_SolvedPuzzles/Submission");
 
         eventInstance.start();
     }

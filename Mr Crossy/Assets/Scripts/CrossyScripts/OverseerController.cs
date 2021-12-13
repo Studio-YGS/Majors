@@ -9,7 +9,16 @@ using FMODUnity;
 
 public class OverseerController : MonoBehaviour
 {
+#if UNITY_EDITOR
+    [Header("EditorOnly")]
+    public bool CrossyQuickSpawn;
+    public float QuickTime;
+#endif
+
     public static BehaviorTree ObserverTree;
+
+    public static float CrossyPathDistance = 0f;
+
     public bool m_PlayerInHouse;
     public bool allowVignette = true;
 
@@ -56,7 +65,11 @@ public class OverseerController : MonoBehaviour
     [SerializeField] private float m_SearchTightAmt;
     [SerializeField] private float m_SearchRadiusAggro;
     [SerializeField] private Vector3 m_ValidationPosition;
-    [SerializeField] private List<GameObject> m_SpawnLighthouses = new List<GameObject>();
+
+    public List<GameObject> distOneSpawnLighthouses = new List<GameObject>();
+    public List<GameObject> distTwoSpawnLighthouses = new List<GameObject>();
+    public List<GameObject> distThreeSpawnLighthouses = new List<GameObject>();
+    private List<GameObject> m_SpawnLighthouses = new List<GameObject>();
 
     [Header("Heal 'N' Die")]
     [SerializeField] private int m_DeathChanceMax;
@@ -71,13 +84,13 @@ public class OverseerController : MonoBehaviour
     [SerializeField] private float m_TitanAwakenThresh;
 
     [Header("FMOD Variables")]
-    public string distanceParamName = "Distance";
-    public string chaseParamName = "IsChasing";
-    public string deadParamName = "isDead";
-    public string titanParamName = "Titan";
+    //public string distanceParamName = "Distance";
+    //public string chaseParamName = "IsChasing";
+    //public string deadParamName = "isDead";
+    //public string titanParamName = "Titan";
 
     [SerializeField] bool attemptingSafe = false;
-    [HideInInspector] public bool attemptingDie = false;
+    public bool attemptingDie = false;
     [SerializeField] bool hasChased = false;
     [SerializeField] bool fiddleFMOD = false;
 
@@ -118,7 +131,7 @@ public class OverseerController : MonoBehaviour
     public int DeathChanceMaximum { get { return m_DeathChanceMax; } }
     public int DeathChanceRemaining { get { return m_DeathChanceRemain; } set { m_DeathChanceRemain = value; } }
 
-    public Vector3 ValidationPosition { get { return m_ValidationPosition; } }
+    public Vector3 ValidationPosition { get { return (usePositioner) ? validationPositioner.transform.position : m_ValidationPosition; } }
     public int State { get { return m_State; } set { m_State = value; } }
     public bool HideTitan { get { return m_HideTitan; } set { m_HideTitan = value; } }
 
@@ -128,6 +141,11 @@ public class OverseerController : MonoBehaviour
 
     public bool IsInHouse { get { return m_PlayerInHouse; } set { m_PlayerInHouse = value; } }
 
+    public bool Chasing { get { return hasChased; } }
+    public bool AttemptingSafe { get { return attemptingSafe; } }
+    public bool AttemptingDie { get { return attemptingDie; } }
+    public bool Puzzling { get { return keyMan.puzzleOn; } }
+
     #endregion
 
     [Space(10)]
@@ -135,7 +153,7 @@ public class OverseerController : MonoBehaviour
     public List<Lighthouse> districtTwoLighthouses = new List<Lighthouse>();
     public List<Lighthouse> districtThreeLighthouses = new List<Lighthouse>();
 
-    public List<Lighthouse> titanLighthouses = new List<Lighthouse>();
+    [HideInInspector] public List<Lighthouse> titanLighthouses = new List<Lighthouse>();
 
 
     public Lighthouse storedHouse;
@@ -146,6 +164,10 @@ public class OverseerController : MonoBehaviour
     [SerializeField] bool playedTitanLine = false;
     private void Awake()
     {
+#if UNITY_EDITOR
+        if (CrossyQuickSpawn) m_TimeSpawn = QuickTime;
+#endif
+
         m_Observer = gameObject;
         ObserverTree = gameObject.GetComponent<BehaviorTree>();
         distootle = FindObjectOfType<MrCrossyDistortion>();
@@ -175,47 +197,86 @@ public class OverseerController : MonoBehaviour
 
     private void Update()
     {
-        if (usePositioner) m_ValidationPosition = validationPositioner.transform.position;
+        //if (usePositioner) m_ValidationPosition = validationPositioner.transform.position;
 
         titan.m_state = m_State;
         titan.hidingTitan = m_HideTitan;
 
         HouseyBoBousey();
 
-
-        if(titan.animator.GetCurrentAnimatorStateInfo(0).IsName("TitanCrossyIdle"))
-        {
-            if(!m_TimerActive && !titan.allowHide)
-            {
-                StartCoroutine(AllowHideTimer());
-            }
-        }
-
-        if(m_State == -1 && !m_IsTutorial)
-        {
-            bool left = LeftRadius();
-
-            if (left)
-            {
-                if (titan.allowHide) CheckClosestLighthouse();
-            }
-        }
-
-        VignetteProcessor();
-
         if(!m_IsTutorial)
         {
-            if (m_State >= 1 || keyMan.puzzleOn || attemptingSafe || hasChased || emitter.Params[1].Value == 0f) fiddleFMOD = true;
+            if (m_State >= 1 && !m_PlayerInHouse || keyMan.puzzleOn) fiddleFMOD = true;
             else fiddleFMOD = false;
+            GetCrossyPlayerDistance();
+            if (fiddleFMOD) CrossyFmodDistance();
+            else
+            {
+                if(emitter.Params[0].Value != 100f)
+                {
+                    emitter.Params[0].Value = 100f;
+                    emitter.Target.SetParameter(emitter.Params[0].Name, emitter.Params[0].Value);
+                }
+            }
 
-            if (fiddleFMOD) CrossyFMODFiddling(crossyAgent, m_ValidationPosition, m_State, deady);
+            //if (m_State >= 1 || keyMan.puzzleOn || attemptingSafe || hasChased || emitter.Params[1].Value == 0f) fiddleFMOD = true;
+            //else fiddleFMOD = false;
 
-            ParameterHell();
+            //if (fiddleFMOD) CrossyFMODFiddling(CrossyPathDistance, m_State, deady);
+            //else
+            //{
+            //    if(emitter.Params[0].Value != 100f)
+            //    {
+            //        emitter.Params[0].Value = 100f;
+            //        emitter.Target.SetParameter(emitter.Params[0].Name, emitter.Params[0].Value);
+            //    }
+            //}
+            TitanUppyDownyNoisies();
+            VignetteProcessor();
 
-            if (m_State == -1 && !m_PlayerInHouse)
-            { 
-                TitanCrossyVoiceLines();
-                TitanUppyDownyNoisies();
+            //ParameterHell();
+            
+
+            if (m_State == -1)
+            {
+                if (titan.animator.GetCurrentAnimatorStateInfo(0).IsName("TitanCrossyIdle"))
+                {
+                    if (!m_TimerActive && !titan.allowHide)
+                    {
+                        StartCoroutine(AllowHideTimer());
+                    }
+                }
+
+                if (!m_PlayerInHouse)
+                {
+                    TitanCrossyVoiceLines();
+                    
+                }
+                if (!titan.lighthousing)
+                {
+                    bool left = LeftRadius();
+
+                    if (left)
+                    {
+                        if (titan.allowHide) CheckClosestLighthouse();
+                    }
+                }
+                
+            }
+        }
+        if (!hasChased && m_State == 3)
+        {
+            PursuitAudio();
+        }
+        else if (hasChased)
+        {
+            if(deady)
+            {
+                if (!attemptingSafe && !attemptingDie) DeadAudio();
+            }
+            else if (m_State != 3 && !keyMan.puzzleOn && !deady || m_PlayerInHouse && !keyMan.puzzleOn)
+            {
+                if (!attemptingSafe && !attemptingDie) StartCoroutine(WaitForPuzzleOff());
             }
         }
 
@@ -237,6 +298,7 @@ public class OverseerController : MonoBehaviour
         m_TitanNoisyNum = 0;
         yield return new WaitForSeconds(1);
         emitter.Params[3].Value = m_TitanNoisyNum;
+        emitter.Target.SetParameter(emitter.Params[3].Name, emitter.Params[3].Value);
     }
 
     public void VignetteProcessor()
@@ -246,7 +308,7 @@ public class OverseerController : MonoBehaviour
             if (allowVignette)
             {
                 vignetteActivated = true;
-                Debug.Log("potoatosondwich");
+                //Debug.Log("potoatosondwich");
                 distootle.DistanceVignette(m_Crossy);
             }
 
@@ -255,22 +317,18 @@ public class OverseerController : MonoBehaviour
                 keyMan.doorsLocked = true;
             }
         }
-        else if (m_State != 3 && vignetteActivated && !deady)
+        else if (m_State != 3)
         {
             if (allowVignette)
             {
-                vignetteActivated = false;
-                Debug.Log("VignetteNooooooo");
-                distootle.DecreaseVignette();
+                if(vignetteActivated && !deady)
+                {
+                    vignetteActivated = false;
+                    //Debug.Log("VignetteNooooooo");
+                    distootle.DecreaseVignette();
+                }
             }
 
-            if (keyMan.doorsLocked)
-            {
-                keyMan.doorsLocked = false;
-            }
-        }
-        else if (m_State != 3)
-        {
             if (keyMan.doorsLocked)
             {
                 keyMan.doorsLocked = false;
@@ -289,6 +347,8 @@ public class OverseerController : MonoBehaviour
 
             m_PlayerInHouse = true;
             if(keyMan.doorsLocked) keyMan.doorsLocked = false;
+
+            
 
             NavMesh.SamplePosition(validationPositioner.transform.position, out validationHit, 1, NavMesh.AllAreas);
             if(validationHit.mask == 256)
@@ -326,6 +386,34 @@ public class OverseerController : MonoBehaviour
         m_StalkStreet = stalky;
     }
 
+    public void SetLighthouseGroup(int district)
+    {
+        switch (district)
+        {
+            case 1:
+                {
+                    //titanLighthouses.Clear();
+                    m_SpawnLighthouses = distOneSpawnLighthouses;
+                    titanLighthouses = districtOneLighthouses;
+                    break;
+                }
+            case 2:
+                {
+                    //titanLighthouses.Clear();
+                    m_SpawnLighthouses = distTwoSpawnLighthouses;
+                    titanLighthouses = districtTwoLighthouses;
+                    break;
+                }
+            case 3:
+                {
+                    //titanLighthouses.Clear();
+                    m_SpawnLighthouses = distThreeSpawnLighthouses;
+                    titanLighthouses = districtThreeLighthouses;
+                    break;
+                }
+        }
+    }
+
     public void TutorialActive()
     {
         m_IsTutorial = true;
@@ -340,15 +428,18 @@ public class OverseerController : MonoBehaviour
 
     public void AwakenObserver()
     {
+        SetLighthouseGroup(1);
         TreeMalarkey.EnableTree(ObserverTree);
         distootle.ShoobyDooby();
         m_Crossy.GetComponent<CrossyController>().RegisterEvents();
+        ObserverRegister();
     }
 
     public bool LeftRadius()
     {
         Vector3 playerPosition = new Vector3(m_Player.transform.position.x, 0f, m_Player.transform.position.z);
-        Vector3 check = new Vector3(titan.lighthouse.selfTransform.position.x, 0f, titan.lighthouse.selfTransform.position.z);
+        //Vector3 check = new Vector3(titan.lighthouse.selfTransform.position.x, 0f, titan.lighthouse.selfTransform.position.z);
+        Vector3 check = titan.lighthouse.CheckCentre;
         float dist = Vector3.Distance(playerPosition, check);
 
         if (dist > titan.lighthouse.checkRadius)
@@ -401,60 +492,83 @@ public class OverseerController : MonoBehaviour
         
     }
 
-    public void ParameterHell()
+    public void GetCrossyPlayerDistance()
     {
-        emitter.Target.SetParameter(distanceParamName, emitter.Params[0].Value);
-        emitter.Target.SetParameter(chaseParamName, emitter.Params[1].Value);
-        emitter.Target.SetParameter(deadParamName, emitter.Params[2].Value);
-        emitter.Target.SetParameter(titanParamName, emitter.Params[3].Value);
-    }
-
-    public void CrossyFMODFiddling(NavMeshAgent agent, Vector3 playerPos, int state, bool dead)
-    {
-        CrossKeyManager key = FindObjectOfType<CrossKeyManager>();
-
-        pathDistance = Mathf.Clamp(pathDistance, 0f, 100f);
-
         NavMeshPath navPath = new NavMeshPath();
 
-        if(agent.CalculatePath(playerPos, navPath))
+        if(NavMesh.CalculatePath(m_Crossy.transform.position, m_Player.transform.position, crossyAgent.areaMask, navPath))
         {
-            if(navPath.status == NavMeshPathStatus.PathComplete)
+            if(navPath.status != NavMeshPathStatus.PathInvalid)
             {
-                pathDistance = Emerald.GetPathLength(navPath);
-                Debug.Log("CrossyFMOD PathDistance: " + pathDistance);
+                CrossyPathDistance = Emerald.GetPathLength(navPath);
             }
-            
         }
+    }
 
-        if(pathDistance <= 100f)
+    public void ParameterHell()
+    {
+        emitter.Target.SetParameter(emitter.Params[0].Name, emitter.Params[0].Value);
+        emitter.Target.SetParameter(emitter.Params[1].Name, emitter.Params[1].Value);
+        emitter.Target.SetParameter(emitter.Params[2].Name, emitter.Params[2].Value);
+        emitter.Target.SetParameter(emitter.Params[3].Name, emitter.Params[3].Value);
+    }
+
+    public void CrossyFmodDistance()
+    {
+        if(CrossyPathDistance <= 100)
+        {
+            emitter.Params[0].Value = CrossyPathDistance;
+            emitter.Target.SetParameter(emitter.Params[0].Name, emitter.Params[0].Value);
+        }
+        else
+        {
+            emitter.Params[0].Value = 100f;
+            emitter.Target.SetParameter(emitter.Params[0].Name, emitter.Params[0].Value);
+        }
+    }
+
+    public void CrossyFMODFiddling(float pathDistance, int state, bool dead)
+    {
+
+        if (pathDistance <= 100f && state != -1)
         {
             Debug.Log("CrossyFMOD ShouldBeSetting");
             emitter.Params[0].Value = pathDistance;
+            emitter.Target.SetParameter(emitter.Params[0].Name, emitter.Params[0].Value);
             Debug.Log("ADAPTIVE: Distance: " + pathDistance);
         }
-        else emitter.Params[0].Value = 100f;
+        else
+        {
+            emitter.Params[0].Value = 100f;
+            emitter.Target.SetParameter(emitter.Params[0].Name, emitter.Params[0].Value);
+        }
 
-        if (state == 3 || key.puzzleOn)
+        
+        if (!m_PlayerInHouse && state < 3 && !keyMan.puzzleOn)
+        {
+            if (hasChased && !attemptingSafe && !keyMan.puzzleOn)
+            {
+                StartCoroutine(WaitForPuzzleOff());
+                Debug.Log("ADAPTIVE: Chase Stopped: State = " + state + ", PuzzleOn = " + keyMan.puzzleOn);
+            }
+        }
+        else if (state == 3 && !attemptingSafe && !attemptingDie || keyMan.puzzleOn && !attemptingSafe && !attemptingDie)
         {
             hasChased = true;
-            emitter.Params[1].Value = 0f;
-            Debug.Log("ADAPTIVE: Chase Started: State = " + state + ", PuzzleOn = " + key.puzzleOn);
-        }
-        else if (!m_PlayerInHouse && (state == 1 || state == 0 || state == -1))
-        {
-            if (hasChased && !attemptingSafe)
+            if (emitter.Params[1].Value != 0f)
             {
-                Safe();
+                emitter.Params[1].Value = 0f;
+                emitter.Target.SetParameter(emitter.Params[1].Name, emitter.Params[1].Value);
             }
-            Debug.Log("ADAPTIVE: Chase Stopped: State = " + state + ", PuzzleOn = " + key.puzzleOn);
+            Debug.Log("ADAPTIVE: Chase Started: State = " + state + ", PuzzleOn = " + keyMan.puzzleOn);
         }
 
-        if (dead)
-        {
-            if(!attemptingDie) DeadNoises();
-            Debug.Log("ADAPTIVE: Dead Played: " + 0f);
-        }
+
+        //if (dead)
+        //{
+        //    if(!attemptingDie) DeadNoises();
+        //    Debug.Log("ADAPTIVE: Dead Played: " + 0f);
+        //}
         //else if(!dead && !attemptingSafe)
         //{ 
         //    emitter.Target.SetParameter(deadParamName, 1f);
@@ -463,35 +577,53 @@ public class OverseerController : MonoBehaviour
 
         if (m_PlayerInHouse)
         {
-            if (hasChased && !attemptingSafe)
+            if (hasChased && !attemptingSafe && !attemptingDie)
             {
                 StartCoroutine(WaitForPuzzleOff());
             }
         }
 
-        IEnumerator WaitForPuzzleOff()
+        
+    } //Obsolete hopefully
+
+    IEnumerator WaitForPuzzleOff()
+    {
+        attemptingSafe = true;
+        //yield return new WaitForSecondsRealtime(0.5f);
+        while (keyMan.puzzleOn)
         {
-            attemptingSafe = true;
-            while (key.puzzleOn)
-            {
-                yield return null;
-            }
-
-            Safe();
-            yield return new WaitForSeconds(1f);
-            emitter.Params[2].Value = 1f;
-
-            hasChased = false;
-            Debug.Log("ADAPTIVE: Safe Played: " + 2f);
-            attemptingSafe = false;
-            StopCoroutine(WaitForPuzzleOff());
+            yield return null;
         }
 
-        void Safe()
+        Safe();
+
+        yield return new WaitForSeconds(1f);
+
+        if (emitter.Params[2].Value != 1f)
         {
-            Debug.Log("ADAPTIVE: Safe Method Called");
+            emitter.Params[2].Value = 1f;
+            emitter.Target.SetParameter(emitter.Params[2].Name, emitter.Params[2].Value);
+        }
+
+        hasChased = false;
+        Debug.Log("ADAPTIVE: Safe Played: " + 2f);
+        attemptingSafe = false;
+        StopCoroutine(WaitForPuzzleOff());
+    }
+
+    void Safe()
+    {
+        Debug.Log("ADAPTIVE: Safe Method Called");
+        if (emitter.Params[1].Value != 1f)
+        {
+            Debug.Log("ADAPTIVE: Chasing set false");
             emitter.Params[1].Value = 1f;
+            emitter.Target.SetParameter(emitter.Params[1].Name, emitter.Params[1].Value);
+        }
+        if (emitter.Params[2].Value != 2f)
+        {
             emitter.Params[2].Value = 2f;
+            emitter.Target.SetParameter(emitter.Params[2].Name, emitter.Params[2].Value);
         }
     }
 
@@ -504,13 +636,86 @@ public class OverseerController : MonoBehaviour
     {
         attemptingDie = true;
 
-        emitter.Params[2].Value = 0f;
-        emitter.Params[1].Value = 1f;
+        if (emitter.Params[2].Value != 0f)
+        {
+            emitter.Params[2].Value = 0f;
+            emitter.Target.SetParameter(emitter.Params[2].Name, emitter.Params[2].Value);
+        } //Makes dead
+        if (emitter.Params[1].Value != 1f)
+        {
+            Debug.Log("ADAPTIVE: Chasing set false");
+            emitter.Params[1].Value = 1f;
+            emitter.Target.SetParameter(emitter.Params[1].Name, emitter.Params[1].Value);
+        } //Makes chase stop
         yield return new WaitForSeconds(1f);
-        emitter.Params[2].Value = 1f;
-
-        attemptingDie = true;
+        if (emitter.Params[2].Value != 1f)
+        {
+            emitter.Params[2].Value = 1f;
+            emitter.Target.SetParameter(emitter.Params[2].Name, emitter.Params[2].Value);
+        } // Makes not dead
+        hasChased = false;
+        attemptingDie = false;
     }
+    #endregion
+
+    #region TreeEvents
+    private void OnEnable()
+    {
+        TreeMalarkey.RegisterEventOnTree(CrossyController.crossyTree, "DespawnAudio", TheDespawnThing);
+        TreeMalarkey.RegisterEventOnTree(CrossyController.crossyTree, "PursuitAudio", PursuitAudio);
+        TreeMalarkey.RegisterEventOnTree(CrossyController.crossyTree, "DeadAudio", DeadAudio);
+        TreeMalarkey.RegisterEventOnTree(CrossyController.crossyTree, "SafeAudio", SafeAudio);
+    }
+
+    public void ObserverRegister()
+    {
+        
+        TreeMalarkey.RegisterEventOnTree(ObserverTree, "PursuitAudio", PursuitAudio);
+        TreeMalarkey.RegisterEventOnTree(ObserverTree, "DeadAudio", DeadAudio);
+        TreeMalarkey.RegisterEventOnTree(ObserverTree, "SafeAudio", SafeAudio);
+    }
+
+    public void PursuitAudio()
+    {
+        Debug.Log("EVENT FROM TREE: Pursuit");
+        hasChased = true;
+        if (emitter.Params[1].Value != 0f)
+        {
+            emitter.Params[1].Value = 0f;
+            emitter.Target.SetParameter(emitter.Params[1].Name, emitter.Params[1].Value);
+            
+        }
+    }
+
+    public void DeadAudio()
+    {
+        Debug.Log("EVENT FROM TREE: Dead");
+        StartCoroutine(DeadSounds());
+    }
+
+    public void SafeAudio()
+    {
+        Debug.Log("EVENT FROM TREE: Safe");
+        StartCoroutine(WaitForPuzzleOff());
+    }
+
+    public void TheDespawnThing()
+    {
+        Debug.Log("EVENT FROM TREE: Despawn");
+        StartCoroutine(WaitForPuzzleOff());
+    }
+
+    private void OnDisable()
+    {
+        TreeMalarkey.UnregisterEventOnTree(CrossyController.crossyTree, "DespawnAudio", TheDespawnThing);
+        TreeMalarkey.UnregisterEventOnTree(CrossyController.crossyTree, "PursuitAudio", PursuitAudio);
+        TreeMalarkey.UnregisterEventOnTree(CrossyController.crossyTree, "DeadAudio", DeadAudio);
+        TreeMalarkey.UnregisterEventOnTree(CrossyController.crossyTree, "SafeAudio", SafeAudio);
+        TreeMalarkey.UnregisterEventOnTree(ObserverTree, "PursuitAudio", PursuitAudio);
+        TreeMalarkey.UnregisterEventOnTree(ObserverTree, "DeadAudio", DeadAudio);
+        TreeMalarkey.UnregisterEventOnTree(ObserverTree, "SafeAudio", SafeAudio);
+    }
+
     #endregion
 
 
@@ -558,6 +763,7 @@ public class OverseerController : MonoBehaviour
                 StopCoroutine(TitanSoundNeutral());
                 m_TitanNoisyNum = 1;
                 emitter.Params[3].Value = m_TitanNoisyNum;
+                emitter.Target.SetParameter(emitter.Params[3].Name, emitter.Params[3].Value);
             }
         }
         else if (titan.animator.GetCurrentAnimatorStateInfo(0).IsName("TitanCrossyHide"))
@@ -568,6 +774,7 @@ public class OverseerController : MonoBehaviour
                 StopCoroutine(TitanSoundNeutral());
                 m_TitanNoisyNum = 2;
                 emitter.Params[3].Value = m_TitanNoisyNum;
+                emitter.Target.SetParameter(emitter.Params[3].Name, emitter.Params[3].Value);
             }
         }
     }
