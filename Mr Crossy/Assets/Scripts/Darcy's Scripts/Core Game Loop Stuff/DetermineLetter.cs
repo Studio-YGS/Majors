@@ -16,6 +16,8 @@ public class DetermineLetter : MonoBehaviour
     [HideInInspector]
     public string wordName;
 
+    bool altarAssigned;
+
     public void AssignPuzzleController()
     {
         PuzzleController[] puzzleControllers = FindObjectsOfType<PuzzleController>();
@@ -51,6 +53,33 @@ public class DetermineLetter : MonoBehaviour
                 {
                     puzzleController = puzzleControllers[i];
                     Debug.Log("Puzzle Controller for: " + gameObject.name + " is: " + puzzleController.gameObject.name);
+                }
+            }
+        }
+
+        if (!altarAssigned && wordName != "GATE")
+        {
+            AssignAltar();
+        }
+    }
+
+    void AssignAltar()
+    {
+        WordCollision[] collisions = FindObjectsOfType<WordCollision>();
+
+        for(int i = 0; i < collisions.Length; i++)
+        {
+            if (collisions[i].mainWord == wordName)
+            {
+                if (!GetComponentInParent<OverlappedAltar>())
+                {
+                    collisions[i].altars.Add(gameObject);
+                    altarAssigned = true;
+                }
+                else
+                {
+                    collisions[i].altars.Add(GetComponentInParent<OverlappedAltar>().gameObject);
+                    altarAssigned = true;
                 }
             }
         }
