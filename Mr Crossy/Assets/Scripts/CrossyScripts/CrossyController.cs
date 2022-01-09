@@ -156,7 +156,7 @@ public class CrossyController : MonoBehaviour
     public bool ShouldRun { get { return m_ShouldRun; } set { m_ShouldRun = value; } }
     public bool InSight { get { return m_InSight; } set { m_InSight = value; } }
     public bool InPeripheral { get { return m_InPeripheral; } set { m_InPeripheral = value; } }
-    public bool ShouldBeStopped { get { return animator.GetCurrentAnimatorStateInfo(0).IsName("Spinspin") || animator.GetCurrentAnimatorStateInfo(0).IsName("Scream") || animator.GetCurrentAnimatorStateInfo(0).IsName("Agony") || animator.GetCurrentAnimatorStateInfo(0).IsName("LookAround"); } /*set { m_ShouldBeStopped = value; }*/ }
+    public bool ShouldBeStopped { get { return animator.GetCurrentAnimatorStateInfo(0).IsName("Spinspin") || animator.GetCurrentAnimatorStateInfo(0).IsName("Agony") || animator.GetCurrentAnimatorStateInfo(0).IsName("LookAround"); } }
     public int State { get { return m_State; } set { m_State = value; } }
     public Vector3 CrossyDespawn { get { return m_CrossyDespawn.position; } set { m_CrossyDespawn.position = value; } }
 
@@ -215,6 +215,8 @@ public class CrossyController : MonoBehaviour
 
     private void Update()
     {
+        animator.SetInteger("State", m_State);
+
         if(m_State != -1)
         {
             if (ShouldBeStopped)
@@ -223,8 +225,6 @@ public class CrossyController : MonoBehaviour
             }
             else agent.isStopped = false;
         }
-        //Debug.Log("STOP: SHOULD BE: " + ShouldBeStopped);
-        //Debug.Log("STOP: AGENT IS: " + agent.isStopped);
 
         if (speedDebugLog)
         {
