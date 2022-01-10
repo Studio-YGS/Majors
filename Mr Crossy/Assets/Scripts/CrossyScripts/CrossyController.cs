@@ -75,7 +75,8 @@ public class CrossyController : MonoBehaviour
 
     [Tooltip("Distance from destination that Mr. Crossy can stop at.")]
     [SerializeField] private float m_StoppingDistance;
-    [SerializeField] private float m_AttackDistanceOffset;
+    [SerializeField] private float m_AttackAttemptDistance;
+    [SerializeField] private float m_AttackHitDistance;
     /*[SerializeField] */
     private float m_CornerThreshold;
 
@@ -161,7 +162,8 @@ public class CrossyController : MonoBehaviour
     public Vector3 CrossyDespawn { get { return m_CrossyDespawn.position; } set { m_CrossyDespawn.position = value; } }
 
     public float PursuitDistance { get { return m_PursuitDistance; } }
-    public float AttackDistanceOffset { get { return m_AttackDistanceOffset; } }
+    public float AttackAttemptDistance { get { return m_AttackAttemptDistance; } }
+    public float AttackHitDistance { get { return m_AttackHitDistance; } }
 
     public float BaseDetectTime { get { return m_DetectionTime; } }
     public float CloseDetectTime { get { return m_DetectionTime * 3; } }
