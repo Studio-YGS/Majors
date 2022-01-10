@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using FMOD.Studio;
 using FMODUnity;
+using UnityEngine.UI;
 
 public class NoteController : MonoBehaviour
 {
@@ -13,20 +14,27 @@ public class NoteController : MonoBehaviour
 
     JournalOnSwitch journalOnSwitch;
 
-    int currentNote = 0;
+    Sprite noteImage;
 
-    bool tutorialLine = false;
+    Color alphaOne;
+
+    int currentNote;
+
+    bool tutorialLine, found;
 
     EventInstance eventInstance;
 
     [SerializeField]
     TextMeshProUGUI prompt;
 
-    void Awake()
+    void Start()
     {
         journalOnSwitch = FindObjectOfType<JournalOnSwitch>();
         journalController = FindObjectOfType<JournalController>();
         player = FindObjectOfType<Player_Controller>();
+
+        alphaOne.a = 1f;
+        alphaOne = Color.white;
     }
 
     void Update()
@@ -42,7 +50,8 @@ public class NoteController : MonoBehaviour
 
                 if (Input.GetKeyDown(KeyCode.E))
                 {
-                    hit.transform.gameObject.GetComponent<NoteAssign>().assignedNote.SetActive(true);
+                    noteImage = hit.transform.gameObject.GetComponent<NoteAssign>().assignedNote;
+
                     hit.transform.gameObject.SetActive(false);
                     GameObject.Find(hit.transform.gameObject.name).SetActive(false);
 
@@ -74,11 +83,35 @@ public class NoteController : MonoBehaviour
 
     void PickUpNote()
     {
+        GameObject[] notes = journalController.notePages;
+        for(int i = 0; i < notes.Length; i++)
+        {
+            Image[] images = notes[i].GetComponentsInChildren<Image>();
+
+            for(int x = 0; x < images.Length; x++)
+            {
+                if(images[x].sprite == null)
+                {
+                    images[x].sprite = noteImage;
+                    images[x].color = alphaOne;
+                    found = true;
+                    break;
+                }
+            }
+
+            if (found)
+            {
+                break;
+            }
+        }
+
+        found = false;
+
         journalController.whichNotesPage = currentNote;
         journalController.noteList.Add(currentNote);
-        journalController.pickedUpNotes++;
 
         journalOnSwitch.OpenOrClose();
+
         journalController.OpenNotes();
     }
 }

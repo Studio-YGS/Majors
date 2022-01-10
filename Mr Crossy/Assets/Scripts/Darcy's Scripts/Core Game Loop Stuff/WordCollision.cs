@@ -125,14 +125,6 @@ public class WordCollision : MonoBehaviour
         }
     }
 
-    public void AssignAltars()
-    {
-        if(altars.Count == 0)
-        {
-
-        }
-    }
-
     public void DisableAltars()
     {
         if (altars.Count > 0)
@@ -161,6 +153,11 @@ public class WordCollision : MonoBehaviour
 
     public void SetHomeText()
     {
+        if(puzzleController == null)
+        {
+            AssignController();
+        }
+
         puzzleController.streetText.text = "Home.";
     }
 }
