@@ -19,11 +19,14 @@ public class JournalOnSwitch : MonoBehaviour
 
     EventInstance eventInstance;
 
+    HeadBob headBob;
+
     void Start()
     {
         pauseMenu = FindObjectOfType<MenuManager>();
         fpc = FindObjectOfType<Player_Controller>();
         journalController = FindObjectOfType<JournalController>();
+        headBob = FindObjectOfType<HeadBob>();
     }
 
     public bool OpenOrClose()
@@ -50,6 +53,7 @@ public class JournalOnSwitch : MonoBehaviour
         if (!journalController.disabled)
         {
             fpc.DisableController();
+            headBob.enabled = false;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
             pauseMenu.streetName.SetActive(false);
@@ -71,6 +75,7 @@ public class JournalOnSwitch : MonoBehaviour
         if (!journalController.disabled)
         {
             fpc.EnableController();
+            headBob.enabled = true;
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
             pauseMenu.streetName.SetActive(true);
