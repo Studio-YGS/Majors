@@ -10,6 +10,7 @@ public class Player_Controller : MonoBehaviour
     public float baseSpeed;
     public float speed;
     public float sprintSpeed;
+    public float outOfBreathSpeed;
     public float stamina = 8;
     public float crouchSpeed;
     public float gravity;
@@ -128,13 +129,13 @@ public class Player_Controller : MonoBehaviour
             }
 
 
-            if (Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.C) && stamina > 0 && !sprintingLimit)
+            if (Input.GetKey(KeyCode.LeftShift) && !Input.GetKey(KeyCode.C) && stamina > 0 && !sprintingLimit && !outOfBreath)
             {
                 speed = sprintSpeed;
                 stamina -= Time.unscaledDeltaTime * 2;
                 
             }
-            else if (Input.GetKeyUp(KeyCode.LeftShift) /*&& !Input.GetKey(KeyCode.C)*/)
+            else if (Input.GetKeyUp(KeyCode.LeftShift) && !outOfBreath/*&& !Input.GetKey(KeyCode.C)*/)
             {
                 speed = baseSpeed;
                 sprintingLimit = false;
@@ -153,7 +154,7 @@ public class Player_Controller : MonoBehaviour
                     StartCoroutine(OutOfBreath());
                 }
                 sprintingLimit = true;
-                speed = baseSpeed;
+                //speed = baseSpeed;
             }
 
             move.Normalize();
@@ -205,7 +206,14 @@ public class Player_Controller : MonoBehaviour
     {
         outOfBreath = true;
         FMODUnity.RuntimeManager.PlayOneShot("event:/Character/Out of Stamina/Out of Breath");
-        yield return new WaitForSecondsRealtime(2);
+        speed = outOfBreathSpeed;
+        while (stamina < 4)
+        {
+            yield return null;
+        }
+        //yield return new WaitForSecondsRealtime(2);
+        speed = baseSpeed;
+        sprintingLimit = false;
         outOfBreath = false;
     }
 

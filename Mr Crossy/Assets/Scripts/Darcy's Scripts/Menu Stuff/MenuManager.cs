@@ -28,6 +28,8 @@ public class MenuManager : MonoBehaviour
 
     AsyncOperation loadingScene;
 
+    public GameObject screenFade;
+
     void Start()
     {
         if (!mainMenu)
@@ -232,15 +234,24 @@ public class MenuManager : MonoBehaviour
             if(loadingScene.progress >= 0.9f)
             {
                 pressSpace.SetActive(true);
+                screenFade.SetActive(true);
                 if (Input.GetKey(KeyCode.Space))
                 {
                     pressSpace.SetActive(false);
-                    loadingScene.allowSceneActivation = true;
+                    screenFade.GetComponent<Animator>().SetTrigger("Fade");
+                    StartCoroutine(FadeLoading());
                 }
             }
             yield return null;
         }
        
+    }
+
+    IEnumerator FadeLoading()
+    {
+        yield return new WaitForSeconds(3);
+        loadingScene.allowSceneActivation = true;
+        
     }
 
     public IEnumerator QuitGag()
