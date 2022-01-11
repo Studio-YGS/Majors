@@ -18,23 +18,10 @@ public class AudioSettings : MonoBehaviour
 
     void Awake()
     {
-        if (mainMenu)
-        {
-            DontDestroyOnLoad(gameObject);
-        }
+        menuManager = FindObjectOfType<MenuManager>();
 
-        if(GameObject.Find("Audio Settings") && !mainMenu)
-        {
-            musicVolume = GameObject.Find("Audio Settings").GetComponent<AudioSettings>().musicVolume;
-            sfxVolume = GameObject.Find("Audio Settings").GetComponent<AudioSettings>().sfxVolume;
-            voiceVolume = GameObject.Find("Audio Settings").GetComponent<AudioSettings>().voiceVolume;
-
-            menuManager = FindObjectOfType<MenuManager>();
-
-            menuManager.UpdateSliders();
-
-            Destroy(GameObject.Find("Audio Settings"));
-        }
+        LoadSettings();
+        menuManager.UpdateSliders();
 
         sfx = RuntimeManager.GetBus("bus:/SFX");
         music = RuntimeManager.GetBus("bus:/Music");
@@ -79,5 +66,19 @@ public class AudioSettings : MonoBehaviour
         //{
         //    voiceVolumePreview.start();
         //}
+    }
+
+    public void SaveSettings()
+    {
+        AudioSaveSystem.SaveAudio(this);
+    }
+
+    public void LoadSettings()
+    {
+       AudioData data =  AudioSaveSystem.LoadAudio();
+
+        musicVolume = data.musicVolume;
+        sfxVolume = data.sfxVolume;
+        voiceVolume = data.voiceVolume;
     }
 }
