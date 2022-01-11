@@ -13,6 +13,8 @@ public class MenuManager : MonoBehaviour
 
     JournalController journalController;
 
+    AudioSettings audioSettings;
+
     [SerializeField]
     GameObject pauseMenuObject, settingsMenuObject, mainMenuObject, pressSpace, controlsUI, loadingAni;
 
@@ -28,6 +30,8 @@ public class MenuManager : MonoBehaviour
 
     AsyncOperation loadingScene;
 
+    public GameObject screenFade;
+
     void Start()
     {
         if (!mainMenu)
@@ -37,6 +41,11 @@ public class MenuManager : MonoBehaviour
             journalController = FindObjectOfType<JournalController>();
             defTimeScale = Time.timeScale;
         }
+
+        audioSettings = FindObjectOfType<AudioSettings>();
+
+        LoadSettings();
+        UpdateSliders();
     }
 
     void Update()
@@ -217,8 +226,31 @@ public class MenuManager : MonoBehaviour
                         sliders[i].value = audio.voiceVolume;
                         break;
                     }
+                case "Mouse Slider":
+                    {
+                        sliders[i].value = playerController.mouseSensitivity;
+                        break;
+                    }
             }
         }
+    }
+
+    public void LoadSettings()
+    {
+        SettingsData data = SettingsSaveSystem.LoadSettings();
+
+        if(data != null)
+        {
+            audioSettings.musicVolume = data.musicVolume;
+            audioSettings.sfxVolume = data.sfxVolume;
+            audioSettings.voiceVolume = data.voiceVolume;
+            playerController.mouseSensitivity = data.mouseSens;
+        }
+    } 
+
+    public void SaveSettings()
+    {
+        SettingsSaveSystem.SaveSettings(audioSettings, playerController);
     }
 
     IEnumerator ReadingControls()
@@ -232,15 +264,24 @@ public class MenuManager : MonoBehaviour
             if(loadingScene.progress >= 0.9f)
             {
                 pressSpace.SetActive(true);
+                screenFade.SetActive(true);
                 if (Input.GetKey(KeyCode.Space))
                 {
                     pressSpace.SetActive(false);
-                    loadingScene.allowSceneActivation = true;
+                    screenFade.GetComponent<Animator>().SetTrigger("Fade");
+                    StartCoroutine(FadeLoading());
                 }
             }
             yield return null;
         }
        
+    }
+
+    IEnumerator FadeLoading()
+    {
+        yield return new WaitForSeconds(3);
+        loadingScene.allowSceneActivation = true;
+        
     }
 
     public IEnumerator QuitGag()

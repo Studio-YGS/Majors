@@ -187,6 +187,7 @@ public class ObjectHolder : MonoBehaviour
                 vHolder.controller.enabled = false;
                 beingInspected = true;
                 objectBeingInspected = true;
+                vHolder.headbob.enabled = false;
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
             }
@@ -198,6 +199,7 @@ public class ObjectHolder : MonoBehaviour
                 vHolder.controller.enabled = true;
                 beingInspected = false;
                 objectBeingInspected = false;
+                vHolder.headbob.enabled = true;
                 Cursor.visible = false;
                 Cursor.lockState = CursorLockMode.Locked;
                 transform.position = vHolder.hand.TransformPoint(handOffset);

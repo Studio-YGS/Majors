@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using FMOD.Studio;
 using FMODUnity;
+using UnityEngine.UI;
 
 public class JournalController : MonoBehaviour
 {
     [SerializeField]
-    GameObject[] notePages, logPages;
+    GameObject[] logPages;
+
+    public GameObject[] notePages;
 
     JournalOnSwitch journalOnSwitch;
 
@@ -22,11 +25,12 @@ public class JournalController : MonoBehaviour
     int whichTab = 1; //,whichLogPage = 0;
 
     //[HideInInspector]
-    public int whichNotesPage = 0, pickedUpNotes = -1;
+    public int whichNotesPage;
 
     public bool disabled = false, tutorial = true;
     [HideInInspector]
     public bool readingHowTo = false, waitForCrossy = false, logTab, notesTab;
+    bool fromArrow;
 
     EventInstance eventInstance;
 
@@ -178,23 +182,81 @@ public class JournalController : MonoBehaviour
                     notePages[i].SetActive(false);
                 }
 
+                if (!fromArrow)
+                {
+                    for (int i = 0; i < notePages.Length; i++)
+                    {
+                        Image[] images = notePages[i].GetComponentsInChildren<Image>();
+                        bool found = false;
+                        int imageCount = 0;
+
+                        for (int x = 0; x < images.Length; x++)
+                        {
+                            if (images[x].sprite == null)
+                            {
+                                imageCount++;
+                                found = true;
+                            }
+                        }
+
+                        if (found)
+                        {
+                            if (imageCount == 2)
+                            {
+                                whichNotesPage = i - 1;
+                            }
+                            else
+                            {
+                                whichNotesPage = i;
+                            }
+                            break;
+                        }
+                    }
+                }
+
+                fromArrow = false;
+
                 notePages[whichNotesPage].SetActive(true);
 
                 if (whichNotesPage == 0)
                 {
                     leftArrow.SetActive(false);
-                    rightArrow.SetActive(true);
                 }
-                else if (whichNotesPage == 1)
+                else if(whichNotesPage == 1 || whichNotesPage == 2)
                 {
                     leftArrow.SetActive(true);
-                    rightArrow.SetActive(true);
                 }
-                else if (whichNotesPage == 2)
+
+                if(whichNotesPage != 2)
                 {
-                    leftArrow.SetActive(true);
+                    for (int i = whichNotesPage + 1; i < notePages.Length; i++)
+                    {
+                        Image[] images = notePages[i].GetComponentsInChildren<Image>();
+                        bool found = false;
+
+                        for (int x = 0; x < images.Length; x++)
+                        {
+                            if (images[x].sprite != null)
+                            {
+                                found = true;
+                            }
+                        }
+
+                        if (found)
+                        {
+                            rightArrow.SetActive(true);
+                        }
+                        else if (!found)
+                        {
+                            rightArrow.SetActive(false);
+                        }
+                        break;
+                    }
+                }
+                else
+                {
                     rightArrow.SetActive(false);
-                }
+                }             
             }
         }
     }
@@ -230,6 +292,7 @@ public class JournalController : MonoBehaviour
                 case 3:
                     {
                         whichNotesPage++;
+                        fromArrow = true;
                         OpenNotes();
                         break;
                     }
@@ -252,6 +315,7 @@ public class JournalController : MonoBehaviour
                 case 3:
                     {
                         whichNotesPage--;
+                        fromArrow = true;
                         OpenNotes();
                         break;
                     }

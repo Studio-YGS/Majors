@@ -14,4 +14,10 @@ public class ObjectVariableHolder : MonoBehaviour
     public Image imageTwo;
     public TMP_Text textNameTwo;
     public TMP_Text hoverText;
+    public HeadBob headbob;
+
+    private void Start()
+    {
+        headbob = FindObjectOfType<HeadBob>();
+    }
 }
