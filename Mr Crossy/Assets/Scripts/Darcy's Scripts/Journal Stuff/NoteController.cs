@@ -18,7 +18,7 @@ public class NoteController : MonoBehaviour
 
     Color alphaOne;
 
-    int currentNote;
+    int imageNumber;
 
     bool tutorialLine, found;
 
@@ -55,7 +55,7 @@ public class NoteController : MonoBehaviour
                     hit.transform.gameObject.SetActive(false);
                     GameObject.Find(hit.transform.gameObject.name).SetActive(false);
 
-                    currentNote = hit.transform.gameObject.GetComponent<NoteAssign>().page;
+                    imageNumber = hit.transform.gameObject.GetComponent<NoteAssign>().imageNumber;
 
                     eventInstance = RuntimeManager.CreateInstance("event:/2D/Paper/Paper Up");
 
@@ -63,7 +63,7 @@ public class NoteController : MonoBehaviour
 
                     PickUpNote();
 
-                    if (!tutorialLine)
+                    if (!tutorialLine && GetComponent<TutorialSectionStart>())
                     {
                         GetComponent<TutorialSectionStart>().NoteTutorialLine();
                         tutorialLine = true;
@@ -87,13 +87,49 @@ public class NoteController : MonoBehaviour
         for(int i = 0; i < notes.Length; i++)
         {
             Image[] images = notes[i].GetComponentsInChildren<Image>();
+            TextMeshProUGUI[] texts = notes[i].GetComponentsInChildren<TextMeshProUGUI>();
 
             for(int x = 0; x < images.Length; x++)
             {
-                if(images[x].sprite == null)
+                if (images[x].sprite == null)
                 {
                     images[x].sprite = noteImage;
                     images[x].color = alphaOne;
+
+                    switch (imageNumber)
+                    {
+                        case 1:
+                            {
+                                texts[x].text = "A Birthday Card";
+                                break;
+                            }
+                        case 2:
+                            {
+                                texts[x].text = "An Insurance Letter";
+                                break;
+                            }
+                        case 3:
+                            {
+                                texts[x].text = "An Autopsy Report";
+                                break;
+                            }
+                        case 4:
+                            {
+                                texts[x].text = "Potential Pet 1";
+                                break;
+                            }
+                        case 5:
+                            {
+                                texts[x].text = "Potential Pet 2";
+                                break;
+                            }
+                        case 6:
+                            {
+                                texts[x].text = "Potential Pet 3";
+                                break;
+                            }
+                    }
+
                     found = true;
                     break;
                 }
@@ -107,8 +143,8 @@ public class NoteController : MonoBehaviour
 
         found = false;
 
-        journalController.whichNotesPage = currentNote;
-        journalController.noteList.Add(currentNote);
+        journalController.whichNotesPage = imageNumber;
+        journalController.noteList.Add(imageNumber);
 
         journalOnSwitch.OpenOrClose();
 

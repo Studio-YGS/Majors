@@ -17,8 +17,8 @@ GameObject:
   - component: {fileID: 1216256377}
   - component: {fileID: 3529918932757500698}
   - component: {fileID: 2076083712}
-  - component: {fileID: 1948342451}
   - component: {fileID: 5784229084774953807}
+  - component: {fileID: 1948342451}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -181,6 +181,7 @@ MonoBehaviour:
   streetName: {fileID: 0}
   mainMenu: 0
   menuOpen: 0
+  screenFade: {fileID: 0}
 --- !u!114 &1948342450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -366,26 +367,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
---- !u!114 &1948342451
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2629922956381282759}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7906f1951833a98418eab590d5c53599, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hand: {fileID: 0}
-  cam: {fileID: 0}
-  controller: {fileID: 0}
-  image: {fileID: 0}
-  textName: {fileID: 0}
-  imageTwo: {fileID: 0}
-  textNameTwo: {fileID: 0}
-  hoverText: {fileID: 0}
 --- !u!114 &5784229084774953807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -413,3 +394,24 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+--- !u!114 &1948342451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2629922956381282759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7906f1951833a98418eab590d5c53599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hand: {fileID: 0}
+  cam: {fileID: 0}
+  controller: {fileID: 0}
+  image: {fileID: 0}
+  textName: {fileID: 0}
+  imageTwo: {fileID: 0}
+  textNameTwo: {fileID: 0}
+  hoverText: {fileID: 0}
+  headbob: {fileID: 0}

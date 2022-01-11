@@ -6,5 +6,5 @@ public class NoteAssign : MonoBehaviour
 {
     public Sprite assignedNote;
 
-    public int page;
+    public int imageNumber;
 }

@@ -10,6 +10,8 @@ public class AudioSettings : MonoBehaviour
 
     MenuManager menuManager;
 
+    Player_Controller player;
+
     Bus music, sfx, voice;
 
     public float musicVolume = 0.5f, sfxVolume = 0.5f, voiceVolume = 0.5f;
@@ -19,9 +21,7 @@ public class AudioSettings : MonoBehaviour
     void Awake()
     {
         menuManager = FindObjectOfType<MenuManager>();
-
-        LoadSettings();
-        menuManager.UpdateSliders();
+        player = FindObjectOfType<Player_Controller>();
 
         sfx = RuntimeManager.GetBus("bus:/SFX");
         music = RuntimeManager.GetBus("bus:/Music");
@@ -66,19 +66,5 @@ public class AudioSettings : MonoBehaviour
         //{
         //    voiceVolumePreview.start();
         //}
-    }
-
-    public void SaveSettings()
-    {
-        AudioSaveSystem.SaveAudio(this);
-    }
-
-    public void LoadSettings()
-    {
-       AudioData data =  AudioSaveSystem.LoadAudio();
-
-        musicVolume = data.musicVolume;
-        sfxVolume = data.sfxVolume;
-        voiceVolume = data.voiceVolume;
     }
 }
