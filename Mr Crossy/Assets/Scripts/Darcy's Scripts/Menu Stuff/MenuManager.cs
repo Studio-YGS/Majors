@@ -96,7 +96,8 @@ public class MenuManager : MonoBehaviour
             GetComponent<TutorialController>().objectsToSwitchOn[i].SetActive(false);
         }
 
-        RuntimeManager.PauseAllEvents(true);
+        //RuntimeManager.PauseAllEvents(true);
+        RuntimeManager.GetBus("bus:/Pause Group").setPaused(true);
 
         streetName.SetActive(false);
         Cursor.visible = true;
@@ -123,7 +124,8 @@ public class MenuManager : MonoBehaviour
             GetComponent<TutorialController>().objectsToSwitchOn[i].SetActive(true);
         }
 
-        RuntimeManager.PauseAllEvents(false);
+        //RuntimeManager.PauseAllEvents(false);
+        RuntimeManager.GetBus("bus:/Pause Group").setPaused(false);
 
         streetName.SetActive(true);
         Cursor.visible = false;
@@ -193,12 +195,11 @@ public class MenuManager : MonoBehaviour
 
     public void QuitGame()
     {
-        //if (!quitGagPlaying)
-        //{
-        //    quitGagPlaying = true;
-        //    StartCoroutine("QuitGag");
-        //}
-        Application.Quit();
+        if (!quitGagPlaying)
+        {
+            quitGagPlaying = true;
+            StartCoroutine("QuitGag");
+        }
     }
 
     public void UpdateSliders()
@@ -286,7 +287,7 @@ public class MenuManager : MonoBehaviour
 
     public IEnumerator QuitGag()
     {
-        FMODUnity.RuntimeManager.PlayOneShot("event:/MR_C_Random/I_Quit");
+        RuntimeManager.PlayOneShot("event:/MR_C_Random/I_Quit");
         yield return new WaitForSeconds(7f);
         Application.Quit();
     }

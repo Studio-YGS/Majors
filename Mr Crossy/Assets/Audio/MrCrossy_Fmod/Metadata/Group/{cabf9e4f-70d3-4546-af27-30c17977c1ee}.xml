@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="MixerGroup" id="{cabf9e4f-70d3-4546-af27-30c17977c1ee}">
+		<property name="name">
+			<value>Unpause Group</value>
+		</property>
+		<relationship name="effectChain">
+			<destination>{56ca5acb-73c9-488d-9a78-33210a84132b}</destination>
+		</relationship>
+		<relationship name="panner">
+			<destination>{7a3214fd-c9fa-4ce8-a514-9b87a78612ef}</destination>
+		</relationship>
+		<relationship name="output">
+			<destination>{522e00b0-f47a-4b27-be75-96f6112d4cd2}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusEffectChain" id="{56ca5acb-73c9-488d-9a78-33210a84132b}">
+		<relationship name="effects">
+			<destination>{0e72ea8b-eeb3-4ead-90b4-679fcff54496}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusPanner" id="{7a3214fd-c9fa-4ce8-a514-9b87a78612ef}" />
+	<object class="MixerBusFader" id="{0e72ea8b-eeb3-4ead-90b4-679fcff54496}" />
+</objects>
