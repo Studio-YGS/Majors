@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NoteAssign : MonoBehaviour
 {
-    public GameObject assignedNote;
+    public Sprite assignedNote;
 
-    public int page;
+    public int imageNumber;
 }

@@ -8,9 +8,7 @@ public class AudioSettings : MonoBehaviour
 {
     EventInstance sfxVolumePreview, voiceVolumePreview;
 
-    MenuManager menuManager;
-
-    Bus music, sfx, voice;
+    Bus musicP, sfxP, voiceP, sfxUP, voiceUP;
 
     public float musicVolume = 0.5f, sfxVolume = 0.5f, voiceVolume = 0.5f;
 
@@ -18,36 +16,25 @@ public class AudioSettings : MonoBehaviour
 
     void Awake()
     {
-        if (mainMenu)
-        {
-            DontDestroyOnLoad(gameObject);
-        }
+        sfxP = RuntimeManager.GetBus("bus:/Pause Group/SFX");
+        musicP = RuntimeManager.GetBus("bus:/Pause Group/Music");
+        voiceP = RuntimeManager.GetBus("bus:/Pause Group/Voice");
 
-        if(GameObject.Find("Audio Settings") && !mainMenu)
-        {
-            musicVolume = GameObject.Find("Audio Settings").GetComponent<AudioSettings>().musicVolume;
-            sfxVolume = GameObject.Find("Audio Settings").GetComponent<AudioSettings>().sfxVolume;
-            voiceVolume = GameObject.Find("Audio Settings").GetComponent<AudioSettings>().voiceVolume;
+        sfxUP = RuntimeManager.GetBus("bus:/Unpause Group/SFX");
+        voiceUP = RuntimeManager.GetBus("bus:/Unpause Group/Voice");
 
-            menuManager = FindObjectOfType<MenuManager>();
-
-            menuManager.UpdateSliders();
-
-            Destroy(GameObject.Find("Audio Settings"));
-        }
-
-        sfx = RuntimeManager.GetBus("bus:/SFX");
-        music = RuntimeManager.GetBus("bus:/Music");
-        voice = RuntimeManager.GetBus("bus:/Voice");
         sfxVolumePreview = RuntimeManager.CreateInstance("event:/UI_Multimedia/Tutorial_Info");
         voiceVolumePreview = RuntimeManager.CreateInstance("event:/MR_C_Attack/Mr_C_Attack");
     }
 
     void Update()
     {
-        music.setVolume(musicVolume);
-        sfx.setVolume(sfxVolume);
-        voice.setVolume(voiceVolume);
+        musicP.setVolume(musicVolume);
+        sfxP.setVolume(sfxVolume);
+        voiceP.setVolume(voiceVolume);
+
+        sfxUP.setVolume(sfxVolume);
+        voiceUP.setVolume(voiceVolume);
     }
 
     public void MusicVolumeLevel(float newMusicVolume)
@@ -59,25 +46,25 @@ public class AudioSettings : MonoBehaviour
     {
         sfxVolume = newSFXVolume;
 
-        //PLAYBACK_STATE pbState;
-        //sfxVolumePreview.getPlaybackState(out pbState);
+        PLAYBACK_STATE pbState;
+        sfxVolumePreview.getPlaybackState(out pbState);
 
-        //if(pbState != PLAYBACK_STATE.PLAYING)
-        //{
-        //    sfxVolumePreview.start();
-        //}
+        if(pbState != PLAYBACK_STATE.PLAYING)
+        {
+            sfxVolumePreview.start();
+        }
     }
 
     public void VoiceVolumeLevel(float newVoiceVolume)
     {
         voiceVolume = newVoiceVolume;
 
-        //PLAYBACK_STATE pbState;
-        //voiceVolumePreview.getPlaybackState(out pbState);
+        PLAYBACK_STATE pbState;
+        voiceVolumePreview.getPlaybackState(out pbState);
 
-        //if (pbState != PLAYBACK_STATE.PLAYING)
-        //{
-        //    voiceVolumePreview.start();
-        //}
+        if (pbState != PLAYBACK_STATE.PLAYING)
+        {
+            voiceVolumePreview.start();
+        }
     }
 }

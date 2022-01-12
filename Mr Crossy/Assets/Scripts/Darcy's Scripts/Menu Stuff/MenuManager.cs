@@ -13,6 +13,8 @@ public class MenuManager : MonoBehaviour
 
     JournalController journalController;
 
+    AudioSettings audioSettings;
+
     [SerializeField]
     GameObject pauseMenuObject, settingsMenuObject, mainMenuObject, pressSpace, controlsUI, loadingAni;
 
@@ -28,6 +30,8 @@ public class MenuManager : MonoBehaviour
 
     AsyncOperation loadingScene;
 
+    public GameObject screenFade;
+
     void Start()
     {
         if (!mainMenu)
@@ -37,6 +41,11 @@ public class MenuManager : MonoBehaviour
             journalController = FindObjectOfType<JournalController>();
             defTimeScale = Time.timeScale;
         }
+
+        audioSettings = FindObjectOfType<AudioSettings>();
+
+        LoadSettings();
+        UpdateSliders();
     }
 
     void Update()
@@ -87,7 +96,8 @@ public class MenuManager : MonoBehaviour
             GetComponent<TutorialController>().objectsToSwitchOn[i].SetActive(false);
         }
 
-        RuntimeManager.PauseAllEvents(true);
+        //RuntimeManager.PauseAllEvents(true);
+        RuntimeManager.GetBus("bus:/Pause Group").setPaused(true);
 
         streetName.SetActive(false);
         Cursor.visible = true;
@@ -114,7 +124,8 @@ public class MenuManager : MonoBehaviour
             GetComponent<TutorialController>().objectsToSwitchOn[i].SetActive(true);
         }
 
-        RuntimeManager.PauseAllEvents(false);
+        //RuntimeManager.PauseAllEvents(false);
+        RuntimeManager.GetBus("bus:/Pause Group").setPaused(false);
 
         streetName.SetActive(true);
         Cursor.visible = false;
@@ -184,12 +195,11 @@ public class MenuManager : MonoBehaviour
 
     public void QuitGame()
     {
-        //if (!quitGagPlaying)
-        //{
-        //    quitGagPlaying = true;
-        //    StartCoroutine("QuitGag");
-        //}
-        Application.Quit();
+        if (!quitGagPlaying)
+        {
+            quitGagPlaying = true;
+            StartCoroutine("QuitGag");
+        }
     }
 
     public void UpdateSliders()
@@ -217,8 +227,31 @@ public class MenuManager : MonoBehaviour
                         sliders[i].value = audio.voiceVolume;
                         break;
                     }
+                case "Mouse Slider":
+                    {
+                        sliders[i].value = playerController.mouseSensitivity;
+                        break;
+                    }
             }
         }
+    }
+
+    public void LoadSettings()
+    {
+        SettingsData data = SettingsSaveSystem.LoadSettings();
+
+        if(data != null)
+        {
+            audioSettings.musicVolume = data.musicVolume;
+            audioSettings.sfxVolume = data.sfxVolume;
+            audioSettings.voiceVolume = data.voiceVolume;
+            playerController.mouseSensitivity = data.mouseSens;
+        }
+    } 
+
+    public void SaveSettings()
+    {
+        SettingsSaveSystem.SaveSettings(audioSettings, playerController);
     }
 
     IEnumerator ReadingControls()
@@ -232,10 +265,12 @@ public class MenuManager : MonoBehaviour
             if(loadingScene.progress >= 0.9f)
             {
                 pressSpace.SetActive(true);
+                screenFade.SetActive(true);
                 if (Input.GetKey(KeyCode.Space))
                 {
                     pressSpace.SetActive(false);
-                    loadingScene.allowSceneActivation = true;
+                    screenFade.GetComponent<Animator>().SetTrigger("Fade");
+                    StartCoroutine(FadeLoading());
                 }
             }
             yield return null;
@@ -243,9 +278,16 @@ public class MenuManager : MonoBehaviour
        
     }
 
+    IEnumerator FadeLoading()
+    {
+        yield return new WaitForSeconds(3);
+        loadingScene.allowSceneActivation = true;
+        
+    }
+
     public IEnumerator QuitGag()
     {
-        FMODUnity.RuntimeManager.PlayOneShot("event:/MR_C_Random/I_Quit");
+        RuntimeManager.PlayOneShot("event:/MR_C_Random/I_Quit");
         yield return new WaitForSeconds(7f);
         Application.Quit();
     }
