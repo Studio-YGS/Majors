@@ -507,6 +507,18 @@ public class CrossyController : MonoBehaviour
         loweringEye = false;
     }
 
+    public void OnDrawGizmos()
+    {
+#if UNITY_EDITOR
+        UnityEditor.Handles.color = Color.green;
+        UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.up, AttackHitDistance);
+        UnityEditor.Handles.color = Color.yellow;
+        UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.up, StoppingDistance);
+        UnityEditor.Handles.color = Color.red;
+        UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.up, AttackAttemptDistance);
+#endif
+    }
+
     #region TreeEvents
     public void OnEnable()
     {
