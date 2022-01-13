@@ -431,6 +431,7 @@ public class OverseerController : MonoBehaviour
         SetLighthouseGroup(1);
         TreeMalarkey.EnableTree(ObserverTree);
         distootle.ShoobyDooby();
+        CheckClosestLighthouse();
         m_Crossy.GetComponent<CrossyController>().RegisterEvents();
         ObserverRegister();
     }
@@ -489,6 +490,7 @@ public class OverseerController : MonoBehaviour
         storedDist = 0;
         Debug.Log("EndLight");
 
+        if (!titan.lightInit) titan.lightInit = true;
         
     }
 
