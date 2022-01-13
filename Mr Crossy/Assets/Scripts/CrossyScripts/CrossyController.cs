@@ -75,7 +75,8 @@ public class CrossyController : MonoBehaviour
 
     [Tooltip("Distance from destination that Mr. Crossy can stop at.")]
     [SerializeField] private float m_StoppingDistance;
-    [SerializeField] private float m_AttackDistanceOffset;
+    [SerializeField] private float m_AttackAttemptDistance;
+    [SerializeField] private float m_AttackHitDistance;
     /*[SerializeField] */
     private float m_CornerThreshold;
 
@@ -156,12 +157,13 @@ public class CrossyController : MonoBehaviour
     public bool ShouldRun { get { return m_ShouldRun; } set { m_ShouldRun = value; } }
     public bool InSight { get { return m_InSight; } set { m_InSight = value; } }
     public bool InPeripheral { get { return m_InPeripheral; } set { m_InPeripheral = value; } }
-    public bool ShouldBeStopped { get { return animator.GetCurrentAnimatorStateInfo(0).IsName("Spinspin") || animator.GetCurrentAnimatorStateInfo(0).IsName("Scream") || animator.GetCurrentAnimatorStateInfo(0).IsName("Agony") || animator.GetCurrentAnimatorStateInfo(0).IsName("LookAround"); } /*set { m_ShouldBeStopped = value; }*/ }
+    public bool ShouldBeStopped { get { return animator.GetCurrentAnimatorStateInfo(0).IsName("Spinspin") || animator.GetCurrentAnimatorStateInfo(0).IsName("Agony") || animator.GetCurrentAnimatorStateInfo(0).IsName("LookAround"); } }
     public int State { get { return m_State; } set { m_State = value; } }
     public Vector3 CrossyDespawn { get { return m_CrossyDespawn.position; } set { m_CrossyDespawn.position = value; } }
 
     public float PursuitDistance { get { return m_PursuitDistance; } }
-    public float AttackDistanceOffset { get { return m_AttackDistanceOffset; } }
+    public float AttackAttemptDistance { get { return m_AttackAttemptDistance; } }
+    public float AttackHitDistance { get { return m_AttackHitDistance; } }
 
     public float BaseDetectTime { get { return m_DetectionTime; } }
     public float CloseDetectTime { get { return m_DetectionTime * 3; } }
@@ -215,6 +217,8 @@ public class CrossyController : MonoBehaviour
 
     private void Update()
     {
+        animator.SetInteger("State", m_State);
+
         if(m_State != -1)
         {
             if (ShouldBeStopped)
@@ -223,8 +227,6 @@ public class CrossyController : MonoBehaviour
             }
             else agent.isStopped = false;
         }
-        //Debug.Log("STOP: SHOULD BE: " + ShouldBeStopped);
-        //Debug.Log("STOP: AGENT IS: " + agent.isStopped);
 
         if (speedDebugLog)
         {
@@ -503,6 +505,18 @@ public class CrossyController : MonoBehaviour
         colour.a = lowerTo;
         crossyGlow.color = colour;
         loweringEye = false;
+    }
+
+    public void OnDrawGizmos()
+    {
+#if UNITY_EDITOR
+        UnityEditor.Handles.color = Color.green;
+        UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.up, AttackHitDistance);
+        UnityEditor.Handles.color = Color.yellow;
+        UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.up, StoppingDistance);
+        UnityEditor.Handles.color = Color.red;
+        UnityEditor.Handles.DrawWireDisc(transform.position, Vector3.up, AttackAttemptDistance);
+#endif
     }
 
     #region TreeEvents
