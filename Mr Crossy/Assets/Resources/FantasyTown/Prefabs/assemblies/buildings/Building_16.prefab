@@ -2758,7 +2758,7 @@ GameObject:
   m_Name: wall_90_basement_9m (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 4
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4700501071597608
@@ -3420,7 +3420,7 @@ GameObject:
   m_Name: roof_01_scaffold_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 8
+  m_NavMeshLayer: 9
   m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4232203996151270
@@ -3984,7 +3984,7 @@ GameObject:
   m_Name: floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 8
+  m_NavMeshLayer: 9
   m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4809550806071516
@@ -5396,7 +5396,7 @@ GameObject:
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 4
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 27
   m_IsActive: 1
 --- !u!4 &4516998108246138
@@ -6568,6 +6568,7 @@ Transform:
   - {fileID: 8151034886497829761}
   - {fileID: 4332677923919264365}
   - {fileID: 140798101103409910}
+  - {fileID: 7231873597798197831}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6856,7 +6857,7 @@ GameObject:
   m_Name: wall_90_basement_9m (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 4
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4148763144577088
@@ -7388,7 +7389,7 @@ GameObject:
   m_Name: wall_90_basement_9m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 4
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4581963001066122
@@ -7564,7 +7565,7 @@ GameObject:
   m_Name: wall_90_basement_9m (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 4
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4795229409806820
@@ -7658,7 +7659,7 @@ GameObject:
   m_Name: stone_14_stairs_01_sides
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 4
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 59
   m_IsActive: 0
 --- !u!4 &4474276364486234
@@ -8240,7 +8241,7 @@ GameObject:
   m_Name: stairs_a_3m (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 8
+  m_NavMeshLayer: 9
   m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &4740254719532452
@@ -8602,7 +8603,7 @@ GameObject:
   m_Name: Interior
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 8
+  m_NavMeshLayer: 9
   m_StaticEditorFlags: 123
   m_IsActive: 1
 --- !u!4 &4060825447928270
@@ -8693,7 +8694,7 @@ GameObject:
   m_Name: stone_14_stairs_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 4
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 27
   m_IsActive: 0
 --- !u!4 &4644986543795970
@@ -11831,6 +11832,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a054274092705d47b8cc27f27aab3bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &4174458641533652943
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5796242079210652599}
+  m_Layer: 0
+  m_Name: LinkPoint-2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5796242079210652599
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4174458641533652943}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1.824, z: 2.171}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3665547313726700626}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4251467963146663377
 GameObject:
   m_ObjectHideFlags: 0
@@ -12102,6 +12133,38 @@ Transform:
   m_Father: {fileID: 4723535245277958}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!1 &5473366590196927567
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7231873597798197831}
+  m_Layer: 0
+  m_Name: NavMeshLinks-B_16
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7231873597798197831
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5473366590196927567}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 3665547313726700626}
+  - {fileID: 289702747742197841}
+  m_Father: {fileID: 4723535245277958}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5486754827386847089
 GameObject:
   m_ObjectHideFlags: 0
@@ -12808,7 +12871,7 @@ GameObject:
   m_Name: wood_01_trim_8m_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 8
+  m_NavMeshLayer: 9
   m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5674846423217488804
@@ -13521,7 +13584,7 @@ GameObject:
   m_Name: wood_02_trim_2m (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 8
+  m_NavMeshLayer: 9
   m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5674639527614470320
@@ -13615,7 +13678,7 @@ GameObject:
   m_Name: wood_02_trim_2m (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 8
+  m_NavMeshLayer: 9
   m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &5675074210889933492
@@ -14508,6 +14571,66 @@ Transform:
   m_Father: {fileID: 4585042917558250}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!1 &5737904822044854781
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4629088840093752861}
+  m_Layer: 0
+  m_Name: LinkPoint-1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4629088840093752861
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5737904822044854781}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 1.541, z: -2.284}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 289702747742197841}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6251309238700558727
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4764561270782596163}
+  m_Layer: 0
+  m_Name: LinkPoint-1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4764561270782596163
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6251309238700558727}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 1.443, z: -1.765}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3665547313726700626}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6552754358129084447
 GameObject:
   m_ObjectHideFlags: 0
@@ -14836,7 +14959,7 @@ GameObject:
   m_Name: stairs_a_3m
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 8
+  m_NavMeshLayer: 9
   m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &6555864973094186207
@@ -14961,7 +15084,7 @@ GameObject:
   m_Name: wood_01_trim_8m_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 8
+  m_NavMeshLayer: 9
   m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &6549687326497485397
@@ -15191,7 +15314,7 @@ GameObject:
   m_Name: stone_14_stairs_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 4
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 59
   m_IsActive: 0
 --- !u!4 &6549485030174638135
@@ -16004,7 +16127,7 @@ GameObject:
   m_Name: floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 8
+  m_NavMeshLayer: 9
   m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &6549753016296935361
@@ -17682,7 +17805,7 @@ GameObject:
   m_Name: wood_02_trim_2m (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 8
+  m_NavMeshLayer: 9
   m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &6549480425626872129
@@ -18657,7 +18780,7 @@ GameObject:
   m_Name: wood_02_trim_2m (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 8
+  m_NavMeshLayer: 9
   m_StaticEditorFlags: 123
   m_IsActive: 0
 --- !u!4 &6549881785090036549
@@ -21357,6 +21480,56 @@ Transform:
   m_Father: {fileID: 6549510071119978367}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 179.99998, z: 0}
+--- !u!1 &6874717666976565599
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 289702747742197841}
+  - component: {fileID: 6457385137495683212}
+  m_Layer: 0
+  m_Name: StairLink-2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &289702747742197841
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6874717666976565599}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.035, y: 4.951, z: 4.448}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4629088840093752861}
+  - {fileID: 6006280360853788650}
+  m_Father: {fileID: 7231873597798197831}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!191 &6457385137495683212
+OffMeshLink:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6874717666976565599}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_AreaIndex: 9
+  m_AgentTypeID: 0
+  m_Start: {fileID: 4629088840093752861}
+  m_End: {fileID: 6006280360853788650}
+  m_CostOverride: -1
+  m_BiDirectional: 1
+  m_Activated: 1
+  m_AutoUpdatePositions: 0
 --- !u!1 &6948555367239197635
 GameObject:
   m_ObjectHideFlags: 0
@@ -21792,6 +21965,36 @@ OcclusionArea:
   m_Size: {x: 11.5930805, y: 21.739635, z: 13.234753}
   m_Center: {x: 0.19071281, y: -5.2860327, z: -1.2599099}
   m_IsViewVolume: 1
+--- !u!1 &7923107212348082085
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6006280360853788650}
+  m_Layer: 0
+  m_Name: LinkPoint-2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6006280360853788650
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7923107212348082085}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: -1.712, z: 2.764}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 289702747742197841}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7980856073202759481
 GameObject:
   m_ObjectHideFlags: 0
@@ -22001,6 +22204,56 @@ Transform:
   m_Father: {fileID: 9190706313125125907}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8697082660221475444
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3665547313726700626}
+  - component: {fileID: 1098457192119835926}
+  m_Layer: 0
+  m_Name: StairLink-1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3665547313726700626
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8697082660221475444}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.035, y: 1.835, z: 3.76}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4764561270782596163}
+  - {fileID: 5796242079210652599}
+  m_Father: {fileID: 7231873597798197831}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!191 &1098457192119835926
+OffMeshLink:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8697082660221475444}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_AreaIndex: 9
+  m_AgentTypeID: 0
+  m_Start: {fileID: 4764561270782596163}
+  m_End: {fileID: 5796242079210652599}
+  m_CostOverride: -1
+  m_BiDirectional: 1
+  m_Activated: 1
+  m_AutoUpdatePositions: 0
 --- !u!1 &9190706313125125904
 GameObject:
   m_ObjectHideFlags: 0
@@ -22558,7 +22811,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1930961226, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: UID
-      value: -1621680682
+      value: 1231094062
       objectReference: {fileID: 0}
     - target: {fileID: 1260673417133536, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: m_Name
@@ -22628,7 +22881,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1930961226, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: UID
-      value: 955768754
+      value: -1159677412
       objectReference: {fileID: 0}
     - target: {fileID: 1260673417133536, guid: 620889eee27511848bc90205110e63d6, type: 3}
       propertyPath: m_Name
