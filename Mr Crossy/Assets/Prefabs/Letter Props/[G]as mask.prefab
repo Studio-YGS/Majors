@@ -32,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 8995509697023108492}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -3.4959595, y: 1.0717859, z: -17.155415}
-  m_LocalScale: {x: 3.0285647, y: 3.0285647, z: 3.0285647}
+  m_LocalScale: {x: 3.0285647, y: 3.028565, z: 3.0285647}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -96,10 +96,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.024089642
-  m_Height: 0.07419267
+  m_Radius: 0.058536086
+  m_Height: 0.12583928
   m_Direction: 1
-  m_Center: {x: 1.118571e-15, y: -0.028458819, z: 0.02852251}
+  m_Center: {x: 2.2568288e-11, y: -0.0026354392, z: -0.005923952}
 --- !u!135 &8995509697023108480
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -109,7 +109,7 @@ SphereCollider:
   m_GameObject: {fileID: 8995509697023108492}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.046626534
   m_Center: {x: -0, y: 0.01892865, z: -0.01}
@@ -162,15 +162,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectImage: {fileID: -6316726322100093249, guid: b7e8cb51e925c3c4d9ce14fa6b38f2b0, type: 3}
   objectName: '[G]as Mask'
-  image: {fileID: 0}
-  textName: {fileID: 0}
-  imageTwo: {fileID: 0}
-  textNameTwo: {fileID: 0}
-  hand: {fileID: 0}
+  vHolder: {fileID: 0}
   thisObjectHeld: 0
   isPlacedDown: 1
   beingInspected: 0
-  controller: {fileID: 0}
   ogScaleFactor: {x: 3.0285647, y: 3.0285647, z: 3.0285647}
   pickupRange: 5
   handOffset: {x: 0.03, y: 0.48, z: -0.08}
@@ -179,4 +174,3 @@ MonoBehaviour:
   placementOffset: {x: 0, y: 0.06, z: 0}
   rotationalSet: {x: -0.5, y: 0, z: 0, w: 0.8660254}
   distanceFromFace: 0.5
-  updatePos: 0
