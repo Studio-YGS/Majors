@@ -36,6 +36,9 @@ public class CrossyController : MonoBehaviour
     [SerializeField] private Transform m_CrossyDespawn;
     [SerializeField] private GameObject screecher;
 
+    private Vector3 m_HouseScoutCentre;
+    private float m_HouseScoutRadius;
+
     [Header("Eye Glow")]
     [SerializeField] private Material crossyGlow;
     [SerializeField] private float m_AlertUnSeenValue;
@@ -179,6 +182,9 @@ public class CrossyController : MonoBehaviour
     public float LowerQuartMulti { get { return m_LowerQuartMulti; } set { m_LowerQuartMulti = value; } }
     public float ReverseMulti { get { return m_ReverseMulti; } set { m_ReverseMulti = value; } }
 
+    public Vector3 HouseScoutCentre { get { return m_HouseScoutCentre; } set { m_HouseScoutCentre = value; } }
+    public float HouseScoutRadius { get { return m_HouseScoutRadius; } set { m_HouseScoutRadius = value; } }
+
     public GameObject WarpParticleOne { get { return m_WarpParticleOne; } }
     public GameObject WarpParticleTwo { get { return m_WarpParticleTwo; } }
 
@@ -308,6 +314,11 @@ public class CrossyController : MonoBehaviour
         {
             animator.SetBool("ScaryVariant", false);
         }
+    }
+
+    public void HouseScoutVariableStter()
+    {
+
     }
 
     public void ForceDespawn()

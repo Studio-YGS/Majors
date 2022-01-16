@@ -19,7 +19,8 @@ public class OverseerController : MonoBehaviour
 
     public static float CrossyPathDistance = 0f;
 
-    public bool m_PlayerInHouse;
+    public bool m_PlayerInSafeHouse;
+    public bool m_PlayerInStreetHouse;
     public bool allowVignette = true;
 
     CrossyTheWatcher titan;
@@ -139,7 +140,8 @@ public class OverseerController : MonoBehaviour
 
     public bool IsTutorial { get { return m_IsTutorial; } set { m_IsTutorial = value; } }
 
-    public bool IsInHouse { get { return m_PlayerInHouse; } set { m_PlayerInHouse = value; } }
+    public bool IsInSafeHouse { get { return m_PlayerInSafeHouse; } set { m_PlayerInSafeHouse = value; } }
+    public bool IsInStreetHouse { get { return m_PlayerInStreetHouse; } set { m_PlayerInStreetHouse = value; } }
 
     public bool Chasing { get { return hasChased; } }
     public bool AttemptingSafe { get { return attemptingSafe; } }
@@ -206,7 +208,7 @@ public class OverseerController : MonoBehaviour
 
         if(!m_IsTutorial)
         {
-            if (m_State >= 1 && !m_PlayerInHouse || keyMan.puzzleOn) fiddleFMOD = true;
+            if (m_State >= 1 && !m_PlayerInSafeHouse || keyMan.puzzleOn) fiddleFMOD = true;
             else fiddleFMOD = false;
             GetCrossyPlayerDistance();
             if (fiddleFMOD) CrossyFmodDistance();
@@ -219,23 +221,9 @@ public class OverseerController : MonoBehaviour
                 }
             }
 
-            //if (m_State >= 1 || keyMan.puzzleOn || attemptingSafe || hasChased || emitter.Params[1].Value == 0f) fiddleFMOD = true;
-            //else fiddleFMOD = false;
-
-            //if (fiddleFMOD) CrossyFMODFiddling(CrossyPathDistance, m_State, deady);
-            //else
-            //{
-            //    if(emitter.Params[0].Value != 100f)
-            //    {
-            //        emitter.Params[0].Value = 100f;
-            //        emitter.Target.SetParameter(emitter.Params[0].Name, emitter.Params[0].Value);
-            //    }
-            //}
             TitanUppyDownyNoisies();
             VignetteProcessor();
 
-            //ParameterHell();
-            
 
             if (m_State == -1)
             {
@@ -247,7 +235,7 @@ public class OverseerController : MonoBehaviour
                     }
                 }
 
-                if (!m_PlayerInHouse)
+                if (!m_PlayerInSafeHouse)
                 {
                     TitanCrossyVoiceLines();
                     
@@ -274,7 +262,7 @@ public class OverseerController : MonoBehaviour
             {
                 if (!attemptingSafe && !attemptingDie) DeadAudio();
             }
-            else if (m_State != 3 && !keyMan.puzzleOn && !deady || m_PlayerInHouse && !keyMan.puzzleOn)
+            else if (m_State != 3 && !keyMan.puzzleOn && !deady || m_PlayerInSafeHouse && !keyMan.puzzleOn)
             {
                 if (!attemptingSafe && !attemptingDie) StartCoroutine(WaitForPuzzleOff());
             }
@@ -345,7 +333,7 @@ public class OverseerController : MonoBehaviour
         {
             NavMeshHit validationHit;
 
-            m_PlayerInHouse = true;
+            m_PlayerInSafeHouse = true;
             if(keyMan.doorsLocked) keyMan.doorsLocked = false;
 
             
@@ -370,7 +358,7 @@ public class OverseerController : MonoBehaviour
         }
         else if (baseHit.mask == 8 || baseHit.mask == 16 || baseHit.mask == 32)
         {
-            m_PlayerInHouse = false;
+            m_PlayerInSafeHouse = false;
 
             validationPositioner.transform.position = new Vector3
             (
@@ -546,7 +534,7 @@ public class OverseerController : MonoBehaviour
         }
 
         
-        if (!m_PlayerInHouse && state < 3 && !keyMan.puzzleOn)
+        if (!m_PlayerInSafeHouse && state < 3 && !keyMan.puzzleOn)
         {
             if (hasChased && !attemptingSafe && !keyMan.puzzleOn)
             {
@@ -577,7 +565,7 @@ public class OverseerController : MonoBehaviour
         //    Debug.Log("ADAPTIVE: Not Dead/Safe: " + 1f);
         //}
 
-        if (m_PlayerInHouse)
+        if (m_PlayerInSafeHouse)
         {
             if (hasChased && !attemptingSafe && !attemptingDie)
             {
