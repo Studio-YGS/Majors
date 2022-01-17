@@ -27,6 +27,10 @@ public class OverseerController : MonoBehaviour
     MrCrossyDistortion distootle;
     CrossKeyManager keyMan;
     NavMeshAgent crossyAgent;
+    JournalController journCont;
+    JournalOnSwitch journSwitch;
+    MenuManager menu;
+    CrossyController crossyController;
 
     public EmitterRef emitter;
     EventInstance eventInstance;
@@ -66,6 +70,9 @@ public class OverseerController : MonoBehaviour
     [SerializeField] private float m_SearchTightAmt;
     [SerializeField] private float m_SearchRadiusAggro;
     [SerializeField] private Vector3 m_ValidationPosition;
+
+    public List<GameObject> houseScoutPoints = new List<GameObject>();
+    public List<float> houseScoutRadius = new List<float>();
 
     public List<GameObject> distOneSpawnLighthouses = new List<GameObject>();
     public List<GameObject> distTwoSpawnLighthouses = new List<GameObject>();
@@ -143,6 +150,8 @@ public class OverseerController : MonoBehaviour
     public bool IsInSafeHouse { get { return m_PlayerInSafeHouse; } set { m_PlayerInSafeHouse = value; } }
     public bool IsInStreetHouse { get { return m_PlayerInStreetHouse; } set { m_PlayerInStreetHouse = value; } }
 
+
+
     public bool Chasing { get { return hasChased; } }
     public bool AttemptingSafe { get { return attemptingSafe; } }
     public bool AttemptingDie { get { return attemptingDie; } }
@@ -151,6 +160,7 @@ public class OverseerController : MonoBehaviour
     #endregion
 
     [Space(10)]
+
     public List<Lighthouse> districtOneLighthouses = new List<Lighthouse>();
     public List<Lighthouse> districtTwoLighthouses = new List<Lighthouse>();
     public List<Lighthouse> districtThreeLighthouses = new List<Lighthouse>();
@@ -174,6 +184,9 @@ public class OverseerController : MonoBehaviour
         ObserverTree = gameObject.GetComponent<BehaviorTree>();
         distootle = FindObjectOfType<MrCrossyDistortion>();
         keyMan = FindObjectOfType<CrossKeyManager>();
+        journCont = FindObjectOfType<JournalController>();
+        journSwitch = FindObjectOfType<JournalOnSwitch>();
+        menu = FindObjectOfType<MenuManager>();
 
         if (m_Player == null) m_Player = GameObject.Find("Fps Character");
 
@@ -196,7 +209,6 @@ public class OverseerController : MonoBehaviour
 
     }
 
-
     private void Update()
     {
         //if (usePositioner) m_ValidationPosition = validationPositioner.transform.position;
@@ -204,13 +216,15 @@ public class OverseerController : MonoBehaviour
         titan.m_state = m_State;
         titan.hidingTitan = m_HideTitan;
 
-        HouseyBoBousey();
+        NavAreaDetection();
 
         if(!m_IsTutorial)
         {
             if (m_State >= 1 && !m_PlayerInSafeHouse || keyMan.puzzleOn) fiddleFMOD = true;
             else fiddleFMOD = false;
+
             GetCrossyPlayerDistance();
+
             if (fiddleFMOD) CrossyFmodDistance();
             else
             {
@@ -223,7 +237,6 @@ public class OverseerController : MonoBehaviour
 
             TitanUppyDownyNoisies();
             VignetteProcessor();
-
 
             if (m_State == -1)
             {
@@ -251,6 +264,16 @@ public class OverseerController : MonoBehaviour
                 }
                 
             }
+
+            if (m_State == 3)
+            {
+                if (journSwitch.open) journSwitch.ForceOpenOrClose();
+                if (!journCont.disabled && !menu.menuOpen) journCont.disabled = true;
+            }
+            else
+            {
+                if (journCont.disabled) journCont.disabled = false;
+            }
         }
         if (!hasChased && m_State == 3)
         {
@@ -267,6 +290,8 @@ public class OverseerController : MonoBehaviour
                 if (!attemptingSafe && !attemptingDie) StartCoroutine(WaitForPuzzleOff());
             }
         }
+
+        
 
     }
 
@@ -323,7 +348,7 @@ public class OverseerController : MonoBehaviour
             }
         }
     }
-    public void HouseyBoBousey()
+    public void NavAreaDetection()
     {
         NavMeshHit baseHit;
         
@@ -334,6 +359,7 @@ public class OverseerController : MonoBehaviour
             NavMeshHit validationHit;
 
             m_PlayerInSafeHouse = true;
+            m_PlayerInStreetHouse = false;
             if(keyMan.doorsLocked) keyMan.doorsLocked = false;
 
             
@@ -359,6 +385,19 @@ public class OverseerController : MonoBehaviour
         else if (baseHit.mask == 8 || baseHit.mask == 16 || baseHit.mask == 32)
         {
             m_PlayerInSafeHouse = false;
+            m_PlayerInStreetHouse = false;
+
+            validationPositioner.transform.position = new Vector3
+            (
+                m_Player.transform.position.x,
+                baseHit.position.y,
+                m_Player.transform.position.z
+            );
+        }
+        else if(baseHit.mask == 512)
+        {
+            m_PlayerInSafeHouse = false;
+            m_PlayerInStreetHouse = true;
 
             validationPositioner.transform.position = new Vector3
             (
@@ -383,6 +422,7 @@ public class OverseerController : MonoBehaviour
                     //titanLighthouses.Clear();
                     m_SpawnLighthouses = distOneSpawnLighthouses;
                     titanLighthouses = districtOneLighthouses;
+                    crossyController.HouseScoutVariableSetter(houseScoutPoints[district-1].transform.position, houseScoutRadius[district-1]);
                     break;
                 }
             case 2:
@@ -390,6 +430,7 @@ public class OverseerController : MonoBehaviour
                     //titanLighthouses.Clear();
                     m_SpawnLighthouses = distTwoSpawnLighthouses;
                     titanLighthouses = districtTwoLighthouses;
+                    crossyController.HouseScoutVariableSetter(houseScoutPoints[district - 1].transform.position, houseScoutRadius[district - 1]);
                     break;
                 }
             case 3:

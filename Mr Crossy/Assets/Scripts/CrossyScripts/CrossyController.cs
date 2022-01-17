@@ -316,9 +316,10 @@ public class CrossyController : MonoBehaviour
         }
     }
 
-    public void HouseScoutVariableStter()
+    public void HouseScoutVariableSetter(Vector3 scoutPos, float scoutRadius)
     {
-
+        m_HouseScoutCentre = scoutPos;
+        m_HouseScoutRadius = scoutRadius;
     }
 
     public void ForceDespawn()
