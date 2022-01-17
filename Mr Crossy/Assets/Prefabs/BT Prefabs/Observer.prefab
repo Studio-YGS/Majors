@@ -88,6 +88,8 @@ MonoBehaviour:
   m_SearchTightAmt: 15
   m_SearchRadiusAggro: 20
   m_ValidationPosition: {x: 57, y: 39, z: 38}
+  houseScoutPoints: []
+  houseScoutRadius: []
   distOneSpawnLighthouses: []
   distTwoSpawnLighthouses: []
   distThreeSpawnLighthouses: []
@@ -582,6 +584,28 @@ MonoBehaviour:
     global: 1
     targetComponent: {fileID: 796532654218381237}
     targetName: Puzzling
+    targetGlobal: 0
+    animator: {fileID: 0}
+    animatorParameterType: 0
+    targetID: 0
+  - synchronizationType: 1
+    setVariable: 1
+    behavior: {fileID: 1029258597979052623}
+    variableName: GL_IsInSafeHouse
+    global: 1
+    targetComponent: {fileID: 796532654218381237}
+    targetName: IsInSafeHouse
+    targetGlobal: 0
+    animator: {fileID: 0}
+    animatorParameterType: 0
+    targetID: 0
+  - synchronizationType: 1
+    setVariable: 1
+    behavior: {fileID: 1029258597979052623}
+    variableName: GL_IsInStreetHouse
+    global: 1
+    targetComponent: {fileID: 796532654218381237}
+    targetName: IsInStreetHouse
     targetGlobal: 0
     animator: {fileID: 0}
     animatorParameterType: 0
