@@ -22,7 +22,9 @@ public class ObjectHolder : MonoBehaviour
     Quaternion startRot;
     //Material mat;
     //float dissolveValue;
-    //[HideInInspector] public Transform hand;
+
+    //TOGGLE THE BELOW WHEN DONE EDITING
+    [HideInInspector] public Transform hand;
     Transform objectInspectPoint;
     //Transform cam;
     static GameObject heldObject;
@@ -45,13 +47,17 @@ public class ObjectHolder : MonoBehaviour
     [Header("On Pedestal")]
     public Vector3 placementOffset;
     public Quaternion rotationalSet;
+
+
     [Header("When Inspecting")]
     public float distanceFromFace = 1.2f;
-    //[Header("Testing Pos In Hand")]
-    //public bool updatePos;
-    //Vector3 newHandPosition = Vector3.zero;
-    //Quaternion newHandRotation = new Quaternion(0, 0, 0, 0);
-    //Vector3 newScaleFactor;
+
+    // updatePos is for editing the position in hand when in playmode
+    [Header("Testing Pos In Hand")]
+    public bool updatePos;
+    Vector3 newHandPosition = Vector3.zero;
+    Quaternion newHandRotation = new Quaternion(0, 0, 0, 0);
+    Vector3 newScaleFactor;
 
     void Start()
     {
@@ -60,20 +66,25 @@ public class ObjectHolder : MonoBehaviour
         //mat = gameObject.GetComponent<MeshRenderer>().material;
         startPos = transform.position;
         startRot = transform.rotation;
-        //hand = vHolder.hand;
+        
+        //TOGGLE THE BELOW WHEN DONE EDITING
+        hand = vHolder.hand;
+        
         objectInspectPoint = vHolder.hand.GetComponentInChildren<Transform>();
         //cam = vHolder.cam; ;
         //controller = vHolder.controller;
         //image = vHolder.image;
         //textName = vHolder.textName;
-        
+
         //imageTwo = vHolder.imageTwo;
         //textNameTwo = vHolder.textNameTwo;
 
         //hoverText = vHolder.hoverText;
-        //newHandPosition = handOffset;
-        //newHandRotation = handRotation;
-        //newScaleFactor = scaleFactor;
+
+        //TOGGLE THE BELOW 3 LINES WHEN DONE EDITING
+        newHandPosition = handOffset;
+        newHandRotation = handRotation;
+        newScaleFactor = scaleFactor;
         ogScaleFactor = transform.localScale;
     }
 
@@ -231,26 +242,26 @@ public class ObjectHolder : MonoBehaviour
         //    }
         //}
 
-        //if(updatePos && thisObjectHeld)
-        //{
+        if (updatePos && thisObjectHeld)
+        {
 
-        //    if(handOffset != newHandPosition)
-        //    {
-        //        transform.position = hand.TransformPoint(handOffset);
-        //        newHandPosition = handOffset;
-        //    }
-        //    if(handRotation != newHandRotation)
-        //    {
-        //        transform.localRotation = handRotation;
-        //        newHandRotation = handRotation;
-        //    }
-        //    if(scaleFactor != newScaleFactor)
-        //    {
-        //        transform.localScale = scaleFactor;
-        //        newScaleFactor = scaleFactor;
-        //    }
+            if (handOffset != newHandPosition)
+            {
+                transform.position = hand.TransformPoint(handOffset);
+                newHandPosition = handOffset;
+            }
+            if (handRotation != newHandRotation)
+            {
+                transform.localRotation = handRotation;
+                newHandRotation = handRotation;
+            }
+            if (scaleFactor != newScaleFactor)
+            {
+                transform.localScale = scaleFactor;
+                newScaleFactor = scaleFactor;
+            }
 
-        //}
+        }
 
     }
 
