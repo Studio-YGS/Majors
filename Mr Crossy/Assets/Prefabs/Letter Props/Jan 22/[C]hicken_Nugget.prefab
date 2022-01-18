@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &125472
+--- !u!1 &172673961218916056
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,49 +8,49 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 497658}
-  - component: {fileID: 3338116}
-  - component: {fileID: 2363966}
-  - component: {fileID: 3758529064285201672}
-  - component: {fileID: 1569955247}
-  - component: {fileID: 1569955242}
-  - component: {fileID: 1569955246}
+  - component: {fileID: 6336252812242084224}
+  - component: {fileID: 1533574341446788138}
+  - component: {fileID: 5220771012348297990}
+  - component: {fileID: 2809507149467554360}
+  - component: {fileID: 2809507149467554361}
+  - component: {fileID: 2809507149467554358}
+  - component: {fileID: 2809507149467554359}
   m_Layer: 0
-  m_Name: '[S]occer Ball'
+  m_Name: '[C]hicken_Nugget'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &497658
+--- !u!4 &6336252812242084224
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 125472}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_GameObject: {fileID: 172673961218916056}
+  m_LocalRotation: {x: 0, y: 0.3681408, z: 0, w: 0.9297701}
+  m_LocalPosition: {x: -2.7091126, y: 0.9507, z: -23.711243}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &3338116
+  m_LocalEulerAnglesHint: {x: 0, y: 43.202, z: 0}
+--- !u!33 &1533574341446788138
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 125472}
-  m_Mesh: {fileID: 4300000, guid: f801cd08c4d03a84aba8a114183b47ec, type: 3}
---- !u!23 &2363966
+  m_GameObject: {fileID: 172673961218916056}
+  m_Mesh: {fileID: -6498154635197081451, guid: cc5eb0f7fcf545a468297a9da71ded23, type: 3}
+--- !u!23 &5220771012348297990
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 125472}
+  m_GameObject: {fileID: 172673961218916056}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 1
@@ -63,8 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8b514dbca3989824f8d839caad57c387, type: 2}
-  - {fileID: 2100000, guid: 7d7a96d5e6ab84b4d8fbc549ecb28da4, type: 2}
+  - {fileID: 2100000, guid: 417c3e3c273b5f34e859d3b72c188d32, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -86,26 +85,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &3758529064285201672
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 125472}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.16238964
-  m_Center: {x: -0.000000007450581, y: 0.16241406, z: -0.000000007450581}
---- !u!54 &1569955247
+--- !u!54 &2809507149467554360
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 125472}
+  m_GameObject: {fileID: 172673961218916056}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -115,41 +101,54 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &1569955242
+--- !u!65 &2809507149467554361
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 172673961218916056}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5086489, y: 0.1946003, z: 0.2637688}
+  m_Center: {x: 0.031534795, y: 0.016189478, z: 0.4272324}
+--- !u!114 &2809507149467554358
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 125472}
+  m_GameObject: {fileID: 172673961218916056}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c771dc25b37682447906be6093940da8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectImage: {fileID: -3032307787518733192, guid: 6678742f1643bcc46abaf1cc800080ec, type: 3}
-  objectName: '[B]all'
+  objectImage: {fileID: 1567321139671501870, guid: 6678742f1643bcc46abaf1cc800080ec, type: 3}
+  objectName: '[C]hicken_Nugget'
   vHolder: {fileID: 0}
   hand: {fileID: 0}
   thisObjectHeld: 1
   isPlacedDown: 0
-  beingInspected: 1
-  ogScaleFactor: {x: 1, y: 1, z: 1}
+  beingInspected: 0
+  ogScaleFactor: {x: 0.2, y: 0.2, z: 0.2}
   pickupRange: 5
-  handOffset: {x: -0.01, y: 0.24, z: -0.11}
-  handRotation: {x: 0, y: 0, z: 0, w: 0}
+  handOffset: {x: 0.04, y: 0.08, z: 0.42}
+  handRotation: {x: -0.6063798, y: 0.55796826, z: -0.16851853, w: 0.5409034}
   scaleFactor: {x: 1, y: 1, z: 1}
-  placementOffset: {x: 0, y: 0, z: 0}
-  rotationalSet: {x: 0, y: 0, z: 0, w: 0}
-  distanceFromFace: 0.5
+  placementOffset: {x: 0, y: 0, z: -0.09}
+  rotationalSet: {x: 0, y: 0.25881904, z: 0, w: 0.9659258}
+  distanceFromFace: 0.7
   updatePos: 0
---- !u!114 &1569955246
+--- !u!114 &2809507149467554359
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 125472}
+  m_GameObject: {fileID: 172673961218916056}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}

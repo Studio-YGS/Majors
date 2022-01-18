@@ -12,6 +12,9 @@ GameObject:
   - component: {fileID: 3389922}
   - component: {fileID: 2334254}
   - component: {fileID: 5888476320609290624}
+  - component: {fileID: 103777020}
+  - component: {fileID: 103777018}
+  - component: {fileID: 103777019}
   m_Layer: 0
   m_Name: '[G]lasses'
   m_TagString: Untagged
@@ -49,7 +52,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 132860}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1
@@ -96,3 +99,66 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.19400032, y: 0.053218592, z: 0.19833566}
   m_Center: {x: -0.00014795738, y: 0.027215103, z: 0.008853054}
+--- !u!54 &103777020
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 132860}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &103777018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 132860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c771dc25b37682447906be6093940da8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectImage: {fileID: 7295492971941686735, guid: 6678742f1643bcc46abaf1cc800080ec, type: 3}
+  objectName: Glasses
+  vHolder: {fileID: 0}
+  hand: {fileID: 0}
+  thisObjectHeld: 1
+  isPlacedDown: 0
+  beingInspected: 0
+  ogScaleFactor: {x: 1, y: 1, z: 1}
+  pickupRange: 5
+  handOffset: {x: -0.31, y: 0.48, z: -0.34}
+  handRotation: {x: 0.06822579, y: -0.25033206, z: 0.27497223, w: -0.9257804}
+  scaleFactor: {x: 1, y: 1, z: 1}
+  placementOffset: {x: 0, y: 0, z: 0}
+  rotationalSet: {x: 0, y: 0.70710677, z: 0, w: 0.70710677}
+  distanceFromFace: 0.25
+  updatePos: 0
+--- !u!114 &103777019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 132860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  distanceAway: 5
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
