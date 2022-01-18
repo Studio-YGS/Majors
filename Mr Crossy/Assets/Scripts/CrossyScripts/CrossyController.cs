@@ -55,24 +55,23 @@ public class CrossyController : MonoBehaviour
     [Header("Movement Variables")]
     [Tooltip("Mr. Crossy's walking speed.")]
     [SerializeField] private float m_WalkSpeed;
+
     [Tooltip("Mr. Crossy's full running speed.")]
     [SerializeField] private float m_FullRunSpeed;
+
     [Tooltip("Percentage of full running speed.")]
     [Range(0, 100)] [SerializeField] private int m_SubRunPercent;
+
     private float m_RunSpeed;
     private float m_MoveSpeed;
 
     [Tooltip("Mr. Crossy's acceleration rate.")]
     [SerializeField] private float m_BaseAcceleration;
-    /*[SerializeField] */
     [SerializeField] private float m_StoppingAcceleration = 120f;
-    /*[SerializeField] */
     private float m_Acceleration;
 
     [Tooltip("Mr. Crossy's turning speed.")]
-    /*[SerializeField]*/
     private float m_WalkAngularSpeed;
-    /*[SerializeField]*/
     private float m_RunAngularSpeed;
     [SerializeField] private float m_AngularSpeed;
 
@@ -90,6 +89,8 @@ public class CrossyController : MonoBehaviour
 
     private float m_DistanceToCorner;
 
+
+
     private int m_Mask;
     private bool m_InSight = false;
     private bool m_InPeripheral = false;
@@ -105,6 +106,7 @@ public class CrossyController : MonoBehaviour
     [SerializeField] private float m_LowerQuartDistance;
     [Space(10)]
     [SerializeField] private float m_DetectionTime;
+    [SerializeField] private float m_HouseScoutTime;
     [SerializeField] private float m_HighestQuartMulti;
     [SerializeField] private float m_UpperQuartMulti;
     [SerializeField] private float m_LowerQuartMulti;
@@ -115,6 +117,7 @@ public class CrossyController : MonoBehaviour
     [Space]
     [Range(0.01f, 0.9f)]
     [SerializeField] private float m_EyeAlertPoint = 0.5f;
+
 
     [Header("Particle Effects")]
     [SerializeField] private GameObject m_WarpParticleOne;
@@ -145,8 +148,8 @@ public class CrossyController : MonoBehaviour
     #region Properties
     public Transform Vision { get { return m_Vision; } }
     public Transform HindVision { get { return m_HindVision; } }
-    public float WalkSpeed { get { return m_WalkSpeed; } /*set { m_WalkSpeed = value; }*/ }
-    public float FullRunSpeed { get { return m_FullRunSpeed; } /*set { m_FullRunSpeed = value; }*/ }
+    public float WalkSpeed { get { return m_WalkSpeed; } }
+    public float FullRunSpeed { get { return m_FullRunSpeed; } }
     public float SubRunSpeed { get { return m_FullRunSpeed * (m_SubRunPercent / 100f); } }
     public float RunSpeed { get { return (m_InSight) ? FullRunSpeed : SubRunSpeed; } }
     public float MoveSpeed { get { return (m_ShouldRun && RunSpeed > WalkSpeed) ? RunSpeed : WalkSpeed; } }
@@ -168,6 +171,7 @@ public class CrossyController : MonoBehaviour
     public float AttackAttemptDistance { get { return m_AttackAttemptDistance; } }
     public float AttackHitDistance { get { return m_AttackHitDistance; } }
 
+    public float HouseScoutTime { get { return m_HouseScoutTime; } }
     public float BaseDetectTime { get { return m_DetectionTime; } }
     public float CloseDetectTime { get { return m_DetectionTime * 3; } }
 
@@ -217,8 +221,6 @@ public class CrossyController : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         m_Mask = agent.areaMask;
-        //headBone = animator.GetBoneTransform(HumanBodyBones.Head);
-        //m_RunDistance = (m_State == 2) ? m_AlertRunDistance : m_PatrolRunDistance;
     }
 
     private void Update()
@@ -252,8 +254,7 @@ public class CrossyController : MonoBehaviour
         if(allowScaryRun) ScaryRunCondition();
         //StoppyStop();
 
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Spinspin")) animator.applyRootMotion = true;
-        else animator.applyRootMotion = false;
+        animator.applyRootMotion = animator.GetCurrentAnimatorStateInfo(0).IsName("Spinspin");
 
         //RunSpeed = (m_InSight) ? FullRunSpeed : SubRunSpeed;
         //MoveSpeed = (m_ShouldRun) ? RunSpeed : WalkSpeed;
