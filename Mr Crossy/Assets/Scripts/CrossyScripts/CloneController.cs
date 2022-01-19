@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using BehaviorDesigner.Runtime;
+using BehaviorDesigner.Runtime.Tactical;
 using FMODUnity;
 using FMOD.Studio;
 
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(NavMeshAgent))]
-public class CloneController : MonoBehaviour
+public class CloneController : MonoBehaviour, IAttackAgent
 {
     #region ExternalVariables
     public BehaviorTree cloneTree;
+
     Animator animator;
     NavMeshAgent agent;
     EventInstance attackLines;
@@ -21,6 +23,7 @@ public class CloneController : MonoBehaviour
 
     #region MainVariables
 
+    #region Main/VisionVariables
     [Header("Vision Variables")]
     [SerializeField] private Transform m_Vision;
     [Space(5)]
@@ -32,7 +35,9 @@ public class CloneController : MonoBehaviour
 
     private bool m_InSight = false;
     private bool m_InPeripheral = false;
+    #endregion
 
+    #region Main/MovementVariables
     [Header("Movement Variables")]
     [SerializeField] private float m_WalkSpeed;
     [SerializeField] private float m_FullRunSpeed;
@@ -49,7 +54,18 @@ public class CloneController : MonoBehaviour
 
     float mSpeed;
     float tSpeed;
+    #endregion
 
+    #region Main/AttackVariables
+
+    [SerializeField] private float m_AttackDistance;
+    [SerializeField] private float m_AttackDelay;
+    [SerializeField] private float m_AttackAngle;
+
+    private float m_SinceLastAttack;
+    #endregion
+
+    #region Main/EyeGlowVariables
     [Header("Eye Glow Variables")]
     [SerializeField] private Material cloneGlow;
 
@@ -62,7 +78,9 @@ public class CloneController : MonoBehaviour
 
     bool raisingEye;
     bool loweringEye;
+    #endregion
 
+    #region Main/IKVariables
     [Header("IK Variables")]
     public LayerMask layerMask;
     public string walkableTag;
@@ -77,10 +95,13 @@ public class CloneController : MonoBehaviour
 
     [Range(0, 2)] public float IKLeftFootDistance;
     [Range(0, 2)] public float IKRightFootDistance;
+    #endregion
 
+    #region Main/MiscVariables
     //Misc Variables
     private int m_State = -1;
     private int m_Mask;
+    #endregion
 
     #endregion
 
@@ -115,12 +136,13 @@ public class CloneController : MonoBehaviour
 
     #endregion
 
+    #region UnityMethods
     private void Awake()
     {
         cloneTree = GetComponent<BehaviorTree>();
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-
+        
         m_Mask = agent.areaMask;
 
         cloneGlow.EnableKeyword("_EMISSION");
@@ -128,7 +150,6 @@ public class CloneController : MonoBehaviour
 
     private void Update()
     {
-
         CloneEye();
 
         //Animator
@@ -140,8 +161,9 @@ public class CloneController : MonoBehaviour
         animator.SetFloat("Turn", tSpeed);
     }
 
-    #region MainMethods
+    #endregion
 
+    #region MainMethods
     public void GetMotionHashValues()
     {
         Vector3 velocity = agent.transform.InverseTransformDirection(agent.velocity);
@@ -152,8 +174,32 @@ public class CloneController : MonoBehaviour
 
     #endregion
 
-    #region EyeGlowMethods
+    #region AttackInterfaceMethods
+    public float AttackDistance()
+    {
+        return m_AttackDistance;
+    }
 
+    public bool CanAttack()
+    {
+        return (m_SinceLastAttack + m_AttackDelay < Time.time && animator.GetCurrentAnimatorStateInfo(1).IsName("NotAttacking"));
+    }
+
+    public float AttackAngle()
+    {
+        return m_AttackAngle;
+    }
+
+    public void Attack(Vector3 targetPosition)
+    {
+        animator.SetInteger("AttackVar", Random.Range(0, 2));
+        animator.SetTrigger("Attack");
+        m_SinceLastAttack = Time.time;
+    }
+
+    #endregion
+
+    #region EyeGlowMethods
     public IEnumerator RaiseEyeGlow(Color colour, float raiseTo)
     {
         raisingEye = true;
@@ -167,7 +213,6 @@ public class CloneController : MonoBehaviour
         cloneGlow.color = colour;
         raisingEye = false;
     }
-
     public IEnumerator LowerEyeGlow(Color colour, float lowerTo)
     {
         loweringEye = true;
@@ -251,7 +296,6 @@ public class CloneController : MonoBehaviour
     #endregion
 
     #region AnimatorMethods
-
     IEnumerator IncreaseLook()
     {
         StopCoroutine(DecreaseLook());

@@ -2958,16 +2958,13 @@ MonoBehaviour:
   speedDebugLog: 0
   m_Vision: {fileID: 8395744739945143461}
   m_HindVision: {fileID: 2129252262042199149}
+  m_FocalViewDist: 40
+  m_PeripheralViewDist: 30
+  m_HindViewDist: 5
+  m_FocalViewCone: 75
+  m_PeripheralViewCone: 200
+  m_HindViewCone: 50
   m_CrossyDespawn: {fileID: 0}
-  screecher: {fileID: 5101694952831017790}
-  crossyGlow: {fileID: 2100000, guid: 62ab737d170822d458abd4a530ad96bc, type: 2}
-  m_AlertUnSeenValue: 0.2
-  m_AlertPerifValue: 0.4
-  m_AlertFocalValue: 0.6
-  m_PursitUnseenValue: 0.7
-  m_PursitFocalValue: 1
-  m_EyeRaiseRate: 2
-  m_EyeLowerRate: 2
   m_WalkSpeed: 1
   m_FullRunSpeed: 4
   m_SubRunPercent: 90
@@ -2975,28 +2972,12 @@ MonoBehaviour:
   m_StoppingAcceleration: 120
   m_AngularSpeed: 360
   m_StoppingDistance: 1
-  m_AttackAttemptDistance: 2.2
-  m_AttackHitDistance: 1.5
-  m_PatrolRunDistance: 80
-  m_AlertRunDistance: 20
-  m_ScaryDistance: 15
-  m_FocalViewDist: 40
-  m_PeripheralViewDist: 30
-  m_PursuitDistance: 10
-  m_UpperQuartDistance: 30
-  m_LowerQuartDistance: 20
-  m_DetectionTime: 10
-  m_HouseScoutTime: 20
-  m_HighestQuartMulti: 1.75
-  m_UpperQuartMulti: 1.5
-  m_LowerQuartMulti: 1.25
-  m_ReverseMulti: 0.7
-  m_FocalViewCone: 75
-  m_PeripheralViewCone: 200
-  m_EyeAlertPoint: 0.5
-  m_WarpParticleOne: {fileID: 0}
-  m_WarpParticleTwo: {fileID: 0}
-  m_ParticleWait: 3
+  crossyGlow: {fileID: 2100000, guid: 62ab737d170822d458abd4a530ad96bc, type: 2}
+  m_AlertUnSeenValue: 0.2
+  m_AlertPerifValue: 0.4
+  m_AlertFocalValue: 0.6
+  m_EyeRaiseRate: 2
+  m_EyeLowerRate: 2
   layerMask:
     serializedVersion: 2
     m_Bits: 131072
@@ -3008,6 +2989,24 @@ MonoBehaviour:
   lookAtOffset: {x: 0, y: 0, z: 0}
   IKLeftFootDistance: 0.071
   IKRightFootDistance: 0.071
+  m_WarpParticleOne: {fileID: 0}
+  m_WarpParticleTwo: {fileID: 0}
+  m_ParticleWait: 3
+  screecher: {fileID: 5101694952831017790}
+  m_DetectionTime: 10
+  m_HouseScoutTime: 20
+  m_HighestQuartMulti: 1.75
+  m_UpperQuartMulti: 1.5
+  m_LowerQuartMulti: 1.25
+  m_ReverseMulti: 0.7
+  m_PatrolRunDistance: 80
+  m_AlertRunDistance: 20
+  m_ScaryDistance: 15
+  m_PursuitDistance: 10
+  m_UpperQuartDistance: 30
+  m_LowerQuartDistance: 20
+  m_AttackAttemptDistance: 2.2
+  m_AttackHitDistance: 1.5
 --- !u!114 &8435205118161319010
 MonoBehaviour:
   m_ObjectHideFlags: 0
