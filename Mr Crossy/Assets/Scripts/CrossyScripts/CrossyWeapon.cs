@@ -5,10 +5,10 @@ using BehaviorDesigner.Runtime.Tactical;
 
 public class CrossyWeapon : MonoBehaviour
 {
-    public Animator animator;
+    public Animator wielderAnimator;
 
     public float weaponDamage = 1;
-    public bool Attacking { get { return !animator.GetCurrentAnimatorStateInfo(1).IsName("NotAttacking"); } }
+    public bool Attacking { get { return !wielderAnimator.GetCurrentAnimatorStateInfo(1).IsName("NotAttacking"); } }
     private void OnCollisionEnter(Collision collision)
     {
         IDamageable target;

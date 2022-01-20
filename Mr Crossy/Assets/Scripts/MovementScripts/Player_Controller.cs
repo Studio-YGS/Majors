@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BehaviorDesigner.Runtime.Tactical;
 
-public class Player_Controller : MonoBehaviour
+public class Player_Controller : MonoBehaviour, IDamageable
 {
     public CharacterController controller;
     public LayerMask raycastLayerMask;
@@ -11,6 +12,9 @@ public class Player_Controller : MonoBehaviour
     public float speed;
     public float sprintSpeed;
     public float outOfBreathSpeed;
+    public float maxHealth = 3;
+    [HideInInspector]
+    public float currentHealth;
     public float stamina = 8;
     public float crouchSpeed;
     public float gravity;
@@ -52,6 +56,10 @@ public class Player_Controller : MonoBehaviour
     //public bool zBackwards;
     //public bool xRight;
     //public bool xLeft;
+    void Awake()
+    {
+        currentHealth = maxHealth;
+    }
     void Start()
     {
         baseSpeed = speed;
@@ -257,7 +265,25 @@ public class Player_Controller : MonoBehaviour
         UnlockCursor();
     }
 
-    
+    public void Damage(float amount)
+    {
+        currentHealth = Mathf.Max(currentHealth - amount, 0);
+
+        if(currentHealth == 0)
+        {
+            //JustDyingThings
+        }
+    }
+
+    public bool IsAlive()
+    {
+        return currentHealth > 0;
+    }
+
+    public void ResetHealth()
+    {
+
+    }
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
         if (hit.gameObject.GetComponent<DoorInteraction>())
