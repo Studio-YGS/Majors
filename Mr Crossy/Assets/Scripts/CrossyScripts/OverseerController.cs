@@ -179,7 +179,6 @@ public class OverseerController : MonoBehaviour
     public float currDist;
     private float storedDist = 0;
     bool vignetteActivated = false;
-    float pathDistance = 100f;
     [SerializeField] bool playedTitanLine = false;
     private void Awake()
     {
@@ -197,6 +196,7 @@ public class OverseerController : MonoBehaviour
 
         if (m_Player == null) m_Player = GameObject.Find("Fps Character");
 
+        
         emitter.Params[0].Value = 100f;
         emitter.Params[1].Value = 1f;
         emitter.Params[2].Value = 1f;
@@ -213,6 +213,7 @@ public class OverseerController : MonoBehaviour
         titan = m_TitanCrossy.GetComponent<CrossyTheWatcher>();
 
         crossyAgent = m_Crossy.GetComponent<NavMeshAgent>();
+        crossyController = m_Crossy.GetComponent<CrossyController>();
 
     }
 

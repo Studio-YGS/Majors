@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Gemstone;
 using BehaviorDesigner.Runtime;
 using FMOD.Studio;
 using FMODUnity;
 
 public class MouthOfGod : MonoBehaviour
 {
+    [SerializeField]
+    private BehaviorTree mouthOfGod;
     public static BehaviorTree MouthOfGodTree;
 
     #region AudioVariables
@@ -29,7 +32,7 @@ public class MouthOfGod : MonoBehaviour
     #region UnityMethods
     private void Awake()
     {
-        
+        MouthOfGodTree = mouthOfGod;
     }
 
     // Start is called before the first frame update
@@ -43,6 +46,8 @@ public class MouthOfGod : MonoBehaviour
     {
         if(!overseer.m_IsTutorial)
         {
+            CrossyAudioDistance();
+
             if(!overseer.m_PlayerInSafeHouse)
             {
                 TitanCrossyVoiceLines();
@@ -84,6 +89,23 @@ public class MouthOfGod : MonoBehaviour
     void DeathAudio()
     {
         StartCoroutine(SafeDelay());
+    }
+
+    void ResetParameters()
+    {
+        if(emitter.Params[0].Value != 100f)
+        {
+            ParameterSet(0, 100f);
+        }
+        if (emitter.Params[1].Value != 1f)
+        {
+            ParameterSet(1, 1f);
+        }
+        if (emitter.Params[2].Value != 1f)
+        {
+            ParameterSet(2, 1f);
+        }
+
     }
 
     void TitanCrossyVoiceLines()
@@ -191,7 +213,16 @@ public class MouthOfGod : MonoBehaviour
 
     #region EventRegister
 
-
+    void OnEnable()
+    {
+        if(MouthOfGodTree)
+        {
+            TreeMalarkey.RegisterEventOnTree(MouthOfGodTree, "CallChaseAudio", ChaseAudio);
+            TreeMalarkey.RegisterEventOnTree(MouthOfGodTree, "CallSafeAudio", SafeAudio);
+            TreeMalarkey.RegisterEventOnTree(MouthOfGodTree, "CallDeathAudio", DeathAudio);
+            TreeMalarkey.RegisterEventOnTree(MouthOfGodTree, "CallResetAudio", ResetParameters);
+        }
+    }
 
     #endregion
 }

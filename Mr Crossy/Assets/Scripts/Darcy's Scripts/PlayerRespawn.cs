@@ -48,31 +48,31 @@ public class PlayerRespawn : MonoBehaviour
         respawnPosition = respawnPoints[0];
     }
 
-    public void Register()
-    {
-        TreeMalarkey.RegisterEventOnTree(CrossyController.crossyTree, "DeadNoises", PlayerDie);
-    }
+    //public void Register()
+    //{
+    //    TreeMalarkey.RegisterEventOnTree(CrossyController.crossyTree, "DeadNoises", PlayerDie);
+    //}
 
-    public void OnDisable()
-    {
-        TreeMalarkey.UnregisterEventOnTree(CrossyController.crossyTree, "DeadNoises", PlayerDie);
-    }
+    //public void OnDisable()
+    //{
+    //    TreeMalarkey.UnregisterEventOnTree(CrossyController.crossyTree, "DeadNoises", PlayerDie);
+    //}
 
     void Update()
     {
-        if(crossyPosition.position != originalposition && !hasMoved)
-        {
-            Register();
-            hasMoved = true;
-        }
+        //if(crossyPosition.position != originalposition && !hasMoved)
+        //{
+        //    Register();
+        //    hasMoved = true;
+        //}
     }
 
     public void PlayerDie()
     {
         FindObjectOfType<CrossKeyManager>().doorsLocked = false;
         FindObjectOfType<ObjectHolder>().DeathDrop();
-        seer.deady = true;
-        if (!seer.attemptingDie) seer.DeadNoises();
+        //seer.deady = true;
+        //if (!seer.attemptingDie) seer.DeadNoises();
         FindObjectOfType<MrCrossyDistortion>().ResetDamage();
         player.cam.gameObject.SetActive(false);
         player.DisableController();
@@ -100,24 +100,24 @@ public class PlayerRespawn : MonoBehaviour
     {
         player.EnableController();
 
-        if (seer.emitter.Params[2].Value != 1f)
-        {
-            seer.emitter.Params[2].Value = 1f;
-            seer.emitter.Target.SetParameter(seer.emitter.Params[1].Name, seer.emitter.Params[1].Value);
-        }
-        //seer.emitter.Params[2].Value = 1f;
-        if (seer.emitter.Params[0].Value != 100f)
-        {
-            seer.emitter.Params[0].Value = 100f;
-            seer.emitter.Target.SetParameter(seer.emitter.Params[0].Name, seer.emitter.Params[0].Value);
-        }
-        //seer.emitter.Params[0].Value = 100f;
-        if (seer.emitter.Params[1].Value != 1f)
-        {
-            seer.emitter.Params[1].Value = 1f;
-            seer.emitter.Target.SetParameter(seer.emitter.Params[1].Name, seer.emitter.Params[1].Value);
-        }
-        //seer.emitter.Params[1].Value = 1f;
+        //if (seer.emitter.Params[2].Value != 1f)
+        //{
+        //    seer.emitter.Params[2].Value = 1f;
+        //    seer.emitter.Target.SetParameter(seer.emitter.Params[1].Name, seer.emitter.Params[1].Value);
+        //}
+        ////seer.emitter.Params[2].Value = 1f;
+        //if (seer.emitter.Params[0].Value != 100f)
+        //{
+        //    seer.emitter.Params[0].Value = 100f;
+        //    seer.emitter.Target.SetParameter(seer.emitter.Params[0].Name, seer.emitter.Params[0].Value);
+        //}
+        ////seer.emitter.Params[0].Value = 100f;
+        //if (seer.emitter.Params[1].Value != 1f)
+        //{
+        //    seer.emitter.Params[1].Value = 1f;
+        //    seer.emitter.Target.SetParameter(seer.emitter.Params[1].Name, seer.emitter.Params[1].Value);
+        //}
+        ////seer.emitter.Params[1].Value = 1f;
 
         exSwitch.WalkIn();
         journal.EnableJournal();
