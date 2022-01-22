@@ -23,7 +23,8 @@ public class OverseerController : MonoBehaviour
     public bool m_PlayerInStreetHouse;
     public bool allowVignette = true;
 
-    CrossyTheWatcher titan;
+    [HideInInspector]
+    public CrossyTheWatcher titan;
     MrCrossyDistortion distootle;
     CrossKeyManager keyMan;
     NavMeshAgent crossyAgent;
@@ -105,7 +106,11 @@ public class OverseerController : MonoBehaviour
     [Range(0f, 1f)] [SerializeField] private float m_TitanVoiceLineChance = 0.5f;
     private int m_TitanNoisyNum = 0;
     [Space(10)]
-    [SerializeField] private bool m_IsTutorial = true;
+    public bool m_IsTutorial = true;
+
+    private bool m_InSight;
+
+    public List<CloneController> crossyClones = new List<CloneController>();
 
     #endregion
 
@@ -156,6 +161,8 @@ public class OverseerController : MonoBehaviour
     public bool AttemptingSafe { get { return attemptingSafe; } }
     public bool AttemptingDie { get { return attemptingDie; } }
     public bool Puzzling { get { return keyMan.puzzleOn; } }
+
+    public bool InSight { get { return m_InSight; } set { m_InSight = value; } }
 
     #endregion
 
@@ -291,7 +298,7 @@ public class OverseerController : MonoBehaviour
             }
         }
 
-        
+        PlayerIsBeingSeen();
 
     }
 
@@ -411,6 +418,31 @@ public class OverseerController : MonoBehaviour
     public void SetStalkies(CrossyStreetStalk stalky)
     {
         m_StalkStreet = stalky;
+    }
+
+    public void PlayerIsBeingSeen()
+    {
+        if(crossyClones.Count == 0)
+        {
+            InSight = crossyController.InOwnSight;
+        }
+        else
+        {
+            InSight = crossyController.InOwnSight || CloneSight();
+        }
+    }
+
+    bool CloneSight()
+    {
+        foreach(CloneController clone in crossyClones)
+        {
+            if(clone.InOwnSight)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public void SetLighthouseGroup(int district)

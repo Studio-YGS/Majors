@@ -5,6 +5,8 @@ using BehaviorDesigner.Runtime.Tactical;
 
 public class Player_Controller : MonoBehaviour, IDamageable
 {
+    PlayerRespawn repawn;
+
     public CharacterController controller;
     public LayerMask raycastLayerMask;
     [HideInInspector]
@@ -59,6 +61,7 @@ public class Player_Controller : MonoBehaviour, IDamageable
     void Awake()
     {
         currentHealth = maxHealth;
+        repawn = FindObjectOfType<PlayerRespawn>();
     }
     void Start()
     {
@@ -272,6 +275,7 @@ public class Player_Controller : MonoBehaviour, IDamageable
         if(currentHealth == 0)
         {
             //JustDyingThings
+            repawn.PlayerDie();
         }
     }
 
@@ -282,7 +286,7 @@ public class Player_Controller : MonoBehaviour, IDamageable
 
     public void ResetHealth()
     {
-
+        //Magic
     }
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {

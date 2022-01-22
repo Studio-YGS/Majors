@@ -74,7 +74,7 @@ public class PlayerRespawn : MonoBehaviour
         seer.deady = true;
         if (!seer.attemptingDie) seer.DeadNoises();
         FindObjectOfType<MrCrossyDistortion>().ResetDamage();
-        player.gameObject.SetActive(false);
+        player.cam.gameObject.SetActive(false);
         player.DisableController();
         player.transform.position = respawnPosition.position;
 
@@ -142,8 +142,9 @@ public class PlayerRespawn : MonoBehaviour
         puzzleController = FindObjectOfType<PuzzleController>();
         puzzleController.MistakeCounter();
         crossyDeath = false;
-        player.gameObject.SetActive(true);
-        player.enabled = true;
+        player.cam.gameObject.SetActive(true);
+        //player.enabled = true;
+        player.ResetHealth();
 
         street.GetComponent<TextMeshProUGUI>().text = "Home.";
         FindObjectOfType<MrCrossyDistortion>().mask.GetComponent<Animator>().SetTrigger("FadeAway");

@@ -48,7 +48,7 @@ public class CrossyController : MonoBehaviour, IAttackAgent
     [SerializeField] private float m_PeripheralViewCone;
     [SerializeField] private float m_HindViewCone;
 
-    private bool m_InSight = false;
+    private bool m_InOwnSight = false;
     private bool m_InPeripheral = false;
     #endregion
 
@@ -156,7 +156,7 @@ public class CrossyController : MonoBehaviour, IAttackAgent
     public float WalkSpeed { get { return m_WalkSpeed; } }
     public float FullRunSpeed { get { return m_FullRunSpeed; } }
     public float SubRunSpeed { get { return m_FullRunSpeed * (m_SubRunPercent / 100f); } }
-    public float RunSpeed { get { return (m_InSight) ? FullRunSpeed : SubRunSpeed; } }
+    public float RunSpeed { get { return (m_InOwnSight) ? FullRunSpeed : SubRunSpeed; } }
     public float MoveSpeed { get { return (m_ShouldRun && RunSpeed > WalkSpeed) ? RunSpeed : WalkSpeed; } }
 
     public float Acceleration { get { return (ShouldBeStopped) ? m_StoppingAcceleration : m_BaseAcceleration; } }
@@ -166,7 +166,7 @@ public class CrossyController : MonoBehaviour, IAttackAgent
 
     public int NavMeshMask { get { return m_Mask; } }
     public bool ShouldRun { get { return m_ShouldRun; } set { m_ShouldRun = value; } }
-    public bool InSight { get { return m_InSight; } set { m_InSight = value; } }
+    public bool InOwnSight { get { return m_InOwnSight; } set { m_InOwnSight = value; } }
     public bool InPeripheral { get { return m_InPeripheral; } set { m_InPeripheral = value; } }
     public bool ShouldBeStopped { get { return animator.GetCurrentAnimatorStateInfo(0).IsName("Spinspin") || animator.GetCurrentAnimatorStateInfo(0).IsName("Agony") || animator.GetCurrentAnimatorStateInfo(0).IsName("LookAround"); } }
     public int State { get { return m_State; } set { m_State = value; } }
@@ -242,7 +242,7 @@ public class CrossyController : MonoBehaviour, IAttackAgent
 
         animator.applyRootMotion = animator.GetCurrentAnimatorStateInfo(0).IsName("Spinspin");
 
-        if (m_InSight || m_InPeripheral) lookCondition = true;
+        if (m_InOwnSight || m_InPeripheral) lookCondition = true;
         else lookCondition = false;
 
         GetMotionHashValues();
@@ -375,7 +375,7 @@ public class CrossyController : MonoBehaviour, IAttackAgent
             }
             else if (m_State >= 1)
             {
-                if (!m_InPeripheral && !m_InSight)
+                if (!m_InPeripheral && !m_InOwnSight)
                 {
                     emColour.a = 0.5f;
                     if (colour.a < m_AlertUnSeenValue)
@@ -390,7 +390,7 @@ public class CrossyController : MonoBehaviour, IAttackAgent
                     }
                     crossyGlow.SetColor("_EmissionColor", emColour);
                 }
-                else if (m_InPeripheral && !m_InSight)
+                else if (m_InPeripheral && !m_InOwnSight)
                 {
                     emColour.a = 0.7f;
                     if (colour.a < m_AlertPerifValue)
@@ -405,7 +405,7 @@ public class CrossyController : MonoBehaviour, IAttackAgent
                     }
                     crossyGlow.SetColor("_EmissionColor", emColour);
                 }
-                else if (m_InSight)
+                else if (m_InOwnSight)
                 {
                     emColour.a = 1f;
                     if (colour.a < m_AlertFocalValue)

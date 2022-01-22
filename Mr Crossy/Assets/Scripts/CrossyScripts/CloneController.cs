@@ -15,8 +15,11 @@ public class CloneController : MonoBehaviour, IAttackAgent
     #region ExternalVariables
     public BehaviorTree cloneTree;
 
+    OverseerController overseer;
+
     Animator animator;
     NavMeshAgent agent;
+
     EventInstance attackLines;
     EventInstance attackChild;
     #endregion
@@ -33,7 +36,7 @@ public class CloneController : MonoBehaviour, IAttackAgent
     [SerializeField] private float m_FocalViewCone;
     [SerializeField] private float m_PeripheralViewCone;
 
-    private bool m_InSight = false;
+    private bool m_InOwnSight = false;
     private bool m_InPeripheral = false;
     #endregion
 
@@ -112,15 +115,15 @@ public class CloneController : MonoBehaviour, IAttackAgent
     public float PeripheralViewDist { get { return m_PeripheralViewDist; } set { m_PeripheralViewDist = value; } }
     public float FocalViewCone { get { return m_FocalViewCone; } set { m_FocalViewCone = value; } }
     public float PeripheralViewCone { get { return m_PeripheralViewCone; } set { m_PeripheralViewCone = value; } }
-    public bool InSight { get { return m_InSight; } set { m_InSight = value; } }
+    public bool InOwnSight { get { return m_InOwnSight; } set { m_InOwnSight = value; } }
     public bool InPeripheral { get { return m_InPeripheral; } set { m_InPeripheral = value; } }
-    public bool LookCondition { get { return InSight || InPeripheral; } }
+    public bool LookCondition { get { return InOwnSight || InPeripheral; } }
 
     //Movement Properties
     public float WalkSpeed { get { return m_WalkSpeed; } }
     public float FullRunSpeed { get { return m_FullRunSpeed; } }
     public float SubRunSpeed { get { return m_FullRunSpeed * (m_SubRunPercent / 100f); } }
-    public float RunSpeed { get { return (m_InSight) ? FullRunSpeed : SubRunSpeed; } }
+    public float RunSpeed { get { return (m_InOwnSight) ? FullRunSpeed : SubRunSpeed; } }
     public float MoveSpeed { get { return (LookCondition && RunSpeed > WalkSpeed) ? RunSpeed : WalkSpeed; } }
 
     public float Acceleration { get { return (ShouldBeStopped) ? m_StoppingAcceleration : m_BaseAcceleration; } }
@@ -139,6 +142,8 @@ public class CloneController : MonoBehaviour, IAttackAgent
     #region UnityMethods
     private void Awake()
     {
+        overseer = FindObjectOfType<OverseerController>();
+
         cloneTree = GetComponent<BehaviorTree>();
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
@@ -146,6 +151,8 @@ public class CloneController : MonoBehaviour, IAttackAgent
         m_Mask = agent.areaMask;
 
         cloneGlow.EnableKeyword("_EMISSION");
+
+        overseer.crossyClones.Add(this);
     }
 
     private void Update()
@@ -244,7 +251,7 @@ public class CloneController : MonoBehaviour, IAttackAgent
             }
             else if (m_State >= 1)
             {
-                if (!m_InPeripheral && !m_InSight)
+                if (!m_InPeripheral && !m_InOwnSight)
                 {
                     emColour.a = 0.5f;
                     if (colour.a < m_AlertUnSeenValue)
@@ -259,7 +266,7 @@ public class CloneController : MonoBehaviour, IAttackAgent
                     }
                     cloneGlow.SetColor("_EmissionColor", emColour);
                 }
-                else if (m_InPeripheral && !m_InSight)
+                else if (m_InPeripheral && !m_InOwnSight)
                 {
                     emColour.a = 0.7f;
                     if (colour.a < m_AlertPerifValue)
@@ -274,7 +281,7 @@ public class CloneController : MonoBehaviour, IAttackAgent
                     }
                     cloneGlow.SetColor("_EmissionColor", emColour);
                 }
-                else if (m_InSight)
+                else if (m_InOwnSight)
                 {
                     emColour.a = 1f;
                     if (colour.a < m_AlertFocalValue)
