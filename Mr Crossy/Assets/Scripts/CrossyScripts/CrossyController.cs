@@ -8,8 +8,6 @@ using FMODUnity;
 using FMOD.Studio;
 
 
-//If you want stuff to happen when mr crossy attacks you, stuff it in the "CrossyAttack" method way down yonder
-
 //State Stuff -- Despawned = -1, Idle = 0, Patrol = 1, Alert = 2, Pursuit = 3
 
 [RequireComponent(typeof(Animator))]

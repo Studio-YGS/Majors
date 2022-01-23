@@ -7,7 +7,7 @@ public class CrossyWeapon : MonoBehaviour
 {
     public Animator wielderAnimator;
 
-    public float weaponDamage = 1;
+    public float weaponDamage = 10;
     public bool Attacking { get { return !wielderAnimator.GetCurrentAnimatorStateInfo(1).IsName("NotAttacking"); } }
     private void OnCollisionEnter(Collision collision)
     {

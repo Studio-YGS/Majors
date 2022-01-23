@@ -73,7 +73,7 @@ public class MouthOfGod : MonoBehaviour
         }
     }
 
-    void ChaseAudio()
+    public void ChaseAudio()
     {
         if(emitter.Params[1].Value != 0f)
         {
@@ -81,17 +81,17 @@ public class MouthOfGod : MonoBehaviour
         }
     }
 
-    void SafeAudio()
+    public void SafeAudio()
     {
         StartCoroutine(SafeDelay());
     }
 
-    void DeathAudio()
+    public void DeathAudio()
     {
-        StartCoroutine(SafeDelay());
+        StartCoroutine(DeathDelay());
     }
 
-    void ResetParameters()
+    public void ResetParameters()
     {
         if(emitter.Params[0].Value != 100f)
         {
@@ -221,6 +221,17 @@ public class MouthOfGod : MonoBehaviour
             TreeMalarkey.RegisterEventOnTree(MouthOfGodTree, "CallSafeAudio", SafeAudio);
             TreeMalarkey.RegisterEventOnTree(MouthOfGodTree, "CallDeathAudio", DeathAudio);
             TreeMalarkey.RegisterEventOnTree(MouthOfGodTree, "CallResetAudio", ResetParameters);
+        }
+    }
+
+    void OnDisable()
+    {
+        if (MouthOfGodTree)
+        {
+            TreeMalarkey.UnregisterEventOnTree(MouthOfGodTree, "CallChaseAudio", ChaseAudio);
+            TreeMalarkey.UnregisterEventOnTree(MouthOfGodTree, "CallSafeAudio", SafeAudio);
+            TreeMalarkey.UnregisterEventOnTree(MouthOfGodTree, "CallDeathAudio", DeathAudio);
+            TreeMalarkey.UnregisterEventOnTree(MouthOfGodTree, "CallResetAudio", ResetParameters);
         }
     }
 

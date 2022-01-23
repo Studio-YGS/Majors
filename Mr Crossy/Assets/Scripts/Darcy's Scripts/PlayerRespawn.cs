@@ -35,14 +35,12 @@ public class PlayerRespawn : MonoBehaviour
     int deathCount;
 
     bool hasMoved = false, tutorialPlayed;
-    OverseerController seer;
     public ExternalInteralSwitch exSwitch;
     [HideInInspector] public bool crossyDeath;
 
     void Start()
     {
         originalposition = crossyPosition.position;
-        seer = FindObjectOfType<OverseerController>();
         player = FindObjectOfType<Player_Controller>();
         journal = FindObjectOfType<JournalController>();
         respawnPosition = respawnPoints[0];

@@ -2,10 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using BehaviorDesigner.Runtime.Tactical;
+using FMOD.Studio;
+using FMODUnity;
 
 public class Player_Controller : MonoBehaviour, IDamageable
 {
+    OverseerController overseer;
     PlayerRespawn respawn;
+
+    EventInstance takeDamage;
+
+    MouthOfGod voiceOfGod;
 
     public CharacterController controller;
     public LayerMask raycastLayerMask;
@@ -14,7 +21,7 @@ public class Player_Controller : MonoBehaviour, IDamageable
     public float speed;
     public float sprintSpeed;
     public float outOfBreathSpeed;
-    public float maxHealth = 3;
+    public float maxHealth = 30;
     [HideInInspector]
     public float currentHealth;
     public float stamina = 8;
@@ -62,6 +69,8 @@ public class Player_Controller : MonoBehaviour, IDamageable
     {
         currentHealth = maxHealth;
         respawn = FindObjectOfType<PlayerRespawn>();
+        overseer = FindObjectOfType<OverseerController>();
+        voiceOfGod = FindObjectOfType<MouthOfGod>();
     }
     void Start()
     {
@@ -211,6 +220,9 @@ public class Player_Controller : MonoBehaviour, IDamageable
         //        EnableController();
         //    }
         //}
+
+        //Healing Stuff
+        if (overseer.m_PlayerInSafeHouse) HealPlayer();
     }
     
     IEnumerator OutOfBreath()
@@ -272,11 +284,23 @@ public class Player_Controller : MonoBehaviour, IDamageable
     {
         currentHealth = Mathf.Max(currentHealth - amount, 0);
 
+        TakeDamageNoise();
+
         if(currentHealth == 0)
         {
             //JustDyingThings
+            voiceOfGod.DeathAudio();
             respawn.PlayerDie();
         }
+    }
+
+    void TakeDamageNoise()
+    {
+        takeDamage = RuntimeManager.CreateInstance("event:/Character/Hit and damage/Child Hit and Damage");
+
+        takeDamage.start();
+
+        takeDamage.release();
     }
 
     public bool IsAlive()
@@ -284,9 +308,18 @@ public class Player_Controller : MonoBehaviour, IDamageable
         return currentHealth > 0;
     }
 
+    public void HealPlayer()
+    {
+        if(currentHealth < maxHealth)
+        {
+            currentHealth = Mathf.Min(currentHealth + Time.deltaTime, maxHealth);
+        }
+    }
+
     public void ResetHealth()
     {
         currentHealth = maxHealth;
+        voiceOfGod.ResetParameters();
     }
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {

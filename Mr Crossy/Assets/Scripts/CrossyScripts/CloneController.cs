@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Gemstone;
 using UnityEngine.AI;
 using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tactical;
@@ -52,8 +53,6 @@ public class CloneController : MonoBehaviour, IAttackAgent
     [SerializeField] private float m_AngularSpeed;
 
     [SerializeField] private float m_StoppingDistance;
-    [SerializeField] private float m_AttackAttemptDistance;
-    [SerializeField] private float m_AttackHitDistance;
 
     float mSpeed;
     float tSpeed;
@@ -104,6 +103,9 @@ public class CloneController : MonoBehaviour, IAttackAgent
     //Misc Variables
     private int m_State = -1;
     private int m_Mask;
+
+    //Particles
+    public GameObject warpParticle;
     #endregion
 
     #endregion
@@ -129,8 +131,6 @@ public class CloneController : MonoBehaviour, IAttackAgent
     public float Acceleration { get { return (ShouldBeStopped) ? m_StoppingAcceleration : m_BaseAcceleration; } }
     public float AngularSpeed { get { return m_AngularSpeed; } set { m_AngularSpeed = value; } }
     public float StoppingDistance { get { return m_StoppingDistance; } set { m_StoppingDistance = value; } }
-    public float AttackAttemptDistance { get { return m_AttackAttemptDistance; } }
-    public float AttackHitDistance { get { return m_AttackHitDistance; } }
 
     //Misc Properties
     public int NavMeshMask { get { return m_Mask; } }
@@ -157,6 +157,8 @@ public class CloneController : MonoBehaviour, IAttackAgent
 
     private void Update()
     {
+        agent.acceleration = Acceleration;
+
         CloneEye();
 
         //Animator
@@ -177,6 +179,21 @@ public class CloneController : MonoBehaviour, IAttackAgent
 
         mSpeed = velocity.z;
         tSpeed = velocity.x;
+    }
+
+    public void RemoveSelfFromList()
+    {
+        Instantiate(warpParticle, transform.position, transform.rotation);
+        overseer.crossyClones.Remove(this);
+    }
+
+    void AttackNoise()
+    {
+        attackLines = RuntimeManager.CreateInstance("event:/MR_C_Attack/Mr_C_Attack");
+
+        attackLines.start();
+
+        attackLines.release();
     }
 
     #endregion
@@ -383,6 +400,22 @@ public class CloneController : MonoBehaviour, IAttackAgent
             }
         }
 
+    }
+
+    #endregion
+
+
+
+    #region EventMethods
+
+    void OnEnable()
+    {
+        TreeMalarkey.RegisterEventOnTree(cloneTree, "PrepDespawn", RemoveSelfFromList);
+    }
+
+    void OnDisable()
+    {
+        TreeMalarkey.UnregisterEventOnTree(cloneTree, "PrepDespawn", RemoveSelfFromList);
     }
 
     #endregion

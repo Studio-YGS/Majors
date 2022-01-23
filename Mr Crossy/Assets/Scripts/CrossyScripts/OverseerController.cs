@@ -110,6 +110,10 @@ public class OverseerController : MonoBehaviour
 
     private bool m_InSight;
 
+    [SerializeField]
+    private int m_CloneLimit;
+    [SerializeField]
+    private float m_CloneSpawnDelay;
     public List<CloneController> crossyClones = new List<CloneController>();
 
     #endregion
@@ -361,7 +365,7 @@ public class OverseerController : MonoBehaviour
         NavMeshHit baseHit;
         
         NavMesh.SamplePosition(m_Player.transform.position, out baseHit, 1, NavMesh.AllAreas);
-        Debug.Log("NavArea: " + baseHit.mask.ToString());
+        //Debug.Log("NavArea: " + baseHit.mask.ToString());
         if (baseHit.mask == 256)
         {
             NavMeshHit validationHit;
