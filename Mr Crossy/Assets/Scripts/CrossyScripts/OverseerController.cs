@@ -37,7 +37,7 @@ public class OverseerController : MonoBehaviour
     EventInstance eventInstance;
 
     public bool deady = false;
-    
+
     #region Fields
     [SerializeField] private bool startOnAwake;
     [SerializeField] private bool usePositioner;
@@ -110,10 +110,15 @@ public class OverseerController : MonoBehaviour
 
     private bool m_InSight;
 
+    [Header("Clone Variables")]
+    public GameObject clonePrefab;
+    public GameObject warpParticlePrefab;
+
     [SerializeField]
     private int m_CloneLimit;
     [SerializeField]
     private float m_CloneSpawnDelay;
+    private float m_SinceLastClone;
     public List<CloneController> crossyClones = new List<CloneController>();
 
     #endregion
@@ -159,7 +164,9 @@ public class OverseerController : MonoBehaviour
     public bool IsInSafeHouse { get { return m_PlayerInSafeHouse; } set { m_PlayerInSafeHouse = value; } }
     public bool IsInStreetHouse { get { return m_PlayerInStreetHouse; } set { m_PlayerInStreetHouse = value; } }
 
-
+    public int CloneSpawnLimit { get { return m_CloneLimit; } }
+    public int ClonesSpawned { get { return crossyClones.Count; } }
+    public float CloneSpawnDelay { get { return m_CloneSpawnDelay; } }
 
     public bool Chasing { get { return hasChased; } }
     public bool AttemptingSafe { get { return attemptingSafe; } }
@@ -219,6 +226,7 @@ public class OverseerController : MonoBehaviour
         crossyAgent = m_Crossy.GetComponent<NavMeshAgent>();
         crossyController = m_Crossy.GetComponent<CrossyController>();
 
+        m_SinceLastClone = -m_CloneLimit;
     }
 
     private void Update()
@@ -450,6 +458,15 @@ public class OverseerController : MonoBehaviour
         return false;
     }
 
+    public bool CanSpawnClone()
+    {
+        return (m_SinceLastClone + m_CloneSpawnDelay < Time.time && crossyClones.Count < m_CloneLimit);
+    }
+
+    public void SpawnClone(Transform posToSpawn)
+    {
+        Instantiate(warpParticlePrefab, posToSpawn.position, posToSpawn.rotation);
+    }
     public void SetLighthouseGroup(int district)
     {
         switch (district)
@@ -723,6 +740,13 @@ public class OverseerController : MonoBehaviour
         } // Makes not dead
         hasChased = false;
         attemptingDie = false;
+    }
+
+    IEnumerator SpawnDelay(Transform posToSpawn)
+    {
+        Instantiate(warpParticlePrefab, posToSpawn.position, posToSpawn.rotation);
+        yield return new WaitForSeconds(3f);
+        Instantiate(clonePrefab, posToSpawn.position, posToSpawn.rotation);
     }
     #endregion
 
