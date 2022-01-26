@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using FMODUnity;
+using FMOD.Studio;
 
 public class MenuManager : MonoBehaviour
 {
@@ -43,6 +44,7 @@ public class MenuManager : MonoBehaviour
         }
 
         audioSettings = FindObjectOfType<AudioSettings>();
+        audioSettings.MuteControl(true, 3);
 
         LoadSettings();
         UpdateSliders();
@@ -78,6 +80,8 @@ public class MenuManager : MonoBehaviour
         playerController.DisableController();
         playerController.inJournal = false;
 
+        audioSettings.MuteControl(false, 3);
+
         if (journalController.disabled)
         {
             dontEnable = true;
@@ -99,7 +103,7 @@ public class MenuManager : MonoBehaviour
         //RuntimeManager.PauseAllEvents(true);
         RuntimeManager.GetBus("bus:/Pause Group").setPaused(true);
 
-        streetName.SetActive(false);
+        //streetName.SetActive(false);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
 
@@ -127,7 +131,7 @@ public class MenuManager : MonoBehaviour
         //RuntimeManager.PauseAllEvents(false);
         RuntimeManager.GetBus("bus:/Pause Group").setPaused(false);
 
-        streetName.SetActive(true);
+        //streetName.SetActive(true);
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = defTimeScale;
@@ -287,9 +291,28 @@ public class MenuManager : MonoBehaviour
 
     public IEnumerator QuitGag()
     {
-        RuntimeManager.PlayOneShot("event:/MR_C_Random/I_Quit");
-        yield return new WaitForSeconds(7f);
+        EventInstance eventInstance = RuntimeManager.CreateInstance("event:/MR_C_Random/I_Quit");
+
+        eventInstance.start();
+
+        yield return new WaitForSecondsRealtime(7f);
+
+        Debug.Log("quit");
+
+        //PLAYBACK_STATE pbState;
+        //eventInstance.getPlaybackState(out pbState);
+
+        //Debug.Log(pbState);
+
+        //while (pbState != PLAYBACK_STATE.PLAYING && pbState != PLAYBACK_STATE.STARTING)
+        //{
+        //    Debug.Log(pbState);
+        //}
+
+        //Debug.Log(pbState);
         Application.Quit();
+        //Debug.Log("quit");
+        //yield return null;
     }
 
     public void ResolutionChange(int val)

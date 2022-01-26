@@ -43,7 +43,7 @@ public class PuzzleController : MonoBehaviour
     {
         uiWord = " _ _ _ _";
 
-        streetText = GameObject.Find("Street Name With Word").GetComponent<TextMeshProUGUI>();
+        //streetText = GameObject.Find("Street Name With Word").GetComponent<TextMeshProUGUI>();
 
         if (tutorial)
         {
@@ -243,7 +243,7 @@ public class PuzzleController : MonoBehaviour
             uiWord = "";
         }
 
-        streetText.text = uiWord;
+        //streetText.text = uiWord;
     }
 
     void CompletionCheck()
