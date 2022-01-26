@@ -90,9 +90,9 @@ public class TutorialController : MonoBehaviour
 
     public void StreetNameBlank()
     {
-        PuzzleController puzzleController = FindObjectOfType<PuzzleController>();
+        //PuzzleController puzzleController = FindObjectOfType<PuzzleController>();
 
-        puzzleController.streetText.text = "";
+        //puzzleController.streetText.text = "";
     }
 
     public void CrossyWait()

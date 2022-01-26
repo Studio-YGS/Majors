@@ -21,6 +21,8 @@ public class WordCollision : MonoBehaviour
 
     MenuManager menuManager;
 
+    UIController uiController;
+
     [SerializeField] 
     CrossyStreetStalk streetStalk;
 
@@ -31,6 +33,7 @@ public class WordCollision : MonoBehaviour
         menuManager = FindObjectOfType<MenuManager>();
         respawn = FindObjectOfType<RespawnWordColliders>();
         seer = FindObjectOfType<OverseerController>();
+        uiController = FindObjectOfType<UIController>();
 
         SetUpWords();
     }
@@ -89,7 +92,7 @@ public class WordCollision : MonoBehaviour
             puzzleController.wordCollision = GetComponent<WordCollision>();
             puzzleController.word = mainWord;
             puzzleController.wordObjects.Clear();
-            puzzleController.currentStreet = street;
+            //puzzleController.currentStreet = street;
 
             if (wordObjects != null)
             {
@@ -114,7 +117,9 @@ public class WordCollision : MonoBehaviour
                 puzzleController.PlayerWordControl();
             }
 
-            menuManager.streetName.SetActive(true);
+            //menuManager.streetName.SetActive(true);
+                
+            uiController.SwitchStreet(this);
 
             if (streetStalk != null)
             {
@@ -158,6 +163,6 @@ public class WordCollision : MonoBehaviour
             AssignController();
         }
 
-        puzzleController.streetText.text = "Home.";
+        //puzzleController.streetText.text = "Home.";
     }
 }

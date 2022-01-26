@@ -37,6 +37,29 @@ public class AudioSettings : MonoBehaviour
         voiceUP.setVolume(voiceVolume);
     }
 
+    public void MuteControl(bool mute, int whichBusGroup) //1 = all, 2 = Pause Group, 3 = Unpause Group
+    {
+        if(whichBusGroup == 1)
+        {
+            musicP.setMute(mute);
+            sfxP.setMute(mute);
+            voiceP.setMute(mute);
+            sfxUP.setMute(mute);
+            voiceUP.setMute(mute);
+        }
+        else if(whichBusGroup == 2)
+        {
+            musicP.setMute(mute);
+            sfxP.setMute(mute);
+            voiceP.setMute(mute);
+        }
+        else if(whichBusGroup == 3)
+        {
+            sfxUP.setMute(mute);
+            voiceUP.setMute(mute);
+        }
+    }
+
     public void MusicVolumeLevel(float newMusicVolume)
     {
         musicVolume = newMusicVolume;

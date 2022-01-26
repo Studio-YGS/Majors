@@ -85,7 +85,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: streetAOn
+    m_ConditionEvent: streetSwitch
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -6146428375572605372}
@@ -185,7 +185,7 @@ AnimatorController:
   m_Name: UI_StreetSign
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: streetAOn
+  - m_Name: streetSwitch
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -288,7 +288,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: streetAOn
+    m_ConditionEvent: streetSwitch
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -4714400961564878770}
