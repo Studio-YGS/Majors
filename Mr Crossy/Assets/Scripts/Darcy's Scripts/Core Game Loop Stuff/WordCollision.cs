@@ -19,8 +19,6 @@ public class WordCollision : MonoBehaviour
 
     OverseerController seer;
 
-    MenuManager menuManager;
-
     UIController uiController;
 
     [SerializeField] 
@@ -30,7 +28,6 @@ public class WordCollision : MonoBehaviour
 
     void Start()
     {
-        menuManager = FindObjectOfType<MenuManager>();
         respawn = FindObjectOfType<RespawnWordColliders>();
         seer = FindObjectOfType<OverseerController>();
         uiController = FindObjectOfType<UIController>();
@@ -42,7 +39,14 @@ public class WordCollision : MonoBehaviour
     {
         if (other.CompareTag("GameController"))
         {
-            SetUpController();
+            if (gameObject.name.Contains("Home"))
+            {
+                SetHomeText();
+            }
+            else
+            {
+                SetUpController();
+            }
         }
     }
 
@@ -82,7 +86,9 @@ public class WordCollision : MonoBehaviour
     {
         if (!gameObject.name.Contains("Home"))
         {
-            if(puzzleController == null)
+            uiController.SwitchStreet(this);
+
+            if (puzzleController == null)
             {
                 AssignController();
             }
@@ -92,7 +98,6 @@ public class WordCollision : MonoBehaviour
             puzzleController.wordCollision = GetComponent<WordCollision>();
             puzzleController.word = mainWord;
             puzzleController.wordObjects.Clear();
-            //puzzleController.currentStreet = street;
 
             if (wordObjects != null)
             {
@@ -116,10 +121,7 @@ public class WordCollision : MonoBehaviour
             {
                 puzzleController.PlayerWordControl();
             }
-
-            //menuManager.streetName.SetActive(true);
-                
-            uiController.SwitchStreet(this);
+            
 
             if (streetStalk != null)
             {
@@ -158,11 +160,6 @@ public class WordCollision : MonoBehaviour
 
     public void SetHomeText()
     {
-        if(puzzleController == null)
-        {
-            AssignController();
-        }
-
-        //puzzleController.streetText.text = "Home.";
+        uiController.HomeSwitch();
     }
 }

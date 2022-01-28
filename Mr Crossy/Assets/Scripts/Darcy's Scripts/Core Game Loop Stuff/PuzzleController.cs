@@ -14,6 +14,8 @@ public class PuzzleController : MonoBehaviour
     public string word, currentStreet;
     string playersWord, letter, altarName, uiWord;
 
+    UIController uiController;
+
     [SerializeField]
     TextMeshProUGUI mistakeText;
     [HideInInspector]
@@ -24,7 +26,7 @@ public class PuzzleController : MonoBehaviour
     int wordLength, mistakeCount, completedWords, letterPoint, objectPoint;
     public int wordsInPuzzle;
 
-    [HideInInspector]
+    //[HideInInspector]
     public List<TextMeshProUGUI> canvasLetters = new List<TextMeshProUGUI>();
 
     [HideInInspector]
@@ -44,6 +46,8 @@ public class PuzzleController : MonoBehaviour
         uiWord = " _ _ _ _";
 
         //streetText = GameObject.Find("Street Name With Word").GetComponent<TextMeshProUGUI>();
+
+        uiController = FindObjectOfType<UIController>();
 
         if (tutorial)
         {
@@ -236,14 +240,31 @@ public class PuzzleController : MonoBehaviour
 
         Debug.Log("current st: " + currentStreet + ",  current altar word: " + currentAltarWord);
 
-        uiWord = currentStreet + ": " + currentAltarWord;
+        TextMeshProUGUI[] letters = uiController.currentWordDisplay.GetComponentsInChildren<TextMeshProUGUI>();
 
-        if (currentStreet == "")
+        for(int i = 0; i < letters.Length; i++)
         {
-            uiWord = "";
+            Debug.Log(letters[i].gameObject.name);
+            if (canvasLetters[i].text.ToIntArray().Length < 1)
+            {
+                letters[i].text = "";
+                letters[i].alpha = 0f;
+            }
+            else
+            {
+                letters[i].text = canvasLetters[i].text;
+                letters[i].alpha = 1f;
+            }
         }
 
-        //streetText.text = uiWord;
+        //uiWord = currentStreet + ": " + currentAltarWord;
+
+        //if (currentStreet == "")
+        //{
+        //    uiWord = "";
+        //}
+
+        ////streetText.text = uiWord;
     }
 
     void CompletionCheck()

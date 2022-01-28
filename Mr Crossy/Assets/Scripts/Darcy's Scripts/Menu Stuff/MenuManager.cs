@@ -19,8 +19,6 @@ public class MenuManager : MonoBehaviour
     [SerializeField]
     GameObject pauseMenuObject, settingsMenuObject, mainMenuObject, pressSpace, controlsUI, loadingAni;
 
-    public GameObject streetName;
-
     float defTimeScale;
 
     public bool mainMenu;
@@ -103,7 +101,6 @@ public class MenuManager : MonoBehaviour
         //RuntimeManager.PauseAllEvents(true);
         RuntimeManager.GetBus("bus:/Pause Group").setPaused(true);
 
-        //streetName.SetActive(false);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
 
@@ -131,7 +128,6 @@ public class MenuManager : MonoBehaviour
         //RuntimeManager.PauseAllEvents(false);
         RuntimeManager.GetBus("bus:/Pause Group").setPaused(false);
 
-        //streetName.SetActive(true);
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = defTimeScale;
