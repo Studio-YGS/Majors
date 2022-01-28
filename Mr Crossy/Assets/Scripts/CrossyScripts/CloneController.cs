@@ -181,7 +181,7 @@ public class CloneController : MonoBehaviour, IAttackAgent
         tSpeed = velocity.x;
     }
 
-    public void RemoveSelfFromList()
+    public void PrepDespawn()
     {
         Instantiate(warpParticle, transform.position, transform.rotation);
         overseer.crossyClones.Remove(this);
@@ -410,12 +410,12 @@ public class CloneController : MonoBehaviour, IAttackAgent
 
     void OnEnable()
     {
-        TreeMalarkey.RegisterEventOnTree(cloneTree, "PrepDespawn", RemoveSelfFromList);
+        TreeMalarkey.RegisterEventOnTree(cloneTree, "PrepDespawn", PrepDespawn);
     }
 
     void OnDisable()
     {
-        TreeMalarkey.UnregisterEventOnTree(cloneTree, "PrepDespawn", RemoveSelfFromList);
+        TreeMalarkey.UnregisterEventOnTree(cloneTree, "PrepDespawn", PrepDespawn);
     }
 
     #endregion
