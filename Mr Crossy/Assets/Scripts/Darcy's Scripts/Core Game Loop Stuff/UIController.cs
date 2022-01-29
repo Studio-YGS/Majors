@@ -65,7 +65,6 @@ public class UIController : MonoBehaviour
 
                 if (letters.Length == wordCollision.mainWord.ToIntArray().Length)
                 {
-                    Debug.Log("im cumming");
                     currentWordDisplay = wordDisplayObjects[i];
 
                     currentWordDisplay.GetComponentInParent<Animator>().SetBool(currentWordDisplay.name, true);
@@ -79,6 +78,8 @@ public class UIController : MonoBehaviour
         yield return new WaitForSeconds(1.2f);
 
         animating = false;
+
+        StopCoroutine(AnimationWait());
     }
 
     public void HomeSwitch()
@@ -119,6 +120,8 @@ public class UIController : MonoBehaviour
             currentWordDisplay = wordDisplayObjects[1];
 
             currentWordDisplay.GetComponentInParent<Animator>().SetBool(currentWordDisplay.name, true);
+
+            StartCoroutine(AnimationWait());
         }
     }
 }

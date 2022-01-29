@@ -86,7 +86,10 @@ public class WordCollision : MonoBehaviour
     {
         if (!gameObject.name.Contains("Home"))
         {
-            uiController.SwitchStreet(this);
+            if(!dontWrite && !dontCheck)
+            {
+                uiController.SwitchStreet(this);
+            }
 
             if (puzzleController == null)
             {

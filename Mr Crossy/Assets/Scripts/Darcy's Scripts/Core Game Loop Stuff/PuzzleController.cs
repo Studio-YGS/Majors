@@ -12,7 +12,7 @@ using FMODUnity;
 public class PuzzleController : MonoBehaviour
 {
     public string word, currentStreet;
-    string playersWord, letter, altarName, uiWord;
+    string playersWord, letter, altarName;
 
     UIController uiController;
 
@@ -43,14 +43,12 @@ public class PuzzleController : MonoBehaviour
 
     void Start()
     {
-        uiWord = " _ _ _ _";
-
-        //streetText = GameObject.Find("Street Name With Word").GetComponent<TextMeshProUGUI>();
-
         uiController = FindObjectOfType<UIController>();
 
         if (tutorial)
         {
+            uiController.currentWordDisplay = uiController.wordDisplayObjects[1];
+
             SetUpLetters(0);
         }
     }
@@ -244,7 +242,6 @@ public class PuzzleController : MonoBehaviour
 
         for(int i = 0; i < letters.Length; i++)
         {
-            Debug.Log(letters[i].gameObject.name);
             if (canvasLetters[i].text.ToIntArray().Length < 1)
             {
                 letters[i].text = "";
