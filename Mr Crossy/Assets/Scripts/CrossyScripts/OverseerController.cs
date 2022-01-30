@@ -358,7 +358,7 @@ public class OverseerController : MonoBehaviour
         distootle.ShoobyDooby();
         CheckClosestLighthouse();
         m_Crossy.GetComponent<CrossyController>().RegisterEvents();
-        ObserverRegister();
+        //ObserverRegister();
     }
     public void NavAreaDetection()
     {
@@ -729,21 +729,21 @@ public class OverseerController : MonoBehaviour
     #endregion
 
     #region TreeEvents
-    private void OnEnable()
-    {
-        TreeMalarkey.RegisterEventOnTree(CrossyController.crossyTree, "DespawnAudio", TheDespawnThing);
-        TreeMalarkey.RegisterEventOnTree(CrossyController.crossyTree, "PursuitAudio", PursuitAudio);
-        TreeMalarkey.RegisterEventOnTree(CrossyController.crossyTree, "DeadAudio", DeadAudio);
-        TreeMalarkey.RegisterEventOnTree(CrossyController.crossyTree, "SafeAudio", SafeAudio);
-    }
+    //private void OnEnable()
+    //{
+    //    TreeMalarkey.RegisterEventOnTree(CrossyController.crossyTree, "DespawnAudio", TheDespawnThing);
+    //    TreeMalarkey.RegisterEventOnTree(CrossyController.crossyTree, "PursuitAudio", PursuitAudio);
+    //    TreeMalarkey.RegisterEventOnTree(CrossyController.crossyTree, "DeadAudio", DeadAudio);
+    //    TreeMalarkey.RegisterEventOnTree(CrossyController.crossyTree, "SafeAudio", SafeAudio);
+    //}
 
-    public void ObserverRegister()
-    {
+    //public void ObserverRegister()
+    //{
         
-        TreeMalarkey.RegisterEventOnTree(ObserverTree, "PursuitAudio", PursuitAudio);
-        TreeMalarkey.RegisterEventOnTree(ObserverTree, "DeadAudio", DeadAudio);
-        TreeMalarkey.RegisterEventOnTree(ObserverTree, "SafeAudio", SafeAudio);
-    }
+    //    TreeMalarkey.RegisterEventOnTree(ObserverTree, "PursuitAudio", PursuitAudio);
+    //    TreeMalarkey.RegisterEventOnTree(ObserverTree, "DeadAudio", DeadAudio);
+    //    TreeMalarkey.RegisterEventOnTree(ObserverTree, "SafeAudio", SafeAudio);
+    //}
 
     public void PursuitAudio()
     {
@@ -775,79 +775,79 @@ public class OverseerController : MonoBehaviour
         StartCoroutine(WaitForPuzzleOff());
     }
 
-    private void OnDisable()
-    {
-        TreeMalarkey.UnregisterEventOnTree(CrossyController.crossyTree, "DespawnAudio", TheDespawnThing);
-        TreeMalarkey.UnregisterEventOnTree(CrossyController.crossyTree, "PursuitAudio", PursuitAudio);
-        TreeMalarkey.UnregisterEventOnTree(CrossyController.crossyTree, "DeadAudio", DeadAudio);
-        TreeMalarkey.UnregisterEventOnTree(CrossyController.crossyTree, "SafeAudio", SafeAudio);
-        TreeMalarkey.UnregisterEventOnTree(ObserverTree, "PursuitAudio", PursuitAudio);
-        TreeMalarkey.UnregisterEventOnTree(ObserverTree, "DeadAudio", DeadAudio);
-        TreeMalarkey.UnregisterEventOnTree(ObserverTree, "SafeAudio", SafeAudio);
-    }
+    //private void OnDisable()
+    //{
+    //    TreeMalarkey.UnregisterEventOnTree(CrossyController.crossyTree, "DespawnAudio", TheDespawnThing);
+    //    TreeMalarkey.UnregisterEventOnTree(CrossyController.crossyTree, "PursuitAudio", PursuitAudio);
+    //    TreeMalarkey.UnregisterEventOnTree(CrossyController.crossyTree, "DeadAudio", DeadAudio);
+    //    TreeMalarkey.UnregisterEventOnTree(CrossyController.crossyTree, "SafeAudio", SafeAudio);
+    //    TreeMalarkey.UnregisterEventOnTree(ObserverTree, "PursuitAudio", PursuitAudio);
+    //    TreeMalarkey.UnregisterEventOnTree(ObserverTree, "DeadAudio", DeadAudio);
+    //    TreeMalarkey.UnregisterEventOnTree(ObserverTree, "SafeAudio", SafeAudio);
+    //}
 
     #endregion
 
 
     #region VoiceStuff
 
-    void TitanCrossyVoiceLines()
-    {
-        if (titan.animator.GetCurrentAnimatorStateInfo(0).IsName("TitanCrossyIdle") && !playedTitanLine)
-        {
-            float probability = Random.Range(0f, 1f);
-            Debug.Log("TitanFMOD probability: " + probability);
-            if (probability < m_TitanVoiceLineChance)
-            {
-                eventInstance = RuntimeManager.CreateInstance("event:/MR_C_Titan/Titan_Oneliners");
-                eventInstance.set3DAttributes(RuntimeUtils.To3DAttributes(m_TitanHead));
-                Debug.Log("TitanFMOD TitanPlayLine");
-                eventInstance.start();
-            }
+    //void TitanCrossyVoiceLines()
+    //{
+    //    if (titan.animator.GetCurrentAnimatorStateInfo(0).IsName("TitanCrossyIdle") && !playedTitanLine)
+    //    {
+    //        float probability = Random.Range(0f, 1f);
+    //        Debug.Log("TitanFMOD probability: " + probability);
+    //        if (probability < m_TitanVoiceLineChance)
+    //        {
+    //            eventInstance = RuntimeManager.CreateInstance("event:/MR_C_Titan/Titan_Oneliners");
+    //            eventInstance.set3DAttributes(RuntimeUtils.To3DAttributes(m_TitanHead));
+    //            Debug.Log("TitanFMOD TitanPlayLine");
+    //            eventInstance.start();
+    //        }
 
-            playedTitanLine = true;
-        }
-        else if (titan.animator.GetCurrentAnimatorStateInfo(0).IsName("TitanCrossyIdleHidden")) 
-        {
-            Debug.Log("TitanFMOD TitanPlayReset");
-            eventInstance.release();
-            playedTitanLine = false; 
-        }
-    }
+    //        playedTitanLine = true;
+    //    }
+    //    else if (titan.animator.GetCurrentAnimatorStateInfo(0).IsName("TitanCrossyIdleHidden")) 
+    //    {
+    //        Debug.Log("TitanFMOD TitanPlayReset");
+    //        eventInstance.release();
+    //        playedTitanLine = false; 
+    //    }
+    //}
 
-    void TitanUppyDownyNoisies()
-    {
-        if(titan.animator.GetCurrentAnimatorStateInfo(0).IsName("TitanCrossyIdleHidden") || titan.animator.GetCurrentAnimatorStateInfo(0).IsName("TitanCrossyIdle"))
-        {
-            if(m_TitanNoisyNum != 0)
-            {
-                Debug.Log("UPPYDOWNY: Doing Neutral");
-                StartCoroutine(TitanSoundNeutral());
-            }
-        }
-        else if (titan.animator.GetCurrentAnimatorStateInfo(0).IsName("TitanCrossyRising"))
-        {
-            if(m_TitanNoisyNum != 1)
-            {
-                Debug.Log("UPPYDOWNY: Doing Uppy");
-                StopCoroutine(TitanSoundNeutral());
-                m_TitanNoisyNum = 1;
-                emitter.Params[3].Value = m_TitanNoisyNum;
-                emitter.Target.SetParameter(emitter.Params[3].Name, emitter.Params[3].Value);
-            }
-        }
-        else if (titan.animator.GetCurrentAnimatorStateInfo(0).IsName("TitanCrossyHide"))
-        {
-            if (m_TitanNoisyNum != 2)
-            {
-                Debug.Log("UPPYDOWNY: Doing Downy");
-                StopCoroutine(TitanSoundNeutral());
-                m_TitanNoisyNum = 2;
-                emitter.Params[3].Value = m_TitanNoisyNum;
-                emitter.Target.SetParameter(emitter.Params[3].Name, emitter.Params[3].Value);
-            }
-        }
-    }
+    //void TitanUppyDownyNoisies()
+    //{
+    //    if(titan.animator.GetCurrentAnimatorStateInfo(0).IsName("TitanCrossyIdleHidden") || titan.animator.GetCurrentAnimatorStateInfo(0).IsName("TitanCrossyIdle"))
+    //    {
+    //        if(m_TitanNoisyNum != 0)
+    //        {
+    //            Debug.Log("UPPYDOWNY: Doing Neutral");
+    //            StartCoroutine(TitanSoundNeutral());
+    //        }
+    //    }
+    //    else if (titan.animator.GetCurrentAnimatorStateInfo(0).IsName("TitanCrossyRising"))
+    //    {
+    //        if(m_TitanNoisyNum != 1)
+    //        {
+    //            Debug.Log("UPPYDOWNY: Doing Uppy");
+    //            StopCoroutine(TitanSoundNeutral());
+    //            m_TitanNoisyNum = 1;
+    //            emitter.Params[3].Value = m_TitanNoisyNum;
+    //            emitter.Target.SetParameter(emitter.Params[3].Name, emitter.Params[3].Value);
+    //        }
+    //    }
+    //    else if (titan.animator.GetCurrentAnimatorStateInfo(0).IsName("TitanCrossyHide"))
+    //    {
+    //        if (m_TitanNoisyNum != 2)
+    //        {
+    //            Debug.Log("UPPYDOWNY: Doing Downy");
+    //            StopCoroutine(TitanSoundNeutral());
+    //            m_TitanNoisyNum = 2;
+    //            emitter.Params[3].Value = m_TitanNoisyNum;
+    //            emitter.Target.SetParameter(emitter.Params[3].Name, emitter.Params[3].Value);
+    //        }
+    //    }
+    //}
 
     #endregion
 }
