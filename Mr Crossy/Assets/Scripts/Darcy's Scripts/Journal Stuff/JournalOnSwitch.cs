@@ -15,7 +15,7 @@ public class JournalOnSwitch : MonoBehaviour
 
     JournalController journalController;
 
-    MenuManager pauseMenu;
+    MenuManager menuManager;
 
     EventInstance eventInstance;
 
@@ -23,7 +23,7 @@ public class JournalOnSwitch : MonoBehaviour
 
     void Start()
     {
-        pauseMenu = FindObjectOfType<MenuManager>();
+        menuManager = FindObjectOfType<MenuManager>();
         fpc = FindObjectOfType<Player_Controller>();
         journalController = FindObjectOfType<JournalController>();
         headBob = FindObjectOfType<HeadBob>();
@@ -56,7 +56,7 @@ public class JournalOnSwitch : MonoBehaviour
             headBob.enabled = false;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
-            pauseMenu.streetName.SetActive(false);
+            //pauseMenu.streetName.SetActive(false);
 
             journalController.OpenMap();
 
@@ -78,7 +78,7 @@ public class JournalOnSwitch : MonoBehaviour
             headBob.enabled = true;
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
-            pauseMenu.streetName.SetActive(true);
+            //menuManager.streetName.SetActive(true);
 
             eventInstance = RuntimeManager.CreateInstance("event:/2D/Paper/Paper Up");
 
