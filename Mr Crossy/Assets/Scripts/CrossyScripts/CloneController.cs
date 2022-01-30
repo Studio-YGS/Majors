@@ -203,21 +203,19 @@ public class CloneController : MonoBehaviour, IAttackAgent
     {
         return m_AttackDistance;
     }
-
     public bool CanAttack()
     {
         return (m_SinceLastAttack + m_AttackDelay < Time.time && animator.GetCurrentAnimatorStateInfo(1).IsName("NotAttacking"));
     }
-
     public float AttackAngle()
     {
         return m_AttackAngle;
     }
-
     public void Attack(Vector3 targetPosition)
     {
         animator.SetInteger("AttackVar", Random.Range(0, 2));
         animator.SetTrigger("Attack");
+        AttackNoise();
         m_SinceLastAttack = Time.time;
     }
 

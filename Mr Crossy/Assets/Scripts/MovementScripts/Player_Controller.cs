@@ -289,11 +289,11 @@ public class Player_Controller : MonoBehaviour, IDamageable
         if(currentHealth == 0)
         {
             //JustDyingThings
+            FindObjectOfType<MrCrossyDistortion>().DarkenScreen(1.5f);
             voiceOfGod.DeathAudio();
             respawn.PlayerDie();
         }
     }
-
     void TakeDamageNoise()
     {
         takeDamage = RuntimeManager.CreateInstance("event:/Character/Hit and damage/Child Hit and Damage");
@@ -302,12 +302,10 @@ public class Player_Controller : MonoBehaviour, IDamageable
 
         takeDamage.release();
     }
-
     public bool IsAlive()
     {
         return currentHealth > 0;
     }
-
     public void HealPlayer()
     {
         if(currentHealth < maxHealth)
@@ -315,7 +313,6 @@ public class Player_Controller : MonoBehaviour, IDamageable
             currentHealth = Mathf.Min(currentHealth + Time.deltaTime, maxHealth);
         }
     }
-
     public void ResetHealth()
     {
         currentHealth = maxHealth;

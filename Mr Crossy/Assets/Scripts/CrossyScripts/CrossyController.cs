@@ -260,7 +260,6 @@ public class CrossyController : MonoBehaviour, IAttackAgent
         mSpeed = velocity.z;
         tSpeed = velocity.x;
     }
-
     public void Running()
     {
         if (overrideShouldRun == false) // Sets 'm_ShouldRun' based on state and distance from target.
@@ -275,13 +274,11 @@ public class CrossyController : MonoBehaviour, IAttackAgent
         }
         else { m_ShouldRun = run; }
     }
-
     public void HouseScoutVariableSetter(Vector3 scoutPos, float scoutRadius)
     {
         m_HouseScoutCentre = scoutPos;
         m_HouseScoutRadius = scoutRadius;
     }
-
     public void ScaryRunCondition()
     {
         float distance = agent.remainingDistance;
@@ -300,7 +297,14 @@ public class CrossyController : MonoBehaviour, IAttackAgent
             animator.SetBool("ScaryVariant", false);
         }
     }
+    public void AttackSound()
+    {
+        attackLines = RuntimeManager.CreateInstance("event:/MR_C_Attack/Mr_C_Attack");
 
+        attackLines.start();
+
+        attackLines.release();
+    }
     #endregion
 
     #region AttackInterfaceMethods
@@ -308,24 +312,21 @@ public class CrossyController : MonoBehaviour, IAttackAgent
     {
         return m_AttackDistance;
     }
-
     public bool CanAttack()
     {
         return (m_SinceLastAttack + m_AttackDelay < Time.time && animator.GetCurrentAnimatorStateInfo(1).IsName("NotAttacking"));
     }
-
     public float AttackAngle()
     {
         return m_AttackAngle;
     }
-
     public void Attack(Vector3 targetPosition)
     {
         animator.SetInteger("AttackVar", Random.Range(0, 2));
         animator.SetTrigger("Attack");
+        AttackSound();
         m_SinceLastAttack = Time.time;
     }
-
     #endregion
 
     #region EyeGlowMethods
@@ -510,19 +511,6 @@ public class CrossyController : MonoBehaviour, IAttackAgent
 
     #endregion
 
-    public void ForceDespawn()
-    {
-        crossyTree.SendEvent("Despawn");
-    }
-
-    //public void StoppyStop()
-    //{
-    //    if (animator.GetCurrentAnimatorStateInfo(0).IsName("Spinspin") || animator.GetCurrentAnimatorStateInfo(0).IsName("Scream") || animator.GetCurrentAnimatorStateInfo(0).IsName("Agony") || animator.GetCurrentAnimatorStateInfo(0).IsName("LookAround"))
-    //    {
-    //        m_ShouldBeStopped = true;
-    //    }
-    //    else m_ShouldBeStopped = false;
-    //}
 
     
 
@@ -530,8 +518,6 @@ public class CrossyController : MonoBehaviour, IAttackAgent
     public void OnEnable()
     {
         TreeMalarkey.RegisterEventOnTree(crossyTree, "Darken", DarkenEvent);
-        TreeMalarkey.RegisterEventOnTree(crossyTree, "PlayAttack", AttackSound);
-        TreeMalarkey.RegisterEventOnTree(crossyTree, "PlayDamage", AttackHitSound);
         TreeMalarkey.RegisterEventOnTree(crossyTree, "WooshOne", WooshSingle);
         TreeMalarkey.RegisterEventOnTree(crossyTree, "WooshTwo", WooshBothle);
     }
@@ -549,17 +535,7 @@ public class CrossyController : MonoBehaviour, IAttackAgent
         Debug.Log("EVENT methid called");
     }
 
-    public void AttackSound()
-    {
-        attackLines = RuntimeManager.CreateInstance("event:/MR_C_Attack/Mr_C_Attack");
-        attackLines.start();
-    }
-
-    public void AttackHitSound()
-    {
-        attackChild = RuntimeManager.CreateInstance("event:/Character/Hit and damage/Child Hit and Damage");
-        attackChild.start();
-    }
+    
 
     public void WooshSingle()
     {
@@ -581,7 +557,6 @@ public class CrossyController : MonoBehaviour, IAttackAgent
     {
         TreeMalarkey.UnregisterEventOnTree(crossyTree, "Darken", DarkenEvent);
         TreeMalarkey.UnregisterEventOnTree(crossyTree, "PlayAttack", AttackSound);
-        TreeMalarkey.UnregisterEventOnTree(crossyTree, "PlayDamage", AttackHitSound);
         TreeMalarkey.UnregisterEventOnTree(crossyTree, "WooshOne", WooshSingle);
         TreeMalarkey.UnregisterEventOnTree(crossyTree, "WooshTwo", WooshBothle);
         TreeMalarkey.UnregisterEventOnTree(OverseerController.ObserverTree, "WooshOne", WooshSingle);
