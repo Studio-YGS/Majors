@@ -10,19 +10,21 @@ public class ObjectHolder : MonoBehaviour
 {
     public Sprite objectImage;
     public string objectName;
-    [HideInInspector] public Image image;
-    [HideInInspector] public TMP_Text textName;
-    [HideInInspector] public Image imageTwo;
-    [HideInInspector] public TMP_Text textNameTwo;
-    TMP_Text hoverText;
+    public ObjectVariableHolder vHolder;
+    //[HideInInspector] public Image image;
+    //[HideInInspector] public TMP_Text textName;
+    //[HideInInspector] public Image imageTwo;
+    //[HideInInspector] public TMP_Text textNameTwo;
+    //TMP_Text hoverText;
     bool turnOffHoverText;
+    public static bool forcedRaycast;
     Vector3 startPos;
     Quaternion startRot;
-    Material mat;
+    //Material mat;
     //float dissolveValue;
-    [HideInInspector] public Transform hand;
+    //[HideInInspector] public Transform hand;
     Transform objectInspectPoint;
-    Transform cam;
+    //Transform cam;
     static GameObject heldObject;
     //static GameObject[] objectsInHands;
     static List<GameObject> objectsInHands = new List<GameObject>();
@@ -30,8 +32,9 @@ public class ObjectHolder : MonoBehaviour
     [HideInInspector] public bool thisObjectHeld;
     [HideInInspector] public bool isPlacedDown;
     [HideInInspector] public bool beingInspected;
+    [HideInInspector] public static bool objectBeingInspected;
     //Vector3 posLastFrame;
-    [HideInInspector] public Player_Controller controller;
+    //[HideInInspector] public Player_Controller controller;
 
     [HideInInspector] public Vector3 ogScaleFactor;
     public float pickupRange = 5;
@@ -44,45 +47,51 @@ public class ObjectHolder : MonoBehaviour
     public Quaternion rotationalSet;
     [Header("When Inspecting")]
     public float distanceFromFace = 1.2f;
-    [Header("Testing Pos In Hand")]
-    public bool updatePos;
-    Vector3 newHandPosition = Vector3.zero;
-    Quaternion newHandRotation = new Quaternion(0, 0, 0, 0);
-    Vector3 newScaleFactor;
+    //[Header("Testing Pos In Hand")]
+    //public bool updatePos;
+    //Vector3 newHandPosition = Vector3.zero;
+    //Quaternion newHandRotation = new Quaternion(0, 0, 0, 0);
+    //Vector3 newScaleFactor;
 
     void Start()
     {
         thisObjectHeld = false;
-        mat = gameObject.GetComponent<MeshRenderer>().material;
+        //vHolder = FindObjectOfType<ObjectVariableHolder>();
+        //mat = gameObject.GetComponent<MeshRenderer>().material;
         startPos = transform.position;
         startRot = transform.rotation;
-        hand = GameObject.FindGameObjectWithTag("Hand").transform;
-        objectInspectPoint = hand.GetComponentInChildren<Transform>();
-        cam = FindObjectOfType<Camera>().transform;
-        controller = FindObjectOfType<Player_Controller>();
-        image = GameObject.Find("Canvas").transform.Find("Item Square 1").transform.Find("Object Image").GetComponent<Image>();
-        textName = GameObject.Find("Canvas").transform.Find("Object Name").GetComponent<TMP_Text>();
+        //hand = vHolder.hand;
+        objectInspectPoint = vHolder.hand.GetComponentInChildren<Transform>();
+        //cam = vHolder.cam; ;
+        //controller = vHolder.controller;
+        //image = vHolder.image;
+        //textName = vHolder.textName;
         
-        imageTwo = GameObject.Find("Canvas").transform.Find("Item Square 2").transform.Find("Object Image").GetComponent<Image>();
-        textNameTwo = GameObject.Find("Canvas").transform.Find("Object Name 2").GetComponent<TMP_Text>();
+        //imageTwo = vHolder.imageTwo;
+        //textNameTwo = vHolder.textNameTwo;
 
-        hoverText = GameObject.Find("Canvas").transform.Find("Hover Name").GetComponent<TMP_Text>();
-        newHandPosition = handOffset;
-        newHandRotation = handRotation;
-        newScaleFactor = scaleFactor;
+        //hoverText = vHolder.hoverText;
+        //newHandPosition = handOffset;
+        //newHandRotation = handRotation;
+        //newScaleFactor = scaleFactor;
         ogScaleFactor = transform.localScale;
     }
 
-    
+
     void Update()
     {
         RaycastHit hit;
-        if(Physics.Raycast(cam.position, cam.forward, out hit, pickupRange, controller.raycastLayerMask))
+        if (Physics.Raycast(vHolder.cam.position, vHolder.cam.forward, out hit, pickupRange, vHolder.controller.raycastLayerMask))
         {
-            if(hit.collider == gameObject.GetComponent<Collider>())
+            if (hit.collider == gameObject.GetComponent<Collider>())
             {
-                hoverText.text = "Pick Up " + objectName;
-                hoverText.gameObject.SetActive(true);
+                vHolder.hoverText.text = "Pick Up " + objectName;
+                vHolder.hoverText.gameObject.SetActive(true);
+                if (!forcedRaycast && GameObject.Find("Game Manager"))
+                {
+                    forcedRaycast = true;
+                    GameObject.Find("Game Manager").GetComponent<TutorialSectionStart>().ForceRaycast();
+                }
                 turnOffHoverText = true;
                 GameObject intereactedObject = hit.collider.gameObject;
                 if (Input.GetKeyDown(KeyCode.E) && objectsInHands.Count == 2)
@@ -99,20 +108,20 @@ public class ObjectHolder : MonoBehaviour
                 }
                 else if (Input.GetKeyDown(KeyCode.E) && objectsInHands.Count == 0)
                 {
-                    
+
                     PickUpObject(intereactedObject);
                 }
             }
             else if (hit.collider != gameObject.GetComponent<Collider>() && turnOffHoverText)
             {
                 turnOffHoverText = false;
-                hoverText.gameObject.SetActive(false);
+                vHolder.hoverText.gameObject.SetActive(false);
             }
         }
         else if (turnOffHoverText)
         {
             turnOffHoverText = false;
-            hoverText.gameObject.SetActive(false);
+            vHolder.hoverText.gameObject.SetActive(false);
         }
 
         if (Input.GetKeyDown(KeyCode.X))
@@ -120,73 +129,92 @@ public class ObjectHolder : MonoBehaviour
             Drop();
         }
 
-        if(objectsInHands.Count == 2 && thisObjectHeld && !FindObjectOfType<MenuManager>().menuOpen)
+
+
+        if (Input.GetAxis("Mouse ScrollWheel") != 0f)
         {
-            if(Input.GetAxis("Mouse ScrollWheel") != 0f )
+            if (objectsInHands.Count == 2 && thisObjectHeld && !FindObjectOfType<MenuManager>().menuOpen)
             {
-                if(objectsInHands[0].activeSelf == true)
+                if (objectsInHands[0].activeSelf == true)
                 {
                     objectsInHands[0].SetActive(false);
                     objectsInHands[1].SetActive(true);
                     heldObject = objectsInHands[1];
-                    image.GetComponentInParent<Transform>().localScale = new Vector3(1f, 1f, 1f);
-                    imageTwo.GetComponentInParent<Transform>().localScale = new Vector3(1.3f, 1.3f, 1.3f);
+                    vHolder.image.GetComponentInParent<Transform>().localScale = new Vector3(1f, 1f, 1f);
+                    vHolder.imageTwo.GetComponentInParent<Transform>().localScale = new Vector3(1.3f, 1.3f, 1.3f);
+                    Debug.Log("Change");
                 }
                 else if (objectsInHands[1].activeSelf == true)
                 {
                     objectsInHands[1].SetActive(false);
                     objectsInHands[0].SetActive(true);
                     heldObject = objectsInHands[0];
-                    imageTwo.GetComponentInParent<Transform>().localScale = new Vector3(1f, 1f, 1f);
-                    image.GetComponentInParent<Transform>().localScale = new Vector3(1.3f, 1.3f, 1.3f);
+                    vHolder.imageTwo.GetComponentInParent<Transform>().localScale = new Vector3(1f, 1f, 1f);
+                    vHolder.image.GetComponentInParent<Transform>().localScale = new Vector3(1.3f, 1.3f, 1.3f);
                 }
             }
-            if (Input.GetKeyDown(KeyCode.Alpha1))
+        }
+        
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            if (objectsInHands.Count == 2 && thisObjectHeld && !FindObjectOfType<MenuManager>().menuOpen)
             {
                 objectsInHands[1].SetActive(false);
                 objectsInHands[0].SetActive(true);
                 heldObject = objectsInHands[0];
-                imageTwo.GetComponentInParent<Transform>().localScale = new Vector3(1f, 1f, 1f);
-                image.GetComponentInParent<Transform>().localScale = new Vector3(1.3f, 1.3f, 1.3f);
+                vHolder.imageTwo.GetComponentInParent<Transform>().localScale = new Vector3(1f, 1f, 1f);
+                vHolder.image.GetComponentInParent<Transform>().localScale = new Vector3(1.3f, 1.3f, 1.3f);
             }
-            else if (Input.GetKeyDown(KeyCode.Alpha2))
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            if (objectsInHands.Count == 2 && thisObjectHeld && !FindObjectOfType<MenuManager>().menuOpen)
             {
                 objectsInHands[0].SetActive(false);
                 objectsInHands[1].SetActive(true);
                 heldObject = objectsInHands[1];
-                image.GetComponentInParent<Transform>().localScale = new Vector3(1f, 1f, 1f);
-                imageTwo.GetComponentInParent<Transform>().localScale = new Vector3(1.3f, 1.3f, 1.3f);
+                vHolder.image.GetComponentInParent<Transform>().localScale = new Vector3(1f, 1f, 1f);
+                vHolder.imageTwo.GetComponentInParent<Transform>().localScale = new Vector3(1.3f, 1.3f, 1.3f);
             }
         }
 
-        if (thisObjectHeld && !FindObjectOfType<CrossKeyManager>().puzzleOn)
+        if (Input.GetMouseButtonDown(1))
         {
-            if (Input.GetMouseButtonDown(1))
+            if (thisObjectHeld && !FindObjectOfType<CrossKeyManager>().puzzleOn && !DoorInteraction.beingMoved)
             {
                 Vector3 posOffset = transform.position - transform.GetComponent<Renderer>().bounds.center;
-                transform.position = cam.position + cam.forward * distanceFromFace + posOffset;
-                controller.enabled = false;
+                transform.position = vHolder.cam.position + vHolder.cam.forward * distanceFromFace + posOffset;
+                vHolder.controller.enabled = false;
                 beingInspected = true;
+                objectBeingInspected = true;
+                vHolder.headbob.enabled = false;
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
             }
-            else if (Input.GetMouseButtonUp(1))
+        }
+        else if (Input.GetMouseButtonUp(1))
+        {
+            if (thisObjectHeld && !FindObjectOfType<CrossKeyManager>().puzzleOn && !DoorInteraction.beingMoved)
             {
-                controller.enabled = true;
+                vHolder.controller.enabled = true;
                 beingInspected = false;
+                objectBeingInspected = false;
+                vHolder.headbob.enabled = true;
                 Cursor.visible = false;
                 Cursor.lockState = CursorLockMode.Locked;
-                transform.position = hand.TransformPoint(handOffset);
+                transform.position = vHolder.hand.TransformPoint(handOffset);
                 transform.localRotation = handRotation;
             }
-            if (Input.GetMouseButton(0) && Input.GetMouseButton(1))
+        }
+        if (Input.GetMouseButton(0) && Input.GetMouseButton(1))
+        {
+            if (thisObjectHeld && !FindObjectOfType<CrossKeyManager>().puzzleOn && !DoorInteraction.beingMoved)
             {
                 float rotX = Input.GetAxis("Mouse X") * 200 * Mathf.Deg2Rad;
                 float rotY = Input.GetAxis("Mouse Y") * 200 * Mathf.Deg2Rad;
-                transform.RotateAround(transform.GetComponent<Renderer>().bounds.center, cam.up, -rotX);
-                transform.RotateAround(transform.GetComponent<Renderer>().bounds.center, cam.right, rotY);
+                transform.RotateAround(transform.GetComponent<Renderer>().bounds.center, vHolder.cam.up, -rotX);
+                transform.RotateAround(transform.GetComponent<Renderer>().bounds.center, vHolder.cam.right, rotY);
             }
-
         }
 
         //if(dissolving == true)
@@ -202,31 +230,49 @@ public class ObjectHolder : MonoBehaviour
         //        mat.SetFloat("Vector1_1bfaaeffe0534a91a219fc6f2e1eae9e", dissolveValue);
         //    }
         //}
-        
-        if(updatePos && thisObjectHeld)
-        {
-            
-            if(handOffset != newHandPosition)
-            {
-                transform.position = hand.TransformPoint(handOffset);
-                newHandPosition = handOffset;
-            }
-            if(handRotation != newHandRotation)
-            {
-                transform.localRotation = handRotation;
-                newHandRotation = handRotation;
-            }
-            if(scaleFactor != newScaleFactor)
-            {
-                transform.localScale = scaleFactor;
-                newScaleFactor = scaleFactor;
-            }
-            
-        }
+
+        //if(updatePos && thisObjectHeld)
+        //{
+
+        //    if(handOffset != newHandPosition)
+        //    {
+        //        transform.position = hand.TransformPoint(handOffset);
+        //        newHandPosition = handOffset;
+        //    }
+        //    if(handRotation != newHandRotation)
+        //    {
+        //        transform.localRotation = handRotation;
+        //        newHandRotation = handRotation;
+        //    }
+        //    if(scaleFactor != newScaleFactor)
+        //    {
+        //        transform.localScale = scaleFactor;
+        //        newScaleFactor = scaleFactor;
+        //    }
+
+        //}
 
     }
 
+    public void ObjectDroppedWhileInspecting()
+    {
+        objectBeingInspected = false;
+    }
 
+    public void DeathDrop()
+    {
+        if(objectsInHands.Count == 1)
+        {
+            DropCurrentObject(heldObject);
+        }
+        else if(objectsInHands.Count == 2)
+        {
+            DropCurrentObject(heldObject);
+            objectsInHands[0].SetActive(true);
+            heldObject = objectsInHands[0];
+            DropCurrentObject(heldObject);
+        }
+    }
     public void Drop()
     {
         if (thisObjectHeld)
@@ -246,15 +292,15 @@ public class ObjectHolder : MonoBehaviour
         {
             if (objectsInHands.Count == 2)
             {
-                image.sprite = objectsInHands[1].GetComponent<ObjectHolder>().objectImage;
-                textName.text = objectsInHands[1].GetComponent<ObjectHolder>().objectName;
-                imageTwo.gameObject.SetActive(false);
-                textNameTwo.gameObject.SetActive(false);
+                vHolder.image.sprite = objectsInHands[1].GetComponent<ObjectHolder>().objectImage;
+                vHolder.textName.text = objectsInHands[1].GetComponent<ObjectHolder>().objectName;
+                vHolder.imageTwo.gameObject.SetActive(false);
+                vHolder.textNameTwo.gameObject.SetActive(false);
             }
             else
             {
-                image.gameObject.SetActive(false);
-                textName.gameObject.SetActive(false);
+                vHolder.image.gameObject.SetActive(false);
+                vHolder.textName.gameObject.SetActive(false);
             }
             objectsInHands.Remove(objectsInHands[0]);
             
@@ -262,24 +308,24 @@ public class ObjectHolder : MonoBehaviour
         else if (item == objectsInHands[1])
         {
             objectsInHands.Remove(objectsInHands[1]);
-            imageTwo.gameObject.SetActive(false);
-            textNameTwo.gameObject.SetActive(false);
+            vHolder.imageTwo.gameObject.SetActive(false);
+            vHolder.textNameTwo.gameObject.SetActive(false);
             
         }
-        image.transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
+        vHolder.image.transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
 
         heldObject.transform.parent = null;
         
         RaycastHit detectWall;
-        if (Physics.Raycast(cam.position, cam.forward, out detectWall, 0.5f,controller.raycastLayerMask))
+        if (Physics.Raycast(vHolder.cam.position, vHolder.cam.forward, out detectWall, 0.5f, vHolder.controller.raycastLayerMask))
         {
             if (detectWall.collider == null)
             {
-                heldObject.transform.position = cam.position + cam.forward;
+                heldObject.transform.position = vHolder.cam.position + vHolder.cam.forward;
             }
             else
             {
-                heldObject.transform.position = cam.position - cam.forward;
+                heldObject.transform.position = vHolder.cam.position - vHolder.cam.forward;
             }
         }
         heldObject.gameObject.GetComponent<Collider>().enabled = true;
@@ -311,11 +357,11 @@ public class ObjectHolder : MonoBehaviour
         itemObjectHolder.StartCoroutine("Dissolve");
         
         heldObject.transform.localScale = itemObjectHolder.ogScaleFactor;
-        if (controller.enabled == false)
+        if (vHolder.controller.enabled == false)
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
-            controller.enabled = true;
+            vHolder.controller.enabled = true;
         }
 
     }
@@ -327,23 +373,23 @@ public class ObjectHolder : MonoBehaviour
         {
             objectsInHands.Add(item);
             heldObject = item;
-            image.gameObject.SetActive(true);
-            textName.gameObject.SetActive(true);
-            itemObjectHolder.image.sprite = objectImage;
-            textName.text = itemObjectHolder.objectName;
-            image.GetComponentInParent<Transform>().localScale = new Vector3(1.3f, 1.3f, 1.3f);
+            vHolder.image.gameObject.SetActive(true);
+            vHolder.textName.gameObject.SetActive(true);
+            itemObjectHolder.vHolder.image.sprite = objectImage;
+            vHolder.textName.text = itemObjectHolder.objectName;
+            vHolder.image.GetComponentInParent<Transform>().localScale = new Vector3(1.3f, 1.3f, 1.3f);
         }
         else if (objectsInHands.Count == 1)
         {
             objectsInHands.Add(item);
             objectsInHands[0].SetActive(false);
             heldObject = item;
-            imageTwo.gameObject.SetActive(true);
-            textNameTwo.gameObject.SetActive(true);
-            itemObjectHolder.imageTwo.sprite = objectImage;
-            textNameTwo.text = itemObjectHolder.objectName;
-            image.GetComponentInParent<Transform>().localScale = new Vector3(1f, 1f, 1f);
-            imageTwo.GetComponentInParent<Transform>().localScale = new Vector3(1.3f, 1.3f, 1.3f);
+            vHolder.imageTwo.gameObject.SetActive(true);
+            vHolder.textNameTwo.gameObject.SetActive(true);
+            itemObjectHolder.vHolder.imageTwo.sprite = objectImage;
+            vHolder.textNameTwo.text = itemObjectHolder.objectName;
+            vHolder.image.GetComponentInParent<Transform>().localScale = new Vector3(1f, 1f, 1f);
+            vHolder.imageTwo.GetComponentInParent<Transform>().localScale = new Vector3(1.3f, 1.3f, 1.3f);
         }
 
         FMODUnity.RuntimeManager.PlayOneShot("event:/2D/Object Interaction/Object Pickup");
@@ -353,8 +399,8 @@ public class ObjectHolder : MonoBehaviour
         //itemObjectHolder.mat.SetFloat("Vector1_1bfaaeffe0534a91a219fc6f2e1eae9e", dissolveValue);
         itemObjectHolder.transform.localScale = scaleFactor;
         //itemObjectHolder.transform.position = hand.position + handOffset;
-        itemObjectHolder.transform.position = hand.TransformPoint(handOffset);
-        itemObjectHolder.transform.parent = hand;
+        itemObjectHolder.transform.position = vHolder.hand.TransformPoint(handOffset);
+        itemObjectHolder.transform.parent = vHolder.hand;
         itemObjectHolder.gameObject.GetComponent<Collider>().enabled = false;
         itemObjectHolder.gameObject.GetComponent<Rigidbody>().isKinematic = true;
         itemObjectHolder.gameObject.GetComponent<Rigidbody>().useGravity = false;
@@ -395,15 +441,15 @@ public class ObjectHolder : MonoBehaviour
         {
             if (objectsInHands.Count == 2)
             {
-                image.sprite = objectsInHands[1].GetComponent<ObjectHolder>().objectImage;
-                textName.text = objectsInHands[1].GetComponent<ObjectHolder>().objectName;
-                imageTwo.gameObject.SetActive(false);
-                textNameTwo.gameObject.SetActive(false);
+                vHolder.image.sprite = objectsInHands[1].GetComponent<ObjectHolder>().objectImage;
+                vHolder.textName.text = objectsInHands[1].GetComponent<ObjectHolder>().objectName;
+                vHolder.imageTwo.gameObject.SetActive(false);
+                vHolder.textNameTwo.gameObject.SetActive(false);
             }
             else
             {
-                image.gameObject.SetActive(false);
-                textName.gameObject.SetActive(false);
+                vHolder.image.gameObject.SetActive(false);
+                vHolder.textName.gameObject.SetActive(false);
             }
             objectsInHands.Remove(objectsInHands[0]);
 
@@ -411,8 +457,8 @@ public class ObjectHolder : MonoBehaviour
         else if (item == objectsInHands[1])
         {
             objectsInHands.Remove(objectsInHands[1]);
-            imageTwo.gameObject.SetActive(false);
-            textNameTwo.gameObject.SetActive(false);
+            vHolder.imageTwo.gameObject.SetActive(false);
+            vHolder.textNameTwo.gameObject.SetActive(false);
 
         }
         if (objectsInHands.Count == 1)
@@ -420,7 +466,7 @@ public class ObjectHolder : MonoBehaviour
             objectsInHands[0].SetActive(true);
             heldObject = objectsInHands[0];
         }
-        image.transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
+        vHolder.image.transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
     }
 
     IEnumerator Dissolve()

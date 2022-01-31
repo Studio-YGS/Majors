@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 696453472}
   - component: {fileID: 696453474}
   m_Layer: 0
-  m_Name: Top Left Puzzle Controller
+  m_Name: District 1 Puzzle Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,15 +44,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b953eeb9353c4c945b4669114d40ae51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wordObject: {fileID: 0}
-  assignedAltars: []
   word: 
   currentStreet: 
   mistakeText: {fileID: 0}
   streetText: {fileID: 0}
-  wordsInPuzzle: 4
+  wordsInPuzzle: 3
   canvasLetters: []
   storedObjects: []
+  wordObjects: []
+  tutorial: 0
+  devPuzzleCompletion: 0
   winEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -65,7 +66,7 @@ MonoBehaviour:
   tutorialMistakeEvent:
     m_PersistentCalls:
       m_Calls: []
-  tutorial: 0
+  wordCollision: {fileID: 0}
 --- !u!114 &696453474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,7 +103,115 @@ MonoBehaviour:
   needsRaycast: 0
   needsSecondRaycast: 0
   needsCheck: 1
+  atGate: 0
   tutorialClues: []
+  locked: {fileID: 0}
+--- !u!1 &501445359282435941
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4177072764480106705}
+  - component: {fileID: 8862228203593798333}
+  - component: {fileID: 6869647037140475286}
+  m_Layer: 0
+  m_Name: District 2 Puzzle Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &4177072764480106705
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 501445359282435941}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7026571351127810741}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8862228203593798333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 501445359282435941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b953eeb9353c4c945b4669114d40ae51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  word: 
+  currentStreet: 
+  mistakeText: {fileID: 0}
+  streetText: {fileID: 0}
+  wordsInPuzzle: 4
+  canvasLetters: []
+  storedObjects: []
+  wordObjects: []
+  tutorial: 0
+  devPuzzleCompletion: 0
+  winEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  loseEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  tutorialEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  tutorialMistakeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  wordCollision: {fileID: 0}
+--- !u!114 &6869647037140475286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 501445359282435941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 929ec0948db3c3b40b45ee8e9d981a2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sectionStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: AnimationControl, Assembly-CSharp
+        m_MethodName: TutorialAnimationsTrue
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 0.7.3
+          m_BoolArgument: 0
+        m_CallState: 2
+  steppingAway:
+    m_PersistentCalls:
+      m_Calls: []
+  raycastEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  needsRaycast: 0
+  needsSecondRaycast: 0
+  needsCheck: 1
+  atGate: 0
+  tutorialClues: []
+  locked: {fileID: 0}
 --- !u!1 &7026571350554647380
 GameObject:
   m_ObjectHideFlags: 0
@@ -146,12 +255,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b953eeb9353c4c945b4669114d40ae51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wordObject: {fileID: 0}
-  assignedAltars:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   word: GATE
   currentStreet: Home
   mistakeText: {fileID: 0}
@@ -159,6 +262,9 @@ MonoBehaviour:
   wordsInPuzzle: 1
   canvasLetters: []
   storedObjects: []
+  wordObjects: []
+  tutorial: 1
+  devPuzzleCompletion: 0
   winEvent:
     m_PersistentCalls:
       m_Calls:
@@ -279,7 +385,7 @@ MonoBehaviour:
   tutorialMistakeEvent:
     m_PersistentCalls:
       m_Calls: []
-  tutorial: 1
+  wordCollision: {fileID: 0}
 --- !u!1 &7026571351127810738
 GameObject:
   m_ObjectHideFlags: 0
@@ -309,6 +415,7 @@ Transform:
   m_Children:
   - {fileID: 7026571350554647383}
   - {fileID: 696453473}
+  - {fileID: 4177072764480106705}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

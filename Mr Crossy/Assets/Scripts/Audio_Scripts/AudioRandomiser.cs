@@ -22,6 +22,11 @@ public class AudioRandomiser : MonoBehaviour
         StartCoroutine("Waiter");
     }
 
+    private void OnEnable()
+    {
+        StartCoroutine("Waiter");
+    }
+
     public IEnumerator Waiter()
     {
 

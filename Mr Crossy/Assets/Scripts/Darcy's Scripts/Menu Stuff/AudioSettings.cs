@@ -8,9 +8,7 @@ public class AudioSettings : MonoBehaviour
 {
     EventInstance sfxVolumePreview, voiceVolumePreview;
 
-    MenuManager menuManager;
-
-    Bus music, sfx, voice;
+    Bus musicP, sfxP, voiceP, sfxUP, voiceUP;
 
     public float musicVolume = 0.5f, sfxVolume = 0.5f, voiceVolume = 0.5f;
 
@@ -18,36 +16,48 @@ public class AudioSettings : MonoBehaviour
 
     void Awake()
     {
-        if (mainMenu)
-        {
-            DontDestroyOnLoad(gameObject);
-        }
+        sfxP = RuntimeManager.GetBus("bus:/Pause Group/SFX");
+        musicP = RuntimeManager.GetBus("bus:/Pause Group/Music");
+        voiceP = RuntimeManager.GetBus("bus:/Pause Group/Voice");
 
-        if(GameObject.Find("Audio Settings") && !mainMenu)
-        {
-            musicVolume = GameObject.Find("Audio Settings").GetComponent<AudioSettings>().musicVolume;
-            sfxVolume = GameObject.Find("Audio Settings").GetComponent<AudioSettings>().sfxVolume;
-            voiceVolume = GameObject.Find("Audio Settings").GetComponent<AudioSettings>().voiceVolume;
+        sfxUP = RuntimeManager.GetBus("bus:/Unpause Group/SFX");
+        voiceUP = RuntimeManager.GetBus("bus:/Unpause Group/Voice");
 
-            menuManager = FindObjectOfType<MenuManager>();
-
-            menuManager.UpdateSliders();
-
-            Destroy(GameObject.Find("Audio Settings"));
-        }
-
-        sfx = RuntimeManager.GetBus("bus:/SFX");
-        music = RuntimeManager.GetBus("bus:/Music");
-        voice = RuntimeManager.GetBus("bus:/Voice");
         sfxVolumePreview = RuntimeManager.CreateInstance("event:/UI_Multimedia/Tutorial_Info");
         voiceVolumePreview = RuntimeManager.CreateInstance("event:/MR_C_Attack/Mr_C_Attack");
     }
 
     void Update()
     {
-        music.setVolume(musicVolume);
-        sfx.setVolume(sfxVolume);
-        voice.setVolume(voiceVolume);
+        musicP.setVolume(musicVolume);
+        sfxP.setVolume(sfxVolume);
+        voiceP.setVolume(voiceVolume);
+
+        sfxUP.setVolume(sfxVolume);
+        voiceUP.setVolume(voiceVolume);
+    }
+
+    public void MuteControl(bool mute, int whichBusGroup) //1 = all, 2 = Pause Group, 3 = Unpause Group
+    {
+        if(whichBusGroup == 1)
+        {
+            musicP.setMute(mute);
+            sfxP.setMute(mute);
+            voiceP.setMute(mute);
+            sfxUP.setMute(mute);
+            voiceUP.setMute(mute);
+        }
+        else if(whichBusGroup == 2)
+        {
+            musicP.setMute(mute);
+            sfxP.setMute(mute);
+            voiceP.setMute(mute);
+        }
+        else if(whichBusGroup == 3)
+        {
+            sfxUP.setMute(mute);
+            voiceUP.setMute(mute);
+        }
     }
 
     public void MusicVolumeLevel(float newMusicVolume)

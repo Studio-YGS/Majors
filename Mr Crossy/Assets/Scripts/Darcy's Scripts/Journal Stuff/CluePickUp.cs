@@ -40,11 +40,6 @@ public class CluePickUp : MonoBehaviour
                     eventInstance = RuntimeManager.CreateInstance("event:/2D/Paper/Paper Up");
 
                     eventInstance.start();
-
-                    //if (GetComponentInParent<TutorialSectionStart>())
-                    //{
-                    //    GetComponentInParent<TutorialSectionStart>().CheckClues();
-                    //}
                 }
             }
             else
@@ -56,5 +51,10 @@ public class CluePickUp : MonoBehaviour
         {
             prompt.gameObject.SetActive(false);
         }
+    }
+
+    public void PickUpOverride()
+    {
+        pickUp.Invoke();
     }
 }

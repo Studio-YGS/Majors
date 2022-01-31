@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using FMODUnity;
+using FMOD.Studio;
 
 public class MenuManager : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class MenuManager : MonoBehaviour
     JournalOnSwitch journalOnSwitch;
 
     JournalController journalController;
+
+    AudioSettings audioSettings;
 
     [SerializeField]
     GameObject pauseMenuObject, settingsMenuObject, mainMenuObject, pressSpace, controlsUI, loadingAni;
@@ -24,9 +27,11 @@ public class MenuManager : MonoBehaviour
     [HideInInspector] 
     public bool menuOpen;
 
-    bool dontEnable;
+    bool dontEnable, quitGagPlaying;
 
     AsyncOperation loadingScene;
+
+    public GameObject screenFade;
 
     void Start()
     {
@@ -37,13 +42,19 @@ public class MenuManager : MonoBehaviour
             journalController = FindObjectOfType<JournalController>();
             defTimeScale = Time.timeScale;
         }
+
+        audioSettings = FindObjectOfType<AudioSettings>();
+        audioSettings.MuteControl(true, 3);
+
+        LoadSettings();
+        UpdateSliders();
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (!mainMenu && !FindObjectOfType<CrossKeyManager>().puzzleOn && !journalController.readingHowTo && !journalController.waitForCrossy)
+            if (!mainMenu && !FindObjectOfType<CrossKeyManager>().puzzleOn && !journalController.readingHowTo && !journalController.waitForCrossy && !controlsUI.activeInHierarchy)
             {
                 if (!playerController.inJournal && !pauseMenuObject.activeInHierarchy && !settingsMenuObject.activeInHierarchy)
                 {
@@ -69,6 +80,8 @@ public class MenuManager : MonoBehaviour
         playerController.DisableController();
         playerController.inJournal = false;
 
+        audioSettings.MuteControl(false, 3);
+
         if (journalController.disabled)
         {
             dontEnable = true;
@@ -87,9 +100,10 @@ public class MenuManager : MonoBehaviour
             GetComponent<TutorialController>().objectsToSwitchOn[i].SetActive(false);
         }
 
-        RuntimeManager.PauseAllEvents(true);
+        //RuntimeManager.PauseAllEvents(true);
+        RuntimeManager.GetBus("bus:/Pause Group").setPaused(true);
 
-        streetName.SetActive(false);
+        //streetName.SetActive(false);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
 
@@ -114,9 +128,10 @@ public class MenuManager : MonoBehaviour
             GetComponent<TutorialController>().objectsToSwitchOn[i].SetActive(true);
         }
 
-        RuntimeManager.PauseAllEvents(false);
+        //RuntimeManager.PauseAllEvents(false);
+        RuntimeManager.GetBus("bus:/Pause Group").setPaused(false);
 
-        streetName.SetActive(true);
+        //streetName.SetActive(true);
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = defTimeScale;
@@ -124,7 +139,7 @@ public class MenuManager : MonoBehaviour
 
     public void StartGame()
     {
-        controlsUI.SetActive(true);
+        OpenControlsUI();
 
         loadingAni.SetActive(true);
 
@@ -161,14 +176,34 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-    public void QuitGame()
+    public void OpenControlsUI()
     {
-        Application.Quit();
+        controlsUI.SetActive(true);
+        settingsMenuObject.SetActive(false);
+
+        if (!mainMenu)
+        {
+            controlsUI.GetComponentInChildren<Button>().gameObject.SetActive(true);
+        }
+        else
+        {
+            controlsUI.GetComponentInChildren<Button>().gameObject.SetActive(false);
+        }
     }
 
-    public void RestartGame()
+    public void CloseControlsUI()
     {
-        SceneManager.LoadScene("Main_Cael");
+        controlsUI.SetActive(false);
+        OpenSettingsMenu();
+    }
+
+    public void QuitGame()
+    {
+        if (!quitGagPlaying)
+        {
+            quitGagPlaying = true;
+            StartCoroutine("QuitGag");
+        }
     }
 
     public void UpdateSliders()
@@ -196,13 +231,36 @@ public class MenuManager : MonoBehaviour
                         sliders[i].value = audio.voiceVolume;
                         break;
                     }
+                case "Mouse Slider":
+                    {
+                        sliders[i].value = playerController.mouseSensitivity;
+                        break;
+                    }
             }
         }
     }
 
+    public void LoadSettings()
+    {
+        SettingsData data = SettingsSaveSystem.LoadSettings();
+
+        if(data != null)
+        {
+            audioSettings.musicVolume = data.musicVolume;
+            audioSettings.sfxVolume = data.sfxVolume;
+            audioSettings.voiceVolume = data.voiceVolume;
+            playerController.mouseSensitivity = data.mouseSens;
+        }
+    } 
+
+    public void SaveSettings()
+    {
+        SettingsSaveSystem.SaveSettings(audioSettings, playerController);
+    }
+
     IEnumerator ReadingControls()
     {
-        loadingScene = SceneManager.LoadSceneAsync("Main_Cael", LoadSceneMode.Single);
+        loadingScene = SceneManager.LoadSceneAsync("Submission", LoadSceneMode.Single);
         loadingScene.allowSceneActivation = false;
 
         while (!loadingScene.isDone)
@@ -211,14 +269,50 @@ public class MenuManager : MonoBehaviour
             if(loadingScene.progress >= 0.9f)
             {
                 pressSpace.SetActive(true);
+                screenFade.SetActive(true);
                 if (Input.GetKey(KeyCode.Space))
                 {
-                    loadingScene.allowSceneActivation = true;
+                    pressSpace.SetActive(false);
+                    screenFade.GetComponent<Animator>().SetTrigger("Fade");
+                    StartCoroutine(FadeLoading());
                 }
             }
             yield return null;
         }
        
+    }
+
+    IEnumerator FadeLoading()
+    {
+        yield return new WaitForSeconds(3);
+        loadingScene.allowSceneActivation = true;
+        
+    }
+
+    public IEnumerator QuitGag()
+    {
+        EventInstance eventInstance = RuntimeManager.CreateInstance("event:/MR_C_Random/I_Quit");
+
+        eventInstance.start();
+
+        yield return new WaitForSecondsRealtime(7f);
+
+        Debug.Log("quit");
+
+        //PLAYBACK_STATE pbState;
+        //eventInstance.getPlaybackState(out pbState);
+
+        //Debug.Log(pbState);
+
+        //while (pbState != PLAYBACK_STATE.PLAYING && pbState != PLAYBACK_STATE.STARTING)
+        //{
+        //    Debug.Log(pbState);
+        //}
+
+        //Debug.Log(pbState);
+        Application.Quit();
+        //Debug.Log("quit");
+        //yield return null;
     }
 
     public void ResolutionChange(int val)

@@ -7,6 +7,8 @@ public class ObjectPlacement : MonoBehaviour
     Transform hand;
     Transform cam;
 
+    JournalOnSwitch journal;
+
     public float placementRange = 3;
     bool objectPlaced;
     GameObject PlacedObject;
@@ -15,6 +17,7 @@ public class ObjectPlacement : MonoBehaviour
     void Start()
     {
         hand = GameObject.FindGameObjectWithTag("Hand").transform;
+        journal = FindObjectOfType<JournalOnSwitch>();
         cam = FindObjectOfType<Camera>().transform;
     }
 
@@ -28,7 +31,7 @@ public class ObjectPlacement : MonoBehaviour
         {
             if (hit.collider == gameObject.GetComponent<Collider>() && hand.GetComponentInChildren<ObjectHolder>())
             {
-                if (Input.GetKeyDown(KeyCode.E) && !objectPlaced)
+                if (Input.GetKeyDown(KeyCode.E) && !objectPlaced && !journal.open)
                 {
                     foreach(Transform child in hand)
                     {

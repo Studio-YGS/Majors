@@ -17,13 +17,19 @@ public class Lighthouse : MonoBehaviour
     [Space(10)]
     public float hiddenYOffset;
     [HideInInspector] public Vector3 hiddenPosition;
+
+    public Vector3 checkOffset;
+
+    public float checkRadius;
+
+    public Vector3 CheckCentre { get { return new Vector3(selfTransform.position.x + checkOffset.x, hiddenPosition.y, selfTransform.position.z + checkOffset.z); } }
+
     [Header("Rotation Limits")]
     public float minAngle;
     public float maxAngle;
-
     [HideInInspector] public float currentAngle;
+
     [Header("Gizmo settings")]
-    [SerializeField] private float gizmoCheckRadius;
     [SerializeField] private float gizmoHandGoalRadius;
     [SerializeField] private float gizmoGuideGoalRadius;
     [Space(10)]
@@ -44,7 +50,7 @@ public class Lighthouse : MonoBehaviour
     {
 #if UNITY_EDITOR
         Handles.color = radialColour;
-        Handles.DrawSolidDisc(selfTransform.position, selfTransform.up, gizmoCheckRadius);
+        Handles.DrawSolidDisc(CheckCentre, selfTransform.up, checkRadius);
 
         Gizmos.color = handGoalColour;
         Gizmos.DrawSphere(leftHandFinalGoal.position, gizmoHandGoalRadius);

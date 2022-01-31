@@ -40,6 +40,7 @@ public class CrossKeyManager : MonoBehaviour
     OverseerController seer;
     bool firstTime = true;
     public AnimationControl animControl;
+    public GameObject deathCrossy;
     void Start()
     {
         cam = FindObjectOfType<Camera>().transform;
@@ -57,7 +58,11 @@ public class CrossKeyManager : MonoBehaviour
     {
         if (firstTime)
         {
-            animControl.TutorialAnimationsTrue("0.7.2");
+            if (animControl)
+            {
+                animControl.TutorialAnimationsTrue("0.7.2");
+            }
+            
             firstTime = false;
         }
 
@@ -315,13 +320,27 @@ public class CrossKeyManager : MonoBehaviour
             Destroy(newCrossKey);
         }
         Destroy(mrCrossy);
-        FindObjectOfType<MrCrossyDistortion>().DarkenScreen(1.5f);
+        FindObjectOfType<MrCrossyDistortion>().DarkenScreen(1.3f);
         hintArea.text = "";
         Time.timeScale = 1;
         Time.fixedDeltaTime = 0.02f;
-        seer.deady = true;
-        
-        seer.emitter.Target.SetParameter(seer.deadParamName, 0f);
+        controller.enabled = false;
+        headBob.enabled = false;
+        if (seer)
+        {
+            seer.deady = true;
+
+            if(!seer.attemptingDie) seer.DeadNoises();
+        }
+        deathCrossy.SetActive(true);
+        StartCoroutine(WaitForDeath());
+    }
+
+    IEnumerator WaitForDeath()
+    {
+        yield return new WaitForSecondsRealtime(4.5f);
+        deathCrossy.SetActive(false);
+        FindObjectOfType<PlayerRespawn>().crossyDeath = true;
         FindObjectOfType<PlayerRespawn>().PlayerDie();
         puzzleOn = false;
     }

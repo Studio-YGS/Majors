@@ -4,14 +4,13 @@ using UnityEngine;
 using TMPro;
 using FMOD.Studio;
 using FMODUnity;
+using UnityEngine.Events;
 
 public class TutorialController : MonoBehaviour
 {
     JournalController journalController;
 
     JournalOnSwitch journalOnSwitch;
-
-    JournalTimer journalTimer;
 
     Player_Controller playerController;
 
@@ -21,17 +20,18 @@ public class TutorialController : MonoBehaviour
 
     public GameObject[] objectsToSwitchOn;
 
+    public UnityEvent showTabs;
+
     [SerializeField]
     TextMeshProUGUI conLetter;
 
-    bool directed = false, doneTalk = false, spotted = false;
+    bool directed, doneTalk, spotted, fiveMinute, canPlayFive = true;
 
     void Start()
     {
         journalController = FindObjectOfType<JournalController>();
         playerController = FindObjectOfType<Player_Controller>();
         journalOnSwitch = FindObjectOfType<JournalOnSwitch>();
-        journalTimer = FindObjectOfType<JournalTimer>();
         overseerController = FindObjectOfType<OverseerController>();
 
         StartTutorial();
@@ -41,10 +41,13 @@ public class TutorialController : MonoBehaviour
 
     void Update()
     {
-        if (overseerController.State == 3 && !spotted)
+        if(overseerController != null)
         {
-            spotted = true;
-            GetComponent<TutorialSectionStart>().sectionStart.Invoke();
+            if (overseerController.State == 3 && !spotted)
+            {
+                spotted = true;
+                GetComponent<TutorialSectionStart>().sectionStart.Invoke();
+            }
         }
     }
 
@@ -87,14 +90,24 @@ public class TutorialController : MonoBehaviour
 
     public void StreetNameBlank()
     {
-        PuzzleController puzzleController = FindObjectOfType<PuzzleController>();
+        //PuzzleController puzzleController = FindObjectOfType<PuzzleController>();
 
-        puzzleController.streetText.text = "";
+        //puzzleController.streetText.text = "";
     }
 
     public void CrossyWait()
     {
         StartCoroutine(WaitForCrossy());
+    }
+
+    public void StartFiveMinuteTimer()
+    {
+        StartCoroutine(FiveMinuteTimer());
+    }
+
+    public void SetCanPlayFiveBool(bool set)
+    {
+        canPlayFive = set;
     }
 
     IEnumerator WaitForCrossy()
@@ -105,13 +118,17 @@ public class TutorialController : MonoBehaviour
 
         eventInstance.start();
 
-        yield return new WaitForSeconds(60f);
+        yield return new WaitForSeconds(31.5f);
 
         journalController.EnableJournal();
         journalController.readingHowTo = true;
 
-        journalOnSwitch.OpenOrClose();
+        if (!journalOnSwitch.open)
+        {
+            journalOnSwitch.OpenOrClose();
+        }
         journalController.OpenHowTo();
+        showTabs.Invoke();
     }
     
     IEnumerator DoneTalk()
@@ -130,5 +147,17 @@ public class TutorialController : MonoBehaviour
         directed = false;
 
         StopCoroutine(DirectionTimer());
+    }
+
+    IEnumerator FiveMinuteTimer()
+    {
+        yield return new WaitForSeconds(300f);
+
+        if (!fiveMinute && canPlayFive)
+        {
+            eventInstance = RuntimeManager.CreateInstance("event:/MR_C_Tutorial/TUT.0.5.1.3");
+
+            eventInstance.start();
+        }
     }
 }

@@ -6,7 +6,8 @@ using FMODUnity;
 
 public class JournalOnSwitch : MonoBehaviour
 {
-    bool open = false;
+    [HideInInspector]
+    public bool open = false;
 
     public GameObject journalOpen, journalClosed;
 
@@ -14,15 +15,18 @@ public class JournalOnSwitch : MonoBehaviour
 
     JournalController journalController;
 
-    MenuManager pauseMenu;
+    MenuManager menuManager;
 
     EventInstance eventInstance;
 
+    HeadBob headBob;
+
     void Start()
     {
-        pauseMenu = FindObjectOfType<MenuManager>();
+        menuManager = FindObjectOfType<MenuManager>();
         fpc = FindObjectOfType<Player_Controller>();
         journalController = FindObjectOfType<JournalController>();
+        headBob = FindObjectOfType<HeadBob>();
     }
 
     public bool OpenOrClose()
@@ -49,9 +53,10 @@ public class JournalOnSwitch : MonoBehaviour
         if (!journalController.disabled)
         {
             fpc.DisableController();
+            headBob.enabled = false;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
-            pauseMenu.streetName.SetActive(false);
+            //pauseMenu.streetName.SetActive(false);
 
             journalController.OpenMap();
 
@@ -70,9 +75,10 @@ public class JournalOnSwitch : MonoBehaviour
         if (!journalController.disabled)
         {
             fpc.EnableController();
+            headBob.enabled = true;
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
-            pauseMenu.streetName.SetActive(true);
+            //menuManager.streetName.SetActive(true);
 
             eventInstance = RuntimeManager.CreateInstance("event:/2D/Paper/Paper Up");
 

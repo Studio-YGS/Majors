@@ -55,6 +55,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -79,6 +80,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &3912712600092442407
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,6 +136,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -158,6 +161,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &4786310314742163258
 GameObject:
   m_ObjectHideFlags: 0
@@ -169,6 +173,7 @@ GameObject:
   - component: {fileID: 674232313976253977}
   - component: {fileID: 8229774531051313114}
   - component: {fileID: 7423252756125825494}
+  - component: {fileID: 5315861975581457550}
   m_Layer: 0
   m_Name: SM_Chair_02a_SM_Chair_02_LOD0
   m_TagString: Untagged
@@ -213,6 +218,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -237,6 +243,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &5315861975581457550
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4786310314742163258}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.78462887, y: 0.93828356, z: 0.15467572}
+  m_Center: {x: 0.31084117, y: 0.46955508, z: -0.06926604}
 --- !u!1 &5247424172371177821
 GameObject:
   m_ObjectHideFlags: 0
@@ -292,6 +312,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -316,6 +337,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &6892266690455955969
 GameObject:
   m_ObjectHideFlags: 0
@@ -325,6 +347,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1067122797012785035}
+  - component: {fileID: 9040175364875341917}
   m_Layer: 0
   m_Name: SM_Chair_02a_SM_Chair_02
   m_TagString: Untagged
@@ -350,6 +373,19 @@ Transform:
   m_Father: {fileID: 8922536711071036066}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &9040175364875341917
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6892266690455955969}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.73282135, y: 0.47425842, z: 0.6859846}
+  m_Center: {x: 0.31468922, y: 0.21215057, z: 0.26822233}
 --- !u!1 &8014686681180646905
 GameObject:
   m_ObjectHideFlags: 0
@@ -446,8 +482,7 @@ LODGroup:
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 7423252756125825494}
-    - renderer: {fileID: -7016185756601279898, guid: 2d285ecdf6c606d49b063a9a0e244184,
-        type: 3}
+    - renderer: {fileID: -7016185756601279898, guid: 2d285ecdf6c606d49b063a9a0e244184, type: 3}
   - screenRelativeHeight: 0.125
     fadeTransitionWidth: 0
     renderers:

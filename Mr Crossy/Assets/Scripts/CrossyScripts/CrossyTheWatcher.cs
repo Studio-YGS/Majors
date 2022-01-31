@@ -6,6 +6,8 @@ public class CrossyTheWatcher : MonoBehaviour
 {
     [HideInInspector] public Animator animator;
 
+    public Material titanGlow;
+
     public bool conditionIsTrue;
     public bool lerpPosition;
     public bool weights;
@@ -19,12 +21,19 @@ public class CrossyTheWatcher : MonoBehaviour
     [Range(0,1)] public float headLookAtWeight;
     //[Range(0,1)] public float spineLookAtWeight;
     //[Range(0,1)] public float spinerLookAtWeight;
-    
+    public List<GameObject> Rendy = new List<GameObject>();
 
     public Lighthouse lighthouse;
 
     private Transform lightHouseBase;
     private Vector3 hiddenPosition;
+
+    public float eyeGlowUpRate;
+    public float eyeGlowDownRate;
+
+    bool eyeGlowing;
+    bool skinned;
+    bool skinCheck;
 
     [Header("TestWeights")]
     [Range(0,1)]public float heightWeight;
@@ -49,6 +58,8 @@ public class CrossyTheWatcher : MonoBehaviour
         //SetPosToLighthouse();
         if(faceToTransform == null) faceToTransform = GameObject.Find("Fps Character").transform;
         if(lookAtTransform == null) lookAtTransform = GameObject.Find("FirstPersonCharacter").transform;
+
+        SkinningMyBoy();
     }
 
     // Update is called once per frame
@@ -71,11 +82,35 @@ public class CrossyTheWatcher : MonoBehaviour
         {
             if (!lighthousing && !hidingTitan)
             {
+                if(animator.GetCurrentAnimatorStateInfo(0).IsName("TitanCrossyIdleHidden"))
+                {
+                    if(titanGlow.color.a != 0f)
+                    {
+                        Color colour = titanGlow.color;
+                        colour.a = 0f;
+                        titanGlow.color = colour;
+                    }
+                }
+
                 if (m_state == -1 && animator.GetCurrentAnimatorStateInfo(0).IsName("TitanCrossyIdleHidden"))
                 {
                     AwakenTitan();
                 }
             }
+            else if(hidingTitan)
+            {
+                if (animator.GetCurrentAnimatorStateInfo(0).IsName("TitanCrossyIdleHidden"))
+                {
+                    if (titanGlow.color.a != 0f)
+                    {
+                        Color colour = titanGlow.color;
+                        colour.a = 0f;
+                        titanGlow.color = colour;
+                    }
+                }
+            }
+
+            if (!skinCheck) SkinningMyBoy();
         }
 
     }
@@ -134,6 +169,34 @@ public class CrossyTheWatcher : MonoBehaviour
         }
     }
 
+    public void SkinningMyBoy()
+    {
+        skinCheck = true;
+        if(animator.GetCurrentAnimatorStateInfo(0).IsName("TitanCrossyIdleHidden"))
+        {
+            if(!skinned && hidingTitan)
+            {
+                foreach (GameObject skin in Rendy)
+                {
+                    skin.SetActive(false);
+                }
+                skinned = true;
+            }
+        }
+        else
+        {
+            if(skinned && !hidingTitan)
+            {
+                foreach (GameObject skin in Rendy)
+                {
+                    skin.SetActive(true);
+                }
+                skinned = false;
+            }
+        }
+        skinCheck = false;
+    }
+
 
     /*public void SetPosToLighthouse()
     {
@@ -167,6 +230,7 @@ public class CrossyTheWatcher : MonoBehaviour
     public void AwakenTitan()
     {
         animator.SetTrigger("TitanAwaken");
+        if (!eyeGlowing) StartCoroutine(TitanEyes());
         allowHide = false;
     }
 
@@ -174,6 +238,11 @@ public class CrossyTheWatcher : MonoBehaviour
     public void HideTitan()
     {
         animator.SetTrigger("TitanSeal");
+        if (eyeGlowing)
+        {
+            StopCoroutine(TitanEyes());
+            eyeGlowing = false;
+        }
     }
 
     public IEnumerator SwitchLighthouse(Lighthouse lighthouseNew)
@@ -196,5 +265,35 @@ public class CrossyTheWatcher : MonoBehaviour
         if (m_state == -1) AwakenTitan();
 
         lighthousing = false;
+    }
+
+    public IEnumerator TitanEyes()
+    {
+        eyeGlowing = true;
+
+        while(!animator.GetCurrentAnimatorStateInfo(0).IsName("TitanCrossyIdle"))
+        {
+            yield return null;
+        }
+        Color colour = titanGlow.color;
+        while(colour.a < 1f)
+        {
+            colour.a += Time.deltaTime * eyeGlowUpRate;
+            titanGlow.color = colour;
+            yield return null;
+        }
+        colour.a = 1f;
+        titanGlow.color = colour;
+
+        while (colour.a > 0f)
+        {
+            colour.a -= Time.deltaTime * eyeGlowDownRate;
+            titanGlow.color = colour;
+            yield return null;
+        }
+        colour.a = 0f;
+        titanGlow.color = colour;
+
+        eyeGlowing = false;
     }
 }

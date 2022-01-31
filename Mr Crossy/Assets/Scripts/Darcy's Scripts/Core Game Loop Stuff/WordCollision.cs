@@ -4,18 +4,24 @@ using UnityEngine;
 
 public class WordCollision : MonoBehaviour
 {
-    public string word, street;
+    public string mainWord, street;
+
+    public string[] overlappedStreets;
 
     [HideInInspector]
-    public bool puzzleComplete;
+    public bool puzzleComplete, altarsDisabled, dontWrite, dontCheck;
 
-    [SerializeField]
-    GameObject[] wordObjects, altars;
+    [HideInInspector]
+    public List<GameObject> altars = new List<GameObject>();
+    List<GameObject> wordObjects = new List<GameObject>();
 
-    [SerializeField]
     PuzzleController puzzleController;
 
+    OverseerController seer;
+
     MenuManager menuManager;
+
+    UIController uiController;
 
     [SerializeField] 
     CrossyStreetStalk streetStalk;
@@ -26,6 +32,10 @@ public class WordCollision : MonoBehaviour
     {
         menuManager = FindObjectOfType<MenuManager>();
         respawn = FindObjectOfType<RespawnWordColliders>();
+        seer = FindObjectOfType<OverseerController>();
+        uiController = FindObjectOfType<UIController>();
+
+        SetUpWords();
     }
 
     void OnTriggerEnter(Collider other)
@@ -36,69 +46,123 @@ public class WordCollision : MonoBehaviour
         }
     }
 
-    void SetUpController()
+    void SetUpWords()
     {
-        int wordPoint;
+        WordHolder holder = FindObjectOfType<WordHolder>();
 
-        puzzleController.word = word;
-        puzzleController.wordObjects.Clear();
-
-        if(wordObjects != null)
+        for(int i = 0; i < holder.words.Length; i++)
         {
-            for (int i = 0; i < wordObjects.Length; i++)
+            if(holder.words[i].name == mainWord)
             {
-                if(wordObjects[i] != null)
-                {
-                    puzzleController.wordObjects.Add(wordObjects[i]);
+                wordObjects.Add(holder.words[i]);
+            }
+        }
 
-                    if (wordObjects[i].name == word)
+        if(overlappedStreets.Length > 0)
+        {
+            for(int i = 0; i < overlappedStreets.Length; i++)
+            {
+                for(int x = 0; x < holder.words.Length; x++)
+                {
+                    if (holder.words[x].name == GameObject.Find(overlappedStreets[i]).GetComponent<WordCollision>().mainWord)
                     {
-                        wordPoint = i;
-                        puzzleController.SetUpLetters(wordPoint);
+                        wordObjects.Add(holder.words[x]);
                     }
                 }
             }
         }
+    }
 
-        puzzleController.currentStreet = street;
-        puzzleController.storedObjects.Clear();
-        puzzleController.wordCollision = GetComponent<WordCollision>();
+    void AssignController()
+    {
+        puzzleController = FindObjectOfType<PuzzleController>();
+    }
 
-        if (!puzzleComplete)
+    public void SetUpController()
+    {
+        if (!gameObject.name.Contains("Home"))
         {
-            puzzleController.PlayerWordControl();
+            if(puzzleController == null)
+            {
+                AssignController();
+            }
+
+            respawn.RespawnColliders();
+
+            puzzleController.wordCollision = GetComponent<WordCollision>();
+            puzzleController.word = mainWord;
+            puzzleController.wordObjects.Clear();
+            //puzzleController.currentStreet = street;
+
+            if (wordObjects != null)
+            {
+                for (int i = 0; i < wordObjects.Count; i++)
+                {
+                    if (wordObjects[i] != null)
+                    {
+                        puzzleController.wordObjects.Add(wordObjects[i]);
+
+                        if (wordObjects[i].name == mainWord)
+                        {
+                            puzzleController.SetUpLetters(i);
+                        }
+                    }
+                }
+            }
+
+            puzzleController.storedObjects.Clear();
+
+            if (!puzzleComplete && !dontCheck)
+            {
+                puzzleController.PlayerWordControl();
+            }
+
+            //menuManager.streetName.SetActive(true);
+                
+            uiController.SwitchStreet(this);
+
+            if (streetStalk != null)
+            {
+                seer.m_StalkStreet = streetStalk;
+            }
+
+            //gameObject.SetActive(false);
         }
-
-        menuManager.streetName.SetActive(true);
-
-        FindObjectOfType<OverseerController>().m_StalkStreet = streetStalk;
-
-        respawn.RespawnColliders();
-
-        gameObject.SetActive(false);
     }
 
     public void DisableAltars()
     {
-        if (altars.Length > 0)
+        if (altars.Count > 0)
         {
-            for (int i = 0; i < altars.Length; i++)
+            for (int i = 0; i < altars.Count; i++)
             {
-                if (altars[i].GetComponent<Outline>())
+                if (altars[i].GetComponent<OverlappedAltar>())
+                {
+                    altars[i].GetComponent<Outline>().enabled = false;
+                    altars[i].GetComponentInChildren<ObjectPlacement>().enabled = false;
+                    altars[i].GetComponentInChildren<DetermineLetter>().storedObject.GetComponent<ObjectHolder>().enabled = false;
+                    altars[i].GetComponentInChildren<DetermineLetter>().storedObject.GetComponent<Outline>().enabled = false;
+                }
+                else if (altars[i].GetComponent<DetermineLetter>())
                 {
                     altars[i].GetComponent<Outline>().enabled = false;
                     altars[i].GetComponentInChildren<ObjectPlacement>().enabled = false;
                     altars[i].GetComponent<DetermineLetter>().storedObject.GetComponent<ObjectHolder>().enabled = false;
                     altars[i].GetComponent<DetermineLetter>().storedObject.GetComponent<Outline>().enabled = false;
                 }
-                else if (altars[i].GetComponentInParent<OverlappedAltar>())
-                {
-                    altars[i].GetComponentInParent<Outline>().enabled = false;
-                    altars[i].GetComponentInParent<OverlappedAltar>().GetComponentInChildren<ObjectPlacement>().enabled = false;
-                    altars[i].GetComponentInParent<DetermineLetter>().storedObject.GetComponent<ObjectHolder>().enabled = false;
-                    altars[i].GetComponentInParent<DetermineLetter>().storedObject.GetComponent<Outline>().enabled = false;
-                }
             }
+
+            altarsDisabled = true;
         }
+    }
+
+    public void SetHomeText()
+    {
+        if(puzzleController == null)
+        {
+            AssignController();
+        }
+
+        //puzzleController.streetText.text = "Home.";
     }
 }

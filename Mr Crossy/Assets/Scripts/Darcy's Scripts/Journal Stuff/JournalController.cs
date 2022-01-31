@@ -3,13 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using FMOD.Studio;
 using FMODUnity;
+using UnityEngine.UI;
 
 public class JournalController : MonoBehaviour
 {
     [SerializeField]
-    GameObject[] notePages, logPages;
+    GameObject[] logPages;
 
-    [HideInInspector]
+    public GameObject[] notePages;
+
+    JournalOnSwitch journalOnSwitch;
+
+    //[HideInInspector]
     public List<int> noteList = new List<int>(0); 
 
     [SerializeField]
@@ -17,20 +22,27 @@ public class JournalController : MonoBehaviour
 
     GameObject mapPage;
 
-    int whichTab = 1, whichLogPage = 0;
+    int whichTab = 1; //,whichLogPage = 0;
 
-    [HideInInspector]
-    public int whichNotesPage = 0;
+    //[HideInInspector]
+    public int whichNotesPage;
 
     public bool disabled = false, tutorial = true;
     [HideInInspector]
-    public bool readingHowTo = false, waitForCrossy = false;
+    public bool readingHowTo = false, waitForCrossy = false, logTab, notesTab;
+    bool fromArrow;
 
     EventInstance eventInstance;
 
     void Start()
     {
         mapPage = tutMap;
+
+        if (!tutorial)
+        {
+            SetToGameMap();
+        }
+        journalOnSwitch = FindObjectOfType<JournalOnSwitch>();
     }
 
     void Update()
@@ -46,24 +58,63 @@ public class JournalController : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Tab))
         {
-            if (readingHowTo)
+            if (!FindObjectOfType<CrossKeyManager>().puzzleOn)
             {
-                readingHowTo = false;
+                if (readingHowTo)
+                {
+                    readingHowTo = false;
 
-                GetComponent<TutorialSectionStart>().ReadHowTo();
+                    GetComponent<TutorialSectionStart>().ReadHowTo();
 
-                GetComponent<JournalTimer>().StartTimer();
+                    GetComponent<JournalTimer>().StartTimer();
 
+                    OpenMap();
+                }
+
+                if (waitForCrossy)
+                {
+                    waitForCrossy = false;
+
+                    GetComponent<TutorialSectionStart>().WaitForCrossy();
+
+                    OpenMap();
+                }
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            if(!FindObjectOfType<CrossKeyManager>().puzzleOn)
+            {
+                if (!journalOnSwitch.open)
+                {
+                    journalOnSwitch.OpenOrClose();
+                }
                 OpenMap();
             }
+        }
 
-            if (waitForCrossy)
+        if (Input.GetKeyDown(KeyCode.N) && notesTab)
+        {
+            if (!FindObjectOfType<CrossKeyManager>().puzzleOn)
             {
-                waitForCrossy = false;
+                if (!journalOnSwitch.open)
+                {
+                    journalOnSwitch.OpenOrClose();
+                }
+                OpenNotes();
+            }
+        }
 
-                GetComponent<TutorialSectionStart>().WaitForCrossy();
-
-                OpenMap();
+        if (Input.GetKeyDown(KeyCode.L) && logTab)
+        {
+            if (!FindObjectOfType<CrossKeyManager>().puzzleOn)
+            {
+                if (!journalOnSwitch.open)
+                {
+                    journalOnSwitch.OpenOrClose();
+                }
+                OpenLog();
             }
         }
     }
@@ -96,7 +147,7 @@ public class JournalController : MonoBehaviour
 
     public void OpenMap()
     {
-        if (!disabled)
+        if (!disabled && mapPage != null)
         {
             log.SetActive(false);
             mapPage.SetActive(true);
@@ -131,23 +182,81 @@ public class JournalController : MonoBehaviour
                     notePages[i].SetActive(false);
                 }
 
+                if (!fromArrow)
+                {
+                    for (int i = 0; i < notePages.Length; i++)
+                    {
+                        Image[] images = notePages[i].GetComponentsInChildren<Image>();
+                        bool found = false;
+                        int imageCount = 0;
+
+                        for (int x = 0; x < images.Length; x++)
+                        {
+                            if (images[x].sprite == null)
+                            {
+                                imageCount++;
+                                found = true;
+                            }
+                        }
+
+                        if (found)
+                        {
+                            if (imageCount == 2)
+                            {
+                                whichNotesPage = i - 1;
+                            }
+                            else
+                            {
+                                whichNotesPage = i;
+                            }
+                            break;
+                        }
+                    }
+                }
+
+                fromArrow = false;
+
                 notePages[whichNotesPage].SetActive(true);
 
-                if (whichNotesPage == 0 && noteList.Count > 1)
+                if (whichNotesPage == 0)
                 {
                     leftArrow.SetActive(false);
-                    rightArrow.SetActive(true);
                 }
-                else if (whichNotesPage == noteList.Count && noteList.Count > 1 || whichNotesPage == noteList.Count - 1 && noteList.Count > 1)
+                else if(whichNotesPage == 1 || whichNotesPage == 2)
                 {
                     leftArrow.SetActive(true);
+                }
+
+                if(whichNotesPage != 2)
+                {
+                    for (int i = whichNotesPage + 1; i < notePages.Length; i++)
+                    {
+                        Image[] images = notePages[i].GetComponentsInChildren<Image>();
+                        bool found = false;
+
+                        for (int x = 0; x < images.Length; x++)
+                        {
+                            if (images[x].sprite != null)
+                            {
+                                found = true;
+                            }
+                        }
+
+                        if (found)
+                        {
+                            rightArrow.SetActive(true);
+                        }
+                        else if (!found)
+                        {
+                            rightArrow.SetActive(false);
+                        }
+                        break;
+                    }
+                }
+                else
+                {
                     rightArrow.SetActive(false);
-                }
-                else if (whichNotesPage > 0)
-                {
-                    leftArrow.SetActive(true);
-                    rightArrow.SetActive(true);
-                }
+                }             
             }
         }
     }
@@ -176,13 +285,14 @@ public class JournalController : MonoBehaviour
             {
                 case 1:
                     {
-                        whichLogPage++;
+                        //whichLogPage++;
                         OpenLog();
                         break;
                     }
                 case 3:
                     {
                         whichNotesPage++;
+                        fromArrow = true;
                         OpenNotes();
                         break;
                     }
@@ -198,13 +308,14 @@ public class JournalController : MonoBehaviour
             {
                 case 1:
                     {
-                        whichLogPage--;
+                        //whichLogPage--;
                         OpenLog();
                         break;
                     }
                 case 3:
                     {
                         whichNotesPage--;
+                        fromArrow = true;
                         OpenNotes();
                         break;
                     }
@@ -234,5 +345,15 @@ public class JournalController : MonoBehaviour
     public void SetCrossyBool(bool set)
     {
         waitForCrossy = set;
+    }
+
+    public void SetLogTabBool(bool set)
+    {
+        logTab = set;
+    }
+
+    public void SetNotesTabBool(bool set)
+    {
+        notesTab = set;
     }
 }
