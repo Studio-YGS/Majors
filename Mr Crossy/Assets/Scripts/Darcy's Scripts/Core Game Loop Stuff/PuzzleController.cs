@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using TMPro;
 using FMOD.Studio;
 using FMODUnity;
+using UnityEngine.VFX;
 
 //Written by Darcy Glover
 
@@ -105,6 +106,12 @@ public class PuzzleController : MonoBehaviour
         letterPoint = firstLength.ToIntArray().Length;
 
         canvasLetters[letterPoint].text = letter;
+
+        TextMeshProUGUI[] uiLetters = uiController.GetComponentsInChildren<TextMeshProUGUI>();
+
+        uiController.wordPop.transform.SetParent(uiLetters[letterPoint].transform);
+
+        uiController.wordPop.GetComponent<VisualEffect>().Play();
     }
 
     public void PlayerWordControl() //this method forms the players word as they place objects, and also controls the win condition
@@ -253,15 +260,6 @@ public class PuzzleController : MonoBehaviour
                 letters[i].alpha = 1f;
             }
         }
-
-        //uiWord = currentStreet + ": " + currentAltarWord;
-
-        //if (currentStreet == "")
-        //{
-        //    uiWord = "";
-        //}
-
-        ////streetText.text = uiWord;
     }
 
     void CompletionCheck()

@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.VFX;
 
 public class UIController : MonoBehaviour
 {
     GameObject streetSigns;
-    
-    public GameObject currentWordDisplay/*, wordPop*/;
+
+    public GameObject wordPop;
+
+    [HideInInspector]
+    public GameObject currentWordDisplay;
 
     public GameObject[] wordDisplayObjects;
     
@@ -20,6 +24,15 @@ public class UIController : MonoBehaviour
         streetSigns = GameObject.Find("Streets_Signs");
 
         streetChildren = streetSigns.GetComponentsInChildren<TextMeshProUGUI>();
+    }
+
+    private void Update()
+    {                       //testing
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Debug.Log("Attempting to play");
+            wordPop.GetComponent<VisualEffect>().Play();
+        }
     }
 
     public void SwitchStreet(WordCollision wordCollision)
