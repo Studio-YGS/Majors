@@ -19,9 +19,9 @@ public class CrossyController : MonoBehaviour, IAttackAgent
     Animator animator;
     NavMeshAgent agent;
     EventInstance attackLines;
-    EventInstance attackChild;
     #endregion
 
+    //Region for variables that are for debug/testing purposes
     #region DebugVariables
     [Header("Debug Booleans")]
     [HideInInspector] public bool overrideShouldRun;
@@ -30,9 +30,12 @@ public class CrossyController : MonoBehaviour, IAttackAgent
     [HideInInspector] public bool lookCondition;
     [SerializeField] private bool allowScaryRun;
     public bool speedDebugLog;
-    #endregion
-
+    #endregion 
+    
+    //Region that contains all main variables.
     #region MainVariables
+
+    //Region that holds variables related to Crossy vision
     #region Main/VisionVariables
     [Header("Vision Variables")]
     [SerializeField] private Transform m_Vision;
@@ -50,6 +53,7 @@ public class CrossyController : MonoBehaviour, IAttackAgent
     private bool m_InPeripheral = false;
     #endregion
 
+    //Region that holds variables related to Crossy movement
     #region Main/MovementVariables
     [Header("Movement Variables")]
     [SerializeField] private Transform m_CrossyDespawn;
@@ -69,8 +73,9 @@ public class CrossyController : MonoBehaviour, IAttackAgent
     float tSpeed;
     #endregion
 
+    //Region that holds variables related to the Attack/Damage Interface
     #region Main/AttackVariables
-    
+
     [SerializeField] private float m_AttackDistance;
     [SerializeField] private float m_AttackDelay;
     [SerializeField] private float m_AttackAngle;
@@ -78,6 +83,7 @@ public class CrossyController : MonoBehaviour, IAttackAgent
     private float m_SinceLastAttack;
     #endregion
 
+    //Region that holds variables related to Eye Glow material
     #region Main/EyeGlowVariables
     [Header("Eye Glow Variables")]
     [SerializeField] private Material crossyGlow;
@@ -93,6 +99,7 @@ public class CrossyController : MonoBehaviour, IAttackAgent
     bool loweringEye;
     #endregion
 
+    //Region that holds variables related to IK Adjustments.
     #region Main/IKVariables
     [Header("IK Variables")]
     public LayerMask layerMask;
@@ -110,6 +117,7 @@ public class CrossyController : MonoBehaviour, IAttackAgent
     [Range(0, 2)] public float IKRightFootDistance;
     #endregion
 
+    //Region that holds variables related to particles.
     #region Main/ParticleVariables
     [Header("Particle Effects")]
     [SerializeField] private GameObject m_WarpParticleOne;
@@ -118,6 +126,7 @@ public class CrossyController : MonoBehaviour, IAttackAgent
     [SerializeField] private float m_ParticleWait;
     #endregion
 
+    //Region that holds variables that I didn't know how to categorise.
     #region Main/MiscVariables
     [Header("Extra Variables")]
     [SerializeField] private GameObject screecher;
@@ -145,9 +154,10 @@ public class CrossyController : MonoBehaviour, IAttackAgent
     private bool m_ShouldRun = false;
     private int m_State = -1;
     #endregion
-    
+
     #endregion
 
+    //Region that holds Properties, mostly used for Behaviour Tree access.
     #region Properties
     public Transform Vision { get { return m_Vision; } }
     public Transform HindVision { get { return m_HindVision; } }
@@ -201,6 +211,7 @@ public class CrossyController : MonoBehaviour, IAttackAgent
 
     #endregion
 
+    //Region that holds methods called by Unity.
     #region UnityMethods
     private void Awake()
     {
@@ -252,6 +263,7 @@ public class CrossyController : MonoBehaviour, IAttackAgent
     }
     #endregion
 
+    //Region that holds methods that modify important variables, but didn't fit into other categories.
     #region MainMethods
     public void GetMotionHashValues()
     {
@@ -307,6 +319,7 @@ public class CrossyController : MonoBehaviour, IAttackAgent
     }
     #endregion
 
+    //Region that holds methods called by the IAttack interface.
     #region AttackInterfaceMethods
     public float AttackDistance()
     {
@@ -329,6 +342,7 @@ public class CrossyController : MonoBehaviour, IAttackAgent
     }
     #endregion
 
+    //Region that holds methods pertaining to Eye Glow changes.
     #region EyeGlowMethods
     public IEnumerator RaiseEyeGlow(Color colour, float raiseTo)
     {
@@ -425,6 +439,7 @@ public class CrossyController : MonoBehaviour, IAttackAgent
 
     #endregion
 
+    //Region that holds methods pertaining to the animator.
     #region AnimatorMethods
     IEnumerator IncreaseLook()
     {
@@ -556,7 +571,6 @@ public class CrossyController : MonoBehaviour, IAttackAgent
     public void OnDisable()
     {
         TreeMalarkey.UnregisterEventOnTree(crossyTree, "Darken", DarkenEvent);
-        TreeMalarkey.UnregisterEventOnTree(crossyTree, "PlayAttack", AttackSound);
         TreeMalarkey.UnregisterEventOnTree(crossyTree, "WooshOne", WooshSingle);
         TreeMalarkey.UnregisterEventOnTree(crossyTree, "WooshTwo", WooshBothle);
         TreeMalarkey.UnregisterEventOnTree(OverseerController.ObserverTree, "WooshOne", WooshSingle);
