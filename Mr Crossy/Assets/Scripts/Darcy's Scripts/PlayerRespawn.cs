@@ -119,7 +119,7 @@ public class PlayerRespawn : MonoBehaviour
 
         exSwitch.WalkIn();
         journal.EnableJournal();
-        FindObjectOfType<OverseerController>().deady = false;
+        //FindObjectOfType<OverseerController>().deady = false;
     }
 
     public void SwitchRespawnPoint(int whichPoint)

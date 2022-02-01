@@ -77,7 +77,7 @@ public class CrossKey : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         FindObjectOfType<CrossKeyManager>().doorsLocked = false;
-        door.StartCoroutine("RotateCamToOldPosition");
+        if (door) door.StartCoroutine("RotateCamToOldPosition");
         Destroy(gameObject);
         
     }

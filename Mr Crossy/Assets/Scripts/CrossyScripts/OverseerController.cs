@@ -21,6 +21,8 @@ public class OverseerController : MonoBehaviour
     public static BehaviorTree ObserverTree;
     public static float CrossyPathDistance = 0f;
 
+    Player_Controller playerController;
+
     private int m_State;
     public bool m_IsTutorial = true;
     private bool m_InSight;
@@ -125,68 +127,37 @@ public class OverseerController : MonoBehaviour
     #endregion
 
     #region Main/MiscVariables
+    [Space(10)]
     public Lighthouse storedHouse;
     public float currDist;
     private float storedDist = 0;
-
+    [Space(10)]
     public CrossyStreetStalk m_StalkStreet;
     [SerializeField] private float m_StreetStalkChance;
+
+    bool vignetteActivated = false;
     #endregion
 
     #endregion
 
-
-
-
-
-
-
-
-
-
-    public EmitterRef emitter;
     EventInstance eventInstance;
 
     public bool deady = false;
 
     #region Fields
     
-    
-    
+    //[SerializeField] private Vector3 m_ValidationPosition;
 
-    
-    
-    //[Space(10)]
-    
-    
-    //[Space(10)]
-    
-    [SerializeField] private Vector3 m_ValidationPosition;
+    //[Header("FMOD Variables")]
+    ////public string distanceParamName = "Distance";
+    ////public string chaseParamName = "IsChasing";
+    ////public string deadParamName = "isDead";
+    ////public string titanParamName = "Titan";
 
-    
-
-    
-
-    [Header("Heal 'N' Die")]
-    [SerializeField] private int m_DeathChanceMax;
-    private int m_DeathChanceRemain;
-    [SerializeField] private float m_HealTimer;
-
-    [Header("FMOD Variables")]
-    //public string distanceParamName = "Distance";
-    //public string chaseParamName = "IsChasing";
-    //public string deadParamName = "isDead";
-    //public string titanParamName = "Titan";
-
-    [SerializeField] bool attemptingSafe = false;
-    public bool attemptingDie = false;
-    [SerializeField] bool hasChased = false;
-    [SerializeField] bool fiddleFMOD = false;
-
-    
-    
-
-    
+    //[SerializeField] bool attemptingSafe = false;
+    //public bool attemptingDie = false;
+    //[SerializeField] bool hasChased = false;
+    //[SerializeField] bool fiddleFMOD = false;
 
     #endregion
 
@@ -216,9 +187,9 @@ public class OverseerController : MonoBehaviour
     public float SearchAreaRadiusMin { get { return m_SearchRadiusMin; } }
     public float SearchAreaRadiusAlert { get { return m_SearchRadiusAggro; } }
 
-    public float HealTimer { get { return m_HealTimer; } }
-    public int DeathChanceMaximum { get { return m_DeathChanceMax; } }
-    public int DeathChanceRemaining { get { return m_DeathChanceRemain; } set { m_DeathChanceRemain = value; } }
+    //public float HealTimer { get { return m_HealTimer; } }
+    //public int DeathChanceMaximum { get { return m_DeathChanceMax; } }
+    //public int DeathChanceRemaining { get { return m_DeathChanceRemain; } set { m_DeathChanceRemain = value; } }
 
     public Vector3 ValidationPosition { get { return validationPositioner.transform.position; } }
     public int State { get { return m_State; } set { m_State = value; } }
@@ -235,23 +206,22 @@ public class OverseerController : MonoBehaviour
     public int ClonesSpawned { get { return crossyClones.Count; } }
     public float CloneSpawnDelay { get { return m_CloneSpawnDelay; } }
 
-    public bool Chasing { get { return hasChased; } }
-    public bool AttemptingSafe { get { return attemptingSafe; } }
-    public bool AttemptingDie { get { return attemptingDie; } }
-    public bool Puzzling { get { return keyMan.puzzleOn; } }
+    //public bool Chasing { get { return hasChased; } }
+    //public bool AttemptingSafe { get { return attemptingSafe; } }
+    //public bool AttemptingDie { get { return attemptingDie; } }
+    //public bool Puzzling { get { return keyMan.puzzleOn; } }
 
     public bool InSight { get { return m_InSight; } set { m_InSight = value; } }
 
     #endregion
 
-    [Space(10)]
+    
 
     
 
 
     
-    bool vignetteActivated = false;
-    [SerializeField] bool playedTitanLine = false;
+    
 
     #region UnityMethods
     private void Awake()
@@ -269,6 +239,7 @@ public class OverseerController : MonoBehaviour
         menu = FindObjectOfType<MenuManager>();
 
         if (m_Player == null) m_Player = GameObject.Find("Fps Character");
+        playerController = m_Player.GetComponent<Player_Controller>();
 
         if (startOnAwake)
         {
@@ -279,7 +250,8 @@ public class OverseerController : MonoBehaviour
 
         crossyAgent = m_Crossy.GetComponent<NavMeshAgent>();
         crossyController = m_Crossy.GetComponent<CrossyController>();
-
+        
+        SetLighthouseGroup(1);
         CheckClosestLighthouse();
     }
 
@@ -325,21 +297,6 @@ public class OverseerController : MonoBehaviour
                 if (journCont.disabled) journCont.disabled = false;
             }
         }
-        if (!hasChased && m_State == 3)
-        {
-            PursuitAudio();
-        }
-        else if (hasChased)
-        {
-            if (deady)
-            {
-                if (!attemptingSafe && !attemptingDie) DeadAudio();
-            }
-            else if (m_State != 3 && !keyMan.puzzleOn && !deady || m_PlayerInSafeHouse && !keyMan.puzzleOn)
-            {
-                if (!attemptingSafe && !attemptingDie) StartCoroutine(WaitForPuzzleOff());
-            }
-        }
 
         PlayerIsBeingSeen();
 
@@ -353,9 +310,9 @@ public class OverseerController : MonoBehaviour
     #region ObserverMethods
     public void AwakenObserver()
     {
-        SetLighthouseGroup(1);
+        
         TreeMalarkey.EnableTree(ObserverTree);
-        distootle.ShoobyDooby();
+        //distootle.ShoobyDooby();
         CheckClosestLighthouse();
         m_Crossy.GetComponent<CrossyController>().RegisterEvents();
         //ObserverRegister();
@@ -485,6 +442,40 @@ public class OverseerController : MonoBehaviour
         m_IsTutorial = false;
         titan.isTutorial = false;
     }
+    public void VignetteProcessor()
+    {
+        if (m_State == 3)
+        {
+            if (allowVignette)
+            {
+                vignetteActivated = true;
+                //Debug.Log("potoatosondwich");
+                distootle.DistanceVignette(m_Crossy);
+            }
+
+            if (!keyMan.doorsLocked)
+            {
+                keyMan.doorsLocked = true;
+            }
+        }
+        else if (m_State != 3)
+        {
+            if (allowVignette)
+            {
+                if (vignetteActivated && playerController.IsAlive())
+                {
+                    vignetteActivated = false;
+                    //Debug.Log("VignetteNooooooo");
+                    distootle.DecreaseVignette();
+                }
+            }
+
+            if (keyMan.doorsLocked)
+            {
+                keyMan.doorsLocked = false;
+            }
+        }
+    }
 
     #endregion
 
@@ -596,258 +587,11 @@ public class OverseerController : MonoBehaviour
 
     #endregion
 
-    #endregion
+    #region EventRegister
 
-
-    #region Methods
-    public void VignetteProcessor()
-    {
-        if (m_State == 3)
-        {
-            if (allowVignette)
-            {
-                vignetteActivated = true;
-                //Debug.Log("potoatosondwich");
-                distootle.DistanceVignette(m_Crossy);
-            }
-
-            if (!keyMan.doorsLocked)
-            {
-                keyMan.doorsLocked = true;
-            }
-        }
-        else if (m_State != 3)
-        {
-            if (allowVignette)
-            {
-                if(vignetteActivated && !deady)
-                {
-                    vignetteActivated = false;
-                    //Debug.Log("VignetteNooooooo");
-                    distootle.DecreaseVignette();
-                }
-            }
-
-            if (keyMan.doorsLocked)
-            {
-                keyMan.doorsLocked = false;
-            }
-        }
-    }
-    
-
-    public void CrossyFmodDistance()
-    {
-        if(CrossyPathDistance <= 100)
-        {
-            emitter.Params[0].Value = CrossyPathDistance;
-            emitter.Target.SetParameter(emitter.Params[0].Name, emitter.Params[0].Value);
-        }
-        else
-        {
-            emitter.Params[0].Value = 100f;
-            emitter.Target.SetParameter(emitter.Params[0].Name, emitter.Params[0].Value);
-        }
-    }
-
-    
-
-    IEnumerator WaitForPuzzleOff()
-    {
-        attemptingSafe = true;
-        //yield return new WaitForSecondsRealtime(0.5f);
-        while (keyMan.puzzleOn)
-        {
-            yield return null;
-        }
-
-        Safe();
-
-        yield return new WaitForSeconds(1f);
-
-        if (emitter.Params[2].Value != 1f)
-        {
-            emitter.Params[2].Value = 1f;
-            emitter.Target.SetParameter(emitter.Params[2].Name, emitter.Params[2].Value);
-        }
-
-        hasChased = false;
-        Debug.Log("ADAPTIVE: Safe Played: " + 2f);
-        attemptingSafe = false;
-        StopCoroutine(WaitForPuzzleOff());
-    }
-
-    void Safe()
-    {
-        Debug.Log("ADAPTIVE: Safe Method Called");
-        if (emitter.Params[1].Value != 1f)
-        {
-            Debug.Log("ADAPTIVE: Chasing set false");
-            emitter.Params[1].Value = 1f;
-            emitter.Target.SetParameter(emitter.Params[1].Name, emitter.Params[1].Value);
-        }
-        if (emitter.Params[2].Value != 2f)
-        {
-            emitter.Params[2].Value = 2f;
-            emitter.Target.SetParameter(emitter.Params[2].Name, emitter.Params[2].Value);
-        }
-    }
-
-    public void DeadNoises()
-    {
-        Debug.Log("ADAPTIVE: Dead Method Called");
-        StartCoroutine(DeadSounds());
-    }
-    IEnumerator DeadSounds()
-    {
-        attemptingDie = true;
-
-        if (emitter.Params[2].Value != 0f)
-        {
-            emitter.Params[2].Value = 0f;
-            emitter.Target.SetParameter(emitter.Params[2].Name, emitter.Params[2].Value);
-        } //Makes dead
-        if (emitter.Params[1].Value != 1f)
-        {
-            Debug.Log("ADAPTIVE: Chasing set false");
-            emitter.Params[1].Value = 1f;
-            emitter.Target.SetParameter(emitter.Params[1].Name, emitter.Params[1].Value);
-        } //Makes chase stop
-        yield return new WaitForSeconds(1f);
-        if (emitter.Params[2].Value != 1f)
-        {
-            emitter.Params[2].Value = 1f;
-            emitter.Target.SetParameter(emitter.Params[2].Name, emitter.Params[2].Value);
-        } // Makes not dead
-        hasChased = false;
-        attemptingDie = false;
-    }
-
-
-    
-    
-    #endregion
-
-    #region TreeEvents
-    //private void OnEnable()
-    //{
-    //    TreeMalarkey.RegisterEventOnTree(CrossyController.crossyTree, "DespawnAudio", TheDespawnThing);
-    //    TreeMalarkey.RegisterEventOnTree(CrossyController.crossyTree, "PursuitAudio", PursuitAudio);
-    //    TreeMalarkey.RegisterEventOnTree(CrossyController.crossyTree, "DeadAudio", DeadAudio);
-    //    TreeMalarkey.RegisterEventOnTree(CrossyController.crossyTree, "SafeAudio", SafeAudio);
-    //}
-
-    //public void ObserverRegister()
-    //{
-        
-    //    TreeMalarkey.RegisterEventOnTree(ObserverTree, "PursuitAudio", PursuitAudio);
-    //    TreeMalarkey.RegisterEventOnTree(ObserverTree, "DeadAudio", DeadAudio);
-    //    TreeMalarkey.RegisterEventOnTree(ObserverTree, "SafeAudio", SafeAudio);
-    //}
-
-    public void PursuitAudio()
-    {
-        Debug.Log("EVENT FROM TREE: Pursuit");
-        hasChased = true;
-        if (emitter.Params[1].Value != 0f)
-        {
-            emitter.Params[1].Value = 0f;
-            emitter.Target.SetParameter(emitter.Params[1].Name, emitter.Params[1].Value);
-            
-        }
-    }
-
-    public void DeadAudio()
-    {
-        Debug.Log("EVENT FROM TREE: Dead");
-        StartCoroutine(DeadSounds());
-    }
-
-    public void SafeAudio()
-    {
-        Debug.Log("EVENT FROM TREE: Safe");
-        StartCoroutine(WaitForPuzzleOff());
-    }
-
-    public void TheDespawnThing()
-    {
-        Debug.Log("EVENT FROM TREE: Despawn");
-        StartCoroutine(WaitForPuzzleOff());
-    }
-
-    //private void OnDisable()
-    //{
-    //    TreeMalarkey.UnregisterEventOnTree(CrossyController.crossyTree, "DespawnAudio", TheDespawnThing);
-    //    TreeMalarkey.UnregisterEventOnTree(CrossyController.crossyTree, "PursuitAudio", PursuitAudio);
-    //    TreeMalarkey.UnregisterEventOnTree(CrossyController.crossyTree, "DeadAudio", DeadAudio);
-    //    TreeMalarkey.UnregisterEventOnTree(CrossyController.crossyTree, "SafeAudio", SafeAudio);
-    //    TreeMalarkey.UnregisterEventOnTree(ObserverTree, "PursuitAudio", PursuitAudio);
-    //    TreeMalarkey.UnregisterEventOnTree(ObserverTree, "DeadAudio", DeadAudio);
-    //    TreeMalarkey.UnregisterEventOnTree(ObserverTree, "SafeAudio", SafeAudio);
-    //}
 
     #endregion
 
-
-    #region VoiceStuff
-
-    //void TitanCrossyVoiceLines()
-    //{
-    //    if (titan.animator.GetCurrentAnimatorStateInfo(0).IsName("TitanCrossyIdle") && !playedTitanLine)
-    //    {
-    //        float probability = Random.Range(0f, 1f);
-    //        Debug.Log("TitanFMOD probability: " + probability);
-    //        if (probability < m_TitanVoiceLineChance)
-    //        {
-    //            eventInstance = RuntimeManager.CreateInstance("event:/MR_C_Titan/Titan_Oneliners");
-    //            eventInstance.set3DAttributes(RuntimeUtils.To3DAttributes(m_TitanHead));
-    //            Debug.Log("TitanFMOD TitanPlayLine");
-    //            eventInstance.start();
-    //        }
-
-    //        playedTitanLine = true;
-    //    }
-    //    else if (titan.animator.GetCurrentAnimatorStateInfo(0).IsName("TitanCrossyIdleHidden")) 
-    //    {
-    //        Debug.Log("TitanFMOD TitanPlayReset");
-    //        eventInstance.release();
-    //        playedTitanLine = false; 
-    //    }
-    //}
-
-    //void TitanUppyDownyNoisies()
-    //{
-    //    if(titan.animator.GetCurrentAnimatorStateInfo(0).IsName("TitanCrossyIdleHidden") || titan.animator.GetCurrentAnimatorStateInfo(0).IsName("TitanCrossyIdle"))
-    //    {
-    //        if(m_TitanNoisyNum != 0)
-    //        {
-    //            Debug.Log("UPPYDOWNY: Doing Neutral");
-    //            StartCoroutine(TitanSoundNeutral());
-    //        }
-    //    }
-    //    else if (titan.animator.GetCurrentAnimatorStateInfo(0).IsName("TitanCrossyRising"))
-    //    {
-    //        if(m_TitanNoisyNum != 1)
-    //        {
-    //            Debug.Log("UPPYDOWNY: Doing Uppy");
-    //            StopCoroutine(TitanSoundNeutral());
-    //            m_TitanNoisyNum = 1;
-    //            emitter.Params[3].Value = m_TitanNoisyNum;
-    //            emitter.Target.SetParameter(emitter.Params[3].Name, emitter.Params[3].Value);
-    //        }
-    //    }
-    //    else if (titan.animator.GetCurrentAnimatorStateInfo(0).IsName("TitanCrossyHide"))
-    //    {
-    //        if (m_TitanNoisyNum != 2)
-    //        {
-    //            Debug.Log("UPPYDOWNY: Doing Downy");
-    //            StopCoroutine(TitanSoundNeutral());
-    //            m_TitanNoisyNum = 2;
-    //            emitter.Params[3].Value = m_TitanNoisyNum;
-    //            emitter.Target.SetParameter(emitter.Params[3].Name, emitter.Params[3].Value);
-    //        }
-    //    }
-    //}
-
     #endregion
+
 }

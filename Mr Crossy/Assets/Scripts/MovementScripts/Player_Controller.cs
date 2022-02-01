@@ -22,7 +22,7 @@ public class Player_Controller : MonoBehaviour, IDamageable
     public float sprintSpeed;
     public float outOfBreathSpeed;
     public float maxHealth = 30;
-    [HideInInspector]
+    //[HideInInspector]
     public float currentHealth;
     public float stamina = 8;
     public float crouchSpeed;
@@ -292,6 +292,8 @@ public class Player_Controller : MonoBehaviour, IDamageable
             FindObjectOfType<MrCrossyDistortion>().DarkenScreen(1.5f);
             voiceOfGod.DeathAudio();
             respawn.PlayerDie();
+
+            overseer.DespawnAllClones();
         }
     }
     void TakeDamageNoise()
@@ -311,6 +313,7 @@ public class Player_Controller : MonoBehaviour, IDamageable
         if(currentHealth < maxHealth)
         {
             currentHealth = Mathf.Min(currentHealth + Time.deltaTime, maxHealth);
+            FindObjectOfType<MrCrossyDistortion>().lowerDamage();
         }
     }
     public void ResetHealth()

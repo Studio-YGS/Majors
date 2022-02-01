@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CrossyTheWatcher : MonoBehaviour
 {
+    OverseerController overseer;
+
     [HideInInspector] public Animator animator;
 
     public Material titanGlow;
@@ -55,6 +57,8 @@ public class CrossyTheWatcher : MonoBehaviour
 
     private void Start()
     {
+        overseer = FindObjectOfType<OverseerController>();
+
         animator = GetComponent<Animator>();
         transform.rotation = lighthouse.selfTransform.rotation;
         //SetPosToLighthouse();
@@ -264,7 +268,7 @@ public class CrossyTheWatcher : MonoBehaviour
         transform.rotation = lighthouse.selfTransform.rotation;
         //SetPosToLighthouse();
 
-        if (m_state == -1) AwakenTitan();
+        if (!overseer.m_IsTutorial && m_state == -1) AwakenTitan();
 
         lighthousing = false;
     }

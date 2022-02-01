@@ -326,12 +326,11 @@ public class CrossKeyManager : MonoBehaviour
         Time.fixedDeltaTime = 0.02f;
         controller.enabled = false;
         headBob.enabled = false;
-        if (seer)
-        {
-            seer.deady = true;
+        //if (seer)
+        //{
+        //    seer.deady = true;
 
-            if(!seer.attemptingDie) seer.DeadNoises();
-        }
+        //}
         deathCrossy.SetActive(true);
         StartCoroutine(WaitForDeath());
     }
@@ -341,7 +340,7 @@ public class CrossKeyManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(4.5f);
         deathCrossy.SetActive(false);
         FindObjectOfType<PlayerRespawn>().crossyDeath = true;
-        FindObjectOfType<PlayerRespawn>().PlayerDie();
+        //FindObjectOfType<PlayerRespawn>().PlayerDie();
         puzzleOn = false;
     }
 }
