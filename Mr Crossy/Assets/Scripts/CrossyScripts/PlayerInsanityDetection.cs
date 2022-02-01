@@ -53,7 +53,7 @@ public class PlayerInsanityDetection : MonoBehaviour
         {
             //float distance = Vector3.Distance(transform.position, m_Crossy.transform.position);
             Debug.Log("SANE Insanity Distance: " + OverseerController.CrossyPathDistance);
-            if (!seer.m_PlayerInHouse && seer.State != -1)
+            if (!seer.m_PlayerInSafeHouse && seer.State != -1)
             {
                 if (OverseerController.CrossyPathDistance < 25f && OverseerController.CrossyPathDistance > 15f)
                 {
