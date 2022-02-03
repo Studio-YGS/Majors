@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using TMPro;
 
-public class PlayerRespawn : MonoBehaviour
+public class PlayerRespawn : MonoBehaviour //this script handles the respawning after the player dies to mr crossy, or during a crosskey puzzle
 {
     Player_Controller player;
 
@@ -65,36 +65,37 @@ public class PlayerRespawn : MonoBehaviour
         //}
     }
 
-    public void PlayerDie()
+    public void PlayerDie() //this method gets called when the player dies from anything
     {
         FindObjectOfType<CrossKeyManager>().doorsLocked = false;
         FindObjectOfType<ObjectHolder>().DeathDrop();
         //seer.deady = true;
         //if (!seer.attemptingDie) seer.DeadNoises();
         FindObjectOfType<MrCrossyDistortion>().ResetDamage();
-        player.cam.gameObject.SetActive(false);
+
+        player.cam.gameObject.SetActive(false); //turns off the player and disables it
         player.DisableController();
         player.transform.position = respawnPosition.position;
 
-        journal.OpenMap();
+        journal.OpenMap(); //disables the journal too
         journal.DisableJournal();
 
-        deathCount++;
+        deathCount++; //counts a death up
         deathCountText.text = deathCount.ToString();
-        if (!crossyDeath)
+        if (!crossyDeath) //if the player died from mr crossy, it plays a video and has a different respawn time
         {
             deathVideoObject.SetActive(true);
 
             StartCoroutine(WaitForRespawn(deathWaitTime));
         }
-        else
+        else //otherwise, 2 seconds respawn time
         {
             StartCoroutine(WaitForRespawn(2));
         }
         
     }
 
-    public void ReleaseToPlayer()
+    public void ReleaseToPlayer() //this method releases control back to the player
     {
         player.EnableController();
 
@@ -122,12 +123,12 @@ public class PlayerRespawn : MonoBehaviour
         FindObjectOfType<OverseerController>().deady = false;
     }
 
-    public void SwitchRespawnPoint(int whichPoint)
+    public void SwitchRespawnPoint(int whichPoint) //this method is called whenever the player enters a new district, so that the proper respawn point can be set
     {
         respawnPosition = respawnPoints[whichPoint - 1];
     }
 
-    IEnumerator WaitForRespawn(float waitTime)
+    IEnumerator WaitForRespawn(float waitTime) //after this co-routine finishes counting, every thing is reset back to normal as if the game just started, however the player is respawned back in the house, and their mistake counter is counted up
     {
         yield return new WaitForSeconds(waitTime);
 

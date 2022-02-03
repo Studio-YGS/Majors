@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class DevTutSkip : MonoBehaviour
+public class DevTutSkip : MonoBehaviour //this script is for dev cheating 
 {
     public UnityEvent openUI;
 

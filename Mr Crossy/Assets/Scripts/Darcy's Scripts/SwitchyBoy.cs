@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class SwitchyBoy : MonoBehaviour
+public class SwitchyBoy : MonoBehaviour //this sript just switches the respawn points and the spawn points for titan crossy whenever the player enters a new district
 {
     [SerializeField]
     GameObject districtOne, districtTwo;
@@ -23,13 +23,13 @@ public class SwitchyBoy : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("GameController"))
+        if (other.CompareTag("GameController")) //making sure that the object that collided was the player
         {
             switchTrigger.Invoke();
         }
     }
 
-    public void ControllerSwitch(int whichController)
+    public void ControllerSwitch(int whichController) //this method gets called by an event that sends an int to decide which district the player is entering.
     {
         switch (whichController)
         {

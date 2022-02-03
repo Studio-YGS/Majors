@@ -43,17 +43,17 @@ public class NoteController : MonoBehaviour
 
         if(Physics.Raycast(player.cam.position, player.cam.TransformDirection(Vector3.forward), out hit, 2f))
         {
-            if(hit.transform.gameObject.CompareTag("Note"))
+            if(hit.transform.gameObject.CompareTag("Note")) //will only do stuff if the object that it hit has the tag of Note
             {
-                prompt.text = "Press E to read note.";
+                prompt.text = "Press E to read note."; //changes the prompt
                 prompt.gameObject.SetActive(true);
 
-                if (Input.GetKeyDown(KeyCode.E))
+                if (Input.GetKeyDown(KeyCode.E)) //if the player then presses e, it will pick up the note
                 {
-                    noteImage = hit.transform.gameObject.GetComponent<NoteAssign>().assignedNote;
+                    noteImage = hit.transform.gameObject.GetComponent<NoteAssign>().assignedNote; //sets the image to the one that is assigned to it
 
-                    hit.transform.gameObject.SetActive(false);
-                    GameObject.Find(hit.transform.gameObject.name).SetActive(false);
+                    hit.transform.gameObject.SetActive(false); //turns off the note
+                    GameObject.Find(hit.transform.gameObject.name).SetActive(false); //finds the other note at the other house and turns that one off too
 
                     imageNumber = hit.transform.gameObject.GetComponent<NoteAssign>().imageNumber;
 
@@ -63,7 +63,7 @@ public class NoteController : MonoBehaviour
 
                     PickUpNote();
 
-                    if (!tutorialLine && GetComponent<TutorialSectionStart>())
+                    if (!tutorialLine && GetComponent<TutorialSectionStart>()) //plays a voiceline if its the first one that the player has picked up
                     {
                         GetComponent<TutorialSectionStart>().NoteTutorialLine();
                         tutorialLine = true;
@@ -81,7 +81,7 @@ public class NoteController : MonoBehaviour
         }
     }
 
-    void PickUpNote()
+    void PickUpNote() //this method is all the journal controller related stuff with picking up the notes
     {
         GameObject[] notes = journalController.notePages;
         for(int i = 0; i < notes.Length; i++)
@@ -91,12 +91,12 @@ public class NoteController : MonoBehaviour
 
             for(int x = 0; x < images.Length; x++)
             {
-                if (images[x].sprite == null)
+                if (images[x].sprite == null) //finds the first image sprite that is null, and assigns itself to it
                 {
                     images[x].sprite = noteImage;
-                    images[x].color = alphaOne;
+                    images[x].color = alphaOne; //the alpha needs to be down when it is null, otherwise the player can see a big white sqaure
 
-                    switch (imageNumber)
+                    switch (imageNumber) //changes the text based on which note the player picked up, so there is a description of the note in the journal
                     {
                         case 1:
                             {
@@ -135,7 +135,7 @@ public class NoteController : MonoBehaviour
                 }
             }
 
-            if (found)
+            if (found) //breaks after the first one found so that it doesn't apply to every single note page
             {
                 break;
             }
@@ -144,10 +144,10 @@ public class NoteController : MonoBehaviour
         found = false;
 
         journalController.whichNotesPage = imageNumber;
-        journalController.noteList.Add(imageNumber);
+        journalController.noteList.Add(imageNumber); //adds itself to the journal list
 
-        journalOnSwitch.OpenOrClose();
+        journalOnSwitch.OpenOrClose(); //opens the journal
 
-        journalController.OpenNotes();
+        journalController.OpenNotes(); //and then opens to the note page 
     }
 }

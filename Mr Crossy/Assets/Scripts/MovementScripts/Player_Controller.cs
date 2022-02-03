@@ -80,7 +80,7 @@ public class Player_Controller : MonoBehaviour, IDamageable
         camStart = cam.localPosition;
 
         //locking cursor and making it invisible
-        //Cursor.visible = false; //cursor cant be invisible for journal to work :(
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
