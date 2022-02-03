@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class TutorialSectionStart : MonoBehaviour
+public class TutorialSectionStart : MonoBehaviour //this script mostly uses Unity Events to make sections start for the tutorial
 {
     Player_Controller playerController;
 
@@ -26,7 +26,7 @@ public class TutorialSectionStart : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("GameController"))
+        if (other.CompareTag("GameController")) //ensuring the object that collided was the player
         {
             sectionStart.Invoke();
         }
@@ -52,22 +52,17 @@ public class TutorialSectionStart : MonoBehaviour
                 raycastEvent.Invoke();
             }
 
-            //if(hit.transform.gameObject.CompareTag("Holdable") && needsRaycast)
-            //{
-                
-            //}
-
-            if (hit.transform.gameObject.CompareTag("Clue") && needsRaycast)
+            if (hit.transform.gameObject.CompareTag("Clue") && needsRaycast) //for clues being picked up for the first time
             {
                 raycastEvent.Invoke();
             }
 
-            if(hit.transform.gameObject.CompareTag("Crosskey") && needsRaycast && Input.GetKeyDown(KeyCode.E))
+            if(hit.transform.gameObject.CompareTag("Crosskey") && needsRaycast && Input.GetKeyDown(KeyCode.E)) //when players pick up crosskeys for the first time
             {
                 raycastEvent.Invoke();
             }
 
-            if(hit.transform.gameObject.CompareTag("Gate") && atGate)
+            if(hit.transform.gameObject.CompareTag("Gate") && atGate) //when the player steps upto the gate before it is open
             {
                 if (locked != null)
                 {
@@ -91,7 +86,7 @@ public class TutorialSectionStart : MonoBehaviour
         }
     }
 
-    public void NeedsRaycast(bool need)
+    public void NeedsRaycast(bool need) //this one and the next two methods are just boolean switches for specific events 
     {
         needsRaycast = need;
     }
@@ -106,7 +101,7 @@ public class TutorialSectionStart : MonoBehaviour
         atGate = at;
     }
 
-    public void CheckClues()
+    public void CheckClues() //this method checks the clues to see if they have been picked up or not
     {
         int count = 0;
 
@@ -134,6 +129,8 @@ public class TutorialSectionStart : MonoBehaviour
             }
         }
     }
+
+    //the last methods all just get called by the Unity Events for their particular things to happen in game
 
     public void ReadHowTo()
     {

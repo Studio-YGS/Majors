@@ -6,7 +6,7 @@ using FMOD.Studio;
 using FMODUnity;
 using TMPro;
 
-public class CluePickUp : MonoBehaviour
+public class CluePickUp : MonoBehaviour //this script just handles the raycasting for the clues
 {
     Player_Controller playerController;
 
@@ -28,12 +28,12 @@ public class CluePickUp : MonoBehaviour
 
         if(Physics.Raycast(playerController.cam.position, playerController.cam.TransformDirection(Vector3.forward), out hit, 2f))
         {
-            if (hit.transform.gameObject.CompareTag("Clue") && hit.transform.gameObject.name == gameObject.name)
+            if (hit.transform.gameObject.CompareTag("Clue") && hit.transform.gameObject.name == gameObject.name) //if the object that was hit is tagged as a clue and is the same object as the object that this component is attached to
             {
-                prompt.text = "Press E to pick up clue(s).";
+                prompt.text = "Press E to pick up clue(s)."; //popping the prompt up so the player knows they can pick it up
                 prompt.gameObject.SetActive(true);
 
-                if (Input.GetKeyDown(KeyCode.E))
+                if (Input.GetKeyDown(KeyCode.E)) //the player can then press e to pick up the note
                 {
                     pickUp.Invoke();
 
@@ -42,7 +42,7 @@ public class CluePickUp : MonoBehaviour
                     eventInstance.start();
                 }
             }
-            else
+            else //if they are not hitting something tagged with Clue, or if they aren't hitting anything at all, it will disable the prompt.
             {
                 prompt.gameObject.SetActive(false);
             }
@@ -53,7 +53,7 @@ public class CluePickUp : MonoBehaviour
         }
     }
 
-    public void PickUpOverride()
+    public void PickUpOverride() //a force pickup for the devskip
     {
         pickUp.Invoke();
     }
