@@ -4,7 +4,7 @@ using UnityEngine;
 using FMOD.Studio;
 using FMODUnity;
 
-public class JournalOnSwitch : MonoBehaviour
+public class JournalOnSwitch : MonoBehaviour //this script just handles checking whether or not the journal is on or off, and switches it accordingly.
 {
     [HideInInspector]
     public bool open = false;
@@ -29,7 +29,7 @@ public class JournalOnSwitch : MonoBehaviour
         headBob = FindObjectOfType<HeadBob>();
     }
 
-    public bool OpenOrClose()
+    public bool OpenOrClose() //this method checks to see if the journal is on or off, and returns true or false respectively.
     {
         if (open)
         {
@@ -43,22 +43,21 @@ public class JournalOnSwitch : MonoBehaviour
         }
     }
 
-    public void ForceOpenOrClose()
+    public void ForceOpenOrClose() //a force that the unity events use
     {
         OpenOrClose();
     }
 
-    void OpenJournal()
+    void OpenJournal() //this method opens the journal if it isn't disabled
     {
         if (!journalController.disabled)
         {
-            fpc.DisableController();
+            fpc.DisableController(); //diables the player controller, and the head bob
             headBob.enabled = false;
             Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-            //pauseMenu.streetName.SetActive(false);
+            Cursor.lockState = CursorLockMode.None; //unlocks the cursor and makes it visible
 
-            journalController.OpenMap();
+            journalController.OpenMap(); //by default when the player opens the journal, it will open to the map
 
             eventInstance = RuntimeManager.CreateInstance("event:/2D/Paper/Paper Up");
 
@@ -70,15 +69,14 @@ public class JournalOnSwitch : MonoBehaviour
         }
     }
 
-    void CloseJournal()
+    void CloseJournal() //this method closes the journal if it isn't disabled
     {
         if (!journalController.disabled)
         {
-            fpc.EnableController();
+            fpc.EnableController(); //reenalbes player controller, head bob, relocks cursor and makes it invisible
             headBob.enabled = true;
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
-            //menuManager.streetName.SetActive(true);
 
             eventInstance = RuntimeManager.CreateInstance("event:/2D/Paper/Paper Up");
 
@@ -90,6 +88,7 @@ public class JournalOnSwitch : MonoBehaviour
         }
     }
 
+    //these methods just show or hide the tab if needed, for things like pausing the game
     public void HideTab()
     {
         journalClosed.SetActive(false);

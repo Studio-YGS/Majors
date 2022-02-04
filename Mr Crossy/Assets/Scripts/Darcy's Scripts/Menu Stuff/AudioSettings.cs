@@ -4,7 +4,7 @@ using UnityEngine;
 using FMOD.Studio;
 using FMODUnity;
 
-public class AudioSettings : MonoBehaviour
+public class AudioSettings : MonoBehaviour //this script handles the volume of the audio in the game
 {
     EventInstance sfxVolumePreview, voiceVolumePreview;
 
@@ -38,7 +38,7 @@ public class AudioSettings : MonoBehaviour
     }
 
     public void MuteControl(bool mute, int whichBusGroup) //1 = all, 2 = Pause Group, 3 = Unpause Group
-    {
+    { //different groups need different muting so that certain sounds can play while the game is paused.
         if(whichBusGroup == 1)
         {
             musicP.setMute(mute);
@@ -60,25 +60,25 @@ public class AudioSettings : MonoBehaviour
         }
     }
 
-    public void MusicVolumeLevel(float newMusicVolume)
+    public void MusicVolumeLevel(float newMusicVolume) //this is called by sliders
     {
         musicVolume = newMusicVolume;
     }
 
-    public void SFXVolumeLevel(float newSFXVolume)
+    public void SFXVolumeLevel(float newSFXVolume) //called by sliders
     {
         sfxVolume = newSFXVolume;
 
-        PLAYBACK_STATE pbState;
-        sfxVolumePreview.getPlaybackState(out pbState);
+        PLAYBACK_STATE pbState; 
+        sfxVolumePreview.getPlaybackState(out pbState); //gets the current playback state of the preview event
 
-        if(pbState != PLAYBACK_STATE.PLAYING)
+        if(pbState != PLAYBACK_STATE.PLAYING) //if it is not playing, it will play the preview
         {
             sfxVolumePreview.start();
         }
     }
 
-    public void VoiceVolumeLevel(float newVoiceVolume)
+    public void VoiceVolumeLevel(float newVoiceVolume) //same as above
     {
         voiceVolume = newVoiceVolume;
 

@@ -6,7 +6,7 @@ using FMOD.Studio;
 using FMODUnity;
 using UnityEngine.Events;
 
-public class TutorialController : MonoBehaviour
+public class TutorialController : MonoBehaviour //this script controls all the events that need to happen during the tutorial
 {
     JournalController journalController;
 
@@ -43,7 +43,7 @@ public class TutorialController : MonoBehaviour
     {
         if(overseerController != null)
         {
-            if (overseerController.State == 3 && !spotted)
+            if (overseerController.State == 3 && !spotted) //if the player has been spotted by mr crossy for the first time, the tutorial for it plays
             {
                 spotted = true;
                 GetComponent<TutorialSectionStart>().sectionStart.Invoke();
@@ -51,12 +51,12 @@ public class TutorialController : MonoBehaviour
         }
     }
 
-    void StartTutorial()
+    void StartTutorial() //this method starts the tutorial
     {
-        playerController.EnableController();
+        playerController.EnableController(); //player controller is enabled, but journal isn't
 
         journalController.EnableJournal();
-        journalController.OpenMap();
+        journalController.OpenMap(); //needs to open the map first though
         journalController.DisableJournal();
 
         eventInstance = RuntimeManager.CreateInstance("event:/MR_C_Tutorial/TUT.0.1");
@@ -69,9 +69,9 @@ public class TutorialController : MonoBehaviour
         }
     }
 
-    public void DirectToNote()
+    public void DirectToNote() //this method plays a voiceline if the player tries to go in the house without picking up the note at the gate first
     {
-        if (!directed && doneTalk)
+        if (!directed && doneTalk) //will only play if they haven't been directed in 15 seconds, or if mr crossy is finished his introduction
         {
             eventInstance = RuntimeManager.CreateInstance("event:/MR_C_Tutorial/TUT.0.2");
 
@@ -79,11 +79,11 @@ public class TutorialController : MonoBehaviour
 
             directed = true;
 
-            StartCoroutine(DirectionTimer());
+            StartCoroutine(DirectionTimer()); //starts the timer
         }
     }
 
-    public void ChangeConLetter(string letter)
+    public void ChangeConLetter(string letter) //this changes the letter in one of the UI prompts to whichever letter the player put down on the altar
     {
         conLetter.text = "[" + letter + "]";
     }
@@ -95,22 +95,22 @@ public class TutorialController : MonoBehaviour
         //puzzleController.streetText.text = "";
     }
 
-    public void CrossyWait()
+    public void CrossyWait() //waiting for mr crossy to talk 
     {
         StartCoroutine(WaitForCrossy());
     }
 
-    public void StartFiveMinuteTimer()
+    public void StartFiveMinuteTimer() //after five minutes, mr crossy reveals the word for the player
     {
         StartCoroutine(FiveMinuteTimer());
     }
 
-    public void SetCanPlayFiveBool(bool set)
+    public void SetCanPlayFiveBool(bool set) //this is to turn it off if they complete it before five minutes, so it doesn't play after the tutorial
     {
         canPlayFive = set;
     }
 
-    IEnumerator WaitForCrossy()
+    IEnumerator WaitForCrossy() //waits for 5 seconds, for mr crossy to appear over the wall
     {
         yield return new WaitForSeconds(5f);
 
@@ -118,7 +118,7 @@ public class TutorialController : MonoBehaviour
 
         eventInstance.start();
 
-        yield return new WaitForSeconds(31.5f);
+        yield return new WaitForSeconds(31.5f); //it then waits this long, as that is how long the voiceline is
 
         journalController.EnableJournal();
         journalController.readingHowTo = true;
@@ -127,7 +127,7 @@ public class TutorialController : MonoBehaviour
         {
             journalOnSwitch.OpenOrClose();
         }
-        journalController.OpenHowTo();
+        journalController.OpenHowTo(); //opens the how to part of the journal at the end of it
         showTabs.Invoke();
     }
     
