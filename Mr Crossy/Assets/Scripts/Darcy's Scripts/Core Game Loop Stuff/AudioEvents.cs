@@ -4,9 +4,9 @@ using UnityEngine;
 using FMOD.Studio;
 using FMODUnity;
 
-public class AudioEvents : MonoBehaviour
+public class AudioEvents : MonoBehaviour //this script just has a bunch of methods in it to play audio through Unity events.
 {
-    EventInstance eventInstance;
+    EventInstance eventInstance; //FMOD's event instance can just be changed whenever we need to play something, instead of playing one-shots that are untrackable
 
     bool incorrectWordVoiceLinePlayed, correctWordVoiceLinePlayed, firstBellToll = true;
 
@@ -16,7 +16,7 @@ public class AudioEvents : MonoBehaviour
 
         eventInstance.start();
 
-        if (!correctWordVoiceLinePlayed && !gameObject.name.Contains("NiNi"))
+        if (!correctWordVoiceLinePlayed && !gameObject.name.Contains("NiNi")) //this one only needs to play once, so a boolean lock is in place. It also doesn't need to play in Nini's scene, so i disabled that
         {
             correctWordVoiceLinePlayed = true;
             eventInstance = RuntimeManager.CreateInstance("event:/MR_C_Tutorial/TUT.0.5.1.1");
@@ -34,7 +34,7 @@ public class AudioEvents : MonoBehaviour
 
     public void TutorialWordIncorrect()
     {
-        if (!incorrectWordVoiceLinePlayed)
+        if (!incorrectWordVoiceLinePlayed) //once again, only needs to be played once, and only during the tutorial
         {
             incorrectWordVoiceLinePlayed = true;
             eventInstance = RuntimeManager.CreateInstance("event:/MR_C_Tutorial/TUT.0.5.1.2");
@@ -42,6 +42,8 @@ public class AudioEvents : MonoBehaviour
             eventInstance.start();
         }
     }
+
+    //all other methods just call the particular event that they need
 
     public void UIPrompt()
     {
