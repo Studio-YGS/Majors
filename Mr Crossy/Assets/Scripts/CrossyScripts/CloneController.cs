@@ -153,6 +153,8 @@ public class CloneController : MonoBehaviour, IAttackAgent
         cloneGlow.EnableKeyword("_EMISSION");
 
         overseer.crossyClones.Add(this);
+
+        lookAtTransform = overseer.Player.GetComponent<Player_Controller>().cam;
     }
 
     private void Update()

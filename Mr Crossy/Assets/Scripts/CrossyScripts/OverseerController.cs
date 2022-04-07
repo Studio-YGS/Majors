@@ -122,7 +122,7 @@ public class OverseerController : MonoBehaviour
     [SerializeField]
     private float m_CloneSpawnDelay = 8f;
     private float m_SinceLastClone = 0f;
-    [HideInInspector]
+    [Space(10)]
     public List<CloneController> crossyClones = new List<CloneController>();
     #endregion
 
@@ -565,6 +565,8 @@ public class OverseerController : MonoBehaviour
     }
     public void SpawnClone(Transform posToSpawn)
     {
+        m_SinceLastClone = Time.time;
+
         StartCoroutine(SpawnDelay(posToSpawn));
     }
 
@@ -574,7 +576,7 @@ public class OverseerController : MonoBehaviour
         yield return new WaitForSeconds(3f);
         Instantiate(clonePrefab, posToSpawn.position, posToSpawn.rotation);
 
-        m_SinceLastClone = Time.time;
+        
     }
 
     public void DespawnAllClones()
